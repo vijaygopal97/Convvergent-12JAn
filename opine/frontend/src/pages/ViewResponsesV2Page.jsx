@@ -68,10 +68,12 @@ const ViewResponsesV2Page = () => {
   });
   
   // Filter states
+  // OPTIMIZED: Default to 'today' instead of 'all' to prevent memory leaks and improve performance
+  // Top tech companies (Meta, Twitter, Google) show recent/relevant data first, not all-time
   const [filters, setFilters] = useState({
     search: '',
     status: 'approved_rejected_pending',
-    dateRange: 'all',
+    dateRange: 'today', // Changed from 'all' to 'today' - shows today's data by default
     startDate: '',
     endDate: '',
     gender: '',
@@ -98,6 +100,7 @@ const ViewResponsesV2Page = () => {
   // Interviewer filter states (search-first)
   const [interviewerSearchTerm, setInterviewerSearchTerm] = useState('');
   const [searchedInterviewers, setSearchedInterviewers] = useState([]);
+  const [selectedInterviewers, setSelectedInterviewers] = useState([]); // Persist selected interviewers even after search clears
   const [showInterviewerDropdown, setShowInterviewerDropdown] = useState(false);
   const interviewerDropdownRef = useRef(null);
   const [searchingInterviewers, setSearchingInterviewers] = useState(false);
@@ -111,6 +114,15 @@ const ViewResponsesV2Page = () => {
   // Debounce timer for API calls
   const debounceTimerRef = useRef(null);
   const initialLoadRef = useRef(false);
+  
+  // AbortController for request cancellation (CRITICAL: Prevents memory leaks)
+  const abortControllerRef = useRef(null);
+  
+  // AbortController for modal data fetching (prevents stacking requests when clicking multiple responses)
+  const modalAbortControllerRef = useRef(null);
+  
+  // Track if component is mounted (prevent state updates after unmount)
+  const isMountedRef = useRef(true);
 
   // Fetch survey details
   useEffect(() => {
@@ -139,17 +151,34 @@ const ViewResponsesV2Page = () => {
   };
 
   // Fetch responses with server-side filtering and pagination
-  const fetchResponses = useCallback(async (page = 1) => {
-    if (!surveyId) return;
+  // OPTIMIZED: Uses AbortController to cancel previous requests, prevents memory leaks
+  // Returns a Promise for better async handling
+  const fetchResponses = useCallback(async (page = 1, skipFilterOptions = false) => {
+    if (!surveyId || !isMountedRef.current) return Promise.resolve();
+    
+    // CRITICAL: Cancel previous request to prevent memory leaks and duplicate updates
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    
+    // Create new AbortController for this request
+    abortControllerRef.current = new AbortController();
+    const signal = abortControllerRef.current.signal;
     
     try {
+      if (isMountedRef.current) {
       setLoading(true);
+      }
+      
+      const interviewerIdsParam = filters.interviewerIds && filters.interviewerIds.length > 0 
+        ? filters.interviewerIds.map(id => id?.toString?.() || String(id || '')).join(',') 
+        : '';
       
       const params = {
         page,
         limit: 20,
         status: filters.status || 'approved_rejected_pending',
-        dateRange: filters.dateRange || 'all',
+        dateRange: filters.dateRange || 'today', // Default to 'today' if not set
         startDate: filters.startDate || '',
         endDate: filters.endDate || '',
         gender: filters.gender || '',
@@ -160,38 +189,132 @@ const ViewResponsesV2Page = () => {
         district: filters.district || '',
         lokSabha: filters.lokSabha || '',
         interviewMode: filters.interviewMode || '',
-        interviewerIds: filters.interviewerIds && filters.interviewerIds.length > 0 ? filters.interviewerIds.join(',') : '',
+        interviewerIds: interviewerIdsParam,
         interviewerMode: filters.interviewerMode || 'include',
-        search: filters.search || ''
+        search: filters.search || '',
+        includeFilterOptions: skipFilterOptions ? 'false' : 'true' // Make filterOptions optional
       };
 
-      const response = await surveyResponseAPI.getSurveyResponsesV2(surveyId, params);
+      const response = await surveyResponseAPI.getSurveyResponsesV2(surveyId, params, signal);
+      
+      // CRITICAL: Check if request was aborted or component unmounted
+      if (signal.aborted || !isMountedRef.current) {
+        return Promise.resolve();
+      }
       
       if (response.success) {
+        if (isMountedRef.current) {
         setResponses(response.data.responses);
         setPagination(response.data.pagination);
+          // Only update filterOptions if provided (not skipped)
+          if (response.data.filterOptions) {
         setFilterOptions(response.data.filterOptions);
       }
+        }
+      }
+      
+      return Promise.resolve();
     } catch (error) {
+      // Ignore aborted requests (not an error)
+      if (error.name === 'AbortError' || error.code === 'ERR_CANCELED') {
+        return Promise.resolve();
+      }
+      
+      // Only show error if component is still mounted
+      if (isMountedRef.current) {
       console.error('Error fetching responses:', error);
       showError('Failed to load responses');
+      }
+      
+      return Promise.reject(error);
     } finally {
+      // Only update state if component is still mounted
+      if (isMountedRef.current) {
       setLoading(false);
+      }
     }
   }, [surveyId, filters, showError]);
 
   // Initial load - fetch immediately without debounce
+  // OPTIMIZED: Load responses first (fast), then filterOptions separately (slower)
   useEffect(() => {
     if (surveyId && !initialLoadRef.current) {
       initialLoadRef.current = true;
-      fetchResponses(1);
+      
+      // Load responses first without filterOptions for faster initial display
+      fetchResponses(1, true).then(() => {
+        // After responses load, fetch filterOptions separately in background (non-blocking)
+        // Small delay to ensure responses are displayed first
+        setTimeout(() => {
+          if (isMountedRef.current && surveyId) {
+            // Use a separate AbortController for filterOptions to avoid conflicts
+            const filterOptionsController = new AbortController();
+            
+            surveyResponseAPI.getSurveyResponseCounts(surveyId, {
+              includeFilterOptions: 'true'
+            }, filterOptionsController.signal).then(response => {
+              if (response.success && response.data.filterOptions && isMountedRef.current) {
+                setFilterOptions(response.data.filterOptions);
+              }
+            }).catch(error => {
+              if (error.name !== 'AbortError' && error.code !== 'ERR_CANCELED' && isMountedRef.current) {
+                console.error('Error fetching filter options:', error);
+              }
+            });
+          }
+        }, 500); // 500ms delay to let responses render first
+      }).catch(error => {
+        if (error.name !== 'AbortError' && error.code !== 'ERR_CANCELED') {
+          console.error('Error in initial load:', error);
+        }
+      });
     }
+    
+    // Cleanup: Cancel any pending requests when surveyId changes
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+        abortControllerRef.current = null;
+      }
+    };
   }, [surveyId, fetchResponses]);
 
   // Reset initial load ref when surveyId changes
   useEffect(() => {
     initialLoadRef.current = false;
   }, [surveyId]);
+  
+  // CRITICAL: Cleanup on component unmount (prevents memory leaks)
+  useEffect(() => {
+    isMountedRef.current = true;
+    
+    return () => {
+      isMountedRef.current = false;
+      
+      // Cancel any pending requests
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+        abortControllerRef.current = null;
+      }
+      
+      // Cancel any pending modal requests
+      if (modalAbortControllerRef.current) {
+        modalAbortControllerRef.current.abort();
+        modalAbortControllerRef.current = null;
+      }
+      
+      // Clear all timers
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+        debounceTimerRef.current = null;
+      }
+      
+      if (interviewerSearchTimerRef.current) {
+        clearTimeout(interviewerSearchTimerRef.current);
+        interviewerSearchTimerRef.current = null;
+      }
+    };
+  }, []);
 
   // Fetch CSV file info on component mount
   useEffect(() => {
@@ -215,20 +338,40 @@ const ViewResponsesV2Page = () => {
   }, [surveyId]);
 
   // Debounced fetch responses when filters change (skip initial load)
+  // OPTIMIZED: Proper cleanup prevents memory leaks
   useEffect(() => {
-    if (!surveyId || !initialLoadRef.current) return; // Don't run until initial load is done
+    if (!surveyId || !initialLoadRef.current || !isMountedRef.current) return; // Don't run until initial load is done
     
+    // CRITICAL: Clear previous debounce timer
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
+      debounceTimerRef.current = null;
+    }
+    
+    // CRITICAL: Cancel any pending requests before starting new one
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
     }
     
     debounceTimerRef.current = setTimeout(() => {
-      fetchResponses(1);
+      // Double-check component is still mounted before fetching
+      if (isMountedRef.current && surveyId) {
+        fetchResponses(1, false); // Fetch with filterOptions on filter change
+      }
+      debounceTimerRef.current = null;
     }, 500);
 
+    // CRITICAL: Cleanup function - clear timer and cancel requests
     return () => {
       if (debounceTimerRef.current) {
         clearTimeout(debounceTimerRef.current);
+        debounceTimerRef.current = null;
+      }
+      
+      // Cancel pending request if filters change again
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+        abortControllerRef.current = null;
       }
     };
   }, [filters, surveyId, fetchResponses]);
@@ -255,20 +398,36 @@ const ViewResponsesV2Page = () => {
   }, [surveyId]);
 
   // Debounced interviewer search
+  // OPTIMIZED: Proper cleanup prevents memory leaks
   useEffect(() => {
+    // CRITICAL: Clear previous timer
     if (interviewerSearchTimerRef.current) {
       clearTimeout(interviewerSearchTimerRef.current);
+      interviewerSearchTimerRef.current = null;
     }
 
-    if (interviewerSearchTerm.trim().length >= 2) {
+    if (interviewerSearchTerm.trim().length >= 2 && isMountedRef.current) {
       interviewerSearchTimerRef.current = setTimeout(() => {
+        if (isMountedRef.current) {
         searchInterviewers(interviewerSearchTerm);
         setShowInterviewerDropdown(true);
+        }
+        interviewerSearchTimerRef.current = null;
       }, 500);
     } else {
+      if (isMountedRef.current) {
       setSearchedInterviewers([]);
       setShowInterviewerDropdown(false);
+      }
     }
+    
+    // CRITICAL: Cleanup function
+    return () => {
+      if (interviewerSearchTimerRef.current) {
+        clearTimeout(interviewerSearchTimerRef.current);
+        interviewerSearchTimerRef.current = null;
+      }
+    };
 
     return () => {
       if (interviewerSearchTimerRef.current) {
@@ -340,19 +499,89 @@ const ViewResponsesV2Page = () => {
   };
 
   // Handle interviewer toggle
-  const handleInterviewerToggle = (interviewerId) => {
-    setFilters(prev => {
-      const currentIds = prev.interviewerIds || [];
-      const idStr = interviewerId?.toString() || interviewerId;
-      const isSelected = currentIds.includes(idStr);
-      
-      return {
-        ...prev,
-        interviewerIds: isSelected
-          ? currentIds.filter(id => id !== idStr)
-          : [...currentIds, idStr]
-      };
+  const handleInterviewerToggle = (interviewerId, interviewerData = null) => {
+    console.log('🔍 handleInterviewerToggle CALLED with:', {
+      interviewerId,
+      interviewerIdType: typeof interviewerId,
+      interviewerIdValue: interviewerId,
+      interviewerData,
+      currentFilters: filters,
+      currentSelectedInterviewers: selectedInterviewers
     });
+    
+    // Convert to string for consistent comparison
+    const idStr = interviewerId?.toString?.() || String(interviewerId || '');
+    
+    setFilters(prev => {
+      console.log('🔍 setFilters callback - PREV STATE:', {
+        prev,
+        prevInterviewerIds: prev.interviewerIds,
+        prevInterviewerIdsLength: prev.interviewerIds?.length
+      });
+      
+      const currentIds = prev.interviewerIds || [];
+      // Convert all current IDs to strings for comparison
+      const currentIdsStr = currentIds.map(id => id?.toString?.() || String(id || ''));
+      const isSelected = currentIdsStr.includes(idStr);
+      
+      const newIds = isSelected
+        ? currentIds.filter(id => {
+            const currentIdStr = id?.toString?.() || String(id || '');
+            return currentIdStr !== idStr;
+          })
+        : [...currentIds, idStr];
+      
+      console.log('🔍 setFilters callback - CALCULATED NEW IDs:', {
+        interviewerId,
+        idStr,
+        currentIds,
+        currentIdsStr,
+        isSelected,
+        newIds,
+        newIdsLength: newIds.length
+      });
+      
+      const newState = {
+        ...prev,
+        interviewerIds: newIds
+      };
+      
+      console.log('🔍 setFilters callback - RETURNING NEW STATE:', {
+        newState,
+        interviewerIds: newState.interviewerIds,
+        interviewerIdsLength: newState.interviewerIds.length
+      });
+      
+      return newState;
+    });
+    
+    // Also update selectedInterviewers to persist the interviewer data
+    if (interviewerData) {
+      setSelectedInterviewers(prev => {
+        const currentSelected = prev || [];
+        const isAlreadySelected = currentSelected.some(i => {
+          const currentIdStr = i._id?.toString?.() || String(i._id || '');
+          return currentIdStr === idStr;
+        });
+        
+        if (isAlreadySelected) {
+          return currentSelected.filter(i => {
+            const currentIdStr = i._id?.toString?.() || String(i._id || '');
+            return currentIdStr !== idStr;
+          });
+        } else {
+          return [...currentSelected, interviewerData];
+        }
+      });
+    }
+    
+    // Force a re-render check after state update
+    setTimeout(() => {
+      console.log('🔍 handleInterviewerToggle - AFTER STATE UPDATE (500ms later):', {
+        currentFilters: filters,
+        interviewerIds: filters.interviewerIds
+      });
+    }, 500);
   };
 
   // Handle AC toggle
@@ -389,44 +618,83 @@ const ViewResponsesV2Page = () => {
   }, []);
 
   // Get respondent info from response
-  const getRespondentInfo = (response) => {
+  // Memoized helper function to extract respondent info (optimized for performance)
+  const getRespondentInfo = useCallback((response) => {
     return {
       ac: response.acValue || response.selectedAC || response.selectedPollingStation?.acName || 'N/A',
       city: response.cityValue || 'N/A',
       district: response.districtValue || response.selectedPollingStation?.district || 'N/A',
       lokSabha: response.lokSabhaValue || response.selectedPollingStation?.pcName || 'N/A'
     };
-  };
+  }, []);
 
   // Fetch full response details when View is clicked
-  const handleViewResponse = async (response) => {
+  // OPTIMIZED: Uses AbortController to prevent stacking requests
+  const handleViewResponse = useCallback(async (response) => {
+    // CRITICAL: Cancel previous modal request if any
+    if (modalAbortControllerRef.current) {
+      modalAbortControllerRef.current.abort();
+    }
+    
+    // Create new AbortController for this modal request
+    modalAbortControllerRef.current = new AbortController();
+    const signal = modalAbortControllerRef.current.signal;
+    
     try {
       setLoadingResponseDetails(true);
       setShowResponseDetails(true);
       
-      // Fetch full response details from backend
+      // Use the response from list immediately (show modal fast)
+      setFullResponseDetails(response);
+      setSelectedResponse(response);
+      
+      // Fetch full response details from backend in background
       const responseData = await surveyResponseAPI.getSurveyResponseById(response._id);
+      
+      // Check if request was aborted
+      if (signal.aborted || !isMountedRef.current) {
+        return;
+      }
       
       if (responseData.success && responseData.interview) {
         // The backend returns { success: true, interview: {...} }
+        if (isMountedRef.current) {
         setFullResponseDetails(responseData.interview);
         setSelectedResponse(responseData.interview);
-      } else {
-        // Fallback to the response from list if API fails
-        setFullResponseDetails(response);
-        setSelectedResponse(response);
-        showError('Could not load full response details, showing partial data');
+        }
       }
     } catch (error) {
+      // Ignore aborted requests
+      if (error.name === 'AbortError' || error.code === 'ERR_CANCELED') {
+        return;
+      }
+      
       console.error('Error fetching response details:', error);
-      // Fallback to the response from list
-      setFullResponseDetails(response);
-      setSelectedResponse(response);
+      // Keep the response from list (already set above)
+      if (isMountedRef.current) {
       showError('Could not load full response details, showing partial data');
+      }
     } finally {
+      if (isMountedRef.current) {
       setLoadingResponseDetails(false);
     }
-  };
+    }
+  }, [showError]);
+  
+  // Handle modal close with proper cleanup
+  const handleCloseModal = useCallback(() => {
+    // Cancel any pending modal requests
+    if (modalAbortControllerRef.current) {
+      modalAbortControllerRef.current.abort();
+      modalAbortControllerRef.current = null;
+    }
+    
+    // Clear modal state
+    setShowResponseDetails(false);
+    setSelectedResponse(null);
+    setFullResponseDetails(null);
+    setLoadingResponseDetails(false);
+  }, []);
 
   // ========== CSV GENERATION HELPER FUNCTIONS ==========
   
@@ -808,6 +1076,13 @@ const ViewResponsesV2Page = () => {
   const generateCSV = async (downloadMode) => {
     setShowDownloadModal(false);
     setDownloadingCSV(true);
+    setCsvProgress({ current: 0, total: 0, stage: 'Creating CSV generation job...' });
+
+    let pollInterval = null;
+    let jobId = null;
+    let downloadInProgress = false; // Flag to prevent multiple downloads
+    let downloadCompleted = false; // Flag to prevent re-downloading
+    const storageKey = `csv-job-${surveyId}-${downloadMode}`;
 
     try {
       if (!survey) {
@@ -816,1471 +1091,337 @@ const ViewResponsesV2Page = () => {
         return;
       }
 
-      // Fetch total count first to know how many responses we need to process
-      setCsvProgress({ current: 0, total: 0, stage: 'Counting responses...' });
-      
-      // Build params object with filters - ensure all filter fields are included
-      // Format interviewerIds as comma-separated string (backend expects string)
-      const countParams = {
-        limit: '1',
-        page: '1',
-        status: filters.status || 'approved_rejected_pending',
-        dateRange: filters.dateRange || 'all',
-        startDate: filters.startDate || '',
-        endDate: filters.endDate || '',
-        interviewMode: filters.interviewMode || '',
-        ac: filters.ac || '',
-        interviewerIds: filters.interviewerIds && filters.interviewerIds.length > 0 ? filters.interviewerIds.join(',') : '',
-        interviewerMode: filters.interviewerMode || 'include',
-        search: filters.search || ''
-      };
-      
-      console.log('CSV Download - Count params:', countParams);
-      
-      let countResponse;
-      try {
-        countResponse = await surveyResponseAPI.getSurveyResponsesV2(surveyId, countParams);
-        console.log('CSV Download - Count response:', {
-          success: countResponse.success,
-          hasData: !!countResponse.data,
-          hasPagination: !!countResponse.data?.pagination,
-          paginationTotal: countResponse.data?.pagination?.totalResponses
-        });
-      } catch (error) {
-        console.error('CSV Download - Error fetching count:', error);
-        console.error('CSV Download - Error details:', {
-          message: error.message,
-          response: error.response?.data,
-          status: error.response?.status
-        });
-        showError(`Failed to count responses: ${error.response?.data?.message || error.message || 'Unknown error'}`);
-        setDownloadingCSV(false);
-        setCsvProgress({ current: 0, total: 0, stage: '' });
-        return;
-      }
-      
-      if (!countResponse || !countResponse.success) {
-        console.error('CSV Download - Count response failed:', countResponse);
-        showError(`Failed to count responses: ${countResponse?.message || 'Unknown error'}`);
-        setDownloadingCSV(false);
-        setCsvProgress({ current: 0, total: 0, stage: '' });
-        return;
-      }
-      
-      // Response structure: { success: true, data: { responses: [], pagination: { totalResponses: ... } } }
-      const totalResponses = countResponse.data?.pagination?.totalResponses || countResponse.data?.totalResponses || 0;
-      console.log('CSV Download - Total responses:', totalResponses);
-      
-      if (totalResponses === 0) {
-        console.warn('CSV Download - No responses found with filters:', countParams);
-        showError('No responses found matching the filters. Please adjust your filters and try again.');
-        setDownloadingCSV(false);
-        setCsvProgress({ current: 0, total: 0, stage: '' });
-        return;
-      }
-
-      // Fetch responses in chunks to avoid timeout and memory issues
-      const FETCH_CHUNK_SIZE = 500; // Reduced from 1000 to 500 for better reliability
-      const MAX_RETRIES = 3; // Maximum retry attempts per chunk
-      const RETRY_DELAY_BASE = 1000; // Base delay in ms (1 second)
-      const CHUNK_DELAY = 300; // Delay between chunks in ms (increased from 100)
-      
-      const allResponses = [];
-      let fetchedCount = 0;
-      
-      setCsvProgress({ current: 0, total: totalResponses, stage: `Fetching responses (0/${totalResponses})...` });
-      
-      // Helper function to fetch a chunk with retry logic
-      const fetchChunkWithRetry = async (chunkParams, retryCount = 0) => {
+      // Check localStorage for existing recent job (Approach 3: Frontend state management)
+      const existingJobData = localStorage.getItem(storageKey);
+      if (existingJobData) {
         try {
-          const chunkResponse = await surveyResponseAPI.getSurveyResponsesV2(surveyId, chunkParams);
+          const parsed = JSON.parse(existingJobData);
+          const jobAge = Date.now() - parsed.timestamp;
+          const maxAge = 30 * 60 * 1000; // 30 minutes
           
-          if (!chunkResponse || !chunkResponse.success) {
-            throw new Error(`API error: ${chunkResponse?.message || 'Unknown error'}`);
-          }
-          
-          return chunkResponse.data?.responses || [];
-        } catch (error) {
-          // Check if it's a network error that we should retry
-          const isNetworkError = error.code === 'ERR_NETWORK' || 
-                                  error.code === 'ERR_NETWORK_CHANGED' ||
-                                  error.message?.includes('Network Error') ||
-                                  error.message?.includes('timeout');
-          
-          if (isNetworkError && retryCount < MAX_RETRIES) {
-            const delay = RETRY_DELAY_BASE * Math.pow(2, retryCount); // Exponential backoff
-            console.warn(`CSV Download - Network error on chunk ${chunkParams.page}, retrying in ${delay}ms (attempt ${retryCount + 1}/${MAX_RETRIES})`);
-            await new Promise(resolve => setTimeout(resolve, delay));
-            return fetchChunkWithRetry(chunkParams, retryCount + 1);
-          }
-          
-          // If not retryable or max retries reached, throw
-          throw error;
-        }
-      };
-      
-      while (fetchedCount < totalResponses) {
-        const currentPage = Math.floor(fetchedCount / FETCH_CHUNK_SIZE) + 1;
-        
-        // Build chunk params with all filters
-        // Format interviewerIds as comma-separated string (backend expects string)
-        const chunkParams = {
-          limit: String(FETCH_CHUNK_SIZE),
-          page: String(currentPage),
-          status: filters.status || 'approved_rejected_pending',
-          dateRange: filters.dateRange || 'all',
-          startDate: filters.startDate || '',
-          endDate: filters.endDate || '',
-          interviewMode: filters.interviewMode || '',
-          ac: filters.ac || '',
-          interviewerIds: filters.interviewerIds && filters.interviewerIds.length > 0 ? filters.interviewerIds.join(',') : '',
-          interviewerMode: filters.interviewerMode || 'include',
-          search: filters.search || ''
-        };
-        
-        try {
-          console.log(`CSV Download - Fetching chunk ${currentPage} (responses ${fetchedCount + 1} to ${fetchedCount + FETCH_CHUNK_SIZE})...`);
-          const chunkResponses = await fetchChunkWithRetry(chunkParams);
-          
-          if (chunkResponses.length === 0 && fetchedCount === 0) {
-            // If first chunk is empty, there might be an issue
-            console.warn('CSV Download - First chunk is empty, but totalResponses was', totalResponses);
-          }
-          
-          allResponses.push(...chunkResponses);
-          fetchedCount += chunkResponses.length;
-          
-          console.log(`CSV Download - Chunk ${currentPage} completed: ${chunkResponses.length} responses (Total: ${fetchedCount}/${totalResponses})`);
-          
-          setCsvProgress({ 
-            current: fetchedCount, 
-            total: totalResponses, 
-            stage: `Fetching responses (${fetchedCount}/${totalResponses})...` 
-          });
-          
-          // If we got fewer responses than requested, we've reached the end
-          if (chunkResponses.length < FETCH_CHUNK_SIZE) {
-            console.log(`CSV Download - Reached end of data at ${fetchedCount} responses (expected ${totalResponses})`);
-            if (fetchedCount < totalResponses) {
-              console.warn(`CSV Download - Warning: Fetched ${fetchedCount} but expected ${totalResponses}. Missing ${totalResponses - fetchedCount} responses.`);
-            }
-            break;
-          }
-          
-          // Delay between chunks to prevent overwhelming the server
-          await new Promise(resolve => setTimeout(resolve, CHUNK_DELAY));
-        } catch (error) {
-          console.error(`CSV Download - Error fetching chunk ${currentPage} after retries:`, error);
-          const errorMessage = error.response?.data?.message || error.message || 'Network error';
-          showError(`Failed to fetch responses at chunk ${currentPage}: ${errorMessage}. Please try again or reduce the date range.`);
-          setDownloadingCSV(false);
-          setCsvProgress({ current: 0, total: 0, stage: '' });
-          return;
-        }
-      }
-
-      const filteredResponses = allResponses;
-      console.log('CSV Download - Fetched responses:', filteredResponses.length, 'out of', totalResponses);
-      
-      // Verify that all chunks were fetched successfully
-      if (fetchedCount !== totalResponses) {
-        const missingCount = totalResponses - fetchedCount;
-        console.error(`CSV Download - Data mismatch: Fetched ${fetchedCount}, Expected ${totalResponses}, Missing ${missingCount}`);
-        
-        // Ask user if they want to continue with partial data
-        const continueWithPartial = window.confirm(
-          `Warning: Only ${fetchedCount} of ${totalResponses} responses were fetched. ` +
-          `Missing ${missingCount} responses (likely recent ones). ` +
-          `Do you want to continue with partial data or cancel and try again?`
-        );
-        
-        if (!continueWithPartial) {
-          setDownloadingCSV(false);
-          setCsvProgress({ current: 0, total: 0, stage: '' });
-          return;
-        }
-        
-        showError(`Warning: Only ${fetchedCount} of ${totalResponses} responses downloaded. Some recent responses may be missing.`);
-      }
-      
-      // Sort by createdAt ascending (oldest first) to ensure correct order
-      // This is critical because chunks are fetched with pagination (limit !== -1) 
-      // which means each chunk is sorted newest first, so we need to sort after combining
-      const sortedResponses = [...filteredResponses].sort((a, b) => {
-        // Try multiple date fields in order of preference
-        const getDate = (response) => {
-          if (response.createdAt) return new Date(response.createdAt).getTime();
-          if (response.endTime) return new Date(response.endTime).getTime();
-          if (response.updatedAt) return new Date(response.updatedAt).getTime();
-          // Fallback to 0 (will sort to top if no date found)
-          return 0;
-        };
-        
-        const dateA = getDate(a);
-        const dateB = getDate(b);
-        
-        // If both dates are valid, sort ascending (oldest first)
-        if (dateA > 0 && dateB > 0) {
-          return dateA - dateB;
-        }
-        // If one has no date, put it at the end
-        if (dateA === 0) return 1;
-        if (dateB === 0) return -1;
-        return 0;
-      });
-      
-      console.log('CSV Download - Sorted responses by createdAt (oldest first)');
-      if (sortedResponses.length > 0) {
-        const getDate = (response) => {
-          if (response.createdAt) return new Date(response.createdAt);
-          if (response.endTime) return new Date(response.endTime);
-          if (response.updatedAt) return new Date(response.updatedAt);
-          return new Date(0);
-        };
-        const firstDate = getDate(sortedResponses[0]);
-        const lastDate = getDate(sortedResponses[sortedResponses.length - 1]);
-        console.log(`CSV Download - Date range: ${firstDate.toISOString()} to ${lastDate.toISOString()}`);
-        console.log(`CSV Download - First response date: ${firstDate.toLocaleDateString()}, Last response date: ${lastDate.toLocaleDateString()}`);
-      }
-      
-      if (sortedResponses.length === 0) {
-        console.error('CSV Download - No responses fetched after chunked download');
-        showError('No responses found matching the filters. Please check your filters and try again.');
-        setDownloadingCSV(false);
-        setCsvProgress({ current: 0, total: 0, stage: '' });
-        return;
-      }
-      
-      setCsvProgress({ current: 0, total: totalResponses, stage: `Processing ${sortedResponses.length} responses...` });
-      
-      // Process in chunks to avoid memory issues
-      const CHUNK_SIZE = 500; // Process 500 responses at a time
-
-      // Determine if we have CAPI, CATI, or mixed responses
-      const hasCAPI = sortedResponses.some(r => r.interviewMode?.toUpperCase() === 'CAPI');
-      const hasCATI = sortedResponses.some(r => r.interviewMode?.toUpperCase() === 'CATI');
-      const isMixed = hasCAPI && hasCATI;
-      const isCAPIOnly = hasCAPI && !hasCATI;
-      const isCATIOnly = hasCATI && !hasCAPI;
-
-      // Get ALL questions from the survey itself
-      const allSurveyQuestions = getAllSurveyQuestions(survey);
-      
-      if (allSurveyQuestions.length === 0) {
-        showError('No survey questions found');
-        setDownloadingCSV(false);
-        return;
-      }
-
-      // Filter out AC selection and polling station questions
-      let regularQuestions = allSurveyQuestions
-        .filter(q => !isACOrPollingStationQuestion(q))
-        .sort((a, b) => {
-          const orderA = a.order !== null && a.order !== undefined ? parseInt(a.order) : 9999;
-          const orderB = b.order !== null && b.order !== undefined ? parseInt(b.order) : 9999;
-          if (!isNaN(orderA) && !isNaN(orderB)) {
-            return orderA - orderB;
-          }
-          return 0;
-        });
-      
-      // For survey 68fd1915d41841da463f0d46, filter out "Professional Degree" option from Q13
-      const surveyIdStr = String(surveyId || survey?._id || survey?.id || '');
-      if (surveyIdStr === '68fd1915d41841da463f0d46') {
-        regularQuestions = regularQuestions.map(question => {
-          const questionText = getMainText(question.text || question.questionText || '').toLowerCase();
-          // Check if this is Q13 (three most pressing issues)
-          if (questionText.includes('three most pressing issues') && questionText.includes('west bengal')) {
-            // Filter out "Professional Degree" option
-            if (question.options && Array.isArray(question.options)) {
-              const filteredOptions = question.options.filter(opt => {
-                const optText = typeof opt === 'object' ? getMainText(opt.text || opt.label || opt.value || '') : getMainText(String(opt));
-                const optTextLower = String(optText).toLowerCase();
-                return !optTextLower.includes('professional degree');
-              });
-              return {
-                ...question,
-                options: filteredOptions
-              };
-            }
-          }
-          return question;
-        });
-      }
-      
-      if (regularQuestions.length === 0) {
-        showError('No regular survey questions found');
-        setDownloadingCSV(false);
-        return;
-      }
-
-      // Helper function to get question code from template mapping
-      const getQuestionCodeFromTemplate = (question, questionNumber) => {
-        if (!question) return `q${questionNumber}`;
-        
-        const questionText = getMainText(question.text || question.questionText || '').toLowerCase();
-        const qNum = questionNumber;
-        
-        if (question.id) {
-          const questionId = String(question.id).toLowerCase();
-          if (questionId.includes('religion') || questionId === 'resp_religion') return 'resp_religion';
-          if (questionId.includes('social_cat') || questionId === 'resp_social_cat') return 'resp_social_cat';
-          if (questionId.includes('caste') || questionId === 'resp_caste_jati') return 'resp_caste_jati';
-          if (questionId.includes('female_edu') || questionId === 'resp_female_edu') return 'resp_female_edu';
-          if (questionId.includes('male_edu') || questionId === 'resp_male_edu') return 'resp_male_edu';
-          if (questionId.includes('occupation') || questionId === 'resp_occupation') return 'resp_occupation';
-          if (questionId.includes('mobile') || questionId === 'resp_mobile') return 'resp_mobile';
-          if (questionId.includes('name') && !questionId.includes('caste')) return 'resp_name';
-        }
-        
-        // Map by question text keywords
-        if (questionText.includes('religion') && questionText.includes('belong to')) return 'resp_religion';
-        if (questionText.includes('social category') && questionText.includes('belong to')) return 'resp_social_cat';
-        if (questionText.includes('caste') && (questionText.includes('tell me') || questionText.includes('jati'))) return 'resp_caste_jati';
-        if (questionText.includes('female') && questionText.includes('education') && 
-            (questionText.includes('most educated') || questionText.includes('highest educational'))) return 'resp_female_edu';
-        if (questionText.includes('male') && questionText.includes('education') && 
-            (questionText.includes('most educated') || questionText.includes('highest educational'))) return 'resp_male_edu';
-        if (questionText.includes('occupation') && questionText.includes('chief wage earner')) return 'resp_occupation';
-        if ((questionText.includes('mobile number') || questionText.includes('phone number')) && 
-            questionText.includes('share')) return 'resp_mobile';
-        if (questionText.includes('share your name') && questionText.includes('confidential')) return 'resp_name';
-        if (questionText.includes('contact you in future') || 
-            (questionText.includes('future') && questionText.includes('similar surveys'))) return 'thanks_future';
-        
-        return `q${qNum}`;
-      };
-      
-      // Helper function to get option code for multi-select questions
-      const getOptionCodeFromTemplate = (questionCode, optionIndex, option, questionNumber) => {
-        const optText = typeof option === 'object' ? getMainText(option.text || '') : getMainText(String(option));
-        if (isOthersOption(optText)) {
-          if (questionCode.startsWith('resp_') || questionCode === 'thanks_future') {
-            return `${questionCode}_oth`;
-          }
-          return `${questionCode}_oth`;
-        }
-        
-        const optionNum = optionIndex + 1;
-        
-        if (questionCode.startsWith('resp_') || questionCode === 'thanks_future') {
-          return `${questionCode}_${optionNum}`;
-        }
-        
-        return `${questionCode}_${optionNum}`;
-      };
-
-      // Build headers with two rows: titles and codes
-      const metadataTitleRow = [];
-      const metadataCodeRow = [];
-      
-      // Metadata columns
-      metadataTitleRow.push('Serial Number');
-      metadataCodeRow.push('serial_no');
-      metadataTitleRow.push('Response ID');
-      metadataCodeRow.push('Response ID'); // Added code
-      metadataTitleRow.push('Interview Mode');
-      metadataCodeRow.push('MODE'); // Added code
-      metadataTitleRow.push('Interviewer Name');
-      metadataCodeRow.push('int_name');
-      metadataTitleRow.push('Interviewer ID');
-      metadataCodeRow.push('int_id');
-      metadataTitleRow.push('Interviewer Email');
-      metadataCodeRow.push('Email_Id'); // Added code
-      metadataTitleRow.push('Supervisor Name');
-      metadataCodeRow.push('sup_name');
-      metadataTitleRow.push('Supervisor ID');
-      metadataCodeRow.push('sup_id');
-      metadataTitleRow.push('Response Date'); // Date only (IST)
-      metadataCodeRow.push('survey_date');
-      metadataTitleRow.push('Response Date Time'); // Date and time (IST)
-      metadataCodeRow.push('survey_datetime');
-      metadataTitleRow.push('Status');
-      metadataCodeRow.push('Status');
-      metadataTitleRow.push('Assembly Constituency code');
-      metadataCodeRow.push('ac_code');
-      metadataTitleRow.push('Assembly Constituency (AC)');
-      metadataCodeRow.push('ac_name');
-      metadataTitleRow.push('Parliamentary Constituency Code');
-      metadataCodeRow.push('pc_code');
-      metadataTitleRow.push('Parliamentary Constituency (PC)');
-      metadataCodeRow.push('pc_name');
-      metadataTitleRow.push('District Code');
-      metadataCodeRow.push('district_code');
-      metadataTitleRow.push('District');
-      metadataCodeRow.push('district_code');
-      metadataTitleRow.push('Region Code');
-      metadataCodeRow.push('region_code');
-      metadataTitleRow.push('Region Name');
-      metadataCodeRow.push('region_name');
-      metadataTitleRow.push('Polling Station Code');
-      metadataCodeRow.push('rt_polling_station_no');
-      metadataTitleRow.push('Polling Station Name');
-      metadataCodeRow.push('rt_polling_station_name');
-      metadataTitleRow.push('GPS Coordinates');
-      metadataCodeRow.push('rt_gps_coordinates');
-      metadataTitleRow.push('Call ID');
-      metadataCodeRow.push('');
-
-      // Build question headers with multi-select handling
-      const questionTitleRow = [];
-      const questionCodeRow = [];
-      const questionMultiSelectMap = new Map();
-      const questionOthersMap = new Map();
-      
-      regularQuestions.forEach((question, index) => {
-        const questionText = question.text || question.questionText || `Question ${index + 1}`;
-        const mainQuestionText = getMainText(questionText);
-        const questionNumber = index + 1;
-        const questionCode = getQuestionCodeFromTemplate(question, questionNumber);
-        
-        questionTitleRow.push(`Q${questionNumber}: ${mainQuestionText}`);
-        questionCodeRow.push(questionCode);
-        
-        const isMultiSelect = (question.type === 'multiple_choice' || question.type === 'multi_select') 
-          && question.settings?.allowMultiple === true 
-          && question.options 
-          && question.options.length > 0;
-        
-        const hasOthersOption = question.options && question.options.some(opt => {
-          const optText = typeof opt === 'object' ? (opt.text || opt.label || opt.value) : opt;
-          const optTextStr = String(optText || '').toLowerCase().trim();
-          return isOthersOption(optTextStr) || 
-                 (optTextStr.includes('other') && (optTextStr.includes('specify') || optTextStr.includes('please')));
-        });
-        
-        const hasIndependentOption = question.options && question.options.some(opt => {
-          const optText = typeof opt === 'object' ? opt.text : opt;
-          const optLower = String(optText).toLowerCase();
-          return optLower.includes('independent') && !optLower.includes('other');
-        });
-        
-        questionOthersMap.set(index, hasOthersOption);
-        
-        if (isMultiSelect) {
-          const regularOptions = [];
-          let othersOption = null;
-          let othersOptionIndex = -1;
-          
-          question.options.forEach((option, optIndex) => {
-            const optText = typeof option === 'object' ? option.text : option;
-            const optTextStr = String(optText || '').trim();
-            if (isOthersOption(optTextStr) || optTextStr.toLowerCase().includes('other') && (optTextStr.toLowerCase().includes('specify') || optTextStr.toLowerCase().includes('please'))) {
-              othersOption = option;
-              othersOptionIndex = optIndex;
-            } else {
-              regularOptions.push(option);
-            }
-          });
-          
-          questionMultiSelectMap.set(index, {
-            isMultiSelect: true,
-            options: regularOptions,
-            othersOption: othersOption,
-            othersOptionIndex: othersOptionIndex,
-            questionText: mainQuestionText,
-            questionNumber,
-            questionCode
-          });
-          
-          let regularOptionIndex = 0;
-          regularOptions.forEach((option) => {
-            const optText = typeof option === 'object' ? option.text : option;
-            const optMainText = getMainText(optText);
-            // Generate option code: Q{questionNumber}_{optionIndex+1}
-            // Format: Q1_2, Q1_3, etc. (matching responses page format)
-            const optionNum = regularOptionIndex + 1; // 1-based index
-            const optCode = `Q${questionNumber}_${optionNum}`;
-            regularOptionIndex++;
-            
-            questionTitleRow.push(`Q${questionNumber}. ${mainQuestionText} - ${optMainText}`);
-            questionCodeRow.push(optCode);
-          });
-          
-          if (hasOthersOption) {
-            // Add _oth_choice column before _oth column for multi-select questions
-            questionTitleRow.push(`Q${questionNumber}: ${mainQuestionText} - Others Choice`);
-            const othersChoiceCode = questionCode.startsWith('resp_') || questionCode === 'thanks_future'
-              ? `${questionCode}_oth_choice`
-              : `${questionCode}_oth_choice`;
-            questionCodeRow.push(othersChoiceCode);
-            
-            // Add _oth column (Others text)
-            questionTitleRow.push(`Q${questionNumber}: ${mainQuestionText} - Others (Specify)`);
-            const othersCode = questionCode.startsWith('resp_') || questionCode === 'thanks_future'
-              ? `${questionCode}_oth`
-              : `${questionCode}_oth`;
-            questionCodeRow.push(othersCode);
-          }
-        } else {
-          if (hasOthersOption) {
-            // Add _oth column for Others text
-            questionTitleRow.push(`Q${questionNumber}: ${mainQuestionText} - Others (Specify)`);
-            const othersCode = questionCode.startsWith('resp_') || questionCode === 'thanks_future'
-              ? `${questionCode}_oth`
-              : `${questionCode}_oth`;
-            questionCodeRow.push(othersCode);
-          }
-          
-          if (hasIndependentOption && ['q5', 'q6', 'q7', 'q8', 'q9'].includes(questionCode)) {
-            questionTitleRow.push(`Q${questionNumber}: ${mainQuestionText} - Independent (Please specify)`);
-            const indCode = `${questionCode}_ind`;
-            questionCodeRow.push(indCode);
-          }
-        }
-      });
-      
-      // Combine metadata and question headers
-      const allTitleRow = [...metadataTitleRow, ...questionTitleRow];
-      const allCodeRow = [...metadataCodeRow, ...questionCodeRow];
-      
-      // Add Status, QC, and Rejection columns at the end
-      allTitleRow.push('Status (0= terminated, 10=valid, 20=rejected, 40=under qc)');
-      allCodeRow.push('status_code');
-      allTitleRow.push('Qc Completion date');
-      allCodeRow.push('qc_completion_date');
-      allTitleRow.push('Assigned to QC ( 1 can mean those whih are assigned to audio qc and 2 can mean those which are not yet assigned)');
-      allCodeRow.push('assigned_to_qc');
-      allTitleRow.push('Reason for rejection (1= short duration, 2= gps rejection, 3= duplicate phone numbers, 4= audio status, 5= gender mismatch, 6=2021 AE, 7=2024 GE, 8= Pref, 9=Interviewer performance)');
-      allCodeRow.push('rejection_reason');
-
-      // Helper function to extract AC and polling station from responses
-      const getACAndPollingStationFromResponses = (responses) => {
-        if (!responses || !Array.isArray(responses)) {
-          return { ac: null, pollingStation: null, groupName: null };
-        }
-        
-        let ac = null;
-        let pollingStation = null;
-        let groupName = null;
-        
-        responses.forEach((responseItem) => {
-          if (responseItem.questionId === 'ac-selection') {
-            ac = responseItem.response || null;
-          }
-          
-          if (responseItem.questionText?.toLowerCase().includes('select polling station') ||
-              responseItem.questionType === 'polling_station') {
-            const stationResponse = responseItem.response;
-            if (stationResponse) {
-              if (typeof stationResponse === 'string' && stationResponse.includes(' - ')) {
-                const parts = stationResponse.split(' - ');
-                if (parts.length >= 3 && parts[0].toLowerCase().startsWith('group')) {
-                  groupName = parts[0] || null;
-                  pollingStation = parts.slice(1).join(' - ');
-                } else if (parts.length === 2 && parts[0].toLowerCase().startsWith('group')) {
-                  groupName = parts[0] || null;
-                  pollingStation = parts[1] || stationResponse;
-                } else {
-                  pollingStation = stationResponse;
-                }
-              } else {
-                pollingStation = stationResponse;
-              }
-            }
-          }
-          
-          if (responseItem.questionId === 'polling-station-group' ||
-              responseItem.questionText?.toLowerCase().includes('select group')) {
-            groupName = responseItem.response || null;
-          }
-        });
-        
-        return { ac, pollingStation, groupName };
-      };
-
-      // Helper function to check if a value matches an option
-      const optionMatches = (option, value) => {
-        if (!option || value === null || value === undefined) return false;
-        const optValue = typeof option === 'object' ? (option.value || option.text) : option;
-        
-        if (optValue === value || String(optValue) === String(value)) {
-          return true;
-        }
-        
-        const optMainText = getMainText(String(optValue));
-        const valueMainText = getMainText(String(value));
-        
-        if (optMainText && valueMainText && optMainText === valueMainText) {
-          return true;
-        }
-        
-        if (typeof option === 'object' && option.code !== null && option.code !== undefined) {
-          const optCode = String(option.code);
-          const valueStr = String(value);
-          if (optCode === valueStr || optCode === valueMainText) {
-            return true;
-          }
-        }
-        
-        return false;
-      };
-
-      // Pre-fetch all polling station data for unique AC codes
-      const uniqueACCodes = new Set();
-      sortedResponses.forEach(response => {
-        const acFromResponse = getACAndPollingStationFromResponses(response.responses).ac;
-        const displayAC = acFromResponse || response.selectedPollingStation?.acName || response.selectedAC || 'N/A';
-        if (displayAC !== 'N/A') {
-          const acCode = getACCodeFromAC(displayAC);
-          if (acCode !== 'N/A') {
-            uniqueACCodes.add(acCode);
-          }
-        }
-      });
-      
-      // Fetch all polling station data in parallel
-      const pollingDataPromises = Array.from(uniqueACCodes).map(acCode => 
-        getPollingStationData(acCode).then(data => ({ acCode, data }))
-      );
-      const pollingDataResults = await Promise.all(pollingDataPromises);
-      const pollingDataMap = new Map();
-      pollingDataResults.forEach(({ acCode, data }) => {
-        pollingDataMap.set(acCode, data);
-      });
-
-      // Pre-fetch supervisor names by memberId (extract unique supervisor IDs from responses)
-      const uniqueSupervisorIDs = new Set();
-      sortedResponses.forEach(response => {
-        if (response.responses && Array.isArray(response.responses)) {
-          const supervisorIdResponse = response.responses.find(r => r.questionId === 'supervisor-id');
-          if (supervisorIdResponse && supervisorIdResponse.response !== null && supervisorIdResponse.response !== undefined && supervisorIdResponse.response !== '') {
-            const supervisorID = String(supervisorIdResponse.response).trim();
-            if (supervisorID && supervisorID !== '') {
-              uniqueSupervisorIDs.add(supervisorID);
-            }
-          }
-        }
-      });
-      
-      // Fetch supervisor names by memberId in parallel (using searchInterviewer API)
-      // Note: This API searches for users by memberId, which should work for supervisors too
-      const supervisorDataMap = new Map();
-      if (uniqueSupervisorIDs.size > 0) {
-        try {
-          const supervisorPromises = Array.from(uniqueSupervisorIDs).map(async (supervisorID) => {
-            try {
-              // Use the searchInterviewer API with includeSupervisors flag to find supervisor by memberId
-              // Supervisors are typically project managers, so we need to search for project_manager userType too
-              const searchResponse = await authAPI.searchInterviewerByMemberId(supervisorID, surveyId, true);
-              if (searchResponse.success && searchResponse.data) {
-                const supervisor = Array.isArray(searchResponse.data) ? searchResponse.data[0] : searchResponse.data;
-                if (supervisor && (supervisor.firstName || supervisor.lastName)) {
-                  const supervisorName = `${supervisor.firstName || ''} ${supervisor.lastName || ''}`.trim();
-                  return { memberId: supervisorID, name: supervisorName };
-                }
-              }
-            } catch (error) {
-              // Silently fail - supervisor might not exist or API might not find them
-              console.warn(`Could not fetch supervisor ${supervisorID}:`, error.message);
-            }
-            return { memberId: supervisorID, name: '' };
-          });
-          
-          const supervisorResults = await Promise.all(supervisorPromises);
-          supervisorResults.forEach(supervisor => {
-            if (supervisor.memberId) {
-              supervisorDataMap.set(supervisor.memberId, supervisor.name);
-            }
-          });
-        } catch (error) {
-          console.error('Error fetching supervisor data:', error);
-        }
-      }
-
-      // Create CSV data rows
-      const csvData = sortedResponses.map((response, rowIndex) => {
-        const { ac: acFromResponse, pollingStation: pollingStationFromResponse } = getACAndPollingStationFromResponses(response.responses);
-        
-        const cleanValue = (value) => {
-          if (value === 'N/A' || value === null || value === undefined) return '';
-          return value;
-        };
-        
-        const displayACRaw = acFromResponse || response.selectedPollingStation?.acName || response.selectedAC || '';
-        const displayAC = displayACRaw || '';
-        
-        let displayPC = response.selectedPollingStation?.pcName || '';
-        if (!displayPC && displayAC) {
-          const pcFromAC = getLokSabhaFromAC(displayAC);
-          displayPC = cleanValue(pcFromAC) || '';
-        }
-        
-        let displayDistrict = response.selectedPollingStation?.district || '';
-        if (!displayDistrict && displayAC) {
-          const districtFromAC = getDistrictFromAC(displayAC);
-          displayDistrict = cleanValue(districtFromAC) || '';
-        }
-        
-        const acCodeRaw = getACCodeFromAC(displayAC);
-        const acCode = cleanValue(acCodeRaw) || '';
-        
-        const pollingStationValue = pollingStationFromResponse || response.selectedPollingStation?.stationName;
-        
-        let pcCode = '';
-        let districtCode = '';
-        let regionCode = '';
-        let regionName = '';
-        
-        // Use JSON mapping for region_code, region_name, and district_code based on AC code
-        if (acCode && acCode !== '') {
-          // Look up in the JSON mapping
-          const acMapping = acRegionDistrictMapping[acCode];
-          if (acMapping) {
-            districtCode = cleanValue(acMapping.district_code) || '';
-            regionCode = cleanValue(acMapping.region_code) || '';
-            regionName = cleanValue(acMapping.region_name) || '';
-          }
-          
-          // Still use pollingDataMap for pcCode (if available)
-          const pollingData = pollingDataMap.get(acCode);
-          if (pollingData && pollingData.pcCode) {
-            pcCode = cleanValue(pollingData.pcCode) || '';
-          }
-        }
-        
-        const { stationCode: stationCodeRaw, stationName: stationNameRaw } = extractPollingStationCodeAndName(pollingStationValue);
-        const stationCode = cleanValue(stationCodeRaw) || '';
-        const stationName = cleanValue(stationNameRaw) || '';
-        
-        // Format date in IST (Indian Standard Time, UTC+5:30)
-        const responseDateUTC = new Date(response.createdAt || response.endTime || response.createdAt);
-        // Convert UTC to IST: add 5 hours and 30 minutes
-        const istOffset = 5.5 * 60 * 60 * 1000; // 5.5 hours in milliseconds
-        const responseDateIST = new Date(responseDateUTC.getTime() + istOffset);
-        
-        // Format date only (YYYY-MM-DD) in IST
-        const istYear = responseDateIST.getUTCFullYear();
-        const istMonth = String(responseDateIST.getUTCMonth() + 1).padStart(2, '0');
-        const istDay = String(responseDateIST.getUTCDate()).padStart(2, '0');
-        const formattedDateOnly = `${istYear}-${istMonth}-${istDay}`;
-        
-        // Format date and time (YYYY-MM-DD HH:MM:SS) in IST
-        const istHours = String(responseDateIST.getUTCHours()).padStart(2, '0');
-        const istMinutes = String(responseDateIST.getUTCMinutes()).padStart(2, '0');
-        const istSeconds = String(responseDateIST.getUTCSeconds()).padStart(2, '0');
-        const formattedDateTime = `${formattedDateOnly} ${istHours}:${istMinutes}:${istSeconds}`;
-        
-        // Extract supervisor ID from responses array (for survey 68fd1915d41841da463f0d46)
-        let supervisorID = '';
-        if (response.responses && Array.isArray(response.responses)) {
-          const supervisorIdResponse = response.responses.find(r => r.questionId === 'supervisor-id');
-          if (supervisorIdResponse && supervisorIdResponse.response !== null && supervisorIdResponse.response !== undefined && supervisorIdResponse.response !== '') {
-            supervisorID = String(supervisorIdResponse.response).trim();
-          }
-        }
-        
-        // Get supervisor name from pre-fetched data
-        const supervisorName = supervisorID && supervisorDataMap.has(supervisorID) 
-          ? supervisorDataMap.get(supervisorID) 
-          : '';
-        
-        // Get interviewer data from interviewerDetails (backend aggregation result)
-        // Backend returns interviewerDetails in aggregation, fallback to interviewer for compatibility
-        const interviewerDetails = response.interviewerDetails || response.interviewer || {};
-        const interviewerName = interviewerDetails.firstName || interviewerDetails.lastName
-          ? `${interviewerDetails.firstName || ''} ${interviewerDetails.lastName || ''}`.trim()
-          : '';
-        const interviewerID = interviewerDetails.memberId || interviewerDetails.memberID || response.interviewer?.memberId || response.interviewer?.memberID || '';
-        const interviewerEmail = interviewerDetails.email || response.interviewer?.email || '';
-        
-        // Build metadata row
-        const metadata = [
-          rowIndex + 1,
-          cleanValue(response.responseId || response._id?.slice(-8)),
-          cleanValue(response.interviewMode?.toUpperCase()),
-          cleanValue(interviewerName || null),
-          cleanValue(interviewerID),
-          cleanValue(interviewerEmail),
-          cleanValue(supervisorName), // Supervisor Name
-          cleanValue(supervisorID), // Supervisor ID
-          formattedDateOnly, // survey_date (date only, IST)
-          formattedDateTime, // survey_datetime (date+time, IST)
-          cleanValue(response.status),
-          cleanValue(acCode),
-          cleanValue(displayAC),
-          cleanValue(pcCode),
-          cleanValue(displayPC),
-          cleanValue(districtCode),
-          cleanValue(displayDistrict),
-          cleanValue(regionCode),
-          cleanValue(regionName),
-          cleanValue(stationCode),
-          cleanValue(stationName),
-          // For CATI responses, leave GPS coordinates empty (no GPS available)
-          response.interviewMode?.toUpperCase() === 'CATI' ? '' : (response.location ? `(${response.location.latitude?.toFixed(4)}, ${response.location.longitude?.toFixed(4)})` : ''),
-          response.call_id || ''
-        ];
-
-        // Extract answers for each question
-        const answers = [];
-        
-        regularQuestions.forEach((surveyQuestion, questionIndex) => {
-          let matchingAnswer = null;
-          
-          if (surveyQuestion.id) {
-            matchingAnswer = response.responses?.find(r => 
-              r.questionId === surveyQuestion.id
-            );
-          }
-          
-          if (!matchingAnswer && surveyQuestion.text) {
-            matchingAnswer = response.responses?.find(r => {
-              const rText = getMainText(r.questionText || '');
-              const sText = getMainText(surveyQuestion.text || surveyQuestion.questionText || '');
-              return rText === sText || r.questionText === surveyQuestion.text || r.questionText === surveyQuestion.questionText;
-            });
-          }
-          
-          const multiSelectInfo = questionMultiSelectMap.get(questionIndex);
-          const hasOthersOption = questionOthersMap.get(questionIndex);
-          // Get questionCode from multiSelectInfo if available, otherwise calculate it
-          const questionCode = multiSelectInfo?.questionCode || getQuestionCodeFromTemplate(surveyQuestion, questionIndex + 1);
-          
-          // Check if this is Q13 (three most pressing issues) for filtering Professional Degree
-          const questionText = getMainText(surveyQuestion.text || surveyQuestion.questionText || '').toLowerCase();
-          const isQ13 = surveyIdStr === '68fd1915d41841da463f0d46' && 
-                        questionText.includes('three most pressing issues') && 
-                        questionText.includes('west bengal');
-          
-          if (multiSelectInfo && multiSelectInfo.isMultiSelect) {
-            // Multi-select question handling
-            let selectedValues = [];
-            let othersText = '';
-            
-            if (matchingAnswer && !matchingAnswer.isSkipped && matchingAnswer.response) {
-              const responseValue = matchingAnswer.response;
-              
-              if (Array.isArray(responseValue)) {
-                selectedValues = responseValue;
-              } else if (responseValue !== null && responseValue !== undefined && responseValue !== '') {
-                selectedValues = [responseValue];
-              }
-            }
-            
-            // For Q13 (three most pressing issues) in survey 68fd1915d41841da463f0d46, filter out "Professional Degree" or "Professional_degree"
-            if (isQ13) {
-              selectedValues = selectedValues.filter(val => {
-                const valStr = typeof val === 'object' ? String(val.text || val.value || val) : String(val);
-                const valLower = valStr.toLowerCase().replace(/[_\s-]/g, ' ').trim();
-                // Filter out "professional degree" in any form (must contain both "professional" AND "degree")
-                return !(valLower.includes('professional') && valLower.includes('degree'));
-              });
-            }
-            
-            let isOthersSelected = false;
-            selectedValues.forEach(val => {
-              const valStr = typeof val === 'object' ? String(val.text || val.value || val) : String(val);
-              const isOthers = surveyQuestion.options.some(opt => {
-                const optText = typeof opt === 'object' ? opt.text : opt;
-                return isOthersOption(optText) && optionMatches(opt, val);
-              }) || valStr.startsWith('Others: ') || isOthersOption(valStr);
-              
-              if (isOthers) {
-                isOthersSelected = true;
-                if (valStr.startsWith('Others: ')) {
-                  othersText = valStr.substring(8).trim();
-                } else {
-                  const othersTextValue = extractOthersText(val);
-                  if (othersTextValue) {
-                    othersText = othersTextValue;
-                  }
-                }
-              }
-            });
-            
-            let mainResponse = '';
-            if (selectedValues.length > 0) {
-              if (downloadMode === 'codes') {
-                mainResponse = selectedValues.map(val => {
-                  const valStr = typeof val === 'object' ? String(val.text || val.value || val) : String(val);
-                  const isOthers = surveyQuestion.options.some(opt => {
-                    const optText = typeof opt === 'object' ? opt.text : opt;
-                    return isOthersOption(optText) && optionMatches(opt, val);
-                  }) || valStr.startsWith('Others: ') || isOthersOption(valStr);
-                  
-                  if (isOthers) {
-                    return '44';
-                  }
-                  
-                  // For Q13, skip "Professional_degree" or "Professional Degree" values entirely
-                  if (isQ13) {
-                    const valStrForCheck = typeof val === 'object' ? String(val.text || val.value || val) : String(val);
-                    const valLowerForCheck = valStrForCheck.toLowerCase().replace(/[_\s-]/g, ' ').trim();
-                    if (valLowerForCheck.includes('professional') && valLowerForCheck.includes('degree')) {
-                      // Skip this value - don't include it in the response
-                      return null; // Return null to filter it out
-                    }
-                  }
-                  
-                  let option = surveyQuestion.options.find(opt => optionMatches(opt, val));
-                  
-                  if (!option) {
-                    const valMainText = getMainText(String(val));
-                    option = surveyQuestion.options.find(opt => {
-                      const optValue = typeof opt === 'object' ? (opt.value || opt.text) : opt;
-                      const optMainText = getMainText(String(optValue));
-                      return optMainText === valMainText && valMainText !== '';
-                    });
-                  }
-                  
-                  if (option) {
-                    if (option.code !== null && option.code !== undefined && option.code !== '') {
-                      return String(option.code);
-                    } else if (option.value) {
-                      const mainValue = getMainText(String(option.value));
-                      if (!/^\d+$/.test(mainValue)) {
-                        const matchingOpt = surveyQuestion.options.find(opt => {
-                          const optMainText = getMainText(String(opt.value || opt.text || ''));
-                          return optMainText === mainValue;
-                        });
-                        if (matchingOpt && matchingOpt.code) {
-                          return String(matchingOpt.code);
-                        } else {
-                          // Special handling for thanks_future: "yes,_you_can" or "yes, you can" should be "1"
-                          if (questionCode === 'thanks_future') {
-                            const valLower = mainValue.toLowerCase().replace(/[,_]/g, ' ').trim();
-                            if (valLower.includes('yes') && (valLower.includes('you') || valLower.includes('can'))) {
-                              return '1';
-                            }
-                          }
-                          return mainValue;
-                        }
-                      } else {
-                        return mainValue;
-                      }
-                    } else {
-                      const mainValue = getMainText(String(val));
-                      // Special handling for thanks_future: "yes,_you_can" or "yes, you can" should be "1"
-                      if (questionCode === 'thanks_future') {
-                        const valLower = mainValue.toLowerCase().replace(/[,_]/g, ' ').trim();
-                        if (valLower.includes('yes') && (valLower.includes('you') || valLower.includes('can'))) {
-                          return '1';
-                        }
-                      }
-                      return mainValue || String(val);
-                    }
-                  }
-                  const mainValue = getMainText(String(val));
-                  // Special handling for thanks_future: "yes,_you_can" or "yes, you can" should be "1"
-                  if (questionCode === 'thanks_future') {
-                    const valLower = mainValue.toLowerCase().replace(/[,_]/g, ' ').trim();
-                    if (valLower.includes('yes') && (valLower.includes('you') || valLower.includes('can'))) {
-                      return '1';
-                    }
-                  }
-                  // For Q13, skip "Professional_degree" values
-                  if (isQ13) {
-                    const valLower = mainValue.toLowerCase().replace(/[_\s-]/g, ' ').trim();
-                    if (valLower.includes('professional') && valLower.includes('degree')) {
-                      return null; // Filter out
-                    }
-                  }
-                  return mainValue || String(val);
-                }).filter(code => code !== null).join(', ');
-              } else {
-                const filteredValues = selectedValues.filter(val => {
-                  const valStr = typeof val === 'object' ? String(val.text || val.value || val) : String(val);
-                  const isOthers = surveyQuestion.options.some(opt => {
-                    const optText = typeof opt === 'object' ? opt.text : opt;
-                    return isOthersOption(optText) && optionMatches(opt, val);
-                  }) || valStr.startsWith('Others: ') || isOthersOption(valStr);
-                  return !isOthers;
+          if (jobAge < maxAge) {
+            // Check if job is still valid
+            const progressCheck = await surveyResponseAPI.getCSVJobProgress(parsed.jobId);
+            if (progressCheck.success) {
+              const { state } = progressCheck;
+              if (state === 'waiting' || state === 'active') {
+                console.log('🔄 Resuming existing job from localStorage:', parsed.jobId);
+                jobId = parsed.jobId;
+                setCsvProgress({ 
+                  current: 0, 
+                  total: 0, 
+                  stage: progressCheck.isLinked ? 'Linked to existing job...' : 'Resuming job...' 
                 });
-                if (isOthersSelected) {
-                  mainResponse = filteredValues.length > 0 
-                    ? formatResponseDisplay(filteredValues, surveyQuestion) + ', Others'
-                    : 'Others';
-                } else {
-                  mainResponse = formatResponseDisplay(selectedValues, surveyQuestion);
-                }
+                // Continue to polling below
+              } else if (state === 'completed') {
+                // Job already completed, download immediately
+                console.log('✅ Job already completed, downloading...');
+                await surveyResponseAPI.downloadCSVFromJob(parsed.jobId);
+                showSuccess('CSV downloaded successfully!');
+        setDownloadingCSV(false);
+        setCsvProgress({ current: 0, total: 0, stage: '' });
+                localStorage.removeItem(storageKey);
+        return;
+              } else {
+                // Job failed or not found, create new one
+                localStorage.removeItem(storageKey);
               }
-            } else if (matchingAnswer && matchingAnswer.isSkipped) {
-              mainResponse = '';
-            } else {
-              mainResponse = '';
+            }
+          } else {
+            // Job too old, remove it
+            localStorage.removeItem(storageKey);
+          }
+        } catch (error) {
+          console.warn('Error checking existing job:', error);
+          localStorage.removeItem(storageKey);
+        }
+      }
+
+      // Step 1: Create CSV generation job (returns immediately with job ID)
+      if (!jobId) {
+        setCsvProgress({ current: 0, total: 0, stage: 'Creating job...' });
+        
+        const jobResponse = await surveyResponseAPI.createCSVJob(surveyId, filters, downloadMode);
+        
+        if (!jobResponse.success || !jobResponse.jobId) {
+          throw new Error(jobResponse.message || 'Failed to create CSV generation job');
+        }
+
+        jobId = jobResponse.jobId;
+        
+        // Store job ID in localStorage (Approach 3)
+        localStorage.setItem(storageKey, JSON.stringify({
+          jobId: jobId,
+          timestamp: Date.now(),
+          surveyId: surveyId,
+          mode: downloadMode
+        }));
+        
+        if (jobResponse.isLinked) {
+          console.log('🔗 Linked to existing job:', jobId);
+          setCsvProgress({ current: 0, total: 0, stage: 'Linked to existing job, checking progress...' });
+        } else {
+          console.log('✅ CSV Job created:', jobId);
+        }
+      }
+
+      // Step 2: Start polling for progress
+      setCsvProgress({ current: 0, total: 0, stage: 'Job created, starting generation...' });
+
+      let pollErrorCount = 0;
+      const maxPollErrors = 5;
+
+      const pollProgress = async () => {
+        // CRITICAL: Stop polling immediately if download already completed or in progress
+        if (downloadCompleted || downloadInProgress) {
+          if (pollInterval) {
+            clearInterval(pollInterval);
+            pollInterval = null;
+          }
+        return;
+      }
+      
+        try {
+          const progressResponse = await surveyResponseAPI.getCSVJobProgress(jobId);
+          
+          // Reset error count on success
+          pollErrorCount = 0;
+          
+          if (!progressResponse.success) {
+            throw new Error(progressResponse.message || 'Failed to get job progress');
+          }
+
+          const { state, progress, result } = progressResponse;
+          
+          console.log('📊 Progress update:', { state, progress, jobId, hasResult: !!result });
+
+          // Check if job is completed - check multiple indicators
+          const isCompleted = state === 'completed' || 
+                             (progress && typeof progress === 'object' && progress.stage === 'completed') ||
+                             (progress && typeof progress === 'object' && progress.message && progress.message.includes('completed')) ||
+                             !!result;
+
+          // Update progress based on job state and progress
+          if (progress && typeof progress === 'object') {
+            const { percentage, current, total, stage, message } = progress;
+            
+            // If we detect completion from message/stage, treat as completed
+            if (isCompleted && !(state === 'completed')) {
+              console.log('✅ Detected completion from progress message/stage, treating as completed');
             }
             
-            // Add main response column first (contains codes like "44" for Others or actual codes)
-            answers.push(mainResponse);
+            setCsvProgress({
+              current: current || Math.round((percentage || 0) * (total || 100) / 100) || 0,
+              total: total || 100,
+              stage: message || stage || 'Processing...'
+            });
+          } else if (typeof progress === 'number') {
+            setCsvProgress({
+              current: Math.round(progress),
+              total: 100,
+              stage: `Generating CSV... ${Math.round(progress)}%`
+            });
+            } else {
+            // Estimate progress based on state
+            let estimatedProgress = 0;
+            let stageMessage = 'Processing...';
             
-            // Add Yes/No columns for each REGULAR option (excluding "Others")
-            // IMPORTANT: These columns must match the order of headers created above (lines 1197-1206)
-            // Get questionCode from multiSelectInfo for use in option matching
-            const questionCodeForMatching = multiSelectInfo.questionCode || questionCode;
-            multiSelectInfo.options.forEach((option, optIndex) => {
-              const optText = typeof option === 'object' ? option.text : option;
-              // Skip if this is "Others" option
-              if (isOthersOption(optText)) {
+            if (state === 'waiting') {
+              estimatedProgress = 0;
+              stageMessage = 'Job queued, waiting to start...';
+            } else if (state === 'active') {
+              estimatedProgress = 10;
+              stageMessage = 'CSV generation in progress...';
+            } else if (state === 'completed' || isCompleted) {
+              estimatedProgress = 100;
+              stageMessage = 'CSV generation completed!';
+            } else if (state === 'failed') {
+              throw new Error(progressResponse.error || 'CSV generation failed');
+            }
+            
+            setCsvProgress({
+              current: estimatedProgress,
+              total: 100,
+              stage: stageMessage
+            });
+          }
+
+          // Check if job is completed - use multiple indicators
+          if (isCompleted) {
+            // CRITICAL: Stop polling FIRST, before any download logic
+            if (pollInterval) {
+              clearInterval(pollInterval);
+              pollInterval = null;
+            }
+
+            // CRITICAL: Check if download already started/completed (prevent duplicates)
+            if (downloadInProgress || downloadCompleted) {
+              console.log('⚠️ Download already in progress or completed, skipping duplicate download');
+              return;
+            }
+
+            // Mark download as in progress to prevent duplicates
+            downloadInProgress = true;
+            
+            setCsvProgress({ current: 100, total: 100, stage: 'Preparing download...' });
+            
+            // Retry download up to 3 times
+            let downloadAttempts = 0;
+            const maxDownloadAttempts = 3;
+            let downloadSuccess = false;
+            
+            try {
+              while (downloadAttempts < maxDownloadAttempts && !downloadSuccess && !downloadCompleted) {
+                downloadAttempts++;
+                console.log(`📥 Download attempt ${downloadAttempts}/${maxDownloadAttempts} for job:`, jobId);
+                
+                // Wait a bit longer on retries
+                if (downloadAttempts > 1) {
+                  setCsvProgress({ current: 100, total: 100, stage: `Retrying download (${downloadAttempts}/${maxDownloadAttempts})...` });
+                  await new Promise(resolve => setTimeout(resolve, 2000 * downloadAttempts));
+                } else {
+                  // Small delay to ensure file is fully written and job state is updated
+                  setCsvProgress({ current: 100, total: 100, stage: 'Finalizing...' });
+                  await new Promise(resolve => setTimeout(resolve, 2000));
+                }
+                
+                await surveyResponseAPI.downloadCSVFromJob(jobId);
+                
+                console.log('✅ CSV download triggered successfully');
+                downloadSuccess = true;
+                downloadCompleted = true; // Mark as completed
+                
+                // Clear localStorage on successful download
+                localStorage.removeItem(storageKey);
+                
+                showSuccess('CSV downloaded successfully!');
+                setDownloadingCSV(false);
+                setCsvProgress({ current: 0, total: 0, stage: '' });
+                
+                // Exit immediately after successful download
                 return;
               }
-              const optValue = typeof option === 'object' ? (option.value || option.text) : option;
-              const isSelected = selectedValues.some(val => {
-                const valStr = typeof val === 'object' ? String(val.text || val.value || val) : String(val);
-                if (valStr.startsWith('Others: ') || isOthersOption(valStr)) {
-                  return false; // Don't match "Others" values
-                }
-                // Improved matching: try multiple methods
-                if (optionMatches(option, val)) {
-                  return true;
-                }
-                // Also try matching by main text (handles translation variations)
-                const valMainText = getMainText(String(valStr));
-                const optMainText = getMainText(String(optValue));
-                if (valMainText && optMainText && valMainText === optMainText) {
-                  return true;
-                }
-                // Special handling for thanks_future: match "yes,_you_can" variations
-                if (questionCodeForMatching === 'thanks_future') {
-                  const valLower = valMainText.toLowerCase().replace(/[,_]/g, ' ').trim();
-                  const optLower = optMainText.toLowerCase().replace(/[,_]/g, ' ').trim();
-                  if (valLower.includes('yes') && optLower.includes('yes') && 
-                      (valLower.includes('you') || valLower.includes('can'))) {
-                    return true;
-                  }
-                }
-                return false;
-              });
               
-              if (downloadMode === 'codes') {
-                answers.push(isSelected ? '1' : '0');
-              } else {
-                answers.push(isSelected ? 'Yes' : 'No');
+              if (!downloadSuccess) {
+                // All attempts failed
+                downloadInProgress = false; // Reset flag on failure
+                localStorage.removeItem(storageKey);
+                showError(`Download failed after ${maxDownloadAttempts} attempts. You can try downloading again manually.`);
+                setDownloadingCSV(false);
+                setCsvProgress({ current: 0, total: 0, stage: '' });
               }
-            });
-            
-            if (hasOthersOption) {
-              // Add _oth_choice column: 1 if mainResponse contains "44" (Others code), 0 otherwise
-              const mainResponseStr = String(mainResponse || '').trim();
-              // Check if mainResponse contains "44" as a separate code (not part of "144" or "440")
-              // Handle formats: "44", "1, 44", "44, 2", "1, 44, 3", etc.
-              let containsOthersCode = false;
-              if (mainResponseStr === '44') {
-                containsOthersCode = true;
-              } else if (mainResponseStr.includes(',')) {
-                // Comma-separated values: check if "44" appears as a separate code
-                const codes = mainResponseStr.split(',').map(c => c.trim());
-                containsOthersCode = codes.includes('44');
-              } else {
-                // Single value: use regex to match exact "44" (not "144" or "440")
-                containsOthersCode = /\b44\b/.test(mainResponseStr);
-              }
-              const othChoiceValue = containsOthersCode ? '1' : '0';
-              answers.push(othChoiceValue);
+            } catch (downloadError) {
+              console.error(`❌ Download error:`, downloadError);
+              downloadInProgress = false; // Reset flag on error
               
-              // Add _oth column (Others text)
-              answers.push(othersText || '');
-            }
-          } else {
-            // Single choice or other question types
-            let questionResponse = '';
-            let othersText = '';
-            
-            if (matchingAnswer) {
-              if (matchingAnswer.isSkipped) {
-                questionResponse = '';
-              } else {
-                const responseValue = matchingAnswer.response;
-                const hasResponseContent = (val) => {
-                  if (!val && val !== 0) return false;
-                  if (Array.isArray(val)) return val.length > 0;
-                  if (typeof val === 'object') return Object.keys(val).length > 0;
-                  return val !== '' && val !== null && val !== undefined;
-                };
-                
-                if (!hasResponseContent(responseValue)) {
-                  questionResponse = '';
-                } else {
-                  const responseStr = String(responseValue);
-                  const isOthersResponse = responseStr.startsWith('Others: ') || 
-                    (hasOthersOption && surveyQuestion.options && surveyQuestion.options.some(opt => {
-                      const optText = typeof opt === 'object' ? opt.text : opt;
-                      return isOthersOption(optText) && optionMatches(opt, responseValue);
-                    }));
-                  
-                  if (isOthersResponse) {
-                    if (responseStr.startsWith('Others: ')) {
-                      othersText = responseStr.substring(8).trim();
-                    } else {
-                      const othersTextValue = extractOthersText(responseValue);
-                      if (othersTextValue) {
-                        othersText = othersTextValue;
-                      }
-                    }
-                    
-                    if (downloadMode === 'codes') {
-                      questionResponse = '44';
-                    } else {
-                      questionResponse = 'Others';
-                    }
-                  } else {
-                    if (downloadMode === 'codes' && surveyQuestion.options) {
-                      let option = surveyQuestion.options.find(opt => optionMatches(opt, responseValue));
-                      
-                      if (!option) {
-                        const responseMainText = getMainText(String(responseValue));
-                        option = surveyQuestion.options.find(opt => {
-                          const optValue = typeof opt === 'object' ? (opt.value || opt.text) : opt;
-                          const optMainText = getMainText(String(optValue));
-                          return optMainText === responseMainText && responseMainText !== '';
-                        });
-                      }
-                      
-                      if (option) {
-                        if (option.code !== null && option.code !== undefined && option.code !== '') {
-                          questionResponse = String(option.code);
-                        } else if (option.value) {
-                          const mainValue = getMainText(String(option.value));
-                          if (!/^\d+$/.test(mainValue)) {
-                            const matchingOpt = surveyQuestion.options.find(opt => {
-                              const optMainText = getMainText(String(opt.value || opt.text || ''));
-                              return optMainText === mainValue;
-                            });
-                            if (matchingOpt && matchingOpt.code) {
-                              questionResponse = String(matchingOpt.code);
-                            } else {
-                              // Special handling for thanks_future: "yes,_you_can" or "yes, you can" should be "1"
-                              if (questionCode === 'thanks_future') {
-                                const valLower = mainValue.toLowerCase().replace(/[,_]/g, ' ').trim();
-                                if (valLower.includes('yes') && (valLower.includes('you') || valLower.includes('can'))) {
-                                  questionResponse = '1';
-                                } else {
-                                  questionResponse = mainValue;
-                                }
-                              } else {
-                                questionResponse = mainValue;
-                              }
-                            }
-                          } else {
-                            questionResponse = mainValue;
-                          }
-                        } else {
-                          const mainValue = getMainText(String(responseValue));
-                          // Special handling for thanks_future: "yes,_you_can" or "yes, you can" should be "1"
-                          if (questionCode === 'thanks_future') {
-                            const valLower = mainValue.toLowerCase().replace(/[,_]/g, ' ').trim();
-                            if (valLower.includes('yes') && (valLower.includes('you') || valLower.includes('can'))) {
-                              questionResponse = '1';
-                            } else {
-                              questionResponse = mainValue || String(responseValue);
-                            }
-                          } else {
-                            questionResponse = mainValue || String(responseValue);
-                          }
-                        }
-                      } else {
-                        // If no option found, use the response value directly
-                        const mainValue = getMainText(String(responseValue));
-                        // CRITICAL: Use the response value itself if it's a valid code/number
-                        // Don't use getMainText if responseValue is already a simple code
-                        if (responseValue !== null && responseValue !== undefined && responseValue !== '') {
-                          const responseStr = String(responseValue);
-                          // If responseValue is a simple number/code, use it directly
-                          if (/^\d+$/.test(responseStr.trim())) {
-                            questionResponse = responseStr.trim();
-                          } else {
-                            questionResponse = mainValue || responseStr;
-                          }
-                        } else {
-                          questionResponse = mainValue || String(responseValue);
-                        }
-                      }
-                    } else {
-                      // Not in codes mode or no options - use display formatting
-                      if (surveyQuestion.options) {
-                        questionResponse = formatResponseDisplay(responseValue, surveyQuestion);
-                      } else {
-                        questionResponse = getHardcodedOptionMapping(
-                          surveyQuestion.text || surveyQuestion.questionText, 
-                          responseValue
-                        );
-                      }
-                    }
-                  }
-                }
+              if (downloadAttempts >= maxDownloadAttempts) {
+                localStorage.removeItem(storageKey);
+                const errorMsg = downloadError.response?.data?.message || downloadError.message || 'Unknown error';
+                showError(`Download failed after ${maxDownloadAttempts} attempts: ${errorMsg}. You can try downloading again manually.`);
+                setDownloadingCSV(false);
+                setCsvProgress({ current: 0, total: 0, stage: '' });
               }
             }
             
-            // Get question number and code (must match header generation logic)
-            const questionNumber = questionIndex + 1;
-            const questionCode = getQuestionCodeFromTemplate(surveyQuestion, questionNumber);
-            const hasIndependentOption = surveyQuestion.options && surveyQuestion.options.some(opt => {
-              const optText = typeof opt === 'object' ? opt.text : opt;
-              const optLower = String(optText).toLowerCase();
-              return optLower.includes('independent') && !optLower.includes('other');
-            });
-            
-            // CRITICAL: Ensure questionResponse is always set correctly
-            // If questionResponse is still empty but we have a matchingAnswer, try to extract the response
-            // BUT: Only do this if questionResponse wasn't set in the main logic above
-            if (!questionResponse && matchingAnswer && !matchingAnswer.isSkipped && matchingAnswer.response) {
-              const responseValue = matchingAnswer.response;
-              const responseStr = String(responseValue);
-              
-              // Check if it's Others response
-              const isOthersResponse = responseStr.startsWith('Others: ') || 
-                (hasOthersOption && surveyQuestion.options && surveyQuestion.options.some(opt => {
-                  const optText = typeof opt === 'object' ? opt.text : opt;
-                  return isOthersOption(optText) && optionMatches(opt, responseValue);
-                }));
-              
-              if (isOthersResponse) {
-                if (downloadMode === 'codes') {
-                  questionResponse = '44';
-                } else {
-                  questionResponse = 'Others';
-                }
-                // Only extract Others text if response starts with "Others: "
-                if (responseStr.startsWith('Others: ')) {
-                  othersText = responseStr.substring(8).trim();
-                } else {
-                  // Only call extractOthersText if it's actually an Others response
-                  const othersTextValue = extractOthersText(responseValue);
-                  if (othersTextValue) {
-                    othersText = othersTextValue;
-                  }
-                }
-              } else if (downloadMode === 'codes' && surveyQuestion.options) {
-                // Try to find matching option and get its code
-                let option = surveyQuestion.options.find(opt => optionMatches(opt, responseValue));
-                if (option && option.code !== null && option.code !== undefined && option.code !== '') {
-                  questionResponse = String(option.code);
-                } else if (responseValue !== null && responseValue !== undefined && responseValue !== '') {
-                  questionResponse = String(responseValue);
-                }
-              } else if (responseValue !== null && responseValue !== undefined && responseValue !== '') {
-                questionResponse = String(responseValue);
-              }
+            return; // Exit polling function - IMPORTANT: prevent restart
+          } else if (state === 'failed') {
+            if (pollInterval) {
+              clearInterval(pollInterval);
+              pollInterval = null;
             }
-            
-            // CRITICAL: Always push main question response first (contains code like "44" for Others or actual code)
-            // This goes into the main question column (e.g., q5, q6)
-            // Ensure questionResponse is always a string (never undefined/null)
-            const mainQuestionResponse = questionResponse !== null && questionResponse !== undefined ? String(questionResponse) : '';
-            answers.push(mainQuestionResponse);
-            
-            if (hasOthersOption) {
-              // Add _oth column (Others text) - goes into q5_oth, q6_oth, etc.
-              // CRITICAL: othersText should ONLY contain the text after "Others: ", never the response code
-              // If othersText somehow contains a response code (just digits), it's a bug - clear it
-              // Also check if othersText equals the mainQuestionResponse (which would be wrong)
-              let othersTextValue = '';
-              if (othersText && othersText.trim() !== '') {
-                // If othersText is just a number (response code), ignore it
-                if (!othersText.match(/^\d+$/)) {
-                  // If othersText equals the main response (wrong), ignore it
-                  if (othersText !== mainQuestionResponse) {
-                    othersTextValue = othersText;
-                  }
-                }
-              }
-              answers.push(othersTextValue);
-            }
-            
-            if (hasIndependentOption && ['q5', 'q6', 'q7', 'q8', 'q9'].includes(questionCode)) {
-              let independentText = '';
-              if (matchingAnswer && matchingAnswer.response) {
-                const responseValue = matchingAnswer.response;
-                const responseStr = String(responseValue).toLowerCase();
-                // Check if this is actually an Independent response
-                const isIndependentResponse = responseStr.includes('independent') || 
-                    surveyQuestion.options.some(opt => {
-                      const optText = typeof opt === 'object' ? opt.text : opt;
-                      return String(optText).toLowerCase().includes('independent') && optionMatches(opt, responseValue);
-                    });
-                
-                if (isIndependentResponse) {
-                  const independentOpt = surveyQuestion.options.find(opt => {
-                    const optText = typeof opt === 'object' ? opt.text : opt;
-                    return String(optText).toLowerCase().includes('independent');
-                  });
-                  if (independentOpt && typeof independentOpt === 'object' && independentOpt.text) {
-                    // Only extract text if response starts with "Others: " or "Independent: "
-                    if (String(responseValue).startsWith('Others: ') || String(responseValue).startsWith('Independent: ')) {
-                      const independentTextValue = extractOthersText(responseValue);
-                      independentText = independentTextValue || '';
-                    }
-                  }
-                }
-              }
-              answers.push(independentText || '');
-            }
+            throw new Error(progressResponse.error || 'CSV generation failed');
           }
-        });
-        
-        // Add QC and status columns
-        const statusCode = getStatusCode(response.status);
-        const qcCompletionDate = response.verificationData?.reviewedAt 
-          ? new Date(response.verificationData.reviewedAt).toLocaleDateString('en-US')
-          : '';
-        
-        let assignedToQC = '';
-        
-        if (response.status === 'Approved' || response.status === 'Rejected') {
-          assignedToQC = '';
-        } else if (response.status === 'Pending_Approval') {
-          const qcBatch = response.qcBatch;
-          const isSampleResponse = response.isSampleResponse || false;
-          
-          if (qcBatch) {
-            let batchStatus = null;
-            let remainingDecision = null;
-            
-            if (typeof qcBatch === 'object' && qcBatch.status) {
-              batchStatus = qcBatch.status;
-              remainingDecision = qcBatch.remainingDecision?.decision;
-            } else if (response.qcBatchStatus) {
-              batchStatus = response.qcBatchStatus;
-              remainingDecision = response.qcBatchRemainingDecision;
-            }
-            
-            if (batchStatus) {
-              if (batchStatus === 'queued_for_qc' ||
-                  (isSampleResponse && (batchStatus === 'qc_in_progress' || batchStatus === 'completed')) ||
-                  (!isSampleResponse && remainingDecision === 'queued_for_qc')) {
-                assignedToQC = '1';
-              } else if (batchStatus === 'collecting' ||
-                         (batchStatus === 'processing' && !isSampleResponse)) {
-                assignedToQC = '2';
-              } else {
-                assignedToQC = '2';
-              }
-            } else {
-              assignedToQC = '2';
-            }
-          } else {
-            assignedToQC = '2';
-          }
-        }
-        
-        const rejectionReasonCode = getRejectionReasonCode(response);
-        
-        return [...metadata, ...answers, statusCode, qcCompletionDate, assignedToQC, rejectionReasonCode];
-      });
+          // If still processing, continue polling
 
-      // Process CSV data in chunks to avoid memory issues
-      setCsvProgress({ current: 0, total: totalResponses, stage: 'Generating CSV content...' });
-      
-      // Generate CSV content in chunks to avoid memory issues
-      const csvChunks = [];
-      
-      // Add header rows (title row and code row)
-      // Note: For survey 68fd1915d41841da463f0d46, only code row is used (no title row)
-      // surveyIdStr is already declared above (line 858), reuse it here
-      if (surveyIdStr !== '68fd1915d41841da463f0d46') {
-        // Add title row for other surveys
-        csvChunks.push(
-          allTitleRow.map(field => {
-            const fieldStr = String(field || '');
-            return `"${fieldStr.replace(/"/g, '""')}"`;
-          }).join(',')
-        );
-      }
-      
-      // Add code row (always present)
-      csvChunks.push(
-        allCodeRow.map(field => {
-          const fieldStr = String(field || '');
-          return `"${fieldStr.replace(/"/g, '""')}"`;
-        }).join(',')
-      );
-      
-      // Add data rows in chunks
-      for (let i = 0; i < csvData.length; i += CHUNK_SIZE) {
-        const chunk = csvData.slice(i, i + CHUNK_SIZE);
-        const chunkContent = chunk.map(row => 
-          row.map(field => {
-            const fieldStr = String(field || '');
-            return `"${fieldStr.replace(/"/g, '""')}"`;
-          }).join(',')
-        ).join('\n');
-        
-        csvChunks.push(chunkContent);
-        
-        // Update progress
-        const processed = Math.min(i + CHUNK_SIZE, csvData.length);
-        setCsvProgress({ 
-          current: processed, 
-          total: totalResponses, 
-          stage: `Generating CSV ${Math.round((processed / totalResponses) * 100)}%...` 
-        });
-        
-        // Allow browser to breathe between chunks (prevents UI freeze)
-        await new Promise(resolve => setTimeout(resolve, 10));
-      }
-      
-      const csvContent = csvChunks.join('\n');
-      
-      setCsvProgress({ current: totalResponses, total: totalResponses, stage: 'Creating download file...' });
-      
-      // Create blob and download
-      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      const modeSuffix = downloadMode === 'codes' ? '_codes' : '_responses';
-      const formatSuffix = isMixed ? '_mixed' : (isCAPIOnly ? '_CAPI' : (isCATIOnly ? '_CATI' : ''));
-      link.download = `${survey?.surveyName || survey?.title || 'survey'}${formatSuffix}${modeSuffix}_${new Date().toISOString().split('T')[0]}.csv`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-      
-      showSuccess(`CSV downloaded successfully (${totalResponses} responses)`);
-      setDownloadingCSV(false);
-      setCsvProgress({ current: 0, total: 0, stage: '' });
-      
-      // Only update pre-generated files if filters are "All Time" and "All Status"
-      // This ensures pre-generated files always contain complete data
-      const isAllTime = filters.dateRange === 'all' || !filters.dateRange;
-      const isAllStatus = filters.status === 'approved_rejected_pending' || !filters.status;
-      const hasNoOtherFilters = !filters.interviewMode && 
-                                !filters.ac && 
-                                (!filters.interviewerIds || filters.interviewerIds.length === 0) &&
-                                !filters.search;
-      
-      if (isAllTime && isAllStatus && hasNoOtherFilters) {
-        // Update pre-generated files only when downloading complete dataset
-        try {
-          await surveyResponseAPI.triggerCSVGeneration(surveyId);
-          // Refresh CSV file info
-          const csvInfoResponse = await surveyResponseAPI.getCSVFileInfo(surveyId);
-          if (csvInfoResponse.success) {
-            setCsvFileInfo(csvInfoResponse.data);
-          }
         } catch (error) {
-          console.error('Error updating pre-generated CSV:', error);
-          // Don't show error to user, this is background operation
+          pollErrorCount++;
+          console.error(`❌ Poll error (${pollErrorCount}/${maxPollErrors}):`, error);
+          
+          // If too many errors, stop polling
+          if (pollErrorCount >= maxPollErrors) {
+            if (pollInterval) {
+              clearInterval(pollInterval);
+              pollInterval = null;
+            }
+            localStorage.removeItem(storageKey);
+            const errorMsg = error.response?.data?.message || error.message || 'Failed to get job progress';
+            showError(`CSV generation error: ${errorMsg}. Please try again.`);
+            setDownloadingCSV(false);
+            setCsvProgress({ current: 0, total: 0, stage: '' });
+                return;
+              }
+          
+          // Continue polling despite error (might be temporary)
+          setCsvProgress({ 
+            current: 0, 
+            total: 100, 
+            stage: `Connection issue (${pollErrorCount}/${maxPollErrors}), retrying...` 
+          });
+        }
+      };
+
+      // Poll immediately, then every 2 seconds
+      // Only start polling if download hasn't completed
+      if (!downloadCompleted && !downloadInProgress) {
+        await pollProgress();
+        // Only set interval if download hasn't started during initial poll
+        if (!downloadCompleted && !downloadInProgress) {
+          pollInterval = setInterval(() => {
+            // Double-check before each poll
+            if (downloadCompleted || downloadInProgress) {
+              if (pollInterval) {
+                clearInterval(pollInterval);
+                pollInterval = null;
+              }
+              return;
+            }
+            pollProgress();
+          }, 2000); // Poll every 2 seconds
         }
       }
-      
+
+      // Set maximum polling time (30 minutes)
+      setTimeout(() => {
+        if (pollInterval) {
+          clearInterval(pollInterval);
+          pollInterval = null;
+          if (setDownloadingCSV) {
+            setDownloadingCSV(false);
+            showError('CSV generation timed out. Please try again.');
+            setCsvProgress({ current: 0, total: 0, stage: '' });
+          }
+        }
+      }, 30 * 60 * 1000); // 30 minutes
+
     } catch (error) {
-      console.error('Error downloading CSV:', error);
-      console.error('Error stack:', error.stack);
-      // Use optional chaining and check if variables exist before accessing
-      const sortedResponsesLength = typeof sortedResponses !== 'undefined' ? (sortedResponses?.length || 0) : 0;
-      const csvDataLength = typeof csvData !== 'undefined' ? (csvData?.length || 0) : 0;
-      const allCodeRowLength = typeof allCodeRow !== 'undefined' ? (allCodeRow?.length || 0) : 0;
-      console.error('Error details:', {
-        message: error.message,
-        name: error.name,
-        surveyId: surveyId,
-        totalResponses: sortedResponsesLength,
-        csvDataLength: csvDataLength,
-        allCodeRowLength: allCodeRowLength
-      });
-      showError('Failed to download CSV: ' + (error.message || 'Unknown error') + '. Check browser console for details.');
+      console.error('Error in CSV generation:', error);
+      
+      // Clean up polling interval
+      if (pollInterval) {
+        clearInterval(pollInterval);
+        pollInterval = null;
+      }
+      
+      // Clear localStorage on error
+      if (storageKey) {
+        localStorage.removeItem(storageKey);
+      }
+      
+      const errorMessage = error.response?.data?.message || error.message || 'Unknown error';
+      showError(`Failed to generate CSV: ${errorMessage}`);
       setDownloadingCSV(false);
       setCsvProgress({ current: 0, total: 0, stage: '' });
     }
   };
 
   // Clear all filters
+
+  // Clear all filters
   const clearFilters = () => {
     setFilters({
       search: '',
       status: 'approved_rejected_pending',
-      dateRange: 'all',
+      dateRange: 'today', // Reset to 'today' instead of 'all' for better performance
       startDate: '',
       endDate: '',
       gender: '',
@@ -2576,13 +1717,25 @@ const ViewResponsesV2Page = () => {
                     {searchedInterviewers.map((interviewer) => (
                       <button
                         key={interviewer._id}
-                        onClick={() => {
-                          handleInterviewerToggle(interviewer._id);
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          console.log('🔍 CLICKED INTERVIEWER BUTTON:', {
+                            interviewer,
+                            interviewerId: interviewer._id,
+                            interviewerIdType: typeof interviewer._id,
+                            currentFilters: filters
+                          });
+                          handleInterviewerToggle(interviewer._id, interviewer);
                           setShowInterviewerDropdown(false);
                           setInterviewerSearchTerm('');
                         }}
                         className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${
-                          filters.interviewerIds.includes(interviewer._id) ? 'bg-blue-50' : ''
+                          filters.interviewerIds.some(id => {
+                            const idStr = id?.toString?.() || String(id || '');
+                            const interviewerIdStr = interviewer._id?.toString?.() || String(interviewer._id || '');
+                            return idStr === interviewerIdStr;
+                          }) ? 'bg-blue-50' : ''
                         }`}
                       >
                         <div className="font-medium">{interviewer.memberId}</div>
@@ -2596,7 +1749,18 @@ const ViewResponsesV2Page = () => {
                 {filters.interviewerIds.length > 0 && (
                   <div className="mt-1 flex flex-wrap gap-1">
                     {filters.interviewerIds.map((id) => {
-                      const interviewer = searchedInterviewers.find(i => i._id === id);
+                      // Find interviewer from selectedInterviewers first, then searchedInterviewers
+                      const idStr = id?.toString?.() || String(id || '');
+                      let interviewer = selectedInterviewers.find(i => {
+                        const interviewerIdStr = i._id?.toString?.() || String(i._id || '');
+                        return idStr === interviewerIdStr;
+                      });
+                      if (!interviewer) {
+                        interviewer = searchedInterviewers.find(i => {
+                          const interviewerIdStr = i._id?.toString?.() || String(i._id || '');
+                          return idStr === interviewerIdStr;
+                        });
+                      }
                       return (
                         <span
                           key={id}
@@ -2709,7 +1873,7 @@ const ViewResponsesV2Page = () => {
                               {respondentInfo.ac}
                             </td>
                             <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                              {new Date(response.createdAt).toLocaleDateString()}
+                              {new Date(response.startTime || response.createdAt).toLocaleDateString()}
                             </td>
                             <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
                               <button
@@ -2815,11 +1979,7 @@ const ViewResponsesV2Page = () => {
         <ResponseDetailsModal
           response={fullResponseDetails || selectedResponse}
           survey={survey}
-          onClose={() => {
-            setShowResponseDetails(false);
-            setSelectedResponse(null);
-            setFullResponseDetails(null);
-          }}
+          onClose={handleCloseModal}
           onStatusChange={(updatedResponse) => {
             // Update the response in the list
             setResponses(prev => 

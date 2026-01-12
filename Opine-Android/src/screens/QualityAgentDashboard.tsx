@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import {
   View,
   StyleSheet,
@@ -23,6 +23,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { apiService } from '../services/api';
 import { User } from '../types';
 import ResponseDetailsModal from '../components/ResponseDetailsModal';
+import { appUpdateService, UpdateInfo } from '../services/appUpdateService';
+import { AppUpdateModal } from '../components/AppUpdateModal';
+import NetInfo from '@react-native-community/netinfo';
+
+// Performance monitoring
+const performanceLog: { [key: string]: number[] } = {};
+const logPerformance = (key: string, duration: number) => {
+  if (!performanceLog[key]) performanceLog[key] = [];
+  performanceLog[key].push(duration);
+  console.log(`⚡ Performance [${key}]: ${duration}ms`);
+};
 
 const { width } = Dimensions.get('window');
 
@@ -38,7 +49,12 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarType, setSnackbarType] = useState<'success' | 'error' | 'info'>('info');
   const [selectedInterview, setSelectedInterview] = useState<any>(null);
+  
+  // App Update Check
+  const [updateInfo, setUpdateInfo] = useState<UpdateInfo | null>(null);
+  const [updateModalVisible, setUpdateModalVisible] = useState(false);
   const [showResponseDetails, setShowResponseDetails] = useState(false);
   const [currentAssignment, setCurrentAssignment] = useState<any>(null);
   const [assignmentExpiresAt, setAssignmentExpiresAt] = useState<Date | null>(null);
@@ -50,75 +66,112 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
   const [pulseAnimation] = useState(new Animated.Value(1));
   const [rotationAnimation] = useState(new Animated.Value(0));
   const [loadingTextIndex, setLoadingTextIndex] = useState(0);
+  
+  // PERFORMANCE FIX: Request cancellation and debouncing
+  const abortControllerRef = useRef<AbortController | null>(null);
+  const isRequestInFlightRef = useRef(false);
+  const lastRequestTimeRef = useRef(0);
 
   useEffect(() => {
-    loadDashboardData();
+    const startTime = performance.now();
+    loadDashboardData().then(() => {
+      const duration = performance.now() - startTime;
+      logPerformance('dashboard_load', duration);
+    });
+    
+    // Check for app updates on mount (non-blocking, silent check)
+    checkForAppUpdate();
+    
+    // Cleanup: Cancel any pending requests on unmount
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+        abortControllerRef.current = null;
+      }
+      isRequestInFlightRef.current = false;
+    };
   }, []);
 
-  // Animation effects for loading screen (similar to Interviewer Dashboard)
+  // PERFORMANCE FIX: Animation effects with proper cleanup
   useEffect(() => {
-    if (isLoading) {
-      // Start pulsing animation
-      const pulseAnim = Animated.loop(
-        Animated.sequence([
-          Animated.timing(pulseAnimation, {
-            toValue: 1.2,
-            duration: 1000,
-            useNativeDriver: true,
-          }),
-          Animated.timing(pulseAnimation, {
-            toValue: 1,
-            duration: 1000,
-            useNativeDriver: true,
-          }),
-        ])
-      );
-
-      // Start rotation animation
-      const rotateAnim = Animated.loop(
-        Animated.timing(rotationAnimation, {
-          toValue: 1,
-          duration: 2000,
+    if (!isLoading) {
+      // If not loading, ensure all animations are stopped
+      return;
+    }
+    
+    // Start pulsing animation
+    const pulseAnim = Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseAnimation, {
+          toValue: 1.2,
+          duration: 1000,
           useNativeDriver: true,
-        })
-      );
+        }),
+        Animated.timing(pulseAnimation, {
+          toValue: 1,
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+      ])
+    );
 
-      // Start loading bar animation
-      const loadingBarAnim = Animated.loop(
-        Animated.sequence([
-          Animated.timing(loadingAnimation, {
-            toValue: 1,
-            duration: 1500,
-            useNativeDriver: false,
-          }),
-          Animated.timing(loadingAnimation, {
-            toValue: 0,
-            duration: 0,
-            useNativeDriver: false,
-          }),
-        ])
-      );
+    // Start rotation animation
+    const rotateAnim = Animated.loop(
+      Animated.timing(rotationAnimation, {
+        toValue: 1,
+        duration: 2000,
+        useNativeDriver: true,
+      })
+    );
 
-      // Rotate loading text
-      const textRotateInterval = setInterval(() => {
-        setLoadingTextIndex((prev) => (prev + 1) % 4);
-      }, 2000);
+    // Start loading bar animation
+    const loadingBarAnim = Animated.loop(
+      Animated.sequence([
+        Animated.timing(loadingAnimation, {
+          toValue: 1,
+          duration: 1500,
+          useNativeDriver: false,
+        }),
+        Animated.timing(loadingAnimation, {
+          toValue: 0,
+          duration: 0,
+          useNativeDriver: false,
+        }),
+      ])
+    );
 
-      pulseAnim.start();
-      rotateAnim.start();
-      loadingBarAnim.start();
+    // Rotate loading text
+    const textRotateInterval = setInterval(() => {
+      setLoadingTextIndex((prev) => (prev + 1) % 4);
+    }, 2000);
 
-      return () => {
+    pulseAnim.start();
+    rotateAnim.start();
+    loadingBarAnim.start();
+
+    // PERFORMANCE FIX: Always return cleanup function, even if component unmounts
+    return () => {
+      try {
         pulseAnim.stop();
         rotateAnim.stop();
         loadingBarAnim.stop();
         clearInterval(textRotateInterval);
-      };
-    }
-  }, [isLoading]);
+      } catch (error) {
+        // Ignore errors during cleanup (component may already be unmounted)
+        console.log('Animation cleanup error (safe to ignore):', error);
+      }
+    };
+  }, [isLoading, pulseAnimation, rotationAnimation, loadingAnimation]);
 
-  // Timer for assignment expiration
+  // PERFORMANCE FIX: Timer with proper cleanup and ref to prevent stale closures
+  const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
   useEffect(() => {
+    // Clear any existing timer first
+    if (timerIntervalRef.current) {
+      clearInterval(timerIntervalRef.current);
+      timerIntervalRef.current = null;
+    }
+    
     if (!assignmentExpiresAt) {
       setTimeRemaining(null);
       return;
@@ -136,6 +189,11 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
           showSnackbar('Your review assignment has expired. Please start a new quality check.');
           handleReleaseAssignment();
         }
+        // Clear interval when expired
+        if (timerIntervalRef.current) {
+          clearInterval(timerIntervalRef.current);
+          timerIntervalRef.current = null;
+        }
       } else {
         const minutes = Math.floor(diff / 60);
         const seconds = diff % 60;
@@ -144,16 +202,22 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
     };
 
     updateTimer();
-    const interval = setInterval(updateTimer, 1000);
+    timerIntervalRef.current = setInterval(updateTimer, 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      if (timerIntervalRef.current) {
+        clearInterval(timerIntervalRef.current);
+        timerIntervalRef.current = null;
+      }
+    };
   }, [assignmentExpiresAt, currentAssignment]);
 
-  const loadDashboardData = async (showLoading: boolean = true) => {
+  const loadDashboardData = useCallback(async (showLoading: boolean = true) => {
     // OPTIMIZED: Allow silent refresh (don't show loading screen when refreshing after submission)
     if (showLoading) {
       setIsLoading(true);
     }
+    const startTime = performance.now();
     try {
       // OPTIMIZED: Use lightweight stats endpoint - only get overview stats, skip expensive aggregations
       // Pass lightweight=true to get only totalReviewed count quickly
@@ -163,6 +227,8 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
       } else {
         setTotalReviewed(0);
       }
+      const duration = performance.now() - startTime;
+      logPerformance('dashboard_data_load', duration);
     } catch (error) {
       console.error('Error loading dashboard data:', error);
       if (showLoading) {
@@ -174,7 +240,7 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
         setIsLoading(false);
       }
     }
-  };
+  }, []);
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
@@ -182,9 +248,48 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
     setIsRefreshing(false);
   };
 
-  const showSnackbar = (message: string) => {
+  const showSnackbar = (message: string, type: 'success' | 'error' | 'info' = 'info') => {
     setSnackbarMessage(message);
+    setSnackbarType(type);
     setSnackbarVisible(true);
+  };
+
+  // Check for app updates
+  const checkForAppUpdate = async (force: boolean = false) => {
+    try {
+      // Only check if online
+      const netState = await NetInfo.fetch();
+      if (!netState.isConnected || netState.isInternetReachable === false) {
+        if (force) {
+          showSnackbar('Please connect to the internet to check for updates', 'error');
+        }
+        console.log('📱 Skipping update check - offline');
+        return;
+      }
+
+      // If forced check, clear throttling and show progress
+      if (force) {
+        await appUpdateService.clearSkippedVersion(); // Clear any skipped version
+        showSnackbar('Checking for updates...', 'info');
+      }
+
+      // Silent check (don't show progress unless forced)
+      const update = await appUpdateService.checkForUpdate(force);
+      
+      if (update) {
+        console.log(`📦 Update available: Version ${update.latestVersion}`);
+        setUpdateInfo(update);
+        setUpdateModalVisible(true);
+      } else if (force) {
+        showSnackbar('App is up to date!', 'success');
+      }
+    } catch (error: any) {
+      console.error('❌ Error checking for app update:', error);
+      if (force) {
+        showSnackbar('Failed to check for updates. Please try again later.', 'error');
+      }
+      // Silently fail - don't interrupt user experience
+    }
   };
 
   const handleLogout = async () => {
@@ -197,9 +302,35 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
     }
   };
 
-  const handleStartQualityCheck = async () => {
+  // PERFORMANCE FIX: Debounced and cancellable request handler
+  const handleStartQualityCheck = useCallback(async (interviewMode?: 'capi' | 'cati') => {
+    // PERFORMANCE FIX: Debounce rapid clicks (300ms)
+    const now = Date.now();
+    if (now - lastRequestTimeRef.current < 300) {
+      console.log('⚡ Request debounced - too soon after last request');
+      return;
+    }
+    lastRequestTimeRef.current = now;
+    
+    // PERFORMANCE FIX: Cancel previous request if still in flight
+    if (isRequestInFlightRef.current && abortControllerRef.current) {
+      console.log('⚡ Cancelling previous request');
+      abortControllerRef.current.abort();
+    }
+    
+    // PERFORMANCE FIX: Prevent multiple simultaneous requests
+    if (isRequestInFlightRef.current) {
+      console.log('⚡ Request already in flight, ignoring');
+      return;
+    }
+    
     try {
       setIsGettingNextAssignment(true);
+      isRequestInFlightRef.current = true;
+      
+      // Create new AbortController for this request
+      abortControllerRef.current = new AbortController();
+      const signal = abortControllerRef.current.signal;
       
       // OPTIMIZED: Clear any previous assignment state first to ensure clean start
       setCurrentAssignment(null);
@@ -210,13 +341,26 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
       // This matches the web behavior - modal opens instantly, data loads async
       setShowResponseDetails(true);
       
-      // Start API call in background
-      const resultPromise = apiService.getNextReviewAssignment();
+      const startTime = performance.now();
+      
+      // Start API call in background with interviewMode filter
+      const params = interviewMode ? { interviewMode } : {};
+      const resultPromise = apiService.getNextReviewAssignment(params);
       
       // Don't await - let it fetch in background while modal is visible
       resultPromise
         .then((result) => {
+          // PERFORMANCE FIX: Check if request was aborted
+          if (signal.aborted) {
+            console.log('⚡ Request was aborted, ignoring result');
+            return;
+          }
+          
+          const duration = performance.now() - startTime;
+          logPerformance('get_next_assignment', duration);
+          
           setIsGettingNextAssignment(false);
+          isRequestInFlightRef.current = false;
           
           if (!result.success) {
             setShowResponseDetails(false);
@@ -228,13 +372,15 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
           if (!result.data || !result.data.interview) {
             setShowResponseDetails(false);
             setSelectedInterview(null);
-            showSnackbar(result.data?.message || 'No responses available for review');
+            const modeText = interviewMode === 'capi' ? 'CAPI' : interviewMode === 'cati' ? 'CATI' : '';
+            showSnackbar(result.data?.message || `No ${modeText} responses available for review`);
             return;
           }
 
           // Set the assigned response
           console.log('🔍 QualityAgentDashboard - Interview data received:', {
             responseId: result.data.interview?.responseId,
+            interviewMode: result.data.interview?.interviewMode,
             hasInterviewer: !!result.data.interview?.interviewer,
             interviewerId: result.data.interview?.interviewer?._id?.toString(),
             interviewerName: result.data.interview?.interviewer ? `${result.data.interview.interviewer.firstName} ${result.data.interview.interviewer.lastName}` : 'null',
@@ -245,11 +391,19 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
           setAssignmentExpiresAt(result.data.expiresAt ? new Date(result.data.expiresAt) : null);
           setSelectedInterview(result.data.interview);
           
-          showSnackbar('Response assigned. You have 30 minutes to complete the review.');
+          const modeText = interviewMode === 'capi' ? 'CAPI' : interviewMode === 'cati' ? 'CATI' : '';
+          showSnackbar(`${modeText} response assigned. You have 30 minutes to complete the review.`);
         })
         .catch((error: any) => {
+          // PERFORMANCE FIX: Ignore abort errors
+          if (signal.aborted || error.name === 'AbortError' || error.message?.includes('aborted')) {
+            console.log('⚡ Request was aborted (expected)');
+            return;
+          }
+          
           console.error('Error getting next assignment:', error);
           setIsGettingNextAssignment(false);
+          isRequestInFlightRef.current = false;
           setShowResponseDetails(false);
           setSelectedInterview(null);
           showSnackbar(error.response?.data?.message || 'Failed to get next assignment. Please try again.');
@@ -258,11 +412,12 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
     } catch (error: any) {
       console.error('Error getting next assignment:', error);
       setIsGettingNextAssignment(false);
+      isRequestInFlightRef.current = false;
       setShowResponseDetails(false);
       setSelectedInterview(null);
       showSnackbar(error.response?.data?.message || 'Failed to get next assignment. Please try again.');
     }
-  };
+  }, []);
 
   const handleReleaseAssignment = async () => {
     if (!currentAssignment || !currentAssignment.responseId) return;
@@ -330,6 +485,8 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
     }
 
     const skippedResponseId = currentAssignment.responseId;
+    // Preserve the interview mode when skipping to get same type of response
+    const currentMode = currentAssignment.interviewMode as 'capi' | 'cati' | undefined;
 
     try {
       // Skip the current assignment (releases it and returns to queue)
@@ -347,8 +504,8 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
         // Wait a moment to ensure database update completes
         await new Promise(resolve => setTimeout(resolve, 500));
         
-        // Automatically get the next assignment, excluding the skipped one
-        await handleStartQualityCheckWithExclusion(skippedResponseId);
+        // Automatically get the next assignment, excluding the skipped one, preserving mode
+        await handleStartQualityCheckWithExclusion(skippedResponseId, currentMode);
       } else {
         showSnackbar(result.message || 'Failed to skip response');
       }
@@ -358,9 +515,27 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
     }
   };
 
-  const handleStartQualityCheckWithExclusion = async (excludeResponseId?: string) => {
+  // PERFORMANCE FIX: Same optimizations for exclusion handler
+  const handleStartQualityCheckWithExclusion = useCallback(async (excludeResponseId?: string, interviewMode?: 'capi' | 'cati') => {
+    // PERFORMANCE FIX: Cancel previous request if still in flight
+    if (isRequestInFlightRef.current && abortControllerRef.current) {
+      console.log('⚡ Cancelling previous request');
+      abortControllerRef.current.abort();
+    }
+    
+    // PERFORMANCE FIX: Prevent multiple simultaneous requests
+    if (isRequestInFlightRef.current) {
+      console.log('⚡ Request already in flight, ignoring');
+      return;
+    }
+    
     try {
       setIsGettingNextAssignment(true);
+      isRequestInFlightRef.current = true;
+      
+      // Create new AbortController for this request
+      abortControllerRef.current = new AbortController();
+      const signal = abortControllerRef.current.signal;
       
       // OPTIMIZED: Clear any previous assignment state first to ensure clean start
       setCurrentAssignment(null);
@@ -371,14 +546,28 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
       // This matches the web behavior - modal opens instantly, data loads async
       setShowResponseDetails(true);
       
-      // Start API call in background with exclusion parameter
-      const params = excludeResponseId ? { excludeResponseId } : {};
+      const startTime = performance.now();
+      
+      // Start API call in background with exclusion parameter and interviewMode
+      const params: any = {};
+      if (excludeResponseId) params.excludeResponseId = excludeResponseId;
+      if (interviewMode) params.interviewMode = interviewMode;
       const resultPromise = apiService.getNextReviewAssignment(params);
       
       // Don't await - let it fetch in background while modal is visible
       resultPromise
         .then((result) => {
+          // PERFORMANCE FIX: Check if request was aborted
+          if (signal.aborted) {
+            console.log('⚡ Request was aborted, ignoring result');
+            return;
+          }
+          
+          const duration = performance.now() - startTime;
+          logPerformance('get_next_assignment_exclusion', duration);
+          
           setIsGettingNextAssignment(false);
+          isRequestInFlightRef.current = false;
           
           if (!result.success) {
             setShowResponseDetails(false);
@@ -399,6 +588,7 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
             console.warn('⚠️ Got the same response we just skipped, trying again...');
             // Wait a bit longer and try again
             setTimeout(async () => {
+              if (signal.aborted) return; // Don't retry if aborted
               const retryResult = await apiService.getNextReviewAssignment({ excludeResponseId });
               if (retryResult.success && retryResult.data?.interview && 
                   retryResult.data.interview.responseId !== excludeResponseId) {
@@ -431,8 +621,15 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
           showSnackbar('Response assigned. You have 30 minutes to complete the review.');
         })
         .catch((error: any) => {
+          // PERFORMANCE FIX: Ignore abort errors
+          if (signal.aborted || error.name === 'AbortError' || error.message?.includes('aborted')) {
+            console.log('⚡ Request was aborted (expected)');
+            return;
+          }
+          
           console.error('Error getting next assignment:', error);
           setIsGettingNextAssignment(false);
+          isRequestInFlightRef.current = false;
           setShowResponseDetails(false);
           setSelectedInterview(null);
           showSnackbar(error.response?.data?.message || 'Failed to get next assignment. Please try again.');
@@ -441,11 +638,12 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
     } catch (error: any) {
       console.error('Error getting next assignment:', error);
       setIsGettingNextAssignment(false);
+      isRequestInFlightRef.current = false;
       setShowResponseDetails(false);
       setSelectedInterview(null);
       showSnackbar(error.response?.data?.message || 'Failed to get next assignment. Please try again.');
     }
-  };
+  }, []);
 
 
   if (isLoading) {
@@ -521,6 +719,7 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
                     styles.loadingDot,
                     {
                       opacity: dotOpacity,
+                      marginHorizontal: 4,
                       transform: [
                         {
                           scale: pulseAnimation.interpolate({
@@ -585,6 +784,20 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
             Logout
           </Button>
         </View>
+        
+        {/* Check for App Updates Button */}
+        <View style={styles.updateButtonContainer}>
+          <Button
+            mode="contained"
+            onPress={() => checkForAppUpdate(true)}
+            icon="cloud-download-outline"
+            buttonColor="#2563eb"
+            textColor="#ffffff"
+            style={styles.updateButton}
+          >
+            Check for App Updates
+          </Button>
+        </View>
       </LinearGradient>
 
       <ScrollView
@@ -610,11 +823,11 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
 
         {/* Start Quality Check Section */}
         <View style={styles.section}>
-          <Card style={styles.actionCard}>
+          <Card style={styles.actionCard} elevation={2}>
             <Card.Content>
               <Text style={styles.sectionTitle}>Quality Review</Text>
               <Text style={styles.sectionDescription}>
-                Start reviewing pending survey responses. You'll have 30 minutes to complete each review.
+                Choose the type of interview you want to review. You'll have 30 minutes to complete each review.
               </Text>
               
               {currentAssignment && timeRemaining && (
@@ -624,40 +837,77 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
                 </View>
               )}
 
-              <Button
-                mode="contained"
-                onPress={currentAssignment ? () => setShowResponseDetails(true) : handleStartQualityCheck}
-                style={styles.startButton}
-                loading={isGettingNextAssignment}
-                disabled={isGettingNextAssignment}
-              >
-                {currentAssignment ? 'Continue Review' : 'Start Quality Check'}
-              </Button>
-
-              {currentAssignment && (
-                <Button
-                  mode="outlined"
-                  onPress={async () => {
-                    Alert.alert(
-                      'Release Assignment',
-                      'Are you sure you want to release this assignment?',
-                      [
-                        { text: 'Cancel', style: 'cancel' },
-                        {
-                          text: 'Release',
-                          style: 'destructive',
-                          onPress: async () => {
-                            await handleReleaseAssignment();
-                            showSnackbar('Assignment released');
+              {currentAssignment ? (
+                // Show continue/release buttons when assignment is active
+                <>
+                  <Button
+                    mode="contained"
+                    onPress={() => setShowResponseDetails(true)}
+                    style={styles.continueButton}
+                    icon="play-circle"
+                  >
+                    Continue Review
+                  </Button>
+                  <Button
+                    mode="outlined"
+                    onPress={async () => {
+                      Alert.alert(
+                        'Release Assignment',
+                        'Are you sure you want to release this assignment?',
+                        [
+                          { text: 'Cancel', style: 'cancel' },
+                          {
+                            text: 'Release',
+                            style: 'destructive',
+                            onPress: async () => {
+                              await handleReleaseAssignment();
+                              showSnackbar('Assignment released');
+                            }
                           }
-                        }
-                      ]
-                    );
-                  }}
-                  style={styles.releaseButton}
-                >
-                  Release Assignment
-                </Button>
+                        ]
+                      );
+                    }}
+                    style={styles.releaseButton}
+                    icon="close-circle"
+                  >
+                    Release Assignment
+                  </Button>
+                </>
+              ) : (
+                // Show CAPI/CATI buttons when no assignment
+                <View style={styles.buttonColumn}>
+                  <View style={styles.buttonContainer}>
+                    <Button
+                      mode="contained"
+                      onPress={() => handleStartQualityCheck('capi')}
+                      style={[styles.modeButton, styles.capiButton]}
+                      contentStyle={styles.modeButtonContent}
+                      labelStyle={styles.modeButtonLabel}
+                      loading={isGettingNextAssignment}
+                      disabled={isGettingNextAssignment}
+                      icon="microphone"
+                    >
+                      Start CAPI QC
+                    </Button>
+                    <Text style={styles.modeButtonSubtext}>Computer-Assisted Personal Interview</Text>
+                  </View>
+                  
+                  <View style={[styles.buttonContainer, { marginTop: 12 }]}>
+                    <Button
+                      mode="contained"
+                      onPress={() => handleStartQualityCheck('cati')}
+                      style={[styles.modeButton, styles.catiButton]}
+                      contentStyle={styles.modeButtonContent}
+                      labelStyle={styles.modeButtonLabel}
+                      loading={isGettingNextAssignment}
+                      disabled={isGettingNextAssignment}
+                      icon="phone"
+                    >
+                      Start CATI QC
+                    </Button>
+                    <Text style={styles.modeButtonSubtext}>Computer-Assisted Telephone Interview</Text>
+                  </View>
+                </View>
               )}
             </Card.Content>
           </Card>
@@ -681,10 +931,28 @@ export default function QualityAgentDashboard({ navigation, user, onLogout }: Qu
         visible={snackbarVisible}
         onDismiss={() => setSnackbarVisible(false)}
         duration={4000}
-        style={styles.snackbar}
+        style={[
+          styles.snackbar,
+          snackbarType === 'success' && styles.snackbarSuccess,
+          snackbarType === 'error' && styles.snackbarError,
+          snackbarType === 'info' && styles.snackbarInfo,
+        ]}
       >
         {snackbarMessage}
       </Snackbar>
+
+      {/* App Update Modal */}
+      <AppUpdateModal
+        visible={updateModalVisible}
+        updateInfo={updateInfo}
+        onClose={() => setUpdateModalVisible(false)}
+        onSkip={() => {
+          if (updateInfo) {
+            appUpdateService.skipVersion(updateInfo.latestVersionCode);
+          }
+          setUpdateModalVisible(false);
+        }}
+      />
     </SafeAreaView>
   );
 }
@@ -749,7 +1017,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 32,
-    gap: 8,
   },
   loadingDot: {
     width: 8,
@@ -850,6 +1117,55 @@ const styles = StyleSheet.create({
     elevation: 4,
     borderRadius: 16,
     backgroundColor: '#ffffff',
+    overflow: 'hidden',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    marginTop: 8,
+  },
+  buttonColumn: {
+    flexDirection: 'column',
+    marginTop: 8,
+  },
+  buttonContainer: {
+    width: '100%',
+  },
+  modeButton: {
+    borderRadius: 12,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  modeButtonContent: {
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    minHeight: 64,
+  },
+  modeButtonLabel: {
+    fontSize: 16,
+    fontWeight: '600',
+    letterSpacing: 0.5,
+  },
+  modeButtonSubtext: {
+    fontSize: 11,
+    color: '#6b7280',
+    marginTop: 4,
+    textAlign: 'center',
+    lineHeight: 14,
+  },
+  capiButton: {
+    backgroundColor: '#2563eb',
+  },
+  catiButton: {
+    backgroundColor: '#059669',
+  },
+  continueButton: {
+    backgroundColor: '#001D48',
+    borderRadius: 12,
+    marginTop: 8,
+    elevation: 2,
   },
   sectionTitle: {
     fontSize: 20,
@@ -890,6 +1206,23 @@ const styles = StyleSheet.create({
   },
   snackbar: {
     backgroundColor: '#1f2937',
+  },
+  snackbarSuccess: {
+    backgroundColor: '#059669',
+  },
+  snackbarError: {
+    backgroundColor: '#dc2626',
+  },
+  snackbarInfo: {
+    backgroundColor: '#2563eb',
+  },
+  updateButtonContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 12,
+    paddingBottom: 8,
+  },
+  updateButton: {
+    borderRadius: 8,
   },
 });
 

@@ -9,10 +9,11 @@ const STORAGE_KEYS = {
   SYNC_QUEUE: 'sync_queue',
   LAST_SYNC: 'last_sync',
   SURVEY_DOWNLOAD_TIME: 'survey_download_time',
+  INTERVIEWER_STATS: 'offline_interviewer_stats', // Cache for interviewer statistics
 };
 
 export interface OfflineInterview {
-  id: string; // Local ID
+  id: string; // Local ID (generated on device)
   surveyId: string;
   survey: any; // Full survey object
   surveyName?: string; // Store survey name separately for display (lightweight)
@@ -32,11 +33,20 @@ export interface OfflineInterview {
   audioOfflinePath?: string | null; // Copied file path (safe storage)
   audioUploadStatus?: 'pending' | 'uploading' | 'uploaded' | 'failed';
   audioUploadError?: string | null;
+  // CRITICAL: Unique ID-based idempotency (like WhatsApp/Meta)
+  serverResponseId?: string; // UUID from backend after first successful sync
+  serverMongoId?: string; // MongoDB _id from backend after first successful sync
+  uploadToken?: string; // For two-phase commit verification
+  syncProgress?: number; // 0-100 (like WhatsApp progress bar) - optional for backward compatibility
+  syncStage?: 'pending' | 'uploading_data' | 'uploading_audio' | 'verifying' | 'synced' | 'failed' | 'failed_permanently'; // Optional for backward compatibility
+  audioRetryCount?: number; // Track audio upload retries separately - optional for backward compatibility
   metadata: {
     qualityMetrics?: any;
     callStatus?: string; // For CATI
     supervisorID?: string; // For CATI
     audioUrl?: string; // Server audio URL after upload
+    responseId?: string; // Legacy - use serverResponseId instead
+    serverResponseId?: string; // Legacy - use top-level serverResponseId instead
     [key: string]: any;
   };
   status: 'pending' | 'syncing' | 'synced' | 'failed';
@@ -65,9 +75,71 @@ class OfflineStorageService {
    */
   async saveSurveys(surveys: any[], downloadDependentData: boolean = false): Promise<void> {
     try {
-      await AsyncStorage.setItem(STORAGE_KEYS.SURVEYS, JSON.stringify(surveys));
+      // CRITICAL: Validate and preserve critical fields (like META/Google data integrity)
+      // Ensure assignACs and other critical fields are never lost
+      
+      // First, read existing surveys to preserve critical fields
+      let existingSurveys: any[] = [];
+      try {
+        const existingData = await AsyncStorage.getItem(STORAGE_KEYS.SURVEYS);
+        if (existingData) {
+          existingSurveys = JSON.parse(existingData);
+        }
+      } catch (readError) {
+        console.warn('⚠️ Could not read existing surveys for validation (non-critical):', readError);
+      }
+      
+      // Validate and preserve critical fields
+      const validatedSurveys = surveys.map((survey: any) => {
+        // For target survey, ensure assignACs is preserved
+        const isTargetSurvey = survey._id === '68fd1915d41841da463f0d46' || survey.id === '68fd1915d41841da463f0d46';
+        
+        if (isTargetSurvey) {
+          // CRITICAL: If assignACs is missing, preserve from existing data or default to true
+          if (survey.assignACs === undefined) {
+            console.warn(`⚠️ CRITICAL: assignACs is missing for target survey ${survey._id} - checking existing data`);
+            const existingSurvey = existingSurveys.find((s: any) => s._id === survey._id || s.id === survey._id);
+            if (existingSurvey && existingSurvey.assignACs !== undefined) {
+              console.log('✅ Preserving assignACs from existing survey data:', existingSurvey.assignACs);
+              survey.assignACs = existingSurvey.assignACs;
+            } else {
+              // CRITICAL: Default to true for target survey to prevent missing AC questions
+              // This ensures AC/Polling Station questions are never missed
+              console.warn('⚠️ No existing assignACs found - defaulting to true for target survey (prevents missing questions)');
+              survey.assignACs = true;
+            }
+          } else {
+            console.log(`✅ assignACs is present for target survey: ${survey.assignACs}`);
+          }
+        }
+        
+        return survey;
+      });
+      
+      await AsyncStorage.setItem(STORAGE_KEYS.SURVEYS, JSON.stringify(validatedSurveys));
       await AsyncStorage.setItem(STORAGE_KEYS.SURVEY_DOWNLOAD_TIME, new Date().toISOString());
-      console.log('✅ Saved', surveys.length, 'surveys to local storage');
+      
+      // PERFORMANCE: Update in-memory cache immediately
+      const { performanceCache } = await import('./performanceCache');
+      performanceCache.setAllSurveys(validatedSurveys);
+      
+      // Also cache individual surveys
+      validatedSurveys.forEach((survey: any) => {
+        const id = survey._id || survey.id;
+        if (id) {
+          performanceCache.setSurvey(id, survey);
+        }
+      });
+      
+      // Invalidate assignment caches for all surveys (assignments may have changed)
+      validatedSurveys.forEach((survey: any) => {
+        const id = survey._id || survey.id;
+        if (id) {
+          performanceCache.invalidateAssignment(id);
+        }
+      });
+      
+      console.log('✅ Saved', validatedSurveys.length, 'surveys to local storage and memory cache (with data integrity validation)');
       
       // If requested, download all dependent data immediately
       if (downloadDependentData && surveys.length > 0) {
@@ -100,9 +172,27 @@ class OfflineStorageService {
    */
   async getSurveys(): Promise<any[]> {
     try {
+      // PERFORMANCE: Check in-memory cache first (ultra-fast)
+      const { performanceCache } = await import('./performanceCache');
+      const cachedSurveys = performanceCache.getAllSurveys();
+      if (cachedSurveys) {
+        console.log('⚡ Surveys loaded from memory cache (instant)');
+        return cachedSurveys;
+      }
+      
+      // Cache miss - read from AsyncStorage
       const data = await AsyncStorage.getItem(STORAGE_KEYS.SURVEYS);
-      if (!data) return [];
-      return JSON.parse(data);
+      if (!data) {
+        return [];
+      }
+      
+      const surveys = JSON.parse(data);
+      
+      // Cache in memory for next access
+      performanceCache.setAllSurveys(surveys);
+      console.log(`⚡ Surveys loaded from storage and cached (${surveys.length} surveys)`);
+      
+      return surveys;
     } catch (error) {
       console.error('❌ Error getting surveys:', error);
       return [];
@@ -114,8 +204,24 @@ class OfflineStorageService {
    */
   async getSurveyById(surveyId: string): Promise<any | null> {
     try {
+      // PERFORMANCE: Check in-memory cache first (ultra-fast)
+      const { performanceCache } = await import('./performanceCache');
+      const cachedSurvey = performanceCache.getSurvey(surveyId);
+      if (cachedSurvey) {
+        console.log(`⚡ Survey ${surveyId} loaded from memory cache (instant)`);
+        return cachedSurvey;
+      }
+      
+      // Cache miss - get from all surveys
       const surveys = await this.getSurveys();
-      return surveys.find(s => s._id === surveyId) || null;
+      const survey = surveys.find(s => s._id === surveyId || s.id === surveyId);
+      
+      // Cache individual survey if found
+      if (survey) {
+        performanceCache.setSurvey(surveyId, survey);
+      }
+      
+      return survey || null;
     } catch (error) {
       console.error('❌ Error getting survey by ID:', error);
       return null;
@@ -177,6 +283,27 @@ class OfflineStorageService {
         // Ensure status is set to 'pending' if not provided
         if (!interviewToSave.status) {
           interviewToSave.status = 'pending';
+        }
+        // CRITICAL: Set default values for new multi-stage sync fields (like WhatsApp/Meta)
+        // Backward compatibility: Only set if not already present (old interviews may not have these)
+        if (interviewToSave.syncProgress === undefined) {
+          interviewToSave.syncProgress = 0;
+        }
+        if (!interviewToSave.syncStage) {
+          interviewToSave.syncStage = 'pending';
+        }
+        if (interviewToSave.audioRetryCount === undefined) {
+          interviewToSave.audioRetryCount = 0;
+        }
+        
+        // BACKWARD COMPATIBILITY: Migrate legacy responseId from metadata to top-level
+        if (!interviewToSave.serverResponseId && interviewToSave.metadata?.responseId) {
+          interviewToSave.serverResponseId = interviewToSave.metadata.responseId;
+          console.log(`🔄 Migrated legacy responseId from metadata to serverResponseId for interview ${interviewToSave.id}`);
+        }
+        if (!interviewToSave.serverResponseId && interviewToSave.metadata?.serverResponseId) {
+          interviewToSave.serverResponseId = interviewToSave.metadata.serverResponseId;
+          console.log(`🔄 Migrated legacy serverResponseId from metadata to serverResponseId for interview ${interviewToSave.id}`);
         }
         interviews.push(interviewToSave);
       }
@@ -382,7 +509,11 @@ class OfflineStorageService {
         interview.lastSyncAttempt = new Date().toISOString();
         if (error) {
           interview.error = error;
-          interview.syncAttempts = (interview.syncAttempts || 0) + 1;
+          // CRITICAL: Only increment syncAttempts if it's not already at max (5)
+          // This prevents infinite retry loops
+          if ((interview.syncAttempts || 0) < 5) {
+            interview.syncAttempts = (interview.syncAttempts || 0) + 1;
+          }
         }
         await this.saveOfflineInterview(interview);
       }
@@ -415,7 +546,11 @@ class OfflineStorageService {
         interview.lastSyncAttempt = new Date().toISOString();
         if (error) {
           interview.error = error;
-          interview.syncAttempts = (interview.syncAttempts || 0) + 1;
+          // CRITICAL: Only increment syncAttempts if it's not already at max (5)
+          // This prevents infinite retry loops
+          if ((interview.syncAttempts || 0) < 5) {
+            interview.syncAttempts = (interview.syncAttempts || 0) + 1;
+          }
         }
         // Save entire object atomically - this ensures metadata and status are updated together
         await this.saveOfflineInterview(interview);
@@ -456,6 +591,86 @@ class OfflineStorageService {
       console.log(`✅ Interview ${interviewId} status changed to ${newStatus}`);
     } catch (error) {
       console.error('❌ Error changing interview status:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Update interview sync progress and stage (for multi-stage sync like WhatsApp/Meta)
+   */
+  async updateInterviewSyncProgress(
+    interviewId: string,
+    progress: number, // 0-100
+    stage: OfflineInterview['syncStage']
+  ): Promise<void> {
+    try {
+      const interviews = await this.getOfflineInterviews();
+      const interview = interviews.find(i => i.id === interviewId);
+      if (interview) {
+        interview.syncProgress = progress;
+        interview.syncStage = stage;
+        await this.saveOfflineInterview(interview);
+        console.log(`✅ Updated interview ${interviewId} sync progress: ${progress}%, stage: ${stage}`);
+      } else {
+        console.warn(`⚠️ Interview ${interviewId} not found for progress update`);
+      }
+    } catch (error) {
+      console.error('❌ Error updating interview sync progress:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Update interview server IDs (responseId, mongoId, uploadToken) after successful upload
+   */
+  async updateInterviewServerIds(
+    interviewId: string,
+    serverResponseId: string,
+    serverMongoId: string,
+    uploadToken?: string
+  ): Promise<void> {
+    try {
+      const interviews = await this.getOfflineInterviews();
+      const interview = interviews.find(i => i.id === interviewId);
+      if (interview) {
+        interview.serverResponseId = serverResponseId;
+        interview.serverMongoId = serverMongoId;
+        if (uploadToken) {
+          interview.uploadToken = uploadToken;
+        }
+        await this.saveOfflineInterview(interview);
+        console.log(`✅ Updated interview ${interviewId} server IDs: responseId=${serverResponseId}, mongoId=${serverMongoId}`);
+      } else {
+        console.warn(`⚠️ Interview ${interviewId} not found for server ID update`);
+      }
+    } catch (error) {
+      console.error('❌ Error updating interview server IDs:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Update interview metadata (for audio URL, etc.)
+   */
+  async updateInterviewMetadata(
+    interviewId: string,
+    metadataUpdates: Partial<OfflineInterview['metadata']>
+  ): Promise<void> {
+    try {
+      const interviews = await this.getOfflineInterviews();
+      const interview = interviews.find(i => i.id === interviewId);
+      if (interview) {
+        interview.metadata = {
+          ...interview.metadata,
+          ...metadataUpdates,
+        };
+        await this.saveOfflineInterview(interview);
+        console.log(`✅ Updated interview ${interviewId} metadata`);
+      } else {
+        console.warn(`⚠️ Interview ${interviewId} not found for metadata update`);
+      }
+    } catch (error) {
+      console.error('❌ Error updating interview metadata:', error);
       throw error;
     }
   }
@@ -624,7 +839,7 @@ class OfflineStorageService {
             : 'Audio file not found. It may have been deleted or was not recorded.'
         },
         exportedAt: new Date().toISOString(),
-        appVersion: '13'
+        appVersion: '15'
       };
 
       const interviewDataJson = JSON.stringify(exportData, null, 2);
@@ -884,6 +1099,7 @@ class OfflineStorageService {
         STORAGE_KEYS.SYNC_QUEUE,
         STORAGE_KEYS.LAST_SYNC,
         STORAGE_KEYS.SURVEY_DOWNLOAD_TIME,
+        STORAGE_KEYS.INTERVIEWER_STATS,
       ]);
       console.log('✅ Cleared all offline data');
     } catch (error) {
@@ -900,6 +1116,58 @@ class OfflineStorageService {
       await AsyncStorage.setItem(STORAGE_KEYS.LAST_SYNC, new Date().toISOString());
     } catch (error) {
       console.error('❌ Error updating last sync time:', error);
+    }
+  }
+
+  // ========== Interviewer Statistics Caching ==========
+  
+  /**
+   * Save interviewer statistics to cache (for offline display)
+   * Like WhatsApp/Meta/Google - cache stats so they're available offline
+   */
+  async saveInterviewerStats(stats: {
+    totalCompleted: number;
+    approved: number;
+    rejected: number;
+    pendingApproval: number;
+  }): Promise<void> {
+    try {
+      const statsData = {
+        ...stats,
+        cachedAt: new Date().toISOString(),
+      };
+      await AsyncStorage.setItem(STORAGE_KEYS.INTERVIEWER_STATS, JSON.stringify(statsData));
+      console.log('✅ Saved interviewer stats to cache:', stats);
+    } catch (error) {
+      console.error('❌ Error saving interviewer stats:', error);
+      // Don't throw - stats caching is not critical
+    }
+  }
+
+  /**
+   * Get cached interviewer statistics (for offline display)
+   * Returns null if no cached stats available
+   */
+  async getCachedInterviewerStats(): Promise<{
+    totalCompleted: number;
+    approved: number;
+    rejected: number;
+    pendingApproval: number;
+  } | null> {
+    try {
+      const data = await AsyncStorage.getItem(STORAGE_KEYS.INTERVIEWER_STATS);
+      if (!data) {
+        return null;
+      }
+      
+      const statsData = JSON.parse(data);
+      // Remove cachedAt field when returning
+      const { cachedAt, ...stats } = statsData;
+      console.log('📦 Loaded interviewer stats from cache:', stats);
+      return stats;
+    } catch (error) {
+      console.error('❌ Error getting cached interviewer stats:', error);
+      return null;
     }
   }
 }

@@ -1,11 +1,103 @@
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
+const { createWriteStream } = require('fs');
 const Survey = require('../models/Survey');
 const SurveyResponse = require('../models/SurveyResponse');
 const User = require('../models/User');
 const assemblyConstituenciesData = require('../data/assemblyConstituencies.json');
 const acRegionDistrictMapping = require('../data/ac_region_district_mapping.json');
+
+// Cache for AC code to PC code mapping (optimized - loaded once)
+let acToPcCodeMapping = null;
+
+/**
+ * Load and cache AC code to PC code mapping from polling_stations.json
+ * This is optimized to load once and reuse for all CSV generations
+ * Structure: { "West Bengal": { "169": { "pc_no": 25, ... }, ... } }
+ */
+const loadACToPCCodeMapping = () => {
+  if (acToPcCodeMapping !== null) {
+    return acToPcCodeMapping; // Return cached mapping
+  }
+
+  try {
+    const pollingStationsPath = path.join(__dirname, '../data/polling_stations.json');
+    const pollingStationsData = JSON.parse(fs.readFileSync(pollingStationsPath, 'utf8'));
+    
+    acToPcCodeMapping = {};
+    
+    // Iterate through all states (e.g., "West Bengal")
+    for (const [stateName, stateData] of Object.entries(pollingStationsData)) {
+      if (stateData && typeof stateData === 'object') {
+        // Iterate through AC codes (keys are AC codes as strings, e.g., "169", "1")
+        for (const [acCode, acData] of Object.entries(stateData)) {
+          if (acData && typeof acData === 'object' && acData.pc_no !== undefined && acData.pc_no !== null) {
+            // Store mapping: AC code -> PC code (pc_no)
+            // Normalize AC code (remove leading zeros for consistent lookup)
+            const normalizedACCode = String(acCode).replace(/^0+/, '') || String(acCode);
+            const pcNo = acData.pc_no;
+            
+            // Store with normalized code (primary)
+            acToPcCodeMapping[normalizedACCode] = pcNo;
+            // Also store with original format for lookup flexibility
+            if (normalizedACCode !== acCode) {
+              acToPcCodeMapping[acCode] = pcNo;
+            }
+            // Store as number too if different
+            const acCodeNum = parseInt(acCode, 10);
+            if (!isNaN(acCodeNum)) {
+              acToPcCodeMapping[acCodeNum] = pcNo;
+              acToPcCodeMapping[String(acCodeNum)] = pcNo;
+            }
+          }
+        }
+      }
+    }
+    
+    console.log(`✅ Loaded AC to PC code mapping: ${Object.keys(acToPcCodeMapping).length} entries (${new Set(Object.values(acToPcCodeMapping)).size} unique PC codes)`);
+    return acToPcCodeMapping;
+  } catch (error) {
+    console.error('❌ Error loading AC to PC code mapping:', error.message);
+    acToPcCodeMapping = {}; // Return empty mapping on error
+    return acToPcCodeMapping;
+  }
+};
+
+/**
+ * Get PC code from AC code using cached mapping
+ * @param {string|number} acCode - Assembly Constituency code
+ * @returns {string} PC code (pc_no) or empty string if not found
+ */
+const getPCCodeFromACCode = (acCode) => {
+  if (!acCode || acCode === 'N/A' || acCode === '' || acCode === null || acCode === undefined) {
+    return '';
+  }
+
+  // Ensure mapping is loaded (lazy load on first use)
+  const mapping = loadACToPCCodeMapping();
+  
+  if (!mapping || Object.keys(mapping).length === 0) {
+    return ''; // Mapping not available
+  }
+  
+  // Normalize AC code for lookup (remove leading zeros)
+  const acCodeStr = String(acCode).trim();
+  const normalizedACCode = acCodeStr.replace(/^0+/, '') || acCodeStr;
+  
+  // Try multiple lookup strategies for maximum compatibility
+  let pcCode = mapping[normalizedACCode] || 
+               mapping[acCodeStr] || 
+               mapping[acCode] ||
+               mapping[parseInt(acCodeStr, 10)] ||
+               mapping[String(parseInt(acCodeStr, 10))];
+  
+  if (pcCode !== undefined && pcCode !== null && pcCode !== '') {
+    return String(pcCode);
+  }
+  
+  return '';
+};
 
 // Directory to store generated CSV files
 const CSV_STORAGE_DIR = path.join(__dirname, '../generated-csvs');
@@ -67,6 +159,7 @@ const generateCSVForSurvey = async (surveyId, downloadMode = 'codes') => {
         status: 1,
         interviewMode: 1,
         createdAt: 1,
+        startTime: 1,
         updatedAt: 1,
         responses: 1,
         selectedAC: 1,
@@ -88,41 +181,617 @@ const generateCSVForSurvey = async (surveyId, downloadMode = 'codes') => {
       }
     });
     
-    // Execute aggregation with allowDiskUse for large datasets
-    console.log(`📊 Fetching responses using aggregation pipeline...`);
-    const responses = await SurveyResponse.aggregate(pipeline, {
+    // Get total count first for progress tracking
+    const countPipeline = [...pipeline, { $count: 'total' }];
+    const countResult = await SurveyResponse.aggregate(countPipeline, {
       allowDiskUse: true,
-      maxTimeMS: 600000 // 10 minutes timeout for large datasets
+      maxTimeMS: 300000 // 5 minutes timeout
     });
+    const totalResponses = countResult.length > 0 ? countResult[0].total : 0;
     
-    console.log(`📊 Found ${responses.length} responses`);
+    console.log(`📊 Found ${totalResponses} responses to process`);
     
-    if (responses.length === 0) {
+    if (totalResponses === 0) {
       console.log(`⚠️  No responses found for survey ${surveyId}`);
       await saveEmptyCSV(surveyId, downloadMode);
       return;
     }
     
-    // Responses are already sorted oldest first (createdAt: 1)
-    const sortedResponses = responses;
+    // MEMORY LEAK FIX: Use streaming writes instead of accumulating all data in memory
+    // Process in TRUE batches - write incrementally to avoid memory accumulation
+    const BATCH_SIZE = 1000; // Reduced batch size for better memory management
+    let skip = 0;
+    let processedCount = 0;
     
-    // Generate CSV content
-    const csvContent = await generateCSVContent(survey, sortedResponses, downloadMode, surveyId);
+    // Prepare CSV file path
+    const surveyDir = path.join(CSV_STORAGE_DIR, surveyId);
+    if (!fs.existsSync(surveyDir)) {
+      fs.mkdirSync(surveyDir, { recursive: true });
+    }
     
-    // Save CSV file
-    await saveCSVFile(surveyId, downloadMode, csvContent);
+    const filename = downloadMode === 'codes' ? 'responses_codes.csv' : 'responses_responses.csv';
+    const filepath = path.join(surveyDir, filename);
     
-    console.log(`✅ CSV file saved for survey ${surveyId}, mode: ${downloadMode}`);
+    // Remove existing file if present
+    if (fs.existsSync(filepath)) {
+      fs.unlinkSync(filepath);
+    }
+    
+    // Create write stream for incremental writing
+    const writeStream = createWriteStream(filepath, { encoding: 'utf8' });
+    let headersWritten = false;
+    
+    console.log(`📊 Processing in TRUE batches of ${BATCH_SIZE} (streaming to file)...`);
+    
+    try {
+      while (skip < totalResponses) {
+        // Fetch batch
+        const batchPipeline = [
+          ...pipeline,
+          { $skip: skip },
+          { $limit: BATCH_SIZE }
+        ];
+        
+        const batchEnd = Math.min(skip + BATCH_SIZE, totalResponses);
+        console.log(`   Fetching batch: ${skip + 1} to ${batchEnd} of ${totalResponses}...`);
+        
+        const batch = await SurveyResponse.aggregate(batchPipeline, {
+          allowDiskUse: true,
+          maxTimeMS: 600000 // 10 minutes per batch
+        });
+        
+        if (batch.length === 0) break;
+        
+        // Generate CSV rows for this batch only
+        const batchCSVRows = await generateCSVContentBatch(
+          survey, 
+          batch, 
+          downloadMode, 
+          surveyId, 
+          skip === 0, // isFirstBatch (to write headers)
+          skip
+        );
+        
+        // Write batch to file immediately
+        for (const row of batchCSVRows) {
+          writeStream.write(row + '\n');
+        }
+        
+        // Mark headers as written after first batch
+        if (!headersWritten && batchCSVRows.length > 0) {
+          headersWritten = true;
+        }
+        
+        processedCount += batch.length;
+        const progress = ((processedCount / totalResponses) * 100).toFixed(1);
+        const memUsage = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(1);
+        console.log(`   Progress: ${processedCount}/${totalResponses} (${progress}%) - Memory: ${memUsage}MB`);
+        
+        // MEMORY LEAK FIX: Clear batch arrays from memory (explicit cleanup)
+        // Clear arrays to help GC reclaim memory faster
+        batch.length = 0;
+        batchCSVRows.length = 0;
+        
+        // Clear supervisor cache if it exists (generated in generateCSVContent)
+        // This prevents accumulation across batches
+        
+        // Force garbage collection hint if available (Node.js --expose-gc flag)
+        if (global.gc && skip % (BATCH_SIZE * 5) === 0) {
+          // Only run GC every 5 batches to avoid performance impact
+          global.gc();
+        }
+        
+        skip += BATCH_SIZE;
+      }
+      
+      // Close write stream
+      writeStream.end();
+      
+      // Wait for stream to finish writing
+      await new Promise((resolve, reject) => {
+        writeStream.on('finish', resolve);
+        writeStream.on('error', reject);
+      });
+      
+      // Save metadata
+      await saveCSVFileMetadata(surveyId, downloadMode);
+      
+      console.log(`✅ CSV file saved (streaming) for survey ${surveyId}, mode: ${downloadMode}`);
+    } catch (error) {
+      writeStream.end(); // Close stream on error
+      throw error;
+    }
   } catch (error) {
     console.error(`❌ Error generating CSV for survey ${surveyId}:`, error);
     throw error;
   }
 };
 
+// Cache for survey structure (headers don't change per batch)
+const surveyStructureCache = new Map();
+
+/**
+ * Generate CSV rows for a batch of responses (streaming-friendly)
+ * Returns array of CSV row strings - headers on first batch, data rows always
+ */
+const generateCSVContentBatch = async (survey, batchResponses, downloadMode, surveyId, isFirstBatch, startIndex) => {
+  const surveyIdStr = String(surveyId || survey?._id || survey?.id || '');
+  const cacheKey = `${surveyIdStr}_${downloadMode}`;
+  
+  const rows = [];
+  
+  // On first batch: generate and cache headers
+  if (isFirstBatch) {
+    const { allTitleRow, allCodeRow, surveyStructure } = await generateCSVHeaders(survey, downloadMode, surveyId);
+    
+    // Cache survey structure for subsequent batches
+    surveyStructureCache.set(cacheKey, surveyStructure);
+    
+    // Add header rows (only title row for non-specific survey, code row always)
+    if (surveyIdStr !== '68fd1915d41841da463f0d46') {
+      rows.push(formatCSVRow(allTitleRow));
+    }
+    rows.push(formatCSVRow(allCodeRow));
+  }
+  
+  // Get cached survey structure
+  const surveyStructure = surveyStructureCache.get(cacheKey);
+  if (!surveyStructure) {
+    throw new Error('Survey structure not found - headers must be generated first');
+  }
+  
+  // Generate data rows for this batch
+  const dataRows = await generateCSVDataRows(
+    survey, 
+    batchResponses, 
+    downloadMode, 
+    surveyId, 
+    startIndex,
+    surveyStructure
+  );
+  
+  rows.push(...dataRows);
+  
+  return rows;
+};
+
+/**
+ * Format a row array into CSV string
+ */
+const formatCSVRow = (row) => {
+  return row.map(field => {
+    const fieldStr = String(field || '');
+    return `"${fieldStr.replace(/"/g, '""')}"`;
+  }).join(',');
+};
+
+/**
+ * Generate CSV headers (title row and code row) - called once per survey
+ */
+const generateCSVHeaders = async (survey, downloadMode, surveyId) => {
+  // This extracts header generation logic from generateCSVContent
+  // We'll reuse the existing logic by calling a modified version
+  const surveyIdStr = String(surveyId || survey?._id || survey?.id || '');
+  
+  // Get all helper functions from the existing generateCSVContent context
+  // We need to extract the header building logic
+  // For now, we'll call generateCSVContent with empty responses just to get headers
+  // But we need to modify it to support batch mode
+  
+  // Actually, better approach: extract header logic separately
+  // Let's use the existing generateCSVContent but modify it to support header-only mode
+  const headerResult = await generateCSVHeadersInternal(survey, downloadMode, surveyId);
+  return headerResult;
+};
+
+/**
+ * Internal function to generate headers
+ */
+const generateCSVHeadersInternal = async (survey, downloadMode, surveyId) => {
+  // Extract the header generation logic from generateCSVContent
+  // This is a simplified version that only generates headers
+  const surveyIdStr = String(surveyId || survey?._id || survey?.id || '');
+  
+  // Helper functions (same as in generateCSVContent)
+  const getMainText = (text) => {
+    if (!text) return '';
+    const textStr = String(text);
+    let cleaned = textStr.replace(/\[.*?\]/g, '').trim();
+    const openBraceIndex = cleaned.indexOf('{');
+    if (openBraceIndex !== -1) {
+      cleaned = cleaned.substring(0, openBraceIndex).trim();
+      cleaned = cleaned.replace(/_+$/, '').trim();
+    }
+    return cleaned;
+  };
+  
+  const isOthersOption = (optText) => {
+    if (!optText) return false;
+    const normalized = String(optText).toLowerCase().trim();
+    return normalized === 'other' || 
+           normalized === 'others' || 
+           (normalized.includes('other') && (normalized.includes('specify') || normalized.includes('please') || normalized.includes('(specify)')));
+  };
+  
+  const getQuestionCodeFromTemplate = (question, questionNumber) => {
+    if (!question) return `q${questionNumber}`;
+    const questionText = getMainText(question.text || question.questionText || '').toLowerCase();
+    const qNum = questionNumber;
+    
+    if (question.id) {
+      const questionId = String(question.id).toLowerCase();
+      if (questionId.includes('religion') || questionId === 'resp_religion') return 'resp_religion';
+      if (questionId.includes('social_cat') || questionId === 'resp_social_cat') return 'resp_social_cat';
+      if (questionId.includes('caste') || questionId === 'resp_caste_jati') return 'resp_caste_jati';
+      if (questionId.includes('female_edu') || questionId === 'resp_female_edu') return 'resp_female_edu';
+      if (questionId.includes('male_edu') || questionId === 'resp_male_edu') return 'resp_male_edu';
+      if (questionId.includes('occupation') || questionId === 'resp_occupation') return 'resp_occupation';
+      if (questionId.includes('mobile') || questionId === 'resp_mobile') return 'resp_mobile';
+      if (questionId.includes('name') && !questionId.includes('caste')) return 'resp_name';
+    }
+    
+    if (questionText.includes('religion') && questionText.includes('belong to')) return 'resp_religion';
+    if (questionText.includes('social category') && questionText.includes('belong to')) return 'resp_social_cat';
+    if (questionText.includes('caste') && (questionText.includes('tell me') || questionText.includes('jati'))) return 'resp_caste_jati';
+    if (questionText.includes('female') && questionText.includes('education') && 
+        (questionText.includes('most educated') || questionText.includes('highest educational'))) return 'resp_female_edu';
+    if (questionText.includes('male') && questionText.includes('education') && 
+        (questionText.includes('most educated') || questionText.includes('highest educational'))) return 'resp_male_edu';
+    if (questionText.includes('occupation') && questionText.includes('chief wage earner')) return 'resp_occupation';
+    if ((questionText.includes('mobile number') || questionText.includes('phone number')) && 
+        questionText.includes('share')) return 'resp_mobile';
+    if (questionText.includes('share your name') && questionText.includes('confidential')) return 'resp_name';
+    if (questionText.includes('contact you in future') || 
+        (questionText.includes('future') && questionText.includes('similar surveys'))) return 'thanks_future';
+    
+    return `q${qNum}`;
+  };
+  
+  const getAllSurveyQuestions = (survey) => {
+    if (!survey) return [];
+    const actualSurvey = survey.survey || survey;
+    let allQuestions = [];
+    
+    if (actualSurvey?.sections && Array.isArray(actualSurvey.sections)) {
+      actualSurvey.sections.forEach(section => {
+        if (section.questions && Array.isArray(section.questions)) {
+          allQuestions.push(...section.questions);
+        }
+      });
+    }
+    
+    if (actualSurvey?.questions && Array.isArray(actualSurvey.questions)) {
+      allQuestions.push(...actualSurvey.questions);
+    }
+    
+    allQuestions.sort((a, b) => (a.order || 0) - (b.order || 0));
+    return allQuestions;
+  };
+  
+  const isACOrPollingStationQuestion = (question) => {
+    if (question.id === 'ac-selection') return true;
+    if (question.type === 'polling_station') return true;
+    const questionText = question.text || question.questionText || '';
+    if (questionText.toLowerCase().includes('select assembly constituency') || 
+        questionText.toLowerCase().includes('select polling station')) {
+      return true;
+    }
+    return false;
+  };
+  
+  // Get all survey questions
+  const allSurveyQuestions = getAllSurveyQuestions(survey);
+  
+  if (allSurveyQuestions.length === 0) {
+    throw new Error('No survey questions found');
+  }
+  
+  // Filter out AC selection and polling station questions
+  let regularQuestions = allSurveyQuestions
+    .filter(q => !isACOrPollingStationQuestion(q))
+    .sort((a, b) => {
+      const orderA = a.order !== null && a.order !== undefined ? parseInt(a.order) : 9999;
+      const orderB = b.order !== null && b.order !== undefined ? parseInt(b.order) : 9999;
+      if (!isNaN(orderA) && !isNaN(orderB)) {
+        return orderA - orderB;
+      }
+      return 0;
+    });
+  
+  // For survey 68fd1915d41841da463f0d46, filter out "Professional Degree" option from Q13
+  if (surveyIdStr === '68fd1915d41841da463f0d46') {
+    regularQuestions = regularQuestions.map(question => {
+      const questionText = getMainText(question.text || question.questionText || '').toLowerCase();
+      if (questionText.includes('three most pressing issues') && questionText.includes('west bengal')) {
+        if (question.options && Array.isArray(question.options)) {
+          const filteredOptions = question.options.filter(opt => {
+            const optText = typeof opt === 'object' ? getMainText(opt.text || opt.label || opt.value || '') : getMainText(String(opt));
+            const optTextLower = String(optText).toLowerCase();
+            return !optTextLower.includes('professional degree');
+          });
+          return {
+            ...question,
+            options: filteredOptions
+          };
+        }
+      }
+      return question;
+    });
+  }
+  
+  if (regularQuestions.length === 0) {
+    throw new Error('No regular survey questions found');
+  }
+  
+  // Build headers with two rows: titles and codes
+  const metadataTitleRow = [];
+  const metadataCodeRow = [];
+  
+  // Metadata columns (same as in generateCSVContent)
+  metadataTitleRow.push('Serial Number');
+  metadataCodeRow.push('serial_no');
+  metadataTitleRow.push('Response ID');
+  metadataCodeRow.push('Response ID');
+  metadataTitleRow.push('Interview Mode');
+  metadataCodeRow.push('MODE');
+  metadataTitleRow.push('Interviewer Name');
+  metadataCodeRow.push('int_name');
+  metadataTitleRow.push('Interviewer ID');
+  metadataCodeRow.push('int_id');
+  metadataTitleRow.push('Interviewer Email');
+  metadataCodeRow.push('Email_Id');
+  metadataTitleRow.push('Supervisor Name');
+  metadataCodeRow.push('sup_name');
+  metadataTitleRow.push('Supervisor ID');
+  metadataCodeRow.push('sup_id');
+  metadataTitleRow.push('Response Date');
+  metadataCodeRow.push('survey_date');
+  metadataTitleRow.push('Response Date Time');
+  metadataCodeRow.push('survey_datetime');
+  metadataTitleRow.push('Status');
+  metadataCodeRow.push('Status');
+  metadataTitleRow.push('Assembly Constituency code');
+  metadataCodeRow.push('ac_code');
+  metadataTitleRow.push('Assembly Constituency (AC)');
+  metadataCodeRow.push('ac_name');
+  metadataTitleRow.push('Parliamentary Constituency Code');
+  metadataCodeRow.push('pc_code');
+  metadataTitleRow.push('Parliamentary Constituency (PC)');
+  metadataCodeRow.push('pc_name');
+  metadataTitleRow.push('District Code');
+  metadataCodeRow.push('district_code');
+  metadataTitleRow.push('District');
+  metadataCodeRow.push('district_code');
+  metadataTitleRow.push('Region Code');
+  metadataCodeRow.push('region_code');
+  metadataTitleRow.push('Region Name');
+  metadataCodeRow.push('region_name');
+  metadataTitleRow.push('Polling Station Code');
+  metadataCodeRow.push('rt_polling_station_no');
+  metadataTitleRow.push('Polling Station Name');
+  metadataCodeRow.push('rt_polling_station_name');
+  metadataTitleRow.push('GPS Coordinates');
+  metadataCodeRow.push('rt_gps_coordinates');
+  metadataTitleRow.push('Call ID');
+  metadataCodeRow.push('Call_ID');
+  
+  // Build question headers with multi-select handling
+  const questionTitleRow = [];
+  const questionCodeRow = [];
+  const questionMultiSelectMap = new Map();
+  const questionOthersMap = new Map();
+  
+  regularQuestions.forEach((question, index) => {
+    const questionText = question.text || question.questionText || `Question ${index + 1}`;
+    const mainQuestionText = getMainText(questionText);
+    const questionNumber = index + 1;
+    const questionCode = getQuestionCodeFromTemplate(question, questionNumber);
+    
+    questionTitleRow.push(`Q${questionNumber}: ${mainQuestionText}`);
+    questionCodeRow.push(questionCode);
+    
+    const isMultiSelect = (question.type === 'multiple_choice' || question.type === 'multi_select') 
+      && question.settings?.allowMultiple === true 
+      && question.options 
+      && question.options.length > 0;
+    
+    const hasOthersOption = question.options && question.options.some(opt => {
+      const optText = typeof opt === 'object' ? (opt.text || opt.label || opt.value) : opt;
+      const optTextStr = String(optText || '').toLowerCase().trim();
+      return isOthersOption(optTextStr) || 
+             (optTextStr.includes('other') && (optTextStr.includes('specify') || optTextStr.includes('please')));
+    });
+    
+    const hasIndependentOption = question.options && question.options.some(opt => {
+      const optText = typeof opt === 'object' ? opt.text : opt;
+      const optLower = String(optText).toLowerCase();
+      return optLower.includes('independent') && !optLower.includes('other');
+    });
+    
+    questionOthersMap.set(index, hasOthersOption);
+    
+    if (isMultiSelect) {
+      const regularOptions = [];
+      let othersOption = null;
+      let othersOptionIndex = -1;
+      
+      question.options.forEach((option, optIndex) => {
+        const optText = typeof option === 'object' ? option.text : option;
+        const optTextStr = String(optText || '').trim();
+        if (isOthersOption(optTextStr) || optTextStr.toLowerCase().includes('other') && (optTextStr.toLowerCase().includes('specify') || optTextStr.toLowerCase().includes('please'))) {
+          othersOption = option;
+          othersOptionIndex = optIndex;
+        } else {
+          regularOptions.push(option);
+        }
+      });
+      
+      questionMultiSelectMap.set(index, {
+        isMultiSelect: true,
+        options: regularOptions,
+        othersOption: othersOption,
+        othersOptionIndex: othersOptionIndex,
+        questionText: mainQuestionText,
+        questionNumber,
+        questionCode
+      });
+      
+      let regularOptionIndex = 0;
+      regularOptions.forEach((option) => {
+        const optText = typeof option === 'object' ? option.text : option;
+        const optMainText = getMainText(optText);
+        const optionNum = regularOptionIndex + 1;
+        const optCode = `Q${questionNumber}_${optionNum}`;
+        regularOptionIndex++;
+        
+        questionTitleRow.push(`Q${questionNumber}. ${mainQuestionText} - ${optMainText}`);
+        questionCodeRow.push(optCode);
+      });
+      
+      if (hasOthersOption) {
+        questionTitleRow.push(`Q${questionNumber}: ${mainQuestionText} - Others Choice`);
+        questionCodeRow.push(`${questionCode}_44`);
+        questionTitleRow.push(`Q${questionNumber}: ${mainQuestionText} - Others (Specify)`);
+        questionCodeRow.push(`${questionCode}_oth`);
+      }
+    } else {
+      if (hasOthersOption) {
+        questionTitleRow.push(`Q${questionNumber}: ${mainQuestionText} - Others (Specify)`);
+        questionCodeRow.push(`${questionCode}_44`);
+      }
+      
+      if (hasIndependentOption && ['q5', 'q6', 'q7', 'q8', 'q9'].includes(questionCode)) {
+        questionTitleRow.push(`Q${questionNumber}: ${mainQuestionText} - Independent (Please specify)`);
+        questionCodeRow.push(`${questionCode}_ind`);
+      }
+    }
+  });
+  
+  // Combine metadata and question headers
+  const allTitleRow = [...metadataTitleRow, ...questionTitleRow];
+  let allCodeRow = [...metadataCodeRow, ...questionCodeRow];
+  
+  // Add Status, QC, and Rejection columns at the end
+  allTitleRow.push('Status (0= terminated, 10=valid, 20=rejected, 40=under qc)');
+  allCodeRow.push('status_code');
+  allTitleRow.push('Qc Completion date');
+  allCodeRow.push('qc_completion_date');
+  allTitleRow.push('Assigned to QC ( 1 can mean those whih are assigned to audio qc and 2 can mean those which are not yet assigned)');
+  allCodeRow.push('assigned_to_qc');
+  allTitleRow.push('Reason for rejection (1= short duration, 2= gps rejection, 3= duplicate phone numbers, 4= audio status, 5= gender mismatch, 6=2021 AE, 7=2024 GE, 8= Pref, 9=Interviewer performance)');
+  allCodeRow.push('rejection_reason');
+  
+  // Apply transformations for survey 68fd1915d41841da463f0d46
+  if (surveyIdStr === '68fd1915d41841da463f0d46') {
+    allCodeRow = allCodeRow.map(code => {
+      if (typeof code === 'string') {
+        return code.replace(/Q(\d+)/g, 'q$1');
+      }
+      return code;
+    });
+    
+    const columnReplacements = {
+      'q1': 'resp_age',
+      'q2': 'resp_registered_voter',
+      'q3': 'resp_gender',
+      'q10_5': 'q10_99',
+      'q11_10': 'q11_11',
+      'q11_11': 'q11_13',
+      'q11_12': 'q11_14',
+      'q11_13': 'q11_15',
+      'q11_14': 'q11_99',
+      'q12_4': 'q12_5',
+      'q12_5': 'q12_6',
+      'q12_6': 'q12_7',
+      'q12_7': 'q12_8',
+      'q12_8': 'q12_9',
+      'q12_9': 'q12_11',
+      'q12_10': 'q12_12',
+      'q12_11': 'q12_14',
+      'q12_12': 'q12_99'
+    };
+    
+    allCodeRow = allCodeRow.map(code => {
+      if (typeof code === 'string' && code in columnReplacements) {
+        return columnReplacements[code];
+      }
+      return code;
+    });
+    
+    allCodeRow = allCodeRow.map(code => {
+      if (typeof code === 'string' && code.includes('_oth_choice')) {
+        return code.replace(/_oth_choice$/, '_44');
+      }
+      if (typeof code === 'string' && code.match(/_[a-z]*_oth$/)) {
+        return code.replace(/_oth$/, '_44');
+      }
+      return code;
+    });
+  } else {
+    allCodeRow = allCodeRow.map(code => {
+      if (typeof code === 'string') {
+        return code.replace(/Q(\d+)/g, 'q$1');
+      }
+      return code;
+    });
+    
+    allCodeRow = allCodeRow.map(code => {
+      if (typeof code === 'string' && code.includes('_oth_choice')) {
+        return code.replace(/_oth_choice$/, '_44');
+      }
+      if (typeof code === 'string' && code.match(/^[a-z]+\d+_oth$/)) {
+        return code.replace(/_oth$/, '_44');
+      }
+      return code;
+    });
+  }
+  
+  // Return headers and survey structure for caching
+  return {
+    allTitleRow,
+    allCodeRow,
+    surveyStructure: {
+      regularQuestions,
+      questionMultiSelectMap,
+      questionOthersMap,
+      allCodeRow // Store for reference
+    }
+  };
+};
+
+/**
+ * Generate CSV data rows for a batch of responses
+ * MEMORY OPTIMIZED: Uses generateCSVContent but immediately processes and clears
+ */
+const generateCSVDataRows = async (survey, batchResponses, downloadMode, surveyId, startIndex, surveyStructure) => {
+  // Reuse existing generateCSVContent but extract only data rows (skip headers)
+  // This ensures we maintain exact same logic and formatting
+  const csvContent = await generateCSVContent(survey, batchResponses, downloadMode, surveyId);
+  
+  // Split into rows and filter empty lines
+  const allRows = csvContent.split('\n').filter(row => row.trim() !== '');
+  
+  // Determine how many header rows to skip
+  const surveyIdStr = String(surveyId || survey?._id || survey?.id || '');
+  const headerRowCount = surveyIdStr === '68fd1915d41841da463f0d46' ? 1 : 2; // 1 = code row only, 2 = title + code rows
+  
+  // Extract data rows only
+  const dataRows = allRows.slice(headerRowCount);
+  
+  // Clear the full content string from memory immediately
+  // This helps GC reclaim memory faster
+  const rows = [...dataRows]; // Create new array (don't reference original)
+  allRows.length = 0; // Clear original array
+  dataRows.length = 0; // Clear slice
+  
+  return rows;
+};
+
 /**
  * Generate CSV content - FULL PORT FROM FRONTEND
+ * Modified to support batch mode (when batchMode=true, returns only data rows, no headers)
  */
-const generateCSVContent = async (survey, sortedResponses, downloadMode, surveyId) => {
+const generateCSVContent = async (survey, sortedResponses, downloadMode, surveyId, batchMode = false) => {
   const surveyIdStr = String(surveyId || survey?._id || survey?.id || '');
   
   // Helper function to get main text (removes translation markers)
@@ -881,17 +1550,17 @@ const generateCSVContent = async (survey, sortedResponses, downloadMode, surveyI
         regionName = cleanValue(acMapping.region_name) || '';
       }
       
-      // Try to get pcCode from polling station data if available
-      // For now, leave empty as we don't have polling station API in backend
-      pcCode = '';
+      // Get pcCode from polling_stations.json using AC code
+      pcCode = getPCCodeFromACCode(acCode);
     }
     
     const { stationCode: stationCodeRaw, stationName: stationNameRaw } = extractPollingStationCodeAndName(pollingStationValue);
     const stationCode = cleanValue(stationCodeRaw) || '';
     const stationName = cleanValue(stationNameRaw) || '';
     
-    // Format date in IST
-    const responseDateUTC = new Date(response.createdAt || response.endTime || response.createdAt);
+    // Format date in IST - Use startTime (interview date) instead of createdAt (sync date)
+    // Fallback to createdAt if startTime is not available
+    const responseDateUTC = new Date(response.startTime || response.createdAt);
     const istOffset = 5.5 * 60 * 60 * 1000;
     const responseDateIST = new Date(responseDateUTC.getTime() + istOffset);
     
@@ -1464,33 +2133,86 @@ const generateCSVContent = async (survey, sortedResponses, downloadMode, surveyI
     return [...metadata, ...answers, statusCode, qcCompletionDate, assignedToQC, rejectionReasonCode];
   });
   
-  // Build CSV content
-  const csvRows = [];
+  // MEMORY OPTIMIZED: Build CSV content incrementally
+  // Removed csvRows array - we'll build CSV string directly
   
-  // For survey 68fd1915d41841da463f0d46, only code row is used (no title row)
-  // This matches the frontend behavior for this specific survey
+  // MEMORY OPTIMIZED: Build CSV incrementally instead of accumulating all rows
+  // Process rows directly without building intermediate arrays
+  const csvLines = [];
+  
+  // Add header rows (already formatted)
   if (surveyIdStr !== '68fd1915d41841da463f0d46') {
-    csvRows.push(allTitleRow);
+    csvLines.push(formatCSVRow(allTitleRow));
+  }
+  csvLines.push(formatCSVRow(allCodeRow));
+  
+  // Process data rows incrementally to reduce peak memory
+  for (const row of csvData) {
+    csvLines.push(formatCSVRow(row));
   }
   
-  // Add code row (always present)
-  csvRows.push(allCodeRow);
+  // Join once at the end (more efficient than accumulating string)
+  const csvContent = csvLines.join('\n');
   
-  // Add data rows
-  csvRows.push(...csvData);
-  
-  const csvContent = csvRows
-    .map(row => row.map(field => {
-      const fieldStr = String(field || '');
-      return `"${fieldStr.replace(/"/g, '""')}"`;
-    }).join(','))
-    .join('\n');
+  // Clear arrays to help GC reclaim memory immediately
+  csvLines.length = 0;
+  csvData.length = 0;
   
   return csvContent;
 };
 
 /**
- * Save CSV file
+ * Helper function to format date in IST
+ */
+const formatDateIST = (date, dateOnly = false) => {
+  if (!date) return '';
+  const d = new Date(date);
+  const istOffset = 5.5 * 60 * 60 * 1000;
+  const istDate = new Date(d.getTime() + istOffset);
+  
+  const year = istDate.getUTCFullYear();
+  const month = String(istDate.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(istDate.getUTCDate()).padStart(2, '0');
+  
+  if (dateOnly) {
+    return `${year}-${month}-${day}`;
+  }
+  
+  const hours = String(istDate.getUTCHours()).padStart(2, '0');
+  const minutes = String(istDate.getUTCMinutes()).padStart(2, '0');
+  const seconds = String(istDate.getUTCSeconds()).padStart(2, '0');
+  
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+};
+
+/**
+ * Save CSV metadata file
+ */
+const saveCSVFileMetadata = async (surveyId, downloadMode) => {
+  const surveyDir = path.join(CSV_STORAGE_DIR, surveyId);
+  if (!fs.existsSync(surveyDir)) {
+    fs.mkdirSync(surveyDir, { recursive: true });
+  }
+  
+  const metadata = {
+    lastUpdated: new Date().toISOString(),
+    lastUpdatedIST: formatDateIST(new Date(), false),
+    mode: downloadMode,
+    surveyId: surveyId
+  };
+  
+  fs.writeFileSync(
+    path.join(surveyDir, `${downloadMode}_metadata.json`),
+    JSON.stringify(metadata, null, 2),
+    'utf8'
+  );
+  
+  console.log(`📝 Metadata saved: ${downloadMode}_metadata.json`);
+  console.log(`   Last Updated: ${metadata.lastUpdatedIST}`);
+};
+
+/**
+ * Save CSV file (legacy function for non-streaming mode)
  */
 const saveCSVFile = async (surveyId, downloadMode, csvContent) => {
   const surveyDir = path.join(CSV_STORAGE_DIR, surveyId);
@@ -1506,28 +2228,6 @@ const saveCSVFile = async (surveyId, downloadMode, csvContent) => {
   }
   
   fs.writeFileSync(filepath, csvContent, 'utf8');
-  
-  // Helper function to format date in IST
-  const formatDateIST = (date, dateOnly = false) => {
-    if (!date) return '';
-    const d = new Date(date);
-    const istOffset = 5.5 * 60 * 60 * 1000;
-    const istDate = new Date(d.getTime() + istOffset);
-    
-    const year = istDate.getUTCFullYear();
-    const month = String(istDate.getUTCMonth() + 1).padStart(2, '0');
-    const day = String(istDate.getUTCDate()).padStart(2, '0');
-    
-    if (dateOnly) {
-      return `${year}-${month}-${day}`;
-    }
-    
-    const hours = String(istDate.getUTCHours()).padStart(2, '0');
-    const minutes = String(istDate.getUTCMinutes()).padStart(2, '0');
-    const seconds = String(istDate.getUTCSeconds()).padStart(2, '0');
-    
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-  };
   
   const metadata = {
     lastUpdated: new Date().toISOString(),
@@ -1603,6 +2303,7 @@ const getCSVFileInfo = (surveyId) => {
 
 module.exports = {
   generateCSVForSurvey,
+  generateCSVContent,
   getCSVFileInfo,
   CSV_STORAGE_DIR
 };

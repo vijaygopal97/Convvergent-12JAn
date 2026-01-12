@@ -1,0 +1,716 @@
+====================================================================================================
+ABANDONED RESPONSES DETAILED REPORT
+====================================================================================================
+
+Generated: 2026-01-05T18:55:46.257Z
+Time Range: 2026-01-04T18:55:45.746Z to 2026-01-05T18:55:46.257Z (24 hours)
+
+📊 SUMMARY
+----------------------------------------------------------------------------------------------------
+Total Pending_Approval (last 24h): 3595
+Should be Abandoned: 203
+Correctly marked: 3392
+Percentage should be abandoned: 5.65%
+
+📱 BREAKDOWN BY INTERVIEW MODE
+----------------------------------------------------------------------------------------------------
+CAPI: 61 responses (30.05%)
+CATI: 142 responses (69.95%)
+
+🚫 BREAKDOWN BY ABANDON REASON
+----------------------------------------------------------------------------------------------------
+Call_Not_Connected: 134 responses (66.01%)
+technical_issue: 27 responses (13.30%)
+respondent_not_available: 14 responses (6.90%)
+location_issue: 10 responses (4.93%)
+Interview_Abandoned_Early: 6 responses (2.96%)
+respondent_refused: 4 responses (1.97%)
+language_barrier: 3 responses (1.48%)
+respondent_busy: 2 responses (0.99%)
+other: 1 responses (0.49%)
+consent_refused: 1 responses (0.49%)
+Not_Registered_Voter_In_AC: 1 responses (0.49%)
+
+📞 BREAKDOWN BY CALL STATUS (CATI)
+----------------------------------------------------------------------------------------------------
+busy: 37 responses (26.06% of CATI)
+did_not_pick_up: 27 responses (19.01% of CATI)
+not_reachable: 22 responses (15.49% of CATI)
+unknown: 17 responses (11.97% of CATI)
+didnt_get_call: 14 responses (9.86% of CATI)
+number_does_not_exist: 10 responses (7.04% of CATI)
+switched_off: 8 responses (5.63% of CATI)
+
+📋 TOP 10 SURVEYS
+----------------------------------------------------------------------------------------------------
+68fd1915d41841da463f0d46:
+  Total: 203 responses
+  CAPI: 61, CATI: 142
+
+👤 TOP 20 INTERVIEWERS
+----------------------------------------------------------------------------------------------------
+MALA MONDAL (ID: 3558):
+  Total: 30 responses
+  CAPI: 0, CATI: 30
+SUMAN CHAKRABORTY (ID: 3556):
+  Total: 30 responses
+  CAPI: 0, CATI: 30
+SUMAIYA KHATUN (ID: 3575):
+  Total: 22 responses
+  CAPI: 0, CATI: 22
+Karina khatoon (ID: 1052):
+  Total: 13 responses
+  CAPI: 0, CATI: 13
+Sifa khatun (ID: 1050):
+  Total: 12 responses
+  CAPI: 0, CATI: 12
+Nurjahan Khatun (ID: 3510):
+  Total: 10 responses
+  CAPI: 0, CATI: 10
+MADHURIMA SUR (ID: CAPI274):
+  Total: 9 responses
+  CAPI: 9, CATI: 0
+Vishals Interviewer (ID: 130848):
+  Total: 8 responses
+  CAPI: 0, CATI: 8
+Lili Kadar (ID: 3260):
+  Total: 6 responses
+  CAPI: 0, CATI: 6
+RUPALI MONDAL (ID: 3571):
+  Total: 5 responses
+  CAPI: 0, CATI: 5
+NIBADITA GIRI (ID: CAPI323):
+  Total: 4 responses
+  CAPI: 4, CATI: 0
+Md Sahid Jamal (ID: CAPI190):
+  Total: 3 responses
+  CAPI: 3, CATI: 0
+Sukanta Mandal (ID: CAPI225):
+  Total: 3 responses
+  CAPI: 3, CATI: 0
+MD SAHIL SK (ID: CAPI132):
+  Total: 3 responses
+  CAPI: 3, CATI: 0
+Mosaraf Mondal (ID: CAPI1006):
+  Total: 2 responses
+  CAPI: 2, CATI: 0
+Sujit Halder (ID: CAPI483):
+  Total: 2 responses
+  CAPI: 2, CATI: 0
+Sourav Dutta (ID: CAPI417):
+  Total: 2 responses
+  CAPI: 2, CATI: 0
+Surajit Mondal (ID: CAPI250):
+  Total: 2 responses
+  CAPI: 2, CATI: 0
+KOUSHIK DAS (ID: CAPI227):
+  Total: 2 responses
+  CAPI: 2, CATI: 0
+Wahida Nasrin (ID: 3503):
+  Total: 2 responses
+  CAPI: 0, CATI: 2
+
+📋 INDICATOR STATISTICS
+----------------------------------------------------------------------------------------------------
+Responses with abandonedReason field: 203
+Responses with metadata.abandoned: 0
+Responses with call status (CATI): 135
+
+📝 FIRST 50 RESPONSES DETAILS
+====================================================================================================
+
+1. Response ID: 8cdc0ec7-8e6a-48a5-9d1d-47f204d0c9a1
+   Session ID: af97331f-2525-474c-9591-0d54f1117b14
+   Mode: capi
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Pritikona Dey (ID: CAPI1058)
+   Current Status: Pending_Approval
+   Abandon Reason: technical_issue
+   Indicators: abandonedReason: "technical_issue"
+   Created: 2026-01-04T19:19:17.995Z
+   Updated: 2026-01-05T18:30:35.478Z
+
+2. Response ID: 618acb71-b5ac-4f4f-8cf7-48ed07d1374b
+   Session ID: 0eba1791-5231-4743-b621-b86985aab29e
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Vishals Interviewer (ID: 130848)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: unknown
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "unknown"
+   Created: 2026-01-04T20:01:22.066Z
+   Updated: 2026-01-05T18:31:23.874Z
+
+3. Response ID: 9eaddb27-e54b-41f0-9bf0-0217bcfbb63d
+   Session ID: 5dc274d3-034f-4d32-8338-18629ae8c0ec
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Vishals Interviewer (ID: 130848)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: unknown
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "unknown"
+   Created: 2026-01-04T20:52:55.880Z
+   Updated: 2026-01-05T18:31:23.874Z
+
+4. Response ID: 0e8c2df3-eb28-4b9d-a76b-74643620322f
+   Session ID: bc4aa213-707b-40b4-bb50-fa1e92636659
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Vishals Interviewer (ID: 130848)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: unknown
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "unknown"
+   Created: 2026-01-04T21:32:46.550Z
+   Updated: 2026-01-05T18:31:23.874Z
+
+5. Response ID: acecf81c-b792-48dc-920e-071eb36ba7b3
+   Session ID: 4c30d925-92b4-469b-a7e7-22750c4effb4
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Nurjahan Khatun (ID: 3510)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: busy
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "busy"
+   Created: 2026-01-04T22:04:48.016Z
+   Updated: 2026-01-05T18:30:37.876Z
+
+6. Response ID: 82f03028-10c5-4d90-a9b2-1240d2c7b72d
+   Session ID: 86ffa7ef-4233-4150-a79e-f07c3c67b653
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Vishals Interviewer (ID: 130848)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: unknown
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "unknown"
+   Created: 2026-01-04T22:21:26.910Z
+   Updated: 2026-01-05T18:31:23.874Z
+
+7. Response ID: b5ff5bca-e147-4247-aaf0-c2aab7ac3a37
+   Session ID: e621b626-be11-4812-8903-dc9eca6e1047
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Lili Kadar (ID: 3260)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: unknown
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "unknown"
+   Created: 2026-01-04T22:27:08.423Z
+   Updated: 2026-01-05T18:31:25.210Z
+
+8. Response ID: e88a1cc1-e02a-44cc-a600-9682df767db9
+   Session ID: eb02f1bf-1c4f-4508-97d3-792d1f1ff33a
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Lili Kadar (ID: 3260)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: unknown
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "unknown"
+   Created: 2026-01-04T22:27:33.201Z
+   Updated: 2026-01-05T18:31:25.210Z
+
+9. Response ID: 5be7bcfd-38c3-45bc-ab28-6af8beee2cc0
+   Session ID: cabe7a67-407b-4d88-a09b-77a1287bb024
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Lili Kadar (ID: 3260)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: busy
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "busy"
+   Created: 2026-01-04T22:29:04.957Z
+   Updated: 2026-01-05T18:31:25.210Z
+
+10. Response ID: 71a2f621-a517-417b-9cfd-f2e2940071fa
+   Session ID: a90f4ef7-77ff-4760-b5fc-9f6752b3722e
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Lili Kadar (ID: 3260)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: unknown
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "unknown"
+   Created: 2026-01-04T22:41:52.346Z
+   Updated: 2026-01-05T18:31:25.210Z
+
+11. Response ID: 29c1b131-c544-41f5-bd5a-0dd135b7739c
+   Session ID: 50a09aa7-a4f5-4b75-8fb6-891f78148b16
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Lili Kadar (ID: 3260)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: unknown
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "unknown"
+   Created: 2026-01-05T00:02:44.626Z
+   Updated: 2026-01-05T18:31:25.210Z
+
+12. Response ID: 47dde788-f0a3-4a34-9b80-e42861ad6e75
+   Session ID: 114d061f-1ec5-4dde-a84f-44e17d9e80cf
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Lili Kadar (ID: 3260)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: unknown
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "unknown"
+   Created: 2026-01-05T00:02:45.227Z
+   Updated: 2026-01-05T18:31:25.210Z
+
+13. Response ID: 261f44ae-84c2-4594-9c57-654ccebe18a5
+   Session ID: 54500db0-5035-4c6b-bfef-6ff33c089b5f
+   Mode: capi
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Mosaraf Mondal (ID: CAPI1006)
+   Current Status: Pending_Approval
+   Abandon Reason: location_issue
+   Indicators: abandonedReason: "location_issue"
+   Created: 2026-01-05T01:39:21.717Z
+   Updated: 2026-01-05T18:30:04.115Z
+
+14. Response ID: eedca019-e087-4bbb-9253-b20b182474c7
+   Session ID: 54a38ce6-9c39-49ee-8297-733165c3412d
+   Mode: capi
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Suvhamoy Sanbighna (ID: CAPI805)
+   Current Status: Pending_Approval
+   Abandon Reason: location_issue
+   Indicators: abandonedReason: "location_issue"
+   Created: 2026-01-05T02:26:08.369Z
+   Updated: 2026-01-05T18:30:33.923Z
+
+15. Response ID: 94f0f3cb-3300-42d2-8cae-2957e9b6b29c
+   Session ID: 01b0db42-0f0f-4709-8e78-242f2994d480
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: did_not_pick_up
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "did_not_pick_up"
+   Created: 2026-01-05T02:54:07.811Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+16. Response ID: 73f66df7-a82a-40e6-b6db-0ab02628e92c
+   Session ID: 685fc0fc-aa66-4783-841d-03da31ce22bf
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: busy
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "busy"
+   Created: 2026-01-05T02:57:43.875Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+17. Response ID: cdaf9900-8e11-4ba1-b2e2-1666c770de6e
+   Session ID: 87f60d23-f469-4c78-bbc9-e909c9a7bd6d
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: not_reachable
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "not_reachable"
+   Created: 2026-01-05T02:59:49.950Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+18. Response ID: ebdf2d9a-dc8a-4ae6-befd-baf739c2ddaf
+   Session ID: c50b1884-a0b0-4228-bab3-13aa73deaad4
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: didnt_get_call
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "didnt_get_call"
+   Created: 2026-01-05T03:01:04.668Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+19. Response ID: 41a2386b-1ef5-48e8-9747-de1abcee6131
+   Session ID: 7ac7771a-7ea3-4bc1-b742-d56b4c870f0f
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: not_reachable
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "not_reachable"
+   Created: 2026-01-05T03:02:35.691Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+20. Response ID: 71898491-f068-42c0-8c39-f469889b60c4
+   Session ID: 42844a65-1564-4bde-abef-72360c3fd929
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Rumpa Das (ID: 3501)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: not_reachable
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "not_reachable"
+   Created: 2026-01-05T03:17:11.790Z
+   Updated: 2026-01-05T18:30:14.764Z
+
+21. Response ID: 6a5d3ee3-c10f-4970-a061-ee4727d6fab9
+   Session ID: 6a18e060-0390-4759-a750-05c199595a4d
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: not_reachable
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "not_reachable"
+   Created: 2026-01-05T03:21:38.001Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+22. Response ID: acf2aded-8078-4c0b-b484-8483de0daa58
+   Session ID: f61a32c9-1ca7-4838-b329-9f569cbad5d6
+   Mode: capi
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Sujit Halder (ID: CAPI483)
+   Current Status: Pending_Approval
+   Abandon Reason: respondent_not_available
+   Indicators: abandonedReason: "respondent_not_available"
+   Created: 2026-01-05T03:44:30.307Z
+   Updated: 2026-01-05T18:30:23.564Z
+
+23. Response ID: f1ca866e-4b2c-4de7-b27b-8e24df59ec3d
+   Session ID: bace7aab-8f35-4b68-a298-46b6c796b16b
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: didnt_get_call
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "didnt_get_call"
+   Created: 2026-01-05T03:45:53.838Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+24. Response ID: 16829e12-aef0-413c-9686-33790105c4be
+   Session ID: 9ef9cac5-0bab-4396-83f9-f0fe03999d2e
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: busy
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "busy"
+   Created: 2026-01-05T03:47:50.976Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+25. Response ID: db722e02-c3f1-42f0-a6f9-03246a5e88fb
+   Session ID: 65f18111-b361-412e-8192-d0011260457a
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: switched_off
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "switched_off"
+   Created: 2026-01-05T03:47:52.022Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+26. Response ID: c6859745-5ab1-4b26-a725-f283a170a440
+   Session ID: d4b04d33-471c-48e7-98a6-2541e611208c
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: busy
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "busy"
+   Created: 2026-01-05T03:48:12.380Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+27. Response ID: 44f0d37c-8719-4f3b-9579-e32880ed481a
+   Session ID: 9f8c9f5a-f973-459d-b395-9e235e893f9a
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: busy
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "busy"
+   Created: 2026-01-05T03:48:37.491Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+28. Response ID: 15afda54-5817-41bf-a7bf-9cbcb9b74a98
+   Session ID: 54386105-693e-413d-96e9-bb02b5df250a
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: did_not_pick_up
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "did_not_pick_up"
+   Created: 2026-01-05T03:50:07.993Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+29. Response ID: c1cc6e68-8c94-4a12-9420-614a4bdcc6a3
+   Session ID: 27623f2c-3a07-4497-a39c-73c82a13bac8
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: RUPALI MONDAL (ID: 3571)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: did_not_pick_up
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "did_not_pick_up"
+   Created: 2026-01-05T04:01:57.339Z
+   Updated: 2026-01-05T18:30:15.386Z
+
+30. Response ID: 92f9f582-67e9-4fd3-b015-dc41c88b1c23
+   Session ID: 8db7c841-2ee3-458a-a663-8abffe3e6d16
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: RUPALI MONDAL (ID: 3571)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: busy
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "busy"
+   Created: 2026-01-05T04:02:45.096Z
+   Updated: 2026-01-05T18:30:15.386Z
+
+31. Response ID: 87a0cc61-d300-4ede-9d26-82cb9ffe6494
+   Session ID: c133cc75-5a80-4b51-982d-a65fe8d5bceb
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: RUPALI MONDAL (ID: 3571)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: not_reachable
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "not_reachable"
+   Created: 2026-01-05T04:36:32.455Z
+   Updated: 2026-01-05T18:30:15.386Z
+
+32. Response ID: b69a2553-86fd-4b75-86f1-b93684b67140
+   Session ID: c188b6eb-0dcf-4517-860a-ce2ac800ec6f
+   Mode: capi
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Sujit Halder (ID: CAPI483)
+   Current Status: Pending_Approval
+   Abandon Reason: respondent_not_available
+   Indicators: abandonedReason: "respondent_not_available"
+   Created: 2026-01-05T04:43:57.847Z
+   Updated: 2026-01-05T18:30:23.564Z
+
+33. Response ID: 3d2b70b3-e242-4cd7-b480-ec3c4c884e0e
+   Session ID: 0c3dbd81-95b9-41de-8e78-15936082df89
+   Mode: capi
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Md Sahid Jamal (ID: CAPI190)
+   Current Status: Pending_Approval
+   Abandon Reason: technical_issue
+   Indicators: abandonedReason: "technical_issue"
+   Created: 2026-01-05T04:50:56.680Z
+   Updated: 2026-01-05T18:30:19.561Z
+
+34. Response ID: e5a757e5-a669-4dcf-b362-c7f6b7739451
+   Session ID: bf8f3a40-40d8-45f0-920f-8c26bbee4aae
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: RUPALI MONDAL (ID: 3571)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: did_not_pick_up
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "did_not_pick_up"
+   Created: 2026-01-05T04:53:38.069Z
+   Updated: 2026-01-05T18:30:15.386Z
+
+35. Response ID: 2ab1ccf4-6985-49a8-87eb-2e82a9ed3c04
+   Session ID: be239b8b-3039-4de5-89ae-bff2d1c0e8b3
+   Mode: capi
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Md Sahid Jamal (ID: CAPI190)
+   Current Status: Pending_Approval
+   Abandon Reason: technical_issue
+   Indicators: abandonedReason: "technical_issue"
+   Created: 2026-01-05T05:00:49.680Z
+   Updated: 2026-01-05T18:30:19.561Z
+
+36. Response ID: af481f7f-48ee-4e3b-a9ef-f44f0e5fdf2f
+   Session ID: 89914838-5772-442e-86c0-e9d73a09385e
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: busy
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "busy"
+   Created: 2026-01-05T05:02:23.555Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+37. Response ID: f9e62d97-a8a9-4d9f-be20-1638f7181d0c
+   Session ID: 463314d5-6874-4c24-9598-aab9f1bc60ce
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: not_reachable
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "not_reachable"
+   Created: 2026-01-05T05:12:44.418Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+38. Response ID: 9db84bdc-ad10-43ca-9603-5ff921cb772e
+   Session ID: 433aa493-af54-4d9a-a178-40b199f47c97
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: busy
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "busy"
+   Created: 2026-01-05T05:21:27.244Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+39. Response ID: f5cae9e7-5fd4-4587-8643-6789269fa82d
+   Session ID: 0fde27a1-3dd0-4673-bf02-57eb4555e94b
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: did_not_pick_up
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "did_not_pick_up"
+   Created: 2026-01-05T05:21:30.561Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+40. Response ID: 276dff2a-7e84-4afe-897b-ae640632612a
+   Session ID: 66f9653f-1122-42a4-b079-56a3c99f127c
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: did_not_pick_up
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "did_not_pick_up"
+   Created: 2026-01-05T05:22:08.166Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+41. Response ID: 31f04993-e034-4cf1-8800-c43114dc9f80
+   Session ID: b5e19175-f04d-4033-8cf0-157e42596179
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: switched_off
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "switched_off"
+   Created: 2026-01-05T05:23:42.291Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+42. Response ID: 8b65326a-8784-4ffb-a9b7-79bfddca8763
+   Session ID: 99c23923-3159-4a95-82ca-3f9bd2b637cd
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: did_not_pick_up
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "did_not_pick_up"
+   Created: 2026-01-05T05:23:43.654Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+43. Response ID: 990ca1b0-f566-4189-957f-fcf994fc0c10
+   Session ID: 64445c75-2f8b-4f08-aff1-eb58214ba3ae
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: SUMAN CHAKRABORTY (ID: 3556)
+   Current Status: Pending_Approval
+   Abandon Reason: Interview_Abandoned_Early
+   Indicators: abandonedReason: "Interview_Abandoned_Early"
+   Created: 2026-01-05T05:24:49.453Z
+   Updated: 2026-01-05T18:30:26.417Z
+
+44. Response ID: 0bae46e2-83d3-4258-9239-42508d15602f
+   Session ID: ea6551a2-835a-45c1-a83d-892bd1c08728
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: SUMAN CHAKRABORTY (ID: 3556)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: didnt_get_call
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "didnt_get_call"
+   Created: 2026-01-05T05:28:07.308Z
+   Updated: 2026-01-05T18:30:26.417Z
+
+45. Response ID: 52f258ff-b791-4aa9-9c27-35affe85f526
+   Session ID: 6c45e320-f3bb-4e28-83cc-ff5f4641efb2
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: number_does_not_exist
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "number_does_not_exist"
+   Created: 2026-01-05T05:28:57.700Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+46. Response ID: 562e74b8-e33a-4b53-805e-db282321e862
+   Session ID: 220cdbb0-3b4a-4933-b938-2bd96165b48a
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: SUMAN CHAKRABORTY (ID: 3556)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: number_does_not_exist
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "number_does_not_exist"
+   Created: 2026-01-05T05:31:12.773Z
+   Updated: 2026-01-05T18:30:26.417Z
+
+47. Response ID: 2a1424d6-d707-4aee-86cb-d3db426e38e4
+   Session ID: f71217dc-2632-4551-bf8c-c5dc4750e292
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: RUPALI MONDAL (ID: 3571)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: not_reachable
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "not_reachable"
+   Created: 2026-01-05T05:31:36.273Z
+   Updated: 2026-01-05T18:30:15.386Z
+
+48. Response ID: 9684f34f-abc0-4a8e-9bd3-f0a36db9e971
+   Session ID: ee5cfcb4-9d12-4954-8e3e-74344e1e2fc3
+   Mode: capi
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Sourav Dutta (ID: CAPI417)
+   Current Status: Pending_Approval
+   Abandon Reason: respondent_refused
+   Indicators: abandonedReason: "respondent_refused"
+   Created: 2026-01-05T05:42:39.267Z
+   Updated: 2026-01-05T18:30:12.629Z
+
+49. Response ID: 5bdcd993-e29a-45a1-b047-8818268f50d4
+   Session ID: c2736ee6-88cf-4364-9e7c-55ad31eff251
+   Mode: cati
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: MALA MONDAL (ID: 3558)
+   Current Status: Pending_Approval
+   Abandon Reason: Call_Not_Connected
+   Call Status: busy
+   Indicators: abandonedReason: "Call_Not_Connected", callStatus: "busy"
+   Created: 2026-01-05T05:43:10.690Z
+   Updated: 2026-01-05T18:30:11.903Z
+
+50. Response ID: 16bbad26-f21a-4cbd-ac68-28a4c5c81363
+   Session ID: 67291e2c-48f3-44b7-a00e-d1fead24352a
+   Mode: capi
+   Survey: Unknown (68fd1915d41841da463f0d46)
+   Interviewer: Sukanta Mandal (ID: CAPI225)
+   Current Status: Pending_Approval
+   Abandon Reason: technical_issue
+   Indicators: abandonedReason: "technical_issue"
+   Created: 2026-01-05T05:43:17.609Z
+   Updated: 2026-01-05T18:30:53.607Z
+
+... and 153 more responses (see JSON file for full list)
+
+====================================================================================================
+END OF REPORT
+====================================================================================================

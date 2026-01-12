@@ -1,0 +1,27 @@
+SKIPPED DUPLICATES (Not Abandoned)
+================================================================================
+Total: 23
+
+1. Duplicate: bd4c9657-739c-4182-b20b-d11a8914c82a | Original: 51241e08-2d4a-47b5-b527-2e1d8653d095 | Status: Pending_Approval | Mode: CAPI
+2. Duplicate: 42a1cd37-2411-43d9-b873-fd260c715313 | Original: e58369a3-c119-4c7f-bd00-53c02086e024 | Status: Pending_Approval | Mode: CAPI
+3. Duplicate: 86d9ebd6-defc-4b0f-9470-7b3982545977 | Original: 2524ab41-9277-43a5-b66c-dc683b439ad3 | Status: Pending_Approval | Mode: CAPI
+4. Duplicate: 02257be8-2c32-4b8c-9735-3fd225bcf4f1 | Original: 3cd5ef66-cee9-4335-9bc1-88888b60f3a5 | Status: Pending_Approval | Mode: CAPI
+5. Duplicate: c2ae3c1f-1952-4329-9621-6a6ac3bf10f8 | Original: 330510cd-ac99-4229-85c0-9631bd4269c5 | Status: Pending_Approval | Mode: CAPI
+6. Duplicate: dbdf4cae-7b06-43d2-9d49-5bbdc8b52ad0 | Original: b623237a-0a71-4e7f-a94b-9b25d4319499 | Status: Terminated | Mode: CAPI
+7. Duplicate: bd26d598-ade5-483c-bf5f-db782a725057 | Original: fe9d9103-684e-47b2-9978-a98549612420 | Status: Pending_Approval | Mode: CAPI
+8. Duplicate: 2b9e4a26-6839-4973-800f-d64c067485bb | Original: c4d67abb-d712-4eaa-8e22-a199a02919e5 | Status: Pending_Approval | Mode: CAPI
+9. Duplicate: 1ceabd4a-ee9e-4186-b1fd-dc5a38badd5e | Original: f2f06db7-f17a-496b-b0f8-b40f8b5b1731 | Status: Pending_Approval | Mode: CAPI
+10. Duplicate: 4e939241-3cd6-4f90-9adf-0e8bf0240baf | Original: 83d821a1-d5ac-4a40-8023-e2b0943730b8 | Status: Pending_Approval | Mode: CAPI
+11. Duplicate: 855dba49-d161-44f4-ac29-e172aa10f6a8 | Original: c5bf8d5c-63fd-4715-8aec-15c0dc2289ab | Status: Pending_Approval | Mode: CAPI
+12. Duplicate: a3981b72-f08e-4e7e-9884-8fb1cde2c2d1 | Original: ad5bb7be-c0eb-4473-abc8-9703d89a33f6 | Status: Pending_Approval | Mode: CAPI
+13. Duplicate: 244422e6-f4a6-49f9-9224-c07e7aa1c5e5 | Original: 2867abef-2539-45dd-89b0-402b6f75fc62 | Status: Pending_Approval | Mode: CAPI
+14. Duplicate: a7d7767d-5363-4a8a-a47c-d76c4aae1328 | Original: d7becaf7-b903-41a4-a156-d46bb11c573d | Status: Pending_Approval | Mode: CAPI
+15. Duplicate: 6202e96b-bf40-40c9-9812-7dae2ec1b23e | Original: 3202a9da-3a7e-4507-a787-bcbd21e53037 | Status: Pending_Approval | Mode: CAPI
+16. Duplicate: 43799034-aa23-4906-a2df-cf85f3dd575c | Original: 069b25e4-0100-4a80-8d6e-01e61b9cbbb2 | Status: Pending_Approval | Mode: CAPI
+17. Duplicate: 309cb43e-72eb-43a4-a98f-a6b7161aca32 | Original: 2626ec51-8df5-45c0-98a1-dd2128f61e8b | Status: Pending_Approval | Mode: CAPI
+18. Duplicate: 85d92386-171d-467a-87e8-bb4d2f46e8b4 | Original: 284933ad-416c-4b5c-8153-18ceb82dbff5 | Status: Pending_Approval | Mode: CAPI
+19. Duplicate: 97b10d57-c3d7-454b-bf84-2dcf27adbc91 | Original: 6246cb2a-2ea4-4555-b7ed-4002a599fb86 | Status: Pending_Approval | Mode: CAPI
+20. Duplicate: 376ce2b0-ef2f-406a-97e6-e7b27f97b5c6 | Original: d3a2c6fb-51b3-4e5f-be28-50656b12c9ec | Status: Pending_Approval | Mode: CAPI
+21. Duplicate: 01c1701b-d3cf-455c-b499-db936d540c4c | Original: 45cf215c-3bbc-4ae0-8a22-264864b40d2e | Status: Pending_Approval | Mode: CAPI
+22. Duplicate: e2ee990e-d84f-45ff-97ee-d59e2bed0817 | Original: 55ccb0b5-caad-4f1b-b791-98baea8276e8 | Status: Pending_Approval | Mode: CAPI
+23. Duplicate: 7ab26e40-fa3d-4a35-b7c4-0dfaf6dc3a40 | Original: d56b23eb-41d3-4b21-810a-a39616c8123a | Status: Pending_Approval | Mode: CAPI

@@ -106,7 +106,7 @@ const ProjectManagerSurveyReports = () => {
   };
 
   const handleViewCallerPerformance = (survey) => {
-    navigate(`/project-manager/surveys/${survey._id || survey.id}/caller-performance`);
+    navigate(`/project-manager/surveys/${survey._id || survey.id}/caller-performance-v2`);
   };
 
   const filteredSurveys = surveys.filter(survey => {
@@ -251,11 +251,11 @@ const ProjectManagerSurveyReports = () => {
                           </button>
                           <button
                             onClick={() => handleViewCallerPerformance(survey)}
-                            className="inline-flex items-center px-3 py-1.5 bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-teal-700 transition-colors shadow-sm"
-                            title="View Caller Performance"
+                            className="inline-flex items-center px-3 py-1.5 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors shadow-sm"
+                            title="View Caller Performance V2 (Optimized for Big Data)"
                           >
                             <Phone className="w-4 h-4 mr-1.5" />
-                            Caller Performance
+                            Caller Performance-V2
                           </button>
                           {/* Responses button hidden to encourage use of Responses V2 */}
                           {/* <button

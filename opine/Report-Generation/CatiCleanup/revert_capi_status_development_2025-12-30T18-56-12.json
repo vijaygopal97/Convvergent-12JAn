@@ -1,0 +1,613 @@
+{
+  "database": "development",
+  "timestamp": "2025-12-30T18:56:12.130Z",
+  "action": "revert_capi_abandoned_to_pending_approval",
+  "summary": {
+    "totalReverted": 14169
+  },
+  "details": {
+    "capiReverted": [
+      {
+        "responseId": "1081de71-efaf-4b4a-9d90-a6dfb9397ae7",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "30ce7a7d-cbeb-4751-a142-ce8701ea363d",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "39a7f8e9-f83a-4cf1-ad60-256dd7bfb195",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "74dcaecb-9ecf-4539-abbb-7401d919ebce",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "dc564ad2-7c6f-4529-8cfb-11c2e0e6ba26",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "47c308d1-17c8-441e-b5ac-484db42419d2",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "9b87c2eb-9596-4c91-9091-80bd7e22d575",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "654313f3-e538-4e0d-9a27-7b27e9b2a400",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "7e8bf3c9-590a-4251-90ec-9e1d9383e4c1",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "37e022d6-17fe-4d0e-8124-3f15daffbeb8",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "ee68c710-af40-4a5a-93c5-22b5c8b6f8a8",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "b60f3cfe-5549-41b8-b45a-146a0bcc86f4",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "ab507106-dfa5-42e6-8acb-f67c7bf611d7",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "47e086b0-afc3-451a-a089-9a6b9e17cb4a",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "3e5717c6-3bee-4d99-8723-e19b132569bb",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "58328ddb-f7e0-4333-ab3b-22fe1698e042",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "6345b032-74ea-4add-93b8-b621022f6a26",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "b66f0ba9-24c2-482f-b65d-f7bce214144e",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "9a40fafc-39eb-4172-a768-8210899ca034",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "e4f5148b-4966-4daf-a3d2-1ae8ae8c150f",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "afc8c052-49f2-47bc-8f91-435e6027d6fe",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "efeaa0a1-0aec-4362-a676-62240ab0bfa7",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "b30155ba-c23d-414f-b76e-d04132ed8dac",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "e3548324-d1ed-4173-958a-097fa5635b2c",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "6d1e6ecd-9fa2-43f0-875c-d92e292ca528",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "1035294a-4a4b-4996-8ea3-69344e04882f",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "3e054039-d378-4e5a-a8aa-2bc8b4eb2b1b",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "4cd9ec9c-c2be-4fdd-bf26-d732decc0d88",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "2f72b27a-30c4-42ec-959a-5843cbad1e97",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "0777f14c-7659-4e59-bc0e-a81af3729be1",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "47b27309-116e-4f76-8b1c-15db131dc676",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "60d2d13e-f9f3-4294-888d-533e0987168a",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "a69df212-d925-45fc-a318-5a304e50b8d9",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "59984d10-9318-4070-b205-f33fc1c994b1",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "f3cbea1c-8cd3-49fd-8020-d95971fb7f8d",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "81bfc7f2-2b05-4237-acda-a3e0faca024c",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "d6ff9ad3-5f0f-489e-9382-5a7aab9e161c",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "37970754-0e12-40db-b500-d6d94642389f",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "94e12cdc-da8b-4756-ae8d-54f2837685ba",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "7d898934-66b0-4724-85dc-3e7f955dba69",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "3156c3ef-c5fe-4bf4-9a52-7803f3c322d5",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "4c67692a-78b4-491d-a4e1-64658fd1b436",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "5deb4ae7-6cda-41ea-9402-deaa213216db",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "056518d2-bd44-41b4-9986-40e0a3c596f4",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "16ca2bb1-d74f-4ea7-a8fb-7a67ede980c6",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "1b4e97fa-dbd9-4f24-ac8c-55dbb24cde90",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "26c36d48-602c-4ecb-8424-c862ae8ab26d",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "fa078374-a023-41a4-840d-e0dd5ff171d8",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "c1b807b3-a52d-434b-92ca-a061efd348a6",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "1fd9c894-a473-4138-8ec3-0da1805c9ff3",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "1ebc7084-b287-4238-a051-a414e15df352",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "dd847260-1fb2-4e90-8970-df028eb1ed0a",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "35bc8fba-f1ef-4502-bdef-1448f2fe8dd1",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "8d3786e2-4d80-4208-8642-bcd28df7741b",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "713c639a-8858-438a-99cc-63d71dd05d8c",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "d58a4a93-a318-493c-96e0-d366e24ac9a6",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "a5d780ce-9012-497f-a2b1-195f2446a594",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "8da42eb3-de39-49e5-8869-a9d44588e9a8",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "19619460-a025-4317-bb8d-3159b37353d8",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "8c9e87a2-8a91-45ce-9664-e0de5b034fba",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "7cd1e56a-57fd-400f-89c7-513f6194132c",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "bbb9d884-9f06-47b1-9723-0231c67a929b",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "8a4926f6-ee9b-48b8-89ae-7d6a637c7b41",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "ba736dba-f4b4-4d2e-b5f1-c8c133562a6e",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "149dc958-99d1-4b93-a4d5-02b88adefe41",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "d01136ba-b9bb-4968-a90e-40e10cd3e239",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "95138845-a7dc-47a4-a847-416a58287caa",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "1041b96a-6de5-404a-af17-e9968ff9e568",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "42a324e8-5ac5-4108-8b64-125f451dda0e",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "971f3b7c-6e96-4a16-b4a1-50ec261d15e6",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "89d986a0-2cb4-418c-91f8-2c2664ebce9e",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "cc76fa6d-d56a-4e8e-971e-6c4df762b6eb",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "7b8babf7-9314-459b-ba1a-7613e4c20480",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "bbdb5166-b411-4ccc-91f5-a6dedb297784",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "a5df806b-6b23-423a-9629-c655f18512b6",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "8762ed93-9328-4ecc-9c9f-0a5aa20afbc6",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "d70a352b-c394-4c37-98e6-c26c478db647",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "d8bafbb8-d68f-4577-b009-200115db8308",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "ee37c0a8-348e-4b8f-b28d-292dec885565",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "fe84a096-f403-4a23-89fb-c99e7b6ca2c9",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "18751455-ba75-4b59-a07b-fd9b23e50995",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "7abbf4cf-8a89-4c49-b5e3-5a9995a14494",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "ec7bef7d-ebf9-4260-9e85-bea3f500799b",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "b864baa7-33ae-41d2-af0b-4711e097fc3c",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "84bec495-94f1-482e-b786-545449c4633c",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "8e7ea023-774f-467d-9a39-8c3db0f5f523",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "85ca4255-bb35-4d7c-9dc1-9adac8c5f915",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "00b1047c-f216-4077-abec-adf797475b40",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "e0fefc41-374c-4513-9d8f-f2d736f1b5f9",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "138ecd83-accc-4555-ba0b-574258becb67",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "b9e2c14b-cbe2-4e7c-beca-1ae18593362d",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "7060e072-97d3-4dad-ad48-6a69c0fec4c1",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "26b7a753-c3b0-4fb9-a760-33a01523b07e",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "d9f5385c-1305-4b2f-846a-81be551da63b",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "9e762fe5-178e-4d86-a888-ecf347660b53",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "89b6b53e-8f5a-4e5f-8ada-c8cc33b9390c",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "075160c0-7306-4e84-9b52-09ea45d08c31",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "7a2f615a-b809-4ae6-896d-a1bd18e992d3",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "2bee3ea2-5c81-40f6-b274-efb48cf8bd67",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      },
+      {
+        "responseId": "d1b210ef-b435-4885-a317-e3811088e72b",
+        "abandonedReason": null,
+        "answeredQuestions": 0,
+        "completionPercentage": 0
+      }
+    ],
+    "totalReverted": 14169
+  }
+}

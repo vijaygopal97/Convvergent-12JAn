@@ -1,0 +1,23 @@
+====================================================================================================
+ABANDONED REASON BUT PENDING_APPROVAL STATUS - REPORT
+Generated: 2026-01-09T07:00:00.000Z
+====================================================================================================
+
+Total Responses Found: 0
+
+Time-based Statistics:
+  - Created in last 24 hours: 0
+  - Created in last 7 days: 0
+  - Created in last 30 days: 0
+
+Update-based Statistics:
+  - Updated in last 24 hours: 0
+  - Updated in last 7 days: 0
+  - Updated in last 30 days: 0
+
+====================================================================================================
+RESULT: ✅ NO PROBLEMATIC RESPONSES FOUND
+====================================================================================================
+
+All responses with abandonedReason that are in Pending_Approval status have been fixed.
+The abandonment prevention logic is working correctly.

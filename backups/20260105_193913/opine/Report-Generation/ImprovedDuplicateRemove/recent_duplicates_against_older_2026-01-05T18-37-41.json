@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-01-05T18:37:41.510Z",
+  "method": "Recent duplicates (last 20 hours) against older responses (before 24 hours)",
+  "timeBoundaries": {
+    "now": "2026-01-05T18:37:32.693Z",
+    "twentyHoursAgo": "2026-01-04T22:37:32.693Z",
+    "strategy": "For each recent response, find duplicates created BEFORE that response's createdAt"
+  },
+  "summary": {
+    "totalDuplicateGroups": 0,
+    "capiDuplicateGroups": 0,
+    "catiDuplicateGroups": 0,
+    "totalRecentDuplicates": 0,
+    "totalOlderDuplicates": 0,
+    "pendingApprovalRecentDuplicates": 0
+  },
+  "statistics": {
+    "totalRecentResponsesProcessed": 4021,
+    "uniqueContentHashesInRecent": 4018,
+    "groupsWithOlderDuplicates": 0,
+    "capiRecentDuplicates": 0,
+    "catiRecentDuplicates": 0
+  },
+  "groups": []
+}

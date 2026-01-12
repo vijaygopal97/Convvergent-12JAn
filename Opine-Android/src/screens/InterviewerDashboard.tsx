@@ -19,10 +19,10 @@ import {
   Card,
   Button,
   Avatar,
-  FAB,
   Snackbar,
   ActivityIndicator,
   Menu,
+  Switch,
 } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
@@ -36,6 +36,8 @@ import * as FileSystem from 'expo-file-system/legacy';
 import * as Sharing from 'expo-sharing';
 import JSZip from 'jszip';
 import { appLoggingService } from '../services/appLoggingService';
+import { appUpdateService, UpdateInfo } from '../services/appUpdateService';
+import { AppUpdateModal } from '../components/AppUpdateModal';
 
 const { width } = Dimensions.get('window');
 
@@ -45,11 +47,66 @@ interface DashboardProps {
   onLogout: () => void;
 }
 
+// Helper function to get human-readable stage text
+const getStageText = (stage: string): string => {
+  switch (stage) {
+    case 'uploading_data':
+      return 'Uploading data';
+    case 'uploading_audio':
+      return 'Uploading audio';
+    case 'verifying':
+      return 'Verifying';
+    case 'synced':
+      return 'Completed';
+    case 'failed':
+      return 'Failed';
+    default:
+      return 'Processing';
+  }
+};
+
 export default function InterviewerDashboard({ navigation, user, onLogout }: DashboardProps) {
   const [availableSurveys, setAvailableSurveys] = useState<Survey[]>([]);
   const [myInterviews, setMyInterviews] = useState<any[]>([]);
   const [offlineInterviews, setOfflineInterviews] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  
+  // Determine if interviewer is CAPI (needs offline mode toggle)
+  // CATI interviewers don't need offline mode - they always require internet
+  const isCapiInterviewer = useMemo(() => {
+    // If there are offline interviews, definitely a CAPI interviewer
+    if (offlineInterviews.length > 0) {
+      return true;
+    }
+    
+    // Check if any available survey is CAPI mode
+    const hasCapiSurvey = availableSurveys.some((survey: Survey) => {
+      // Direct CAPI mode
+      if (survey.mode === 'capi') {
+        return true;
+      }
+      // Multi-mode with CAPI assignment
+      if (survey.mode === 'multi_mode' && survey.assignedMode === 'capi') {
+        return true;
+      }
+      // Check if user is assigned as CAPI interviewer
+      if (survey.mode === 'multi_mode' && survey.capiInterviewers) {
+        const userId = user?._id || user?.id;
+        const isAssigned = survey.capiInterviewers.some((assignment: any) => {
+          const assignedUserId = assignment?.interviewer?._id || 
+                                assignment?.interviewer?.id || 
+                                assignment?.interviewer?.toString() ||
+                                assignment?.interviewerId?.toString();
+          return assignedUserId === userId && 
+                 (assignment.status === 'assigned' || assignment.status === 'accepted');
+        });
+        if (isAssigned) return true;
+      }
+      return false;
+    });
+    
+    return hasCapiSurvey;
+  }, [availableSurveys, offlineInterviews.length, user?._id, user?.id]);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -59,6 +116,15 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
   const [isOffline, setIsOffline] = useState(false);
   const [lastSyncTime, setLastSyncTime] = useState<Date | null>(null);
   const [lastSyncResult, setLastSyncResult] = useState<{ synced: number; failed: number } | null>(null);
+  // Real-time sync progress (WhatsApp-style)
+  const [syncProgress, setSyncProgress] = useState<{
+    currentInterview: number;
+    totalInterviews: number;
+    interviewProgress: number;
+    stage: string;
+    syncedCount: number;
+    failedCount: number;
+  } | null>(null);
   const [isSyncingSurveys, setIsSyncingSurveys] = useState(false);
   const [expandedSurveys, setExpandedSurveys] = useState<Set<string>>(new Set());
   const [loadingAnimation] = useState(new Animated.Value(0));
@@ -72,102 +138,107 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
     rejected: 0,
     pendingApproval: 0
   });
-  // Force Offline Mode - COMMENTED OUT (can be re-enabled when needed)
-  // const [forceOfflineMode, setForceOfflineMode] = useState(false);
+  // Force Offline Mode - For user-controlled offline mode
+  const [forceOfflineMode, setForceOfflineMode] = useState(false);
+  const [canGoOnline, setCanGoOnline] = useState(false); // Track if internet is available for "Go Online" button
   
-  // Network Condition Emulation - COMMENTED OUT (can be re-enabled when needed)
-  // const [networkCondition, setNetworkCondition] = useState<'good_stable' | 'below_average' | 'slow_unstable' | 'very_slow'>('good_stable');
-  // const [networkMenuVisible, setNetworkMenuVisible] = useState(false);
+  // Network Condition Emulation - TEMPORARILY ENABLED FOR TESTING
+  const [networkCondition, setNetworkCondition] = useState<'good_stable' | 'below_average' | 'slow_unstable' | 'very_slow'>('good_stable');
+  const [networkMenuVisible, setNetworkMenuVisible] = useState(false);
+  
+  // App Update Check
+  const [updateInfo, setUpdateInfo] = useState<UpdateInfo | null>(null);
+  const [updateModalVisible, setUpdateModalVisible] = useState(false);
   
   // Get safe area insets for bottom navigation
   const insets = useSafeAreaInsets();
 
-  // Load force offline mode state - COMMENTED OUT (can be re-enabled when needed)
-  // useEffect(() => {
-  //   const loadForceOfflineMode = async () => {
-  //     try {
-  //       const stored = await AsyncStorage.getItem('forceOfflineMode');
-  //       const enabled = stored === 'true';
-  //       setForceOfflineMode(enabled);
-  //       apiService.setForceOfflineMode(enabled);
-  //     } catch (error) {
-  //       console.error('Error loading force offline mode:', error);
-  //     }
-  //   };
-  //   loadForceOfflineMode();
-  // }, []);
+  // Load force offline mode state - TEMPORARILY ENABLED FOR TESTING
+  useEffect(() => {
+    const loadForceOfflineMode = async () => {
+      try {
+        const stored = await AsyncStorage.getItem('forceOfflineMode');
+        const enabled = stored === 'true';
+        setForceOfflineMode(enabled);
+        apiService.setForceOfflineMode(enabled);
+      } catch (error) {
+        console.error('Error loading force offline mode:', error);
+      }
+    };
+    loadForceOfflineMode();
+  }, []);
 
-  // Load network condition state - COMMENTED OUT (can be re-enabled when needed)
+  // Load network condition state - TEMPORARILY ENABLED FOR TESTING
   // Debug mode: Load saved network condition from storage
-  // useEffect(() => {
-  //   const loadNetworkCondition = async () => {
-  //     try {
-  //       const stored = await AsyncStorage.getItem('networkCondition');
-  //       const condition: 'good_stable' | 'below_average' | 'slow_unstable' | 'very_slow' = 
-  //         (stored as any) || 'good_stable';
-  //       setNetworkCondition(condition);
-  //       apiService.setNetworkCondition(condition);
-  //       console.log('✅ Network condition loaded:', condition);
-  //     } catch (error) {
-  //       console.error('Error loading network condition:', error);
-  //       // Fallback: ensure it's set to good_stable
-  //       setNetworkCondition('good_stable');
-  //       apiService.setNetworkCondition('good_stable');
-  //     }
-  //   };
-  //   loadNetworkCondition();
-  // }, []);
+  useEffect(() => {
+    const loadNetworkCondition = async () => {
+      try {
+        const stored = await AsyncStorage.getItem('networkCondition');
+        const condition: 'good_stable' | 'below_average' | 'slow_unstable' | 'very_slow' = 
+          (stored as any) || 'good_stable';
+        setNetworkCondition(condition);
+        apiService.setNetworkCondition(condition);
+        console.log('✅ Network condition loaded:', condition);
+      } catch (error) {
+        console.error('Error loading network condition:', error);
+        // Fallback: ensure it's set to good_stable
+        setNetworkCondition('good_stable');
+        apiService.setNetworkCondition('good_stable');
+      }
+    };
+    loadNetworkCondition();
+  }, []);
 
-  // Toggle force offline mode function - COMMENTED OUT (can be re-enabled when needed)
-  // const toggleForceOfflineMode = async () => {
-  //   const newValue = !forceOfflineMode;
-  //   setForceOfflineMode(newValue);
-  //   apiService.setForceOfflineMode(newValue);
-  //   try {
-  //     await AsyncStorage.setItem('forceOfflineMode', String(newValue));
-  //     showSnackbar(
-  //       newValue 
-  //         ? '🔴 Force Offline Mode ENABLED - All API calls will be blocked' 
-  //         : '🟢 Force Offline Mode DISABLED - Normal mode restored',
-  //       newValue ? 'info' : 'success'
-  //     );
-  //   } catch (error) {
-  //     console.error('Error saving force offline mode:', error);
-  //   }
-  // };
+  // Toggle force offline mode function - TEMPORARILY ENABLED FOR TESTING
+  const toggleForceOfflineMode = async () => {
+    const newValue = !forceOfflineMode;
+    setForceOfflineMode(newValue);
+    apiService.setForceOfflineMode(newValue);
+    try {
+      await AsyncStorage.setItem('forceOfflineMode', String(newValue));
+      showSnackbar(
+        newValue 
+          ? '🔴 Force Offline Mode ENABLED - All API calls will be blocked' 
+          : '🟢 Force Offline Mode DISABLED - Normal mode restored',
+        newValue ? 'info' : 'success'
+      );
+    } catch (error) {
+      console.error('Error saving force offline mode:', error);
+    }
+  };
 
-  // Change network condition function - COMMENTED OUT (can be re-enabled when needed)
-  // const changeNetworkCondition = async (condition: 'good_stable' | 'below_average' | 'slow_unstable' | 'very_slow') => {
-  //   setNetworkCondition(condition);
-  //   apiService.setNetworkCondition(condition);
-  //   setNetworkMenuVisible(false);
-  //   try {
-  //     await AsyncStorage.setItem('networkCondition', condition);
-  //     const conditionNames: Record<string, string> = {
-  //       'good_stable': 'Good Stable Internet',
-  //       'below_average': 'Below Average Internet',
-  //       'slow_unstable': 'Slow & Unstable Internet',
-  //       'very_slow': 'Very Slow Internet',
-  //     };
-  //     showSnackbar(
-  //       `🌐 Network condition: ${conditionNames[condition]}`,
-  //       'info'
-  //     );
-  //   } catch (error) {
-  //     console.error('Error saving network condition:', error);
-  //   }
-  // };
+  // Change network condition function - TEMPORARILY ENABLED FOR TESTING
+  const changeNetworkCondition = async (condition: 'good_stable' | 'below_average' | 'slow_unstable' | 'very_slow') => {
+    setNetworkCondition(condition);
+    apiService.setNetworkCondition(condition);
+    setNetworkMenuVisible(false);
+    try {
+      await AsyncStorage.setItem('networkCondition', condition);
+      const conditionNames: Record<string, string> = {
+        'good_stable': 'Good Stable Internet',
+        'below_average': 'Below Average Internet',
+        'slow_unstable': 'Slow & Unstable Internet',
+        'very_slow': 'Very Slow Internet',
+      };
+      showSnackbar(
+        `🌐 Network condition: ${conditionNames[condition]}`,
+        'info'
+      );
+    } catch (error) {
+      console.error('Error saving network condition:', error);
+    }
+  };
 
-  // Get network condition display name - COMMENTED OUT (can be re-enabled when needed)
-  // const getNetworkConditionName = (condition: string): string => {
-  //   const names: Record<string, string> = {
-  //     'good_stable': 'Good Stable',
-  //     'below_average': 'Below Average',
-  //     'slow_unstable': 'Slow & Unstable',
-  //     'very_slow': 'Very Slow',
-  //   };
-  //   return names[condition] || condition;
-  // };
+  // Get network condition display name - TEMPORARILY ENABLED FOR TESTING
+  const getNetworkConditionName = (condition: string): string => {
+    const names: Record<string, string> = {
+      'good_stable': 'Good Stable',
+      'below_average': 'Below Average',
+      'slow_unstable': 'Slow & Unstable',
+      'very_slow': 'Very Slow',
+    };
+    return names[condition] || condition;
+  };
   
   // Animation effects for loading screen
   useEffect(() => {
@@ -236,6 +307,9 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
     loadPendingInterviewsCount();
     loadOfflineInterviews(); // Load offline interviews on mount
     
+    // Check for app updates on mount (non-blocking, silent check)
+    checkForAppUpdate();
+    
     // Check for polling stations update on app startup (background, non-blocking)
     const checkPollingStationsUpdate = async () => {
       try {
@@ -284,8 +358,21 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
       console.log('🔄 Dashboard focused - reloading stats and offline interviews...');
       lastFocusReloadRef.current = now;
       
-      // Refresh stats if online (lightweight operation)
+      // Refresh stats (works online and offline with cache)
       const refreshStats = async () => {
+        // CRITICAL: Load from cache first for instant display (offline-first)
+        const cachedStats = await offlineStorage.getCachedInterviewerStats();
+        if (cachedStats) {
+          setInterviewStats({
+            totalCompleted: cachedStats.totalCompleted || 0,
+            approved: cachedStats.approved || 0,
+            rejected: cachedStats.rejected || 0,
+            pendingApproval: cachedStats.pendingApproval || 0
+          });
+          console.log('✅ Stats loaded from cache for instant display');
+        }
+        
+        // Then try to fetch fresh stats if online (will update cache if successful)
         const isOnline = await apiService.isOnline();
         if (isOnline) {
           const statsResult = await apiService.getInterviewerStats();
@@ -296,7 +383,11 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
               rejected: statsResult.stats.rejected || 0,
               pendingApproval: statsResult.stats.pendingApproval || 0
             });
+            // Stats are automatically cached by getInterviewerStats
           }
+        } else {
+          // Offline - stats already loaded from cache above
+          console.log('📴 Offline mode - using cached stats');
         }
       };
       refreshStats();
@@ -367,6 +458,20 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
 
     try {
       setIsSyncing(true);
+      setSyncProgress(null); // Reset progress
+      
+      // Set up progress callback for real-time updates
+      syncService.setProgressCallback((progress) => {
+        setSyncProgress({
+          currentInterview: progress.currentInterview,
+          totalInterviews: progress.totalInterviews,
+          interviewProgress: progress.interviewProgress,
+          stage: progress.stage,
+          syncedCount: progress.syncedCount,
+          failedCount: progress.failedCount,
+        });
+      });
+      
       const result = await syncService.syncOfflineInterviews();
       
       if (result.success && result.syncedCount > 0) {
@@ -395,6 +500,8 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
       console.error('❌ Background sync error:', error);
     } finally {
       setIsSyncing(false);
+      setSyncProgress(null); // Clear progress
+      syncService.setProgressCallback(null); // Clear callback
     }
   };
 
@@ -403,19 +510,50 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
   
   useEffect(() => {
     // Set initial network state
-    NetInfo.fetch().then(state => {
+    NetInfo.fetch().then(async state => {
       const isConnected = state.isConnected && state.isInternetReachable !== false;
       wasOfflineRef.current = isOffline;
-      setIsOffline(!isConnected);
-      console.log(`🌐 Initial network state: ${isConnected ? 'ONLINE' : 'OFFLINE'}`);
+      
+      // CRITICAL: If internet is off, automatically set to offline mode (can't be online without internet)
+      // If forceOfflineMode is enabled, stay offline
+      // Otherwise, set based on actual internet connection
+      if (!isConnected) {
+        // No internet - must be offline
+        setIsOffline(true);
+        setCanGoOnline(false); // Can't go online without internet
+        console.log(`🌐 Initial network state: OFFLINE (no internet connection)`);
+      } else {
+        // Internet available - check if forceOfflineMode is enabled
+        const storedForceOffline = await AsyncStorage.getItem('forceOfflineMode');
+        const isForceOffline = storedForceOffline === 'true';
+        setIsOffline(isForceOffline);
+        setCanGoOnline(true); // Can go online if internet is available
+        console.log(`🌐 Initial network state: ${isForceOffline ? 'OFFLINE (forced)' : 'ONLINE'}`);
+      }
     });
 
     // Subscribe to network state changes
-    const unsubscribe = NetInfo.addEventListener(state => {
+    const unsubscribe = NetInfo.addEventListener(async state => {
       const isConnected = state.isConnected && state.isInternetReachable !== false;
       const wasOffline = wasOfflineRef.current;
-      wasOfflineRef.current = !isConnected;
-      setIsOffline(!isConnected);
+      
+      // CRITICAL: If internet is off, automatically set to offline mode
+      // If forceOfflineMode is enabled when online, respect that setting
+      if (!isConnected) {
+        // No internet - must be offline (can't be online without internet)
+        wasOfflineRef.current = true;
+        setIsOffline(true);
+        setCanGoOnline(false); // Can't go online without internet
+        console.log(`🌐 Network state changed: OFFLINE (no internet connection)`);
+      } else {
+        // Internet available - check forceOfflineMode setting
+        const storedForceOffline = await AsyncStorage.getItem('forceOfflineMode');
+        const isForceOffline = storedForceOffline === 'true';
+        wasOfflineRef.current = isForceOffline;
+        setIsOffline(isForceOffline);
+        setCanGoOnline(true); // Can go online if internet is available
+        console.log(`🌐 Network state changed: ${isForceOffline ? 'OFFLINE (forced)' : 'ONLINE'}`);
+      }
       
       console.log(`🌐 Network state changed: ${isConnected ? 'ONLINE' : 'OFFLINE'}`);
 
@@ -707,8 +845,21 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
     }
     
     setIsSyncing(true);
+    setSyncProgress(null); // Reset progress
+    
+    // Set up progress callback for real-time updates (WhatsApp-style)
+    syncService.setProgressCallback((progress) => {
+      setSyncProgress({
+        currentInterview: progress.currentInterview,
+        totalInterviews: progress.totalInterviews,
+        interviewProgress: progress.interviewProgress,
+        stage: progress.stage,
+        syncedCount: progress.syncedCount,
+        failedCount: progress.failedCount,
+      });
+    });
+    
     try {
-      showSnackbar('Syncing offline interviews...', 'info');
       const result = await syncService.syncOfflineInterviews();
       
       if (result.success && result.syncedCount > 0) {
@@ -741,6 +892,8 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
       showSnackbar('Failed to sync interviews. Please try again.', 'error');
     } finally {
       setIsSyncing(false);
+      setSyncProgress(null); // Clear progress
+      syncService.setProgressCallback(null); // Clear callback
     }
   };
 
@@ -818,6 +971,173 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
         },
       ]
     );
+  };
+
+  const handleExportAllInterviews = async () => {
+    try {
+      const allInterviews = await offlineStorage.getOfflineInterviews();
+      
+      if (allInterviews.length === 0) {
+        showSnackbar('No offline interviews to export', 'info');
+        return;
+      }
+      
+      // Confirm with user
+      Alert.alert(
+        'Export All Interviews',
+        `This will export ${allInterviews.length} interview(s) as a ZIP file containing individual interview ZIPs. This may take a while. Continue?`,
+        [
+          { text: 'Cancel', style: 'cancel' },
+          {
+            text: 'Export All',
+            onPress: async () => {
+              try {
+                showSnackbar(`Exporting ${allInterviews.length} interviews...`, 'info');
+                appLoggingService.info('EXPORT', 'Exporting all interviews', { count: allInterviews.length });
+                
+                // Create export directory
+                const exportDir = `${FileSystem.cacheDirectory || FileSystem.documentDirectory}exports/`;
+                const dirInfo = await FileSystem.getInfoAsync(exportDir);
+                if (!dirInfo.exists) {
+                  await FileSystem.makeDirectoryAsync(exportDir, { intermediates: true });
+                }
+                
+                const masterZip = new JSZip();
+                let successCount = 0;
+                let failedCount = 0;
+                
+                // Export each interview as individual ZIP
+                for (let i = 0; i < allInterviews.length; i++) {
+                  const interview = allInterviews[i];
+                  try {
+                    showSnackbar(`Exporting interview ${i + 1} of ${allInterviews.length}...`, 'info');
+                    
+                    // Get export data
+                    const exportData = await offlineStorage.exportInterviewForSharing(interview.id);
+                    
+                    // Create individual ZIP for this interview
+                    const surveyName = interview?.surveyName?.replace(/[^a-z0-9]/gi, '_') || 'interview';
+                    const timestamp = new Date(interview.startTime).toISOString().replace(/[:.]/g, '-');
+                    const jsonFileName = `${surveyName}_${timestamp}.json`;
+                    
+                    // Create individual ZIP
+                    const individualZip = new JSZip();
+                    
+                    // Add JSON to individual ZIP
+                    individualZip.file(jsonFileName, exportData.interviewData);
+                    
+                    // Add audio to individual ZIP if exists
+                    if (exportData.audioExists && exportData.audioPath) {
+                      try {
+                        const audioFileInfo = await FileSystem.getInfoAsync(exportData.audioPath);
+                        if (audioFileInfo.exists) {
+                          const audioExt = exportData.audioPath.split('.').pop() || 'm4a';
+                          const audioFileName = `${surveyName}_${timestamp}.${audioExt}`;
+                          const audioBase64 = await FileSystem.readAsStringAsync(exportData.audioPath, {
+                            encoding: FileSystem.EncodingType.Base64
+                          });
+                          individualZip.file(audioFileName, audioBase64, { base64: true });
+                          console.log(`✅ Added audio to individual ZIP: ${audioFileName}`);
+                        }
+                      } catch (audioError) {
+                        console.warn(`⚠️ Failed to add audio to individual ZIP for interview ${interview.id}:`, audioError);
+                      }
+                    }
+                    
+                    // Generate individual ZIP as base64
+                    const individualZipBlob = await individualZip.generateAsync({
+                      type: 'base64',
+                      compression: 'DEFLATE',
+                      compressionOptions: { level: 6 }
+                    });
+                    
+                    // Add individual ZIP to master ZIP
+                    const individualZipFileName = `${surveyName}_${timestamp}.zip`;
+                    masterZip.file(individualZipFileName, individualZipBlob, { base64: true });
+                    successCount++;
+                    console.log(`✅ Exported interview ${i + 1}/${allInterviews.length}: ${individualZipFileName}`);
+                    
+                  } catch (interviewError) {
+                    console.error(`❌ Failed to export interview ${interview.id}:`, interviewError);
+                    failedCount++;
+                    appLoggingService.error('EXPORT', `Failed to export interview ${interview.id}`, { interviewId: interview.id }, interviewError as Error);
+                  }
+                }
+                
+                // Generate master ZIP
+                showSnackbar('Creating master ZIP file...', 'info');
+                const masterZipBlob = await masterZip.generateAsync({
+                  type: 'base64',
+                  compression: 'DEFLATE',
+                  compressionOptions: { level: 6 }
+                });
+                
+                // Save master ZIP to file
+                // Format: All_Interviews_MemberID_YYYY-MM-DDTHH-MM-SS.zip
+                // Example: All_Interviews_507f1f77bcf86cd799439011_2025-01-15T10-30-45.zip
+                const masterZipTimestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                const memberId = user?._id || user?.id || 'UNKNOWN';
+                const masterZipFileName = `All_Interviews_${memberId}_${masterZipTimestamp}.zip`;
+                const masterZipFilePath = `${exportDir}${masterZipFileName}`;
+                
+                await FileSystem.writeAsStringAsync(masterZipFilePath, masterZipBlob, {
+                  encoding: FileSystem.EncodingType.Base64
+                });
+                
+                console.log(`✅ Master ZIP created: ${masterZipFileName}`);
+                console.log(`📋 Member ID: ${memberId}`);
+                console.log(`📊 Export summary: ${successCount} successful, ${failedCount} failed out of ${allInterviews.length} total`);
+                appLoggingService.info('EXPORT', 'Master ZIP created successfully', {
+                  totalInterviews: allInterviews.length,
+                  successCount,
+                  failedCount,
+                  masterZipFileName,
+                  memberId: memberId
+                });
+                
+                // Share master ZIP
+                const isSharingAvailable = await Sharing.isAvailableAsync();
+                if (isSharingAvailable) {
+                  try {
+                    await Sharing.shareAsync(masterZipFilePath, {
+                      mimeType: 'application/zip',
+                      dialogTitle: 'Export All Interviews',
+                      UTI: 'public.zip-archive'
+                    });
+                    
+                    const message = failedCount > 0
+                      ? `✅ Exported ${successCount} of ${allInterviews.length} interviews!\n⚠️ ${failedCount} failed to export.`
+                      : `✅ Successfully exported all ${successCount} interviews!`;
+                    showSnackbar(message, successCount > 0 ? 'success' : 'info');
+                  } catch (shareError) {
+                    console.error('Error sharing master ZIP:', shareError);
+                    Alert.alert(
+                      'Export Complete',
+                      `✅ Successfully exported ${successCount} of ${allInterviews.length} interviews!\n${failedCount > 0 ? `⚠️ ${failedCount} failed to export.\n\n` : ''}Master ZIP file: ${masterZipFileName}\n\nSaved to: ${exportDir}\n\nYou can find it in your device's file manager.`,
+                      [{ text: 'OK' }]
+                    );
+                  }
+                } else {
+                  Alert.alert(
+                    'Export Complete',
+                    `✅ Successfully exported ${successCount} of ${allInterviews.length} interviews!\n${failedCount > 0 ? `⚠️ ${failedCount} failed to export.\n\n` : ''}Master ZIP file: ${masterZipFileName}\n\nSaved to: ${exportDir}`,
+                    [{ text: 'OK' }]
+                  );
+                }
+                
+              } catch (error: any) {
+                console.error('Error exporting all interviews:', error);
+                appLoggingService.error('EXPORT', 'Failed to export all interviews', {}, error);
+                showSnackbar('Failed to export all interviews. Please try again.', 'error');
+              }
+            }
+          }
+        ]
+      );
+    } catch (error: any) {
+      console.error('Error in handleExportAllInterviews:', error);
+      showSnackbar('Failed to start export. Please try again.', 'error');
+    }
   };
 
   const handleExportInterview = async (interviewId: string) => {
@@ -1034,9 +1354,22 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
         ).length;
         setPendingInterviewsCount(pendingCount);
         
-        // Don't try to load stats or interviews in offline mode
+        // Offline mode - load stats from cache (like WhatsApp/Meta/Google)
+        console.log('📴 Offline mode - loading stats from cache');
+        const cachedStats = await offlineStorage.getCachedInterviewerStats();
+        if (cachedStats) {
+          setInterviewStats({
+            totalCompleted: cachedStats.totalCompleted || 0,
+            approved: cachedStats.approved || 0,
+            rejected: cachedStats.rejected || 0,
+            pendingApproval: cachedStats.pendingApproval || 0
+          });
+          console.log('✅ Stats loaded from cache for offline display:', cachedStats);
+        } else {
+          // No cached stats available - keep current stats (don't reset to zero)
+          console.log('⚠️ No cached stats available - keeping current display');
+        }
         setMyInterviews([]);
-        setInterviewStats({ totalCompleted: 0, approved: 0, rejected: 0, pendingApproval: 0 });
         return;
       }
       
@@ -1057,11 +1390,24 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
         setAvailableSurveys(offlineSurveys || []);
       }
 
-      // Fetch interviewer stats from lightweight endpoint (much faster than fetching all interviews)
+      // CRITICAL: Load stats from cache first for instant display (offline-first)
+      const cachedStats = await offlineStorage.getCachedInterviewerStats();
+      if (cachedStats) {
+        setInterviewStats({
+          totalCompleted: cachedStats.totalCompleted || 0,
+          approved: cachedStats.approved || 0,
+          rejected: cachedStats.rejected || 0,
+          pendingApproval: cachedStats.pendingApproval || 0
+        });
+        console.log('✅ Stats loaded from cache for instant display');
+      }
+      
+      // Fetch interviewer stats from lightweight endpoint (will update cache if successful)
       const statsResult = await apiService.getInterviewerStats();
       console.log('📊 getInterviewerStats API response:', {
         success: statsResult.success,
-        stats: statsResult.stats
+        stats: statsResult.stats,
+        fromCache: statsResult.fromCache || false
       });
 
       if (statsResult.success && statsResult.stats) {
@@ -1071,10 +1417,14 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
           rejected: statsResult.stats.rejected || 0,
           pendingApproval: statsResult.stats.pendingApproval || 0
         });
-      } else {
-        // Fallback: set default stats if API fails
-        console.log('⚠️ Failed to fetch stats from API, using defaults');
+        // Stats are automatically cached by getInterviewerStats API method
+      } else if (!cachedStats) {
+        // Only reset to zero if no cached stats available
+        console.log('⚠️ Failed to fetch stats and no cache available');
         setInterviewStats({ totalCompleted: 0, approved: 0, rejected: 0, pendingApproval: 0 });
+      } else {
+        // Keep cached stats if API fails
+        console.log('⚠️ API failed but cached stats available - keeping cached display');
       }
 
       // Don't fetch all interviews for dashboard - we only need stats
@@ -1158,6 +1508,44 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
     setSnackbarMessage(message);
     setSnackbarType(type);
     setSnackbarVisible(true);
+  };
+
+  // Check for app updates
+  const checkForAppUpdate = async (force: boolean = false) => {
+    try {
+      // Only check if online
+      const netState = await NetInfo.fetch();
+      if (!netState.isConnected || netState.isInternetReachable === false) {
+        if (force) {
+          showSnackbar('Please connect to the internet to check for updates', 'error');
+        }
+        console.log('📱 Skipping update check - offline');
+        return;
+      }
+
+      // If forced check, clear throttling and show progress
+      if (force) {
+        await appUpdateService.clearSkippedVersion(); // Clear any skipped version
+        showSnackbar('Checking for updates...', 'info');
+      }
+
+      // Silent check (don't show progress unless forced)
+      const update = await appUpdateService.checkForUpdate(force);
+      
+      if (update) {
+        console.log(`📦 Update available: Version ${update.latestVersion}`);
+        setUpdateInfo(update);
+        setUpdateModalVisible(true);
+      } else if (force) {
+        showSnackbar('App is up to date!', 'success');
+      }
+    } catch (error: any) {
+      console.error('❌ Error checking for app update:', error);
+      if (force) {
+        showSnackbar('Failed to check for updates. Please try again later.', 'error');
+      }
+      // Silently fail - don't interrupt user experience
+    }
   };
 
   const handleLogout = async () => {
@@ -1399,8 +1787,9 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <StatusBar style="light" />
-      {/* Debug Controls - Force Offline Mode & Network Condition - COMMENTED OUT (can be re-enabled when needed) */}
-      {/* <View style={styles.debugControlsContainer}>
+      {/* Debug Controls - Force Offline Mode & Network Condition - TEMPORARILY DISABLED - Can be enabled later when needed */}
+      {/* 
+      <View style={styles.debugControlsContainer}>
         <TouchableOpacity
           style={[styles.debugControlButton, forceOfflineMode && styles.debugControlButtonActive]}
           onPress={toggleForceOfflineMode}
@@ -1461,7 +1850,8 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
             titleStyle={networkCondition === 'very_slow' ? { fontWeight: 'bold' } : {}}
           />
         </Menu>
-      </View> */}
+      </View>
+      */}
       <LinearGradient
         colors={['#001D48', '#373177', '#3FADCC']}
         start={{ x: 0, y: 0 }}
@@ -1491,6 +1881,21 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
             Logout
           </Button>
         </View>
+        
+        {/* Check for App Updates Button - For Testing */}
+        <View style={styles.syncSurveyContainer}>
+          <Button
+            mode="contained"
+            onPress={() => checkForAppUpdate(true)}
+            style={styles.syncSurveyButton}
+            icon="cloud-download-outline"
+            buttonColor="#2563eb"
+            textColor="#ffffff"
+          >
+            Check for App Updates
+          </Button>
+        </View>
+
         {/* Sync Survey Details Button */}
         <View style={styles.syncSurveyContainer}>
           <Button
@@ -1561,6 +1966,55 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
             </Card.Content>
           </Card>
         </View>
+
+        {/* Online/Offline Mode Toggle - Compact Design (CAPI Interviewers Only) */}
+        {isCapiInterviewer && (
+          <View style={styles.modeToggleCompactContainer}>
+          <View style={styles.modeToggleCompactRow}>
+            <Ionicons 
+              name={isOffline ? "cloud-offline" : "cloud"} 
+              size={18} 
+              color={isOffline ? "#f59e0b" : "#10b981"} 
+              style={styles.modeToggleIcon}
+            />
+            <Text style={styles.modeToggleCompactLabel}>
+              {isOffline ? 'Offline Mode' : 'Online Mode'}
+            </Text>
+            <Switch
+              value={isOffline}
+              onValueChange={async (value) => {
+                if (value) {
+                  // Switching to offline - always allowed
+                  setForceOfflineMode(true);
+                  await AsyncStorage.setItem('forceOfflineMode', 'true');
+                  apiService.setForceOfflineMode(true);
+                  setIsOffline(true);
+                  showSnackbar('Switched to Offline Mode', 'info');
+                } else {
+                  // Switching to online - check if internet is available
+                  if (!canGoOnline) {
+                    Alert.alert(
+                      'No Internet Connection',
+                      'Cannot switch to Online Mode. Please connect to the internet first.',
+                      [{ text: 'OK' }]
+                    );
+                    return;
+                  }
+                  // Internet is available - switch to online
+                  setForceOfflineMode(false);
+                  await AsyncStorage.setItem('forceOfflineMode', 'false');
+                  apiService.setForceOfflineMode(false);
+                  setIsOffline(false);
+                  showSnackbar('Switched to Online Mode', 'success');
+                }
+              }}
+              disabled={!isOffline && !canGoOnline} // Disable if trying to go online but no internet
+              color="#001D48"
+              style={styles.modeToggleSwitch}
+            />
+          </View>
+        </View>
+        )}
 
         {/* Available Surveys */}
         <View style={styles.section}>
@@ -1803,6 +2257,16 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
                 </View>
               )}
             </View>
+            {/* Export All Button - Compact Icon */}
+            {offlineInterviews.length > 0 && (
+              <TouchableOpacity
+                onPress={handleExportAllInterviews}
+                style={styles.exportAllIconButton}
+              >
+                <Ionicons name="download-outline" size={20} color="#2563eb" />
+                <Text style={styles.exportAllIconText}>Export All</Text>
+              </TouchableOpacity>
+            )}
           </View>
           {/* Sync Offline Interviews Button - Positioned above the section */}
           {(pendingInterviewsCount > 0 || offlineInterviews.length > 0) && (
@@ -1820,12 +2284,43 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
                 {isSyncing ? 'Syncing...' : `Sync Offline Interviews${pendingInterviewsCount > 0 ? ` (${pendingInterviewsCount})` : ''}`}
               </Button>
               
-              {/* Sync Status Indicator */}
+              {/* Sync Status Indicator - Real-time Progress (WhatsApp-style) */}
               <View style={styles.syncStatusContainer}>
-                {isSyncing ? (
+                {isSyncing && syncProgress ? (
+                  <View style={styles.syncProgressContainer}>
+                    {/* Overall Progress: X of Y */}
+                    <View style={styles.syncStatusRow}>
+                      <ActivityIndicator size="small" color="#059669" />
+                      <Text style={styles.syncStatusText}>
+                        Uploading interview {syncProgress.currentInterview} of {syncProgress.totalInterviews}
+                        {syncProgress.syncedCount > 0 || syncProgress.failedCount > 0 
+                          ? ` • ${syncProgress.syncedCount} synced${syncProgress.failedCount > 0 ? `, ${syncProgress.failedCount} failed` : ''}`
+                          : ''
+                        }
+                      </Text>
+                    </View>
+                    
+                    {/* Current Interview Progress Bar */}
+                    {syncProgress.currentInterview > 0 && (
+                      <View style={styles.progressBarContainer}>
+                        <View style={styles.progressBarTrack}>
+                          <View 
+                            style={[
+                              styles.progressBarFill, 
+                              { width: `${syncProgress.interviewProgress}%` }
+                            ]} 
+                          />
+                        </View>
+                        <Text style={styles.progressText}>
+                          {getStageText(syncProgress.stage)} - {syncProgress.interviewProgress}%
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+                ) : isSyncing ? (
                   <View style={styles.syncStatusRow}>
                     <ActivityIndicator size="small" color="#f59e0b" />
-                    <Text style={styles.syncStatusText}>Syncing in background...</Text>
+                    <Text style={styles.syncStatusText}>Preparing sync...</Text>
                   </View>
                 ) : lastSyncTime ? (
                   <View style={styles.syncStatusRow}>
@@ -1995,16 +2490,6 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
         )}
       </ScrollView>
 
-      <FAB
-        icon="plus"
-        style={[styles.fab, { bottom: Math.max(16, insets.bottom) + 16 }]} // Positioned at bottom with safe area margin
-        onPress={() => navigation.navigate('AvailableSurveys')}
-        label="Start Interview"
-        iconColor="#ffffff"
-        color="#ffffff"
-        labelStyle={styles.fabLabel}
-        theme={{ colors: { onSurface: '#ffffff', onPrimary: '#ffffff' } }}
-      />
 
       <Snackbar
         visible={snackbarVisible}
@@ -2019,47 +2504,60 @@ export default function InterviewerDashboard({ navigation, user, onLogout }: Das
       >
         {snackbarMessage}
       </Snackbar>
+
+      {/* App Update Modal */}
+      <AppUpdateModal
+        visible={updateModalVisible}
+        updateInfo={updateInfo}
+        onClose={() => setUpdateModalVisible(false)}
+        onSkip={() => {
+          if (updateInfo) {
+            appUpdateService.skipVersion(updateInfo.latestVersionCode);
+            setUpdateModalVisible(false);
+          }
+        }}
+      />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  // Debug Controls styles - Force Offline Mode & Network Condition - COMMENTED OUT (can be re-enabled when needed)
-  // debugControlsContainer: {
-  //   flexDirection: 'row',
-  //   paddingHorizontal: 16,
-  //   paddingTop: 8,
-  //   paddingBottom: 4,
-  //   backgroundColor: '#f5f5f5',
-  //   borderBottomWidth: 1,
-  //   borderBottomColor: '#e0e0e0',
-  //   gap: 8,
-  // },
-  // debugControlButton: {
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   paddingVertical: 8,
-  //   paddingHorizontal: 12,
-  //   backgroundColor: '#fff',
-  //   borderRadius: 8,
-  //   borderWidth: 1,
-  //   borderColor: '#ddd',
-  // },
-  // debugControlButtonActive: {
-  //   backgroundColor: '#dc2626',
-  //   borderColor: '#b91c1c',
-  // },
-  // debugControlText: {
-  //   marginLeft: 6,
-  //   fontSize: 13,
-  //   fontWeight: '600',
-  //   color: '#666',
-  // },
-  // debugControlTextActive: {
-  //   color: '#fff',
-  // },
+  // Debug Controls styles - Force Offline Mode & Network Condition - TEMPORARILY ENABLED FOR TESTING
+  debugControlsContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+    paddingTop: 8,
+    paddingBottom: 4,
+    backgroundColor: '#f5f5f5',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+    gap: 8,
+  },
+  debugControlButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ddd',
+  },
+  debugControlButtonActive: {
+    backgroundColor: '#dc2626',
+    borderColor: '#b91c1c',
+  },
+  debugControlText: {
+    marginLeft: 6,
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#666',
+  },
+  debugControlTextActive: {
+    color: '#fff',
+  },
   container: {
     flex: 1,
     backgroundColor: '#f8fafc',
@@ -2413,17 +2911,6 @@ const styles = StyleSheet.create({
     color: '#9ca3af',
     textAlign: 'center',
   },
-  fab: {
-    position: 'absolute',
-    margin: 16,
-    right: 0,
-    // bottom will be set dynamically based on safe area insets
-    backgroundColor: '#001D48',
-  },
-  fabLabel: {
-    color: '#ffffff',
-    fontWeight: '600',
-  },
   snackbar: {
     // Default background color
   },
@@ -2519,6 +3006,49 @@ const styles = StyleSheet.create({
   expandButton: {
     minWidth: 120,
   },
+  exportAllIconButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    backgroundColor: '#eff6ff',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#bfdbfe',
+    gap: 6,
+  },
+  exportAllIconText: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#2563eb',
+  },
+  modeToggleCompactContainer: {
+    marginTop: 12,
+    marginBottom: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: '#f8fafc',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+  },
+  modeToggleCompactRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  modeToggleIcon: {
+    marginRight: 8,
+  },
+  modeToggleCompactLabel: {
+    flex: 1,
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#1f2937',
+  },
+  modeToggleSwitch: {
+    marginLeft: 8,
+  },
   syncButtonContainer: {
     marginTop: 8,
     marginBottom: 16,
@@ -2543,6 +3073,32 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#6b7280',
     fontStyle: 'italic',
+  },
+  syncProgressContainer: {
+    width: '100%',
+    marginTop: 4,
+  },
+  progressBarContainer: {
+    marginTop: 8,
+    width: '100%',
+  },
+  progressBarTrack: {
+    height: 6,
+    backgroundColor: '#e5e7eb',
+    borderRadius: 3,
+    overflow: 'hidden',
+    marginBottom: 4,
+  },
+  progressBarFill: {
+    height: '100%',
+    backgroundColor: '#059669',
+    borderRadius: 3,
+  },
+  progressText: {
+    fontSize: 11,
+    color: '#059669',
+    fontWeight: '500',
+    textAlign: 'center',
   },
   offlineBadge: {
     fontSize: 12,

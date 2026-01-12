@@ -1,0 +1,101 @@
+{
+  "timestamp": "2026-01-05T17:41:38.944Z",
+  "surveyId": "68fd1915d41841da463f0d46",
+  "dateRange": {
+    "todayIST": "2026-01-05",
+    "startUTC": "2026-01-04T18:30:00.000Z",
+    "endUTC": "2026-01-05T18:29:59.999Z"
+  },
+  "regeneration": {
+    "totalProcessed": 3386,
+    "updated": 3380,
+    "errors": 0
+  },
+  "duplicates": {
+    "totalGroups": 3,
+    "totalDuplicateResponses": 3,
+    "byStatus": {
+      "Pending_Approval": 3,
+      "Approved": 0,
+      "Rejected": 0
+    },
+    "byMode": {
+      "capi": 3,
+      "cati": 0
+    }
+  },
+  "duplicateGroups": [
+    {
+      "contentHash": "3d75ab29009d9c6c",
+      "count": 2,
+      "original": {
+        "responseId": "fcbe6784-e12b-427d-a925-eb66d197e0ee",
+        "mongoId": "695b9b9e5b7ed396da35ab6c",
+        "sessionId": "855e3e7a-f399-4adb-8f17-cf14279bae2a",
+        "status": "Pending_Approval",
+        "interviewMode": "capi",
+        "createdAt": "2026-01-05T11:08:14.407Z",
+        "call_id": null
+      },
+      "duplicates": [
+        {
+          "responseId": "68106040-f1a4-4e8f-914e-95b62809e03d",
+          "mongoId": "695bf4271e853eac107a3d8d",
+          "sessionId": "cbcc8391-74f4-44b7-bc5b-559d78cc934e",
+          "status": "Pending_Approval",
+          "interviewMode": "capi",
+          "createdAt": "2026-01-05T17:25:59.486Z",
+          "call_id": null
+        }
+      ]
+    },
+    {
+      "contentHash": "c2fe193625c8d422",
+      "count": 2,
+      "original": {
+        "responseId": "09017ee4-241f-4b6e-9186-3fe7c8197dd1",
+        "mongoId": "695bbfbd2c6b673d431e4988",
+        "sessionId": "8f13bbc6-ff31-473a-b3cb-8ebff1761234",
+        "status": "Pending_Approval",
+        "interviewMode": "capi",
+        "createdAt": "2026-01-05T13:42:21.121Z",
+        "call_id": null
+      },
+      "duplicates": [
+        {
+          "responseId": "0567f25f-9470-427a-85b6-3a9b9ecb0a94",
+          "mongoId": "695bf424e0752c553e76fb23",
+          "sessionId": "3b42a74d-adf5-4b6e-9a21-ae524a163917",
+          "status": "Pending_Approval",
+          "interviewMode": "capi",
+          "createdAt": "2026-01-05T17:25:56.987Z",
+          "call_id": null
+        }
+      ]
+    },
+    {
+      "contentHash": "d375494753f0d7d3",
+      "count": 2,
+      "original": {
+        "responseId": "466eeba1-3da3-4774-a998-9438e93d030c",
+        "mongoId": "695b9bbfb2031d0d9570853d",
+        "sessionId": "a1e21009-a46d-4c02-8ae5-0c9edc4efe02",
+        "status": "Pending_Approval",
+        "interviewMode": "capi",
+        "createdAt": "2026-01-05T11:08:47.698Z",
+        "call_id": null
+      },
+      "duplicates": [
+        {
+          "responseId": "89683e2a-fb45-46dc-ab33-002c474637f6",
+          "mongoId": "695bf4161244720a60d2456d",
+          "sessionId": "e50cf7f9-a64c-4420-bdcf-70be91c5b89a",
+          "status": "Pending_Approval",
+          "interviewMode": "capi",
+          "createdAt": "2026-01-05T17:25:42.183Z",
+          "call_id": null
+        }
+      ]
+    }
+  ]
+}

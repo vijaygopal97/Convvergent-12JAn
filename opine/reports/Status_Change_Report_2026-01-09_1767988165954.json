@@ -1,0 +1,523 @@
+{
+  "metadata": {
+    "operation": "Change Auto-Rejected to Pending_Approval",
+    "criteria": {
+      "minQuestionsAnswered": 10,
+      "maxResponsesToChange": 100,
+      "sourceReport": "Auto_Rejected_Interviews_Report_Dulal_Ch Roy_2026-01-09.json"
+    },
+    "executedAt": "2026-01-09T19:49:25.745Z",
+    "executedBy": "Script: changeAutoRejectedToPendingApproval.js"
+  },
+  "summary": {
+    "totalInReport": 142,
+    "qualifyingResponses": 142,
+    "attemptedToChange": 100,
+    "successfullyChanged": 0,
+    "failed": 0,
+    "skipped": 100
+  },
+  "changes": [],
+  "errors": [
+    {
+      "responseId": "3e6ea5a1-58b1-4ef9-9b8d-d1b105320c97",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.783Z"
+    },
+    {
+      "responseId": "ac7d102b-e057-4cab-a7c6-ef7e18766657",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.786Z"
+    },
+    {
+      "responseId": "0af1acce-7d7f-4362-a5d3-4ac8be54efac",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.789Z"
+    },
+    {
+      "responseId": "6958d4db-8648-45fc-a3ae-1e39586e09f2",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.792Z"
+    },
+    {
+      "responseId": "73f142a3-8ad6-4dba-9269-d3238d5d6345",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.795Z"
+    },
+    {
+      "responseId": "b1dbccd8-2f14-481c-b1f9-b10b0fe15623",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.797Z"
+    },
+    {
+      "responseId": "688d2e3f-4235-421f-85f7-5952ac0247cb",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.800Z"
+    },
+    {
+      "responseId": "b50b4e10-427b-4a49-9cf4-fccb8f25bca7",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.802Z"
+    },
+    {
+      "responseId": "6e72408e-5435-49eb-87a9-afb81995cf81",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.805Z"
+    },
+    {
+      "responseId": "816da24a-791f-45e9-9ea0-d21f14b0b292",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.807Z"
+    },
+    {
+      "responseId": "840b13c3-ecd0-4e71-885a-f0fe0ed31ffc",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.809Z"
+    },
+    {
+      "responseId": "eb947f11-019b-4267-afc2-7582180e5a5a",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.812Z"
+    },
+    {
+      "responseId": "7823d08a-25e0-43a9-8ffb-cd40358f0bfe",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.814Z"
+    },
+    {
+      "responseId": "cab54192-6bde-4f9b-8c5f-6598a9d419e0",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.816Z"
+    },
+    {
+      "responseId": "ae31b435-3ca3-4590-aa39-c00ff3649d7b",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.818Z"
+    },
+    {
+      "responseId": "96eb7254-d354-4fd7-9cf8-338ca8433b84",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.820Z"
+    },
+    {
+      "responseId": "55d64476-a946-4b1b-98d4-6869c1a7c858",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.822Z"
+    },
+    {
+      "responseId": "6eda258d-7423-4ebc-8d2c-7f37827d1988",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.824Z"
+    },
+    {
+      "responseId": "6c8390cd-d6e0-4346-b0d3-017b7007f304",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.826Z"
+    },
+    {
+      "responseId": "5c15f6a7-06bc-400a-b4c4-167e12bc91eb",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.828Z"
+    },
+    {
+      "responseId": "d7e08592-3067-4e23-827f-9679c7b3e930",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.829Z"
+    },
+    {
+      "responseId": "0d0a5b01-9b1f-4036-a414-cad156705d7c",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.831Z"
+    },
+    {
+      "responseId": "28fb0299-f959-4150-b9eb-70e1680193dc",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.833Z"
+    },
+    {
+      "responseId": "458e8299-3213-4e9f-80bf-b8ebe2a09892",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.835Z"
+    },
+    {
+      "responseId": "70360b59-ba3b-4774-a149-d4a6c772d10a",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.837Z"
+    },
+    {
+      "responseId": "4b3bc354-cdd3-42ef-a83a-b9a6c93b6535",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.839Z"
+    },
+    {
+      "responseId": "86ee960f-571c-4328-8a0a-4587f1c3464a",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.841Z"
+    },
+    {
+      "responseId": "33993b3e-2118-40ac-8fd4-fdc3f1bcd6b4",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.842Z"
+    },
+    {
+      "responseId": "9a1cb9eb-bb03-4eeb-a7a9-aab3e46ca5d7",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.844Z"
+    },
+    {
+      "responseId": "fe646e94-fe66-4b28-8a49-12062255b02a",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.846Z"
+    },
+    {
+      "responseId": "b6bd0c98-ac79-4f8d-86fa-db063cd2a25e",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.847Z"
+    },
+    {
+      "responseId": "76db19d5-0275-4e95-9a68-d11ffe059eae",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.849Z"
+    },
+    {
+      "responseId": "f91fddfe-3b4e-499e-8cbc-f09bd63a9b9c",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.850Z"
+    },
+    {
+      "responseId": "f3dea935-d9dd-4d50-8b35-dc36b8e09fd3",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.852Z"
+    },
+    {
+      "responseId": "666cfd20-6b41-445e-b2be-9984424c8803",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.853Z"
+    },
+    {
+      "responseId": "0a97bbe6-ef29-406c-b7f0-82daf011ca0f",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.855Z"
+    },
+    {
+      "responseId": "f91f190f-4783-4b62-84d7-ecb4e3b5dd42",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.856Z"
+    },
+    {
+      "responseId": "cbb2c676-9c10-4a37-8d01-7b67e58de98c",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.858Z"
+    },
+    {
+      "responseId": "64a326b7-9a53-41ee-b529-7ad2c4dc75b4",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.859Z"
+    },
+    {
+      "responseId": "1829a68b-f0a3-4d10-9d98-72c956079f72",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.861Z"
+    },
+    {
+      "responseId": "60027f02-e967-45c3-8e93-905129864a23",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.863Z"
+    },
+    {
+      "responseId": "5d6a65a9-9e1b-42da-86e5-49674b8dc8a5",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.864Z"
+    },
+    {
+      "responseId": "7ff1bbd7-a525-404f-8437-6a1bcd0dd171",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.866Z"
+    },
+    {
+      "responseId": "d53256bf-35cc-43c2-98dc-d46114a513d2",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.867Z"
+    },
+    {
+      "responseId": "09cd3e80-02a5-4017-b294-edf902c9226b",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.869Z"
+    },
+    {
+      "responseId": "92faa03f-5b02-4d50-ae29-9b603d709811",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.870Z"
+    },
+    {
+      "responseId": "647669a3-7fed-4abf-89cc-7521832eed06",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.872Z"
+    },
+    {
+      "responseId": "a816ac53-3132-4619-a4d5-105f45b72819",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.874Z"
+    },
+    {
+      "responseId": "9bffbdb0-399d-47af-a392-bec046589bc5",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.875Z"
+    },
+    {
+      "responseId": "301cca11-9b96-48f5-a0c3-e342ffee20aa",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.876Z"
+    },
+    {
+      "responseId": "7052f607-63b6-4eae-a5da-ef91f31f7742",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.878Z"
+    },
+    {
+      "responseId": "7ba95dc3-da5a-4f23-aaa4-9f1ad782f050",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.879Z"
+    },
+    {
+      "responseId": "28578a67-cc81-47de-a1e1-ca3600ef2d4a",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.881Z"
+    },
+    {
+      "responseId": "c7adebb0-d520-4648-b1e0-85b22cec7a73",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.883Z"
+    },
+    {
+      "responseId": "92f687d3-84f5-44cf-aae9-48c33dc489a3",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.884Z"
+    },
+    {
+      "responseId": "18396f57-c49c-490d-92b3-10eb12324342",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.886Z"
+    },
+    {
+      "responseId": "2f0781be-57e5-4ebd-963c-b3d911dbbd73",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.887Z"
+    },
+    {
+      "responseId": "9ade6df4-c73e-4d02-b5a4-8f0e76149073",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.889Z"
+    },
+    {
+      "responseId": "c73e971c-8836-4678-a460-115bdbe47184",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.890Z"
+    },
+    {
+      "responseId": "13a35f58-23a3-4838-a394-abd542cf6cdc",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.892Z"
+    },
+    {
+      "responseId": "deb32596-3e84-4ae8-a827-ec1ef96e9248",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.894Z"
+    },
+    {
+      "responseId": "cb2f1569-7235-4dfc-b4e1-39a6b50582a6",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.896Z"
+    },
+    {
+      "responseId": "33a8084b-75d1-47ff-bdba-36c5f2caacf1",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.897Z"
+    },
+    {
+      "responseId": "47f9d64f-7ceb-49ca-9eea-f9138d68facb",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.899Z"
+    },
+    {
+      "responseId": "bb0faea3-de76-4c72-be20-ff36cf1af72c",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.900Z"
+    },
+    {
+      "responseId": "bb9eac53-1b0b-45a4-942b-4f3d550ad5f1",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.902Z"
+    },
+    {
+      "responseId": "a8a60c75-951f-4948-8367-aa7c4ce700a1",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.903Z"
+    },
+    {
+      "responseId": "fb5ae706-e018-44fb-be42-cff0502676f1",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.905Z"
+    },
+    {
+      "responseId": "ec9b19cb-aede-41ba-8398-1e8771a5f537",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.906Z"
+    },
+    {
+      "responseId": "a8937a39-7932-4e3b-ae6d-dc072183017e",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.908Z"
+    },
+    {
+      "responseId": "ae33140a-4366-4a9d-b6f4-5636679c1317",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.909Z"
+    },
+    {
+      "responseId": "b1bae9a4-ad76-445e-9942-7d27819f17c0",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.911Z"
+    },
+    {
+      "responseId": "3880e203-2382-49ca-902f-40d84694bee6",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.912Z"
+    },
+    {
+      "responseId": "1b44d62c-3d3f-4f7e-8963-4046e158775f",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.914Z"
+    },
+    {
+      "responseId": "8c080a83-d0dc-4c2e-a8c2-4fec9a18bf4f",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.915Z"
+    },
+    {
+      "responseId": "8738206e-63ad-45ba-a098-1c2ecd434ab8",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.917Z"
+    },
+    {
+      "responseId": "e5af68c2-6ab4-40b7-96c7-9d6e82ad822a",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.919Z"
+    },
+    {
+      "responseId": "588060cc-cef3-4870-81af-3c9c504c89e1",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.920Z"
+    },
+    {
+      "responseId": "defc543b-b1c7-417e-9b6d-03325cceb070",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.921Z"
+    },
+    {
+      "responseId": "6e4aafaa-8f7e-43ca-b722-d1f1075dade9",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.923Z"
+    },
+    {
+      "responseId": "5cdb8c78-5b0a-45ed-8e54-e0a259b53408",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.925Z"
+    },
+    {
+      "responseId": "6ac85c38-8173-4ddd-8783-cd89708a423e",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.926Z"
+    },
+    {
+      "responseId": "e82ef00b-cc7f-4d3a-9fe0-610eb521bcae",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.928Z"
+    },
+    {
+      "responseId": "c4b95067-20b8-4283-970f-d43229fda245",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.929Z"
+    },
+    {
+      "responseId": "990c8ccd-bb9d-4051-9cbb-b1869b2de284",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.931Z"
+    },
+    {
+      "responseId": "bfe4715b-bc9e-483b-9f60-ca35b165eaad",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.932Z"
+    },
+    {
+      "responseId": "43982f8b-1be1-4cec-8e19-98817c7c7d40",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.933Z"
+    },
+    {
+      "responseId": "783632e0-2dd3-4c81-b26a-70f18720950e",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.935Z"
+    },
+    {
+      "responseId": "f24d8e06-7612-4ea2-9ba1-54ccc0ae3242",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.936Z"
+    },
+    {
+      "responseId": "6dc851d7-c272-4f19-b1c3-4854c55d977f",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.938Z"
+    },
+    {
+      "responseId": "61df3fe3-3b80-492c-8d03-8cb473abea75",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.939Z"
+    },
+    {
+      "responseId": "f9d24f8a-7fd0-424d-bb87-74924e9b4db1",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.941Z"
+    },
+    {
+      "responseId": "b925e0a1-637c-43a6-bb5d-924ef5388491",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.942Z"
+    },
+    {
+      "responseId": "67dfb3b7-9e81-44eb-b8ad-d194a0a545b3",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.944Z"
+    },
+    {
+      "responseId": "336962cf-8ec2-4de9-9baf-1c162a1af712",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.946Z"
+    },
+    {
+      "responseId": "b54c28d3-0d5d-4eda-9f11-aa82b690f99a",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.947Z"
+    },
+    {
+      "responseId": "8dcf8676-de7f-41a4-bacc-3563d53044bc",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.949Z"
+    },
+    {
+      "responseId": "bcab20b8-109c-49d2-a853-f01ec3fd05e1",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.950Z"
+    },
+    {
+      "responseId": "c8f977bc-55f9-4440-97d2-67c3d4bba374",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.952Z"
+    },
+    {
+      "responseId": "3268a0fd-94ff-4cb4-803d-e5cb305055ab",
+      "error": "Response not found or already changed",
+      "timestamp": "2026-01-09T19:49:25.954Z"
+    }
+  ]
+}

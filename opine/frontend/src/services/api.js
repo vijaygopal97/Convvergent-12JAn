@@ -1120,7 +1120,7 @@ export const surveyResponseAPI = {
         throw error;
       }
     },
-    getSurveyResponsesV2: async (surveyId, params = {}) => {
+    getSurveyResponsesV2: async (surveyId, params = {}, signal = null) => {
       try {
         // Use extended timeout for large chunks (especially during CSV download)
         const isLargeChunk = params.limit && parseInt(params.limit) >= 500;
@@ -1128,6 +1128,7 @@ export const surveyResponseAPI = {
         const response = await api.get(`/api/survey-responses/survey/${surveyId}/responses-v2`, { 
           params,
           timeout,
+          signal, // Support AbortController for request cancellation
           // Add cache control header (Connection header is controlled by browser)
           headers: {
             'Cache-Control': 'no-cache'
@@ -1135,11 +1136,35 @@ export const surveyResponseAPI = {
         });
         return response.data;
       } catch (error) {
+        // Ignore aborted requests
+        if (error.name === 'AbortError' || error.code === 'ERR_CANCELED') {
+          throw error; // Re-throw to handle in component
+        }
         console.error('Error fetching survey responses V2:', error);
         // Re-throw with more context for network errors
         if (error.code === 'ERR_NETWORK' || error.code === 'ERR_NETWORK_CHANGED') {
           error.message = `Network error: ${error.message}`;
         }
+        throw error;
+      }
+    },
+    getSurveyResponseCounts: async (surveyId, params = {}, signal = null) => {
+      try {
+        const response = await api.get(`/api/survey-responses/survey/${surveyId}/responses-v2/counts`, {
+          params: {
+            ...params,
+            includeFilterOptions: params.includeFilterOptions || 'true'
+          },
+          timeout: 30000, // 30 seconds for count queries
+          signal // Support AbortController for request cancellation
+        });
+        return response.data;
+      } catch (error) {
+        // Ignore aborted requests
+        if (error.name === 'AbortError' || error.code === 'ERR_CANCELED') {
+          throw error;
+        }
+        console.error('Error fetching survey response counts:', error);
         throw error;
       }
     },
@@ -1277,6 +1302,241 @@ export const surveyResponseAPI = {
         const response = await api.post(`/api/survey-responses/survey/${surveyId}/generate-csv`);
         return response.data;
       } catch (error) {
+        throw error;
+      }
+    },
+
+    // Efficient server-side CSV download with filters
+    // NEW: Create CSV generation job (async job queue)
+    createCSVJob: async (surveyId, filters = {}, mode = 'codes') => {
+      try {
+        // Build query parameters from filters
+        const params = new URLSearchParams();
+        params.append('mode', mode);
+        
+        if (filters.status) params.append('status', filters.status);
+        if (filters.dateRange) params.append('dateRange', filters.dateRange);
+        if (filters.startDate) params.append('startDate', filters.startDate);
+        if (filters.endDate) params.append('endDate', filters.endDate);
+        if (filters.interviewMode) params.append('interviewMode', filters.interviewMode);
+        if (filters.ac) params.append('ac', filters.ac);
+        if (filters.city) params.append('city', filters.city);
+        if (filters.district) params.append('district', filters.district);
+        if (filters.lokSabha) params.append('lokSabha', filters.lokSabha);
+        if (filters.gender) params.append('gender', filters.gender);
+        if (filters.ageMin) params.append('ageMin', filters.ageMin);
+        if (filters.ageMax) params.append('ageMax', filters.ageMax);
+        if (filters.search) params.append('search', filters.search);
+        if (filters.interviewerMode) params.append('interviewerMode', filters.interviewerMode);
+        
+        // Format interviewerIds as comma-separated string
+        if (filters.interviewerIds && filters.interviewerIds.length > 0) {
+          params.append('interviewerIds', filters.interviewerIds.map(id => id?.toString?.() || String(id || '')).join(','));
+        }
+
+        const response = await api.post(`/api/survey-responses/survey/${surveyId}/create-csv-job?${params.toString()}`);
+        return response.data;
+      } catch (error) {
+        throw error;
+      }
+    },
+
+    // Get CSV job progress
+    getCSVJobProgress: async (jobId) => {
+      try {
+        const response = await api.get(`/api/survey-responses/csv-job/${jobId}/progress`);
+        return response.data;
+      } catch (error) {
+        throw error;
+      }
+    },
+
+    // Download CSV from completed job
+    downloadCSVFromJob: async (jobId) => {
+      try {
+        console.log('📥 Starting CSV download for job:', jobId);
+        
+        const response = await api.get(`/api/survey-responses/csv-job/${jobId}/download`, {
+          responseType: 'blob',
+          timeout: 600000
+        });
+
+        console.log('📥 Download response received:', {
+          status: response.status,
+          size: response.data?.size || 0,
+          type: response.data?.type || 'unknown'
+        });
+
+        // Check if response is actually a blob
+        if (!response.data || !(response.data instanceof Blob)) {
+          // If it's a JSON error response, try to parse it
+          if (response.data instanceof Blob) {
+            const text = await response.data.text();
+            try {
+              const errorData = JSON.parse(text);
+              throw new Error(errorData.message || 'Download failed');
+            } catch (e) {
+              throw new Error('Invalid response from server');
+            }
+          }
+          throw new Error('No data received from server');
+        }
+
+        // Check blob size
+        if (response.data.size === 0) {
+          throw new Error('Downloaded file is empty');
+        }
+
+        // Create download link
+        const blob = new Blob([response.data], { type: 'text/csv;charset=utf-8;' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.style.display = 'none'; // Hide the link
+        
+        // Get filename from Content-Disposition header or use default
+        const contentDisposition = response.headers['content-disposition'];
+        let filename = `survey_${jobId}_${new Date().toISOString().split('T')[0]}.csv`;
+        if (contentDisposition) {
+          const filenameMatch = contentDisposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/i);
+          if (filenameMatch && filenameMatch[1]) {
+            filename = filenameMatch[1].replace(/['"]/g, '');
+            // Decode URI if needed
+            try {
+              filename = decodeURIComponent(filename);
+            } catch (e) {
+              // If decoding fails, use as is
+            }
+          }
+        }
+        
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        
+        console.log('📥 Triggering download for:', filename);
+        
+        // Trigger download
+        link.click();
+        
+        // Clean up after a short delay
+        setTimeout(() => {
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        }, 100);
+
+        console.log('✅ CSV download triggered successfully');
+        return { success: true, filename };
+      } catch (error) {
+        console.error('❌ CSV download error:', error);
+        // Re-throw with more context
+        if (error.response) {
+          // Try to get error message from response
+          if (error.response.data instanceof Blob) {
+            try {
+              const text = await error.response.data.text();
+              const errorData = JSON.parse(text);
+              throw new Error(errorData.message || 'Download failed');
+            } catch (e) {
+              throw new Error(`Download failed: ${error.response.status} ${error.response.statusText}`);
+            }
+          }
+          throw new Error(error.response.data?.message || `Download failed: ${error.response.status}`);
+        }
+        throw error;
+      }
+    },
+
+    // OLD: Synchronous CSV download (kept for backward compatibility)
+    downloadCSVWithFilters: async (surveyId, filters = {}, mode = 'codes', progressCallback = null) => {
+      try {
+        // Build query parameters from filters
+        const params = new URLSearchParams();
+        params.append('mode', mode);
+        
+        if (filters.status) params.append('status', filters.status);
+        if (filters.dateRange) params.append('dateRange', filters.dateRange);
+        if (filters.startDate) params.append('startDate', filters.startDate);
+        if (filters.endDate) params.append('endDate', filters.endDate);
+        if (filters.interviewMode) params.append('interviewMode', filters.interviewMode);
+        if (filters.ac) params.append('ac', filters.ac);
+        if (filters.city) params.append('city', filters.city);
+        if (filters.district) params.append('district', filters.district);
+        if (filters.lokSabha) params.append('lokSabha', filters.lokSabha);
+        if (filters.gender) params.append('gender', filters.gender);
+        if (filters.ageMin) params.append('ageMin', filters.ageMin);
+        if (filters.ageMax) params.append('ageMax', filters.ageMax);
+        if (filters.search) params.append('search', filters.search);
+        if (filters.interviewerMode) params.append('interviewerMode', filters.interviewerMode);
+        
+        // Format interviewerIds as comma-separated string
+        if (filters.interviewerIds && filters.interviewerIds.length > 0) {
+          params.append('interviewerIds', filters.interviewerIds.map(id => id?.toString?.() || String(id || '')).join(','));
+        }
+
+        // Use blob response for file download with progress tracking
+        let totalResponses = 0;
+        const response = await api.get(`/api/survey-responses/survey/${surveyId}/download-csv?${params.toString()}`, {
+          responseType: 'blob',
+          timeout: 600000, // 10 minutes timeout for large files
+          onDownloadProgress: (progressEvent) => {
+            // Calculate progress based on loaded bytes
+            const totalBytes = progressEvent.total || 0;
+            const loadedBytes = progressEvent.loaded || 0;
+            const progress = totalBytes > 0 ? Math.round((loadedBytes / totalBytes) * 100) : 0;
+            
+            // Get total responses from header if available (note: headers may not be available in progress event)
+            // We'll get it from the final response
+            
+            // Call progress callback if provided
+            if (progressCallback) {
+              progressCallback({
+                loaded: loadedBytes,
+                total: totalBytes,
+                progress: progress,
+                totalResponses: totalResponses
+              });
+            }
+          }
+        });
+
+        // Get total responses from response header
+        totalResponses = parseInt(response.headers['x-total-responses'] || '0', 10);
+
+        // Create download link
+        const blob = new Blob([response.data], { type: 'text/csv;charset=utf-8;' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        
+        // Get filename from Content-Disposition header or use default
+        const contentDisposition = response.headers['content-disposition'];
+        let filename = `survey_${surveyId}_${mode}_${new Date().toISOString().split('T')[0]}.csv`;
+        if (contentDisposition) {
+          const filenameMatch = contentDisposition.match(/filename="?(.+)"?/i);
+          if (filenameMatch) {
+            filename = filenameMatch[1];
+          }
+        }
+        
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+        // Final progress update
+        if (progressCallback) {
+          progressCallback({
+            loaded: response.data.size || 0,
+            total: response.data.size || 0,
+            progress: 100,
+            totalResponses: totalResponses
+          });
+        }
+
+        return { success: true, filename };
+      } catch (error) {
+        console.error('Error downloading CSV:', error);
         throw error;
       }
     }
@@ -1597,11 +1857,17 @@ export const catiAPI = {
   },
 
   // Get call by ID
-  getCallById: async (callId) => {
+  getCallById: async (callId, signal = null) => {
     try {
-      const response = await api.get(`/api/cati/calls/${callId}`);
+      const response = await api.get(`/api/cati/calls/${callId}`, {
+        signal // Support AbortController for request cancellation
+      });
       return response.data;
     } catch (error) {
+      // Ignore aborted requests
+      if (error.name === 'AbortError' || error.code === 'ERR_CANCELED') {
+        throw error;
+      }
       throw error;
     }
   },

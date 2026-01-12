@@ -1,0 +1,23 @@
+BASELINE METRICS - 2026-01-07 12:32:09
+==========================================
+
+PM2 Processes:
+opine-frontend: CPU=0.2%, Memory=56MB, Restarts=24
+opine-backend: CPU=328.7%, Memory=2632MB, Restarts=672
+opine-backend: CPU=13.6%, Memory=196MB, Restarts=668
+opine-csv-worker: CPU=0.4%, Memory=433MB, Restarts=4
+
+MongoDB:
+Current Connections: 102
+Available: 51098
+Total Created: 12341
+
+System Resources:
+Mem:            30Gi       9.2Gi       5.2Gi        11Mi        16Gi        21Gi
+CPU Load:  2.15, 1.70, 2.37
+
+Redis:
+connected_clients:8
+blocked_clients:1
+
+==========================================

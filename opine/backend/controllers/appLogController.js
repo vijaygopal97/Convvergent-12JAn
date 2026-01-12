@@ -19,24 +19,42 @@ exports.receiveAppLogs = async (req, res) => {
     // Use userId from token if not provided
     const interviewerId = req.user?.id || userId;
 
-    // Prepare log documents
-    const logDocuments = logs.map(log => ({
-      userId: interviewerId,
-      deviceId: deviceInfo?.deviceId || 'unknown',
-      appVersion: appVersion || 'unknown',
-      level: log.level || 'info',
-      category: log.category || 'general',
-      message: log.message || '',
-      metadata: log.metadata || {},
-      stackTrace: log.stackTrace,
-      deviceInfo: deviceInfo || {},
-      timestamp: log.timestamp ? new Date(log.timestamp) : new Date()
-    }));
+    // CRITICAL OPTIMIZATION: Limit log batch size to prevent memory leaks
+    // Top tech companies batch large data operations to prevent memory spikes
+    const MAX_BATCH_SIZE = 1000; // Process max 1000 logs at a time
+    const logBatches = [];
+    
+    for (let i = 0; i < logs.length; i += MAX_BATCH_SIZE) {
+      const batch = logs.slice(i, i + MAX_BATCH_SIZE);
+      logBatches.push(batch);
+    }
+    
+    // Process logs in batches to prevent memory accumulation
+    let totalInserted = 0;
+    for (const batch of logBatches) {
+      // Prepare log documents for this batch
+      const logDocuments = batch.map(log => ({
+        userId: interviewerId,
+        deviceId: deviceInfo?.deviceId || 'unknown',
+        appVersion: appVersion || 'unknown',
+        level: log.level || 'info',
+        category: log.category || 'general',
+        message: (log.message || '').substring(0, 10000), // CRITICAL: Limit message length to prevent huge strings
+        metadata: log.metadata || {},
+        stackTrace: log.stackTrace ? (log.stackTrace.substring(0, 50000)) : undefined, // CRITICAL: Limit stack trace length
+        deviceInfo: deviceInfo || {},
+        timestamp: log.timestamp ? new Date(log.timestamp) : new Date()
+      }));
 
-    // Insert logs in bulk
-    await AppLog.insertMany(logDocuments);
+      // Insert logs in bulk for this batch
+      await AppLog.insertMany(logDocuments);
+      totalInserted += logDocuments.length;
+      
+      // CRITICAL: Clear batch reference to help garbage collection
+      logDocuments.length = 0;
+    }
 
-    console.log(`📝 Received ${logs.length} app logs from device ${deviceInfo?.deviceId || 'unknown'}`);
+    console.log(`📝 Received ${totalInserted} app logs from device ${deviceInfo?.deviceId || 'unknown'}`);
 
     res.status(200).json({
       success: true,

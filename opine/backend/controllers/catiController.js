@@ -231,9 +231,11 @@ const receiveWebhook = async (req, res) => {
     
     // First, try to use raw body if available (captured via verify function)
     if (req.rawBody) {
+      // CRITICAL: Removed full rawBody logging - causes memory leaks for large webhooks
       console.log('📋 ========== RAW BODY CAPTURED ==========');
       console.log('📋 Raw body length:', req.rawBody.length, 'bytes');
-      console.log('📋 Raw body content:', req.rawBody);
+      // CRITICAL: Only log first 500 chars to prevent memory leaks
+      console.log('📋 Raw body preview:', req.rawBody.substring(0, 500), req.rawBody.length > 500 ? '...' : '');
       console.log('📋 =======================================');
       
       // Try to parse as JSON first (DeepCall docs say it sends JSON)
@@ -241,7 +243,8 @@ const receiveWebhook = async (req, res) => {
         webhookData = JSON.parse(req.rawBody);
         console.log('✅ Successfully parsed raw body as JSON');
         console.log('📋 Parsed data keys:', Object.keys(webhookData));
-        console.log('📋 Parsed data:', JSON.stringify(webhookData, null, 2));
+        // CRITICAL: Removed JSON.stringify() - causes memory leaks for large webhook data
+        console.log('📋 Parsed data keys count:', Object.keys(webhookData).length);
       } catch (e) {
         // If not JSON, try form-encoded
         console.log('⚠️  Raw body is not JSON, trying form-encoded format');
@@ -249,7 +252,8 @@ const receiveWebhook = async (req, res) => {
         const querystring = require('querystring');
         const parsed = querystring.parse(req.rawBody);
         console.log('📋 Parsed form-encoded keys:', Object.keys(parsed));
-        console.log('📋 Parsed form-encoded data:', JSON.stringify(parsed, null, 2));
+        // CRITICAL: Removed JSON.stringify() - causes memory leaks for large parsed data
+        console.log('📋 Parsed form-encoded keys count:', Object.keys(parsed).length);
         
         // Check for push_report field
         if (parsed.push_report) {
@@ -272,7 +276,8 @@ const receiveWebhook = async (req, res) => {
             webhookData = JSON.parse(parsed.push_report);
             console.log('✅ Successfully parsed push_report as JSON');
             console.log('📋 Parsed push_report keys:', Object.keys(webhookData));
-            console.log('📋 Parsed push_report data:', JSON.stringify(webhookData, null, 2));
+            // CRITICAL: Removed JSON.stringify() - causes memory leaks for large webhook data
+            console.log('📋 Parsed push_report keys count:', Object.keys(webhookData).length);
           } catch (e2) {
             console.error('❌ Error parsing push_report as JSON:', e2.message);
             console.error('   push_report value that failed:', parsed.push_report);
@@ -315,8 +320,12 @@ const receiveWebhook = async (req, res) => {
     }
     
     // Log the final webhook data
+    // CRITICAL: Removed JSON.stringify() - causes memory leaks for large webhook data
     console.log('📋 Final webhookData keys:', Object.keys(webhookData));
-    console.log('📋 Final webhookData (first 1000 chars):', JSON.stringify(webhookData, null, 2).substring(0, 1000));
+    console.log('📋 Final webhookData keys count:', Object.keys(webhookData).length);
+    // Only log sample values for key fields, not entire object
+    if (webhookData.callId) console.log('📋 callId:', webhookData.callId);
+    if (webhookData.callStatus) console.log('📋 callStatus:', webhookData.callStatus);
     
     // Check if we have meaningful data
     if (Object.keys(webhookData).length === 0) {
@@ -355,7 +364,8 @@ const receiveWebhook = async (req, res) => {
 
     console.log(`🔍 Extracted Call ID: ${callId}`);
     console.log(`🔍 Webhook data keys:`, Object.keys(webhookData));
-    console.log(`🔍 api_para:`, webhookData?.api_para ? JSON.stringify(webhookData.api_para) : 'Not found');
+    // CRITICAL: Removed JSON.stringify() - causes memory leaks
+    console.log(`🔍 api_para:`, webhookData?.api_para ? `Found (keys: ${Object.keys(webhookData.api_para || {}).length})` : 'Not found');
     console.log(`🔍 From (api_para):`, webhookData?.api_para?.from);
     console.log(`🔍 To (api_para):`, webhookData?.api_para?.to);
     console.log(`🔍 cNumber:`, webhookData?.cNumber);
@@ -782,6 +792,92 @@ const receiveWebhook = async (req, res) => {
     if (recordingUrl && typeof recordingUrl === 'string' && recordingUrl !== 'null' && recordingUrl !== '' && recordingUrl !== '[]' && recordingUrl.startsWith('http')) {
       updateData.recordingUrl = recordingUrl;
       console.log(`🎵 Final recording URL: ${recordingUrl}`);
+      
+      // CRITICAL: Auto-upload to S3 in background (non-blocking)
+      // This ensures recordings are preserved even if DeepCall deletes them
+      // Use callId to find the record after it's saved (more reliable than _id for new records)
+      const callIdForUpload = callId;
+      const recordingUrlForUpload = recordingUrl;
+      
+      setImmediate(async () => {
+        try {
+          // Wait a bit for the record to be saved
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
+          // Find the call record (by callId, works for both new and existing)
+          const callForUpload = await CatiCall.findOne({ callId: callIdForUpload });
+          if (!callForUpload) {
+            console.error(`❌ Could not find call record for upload: ${callIdForUpload}`);
+            return;
+          }
+          
+          // Only upload if not already uploaded
+          if (!callForUpload.s3AudioUrl || callForUpload.s3AudioUploadStatus !== 'uploaded') {
+            console.log(`📤 Starting background S3 upload for callId: ${callIdForUpload}`);
+            const { downloadAndUploadCatiAudio } = require('../utils/cloudStorage');
+            
+            // Mark as pending
+            await CatiCall.updateOne(
+              { _id: callForUpload._id },
+              { 
+                $set: { 
+                  s3AudioUploadStatus: 'pending',
+                  s3AudioUploadError: null
+                } 
+              }
+            );
+            
+            // Download and upload
+            const uploadResult = await downloadAndUploadCatiAudio(
+              recordingUrlForUpload,
+              callIdForUpload,
+              { DEEPCALL_TOKEN, DEEPCALL_USER_ID }
+            );
+            
+            // Update with S3 key
+            await CatiCall.updateOne(
+              { _id: callForUpload._id },
+              { 
+                $set: { 
+                  s3AudioUrl: uploadResult.s3Key,
+                  s3AudioUploadedAt: new Date(),
+                  s3AudioUploadStatus: 'uploaded',
+                  s3AudioUploadError: null
+                } 
+              }
+            );
+            
+            console.log(`✅ Successfully uploaded CATI recording to S3: ${uploadResult.s3Key}`);
+          } else {
+            console.log(`ℹ️  Recording already uploaded to S3, skipping: ${callForUpload.s3AudioUrl}`);
+          }
+        } catch (uploadError) {
+          console.error(`❌ Failed to upload CATI recording to S3:`, uploadError);
+          
+          // Mark as failed (but keep DeepCall URL for fallback)
+          const errorMessage = uploadError.message === 'RECORDING_DELETED' 
+            ? 'Recording already deleted from DeepCall' 
+            : uploadError.message;
+          
+          // Try to find and update the call record
+          try {
+            const callForUpload = await CatiCall.findOne({ callId: callIdForUpload });
+            if (callForUpload) {
+              await CatiCall.updateOne(
+                { _id: callForUpload._id },
+                { 
+                  $set: { 
+                    s3AudioUploadStatus: uploadError.message === 'RECORDING_DELETED' ? 'deleted' : 'failed',
+                    s3AudioUploadError: errorMessage.substring(0, 500) // Limit error message length
+                  } 
+                }
+              );
+            }
+          } catch (updateError) {
+            console.error('❌ Failed to update upload status:', updateError);
+          }
+        }
+      });
     } else {
       console.log(`⚠️  No valid recording URL found in webhook data`);
     }
@@ -940,12 +1036,13 @@ const receiveWebhook = async (req, res) => {
     if (webhookData?.DTMF) {
       if (Array.isArray(webhookData.DTMF)) {
         // Convert array to string or skip if empty
+        // CRITICAL: Use String() instead of JSON.stringify() to prevent memory leaks
         if (webhookData.DTMF.length > 0) {
-          updateData.dtmf = JSON.stringify(webhookData.DTMF);
+          updateData.dtmf = String(webhookData.DTMF);
         }
       } else if (typeof webhookData.DTMF === 'string' && webhookData.DTMF !== '[]') {
-      updateData.dtmf = webhookData.DTMF;
-    }
+        updateData.dtmf = webhookData.DTMF;
+      }
     }
     
     // Handle voiceMail - can be array or string
@@ -953,7 +1050,9 @@ const receiveWebhook = async (req, res) => {
       if (Array.isArray(webhookData.voiceMail)) {
         // Convert array to string or skip if empty
         if (webhookData.voiceMail.length > 0) {
-          updateData.voiceMail = JSON.stringify(webhookData.voiceMail);
+          // CRITICAL: Removed JSON.stringify() - causes memory leaks
+          // Store voiceMail as-is if it's already a string, or convert to string without JSON.stringify
+          updateData.voiceMail = typeof webhookData.voiceMail === 'string' ? webhookData.voiceMail : String(webhookData.voiceMail);
         }
       } else if (typeof webhookData.voiceMail === 'string' && webhookData.voiceMail !== '[]') {
       updateData.voiceMail = webhookData.voiceMail;
@@ -1492,12 +1591,37 @@ const getRecording = async (req, res) => {
       // The frontend ensures they can only see responses they're assigned to review
     }
 
+    // CRITICAL: Prefer S3 audio if available (migrated recordings)
+    // This ensures we use our own S3 storage instead of DeepCall URLs that expire
+    if (call.s3AudioUrl && call.s3AudioUploadStatus === 'uploaded') {
+      console.log(`🎵 [AUDIO URL LOG] Quality Agent - Using S3 audio for callId: ${callId}`);
+      console.log(`🎵 [AUDIO URL LOG] S3 Key: ${call.s3AudioUrl}`);
+      console.log(`🎵 [AUDIO URL LOG] Source: S3 (migrated)`);
+      console.log(`🎵 [AUDIO URL LOG] ✅ PROXIED - Streaming through server (NO cross-region charges)`);
+      console.log(`🎵 [AUDIO URL LOG] Backend will download from S3 and stream to client`);
+      const { streamAudioFromS3 } = require('../utils/cloudStorage');
+      try {
+        await streamAudioFromS3(call.s3AudioUrl, req, res);
+        console.log(`🎵 [AUDIO URL LOG] ✅ Successfully streamed S3 audio to client`);
+        return; // Exit early - streamAudioFromS3 handles the response
+      } catch (s3Error) {
+        console.error('❌ Error streaming from S3, falling back to DeepCall:', s3Error.message);
+        // Fall through to DeepCall fallback
+      }
+    }
+
+    // Fallback to DeepCall URL (backward compatibility)
     if (!call.recordingUrl) {
       return res.status(404).json({
         success: false,
         message: 'No recording available for this call'
       });
     }
+
+    console.log(`🎵 [AUDIO URL LOG] Quality Agent - Using DeepCall URL fallback for callId: ${callId}`);
+    console.log(`🎵 [AUDIO URL LOG] DeepCall URL: ${call.recordingUrl}`);
+    console.log(`🎵 [AUDIO URL LOG] Source: DeepCall (not yet migrated to S3)`);
+    console.log(`🎵 [AUDIO URL LOG] ✅ PROXIED - Backend will download from DeepCall and stream to client (NO direct access)`);
 
     // Fetch the recording from DeepCall
     // Try multiple authentication methods as DeepCall might use different auth mechanisms
@@ -1568,6 +1692,10 @@ const getRecording = async (req, res) => {
     }
 
     if (recordingResponse) {
+      console.log(`🎵 [AUDIO URL LOG] ✅ Successfully downloaded from DeepCall, streaming to client`);
+      console.log(`🎵 [AUDIO URL LOG] Content-Type: ${recordingResponse.headers['content-type'] || 'audio/mpeg'}`);
+      console.log(`🎵 [AUDIO URL LOG] Content-Length: ${recordingResponse.headers['content-length'] || 'unknown'}`);
+      
       // Set appropriate headers for audio file
       const contentType = recordingResponse.headers['content-type'] || 'audio/mpeg';
       res.setHeader('Content-Type', contentType);

@@ -1,0 +1,648 @@
+{
+  "testId": "quality-checks-direct-1768158150391",
+  "startTime": "2026-01-11T19:02:30.391Z",
+  "endTime": "2026-01-11T19:03:00.972Z",
+  "duration": "30.58",
+  "totalSamples": 30,
+  "summary": {
+    "cpu": {
+      "avg": "1.05",
+      "max": 1.26,
+      "min": 0.66
+    },
+    "memory": {
+      "avgUsed": "8244.03",
+      "maxUsed": 8277,
+      "avgPercent": "26.12",
+      "maxPercent": 26.23
+    },
+    "mongodbConnections": {
+      "avg": "54.67",
+      "max": 55,
+      "min": 54
+    },
+    "apiResponseTime": {
+      "avg": "572.00",
+      "max": 572,
+      "min": 572,
+      "p95": 572,
+      "p99": 572
+    }
+  },
+  "metrics": {
+    "timestamps": [
+      "2026-01-11T19:02:31.393Z",
+      "2026-01-11T19:02:32.393Z",
+      "2026-01-11T19:02:33.393Z",
+      "2026-01-11T19:02:34.394Z",
+      "2026-01-11T19:02:35.395Z",
+      "2026-01-11T19:02:36.394Z",
+      "2026-01-11T19:02:37.395Z",
+      "2026-01-11T19:02:38.395Z",
+      "2026-01-11T19:02:39.396Z",
+      "2026-01-11T19:02:40.398Z",
+      "2026-01-11T19:02:41.398Z",
+      "2026-01-11T19:02:42.398Z",
+      "2026-01-11T19:02:43.398Z",
+      "2026-01-11T19:02:44.398Z",
+      "2026-01-11T19:02:45.398Z",
+      "2026-01-11T19:02:46.399Z",
+      "2026-01-11T19:02:47.399Z",
+      "2026-01-11T19:02:48.399Z",
+      "2026-01-11T19:02:49.399Z",
+      "2026-01-11T19:02:50.398Z",
+      "2026-01-11T19:02:51.399Z",
+      "2026-01-11T19:02:52.399Z",
+      "2026-01-11T19:02:53.399Z",
+      "2026-01-11T19:02:54.399Z",
+      "2026-01-11T19:02:55.399Z",
+      "2026-01-11T19:02:56.399Z",
+      "2026-01-11T19:02:57.399Z",
+      "2026-01-11T19:02:58.399Z",
+      "2026-01-11T19:02:59.399Z",
+      "2026-01-11T19:03:00.399Z"
+    ],
+    "cpu": [
+      {
+        "percent": 0.66,
+        "user": 589304,
+        "system": 70515
+      },
+      {
+        "percent": 0.72,
+        "user": 641938,
+        "system": 74130
+      },
+      {
+        "percent": 0.75,
+        "user": 674398,
+        "system": 79546
+      },
+      {
+        "percent": 0.77,
+        "user": 691208,
+        "system": 80607
+      },
+      {
+        "percent": 0.8,
+        "user": 713641,
+        "system": 81530
+      },
+      {
+        "percent": 0.85,
+        "user": 761404,
+        "system": 86386
+      },
+      {
+        "percent": 0.86,
+        "user": 773756,
+        "system": 86419
+      },
+      {
+        "percent": 0.87,
+        "user": 784261,
+        "system": 87370
+      },
+      {
+        "percent": 1.01,
+        "user": 911718,
+        "system": 100409
+      },
+      {
+        "percent": 1.02,
+        "user": 921358,
+        "system": 102597
+      },
+      {
+        "percent": 1.04,
+        "user": 932193,
+        "system": 106364
+      },
+      {
+        "percent": 1.05,
+        "user": 943323,
+        "system": 107607
+      },
+      {
+        "percent": 1.11,
+        "user": 1001964,
+        "system": 110461
+      },
+      {
+        "percent": 1.12,
+        "user": 1008866,
+        "system": 111427
+      },
+      {
+        "percent": 1.13,
+        "user": 1013854,
+        "system": 113431
+      },
+      {
+        "percent": 1.13,
+        "user": 1019764,
+        "system": 113642
+      },
+      {
+        "percent": 1.14,
+        "user": 1025722,
+        "system": 114497
+      },
+      {
+        "percent": 1.15,
+        "user": 1030551,
+        "system": 115714
+      },
+      {
+        "percent": 1.15,
+        "user": 1036614,
+        "system": 115851
+      },
+      {
+        "percent": 1.16,
+        "user": 1046030,
+        "system": 116785
+      },
+      {
+        "percent": 1.17,
+        "user": 1054634,
+        "system": 118974
+      },
+      {
+        "percent": 1.18,
+        "user": 1059631,
+        "system": 121878
+      },
+      {
+        "percent": 1.19,
+        "user": 1065284,
+        "system": 124758
+      },
+      {
+        "percent": 1.2,
+        "user": 1074366,
+        "system": 124973
+      },
+      {
+        "percent": 1.21,
+        "user": 1087131,
+        "system": 126059
+      },
+      {
+        "percent": 1.22,
+        "user": 1092490,
+        "system": 127995
+      },
+      {
+        "percent": 1.23,
+        "user": 1099537,
+        "system": 128111
+      },
+      {
+        "percent": 1.23,
+        "user": 1105105,
+        "system": 128985
+      },
+      {
+        "percent": 1.24,
+        "user": 1110971,
+        "system": 129159
+      },
+      {
+        "percent": 1.26,
+        "user": 1123595,
+        "system": 133137
+      }
+    ],
+    "memory": [
+      {
+        "used": 8244,
+        "total": 31557,
+        "percent": 26.12,
+        "heapUsed": 20,
+        "heapTotal": 33,
+        "external": 21
+      },
+      {
+        "used": 8238,
+        "total": 31557,
+        "percent": 26.1,
+        "heapUsed": 21,
+        "heapTotal": 33,
+        "external": 21
+      },
+      {
+        "used": 8243,
+        "total": 31557,
+        "percent": 26.12,
+        "heapUsed": 22,
+        "heapTotal": 33,
+        "external": 21
+      },
+      {
+        "used": 8247,
+        "total": 31557,
+        "percent": 26.13,
+        "heapUsed": 23,
+        "heapTotal": 33,
+        "external": 21
+      },
+      {
+        "used": 8249,
+        "total": 31557,
+        "percent": 26.14,
+        "heapUsed": 24,
+        "heapTotal": 33,
+        "external": 21
+      },
+      {
+        "used": 8255,
+        "total": 31557,
+        "percent": 26.16,
+        "heapUsed": 19,
+        "heapTotal": 35,
+        "external": 21
+      },
+      {
+        "used": 8261,
+        "total": 31557,
+        "percent": 26.18,
+        "heapUsed": 20,
+        "heapTotal": 35,
+        "external": 21
+      },
+      {
+        "used": 8263,
+        "total": 31557,
+        "percent": 26.19,
+        "heapUsed": 22,
+        "heapTotal": 35,
+        "external": 21
+      },
+      {
+        "used": 8255,
+        "total": 31557,
+        "percent": 26.16,
+        "heapUsed": 16,
+        "heapTotal": 19,
+        "external": 21
+      },
+      {
+        "used": 8255,
+        "total": 31557,
+        "percent": 26.16,
+        "heapUsed": 17,
+        "heapTotal": 22,
+        "external": 21
+      },
+      {
+        "used": 8260,
+        "total": 31557,
+        "percent": 26.18,
+        "heapUsed": 18,
+        "heapTotal": 22,
+        "external": 21
+      },
+      {
+        "used": 8277,
+        "total": 31557,
+        "percent": 26.23,
+        "heapUsed": 18,
+        "heapTotal": 22,
+        "external": 21
+      },
+      {
+        "used": 8270,
+        "total": 31557,
+        "percent": 26.21,
+        "heapUsed": 19,
+        "heapTotal": 22,
+        "external": 21
+      },
+      {
+        "used": 8268,
+        "total": 31557,
+        "percent": 26.2,
+        "heapUsed": 18,
+        "heapTotal": 22,
+        "external": 21
+      },
+      {
+        "used": 8268,
+        "total": 31557,
+        "percent": 26.2,
+        "heapUsed": 17,
+        "heapTotal": 22,
+        "external": 21
+      },
+      {
+        "used": 8251,
+        "total": 31557,
+        "percent": 26.15,
+        "heapUsed": 18,
+        "heapTotal": 22,
+        "external": 21
+      },
+      {
+        "used": 8252,
+        "total": 31557,
+        "percent": 26.15,
+        "heapUsed": 17,
+        "heapTotal": 22,
+        "external": 21
+      },
+      {
+        "used": 8226,
+        "total": 31557,
+        "percent": 26.07,
+        "heapUsed": 18,
+        "heapTotal": 22,
+        "external": 21
+      },
+      {
+        "used": 8225,
+        "total": 31557,
+        "percent": 26.07,
+        "heapUsed": 17,
+        "heapTotal": 22,
+        "external": 21
+      },
+      {
+        "used": 8225,
+        "total": 31557,
+        "percent": 26.07,
+        "heapUsed": 18,
+        "heapTotal": 22,
+        "external": 21
+      },
+      {
+        "used": 8223,
+        "total": 31557,
+        "percent": 26.06,
+        "heapUsed": 18,
+        "heapTotal": 19,
+        "external": 21
+      },
+      {
+        "used": 8224,
+        "total": 31557,
+        "percent": 26.06,
+        "heapUsed": 18,
+        "heapTotal": 19,
+        "external": 21
+      },
+      {
+        "used": 8243,
+        "total": 31557,
+        "percent": 26.12,
+        "heapUsed": 18,
+        "heapTotal": 19,
+        "external": 21
+      },
+      {
+        "used": 8226,
+        "total": 31557,
+        "percent": 26.07,
+        "heapUsed": 18,
+        "heapTotal": 19,
+        "external": 21
+      },
+      {
+        "used": 8228,
+        "total": 31557,
+        "percent": 26.07,
+        "heapUsed": 18,
+        "heapTotal": 19,
+        "external": 21
+      },
+      {
+        "used": 8225,
+        "total": 31557,
+        "percent": 26.06,
+        "heapUsed": 18,
+        "heapTotal": 19,
+        "external": 21
+      },
+      {
+        "used": 8228,
+        "total": 31557,
+        "percent": 26.07,
+        "heapUsed": 17,
+        "heapTotal": 20,
+        "external": 21
+      },
+      {
+        "used": 8237,
+        "total": 31557,
+        "percent": 26.1,
+        "heapUsed": 17,
+        "heapTotal": 20,
+        "external": 21
+      },
+      {
+        "used": 8227,
+        "total": 31557,
+        "percent": 26.07,
+        "heapUsed": 18,
+        "heapTotal": 20,
+        "external": 21
+      },
+      {
+        "used": 8228,
+        "total": 31557,
+        "percent": 26.07,
+        "heapUsed": 18,
+        "heapTotal": 20,
+        "external": 21
+      }
+    ],
+    "mongodbConnections": [
+      54,
+      54,
+      54,
+      54,
+      54,
+      54,
+      54,
+      54,
+      54,
+      54,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55,
+      55
+    ],
+    "apiResponseTimes": [
+      572
+    ],
+    "loadAverage": [
+      {
+        "1min": 1.62,
+        "5min": 1.13,
+        "15min": 0.85
+      },
+      {
+        "1min": 1.62,
+        "5min": 1.13,
+        "15min": 0.85
+      },
+      {
+        "1min": 1.73,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.73,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.73,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.73,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.73,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.67,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.67,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.67,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.67,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.67,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.62,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.62,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.62,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.62,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.62,
+        "5min": 1.16,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.57,
+        "5min": 1.15,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.57,
+        "5min": 1.15,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.57,
+        "5min": 1.15,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.57,
+        "5min": 1.15,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.57,
+        "5min": 1.15,
+        "15min": 0.86
+      },
+      {
+        "1min": 1.6,
+        "5min": 1.17,
+        "15min": 0.87
+      },
+      {
+        "1min": 1.6,
+        "5min": 1.17,
+        "15min": 0.87
+      },
+      {
+        "1min": 1.6,
+        "5min": 1.17,
+        "15min": 0.87
+      },
+      {
+        "1min": 1.6,
+        "5min": 1.17,
+        "15min": 0.87
+      },
+      {
+        "1min": 1.6,
+        "5min": 1.17,
+        "15min": 0.87
+      },
+      {
+        "1min": 1.63,
+        "5min": 1.18,
+        "15min": 0.88
+      },
+      {
+        "1min": 1.63,
+        "5min": 1.18,
+        "15min": 0.88
+      },
+      {
+        "1min": 1.63,
+        "5min": 1.18,
+        "15min": 0.88
+      }
+    ],
+    "networkIO": []
+  }
+}

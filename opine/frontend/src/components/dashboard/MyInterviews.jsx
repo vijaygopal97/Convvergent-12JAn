@@ -200,44 +200,30 @@ const MyInterviews = () => {
       }
       
       try {
-        // Use signedUrl if available (from S3), otherwise construct URL from audioUrl
+        // Use proxy URL (from backend) or construct it from audioUrl
         let fullAudioUrl;
-        if (signedUrl) {
-          // Use S3 signed URL directly
-          fullAudioUrl = signedUrl;
-        } else if (audioUrl.startsWith('http')) {
-          // Already a full URL
-          fullAudioUrl = audioUrl;
-        } else if (audioUrl.startsWith('audio/') || audioUrl.startsWith('documents/') || audioUrl.startsWith('reports/')) {
-          // This is an S3 key, not a local path - need to get signed URL from API
+        const proxyUrl = interview.audioRecording?.proxyUrl || interview.audioRecording?.signedUrl;
+        
+        if (proxyUrl) {
+          // Use proxy URL from backend (already includes full path)
           const isProduction = window.location.protocol === 'https:' || window.location.hostname !== 'localhost';
           const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (isProduction ? '' : 'http://localhost:5000');
-          try {
-            const response = await fetch(`${API_BASE_URL}/api/survey-responses/audio-signed-url?audioUrl=${encodeURIComponent(audioUrl)}`, {
-              headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-              }
-            });
-            if (response.ok) {
-              const data = await response.json();
-              fullAudioUrl = data.signedUrl || audioUrl;
-            } else {
-              console.error('Failed to get signed URL:', response.status);
-              showError('Failed to get audio URL. Please try again.');
-              setAudioPlaying(null);
-              setAudioElement(null);
-              return;
-            }
-          } catch (error) {
-            console.error('Error fetching signed URL:', error);
-            showError('Failed to get audio URL. Please try again.');
-            setAudioPlaying(null);
-            setAudioElement(null);
-            return;
+          fullAudioUrl = proxyUrl.startsWith('http') ? proxyUrl : `${API_BASE_URL}${proxyUrl}`;
+        } else if (audioUrl) {
+          // Construct proxy URL from audioUrl
+          const isProduction = window.location.protocol === 'https:' || window.location.hostname !== 'localhost';
+          const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (isProduction ? '' : 'http://localhost:5000');
+          
+          if (audioUrl.startsWith('http')) {
+            // Already a full URL
+            fullAudioUrl = audioUrl;
+          } else if (audioUrl.startsWith('audio/') || audioUrl.startsWith('documents/') || audioUrl.startsWith('reports/')) {
+            // S3 key - use proxy endpoint
+            fullAudioUrl = `${API_BASE_URL}/api/survey-responses/audio/${encodeURIComponent(audioUrl)}`;
+          } else {
+            // Local file path - construct full URL
+            fullAudioUrl = `${API_BASE_URL}${audioUrl}`;
           }
-        } else {
-          // Local file path - construct full URL
-          fullAudioUrl = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${audioUrl}`;
         }
         
         // For S3 signed URLs, skip HEAD check (they're always valid for the expiry period)

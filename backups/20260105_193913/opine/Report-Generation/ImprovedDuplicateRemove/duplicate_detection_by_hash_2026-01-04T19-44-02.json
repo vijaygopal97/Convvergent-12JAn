@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-01-04T19:44:37.838Z",
+  "method": "contentHash-based duplicate detection (without audio, excluding Terminated/abandoned)",
+  "summary": {
+    "totalDuplicateGroups": 0,
+    "capiDuplicateGroups": 0,
+    "catiDuplicateGroups": 0,
+    "totalDuplicatesToMark": 0,
+    "totalOriginals": 0
+  },
+  "statistics": {
+    "totalProcessed": 0,
+    "capiProcessed": 0,
+    "catiProcessed": 0,
+    "capiDuplicatesFound": 0,
+    "catiDuplicatesFound": 0
+  },
+  "groups": []
+}

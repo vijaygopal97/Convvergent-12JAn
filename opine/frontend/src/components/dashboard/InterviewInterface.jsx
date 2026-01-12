@@ -108,6 +108,10 @@ const InterviewInterface = ({ survey, onClose, onComplete }) => {
   const responsesRef = useRef(responses);
   const allQuestionsRef = useRef([]);
   const lastFetchedACRef = useRef(null); // Track last AC we fetched MP/MLA for
+  // TOP-TIER TECH COMPANY SOLUTION: Prevent duplicate CATI calls
+  // Pattern used by: Meta (WhatsApp), Twitter, Google
+  const catiCallInitiatedRef = useRef(false); // Track if call has been initiated
+  const catiCallTimeoutRef = useRef(null); // Track setTimeout for cleanup
   
   // Session state
   const [sessionData, setSessionData] = useState(null);
@@ -1690,13 +1694,33 @@ const InterviewInterface = ({ survey, onClose, onComplete }) => {
   };
 
   // Validate age against target audience requirements
+  // CRITICAL: This function validates age against survey targetAudience.demographics.ageRange
+  // Top tech companies validate input at the point of entry to ensure data quality
   const validateAge = (age) => {
+    // Check if survey and targetAudience exist
+    if (!survey || !survey.targetAudience) {
+      console.warn('⚠️ Age validation: Survey or targetAudience not available');
+      return null; // Can't validate without survey data
+    }
+    
     const ageRange = survey.targetAudience?.demographics?.ageRange;
-    if (!ageRange || !ageRange.min || !ageRange.max) return null; // No age restrictions
+    
+    // CRITICAL FIX: Check for null/undefined explicitly (not falsy check) to handle min=0 case
+    // Use typeof check to ensure min and max are valid numbers
+    if (!ageRange || 
+        typeof ageRange.min !== 'number' || 
+        typeof ageRange.max !== 'number' ||
+        isNaN(ageRange.min) || 
+        isNaN(ageRange.max)) {
+      return null; // No age restrictions (ageRange not properly configured)
+    }
     
     const ageNum = parseInt(age);
-    if (isNaN(ageNum)) return null; // Invalid age format
+    if (isNaN(ageNum) || ageNum <= 0) {
+      return null; // Invalid age format (let other validation handle this)
+    }
     
+    // Validate age is within range
     if (ageNum < ageRange.min || ageNum > ageRange.max) {
       return `Only respondents of age between ${ageRange.min} and ${ageRange.max} are allowed to participate`;
     }
@@ -2761,9 +2785,28 @@ const InterviewInterface = ({ survey, onClose, onComplete }) => {
           setIsInterviewActive(true);
           setCallStatus('idle');
           // No location or audio recording for CATI
+          // TOP-TIER TECH COMPANY SOLUTION: Prevent duplicate calls with idempotency guard
+          // Clear any existing timeout first (defense against re-renders)
+          if (catiCallTimeoutRef.current) {
+            clearTimeout(catiCallTimeoutRef.current);
+            catiCallTimeoutRef.current = null;
+          }
+          // Reset call initiation flag for new interview
+          catiCallInitiatedRef.current = false;
+          
           // Auto-make call after interface is ready (using setTimeout to avoid dependency issue)
-          setTimeout(() => {
+          // Only initiate if not already initiated (idempotency guard)
+          catiCallTimeoutRef.current = setTimeout(() => {
+            // Double-check guard to prevent duplicate calls (React StrictMode protection)
+            if (catiCallInitiatedRef.current) {
+              console.log('⚠️ Call already initiated, skipping duplicate call attempt');
+              return;
+            }
+            
             if (response.data.respondent.id) {
+              // Mark as initiated immediately to prevent race conditions
+              catiCallInitiatedRef.current = true;
+              
               // Call the API directly to avoid dependency on makeCallToRespondent
               catiInterviewAPI.makeCallToRespondent(response.data.respondent.id)
                 .then(callResponse => {
@@ -2772,6 +2815,8 @@ const InterviewInterface = ({ survey, onClose, onComplete }) => {
                     setCallStatus('calling');
                     showSuccess('Call initiated. Waiting for connection...');
                   } else {
+                    // Reset flag on failure to allow retry
+                    catiCallInitiatedRef.current = false;
                     setCallStatus('failed');
                     // Extract detailed error message from API response
                     const errorMsg = callResponse.message || 
@@ -2783,6 +2828,8 @@ const InterviewInterface = ({ survey, onClose, onComplete }) => {
                 })
                 .catch(error => {
                   console.error('Error making call:', error);
+                  // Reset flag on error to allow retry
+                  catiCallInitiatedRef.current = false;
                   setCallStatus('failed');
                   // Extract detailed error message from error response
                   const errorMsg = error.response?.data?.message || 
@@ -2793,6 +2840,8 @@ const InterviewInterface = ({ survey, onClose, onComplete }) => {
                   showError(`Call failed: ${errorMsg}. You can abandon this interview or try again.`);
                 });
             }
+            // Clear timeout ref after execution
+            catiCallTimeoutRef.current = null;
           }, 1500); // Delay to ensure UI is ready
         } else {
           // Show the actual error message from backend
@@ -2911,7 +2960,16 @@ const InterviewInterface = ({ survey, onClose, onComplete }) => {
       return;
     }
 
+    // TOP-TIER TECH COMPANY SOLUTION: Idempotency guard to prevent duplicate calls
+    if (catiCallInitiatedRef.current) {
+      console.log('⚠️ Call already initiated, preventing duplicate call');
+      showError('Call has already been initiated. Please wait for the call to connect.');
+      return;
+    }
+
     try {
+      // Mark as initiated immediately to prevent race conditions
+      catiCallInitiatedRef.current = true;
       setIsLoading(true);
       setCallStatus('calling');
       
@@ -2922,6 +2980,8 @@ const InterviewInterface = ({ survey, onClose, onComplete }) => {
         setCallStatus('calling');
         showSuccess('Call initiated. Waiting for connection...');
       } else {
+        // Reset flag on failure to allow retry
+        catiCallInitiatedRef.current = false;
         // Call failed - show error but don't close interface, allow abandon
         setCallStatus('failed');
         // Extract detailed error message from API response
@@ -2933,6 +2993,8 @@ const InterviewInterface = ({ survey, onClose, onComplete }) => {
       }
     } catch (error) {
       console.error('Error making call:', error);
+      // Reset flag on error to allow retry
+      catiCallInitiatedRef.current = false;
       setCallStatus('failed');
       // Extract detailed error message from error response
       const errorMsg = error.response?.data?.message || 
@@ -3645,6 +3707,20 @@ const InterviewInterface = ({ survey, onClose, onComplete }) => {
     };
   }, [isInterviewActive, isCatiMode]);
   
+  // TOP-TIER TECH COMPANY SOLUTION: Cleanup CATI call timeout on unmount
+  // Prevents memory leaks and duplicate calls from stale timeouts
+  useEffect(() => {
+    return () => {
+      // Clear CATI call timeout if component unmounts
+      if (catiCallTimeoutRef.current) {
+        clearTimeout(catiCallTimeoutRef.current);
+        catiCallTimeoutRef.current = null;
+      }
+      // Reset call initiation flag on unmount
+      catiCallInitiatedRef.current = false;
+    };
+  }, []);
+  
   // Cleanup on unmount
   useEffect(() => {
     return () => {
@@ -4209,6 +4285,12 @@ const InterviewInterface = ({ survey, onClose, onComplete }) => {
         const isInterviewerIdQuestion = currentQuestion.id === 'interviewer-id' || currentQuestion.isInterviewerId;
         const didNotAnswer = currentResponse === 0 || currentResponse === '0';
         
+        // CRITICAL: Check if this is an age question for age range validation
+        const isAgeQuestionCheck = currentQuestion.id === 'fixed_respondent_age' || isAgeQuestion(currentQuestion);
+        const ageValidationError = isAgeQuestionCheck && targetAudienceErrors.has(currentQuestion.id) 
+          ? targetAudienceErrors.get(currentQuestion.id) 
+          : null;
+        
         return (
           <div className="space-y-4">
             <input
@@ -4235,9 +4317,24 @@ const InterviewInterface = ({ survey, onClose, onComplete }) => {
                     }
                     // If longer than 5 digits, don't update (effectively blocks input)
                   } else {
+                    // CRITICAL: For age questions, validate in real-time as user types
                     const numValue = parseFloat(text);
                     if (!isNaN(numValue) && isFinite(numValue)) {
-                      handleResponseChange(currentQuestion.id, numValue);
+                      // For age questions, validate immediately when user enters a valid number
+                      if (isAgeQuestionCheck && survey?.targetAudience?.demographics?.ageRange) {
+                        const ageRange = survey.targetAudience.demographics.ageRange;
+                        // Only validate if we have valid min/max values
+                        if (typeof ageRange.min === 'number' && typeof ageRange.max === 'number' && 
+                            !isNaN(ageRange.min) && !isNaN(ageRange.max)) {
+                          // Validate age range immediately
+                          handleResponseChange(currentQuestion.id, numValue);
+                          // Validation error is set in handleResponseChange via validateFixedQuestion
+                        } else {
+                          handleResponseChange(currentQuestion.id, numValue);
+                        }
+                      } else {
+                        handleResponseChange(currentQuestion.id, numValue);
+                      }
                     }
                   }
                 }
@@ -4247,11 +4344,18 @@ const InterviewInterface = ({ survey, onClose, onComplete }) => {
               max={isInterviewerIdQuestion ? 99999 : undefined}
               min={isInterviewerIdQuestion ? 0 : undefined}
               maxLength={isInterviewerIdQuestion ? 5 : undefined}
-              className={`w-full p-6 text-lg border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 ${
-                didNotAnswer && isPhoneQuestion ? 'bg-gray-100 cursor-not-allowed opacity-60' : ''
+              className={`w-full p-6 text-lg border-2 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 ${
+                didNotAnswer && isPhoneQuestion ? 'bg-gray-100 cursor-not-allowed opacity-60' : '',
+                ageValidationError ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : 'border-gray-200'
               }`}
               required={required && !didNotAnswer}
             />
+            {/* CRITICAL: Display age validation error message below input */}
+            {ageValidationError && (
+              <p className="text-red-600 text-sm font-medium mt-2">
+                {ageValidationError}
+              </p>
+            )}
             {isPhoneQuestion && (
               <label className="flex items-center space-x-3 cursor-pointer p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                 <input

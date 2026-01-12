@@ -1,0 +1,338 @@
+{
+  "timestamp": "2026-01-05T18:39:58.800Z",
+  "method": "Recent duplicates (last 20 hours) against older responses (before 24 hours)",
+  "timeBoundaries": {
+    "now": "2026-01-05T18:39:50.757Z",
+    "twentyHoursAgo": "2026-01-04T22:39:50.757Z",
+    "strategy": "For each recent response, find duplicates created BEFORE that response's createdAt"
+  },
+  "summary": {
+    "totalDuplicateGroups": 3,
+    "capiDuplicateGroups": 3,
+    "catiDuplicateGroups": 0,
+    "totalRecentDuplicates": 6,
+    "totalOlderDuplicates": 0,
+    "pendingApprovalRecentDuplicates": 6
+  },
+  "statistics": {
+    "totalRecentResponsesProcessed": 4021,
+    "uniqueContentHashesInRecent": 4018,
+    "groupsWithOlderDuplicates": 3,
+    "capiRecentDuplicates": 6,
+    "catiRecentDuplicates": 0
+  },
+  "groups": [
+    {
+      "groupNumber": 1,
+      "mode": "CAPI",
+      "contentHash": "3d75ab29009d9c6c",
+      "originalDuplicate": {
+        "responseId": "fcbe6784-e12b-427d-a925-eb66d197e0ee",
+        "mongoId": "695b9b9e5b7ed396da35ab6c",
+        "sessionId": "855e3e7a-f399-4adb-8f17-cf14279bae2a",
+        "interviewer": {
+          "id": "6942c390fe90bbe7745c7a32",
+          "name": "Satabdi Chakrabroty",
+          "email": "bagsatabdi628@gmail.com",
+          "phone": "9339970419",
+          "memberId": "CAPI192"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-05T10:29:13.473Z",
+        "endTime": "2026-01-05T10:34:16.995Z",
+        "duration": 303,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/855e3e7a-f399-4adb-8f17-cf14279bae2a_1767611292722_interview_855e3e7a-f399-4adb-8f17-cf14279bae2a_1767611292722.m4a",
+        "audioDuration": 303,
+        "audioFileSize": 3407945,
+        "location": null,
+        "responseCount": 25,
+        "createdAt": "2026-01-05T11:08:14.407Z",
+        "contentHash": "3d75ab29009d9c6c"
+      },
+      "allOlderDuplicates": [],
+      "recentDuplicates": [
+        {
+          "responseId": "fcbe6784-e12b-427d-a925-eb66d197e0ee",
+          "mongoId": "695b9b9e5b7ed396da35ab6c",
+          "sessionId": "855e3e7a-f399-4adb-8f17-cf14279bae2a",
+          "interviewer": {
+            "id": "6942c390fe90bbe7745c7a32",
+            "name": "Satabdi Chakrabroty",
+            "email": "bagsatabdi628@gmail.com",
+            "phone": "9339970419",
+            "memberId": "CAPI192"
+          },
+          "startTime": "2026-01-05T10:29:13.473Z",
+          "endTime": "2026-01-05T10:34:16.995Z",
+          "duration": 303,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/855e3e7a-f399-4adb-8f17-cf14279bae2a_1767611292722_interview_855e3e7a-f399-4adb-8f17-cf14279bae2a_1767611292722.m4a",
+          "audioDuration": 303,
+          "audioFileSize": 3407945,
+          "location": null,
+          "responseCount": 25,
+          "createdAt": "2026-01-05T11:08:14.407Z",
+          "timeDifferenceFromOriginal": 0,
+          "contentHash": "3d75ab29009d9c6c"
+        },
+        {
+          "responseId": "68106040-f1a4-4e8f-914e-95b62809e03d",
+          "mongoId": "695bf4271e853eac107a3d8d",
+          "sessionId": "cbcc8391-74f4-44b7-bc5b-559d78cc934e",
+          "interviewer": {
+            "id": "6942c368fe90bbe7745bd1ef",
+            "name": "BIDDES SARKAR",
+            "email": "biddessarkar08@gmail.com",
+            "phone": "8250037590",
+            "memberId": "CAPI135"
+          },
+          "startTime": "2026-01-05T10:29:13.473Z",
+          "endTime": "2026-01-05T10:34:16.995Z",
+          "duration": 303,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/855e3e7a-f399-4adb-8f17-cf14279bae2a_1767611292722_interview_855e3e7a-f399-4adb-8f17-cf14279bae2a_1767611292722.m4a",
+          "audioDuration": 303,
+          "audioFileSize": 0,
+          "location": null,
+          "responseCount": 25,
+          "createdAt": "2026-01-05T17:25:59.486Z",
+          "timeDifferenceFromOriginal": 22665,
+          "contentHash": "3d75ab29009d9c6c"
+        }
+      ]
+    },
+    {
+      "groupNumber": 2,
+      "mode": "CAPI",
+      "contentHash": "c2fe193625c8d422",
+      "originalDuplicate": {
+        "responseId": "09017ee4-241f-4b6e-9186-3fe7c8197dd1",
+        "mongoId": "695bbfbd2c6b673d431e4988",
+        "sessionId": "8f13bbc6-ff31-473a-b3cb-8ebff1761234",
+        "interviewer": {
+          "id": "6948dda3a5db6d8d12ce0b4c",
+          "name": "PINTU KAPRI",
+          "email": "capicapi812@gmail.com",
+          "phone": "9332214616",
+          "memberId": "CAPI812"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-05T07:18:55.659Z",
+        "endTime": "2026-01-05T07:27:11.551Z",
+        "duration": 495,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/8f13bbc6-ff31-473a-b3cb-8ebff1761234_1767620539835_interview_8f13bbc6-ff31-473a-b3cb-8ebff1761234_1767620539640.m4a",
+        "audioDuration": 495,
+        "audioFileSize": 7939432,
+        "location": {
+          "latitude": 23.53432,
+          "longitude": 87.3317467,
+          "accuracy": 7.800000190734863,
+          "address": "23.534320, 87.331747",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-05T07:18:59.898Z"
+        },
+        "responseCount": 24,
+        "createdAt": "2026-01-05T13:42:21.121Z",
+        "contentHash": "c2fe193625c8d422"
+      },
+      "allOlderDuplicates": [],
+      "recentDuplicates": [
+        {
+          "responseId": "09017ee4-241f-4b6e-9186-3fe7c8197dd1",
+          "mongoId": "695bbfbd2c6b673d431e4988",
+          "sessionId": "8f13bbc6-ff31-473a-b3cb-8ebff1761234",
+          "interviewer": {
+            "id": "6948dda3a5db6d8d12ce0b4c",
+            "name": "PINTU KAPRI",
+            "email": "capicapi812@gmail.com",
+            "phone": "9332214616",
+            "memberId": "CAPI812"
+          },
+          "startTime": "2026-01-05T07:18:55.659Z",
+          "endTime": "2026-01-05T07:27:11.551Z",
+          "duration": 495,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/8f13bbc6-ff31-473a-b3cb-8ebff1761234_1767620539835_interview_8f13bbc6-ff31-473a-b3cb-8ebff1761234_1767620539640.m4a",
+          "audioDuration": 495,
+          "audioFileSize": 7939432,
+          "location": {
+            "latitude": 23.53432,
+            "longitude": 87.3317467,
+            "accuracy": 7.800000190734863,
+            "address": "23.534320, 87.331747",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-05T07:18:59.898Z"
+          },
+          "responseCount": 24,
+          "createdAt": "2026-01-05T13:42:21.121Z",
+          "timeDifferenceFromOriginal": 0,
+          "contentHash": "c2fe193625c8d422"
+        },
+        {
+          "responseId": "0567f25f-9470-427a-85b6-3a9b9ecb0a94",
+          "mongoId": "695bf424e0752c553e76fb23",
+          "sessionId": "3b42a74d-adf5-4b6e-9a21-ae524a163917",
+          "interviewer": {
+            "id": "6948dda3a5db6d8d12ce0b4c",
+            "name": "PINTU KAPRI",
+            "email": "capicapi812@gmail.com",
+            "phone": "9332214616",
+            "memberId": "CAPI812"
+          },
+          "startTime": "2026-01-05T07:18:55.659Z",
+          "endTime": "2026-01-05T07:27:11.551Z",
+          "duration": 495,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/8f13bbc6-ff31-473a-b3cb-8ebff1761234_1767620539835_interview_8f13bbc6-ff31-473a-b3cb-8ebff1761234_1767620539640.m4a",
+          "audioDuration": 495,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 23.53432,
+            "longitude": 87.3317467,
+            "accuracy": 7.800000190734863,
+            "address": "23.534320, 87.331747",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-05T07:18:59.898Z"
+          },
+          "responseCount": 24,
+          "createdAt": "2026-01-05T17:25:56.987Z",
+          "timeDifferenceFromOriginal": 13415,
+          "contentHash": "c2fe193625c8d422"
+        }
+      ]
+    },
+    {
+      "groupNumber": 3,
+      "mode": "CAPI",
+      "contentHash": "d375494753f0d7d3",
+      "originalDuplicate": {
+        "responseId": "466eeba1-3da3-4774-a998-9438e93d030c",
+        "mongoId": "695b9bbfb2031d0d9570853d",
+        "sessionId": "a1e21009-a46d-4c02-8ae5-0c9edc4efe02",
+        "interviewer": {
+          "id": "6942c390fe90bbe7745c7a32",
+          "name": "Satabdi Chakrabroty",
+          "email": "bagsatabdi628@gmail.com",
+          "phone": "9339970419",
+          "memberId": "CAPI192"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-05T09:33:02.145Z",
+        "endTime": "2026-01-05T09:38:03.841Z",
+        "duration": 301,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/a1e21009-a46d-4c02-8ae5-0c9edc4efe02_1767611326497_interview_a1e21009-a46d-4c02-8ae5-0c9edc4efe02_1767611326497.m4a",
+        "audioDuration": 301,
+        "audioFileSize": 3549193,
+        "location": {
+          "latitude": 24.126824,
+          "longitude": 88.6905037,
+          "accuracy": 92.9000015258789,
+          "address": "Jortala - Sekhpara Road , Jalangi, West Bengal, India",
+          "city": "Jalangi",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2026-01-05T09:33:03.888Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-05T11:08:47.698Z",
+        "contentHash": "d375494753f0d7d3"
+      },
+      "allOlderDuplicates": [],
+      "recentDuplicates": [
+        {
+          "responseId": "466eeba1-3da3-4774-a998-9438e93d030c",
+          "mongoId": "695b9bbfb2031d0d9570853d",
+          "sessionId": "a1e21009-a46d-4c02-8ae5-0c9edc4efe02",
+          "interviewer": {
+            "id": "6942c390fe90bbe7745c7a32",
+            "name": "Satabdi Chakrabroty",
+            "email": "bagsatabdi628@gmail.com",
+            "phone": "9339970419",
+            "memberId": "CAPI192"
+          },
+          "startTime": "2026-01-05T09:33:02.145Z",
+          "endTime": "2026-01-05T09:38:03.841Z",
+          "duration": 301,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/a1e21009-a46d-4c02-8ae5-0c9edc4efe02_1767611326497_interview_a1e21009-a46d-4c02-8ae5-0c9edc4efe02_1767611326497.m4a",
+          "audioDuration": 301,
+          "audioFileSize": 3549193,
+          "location": {
+            "latitude": 24.126824,
+            "longitude": 88.6905037,
+            "accuracy": 92.9000015258789,
+            "address": "Jortala - Sekhpara Road , Jalangi, West Bengal, India",
+            "city": "Jalangi",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-05T09:33:03.888Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-05T11:08:47.698Z",
+          "timeDifferenceFromOriginal": 0,
+          "contentHash": "d375494753f0d7d3"
+        },
+        {
+          "responseId": "89683e2a-fb45-46dc-ab33-002c474637f6",
+          "mongoId": "695bf4161244720a60d2456d",
+          "sessionId": "e50cf7f9-a64c-4420-bdcf-70be91c5b89a",
+          "interviewer": {
+            "id": "6942c368fe90bbe7745bd1ef",
+            "name": "BIDDES SARKAR",
+            "email": "biddessarkar08@gmail.com",
+            "phone": "8250037590",
+            "memberId": "CAPI135"
+          },
+          "startTime": "2026-01-05T09:33:02.145Z",
+          "endTime": "2026-01-05T09:38:03.841Z",
+          "duration": 301,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/a1e21009-a46d-4c02-8ae5-0c9edc4efe02_1767611326497_interview_a1e21009-a46d-4c02-8ae5-0c9edc4efe02_1767611326497.m4a",
+          "audioDuration": 301,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 24.126824,
+            "longitude": 88.6905037,
+            "accuracy": 92.9000015258789,
+            "address": "Jortala - Sekhpara Road , Jalangi, West Bengal, India",
+            "city": "Jalangi",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-05T09:33:03.888Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-05T17:25:42.183Z",
+          "timeDifferenceFromOriginal": 22614,
+          "contentHash": "d375494753f0d7d3"
+        }
+      ]
+    }
+  ]
+}

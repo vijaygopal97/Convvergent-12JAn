@@ -23,6 +23,7 @@ import ViewResponsesV2Page from './pages/ViewResponsesV2Page';
 import SurveyReportsPage from './pages/SurveyReportsPage';
 import SurveyReportsV2Page from './pages/SurveyReportsV2Page';
 import CallerPerformancePage from './pages/CallerPerformancePage';
+import CallerPerformanceV2Page from './pages/CallerPerformanceV2Page';
 import QCPerformancePage from './pages/QCPerformancePage';
 import QCBatchesPage from './pages/QCBatchesPage';
 import FindingsDashboard from './pages/FindingsDashboard';
@@ -120,6 +121,9 @@ function App() {
             {/* Caller Performance Page */}
             <Route path="/company/surveys/:surveyId/caller-performance" element={<CallerPerformancePage />} />
             
+            {/* Caller Performance V2 Page (Optimized) */}
+            <Route path="/company/surveys/:surveyId/caller-performance-v2" element={<CallerPerformanceV2Page />} />
+            
             {/* QC Performance Page */}
             <Route path="/company/surveys/:surveyId/qc-performance" element={<QCPerformancePage />} />
             
@@ -135,6 +139,7 @@ function App() {
             <Route path="/project-manager/surveys/:surveyId/reports" element={<AdminDashboard />} />
             <Route path="/project-manager/surveys/:surveyId/reports-2" element={<SurveyReportsV2Page />} />
             <Route path="/project-manager/surveys/:surveyId/caller-performance" element={<CallerPerformancePage />} />
+            <Route path="/project-manager/surveys/:surveyId/caller-performance-v2" element={<CallerPerformanceV2Page />} />
             <Route path="/project-manager/surveys/:surveyId/responses" element={<ViewResponsesPage />} />
             <Route path="/project-manager/surveys/:surveyId/responses-v2" element={<ViewResponsesV2Page />} />
             <Route path="/project-manager/surveys/:surveyId/qc-performance" element={<AdminDashboard />} />

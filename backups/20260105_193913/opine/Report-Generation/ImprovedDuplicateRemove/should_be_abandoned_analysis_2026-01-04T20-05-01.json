@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-01-04T20:05:01.655Z",
+  "operation": "Analyze Responses That Should Have Been Abandoned",
+  "surveyId": "68fd1915d41841da463f0d46",
+  "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+  "dateRanges": {
+    "today": {
+      "ist": {
+        "start": "2026-01-05T00:00:00.000Z",
+        "end": "2026-01-05T23:59:59.999Z"
+      },
+      "utc": {
+        "start": "2026-01-04T18:30:00.000Z",
+        "end": "2026-01-05T18:29:59.999Z"
+      }
+    },
+    "yesterday": {
+      "ist": {
+        "start": "2026-01-04T00:00:00.000Z",
+        "end": "2026-01-04T23:59:59.999Z"
+      },
+      "utc": {
+        "start": "2026-01-03T18:30:00.000Z",
+        "end": "2026-01-04T18:29:59.999Z"
+      }
+    }
+  },
+  "summary": {
+    "totalChecked": 47531,
+    "totalProblematic": 0,
+    "byDate": {
+      "today": 0,
+      "yesterday": 0,
+      "other": 0
+    },
+    "byStatus": {},
+    "byMissingField": {
+      "missingAC": 0,
+      "missingGender": 0,
+      "missingAge": 0,
+      "missingAll": 0
+    }
+  },
+  "problematicResponses": []
+}

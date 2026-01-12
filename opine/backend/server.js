@@ -50,6 +50,7 @@ const qcBatchRoutes = require('./routes/qcBatchRoutes');
 const qcBatchConfigRoutes = require('./routes/qcBatchConfigRoutes');
 const pollingStationRoutes = require('./routes/pollingStationRoutes');
 const masterDataRoutes = require('./routes/masterDataRoutes');
+const appUpdateRoutes = require('./routes/appUpdateRoutes');
 const cron = require('node-cron');
 const { processQCBatches } = require('./jobs/qcBatchProcessor');
 
@@ -87,12 +88,22 @@ app.use(cors({
 }));
 
 // Increase body size limit for large Excel file uploads (800MB)
-// Use verify function to capture raw body for webhook endpoint
+// CRITICAL OPTIMIZATION: Only capture raw body for webhook if it's small (<10MB)
+// Large webhook bodies (>10MB) should not be stored in memory - causes massive leaks
+// Top tech companies limit in-memory storage for webhook endpoints
 app.use(express.json({ 
   limit: '800mb',
   verify: (req, res, buf, encoding) => {
     if (req.path === '/api/cati/webhook' && req.method === 'POST') {
-      req.rawBody = buf.toString(encoding || 'utf8');
+      // CRITICAL: Only store rawBody if it's small (<10MB) to prevent memory leaks
+      // For larger bodies, we'll parse directly from req.body
+      const bodySize = buf.length;
+      if (bodySize < 10 * 1024 * 1024) { // 10MB limit
+        req.rawBody = buf.toString(encoding || 'utf8');
+      } else {
+        console.warn(`⚠️ Large webhook body detected (${Math.round(bodySize / 1024 / 1024)}MB), skipping rawBody storage to prevent memory leak`);
+        req.rawBody = null; // Don't store large bodies in memory
+      }
     }
   }
 }));
@@ -101,41 +112,59 @@ app.use(express.urlencoded({
   limit: '800mb',
   verify: (req, res, buf, encoding) => {
     if (req.path === '/api/cati/webhook' && req.method === 'POST') {
-      req.rawBody = buf.toString(encoding || 'utf8');
+      // CRITICAL: Only store rawBody if it's small (<10MB) to prevent memory leaks
+      const bodySize = buf.length;
+      if (bodySize < 10 * 1024 * 1024) { // 10MB limit
+        req.rawBody = buf.toString(encoding || 'utf8');
+      } else {
+        console.warn(`⚠️ Large webhook body detected (${Math.round(bodySize / 1024 / 1024)}MB), skipping rawBody storage to prevent memory leak`);
+        req.rawBody = null; // Don't store large bodies in memory
+      }
     }
   }
 }));
 app.use(cookieParser());
 
 // ============================================
-// REQUEST LOGGING MIDDLEWARE - DEBUG SYNC ISSUES
+// REQUEST LOGGING & MEMORY MONITORING MIDDLEWARE
 // ============================================
-// Log ALL incoming API requests to track if requests reach server
+// Log ALL incoming API requests and track memory usage to identify leaks
 // This runs BEFORE authentication middleware
 app.use((req, res, next) => {
   // Only log API requests to reduce noise
   if (req.path.startsWith('/api/')) {
+    const startTime = Date.now();
+    const startMemory = process.memoryUsage();
+    const route = req.route ? req.route.path : req.path;
+    const method = req.method;
+    
+    // Log request start with memory
     const authHeader = req.headers.authorization || '';
     const authPreview = authHeader 
       ? (authHeader.length > 50 ? authHeader.substring(0, 50) + '...' : authHeader)
       : 'NO AUTH HEADER';
     
-    console.log('📨 INCOMING API REQUEST:', {
-      method: req.method,
-      path: req.path,
-      fullUrl: req.originalUrl || req.url,
-      hasAuthHeader: !!req.headers.authorization,
-      authHeaderPreview: authPreview,
-      contentType: req.headers['content-type'] || 'not set',
-      contentLength: req.headers['content-length'] || 'not set',
-      userAgent: req.get('user-agent')?.substring(0, 80) || 'not set',
-      ip: req.ip || req.connection?.remoteAddress || req.socket?.remoteAddress || 'unknown',
-      timestamp: new Date().toISOString(),
-      query: Object.keys(req.query).length > 0 ? req.query : 'none',
-      // For POST requests, log if body exists (without logging full body to avoid spam)
-      hasBody: !!req.body && Object.keys(req.body).length > 0,
-      bodyKeys: req.body && typeof req.body === 'object' ? Object.keys(req.body).slice(0, 10) : 'none'
-    });
+    console.log(`[REQUEST START] ${method} ${route || req.path} | Memory: ${Math.round(startMemory.heapUsed / 1024 / 1024)}MB | Timestamp: ${new Date().toISOString()}`);
+    
+    // Track response finish with memory
+    const originalSend = res.send;
+    res.send = function(data) {
+      const endTime = Date.now();
+      const endMemory = process.memoryUsage();
+      const duration = endTime - startTime;
+      const memoryDiff = endMemory.heapUsed - startMemory.heapUsed;
+      const memoryDiffMB = Math.round(memoryDiff / 1024 / 1024);
+      
+      if (memoryDiffMB > 50) {
+        console.log(`🚨 [MEMORY LEAK DETECTED] ${method} ${route || req.path} | Duration: ${duration}ms | Memory: +${memoryDiffMB}MB (${Math.round(startMemory.heapUsed / 1024 / 1024)}MB → ${Math.round(endMemory.heapUsed / 1024 / 1024)}MB) | Status: ${res.statusCode}`);
+      } else if (memoryDiffMB > 20) {
+        console.log(`⚠️  [MEMORY GROWTH] ${method} ${route || req.path} | Duration: ${duration}ms | Memory: +${memoryDiffMB}MB | Status: ${res.statusCode}`);
+      } else {
+        console.log(`✅ [REQUEST END] ${method} ${route || req.path} | Duration: ${duration}ms | Memory: ${memoryDiffMB >= 0 ? '+' : ''}${memoryDiffMB}MB | Status: ${res.statusCode}`);
+      }
+      
+      originalSend.call(this, data);
+    };
   }
   next();
 });
@@ -258,6 +287,7 @@ app.use('/api/qc-batch-config', qcBatchConfigRoutes);
 app.use('/api/polling-stations', pollingStationRoutes);
 app.use('/api/master-data', masterDataRoutes);
 app.use('/api/app-logs', require('./routes/appLogRoutes'));
+app.use('/api/app', appUpdateRoutes);
 
 // Note: Opines API routes removed - using Contact API instead
 

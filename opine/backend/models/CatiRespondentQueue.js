@@ -147,6 +147,8 @@ catiRespondentQueueSchema.index({ 'respondentContact.phone': 1, survey: 1 }); //
 // Optimized indexes for priority-based selection
 catiRespondentQueueSchema.index({ survey: 1, status: 1, 'respondentContact.ac': 1 }); // For AC-based queries
 catiRespondentQueueSchema.index({ survey: 1, status: 1, createdAt: 1 }); // For fallback queries
+// OPTIMIZATION: Composite index for priority-based queries with sorting (covers entire query)
+catiRespondentQueueSchema.index({ survey: 1, status: 1, 'respondentContact.ac': 1, createdAt: 1 }); // For AC-based queries with sorting
 
 module.exports = mongoose.model('CatiRespondentQueue', catiRespondentQueueSchema);
 

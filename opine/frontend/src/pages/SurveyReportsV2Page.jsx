@@ -69,8 +69,10 @@ const SurveyReportsV2Page = () => {
   const itemsPerPage = 15;
   
   // Filter states
+  // CRITICAL: Default to 'today' instead of 'all' to prevent memory leaks
+  // Loading all-time data on page load causes massive memory usage
   const [filters, setFilters] = useState({
-    dateRange: 'all',
+    dateRange: 'today', // Changed from 'all' to 'today' to prevent memory leaks
     startDate: '',
     endDate: '',
     status: 'approved_rejected_pending',
@@ -227,7 +229,7 @@ const SurveyReportsV2Page = () => {
 
   // Check if filters are default (no filters applied)
   const areFiltersDefault = useMemo(() => {
-    return filters.dateRange === 'all' &&
+    return filters.dateRange === 'today' && // Changed from 'all' to 'today' to match new default
       !filters.startDate &&
       !filters.endDate &&
       filters.status === 'approved_rejected_pending' &&
@@ -560,7 +562,7 @@ const SurveyReportsV2Page = () => {
   // Clear all filters
   const clearFilters = () => {
     setFilters({
-      dateRange: 'all',
+      dateRange: 'today', // Changed from 'all' to 'today' to prevent memory leaks
       startDate: '',
       endDate: '',
       status: 'approved_rejected_pending',

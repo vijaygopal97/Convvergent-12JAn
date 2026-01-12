@@ -461,8 +461,10 @@ const SurveyReportsPage = () => {
   const { showError } = useToast();
 
   // Filter states
+  // CRITICAL: Default to 'today' instead of 'all' to prevent memory leaks
+  // Loading all-time data on page load causes massive memory usage
   const [filters, setFilters] = useState({
-    dateRange: 'all', // 'today', 'week', 'month', 'all'
+    dateRange: 'today', // 'today', 'week', 'month', 'all' - Changed from 'all' to 'today' to prevent memory leaks
     startDate: '',
     endDate: '',
     status: 'approved_rejected_pending', // 'all', 'approved_rejected_pending', 'approved_pending', 'pending', 'Approved', 'Rejected'
@@ -774,8 +776,9 @@ const SurveyReportsPage = () => {
       console.log('🚀 Fetching analytics from backend with filters:', currentFilters);
       
       // Prepare filters for backend API
+      // CRITICAL: Default to 'today' instead of 'all' to prevent memory leaks
       const analyticsFilters = {
-        dateRange: currentFilters.dateRange || 'all',
+        dateRange: currentFilters.dateRange || 'today', // Changed from 'all' to 'today'
         startDate: currentFilters.startDate || '',
         endDate: currentFilters.endDate || '',
         status: currentFilters.status || 'approved_rejected_pending',
@@ -830,11 +833,12 @@ const SurveyReportsPage = () => {
         setSurvey(surveyData);
         
         // Fetch responses for dropdown population (AC, Interviewer filters)
-        // We still need responses for dropdowns, but we don't need all 10,000 for analytics
-        // Fetch a reasonable amount for dropdown population
+        // CRITICAL FIX: Reduced limit to prevent memory leaks
+        // We only need unique ACs and Interviewers for dropdowns, not all responses
+        // Backend now handles this efficiently
         const params = {
           page: 1,
-          limit: 10000, // Keep same limit for dropdown population (AC/Interviewer lists need all responses)
+          limit: 1000, // Reduced from 10000 to prevent memory leaks - enough for dropdown options
           status: 'approved_rejected_pending' // Fetch all statuses for dropdown population
         };
         
@@ -1387,8 +1391,9 @@ const SurveyReportsPage = () => {
 
     return responses.filter(response => {
       // Date range filter - Use LOCAL timezone (IST) for user's perspective
+      // Use startTime (interview date) instead of createdAt (sync date)
       if (filters.dateRange !== 'all') {
-        const responseDate = new Date(response.createdAt);
+        const responseDate = new Date(response.startTime || response.createdAt);
         const now = new Date();
         
         switch (filters.dateRange) {
@@ -1423,8 +1428,9 @@ const SurveyReportsPage = () => {
       }
 
       // Custom date range filter - Use local timezone
+      // Use startTime (interview date) instead of createdAt (sync date)
       if (filters.startDate && filters.endDate) {
-        const responseDate = new Date(response.createdAt);
+        const responseDate = new Date(response.startTime || response.createdAt);
         // Parse dates in local timezone
         const startDate = new Date(filters.startDate);
         startDate.setHours(0, 0, 0, 0);
@@ -2384,8 +2390,8 @@ const SurveyReportsPage = () => {
         ageMap.set(ageGroup, (ageMap.get(ageGroup) || 0) + 1);
       }
 
-      // Daily stats
-      const date = new Date(response.createdAt).toDateString();
+      // Daily stats - Use startTime (interview date) instead of createdAt (sync date)
+      const date = new Date(response.startTime || response.createdAt).toDateString();
       dailyMap.set(date, (dailyMap.get(date) || 0) + 1);
     });
 
@@ -3022,7 +3028,7 @@ const SurveyReportsPage = () => {
   // Clear all filters
   const clearFilters = () => {
     setFilters({
-      dateRange: 'all',
+      dateRange: 'today', // Changed from 'all' to 'today' to prevent memory leaks
       startDate: '',
       endDate: '',
       status: 'all', // Default to all (Approved + Rejected)

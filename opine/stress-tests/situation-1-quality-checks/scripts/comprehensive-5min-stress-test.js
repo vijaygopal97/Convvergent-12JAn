@@ -1,0 +1,971 @@
+/**
+ * Comprehensive 5-Minute Prolonged Stress Test (Scaled Down)
+ * 
+ * Emulates 5 concurrent user scenarios for 5 minutes:
+ * 1. 50 Quality Agents starting CAPI/CATI QC per second (continuous)
+ * 2. 50 CATI Interviewers starting CATI interviews per second (continuous)
+ * 3. 50 CAPI Interviewers starting CAPI interviews per second (continuous)
+ * 4. 10 Project Managers opening reports page per second (continuous)
+ * 5. 2 Company Admins opening company reports page per second (continuous)
+ */
+
+require('dotenv').config({ path: require('path').join(__dirname, '../../../backend/.env') });
+const axios = require('axios');
+const mongoose = require('mongoose');
+const fs = require('fs');
+const path = require('path');
+
+const API_BASE_URL = process.env.API_BASE_URL || 'https://convo.convergentview.com';
+const SURVEY_ID = '68fd1915d41841da463f0d46';
+const TEST_DURATION_SECONDS = 300; // 5 minutes
+const TEST_MARKER = 'STRESS_TEST_5MIN';
+
+// Track quality checks for reversion
+const qualityCheckTracker = {
+  checks: new Map(), // responseId -> { originalStatus, originalVerificationData, originalReviewAssignment }
+  addCheck(responseId, originalData) {
+    if (!this.checks.has(responseId)) {
+      this.checks.set(responseId, originalData);
+    }
+  },
+  getAllChecks() {
+    return Array.from(this.checks.entries());
+  },
+  clear() {
+    this.checks.clear();
+  }
+};
+
+// User credentials
+const QUALITY_AGENT = { email: 'adarshquality123@gmail.com', password: 'Vijaygopal97' };
+const CATI_INTERVIEWER = { email: 'vishalinterviewer@gmail.com', password: 'Demopassword@123' };
+const CAPI_INTERVIEWER = { email: 'ajithinterviewer@gmail.com', password: 'Demopassword@123' };
+const COMPANY_ADMIN = { email: 'ajayadarsh@gmail.com', password: 'Vijaygopal97' };
+
+class UserEmulator {
+  constructor(userType, index, monitor) {
+    this.userType = userType;
+    this.index = index;
+    this.monitor = monitor;
+    this.token = null;
+    this.stats = {
+      requests: 0,
+      successes: 0,
+      failures: 0,
+      totalTime: 0
+    };
+  }
+
+  async login() {
+    let credentials;
+    switch (this.userType) {
+      case 'quality_agent':
+        credentials = QUALITY_AGENT;
+        break;
+      case 'cati_interviewer':
+        credentials = CATI_INTERVIEWER;
+        break;
+      case 'capi_interviewer':
+        credentials = CAPI_INTERVIEWER;
+        break;
+      case 'company_admin':
+        credentials = COMPANY_ADMIN;
+        break;
+      case 'project_manager':
+        // Project managers use company admin account for testing (same permissions)
+        credentials = COMPANY_ADMIN;
+        break;
+      default:
+        throw new Error(`Unknown user type: ${this.userType}`);
+    }
+
+    try {
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, credentials, { timeout: 30000 });
+      if (response.data.success) {
+        this.token = response.data.token || response.data.data?.token;
+        return true;
+      }
+      return false;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async executeAction() {
+    const startTime = Date.now();
+    this.stats.requests++;
+    
+    try {
+      let success = false;
+      
+      switch (this.userType) {
+        case 'quality_agent':
+          success = await this.qualityAgentAction();
+          break;
+        case 'cati_interviewer':
+          success = await this.catiInterviewerAction();
+          break;
+        case 'capi_interviewer':
+          success = await this.capiInterviewerAction();
+          break;
+        case 'project_manager':
+          success = await this.projectManagerAction();
+          break;
+        case 'company_admin':
+          success = await this.companyAdminAction();
+          break;
+      }
+      
+      const responseTime = Date.now() - startTime;
+      this.stats.totalTime += responseTime;
+      
+      if (this.monitor && typeof this.monitor.recordAPICall === 'function') {
+        this.monitor.recordAPICall(responseTime);
+      }
+      
+      // Track success/failure
+      if (success === true) {
+        this.stats.successes++;
+      } else {
+        this.stats.failures++;
+      }
+      
+      return success;
+    } catch (error) {
+      const responseTime = Date.now() - startTime;
+      this.stats.totalTime += responseTime;
+      this.stats.failures++;
+      if (this.monitor && typeof this.monitor.recordAPICall === 'function') {
+        this.monitor.recordAPICall(responseTime);
+      }
+      return false;
+    }
+  }
+
+  async qualityAgentAction() {
+    // 50% CAPI, 50% CATI
+    const interviewMode = this.index % 2 === 0 ? 'capi' : 'cati';
+    
+    try {
+      // Get next review assignment
+      const response = await axios.get(`${API_BASE_URL}/api/survey-responses/next-review`, {
+        headers: { 'Authorization': `Bearer ${this.token}` },
+        params: { surveyId: SURVEY_ID, interviewMode },
+        timeout: 30000,
+        validateStatus: (status) => status < 500 // Accept 4xx as valid responses
+      });
+      
+      // Check if we got a successful response (success: true)
+      if (response.data && response.data.success === true && response.data.data) {
+        const data = response.data.data;
+        const assignment = data.interview || data;
+        // Try multiple possible fields for responseId
+        const responseId = assignment.responseId || assignment._id || assignment.id || data.responseId;
+        
+        if (responseId) {
+          // Track original state from assignment data (more efficient than fetching)
+          // The assignment should contain the current status
+          const currentStatus = assignment.status || 'Pending_Approval';
+          qualityCheckTracker.addCheck(responseId, {
+            originalStatus: currentStatus,
+            originalVerificationData: assignment.verificationData || null,
+            originalReviewAssignment: assignment.reviewAssignment || null,
+            trackedAt: new Date()
+          });
+          
+          // Submit verification
+          const criteria = this.generateVerificationCriteria();
+          const status = Math.random() < 0.7 ? 'approved' : 'rejected';
+          
+          const verifyResponse = await axios.post(
+            `${API_BASE_URL}/api/survey-responses/verify`,
+            {
+              responseId,
+              status,
+              verificationCriteria: criteria,
+              feedback: status === 'rejected' ? 'Test rejection' : ''
+            },
+            {
+              headers: { 'Authorization': `Bearer ${this.token}` },
+              timeout: 60000,
+              validateStatus: (status) => status < 500 // Accept 4xx as valid responses
+            }
+          );
+          
+          // Return true if verification was successful (success: true)
+          return verifyResponse.data && verifyResponse.data.success === true;
+        }
+      }
+      return false;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async catiInterviewerAction() {
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/api/cati-interview/start/${SURVEY_ID}`,
+        {},
+        {
+          headers: { 'Authorization': `Bearer ${this.token}` },
+          timeout: 30000,
+          validateStatus: (status) => status < 500 // Accept 4xx as valid responses
+        }
+      );
+      
+      // Success = API returned success:true (respondent assigned and session created)
+      return response.data && response.data.success === true;
+    } catch (error) {
+      if (this.stats.requests <= 5 && this.index === 0) {
+        console.log(`[CATI ACTION ${this.stats.requests}] Error: ${error.message}, returning false`);
+      }
+      return false;
+    }
+  }
+
+  async capiInterviewerAction() {
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/api/survey-responses/start/${SURVEY_ID}`,
+        {},
+        {
+          headers: { 'Authorization': `Bearer ${this.token}` },
+          timeout: 30000,
+          validateStatus: (status) => status < 500 // Accept 4xx as valid responses
+        }
+      );
+      
+      // Check if response indicates success (success: true)
+      return response.data && response.data.success === true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async projectManagerAction() {
+    try {
+      // Load reports page - get survey analytics (same as company admin for this survey)
+      const response = await axios.get(
+        `${API_BASE_URL}/api/surveys/${SURVEY_ID}/analytics-v2`,
+        {
+          headers: { 'Authorization': `Bearer ${this.token}` },
+          params: { timeRange: 'all' },
+          timeout: 60000,
+          validateStatus: (status) => status < 500 // Accept 4xx as valid responses
+        }
+      );
+      
+      // Check if response indicates success (success: true)
+      return response.data && response.data.success === true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async companyAdminAction() {
+    try {
+      // Load company reports page - get survey responses reports
+      const response = await axios.get(
+        `${API_BASE_URL}/api/surveys/${SURVEY_ID}/analytics-v2`,
+        {
+          headers: { 'Authorization': `Bearer ${this.token}` },
+          params: { timeRange: 'all' },
+          timeout: 60000,
+          validateStatus: (status) => status < 500 // Accept 4xx as valid responses
+        }
+      );
+      
+      // Check if response indicates success (success: true)
+      return response.data && response.data.success === true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  generateVerificationCriteria() {
+    return {
+      audioStatus: ['1', '2', '3', '4'][Math.floor(Math.random() * 4)],
+      genderMatching: ['1', '2', '3'][Math.floor(Math.random() * 3)],
+      upcomingElectionsMatching: ['1', '2', '3'][Math.floor(Math.random() * 3)],
+      previousElectionsMatching: ['1', '2', '3'][Math.floor(Math.random() * 3)],
+      previousLoksabhaElectionsMatching: ['1', '2', '3'][Math.floor(Math.random() * 3)],
+      nameMatching: ['1', '2', '3'][Math.floor(Math.random() * 3)],
+      ageMatching: ['1', '2', '3'][Math.floor(Math.random() * 3)],
+      phoneNumberAsked: ['1', '2'][Math.floor(Math.random() * 2)],
+      audioQuality: ['1', '2', '3', '4'][Math.floor(Math.random() * 4)],
+      questionAccuracy: ['1', '2', '3'][Math.floor(Math.random() * 3)],
+      dataAccuracy: ['1', '2', '3'][Math.floor(Math.random() * 3)],
+      locationMatch: ['1', '2', '3'][Math.floor(Math.random() * 3)]
+    };
+  }
+
+  getStats() {
+    return {
+      requests: this.stats.requests,
+      successes: this.stats.successes,
+      failures: this.stats.failures,
+      totalTime: this.stats.totalTime,
+      avgResponseTime: this.stats.requests > 0 ? (this.stats.totalTime / this.stats.requests).toFixed(2) : 0,
+      successRate: this.stats.requests > 0 ? ((this.stats.successes / this.stats.requests) * 100).toFixed(2) : 0
+    };
+  }
+}
+
+class ComprehensiveStressTest {
+  constructor() {
+    this.testId = `comprehensive-5min-${Date.now()}`;
+    this.reportDir = path.join(__dirname, '../reports');
+    this.emulators = {
+      qualityAgents: [],
+      catiInterviewers: [],
+      capiInterviewers: [],
+      projectManagers: [],
+      companyAdmins: []
+    };
+    this.isRunning = false;
+    this.testStartTime = null; // Track when test starts for accurate cleanup
+  }
+
+  async connectMongoDB() {
+    console.log('🔌 Connecting to MongoDB...');
+    
+    await mongoose.connect(process.env.MONGODB_URI, {
+      maxPoolSize: 100,
+      minPoolSize: 10,
+      serverSelectionTimeoutMS: 30000,
+      readPreference: "secondaryPreferred",
+      maxStalenessSeconds: 90,
+      socketTimeoutMS: 45000,
+      connectTimeoutMS: 10000
+    });
+    
+    await new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject(new Error('MongoDB connection timeout')), 30000);
+      
+      if (mongoose.connection.readyState === 1) {
+        clearTimeout(timeout);
+        mongoose.connection.db.admin().ping().then(() => resolve()).catch(reject);
+      } else {
+        mongoose.connection.once('connected', () => {
+          clearTimeout(timeout);
+          mongoose.connection.db.admin().ping().then(() => resolve()).catch(reject);
+        });
+        mongoose.connection.once('error', (err) => {
+          clearTimeout(timeout);
+          reject(err);
+        });
+      }
+    });
+    
+    console.log('✅ Connected to MongoDB\n');
+    await new Promise(resolve => setTimeout(resolve, 500));
+  }
+
+  async createTestData() {
+    console.log('📝 Creating test data for quality checks...');
+    
+    const capiInterviewer = await mongoose.connection.db.collection('users').findOne({ 
+      email: 'ajithinterviewer@gmail.com',
+      userType: 'interviewer'
+    });
+    
+    const catiInterviewer = await mongoose.connection.db.collection('users').findOne({ 
+      email: 'vishalinterviewer@gmail.com',
+      userType: 'interviewer'
+    });
+
+    if (!capiInterviewer || !catiInterviewer) {
+      throw new Error('Test interviewers not found');
+    }
+
+    // Create 100 responses (50 CAPI, 50 CATI) for continuous testing
+    const responses = [];
+    for (let i = 0; i < 50; i++) {
+      responses.push({
+        survey: new mongoose.Types.ObjectId(SURVEY_ID),
+        interviewer: capiInterviewer._id,
+        status: 'Pending_Approval',
+        interviewMode: 'capi',
+        sessionId: `${TEST_MARKER}-capi-${Date.now()}-${i}`,
+        startTime: new Date(),
+        endTime: new Date(),
+        totalTimeSpent: 300 + Math.floor(Math.random() * 200),
+        responses: [{ sectionIndex: 0, questionIndex: 0, questionId: 'age', questionType: 'numeric', response: 25 + Math.floor(Math.random() * 50), responseTime: 1000 }],
+        selectedAC: 'Ranibandh',
+        location: { latitude: 22.866141660215824, longitude: 86.78307081700281, accuracy: 50 },
+        metadata: { testMarker: TEST_MARKER, testIndex: i },
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
+      
+      responses.push({
+        survey: new mongoose.Types.ObjectId(SURVEY_ID),
+        interviewer: catiInterviewer._id,
+        status: 'Pending_Approval',
+        interviewMode: 'cati',
+        sessionId: `${TEST_MARKER}-cati-${Date.now()}-${i}`,
+        startTime: new Date(),
+        endTime: new Date(),
+        totalTimeSpent: 200 + Math.floor(Math.random() * 150),
+        responses: [{ sectionIndex: 0, questionIndex: 0, questionId: 'age', questionType: 'numeric', response: 25 + Math.floor(Math.random() * 50), responseTime: 800 }],
+        selectedAC: 'Ranibandh',
+        location: { latitude: 22.866141660215824, longitude: 86.78307081700281, accuracy: 100 },
+        metadata: { testMarker: TEST_MARKER, testIndex: 50 + i },
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
+    }
+
+    const responsesCollection = mongoose.connection.db.collection('surveyresponses');
+    const batchSize = 100;
+    let inserted = 0;
+    
+    for (let i = 0; i < responses.length; i += batchSize) {
+      const batch = responses.slice(i, i + batchSize);
+      await responsesCollection.insertMany(batch);
+      inserted += batch.length;
+      console.log(`   ✅ Created ${inserted}/${responses.length} responses`);
+    }
+
+    console.log(`\n✅ Created ${inserted} test responses\n`);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+  }
+
+  async initializeEmulators(monitor) {
+    console.log('👥 Initializing emulators (CONCURRENT)...\n');
+    
+    const loginBatch = async (emulators, groupName, batchSize = 50) => {
+      let initialized = 0;
+      const total = emulators.length;
+      
+      try {
+        for (let i = 0; i < emulators.length; i += batchSize) {
+          const batch = emulators.slice(i, i + batchSize);
+          const loginPromises = batch.map(emulator => 
+            emulator.login().catch(err => {
+              // Silent fail - just return false
+              return false;
+            })
+          );
+          
+          const results = await Promise.allSettled(loginPromises);
+          const successCount = results.filter(r => r.status === 'fulfilled' && r.value === true).length;
+          initialized += batch.length;
+          
+          if (initialized % 50 === 0 || initialized === total) {
+            console.log(`   ${groupName}: ${initialized}/${total} initialized (${successCount} successful logins)`);
+          }
+        }
+      } catch (error) {
+        console.error(`Error in loginBatch for ${groupName}:`, error.message);
+      }
+      
+      return initialized;
+    };
+    
+    // Create all emulators first
+    console.log('📝 Creating emulator instances...');
+    for (let i = 0; i < 50; i++) {
+      this.emulators.qualityAgents.push(new UserEmulator('quality_agent', i, monitor));
+    }
+    for (let i = 0; i < 50; i++) {
+      this.emulators.catiInterviewers.push(new UserEmulator('cati_interviewer', i, monitor));
+    }
+    for (let i = 0; i < 50; i++) {
+      this.emulators.capiInterviewers.push(new UserEmulator('capi_interviewer', i, monitor));
+    }
+    for (let i = 0; i < 10; i++) {
+      this.emulators.projectManagers.push(new UserEmulator('project_manager', i, monitor));
+    }
+    for (let i = 0; i < 2; i++) {
+      this.emulators.companyAdmins.push(new UserEmulator('company_admin', i, monitor));
+    }
+    console.log('✅ All emulator instances created\n');
+    
+    // Login all concurrently in batches
+    console.log('🔐 Logging in emulators (concurrent batches)...\n');
+    
+    // Run login batches with timeout protection
+    const loginPromises = [
+      loginBatch(this.emulators.qualityAgents, 'Quality Agents', 50),
+      loginBatch(this.emulators.catiInterviewers, 'CATI Interviewers', 50),
+      loginBatch(this.emulators.capiInterviewers, 'CAPI Interviewers', 50),
+      loginBatch(this.emulators.projectManagers, 'Project Managers', 10),
+      loginBatch(this.emulators.companyAdmins, 'Company Admins', 2)
+    ];
+    
+    // Add timeout to prevent hanging
+    const timeoutPromise = new Promise((resolve) => {
+      setTimeout(() => {
+        console.log('⚠️  Login batch timeout reached, continuing with initialized emulators...');
+        resolve();
+      }, 300000); // 5 minute timeout
+    });
+    
+    await Promise.race([
+      Promise.allSettled(loginPromises),
+      timeoutPromise
+    ]);
+    
+    // Filter out failed logins
+    this.emulators.qualityAgents = this.emulators.qualityAgents.filter(e => e.token);
+    this.emulators.catiInterviewers = this.emulators.catiInterviewers.filter(e => e.token);
+    this.emulators.capiInterviewers = this.emulators.capiInterviewers.filter(e => e.token);
+    this.emulators.projectManagers = this.emulators.projectManagers.filter(e => e.token);
+    this.emulators.companyAdmins = this.emulators.companyAdmins.filter(e => e.token);
+    
+    console.log('\n✅ Emulator initialization complete!');
+    console.log(`   Quality Agents: ${this.emulators.qualityAgents.length}/50`);
+    console.log(`   CATI Interviewers: ${this.emulators.catiInterviewers.length}/50`);
+    console.log(`   CAPI Interviewers: ${this.emulators.capiInterviewers.length}/50`);
+    console.log(`   Project Managers: ${this.emulators.projectManagers.length}/10`);
+    console.log(`   Company Admins: ${this.emulators.companyAdmins.length}/2\n`);
+  }
+
+  async runContinuousLoad(monitor) {
+    console.log(`🚀 Starting 5-minute continuous stress test...\n`);
+    
+    this.isRunning = true;
+    const startTime = Date.now();
+    const endTime = startTime + (TEST_DURATION_SECONDS * 1000);
+    
+    // Run each user type continuously
+    const promises = [];
+    
+    // Quality Agents: 50 per second
+    promises.push(this.runUserGroup(this.emulators.qualityAgents, 'Quality Agents', 50));
+    
+    // CATI Interviewers: 50 per second
+    promises.push(this.runUserGroup(this.emulators.catiInterviewers, 'CATI Interviewers', 50));
+    
+    // CAPI Interviewers: 50 per second
+    promises.push(this.runUserGroup(this.emulators.capiInterviewers, 'CAPI Interviewers', 50));
+    
+    // Project Managers: 10 per second
+    promises.push(this.runUserGroup(this.emulators.projectManagers, 'Project Managers', 10));
+    
+    // Company Admins: 2 per second
+    promises.push(this.runUserGroup(this.emulators.companyAdmins, 'Company Admins', 2));
+    
+    // Progress reporting
+    const progressInterval = setInterval(() => {
+      const elapsed = ((Date.now() - startTime) / 1000).toFixed(0);
+      const remaining = TEST_DURATION_SECONDS - elapsed;
+      
+      if (remaining > 0) {
+        const qaStats = this.getGroupStats(this.emulators.qualityAgents);
+        const catiStats = this.getGroupStats(this.emulators.catiInterviewers);
+        const capiStats = this.getGroupStats(this.emulators.capiInterviewers);
+        const pmStats = this.getGroupStats(this.emulators.projectManagers);
+        const adminStats = this.getGroupStats(this.emulators.companyAdmins);
+        
+        console.log(`\n⏱️  [${elapsed}s/${TEST_DURATION_SECONDS}s] Progress Update:`);
+        console.log(`   Quality Agents: ${qaStats.totalRequests} requests | Success: ${qaStats.successRate}%`);
+        console.log(`   CATI Interviewers: ${catiStats.totalRequests} requests | Success: ${catiStats.successRate}%`);
+        console.log(`   CAPI Interviewers: ${capiStats.totalRequests} requests | Success: ${capiStats.successRate}%`);
+        console.log(`   Project Managers: ${pmStats.totalRequests} requests | Success: ${pmStats.successRate}%`);
+        console.log(`   Company Admins: ${adminStats.totalRequests} requests | Success: ${adminStats.successRate}%`);
+      }
+    }, 30000); // Every 30 seconds
+    
+    // Wait for test duration
+    await new Promise(resolve => setTimeout(resolve, TEST_DURATION_SECONDS * 1000));
+    
+    this.isRunning = false;
+    clearInterval(progressInterval);
+    
+    // Wait a bit for ongoing requests to complete
+    await Promise.allSettled(promises);
+    
+    console.log('\n✅ Stress test completed!\n');
+  }
+
+  async runUserGroup(emulators, groupName, requestsPerSecond) {
+    if (emulators.length === 0) {
+      console.log(`⚠️  No ${groupName} emulators available, skipping...`);
+      return;
+    }
+    
+    const interval = 1000 / requestsPerSecond; // ms between requests
+    let requestCounter = 0;
+    
+    while (this.isRunning) {
+      const batchStart = Date.now();
+      
+      // Execute batch of requests (rotate through emulators)
+      const batchSize = Math.min(requestsPerSecond, emulators.length);
+      const selectedEmulators = [];
+      
+      // Round-robin selection
+      for (let i = 0; i < batchSize; i++) {
+        const index = (requestCounter + i) % emulators.length;
+        selectedEmulators.push(emulators[index]);
+      }
+      
+      requestCounter = (requestCounter + batchSize) % emulators.length;
+      
+      // Execute with timeout protection
+      // Add small random jitter (0-50ms) to reduce race conditions
+      // This is a common pattern in production stress tests (e.g., AWS, Google)
+      const batchPromises = selectedEmulators.map((emulator, idx) => {
+        const jitter = Math.random() * 50; // 0-50ms random delay
+        return new Promise(resolve => {
+          setTimeout(() => {
+            // CRITICAL: Don't wrap in Promise.race that swallows return values
+            // executeAction updates stats internally, so we just need to wait for it
+            emulator.executeAction()
+              .catch((error) => {
+                // Only catch actual errors, not failed API calls (those return false)
+                console.error(`Error in executeAction for ${emulator.userType}:`, error.message);
+                return false;
+              })
+              .then(resolve);
+          }, jitter);
+        });
+      });
+      
+      await Promise.allSettled(batchPromises);
+      
+      // Wait to maintain rate
+      const batchTime = Date.now() - batchStart;
+      const waitTime = Math.max(0, interval - batchTime);
+      await new Promise(resolve => setTimeout(resolve, waitTime));
+    }
+  }
+
+  getGroupStats(emulators) {
+    const stats = emulators.reduce((acc, emulator) => {
+      const s = emulator.getStats();
+      acc.totalRequests += s.requests;
+      acc.totalSuccesses += s.successes;
+      acc.totalFailures += s.failures;
+      acc.totalTime += s.totalTime;
+      return acc;
+    }, { totalRequests: 0, totalSuccesses: 0, totalFailures: 0, totalTime: 0 });
+    
+    // DEBUG: Log aggregation for debugging
+    // Remove this after confirming stats are correct
+    
+    return {
+      ...stats,
+      successRate: stats.totalRequests > 0 ? ((stats.totalSuccesses / stats.totalRequests) * 100).toFixed(2) : 0,
+      avgResponseTime: stats.totalRequests > 0 ? (stats.totalTime / stats.totalRequests).toFixed(2) : 0
+    };
+  }
+
+  async cleanupTestData() {
+    console.log('\n🧹 Cleaning up test data...');
+    
+    let deletedCount = 0;
+    let revertedCount = 0;
+    // Use testStartTime if available, otherwise use 2x test duration as safety margin
+    const testStartTime = this.testStartTime 
+      ? new Date(this.testStartTime - 60000) // 1 minute before test start as safety margin
+      : new Date(Date.now() - (TEST_DURATION_SECONDS * 1000 * 2));
+    
+    try {
+      const responsesCollection = mongoose.connection.db.collection('surveyresponses');
+      const usersCollection = mongoose.connection.db.collection('users');
+      
+      // Step 1: Revert all quality checks tracked by qualityCheckTracker
+      console.log('🔄 Step 1: Reverting quality checks from tracker...');
+      const qualityChecks = qualityCheckTracker.getAllChecks();
+      console.log(`   Found ${qualityChecks.length} quality checks to revert`);
+      
+      if (qualityChecks.length > 0) {
+        for (const [responseId, originalData] of qualityChecks) {
+          try {
+            const updateData = {
+              $set: {
+                status: originalData.originalStatus || 'Pending_Approval'
+              }
+            };
+            
+            // Restore verificationData if it existed
+            if (originalData.originalVerificationData !== null && originalData.originalVerificationData !== undefined) {
+              updateData.$set.verificationData = originalData.originalVerificationData;
+            } else {
+              // Remove verificationData if it didn't exist originally
+              updateData.$unset = updateData.$unset || {};
+              updateData.$unset.verificationData = '';
+            }
+            
+            // Restore reviewAssignment if it existed
+            if (originalData.originalReviewAssignment !== null && originalData.originalReviewAssignment !== undefined) {
+              updateData.$set.reviewAssignment = originalData.originalReviewAssignment;
+            } else {
+              // Remove reviewAssignment if it didn't exist originally
+              updateData.$unset = updateData.$unset || {};
+              updateData.$unset.reviewAssignment = '';
+            }
+            
+            const result = await responsesCollection.updateOne(
+              { responseId: responseId },
+              updateData
+            );
+            
+            if (result.modifiedCount > 0) {
+              revertedCount++;
+            }
+          } catch (revertError) {
+            console.error(`   ⚠️  Failed to revert ${responseId}:`, revertError.message);
+          }
+        }
+        
+        console.log(`   ✅ Reverted ${revertedCount} quality checks from tracker`);
+      }
+      
+      // Step 2: Revert all reviews done by test quality agent during test run
+      console.log('🔄 Step 2: Reverting reviews done by test quality agent...');
+      const qualityAgent = await usersCollection.findOne({ 
+        email: QUALITY_AGENT.email,
+        userType: 'quality_agent'
+      });
+      
+      if (qualityAgent) {
+        const reviewsResult = await responsesCollection.updateMany(
+          {
+            'verificationData.reviewer': qualityAgent._id,
+            status: { $in: ['Approved', 'Rejected'] },
+            createdAt: { $gte: testStartTime }
+          },
+          {
+            $set: { status: 'Pending_Approval' },
+            $unset: { verificationData: '', reviewAssignment: '' }
+          }
+        );
+        console.log(`   ✅ Reverted ${reviewsResult.modifiedCount} additional reviews by test quality agent`);
+        revertedCount += reviewsResult.modifiedCount;
+      }
+      
+      // Step 3: Delete test responses with test marker
+      console.log('🗑️  Step 3: Deleting test responses with test marker...');
+      const markerResult = await responsesCollection.deleteMany({
+        'metadata.testMarker': TEST_MARKER
+      });
+      deletedCount += markerResult.deletedCount;
+      console.log(`   ✅ Deleted ${markerResult.deletedCount} test responses with marker`);
+      
+      // Step 4: Delete responses created by test interviewers during test run
+      console.log('🗑️  Step 4: Deleting responses created by test interviewers...');
+      const capiInterviewer = await usersCollection.findOne({ 
+        email: CAPI_INTERVIEWER.email,
+        userType: 'interviewer'
+      });
+      const catiInterviewer = await usersCollection.findOne({ 
+        email: CATI_INTERVIEWER.email,
+        userType: 'interviewer'
+      });
+      
+      const interviewerIds = [];
+      if (capiInterviewer) interviewerIds.push(capiInterviewer._id);
+      if (catiInterviewer) interviewerIds.push(catiInterviewer._id);
+      
+      if (interviewerIds.length > 0) {
+        const interviewerResult = await responsesCollection.deleteMany({
+          interviewer: { $in: interviewerIds },
+          createdAt: { $gte: new Date(testStartTime) },
+          survey: new mongoose.Types.ObjectId(SURVEY_ID)
+        });
+        deletedCount += interviewerResult.deletedCount;
+        console.log(`   ✅ Deleted ${interviewerResult.deletedCount} responses created by test interviewers`);
+      }
+      
+      // Clear tracker
+      qualityCheckTracker.clear();
+      
+      console.log(`\n✅ Cleanup complete: ${revertedCount} quality checks reverted, ${deletedCount} test responses deleted\n`);
+      return { deletedCount, revertedCount };
+    } catch (error) {
+      console.error('❌ Error cleaning up:', error.message);
+      console.error(error.stack);
+      return { deletedCount, revertedCount };
+    }
+  }
+
+  async run() {
+    const SystemMonitor = require('./monitor-system');
+    const monitor = new SystemMonitor(this.testId, this.reportDir);
+    
+    try {
+      if (!fs.existsSync(this.reportDir)) {
+        fs.mkdirSync(this.reportDir, { recursive: true });
+      }
+      
+      monitor.start(1000);
+      
+      await this.connectMongoDB();
+      
+      // Create test data (ensure we have enough for continuous testing)
+      await this.createTestData();
+      
+      // Initialize emulators with better error handling
+      console.log('\n⏳ Initializing emulators (this may take a few minutes)...\n');
+      await this.initializeEmulators(monitor);
+      
+      // Record test start time for accurate cleanup
+      this.testStartTime = Date.now();
+      
+      // Verify we have enough emulators
+      const totalEmulators = 
+        this.emulators.qualityAgents.length +
+        this.emulators.catiInterviewers.length +
+        this.emulators.capiInterviewers.length +
+        this.emulators.projectManagers.length +
+        this.emulators.companyAdmins.length;
+      
+      if (totalEmulators < 20) {
+        console.warn(`⚠️  Warning: Only ${totalEmulators} emulators initialized. Continuing with available emulators...`);
+      }
+      
+      console.log(`\n✅ Ready to start stress test with ${totalEmulators} emulators\n`);
+      
+      // Run continuous load for full 5 minutes
+      await this.runContinuousLoad(monitor);
+      
+      const metrics = monitor.stop();
+      
+      // Get final stats
+      const finalStats = {
+        qualityAgents: this.getGroupStats(this.emulators.qualityAgents),
+        catiInterviewers: this.getGroupStats(this.emulators.catiInterviewers),
+        capiInterviewers: this.getGroupStats(this.emulators.capiInterviewers),
+        projectManagers: this.getGroupStats(this.emulators.projectManagers),
+        companyAdmins: this.getGroupStats(this.emulators.companyAdmins)
+      };
+      
+      const cleanupResult = await this.cleanupTestData();
+      const deletedCount = cleanupResult.deletedCount || 0;
+      const revertedCount = cleanupResult.revertedCount || 0;
+      
+      // Save results
+      const resultsFile = path.join(this.reportDir, `results-${this.testId}.json`);
+      fs.writeFileSync(resultsFile, JSON.stringify({
+        testId: this.testId,
+        timestamp: new Date().toISOString(),
+        surveyId: SURVEY_ID,
+        testDuration: TEST_DURATION_SECONDS,
+        cleanup: {
+          deletedResponses: deletedCount,
+          revertedQualityChecks: revertedCount
+        },
+        finalStats,
+        metrics: metrics || {}
+      }, null, 2));
+      
+      // Generate report
+      let summaryReportFile = null;
+      try {
+        const ReportGenerator = require('./generate-report');
+        const generator = new ReportGenerator(this.testId, this.reportDir);
+        summaryReportFile = await generator.generate();
+      } catch (reportError) {
+        console.error('⚠️  Report generation error:', reportError.message);
+      }
+      
+      console.log('\n📊 Final Statistics:');
+      console.log(`   Quality Agents: ${finalStats.qualityAgents.totalRequests} requests | ${finalStats.qualityAgents.successRate.toFixed(2)}% success`);
+      console.log(`   CATI Interviewers: ${finalStats.catiInterviewers.totalRequests} requests | ${finalStats.catiInterviewers.successRate.toFixed(2)}% success`);
+      console.log(`   CAPI Interviewers: ${finalStats.capiInterviewers.totalRequests} requests | ${finalStats.capiInterviewers.successRate.toFixed(2)}% success`);
+      console.log(`   Project Managers: ${finalStats.projectManagers.totalRequests} requests | ${finalStats.projectManagers.successRate.toFixed(2)}% success`);
+      console.log(`   Company Admins: ${finalStats.companyAdmins.totalRequests} requests | ${finalStats.companyAdmins.successRate.toFixed(2)}% success`);
+      console.log(`\n📄 Results JSON: ${resultsFile}`);
+      console.log(`📊 Metrics JSON: ${monitor.metricsFile}`);
+      if (summaryReportFile) {
+        console.log(`\n📋 Summary Report (Markdown): ${summaryReportFile}`);
+        console.log(`   View with: cat ${summaryReportFile}`);
+      }
+      
+      await mongoose.disconnect();
+      process.exit(0);
+    } catch (error) {
+      monitor.stop();
+      console.error('\n❌ Error:', error);
+      
+      // ALWAYS cleanup test data on error
+      console.log('\n🧹 Attempting cleanup after error...');
+      try {
+        const deletedCount = await this.cleanupTestData();
+        console.log(`✅ Cleaned up ${deletedCount} test responses\n`);
+      } catch (cleanupError) {
+        console.error('⚠️  Cleanup error:', cleanupError.message);
+        // Try direct MongoDB cleanup
+        try {
+          const db = mongoose.connection.db;
+          const result = await db.collection('surveyresponses').deleteMany({
+            'metadata.testMarker': TEST_MARKER
+          });
+          console.log(`✅ Cleaned up ${result.deletedCount} responses via direct MongoDB operation\n`);
+        } catch (directCleanupError) {
+          console.error('❌ Direct cleanup failed:', directCleanupError.message);
+          console.error('⚠️  Please run cleanup-all-test-data.js manually to clean up test data\n');
+        }
+      }
+      
+      await mongoose.disconnect();
+      process.exit(1);
+    }
+  }
+}
+
+if (require.main === module) {
+  const test = new ComprehensiveStressTest();
+  
+  // CRITICAL: Ensure cleanup runs on manual stop (Ctrl+C, kill, etc.)
+  let cleanupInProgress = false;
+  const gracefulShutdown = async (signal) => {
+    if (cleanupInProgress) {
+      console.log('\n⚠️  Cleanup already in progress, please wait...');
+      return;
+    }
+    
+    cleanupInProgress = true;
+    console.log(`\n\n🛑 Received ${signal} signal - Starting cleanup...`);
+    
+    try {
+      // Ensure MongoDB is connected for cleanup
+      if (mongoose.connection.readyState === 0) {
+        await test.connectMongoDB();
+      }
+      
+      const cleanupResult = await test.cleanupTestData();
+      console.log(`\n✅ Cleanup complete:`);
+      console.log(`   - Reverted ${cleanupResult.revertedCount || 0} quality checks`);
+      console.log(`   - Deleted ${cleanupResult.deletedCount || 0} test responses`);
+      
+      await mongoose.disconnect();
+      console.log('\n✅ Graceful shutdown complete\n');
+      process.exit(0);
+    } catch (error) {
+      console.error('\n❌ Error during cleanup:', error.message);
+      // Try direct MongoDB cleanup as fallback
+      try {
+        const db = mongoose.connection.db;
+        const result = await db.collection('surveyresponses').deleteMany({
+          'metadata.testMarker': TEST_MARKER
+        });
+        console.log(`✅ Fallback cleanup: Deleted ${result.deletedCount} test responses`);
+      } catch (fallbackError) {
+        console.error('❌ Fallback cleanup also failed:', fallbackError.message);
+        console.error('⚠️  Please run cleanup-all-test-data.js manually to clean up test data');
+      }
+      await mongoose.disconnect();
+      process.exit(1);
+    }
+  };
+  
+  // Register signal handlers for graceful shutdown
+  process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+  process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+  process.on('SIGHUP', () => gracefulShutdown('SIGHUP'));
+  
+  // Run the test
+  test.run().catch(async (error) => {
+    console.error('\n❌ Unhandled error in test:', error);
+    await gracefulShutdown('ERROR');
+  });
+}
+
+module.exports = ComprehensiveStressTest;
+

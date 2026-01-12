@@ -1,0 +1,286 @@
+{
+  "timestamp": "2026-01-05T19:02:54.078Z",
+  "operation": "Analyze Responses That Should Have Been Abandoned (Missing Fields)",
+  "dateRanges": {
+    "last24Hours": {
+      "from": "2026-01-04T19:02:50.262Z",
+      "to": "2026-01-05T19:02:50.262Z"
+    },
+    "today": {
+      "ist": {
+        "start": "2026-01-04T18:30:00.000Z",
+        "end": "2026-01-05T18:29:59.999Z"
+      },
+      "utc": {
+        "start": "2026-01-04T18:30:00.000Z",
+        "end": "2026-01-05T18:29:59.999Z"
+      }
+    },
+    "yesterday": {
+      "ist": {
+        "start": "2026-01-03T18:30:00.000Z",
+        "end": "2026-01-04T18:29:59.999Z"
+      },
+      "utc": {
+        "start": "2026-01-03T18:30:00.000Z",
+        "end": "2026-01-04T18:29:59.999Z"
+      }
+    }
+  },
+  "summary": {
+    "totalChecked": 3393,
+    "totalProblematic": 7,
+    "byStatus": {
+      "Pending_Approval": 7
+    },
+    "byMissingField": {
+      "missingAC": 0,
+      "missingGender": 5,
+      "missingAge": 7,
+      "missingAll": 0
+    },
+    "byMode": {
+      "capi": {
+        "total": 0,
+        "missingAC": 0,
+        "missingGender": 0,
+        "missingAge": 0
+      },
+      "cati": {
+        "total": 7,
+        "missingAC": 0,
+        "missingGender": 5,
+        "missingAge": 7
+      }
+    },
+    "byDate": {
+      "today": 7,
+      "yesterday": 0,
+      "other": 0
+    }
+  },
+  "problematicResponses": [
+    {
+      "responseId": "06b6704a-8a49-4e40-9233-93d79cb1f4de",
+      "mongoId": "695b28777f948a6b09ff2010",
+      "sessionId": "ea95db67-b5ba-4e88-8fe9-da5c951be0de",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "ac": "Madarihat",
+      "gender": "MISSING",
+      "age": "MISSING",
+      "selectedAC": "Madarihat",
+      "missingAC": false,
+      "missingGender": true,
+      "missingAge": true,
+      "reasons": [
+        "Missing Gender",
+        "Missing Age"
+      ],
+      "createdAt": "2026-01-05T02:56:55.150Z",
+      "startTime": "2026-01-05T02:54:38.125Z",
+      "dateLabel": "Today",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "West Bengal Opinion Poll (2025 - 2026)",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      }
+    },
+    {
+      "responseId": "bc0478fd-6ed0-41f4-9409-2e6e9547bbc3",
+      "mongoId": "695b499ceee836b4778eff17",
+      "sessionId": "fb96986f-6724-4f1d-8bdf-b405ef6c50b5",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "ac": "Madarihat",
+      "gender": "MISSING",
+      "age": "MISSING",
+      "selectedAC": "Madarihat",
+      "missingAC": false,
+      "missingGender": true,
+      "missingAge": true,
+      "reasons": [
+        "Missing Gender",
+        "Missing Age"
+      ],
+      "createdAt": "2026-01-05T05:18:20.091Z",
+      "startTime": "2026-01-05T05:17:23.870Z",
+      "dateLabel": "Today",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "West Bengal Opinion Poll (2025 - 2026)",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      }
+    },
+    {
+      "responseId": "bc727387-af9d-483a-821a-d146aaa69eb4",
+      "mongoId": "695b5fae50cfd657a0476e36",
+      "sessionId": "f82c4262-68e9-46a1-bd0e-9299e71e0f28",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "ac": "Madarihat",
+      "gender": "yes",
+      "age": "MISSING",
+      "selectedAC": "Madarihat",
+      "missingAC": false,
+      "missingGender": false,
+      "missingAge": true,
+      "reasons": [
+        "Missing Age"
+      ],
+      "createdAt": "2026-01-05T06:52:30.823Z",
+      "startTime": "2026-01-05T06:50:27.475Z",
+      "dateLabel": "Today",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "West Bengal Opinion Poll (2025 - 2026)",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      }
+    },
+    {
+      "responseId": "bec6a8f7-188c-4a03-8707-4e7bebac0f57",
+      "mongoId": "695b601a4f31bd114f17237e",
+      "sessionId": "7552847b-36f8-42ba-83fd-d7efd15d1500",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "ac": "Madarihat",
+      "gender": "MISSING",
+      "age": "MISSING",
+      "selectedAC": "Madarihat",
+      "missingAC": false,
+      "missingGender": true,
+      "missingAge": true,
+      "reasons": [
+        "Missing Gender",
+        "Missing Age"
+      ],
+      "createdAt": "2026-01-05T06:54:18.049Z",
+      "startTime": "2026-01-05T06:52:36.998Z",
+      "dateLabel": "Today",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "West Bengal Opinion Poll (2025 - 2026)",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      }
+    },
+    {
+      "responseId": "dd22d1fe-0cc9-4669-9f43-9bd6bc1bfdfd",
+      "mongoId": "695b689a2468b2783cc5903a",
+      "sessionId": "aa44f4fd-1d0f-4118-800a-23ba7e290184",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "ac": "Madarihat",
+      "gender": "yes",
+      "age": "MISSING",
+      "selectedAC": "Madarihat",
+      "missingAC": false,
+      "missingGender": false,
+      "missingAge": true,
+      "reasons": [
+        "Missing Age"
+      ],
+      "createdAt": "2026-01-05T07:30:34.435Z",
+      "startTime": "2026-01-05T07:28:05.130Z",
+      "dateLabel": "Today",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "West Bengal Opinion Poll (2025 - 2026)",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      }
+    },
+    {
+      "responseId": "5e8aa83a-be09-41ab-89ad-dd9375061973",
+      "mongoId": "695b9366f7a77c2ddc9512b4",
+      "sessionId": "2079d282-4472-4c3a-8422-a3b507f6936d",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "ac": "Madarihat",
+      "gender": "MISSING",
+      "age": "MISSING",
+      "selectedAC": "Madarihat",
+      "missingAC": false,
+      "missingGender": true,
+      "missingAge": true,
+      "reasons": [
+        "Missing Gender",
+        "Missing Age"
+      ],
+      "createdAt": "2026-01-05T10:33:10.076Z",
+      "startTime": "2026-01-05T10:30:52.605Z",
+      "dateLabel": "Today",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "West Bengal Opinion Poll (2025 - 2026)",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      }
+    },
+    {
+      "responseId": "99257e63-f9fc-433e-9913-6e7dcb6f018a",
+      "mongoId": "695b962be40ecc7bba65dbf0",
+      "sessionId": "63467a7d-161b-4198-9b55-a8fec326dd3d",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "ac": "Madarihat",
+      "gender": "MISSING",
+      "age": "MISSING",
+      "selectedAC": "Madarihat",
+      "missingAC": false,
+      "missingGender": true,
+      "missingAge": true,
+      "reasons": [
+        "Missing Gender",
+        "Missing Age"
+      ],
+      "createdAt": "2026-01-05T10:44:59.580Z",
+      "startTime": "2026-01-05T10:44:02.305Z",
+      "dateLabel": "Today",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "West Bengal Opinion Poll (2025 - 2026)",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      }
+    }
+  ]
+}

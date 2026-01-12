@@ -1,0 +1,68 @@
+{
+  "startTime": "2026-01-12T21:21:51.455Z",
+  "testAccounts": {
+    "qualityAgent": "68fe8b6239b5a3a70225b17b",
+    "catiInterviewer": "68ebf124ab86ea29f3c0f1f8",
+    "capiInterviewer": "68ebee30ab86ea29f3c0f19c"
+  },
+  "responses": {
+    "found": 0,
+    "deleted": 0,
+    "failed": 0,
+    "details": []
+  },
+  "reviews": {
+    "found": 9,
+    "reverted": 9,
+    "failed": 0,
+    "details": [
+      {
+        "responseId": "d441463a-b2d3-4a1b-8d9d-e32a70e3c77e",
+        "originalStatus": "Approved",
+        "revertedAt": "2026-01-12T21:21:51.480Z"
+      },
+      {
+        "responseId": "3c8cfae3-1840-467b-af72-f92d923f2bf4",
+        "originalStatus": "Approved",
+        "revertedAt": "2026-01-12T21:21:51.486Z"
+      },
+      {
+        "responseId": "672aedb5-9566-45bd-88d5-bcdd443ea134",
+        "originalStatus": "Approved",
+        "revertedAt": "2026-01-12T21:21:51.492Z"
+      },
+      {
+        "responseId": "d9feb6a9-9778-4232-b974-1384525f26a3",
+        "originalStatus": "Approved",
+        "revertedAt": "2026-01-12T21:21:51.498Z"
+      },
+      {
+        "responseId": "970e1da5-f29e-4122-8227-25986633f9eb",
+        "originalStatus": "Approved",
+        "revertedAt": "2026-01-12T21:21:51.508Z"
+      },
+      {
+        "responseId": "5409bc38-8e72-4c02-af39-9786e3b64bd3",
+        "originalStatus": "Approved",
+        "revertedAt": "2026-01-12T21:21:51.514Z"
+      },
+      {
+        "responseId": "fea19444-e540-4ed6-9e79-790fbd6e5119",
+        "originalStatus": "Approved",
+        "revertedAt": "2026-01-12T21:21:51.521Z"
+      },
+      {
+        "responseId": "0b7bb6eb-825f-43cf-8504-36da7b42c808",
+        "originalStatus": "Rejected",
+        "revertedAt": "2026-01-12T21:21:51.527Z"
+      },
+      {
+        "responseId": "ba1e884d-f29b-4ab2-b355-8380ac9d9291",
+        "originalStatus": "Rejected",
+        "revertedAt": "2026-01-12T21:21:51.533Z"
+      }
+    ]
+  },
+  "endTime": "2026-01-12T21:21:51.533Z",
+  "duration": "0.08 seconds"
+}

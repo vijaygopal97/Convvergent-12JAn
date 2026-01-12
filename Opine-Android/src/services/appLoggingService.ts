@@ -224,7 +224,7 @@ class AppLoggingService {
             logs: batch,
             deviceInfo,
             userId: this.userId,
-            appVersion: '13'
+            appVersion: '15'
           });
 
           this.lastSentTimestamp = new Date();

@@ -332,15 +332,33 @@ const checkAutoRejection = async (surveyResponse, responses, surveyId) => {
     // Skip if phone number is "0" (indicates "Did not Answer")
     if (phoneNumber && phoneNumber.length > 0 && phoneNumber !== '0') {
       try {
-        // Find all other responses for this survey
-        const otherResponses = await SurveyResponse.find({
-          survey: surveyId,
-          _id: { $ne: surveyResponse._id }, // Exclude current response
-          status: { $in: ['Pending_Approval', 'Approved', 'Rejected'] } // Check all statuses
-        }).select('responses');
+        // CRITICAL OPTIMIZATION: Use cursor-based streaming instead of loading ALL responses into memory
+        // For survey "68fd1915d41841da463f0d46" with thousands of responses, loading all causes 2-3GB memory spikes
+        // Top tech companies use cursors with early exit for duplicate checks - stop as soon as duplicate is found
+        let foundDuplicate = false;
         
-        // Check each response for matching phone number
-        for (const otherResponse of otherResponses) {
+        // Normalize phone number for comparison (lowercase, cleaned)
+        const normalizedPhoneNumber = phoneNumber.toLowerCase().trim();
+        
+        // Use cursor to stream responses instead of loading all at once
+        // CRITICAL: Process in small batches and exit early when duplicate found
+        const duplicateCursor = SurveyResponse.find({
+          survey: surveyId,
+          _id: { $ne: surveyResponse._id },
+          status: { $in: ['Pending_Approval', 'Approved', 'Rejected'] }
+        })
+          .select('responses') // Only select responses field to minimize memory
+          .lean() // Use lean() for plain objects
+          .batchSize(50) // Small batches to prevent memory accumulation
+          .cursor();
+        
+        let processedCount = 0;
+        for await (const otherResponse of duplicateCursor) {
+          // Early exit: Stop immediately if duplicate already found
+          if (foundDuplicate) {
+            break;
+          }
+          
           if (!otherResponse.responses || !Array.isArray(otherResponse.responses)) {
             continue;
           }
@@ -366,26 +384,43 @@ const checkAutoRejection = async (surveyResponse, responses, surveyId) => {
               // Clean other phone number
               let otherPhoneNumber = null;
               if (typeof otherPhoneValue === 'string') {
-                otherPhoneNumber = otherPhoneValue.replace(/\s+/g, '').replace(/-/g, '').replace(/\(/g, '').replace(/\)/g, '').trim();
+                otherPhoneNumber = otherPhoneValue.replace(/\s+/g, '').replace(/-/g, '').replace(/\(/g, '').replace(/\)/g, '').trim().toLowerCase();
               } else if (typeof otherPhoneValue === 'number') {
-                otherPhoneNumber = otherPhoneValue.toString().trim();
+                otherPhoneNumber = otherPhoneValue.toString().trim().toLowerCase();
               }
               
               // Compare cleaned phone numbers (case-insensitive)
-              if (otherPhoneNumber && otherPhoneNumber.toLowerCase() === phoneNumber.toLowerCase()) {
+              if (otherPhoneNumber && otherPhoneNumber === normalizedPhoneNumber) {
                 rejectionReasons.push({
                   reason: 'Duplicate Phone Number',
                   condition: 'duplicate_phone'
                 });
-                break; // Found duplicate, no need to check further
+                foundDuplicate = true;
+                break; // Found duplicate, stop checking this response
               }
             }
           }
           
-          // If we found a duplicate, break out of outer loop
-          if (rejectionReasons.some(r => r.condition === 'duplicate_phone')) {
+          processedCount++;
+          
+          // CRITICAL: Explicit memory cleanup every 100 responses
+          // This prevents memory accumulation during cursor iteration
+          if (processedCount % 100 === 0) {
+            if (global.gc && typeof global.gc === 'function') {
+              global.gc();
+            }
+          }
+          
+          // Early exit if duplicate found - don't process remaining responses
+          if (foundDuplicate) {
             break;
           }
+        }
+        
+        if (foundDuplicate) {
+          console.log(`✅ Duplicate phone check: Found duplicate after processing ${processedCount} responses (early exit)`);
+        } else {
+          console.log(`✅ Duplicate phone check: No duplicates found after processing ${processedCount} responses`);
         }
       } catch (error) {
         console.error('Error checking for duplicate phone number:', error);
@@ -450,4 +485,7 @@ module.exports = {
   checkAutoRejection,
   applyAutoRejection
 };
+
+
+
 

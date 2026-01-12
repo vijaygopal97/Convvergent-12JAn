@@ -113,13 +113,16 @@ const getBatchById = async (req, res) => {
       });
     }
     
-    // Get all responses in batch with details
+    // CRITICAL OPTIMIZATION: Remove 'sections questions' from populate - causes massive memory leaks (5-10MB per survey)
+    // Top tech companies only load what's needed for the UI, not entire survey structures
+    // Use lean() to return plain objects instead of Mongoose documents for better memory efficiency
     const allResponses = await SurveyResponse.find({
       _id: { $in: batch.responses }
     })
       .populate('interviewer', 'firstName lastName email')
-      .populate('survey', 'surveyName sections questions')
-      .select('_id responseId status createdAt interviewMode qcBatch isSampleResponse verificationData responses audioRecording call_id startTime endTime totalTimeSpent location selectedAC qualityMetrics metadata');
+      .populate('survey', 'surveyName description category') // REMOVED 'sections questions' - huge memory leak!
+      .select('_id responseId status createdAt interviewMode qcBatch isSampleResponse verificationData responses audioRecording call_id startTime endTime totalTimeSpent location selectedAC qualityMetrics metadata')
+      .lean(); // CRITICAL: Use lean() for memory efficiency
     
     // Get sample responses (40%)
     const sampleResponses = allResponses.filter(r => 

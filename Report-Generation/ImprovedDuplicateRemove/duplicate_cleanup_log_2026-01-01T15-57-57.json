@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-01-01T15:58:01.055Z",
+  "summary": {
+    "totalDuplicateGroups": 145,
+    "capiDuplicateGroups": 145,
+    "catiDuplicateGroups": 0,
+    "totalDuplicatesToMark": 668,
+    "totalOriginals": 145
+  },
+  "updateResults": {
+    "updated": 668,
+    "errors": []
+  },
+  "statistics": {
+    "totalProcessed": 2067,
+    "capiProcessed": 2057,
+    "catiProcessed": 10,
+    "capiDuplicatesFound": 668,
+    "catiDuplicatesFound": 0,
+    "totalDuplicatesMarked": 668,
+    "errors": []
+  }
+}

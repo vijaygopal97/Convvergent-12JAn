@@ -1,0 +1,81 @@
+==========================================
+  DETAILED SYSTEM MONITORING
+  Timestamp: 2026-01-07 12:30:55
+==========================================
+
+=== SYSTEM RESOURCES ===
+CPU Load Average:
+ 12:30:55 up 1 day, 23:43,  2 users,  load average: 0.65, 1.50, 2.37
+
+Memory:
+               total        used        free      shared  buff/cache   available
+Mem:            30Gi       6.4Gi       8.0Gi        11Mi        16Gi        24Gi
+Swap:             0B          0B          0B
+
+Disk Usage:
+/dev/root       123G  109G   15G  89% /
+
+=== PM2 PROCESSES (Detailed) ===
+{
+  "name": "opine-frontend",
+  "cpu": 0,
+  "memory_mb": 55,
+  "restarts": 24,
+  "status": "online",
+  "uptime": 1767788685254
+}
+{
+  "name": "opine-backend",
+  "cpu": 0,
+  "memory_mb": 151,
+  "restarts": 672,
+  "status": "online",
+  "uptime": 1767788877422
+}
+{
+  "name": "opine-backend",
+  "cpu": 0,
+  "memory_mb": 120,
+  "restarts": 668,
+  "status": "online",
+  "uptime": 1767788967427
+}
+{
+  "name": "opine-csv-worker",
+  "cpu": 0.3,
+  "memory_mb": 434,
+  "restarts": 4,
+  "status": "online",
+  "uptime": 1767784713498
+}
+
+=== MONGODB CONNECTIONS ===
+Current Connections: 102
+Available Connections: 51098
+Total Created: 12277
+Active Clients: 0
+Queued Operations: 0
+
+=== NETWORK CONNECTIONS ===
+MongoDB (27017): 0 connections
+Redis (6379): 0 connections
+
+=== TOP CPU PROCESSES ===
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+ubuntu    663227  100  0.0  11452  4532 ?        R    12:30   0:00 ps aux --sort=-%cpu
+ubuntu    649155 19.3  1.3 1643424 445336 ?      Sl   11:18  13:59 node /var/www/opine/backend/workers/csvGenerationWorker.js
+ubuntu    587543  8.6  1.5 77391400 497024 ?     Sl   04:56  39:13 /home/ubuntu/.cursor-server/bin/32cfbe848b35d9eb320980195985450f244b3030/node --dns-result-order=ipv4first /home/ubuntu/.cursor-server/bin/32cfbe848b35d9eb320980195985450f244b3030/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+ubuntu    662498  5.6  0.4 11855456 138812 ?     Sl   12:29   0:05 node /var/www/opine/backend/server.js
+ubuntu    662270  4.8  0.4 11899508 155856 ?     Sl   12:27   0:08 node /var/www/opine/backend/server.js
+mongodb   455413  1.5 13.4 7367000 4335684 ?     Ssl  Jan06  19:10 /usr/bin/mongod --config /etc/mongod.conf
+ubuntu    663171  1.3  0.0   9624  5496 ?        Ss   12:30   0:00 /usr/bin/bash -O extglob -c snap=$(command cat <&3) && builtin shopt -s extglob && builtin eval -- "$snap" && { builtin set +u 2>/dev/null || true; builtin export PWD="$(builtin pwd)"; builtin eval "$1" < /dev/null; }; COMMAND_EXIT_CODE=$?; dump_bash_state >&4; builtin exit $COMMAND_EXIT_CODE -- cd /var/www/opine && bash monitor-detailed.sh 2>&1 | head -80
+
+=== TOP MEMORY PROCESSES ===
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+mongodb   455413  1.5 13.4 7367000 4335684 ?     Ssl  Jan06  19:10 /usr/bin/mongod --config /etc/mongod.conf
+ubuntu    587543  8.6  1.5 77391400 497024 ?     Sl   04:56  39:13 /home/ubuntu/.cursor-server/bin/32cfbe848b35d9eb320980195985450f244b3030/node --dns-result-order=ipv4first /home/ubuntu/.cursor-server/bin/32cfbe848b35d9eb320980195985450f244b3030/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+ubuntu    649155 19.3  1.3 1643424 445336 ?      Sl   11:18  13:59 node /var/www/opine/backend/workers/csvGenerationWorker.js
+ubuntu    587732  0.0  0.5 1127732 192820 ?      Sl   04:56   0:05 /home/ubuntu/.cursor-server/bin/32cfbe848b35d9eb320980195985450f244b3030/node /home/ubuntu/.cursor-server/bin/32cfbe848b35d9eb320980195985450f244b3030/extensions/json-language-features/server/dist/node/jsonServerMain --node-ipc --clientProcessId=587543
+ubuntu    662270  4.8  0.4 11899508 155856 ?     Sl   12:27   0:08 node /var/www/opine/backend/server.js
+ubuntu    662498  5.6  0.4 11855456 138812 ?     Sl   12:29   0:05 node /var/www/opine/backend/server.js
+ubuntu    587491  0.3  0.3 11835520 128932 ?     Sl   04:56   1:31 /home/ubuntu/.cursor-server/bin/32cfbe848b35d9eb320980195985450f244b3030/node /home/ubuntu/.cursor-server/bin/32cfbe848b35d9eb320980195985450f244b3030/out/server-main.js --start-server --host=127.0.0.1 --port 0 --connection-token-file /run/user/1000/cursor-remote-code.token.b5a4647be1e377176bc3368a461da66d --telemetry-level off --enable-remote-auto-shutdown --accept-server-license-terms

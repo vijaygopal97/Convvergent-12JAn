@@ -1,0 +1,8 @@
+Response ID,Mongo ID,Session ID,Interview Mode,Old Status,New Status,Abandoned Reason,Missing AC,Missing Gender,Missing Age,Updated At
+06b6704a-8a49-4e40-9233-93d79cb1f4de,695b28777f948a6b09ff2010,ea95db67-b5ba-4e88-8fe9-da5c951be0de,cati,Pending_Approval,abandoned,Missing Gender, Age,No,Yes,Yes,2026-01-05T19:07:50.875Z
+bc0478fd-6ed0-41f4-9409-2e6e9547bbc3,695b499ceee836b4778eff17,fb96986f-6724-4f1d-8bdf-b405ef6c50b5,cati,Pending_Approval,abandoned,Missing Gender, Age,No,Yes,Yes,2026-01-05T19:07:50.882Z
+bc727387-af9d-483a-821a-d146aaa69eb4,695b5fae50cfd657a0476e36,f82c4262-68e9-46a1-bd0e-9299e71e0f28,cati,Pending_Approval,abandoned,Missing Age,No,No,Yes,2026-01-05T19:07:50.892Z
+bec6a8f7-188c-4a03-8707-4e7bebac0f57,695b601a4f31bd114f17237e,7552847b-36f8-42ba-83fd-d7efd15d1500,cati,Pending_Approval,abandoned,Missing Gender, Age,No,Yes,Yes,2026-01-05T19:07:50.899Z
+dd22d1fe-0cc9-4669-9f43-9bd6bc1bfdfd,695b689a2468b2783cc5903a,aa44f4fd-1d0f-4118-800a-23ba7e290184,cati,Pending_Approval,abandoned,Missing Age,No,No,Yes,2026-01-05T19:07:50.907Z
+5e8aa83a-be09-41ab-89ad-dd9375061973,695b9366f7a77c2ddc9512b4,2079d282-4472-4c3a-8422-a3b507f6936d,cati,Pending_Approval,abandoned,Missing Gender, Age,No,Yes,Yes,2026-01-05T19:07:50.914Z
+99257e63-f9fc-433e-9913-6e7dcb6f018a,695b962be40ecc7bba65dbf0,63467a7d-161b-4198-9b55-a8fec326dd3d,cati,Pending_Approval,abandoned,Missing Gender, Age,No,Yes,Yes,2026-01-05T19:07:50.921Z

@@ -1,0 +1,255 @@
+{
+  "testId": "comprehensive-5min-1768162071639",
+  "startTime": "2026-01-11T20:07:51.665Z",
+  "endTime": "2026-01-11T20:07:55.634Z",
+  "duration": "3.97",
+  "totalSamples": 3,
+  "summary": {
+    "cpu": {
+      "avg": "1.02",
+      "max": 1.37,
+      "min": 0.8
+    },
+    "memory": {
+      "avgUsed": "9524.33",
+      "maxUsed": 9570,
+      "avgPercent": "30.18",
+      "maxPercent": 30.33
+    },
+    "mongodbConnections": {
+      "avg": "100.00",
+      "max": 100,
+      "min": 100
+    },
+    "apiResponseTime": null
+  },
+  "metrics": {
+    "timestamps": [
+      "2026-01-11T20:07:52.667Z",
+      "2026-01-11T20:07:53.667Z",
+      "2026-01-11T20:07:54.815Z"
+    ],
+    "cpu": [
+      {
+        "percent": 0.8,
+        "user": 694849,
+        "system": 100411
+      },
+      {
+        "percent": 0.88,
+        "user": 765873,
+        "system": 110952
+      },
+      {
+        "percent": 1.37,
+        "user": 1219576,
+        "system": 153327
+      }
+    ],
+    "memory": [
+      {
+        "used": 9483,
+        "total": 31557,
+        "percent": 30.05,
+        "heapUsed": 24,
+        "heapTotal": 34,
+        "external": 22
+      },
+      {
+        "used": 9520,
+        "total": 31557,
+        "percent": 30.17,
+        "heapUsed": 21,
+        "heapTotal": 35,
+        "external": 21
+      },
+      {
+        "used": 9570,
+        "total": 31557,
+        "percent": 30.33,
+        "heapUsed": 24,
+        "heapTotal": 38,
+        "external": 21
+      }
+    ],
+    "mongodbConnections": [
+      100,
+      100,
+      100
+    ],
+    "mongodbReplicaSet": [
+      {
+        "set": "rs0",
+        "members": [
+          {
+            "name": "172.31.43.71:27017",
+            "stateStr": "PRIMARY",
+            "health": 1,
+            "uptime": 82549,
+            "optimeDate": "2026-01-11T20:07:52.000Z",
+            "lastHeartbeat": "",
+            "lag": 693
+          },
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 81989,
+            "optimeDate": "2026-01-11T20:07:52.000Z",
+            "lastHeartbeat": "",
+            "lag": 693
+          }
+        ],
+        "primary": {
+          "name": "172.31.43.71:27017",
+          "stateStr": "PRIMARY",
+          "health": 1,
+          "uptime": 82549,
+          "optimeDate": "2026-01-11T20:07:52.000Z",
+          "lastHeartbeat": "",
+          "lag": 693
+        },
+        "secondaries": [
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 81989,
+            "optimeDate": "2026-01-11T20:07:52.000Z",
+            "lastHeartbeat": "",
+            "lag": 693
+          }
+        ],
+        "healthy": true,
+        "totalMembers": 2
+      },
+      {
+        "set": "rs0",
+        "members": [
+          {
+            "name": "172.31.43.71:27017",
+            "stateStr": "PRIMARY",
+            "health": 1,
+            "uptime": 82550,
+            "optimeDate": "2026-01-11T20:07:52.000Z",
+            "lastHeartbeat": "",
+            "lag": 1686
+          },
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 81990,
+            "optimeDate": "2026-01-11T20:07:52.000Z",
+            "lastHeartbeat": "",
+            "lag": 1686
+          }
+        ],
+        "primary": {
+          "name": "172.31.43.71:27017",
+          "stateStr": "PRIMARY",
+          "health": 1,
+          "uptime": 82550,
+          "optimeDate": "2026-01-11T20:07:52.000Z",
+          "lastHeartbeat": "",
+          "lag": 1686
+        },
+        "secondaries": [
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 81990,
+            "optimeDate": "2026-01-11T20:07:52.000Z",
+            "lastHeartbeat": "",
+            "lag": 1686
+          }
+        ],
+        "healthy": true,
+        "totalMembers": 2
+      },
+      {
+        "set": "rs0",
+        "members": [
+          {
+            "name": "172.31.43.71:27017",
+            "stateStr": "PRIMARY",
+            "health": 1,
+            "uptime": 82551,
+            "optimeDate": "2026-01-11T20:07:52.000Z",
+            "lastHeartbeat": "",
+            "lag": 2927
+          },
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 81991,
+            "optimeDate": "2026-01-11T20:07:52.000Z",
+            "lastHeartbeat": "",
+            "lag": 2927
+          }
+        ],
+        "primary": {
+          "name": "172.31.43.71:27017",
+          "stateStr": "PRIMARY",
+          "health": 1,
+          "uptime": 82551,
+          "optimeDate": "2026-01-11T20:07:52.000Z",
+          "lastHeartbeat": "",
+          "lag": 2927
+        },
+        "secondaries": [
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 81991,
+            "optimeDate": "2026-01-11T20:07:52.000Z",
+            "lastHeartbeat": "",
+            "lag": 2927
+          }
+        ],
+        "healthy": true,
+        "totalMembers": 2
+      }
+    ],
+    "apiResponseTimes": [],
+    "loadAverage": [
+      {
+        "1min": 1.35,
+        "5min": 2.43,
+        "15min": 3.21
+      },
+      {
+        "1min": 1.35,
+        "5min": 2.43,
+        "15min": 3.21
+      },
+      {
+        "1min": 1.4,
+        "5min": 2.42,
+        "15min": 3.21
+      }
+    ],
+    "networkIO": [],
+    "loadBalancer": {
+      "upstreamServers": [
+        {
+          "available": true,
+          "status": "<html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.24.0 (Ubuntu)</center>\r\n</body>\r\n</html>\r\n"
+        },
+        {
+          "available": true,
+          "status": "<html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.24.0 (Ubuntu)</center>\r\n</body>\r\n</html>\r\n"
+        },
+        {
+          "available": true,
+          "status": "<html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.24.0 (Ubuntu)</center>\r\n</body>\r\n</html>\r\n"
+        }
+      ],
+      "requestDistribution": [],
+      "responseTimes": []
+    }
+  }
+}

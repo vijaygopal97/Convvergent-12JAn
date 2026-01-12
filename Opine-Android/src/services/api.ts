@@ -256,6 +256,18 @@ class ApiService {
     if (this.forceOfflineMode) {
       return false;
     }
+    
+    // PERFORMANCE: Check cached online status first (avoid repeated network checks)
+    try {
+      const { performanceCache } = await import('./performanceCache');
+      const cachedStatus = performanceCache.getOnlineStatus();
+      if (cachedStatus !== null) {
+        return cachedStatus;
+      }
+    } catch (cacheError) {
+      // Cache not available, continue with network check
+    }
+    
     try {
       // Use a shorter timeout for faster response
       const controller = new AbortController();
@@ -269,8 +281,24 @@ class ApiService {
       });
       
       clearTimeout(timeoutId);
+      
+      // Cache the result
+      try {
+        const { performanceCache } = await import('./performanceCache');
+        performanceCache.setOnlineStatus(true);
+      } catch (cacheError) {
+        // Ignore cache errors
+      }
+      
       return true;
     } catch (error) {
+      // Cache the result
+      try {
+        const { performanceCache } = await import('./performanceCache');
+        performanceCache.setOnlineStatus(false);
+      } catch (cacheError) {
+        // Ignore cache errors
+      }
       return false;
     }
   }
@@ -446,149 +474,394 @@ class ApiService {
     }
   }
 
+  /**
+   * PERFORMANCE OPTIMIZED: Fast assignment checking using cached data and Map lookups
+   * Replaces O(n*m) array.find() loops with O(1) Map lookups
+   */
+  private async checkAssignmentOptimized(
+    survey: any,
+    currentUserId: string | null
+  ): Promise<{ foundAssignment: boolean; requiresACSelection: boolean; assignedACs: string[] }> {
+    const isTargetSurvey = survey && (survey._id === '68fd1915d41841da463f0d46' || survey.id === '68fd1915d41841da463f0d46');
+    
+    // PERFORMANCE: Check cache first (O(1) lookup)
+    if (currentUserId) {
+      try {
+        const { performanceCache } = await import('./performanceCache');
+        const cachedAssignment = performanceCache.getAssignment(survey._id || survey.id, currentUserId);
+        if (cachedAssignment) {
+          console.log('⚡ Assignment loaded from memory cache (instant)');
+          return {
+            foundAssignment: cachedAssignment.foundAssignment,
+            requiresACSelection: cachedAssignment.requiresACSelection,
+            assignedACs: cachedAssignment.assignedACs,
+          };
+        }
+      } catch (cacheError) {
+        // Cache not available, continue with normal check
+      }
+    }
+    
+    // Cache miss - perform assignment check
+    let foundAssignment = false;
+    let requiresACSelection = false;
+    let assignedACs: string[] = [];
+    
+    // PERFORMANCE: Build Map for O(1) lookup instead of O(n) array.find()
+    // Pre-process assignments into Map<userId, assignment> for instant lookup
+    const assignmentMap = new Map<string, any>();
+    
+    // Process assignedInterviewers
+    if (survey.assignedInterviewers && Array.isArray(survey.assignedInterviewers)) {
+      for (const assignment of survey.assignedInterviewers) {
+        if (!assignment || !assignment.interviewer) continue;
+        if (assignment.status !== 'assigned' && assignment.status !== 'accepted') continue;
+        
+        // Extract userId from assignment
+        let userId: string | null = null;
+        if (assignment.interviewer._id) {
+          userId = assignment.interviewer._id.toString();
+        } else if (assignment.interviewer.toString) {
+          userId = assignment.interviewer.toString();
+        } else {
+          userId = String(assignment.interviewer);
+        }
+        
+        if (userId) {
+          assignmentMap.set(userId, { ...assignment, type: 'assignedInterviewers' });
+        }
+        
+        // Also check interviewerId field
+        if (assignment.interviewerId) {
+          const idStr = assignment.interviewerId.toString();
+          if (!assignmentMap.has(idStr)) {
+            assignmentMap.set(idStr, { ...assignment, type: 'assignedInterviewers' });
+          }
+        }
+      }
+    }
+    
+    // Process capiInterviewers
+    if (survey.capiInterviewers && Array.isArray(survey.capiInterviewers)) {
+      for (const assignment of survey.capiInterviewers) {
+        if (!assignment || !assignment.interviewer) continue;
+        if (assignment.status !== 'assigned' && assignment.status !== 'accepted') continue;
+        
+        // Extract userId from assignment
+        let userId: string | null = null;
+        if (assignment.interviewer._id) {
+          userId = assignment.interviewer._id.toString();
+        } else if (assignment.interviewer.toString) {
+          userId = assignment.interviewer.toString();
+        } else {
+          userId = String(assignment.interviewer);
+        }
+        
+        if (userId) {
+          assignmentMap.set(userId, { ...assignment, type: 'capiInterviewers' });
+        }
+        
+        // Also check interviewerId field
+        if (assignment.interviewerId) {
+          const idStr = assignment.interviewerId.toString();
+          if (!assignmentMap.has(idStr)) {
+            assignmentMap.set(idStr, { ...assignment, type: 'capiInterviewers' });
+          }
+        }
+      }
+    }
+    
+    // PERFORMANCE: O(1) lookup instead of O(n) find
+    if (currentUserId && assignmentMap.has(currentUserId)) {
+      const assignment = assignmentMap.get(currentUserId)!;
+      foundAssignment = true;
+      
+      if (assignment.assignedACs && assignment.assignedACs.length > 0) {
+        requiresACSelection = survey.assignACs === true;
+        assignedACs = assignment.assignedACs || [];
+      } else if (isTargetSurvey) {
+        requiresACSelection = survey.assignACs === true;
+        assignedACs = [];
+      }
+    } else if (!currentUserId && assignmentMap.size > 0) {
+      // No user ID but assignments exist - use first assignment
+      const firstAssignment = assignmentMap.values().next().value;
+      foundAssignment = true;
+      
+      if (firstAssignment.assignedACs && firstAssignment.assignedACs.length > 0) {
+        requiresACSelection = survey.assignACs === true;
+        assignedACs = firstAssignment.assignedACs || [];
+      } else if (isTargetSurvey) {
+        requiresACSelection = survey.assignACs === true;
+        assignedACs = [];
+      }
+    }
+    
+    // For target survey, allow even without explicit assignment (backward compatibility)
+    if (isTargetSurvey) {
+      if (survey.assignACs === true) {
+        foundAssignment = true;
+        requiresACSelection = true;
+        if (assignedACs.length === 0) {
+          assignedACs = [];
+        }
+      } else if (survey.assignACs === undefined) {
+        console.warn('⚠️ CRITICAL: assignACs is undefined for target survey - this should not happen');
+        console.warn('⚠️ Survey data may be incomplete - recommend re-syncing surveys');
+        foundAssignment = true;
+        requiresACSelection = true;
+        assignedACs = [];
+      }
+    }
+    
+    // Cache the result for next time
+    if (currentUserId && survey._id) {
+      try {
+        const { performanceCache } = await import('./performanceCache');
+        performanceCache.setAssignment(survey._id || survey.id, currentUserId, {
+          foundAssignment,
+          requiresACSelection,
+          assignedACs,
+          surveyId: survey._id || survey.id,
+          userId: currentUserId,
+        });
+      } catch (cacheError) {
+        // Ignore cache errors
+      }
+    }
+    
+    return { foundAssignment, requiresACSelection, assignedACs };
+  }
+
   // Survey Responses - Start interview session
+  // CRITICAL: For CAPI, ALWAYS check assignment from synced survey data FIRST (offline-first approach)
+  // Only make API call if online AND assignment found in synced data (for sync purposes)
+  // If API call fails (403 or network error), fallback to offline mode
+  // This ensures CAPI works completely offline without any API calls
+  // PERFORMANCE OPTIMIZED: Uses in-memory cache, optimized assignment checking, batched AsyncStorage reads
   async startInterview(surveyId: string) {
     try {
-      // Check if offline - for CAPI interviews, create local session
-      const isOnline = await this.isOnline();
-      if (!isOnline) {
-        console.log('📴 Offline mode - creating local interview session');
-        // Create a local session ID for offline interviews
-        const localSessionId = `offline_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-        
-        // Get survey from offline storage to check AC requirements
+      // STEP 1: Get survey from offline storage and check assignment FIRST (offline-first)
+      console.log('📴 CAPI: Checking assignment from synced survey data FIRST (offline-first approach)');
+      
+      // PERFORMANCE: Check cache first, then fallback to storage
+      const { performanceCache } = await import('./performanceCache');
+      let survey = performanceCache.getSurvey(surveyId);
+      
+      if (!survey) {
+        // Cache miss - load from storage
         const surveys = await offlineStorage.getSurveys();
-        const survey = surveys.find((s: any) => s._id === surveyId || s.id === surveyId);
+        survey = surveys.find((s: any) => s._id === surveyId || s.id === surveyId);
+      }
+      
+      if (!survey) {
+        console.log('⚠️ Survey not found in offline storage - will try API call (edge case)');
+        const isOnline = await this.isOnline();
+        if (!isOnline) {
+          return {
+            success: false,
+            message: 'Survey not synced and device is offline. Please sync surveys first.'
+          };
+        }
+        const headers = await this.getHeaders();
+        const response = await axios.post(
+          `${this.baseURL}/api/survey-responses/start/${surveyId}`,
+          {},
+          { headers, timeout: 10000 }
+        );
+        return { success: true, response: response.data.data };
+      }
+      
+      // CRITICAL: Validate survey data integrity (like META/Google)
+      // Ensure critical fields are present before allowing interview start
+      const isTargetSurvey = survey && (survey._id === '68fd1915d41841da463f0d46' || survey.id === '68fd1915d41841da463f0d46');
+      const missingFields: string[] = [];
+      
+      // For target survey, assignACs is CRITICAL - must be present
+      if (isTargetSurvey && survey.assignACs === undefined) {
+        missingFields.push('assignACs');
+      }
+      
+      // Check for other critical fields
+      if (!survey._id && !survey.id) {
+        missingFields.push('_id or id');
+      }
+      if (!survey.surveyName && !survey.name) {
+        missingFields.push('surveyName or name');
+      }
+      
+      if (missingFields.length > 0) {
+        console.error('❌ Survey data integrity check FAILED - missing critical fields:', missingFields);
+        console.error('❌ Survey data:', JSON.stringify(survey, null, 2));
         
-        // Determine if AC selection is required
-        // CRITICAL: Match backend logic exactly - for target survey "68fd1915d41841da463f0d46",
-        // require AC selection in CAPI mode even if interviewer has no assigned ACs
-        const isTargetSurvey = survey && (survey._id === '68fd1915d41841da463f0d46' || survey.id === '68fd1915d41841da463f0d46');
-        let requiresACSelection = false;
-        let assignedACs: string[] = [];
+        // PERFORMANCE: Check online status (uses cache)
+        const isOnline = await this.isOnline();
+        if (isOnline) {
+          // Try to re-sync survey data from server
+          console.log('🔄 Attempting to re-sync survey data from server...');
+          try {
+            const fullSurveyResult = await this.getSurveyFull(surveyId);
+            if (fullSurveyResult.success && fullSurveyResult.survey) {
+              // Update survey in offline storage
+              const updatedSurveys = surveys.map((s: any) => 
+                (s._id === surveyId || s.id === surveyId) ? fullSurveyResult.survey : s
+              );
+              await offlineStorage.saveSurveys(updatedSurveys, false);
+              console.log('✅ Survey data re-synced successfully');
+              // Use updated survey
+              const updatedSurvey = updatedSurveys.find((s: any) => s._id === surveyId || s.id === surveyId);
+              if (updatedSurvey) {
+                Object.assign(survey, updatedSurvey);
+              }
+            }
+          } catch (syncError) {
+            console.error('❌ Failed to re-sync survey:', syncError);
+          }
+        }
         
-        // Get current user ID to check their specific assignment
-        let currentUserId: string | null = null;
-        try {
+        // If still missing after re-sync attempt, fail
+        if (isTargetSurvey && survey.assignACs === undefined) {
+          return {
+            success: false,
+            message: 'Survey data is incomplete. Please sync surveys from dashboard first. Missing: assignACs field.'
+          };
+        }
+      }
+      
+      console.log('✅ Survey data integrity check passed');
+      
+      // STEP 2: Check assignment from synced survey data (offline-first)
+      console.log('✅ Survey found in offline storage - checking assignment locally');
+      
+      // PERFORMANCE: Get user ID from cache first
+      let currentUserId: string | null = null;
+      try {
+        const cachedUserData = performanceCache.getUserData();
+        if (cachedUserData) {
+          currentUserId = cachedUserData._id || cachedUserData.id || cachedUserData.memberId || null;
+          console.log('⚡ User ID loaded from memory cache (instant)');
+        } else {
+          // Cache miss - read from AsyncStorage
           const userDataStr = await AsyncStorage.getItem('userData');
           if (userDataStr) {
             const userData = JSON.parse(userDataStr);
             currentUserId = userData._id || userData.id || userData.memberId || null;
-            console.log('🔍 Current user ID for assignment check:', currentUserId);
-          }
-        } catch (error) {
-          console.error('❌ Error getting current user ID:', error);
-        }
-        
-        if (survey) {
-          console.log('🔍 ========== OFFLINE AC ASSIGNMENT DEBUG ==========');
-          console.log('🔍 Survey ID:', survey._id || survey.id);
-          console.log('🔍 Survey assignACs:', survey.assignACs);
-          console.log('🔍 Is Target Survey:', isTargetSurvey);
-          console.log('🔍 Current User ID:', currentUserId);
-          
-          // Check for AC assignment in different assignment types
-          let foundAssignment = false;
-          
-          if (survey.assignedInterviewers && survey.assignedInterviewers.length > 0) {
-            console.log('🔍 Checking assignedInterviewers:', survey.assignedInterviewers.length);
-            // Find assignment for current user specifically
-            const assignment = survey.assignedInterviewers.find((a: any) => {
-              const matchesStatus = a.status === 'assigned';
-              const matchesUser = currentUserId && (
-                (a.interviewer && (a.interviewer._id === currentUserId || a.interviewer.toString() === currentUserId || a.interviewer.id === currentUserId)) ||
-                (a.interviewerId && (a.interviewerId === currentUserId || a.interviewerId.toString() === currentUserId))
-              );
-              return matchesStatus && (currentUserId ? matchesUser : true); // If no user ID, match any assigned
-            });
             
-            if (assignment) {
-              console.log('🔍 Found assignment in assignedInterviewers:', assignment);
-              foundAssignment = true;
-              if (assignment.assignedACs && assignment.assignedACs.length > 0) {
-                requiresACSelection = survey.assignACs === true;
-                assignedACs = assignment.assignedACs || [];
-                console.log('🔍 Assignment has', assignedACs.length, 'assigned ACs:', assignedACs);
-              } else if (isTargetSurvey) {
-                // For target survey, require AC selection even if no assigned ACs
-                requiresACSelection = survey.assignACs === true;
-                assignedACs = [];
-                console.log('🔍 Target survey with no assigned ACs - will show dropdown');
-              }
-            } else {
-              console.log('🔍 No matching assignment found in assignedInterviewers');
-            }
+            // Cache for next time
+            performanceCache.setUserData(userData);
           }
-          
-          // Check CAPI assignments
-          if (!foundAssignment && survey.capiInterviewers && survey.capiInterviewers.length > 0) {
-            console.log('🔍 Checking capiInterviewers:', survey.capiInterviewers.length);
-            // Find assignment for current user specifically
-            const assignment = survey.capiInterviewers.find((a: any) => {
-              const matchesStatus = a.status === 'assigned';
-              const matchesUser = currentUserId && (
-                (a.interviewer && (a.interviewer._id === currentUserId || a.interviewer.toString() === currentUserId || a.interviewer.id === currentUserId)) ||
-                (a.interviewerId && (a.interviewerId === currentUserId || a.interviewerId.toString() === currentUserId))
-              );
-              return matchesStatus && (currentUserId ? matchesUser : true); // If no user ID, match any assigned
-            });
-            
-            if (assignment) {
-              console.log('🔍 Found assignment in capiInterviewers:', assignment);
-              foundAssignment = true;
-              if (assignment.assignedACs && assignment.assignedACs.length > 0) {
-                requiresACSelection = survey.assignACs === true;
-                assignedACs = assignment.assignedACs || [];
-                console.log('🔍 Assignment has', assignedACs.length, 'assigned ACs:', assignedACs);
-              } else if (isTargetSurvey) {
-                // For target survey, require AC selection even if no assigned ACs
-                requiresACSelection = survey.assignACs === true;
-                assignedACs = [];
-                console.log('🔍 Target survey with no assigned ACs - will show dropdown');
-              }
-            } else {
-              console.log('🔍 No matching assignment found in capiInterviewers');
-            }
-          }
-          
-          // If no assignment found but it's target survey, still require AC selection
-          if (!foundAssignment && isTargetSurvey && survey.assignACs === true) {
-            requiresACSelection = true;
-            assignedACs = [];
-            console.log('🔍 No assignment found but target survey - will show dropdown with all ACs');
-          }
-          
-          console.log('🔍 Final result - requiresACSelection:', requiresACSelection, 'assignedACs:', assignedACs, '(length:', assignedACs.length, ')');
-          console.log('🔍 ================================================');
         }
-        
-        // Create local session data
-        const localSessionData = {
-          sessionId: localSessionId,
-          survey: surveyId,
-          interviewMode: 'capi',
-          startTime: new Date().toISOString(),
-          requiresACSelection: requiresACSelection,
-          assignedACs: assignedACs,
-          acAssignmentState: survey?.acAssignmentState || 'West Bengal',
-          status: 'active',
-          isOffline: true, // Mark as offline session
-        };
-        
-        return { 
-          success: true, 
-          response: localSessionData 
-        };
+      } catch (error) {
+        console.error('❌ Error getting current user ID:', error);
       }
       
-      // Online - use API
-      const headers = await this.getHeaders();
-      const response = await axios.post(
-        `${this.baseURL}/api/survey-responses/start/${surveyId}`,
-        {},
-        { headers }
-      );
-      return { success: true, response: response.data.data };
+      // PERFORMANCE OPTIMIZED: Use optimized assignment checking (O(1) Map lookup instead of O(n) array.find)
+      const { foundAssignment, requiresACSelection, assignedACs } = await this.checkAssignmentOptimized(survey, currentUserId);
+      
+      // STEP 3: If assignment found, create local session (offline-first)
+      if (foundAssignment) {
+        console.log('✅ Assignment found in synced survey data - creating local session');
+        
+        // PERFORMANCE: Check online status (uses cache for faster response)
+        const isOnline = await this.isOnline();
+        
+        if (!isOnline) {
+          // Offline - create local session immediately
+          console.log('📴 Offline mode - creating local interview session (assignment verified from synced data)');
+          const localSessionId = `offline_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+          const localSessionData = {
+            sessionId: localSessionId,
+            survey: surveyId,
+            interviewMode: 'capi',
+            startTime: new Date().toISOString(),
+            requiresACSelection: requiresACSelection,
+            assignedACs: assignedACs,
+            acAssignmentState: survey?.acAssignmentState || 'West Bengal',
+            status: 'active',
+            isOffline: true,
+          };
+          
+          return { 
+            success: true, 
+            response: localSessionData 
+          };
+        } else {
+          // Online - try API call for sync
+          // CRITICAL: If this is called during sync, we MUST get a server session, not offline
+          // Check if this is a sync context by checking if we're being called from sync service
+          // For now, we'll always try API call and only fallback if it's NOT a critical sync operation
+          console.log('🌐 Online mode - attempting API call to create server session');
+          try {
+            const headers = await this.getHeaders();
+            const response = await axios.post(
+              `${this.baseURL}/api/survey-responses/start/${surveyId}`,
+              {},
+              { headers, timeout: 10000 }
+            );
+            return { success: true, response: response.data.data };
+          } catch (apiError: any) {
+            // API call failed - check if it's a 403 (assignment issue) or network error
+            const is403Error = apiError.response?.status === 403;
+            const isNetworkError = apiError.message?.includes('Network') || 
+                                  apiError.message?.includes('timeout') ||
+                                  apiError.code === 'NETWORK_ERROR';
+            
+            // CRITICAL: If it's a 403 error, don't fallback to offline - throw the error
+            // This ensures sync operations fail properly if assignment is wrong
+            if (is403Error) {
+              console.error('❌ API call failed with 403 - assignment verification failed on server');
+              console.error('❌ This means the backend rejected the request - do not fallback to offline');
+              throw new Error(apiError.response?.data?.message || 'You are not assigned to this survey on the server');
+            }
+            
+            // Only fallback to offline for network errors (not assignment errors)
+            if (isNetworkError) {
+              console.log('⚠️ Network error during API call, falling back to offline mode (assignment verified from synced data):', apiError.message);
+              const localSessionId = `offline_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+              const localSessionData = {
+                sessionId: localSessionId,
+                survey: surveyId,
+                interviewMode: 'capi',
+                startTime: new Date().toISOString(),
+                requiresACSelection: requiresACSelection,
+                assignedACs: assignedACs,
+                acAssignmentState: survey?.acAssignmentState || 'West Bengal',
+                status: 'active',
+                isOffline: true,
+              };
+              
+              return { 
+                success: true, 
+                response: localSessionData 
+              };
+            }
+            
+            // For other errors, throw them (don't fallback)
+            throw apiError;
+          }
+        }
+      } else {
+        // No assignment found in synced data - this shouldn't happen if surveys are synced correctly
+        console.log('⚠️ No assignment found in synced survey data - will try API call (edge case)');
+        
+        // PERFORMANCE: Check online status (uses cache)
+        const isOnline = await this.isOnline();
+        if (!isOnline) {
+          return {
+            success: false,
+            message: 'You are not assigned to this survey (checked from synced data). Please sync surveys or check your assignment.'
+          };
+        }
+        
+        // Try API call as fallback
+        const headers = await this.getHeaders();
+        const response = await axios.post(
+          `${this.baseURL}/api/survey-responses/start/${surveyId}`,
+          {},
+          { headers, timeout: 10000 }
+        );
+        return { success: true, response: response.data.data };
+      }
     } catch (error: any) {
       console.error('Start interview error:', error);
       console.error('🔍 Error response:', error.response?.data);
@@ -605,103 +878,42 @@ class ApiService {
         // Create a local session ID for offline interviews
         const localSessionId = `offline_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
         
-        // Get survey from offline storage
-        const surveys = await offlineStorage.getSurveys();
-        const survey = surveys.find((s: any) => s._id === surveyId || s.id === surveyId);
+        // PERFORMANCE: Get survey from cache first
+        const { performanceCache } = await import('./performanceCache');
+        let survey = performanceCache.getSurvey(surveyId);
         
-        // Determine if AC selection is required
-        // CRITICAL: Match backend logic exactly - for target survey "68fd1915d41841da463f0d46",
-        // require AC selection in CAPI mode even if interviewer has no assigned ACs
-        const isTargetSurvey = survey && (survey._id === '68fd1915d41841da463f0d46' || survey.id === '68fd1915d41841da463f0d46');
+        if (!survey) {
+          const surveys = await offlineStorage.getSurveys();
+          survey = surveys.find((s: any) => s._id === surveyId || s.id === surveyId);
+        }
+        
+        // PERFORMANCE: Use optimized assignment checking
         let requiresACSelection = false;
         let assignedACs: string[] = [];
         
-        // Get current user ID to check their specific assignment
+        // Get current user ID from cache
         let currentUserId: string | null = null;
         try {
-          const userDataStr = await AsyncStorage.getItem('userData');
-          if (userDataStr) {
-            const userData = JSON.parse(userDataStr);
-            currentUserId = userData._id || userData.id || userData.memberId || null;
-            console.log('🔍 [Network Error Fallback] Current user ID for assignment check:', currentUserId);
+          const cachedUserData = performanceCache.getUserData();
+          if (cachedUserData) {
+            currentUserId = cachedUserData._id || cachedUserData.id || cachedUserData.memberId || null;
+          } else {
+            const userDataStr = await AsyncStorage.getItem('userData');
+            if (userDataStr) {
+              const userData = JSON.parse(userDataStr);
+              currentUserId = userData._id || userData.id || userData.memberId || null;
+              performanceCache.setUserData(userData);
+            }
           }
         } catch (error) {
           console.error('❌ Error getting current user ID:', error);
         }
         
         if (survey) {
-          console.log('🔍 [Network Error Fallback] ========== OFFLINE AC ASSIGNMENT DEBUG ==========');
-          console.log('🔍 Survey ID:', survey._id || survey.id);
-          console.log('🔍 Survey assignACs:', survey.assignACs);
-          console.log('🔍 Is Target Survey:', isTargetSurvey);
-          console.log('🔍 Current User ID:', currentUserId);
-          
-          let foundAssignment = false;
-          
-          if (survey.assignedInterviewers && survey.assignedInterviewers.length > 0) {
-            console.log('🔍 Checking assignedInterviewers:', survey.assignedInterviewers.length);
-            const assignment = survey.assignedInterviewers.find((a: any) => {
-              const matchesStatus = a.status === 'assigned';
-              const matchesUser = currentUserId && (
-                (a.interviewer && (a.interviewer._id === currentUserId || a.interviewer.toString() === currentUserId || a.interviewer.id === currentUserId)) ||
-                (a.interviewerId && (a.interviewerId === currentUserId || a.interviewerId.toString() === currentUserId))
-              );
-              return matchesStatus && (currentUserId ? matchesUser : true);
-            });
-            
-            if (assignment) {
-              console.log('🔍 Found assignment in assignedInterviewers:', assignment);
-              foundAssignment = true;
-              if (assignment.assignedACs && assignment.assignedACs.length > 0) {
-                requiresACSelection = survey.assignACs === true;
-                assignedACs = assignment.assignedACs || [];
-                console.log('🔍 Assignment has', assignedACs.length, 'assigned ACs:', assignedACs);
-              } else if (isTargetSurvey) {
-                requiresACSelection = survey.assignACs === true;
-                assignedACs = [];
-                console.log('🔍 Target survey with no assigned ACs - will show dropdown');
-              }
-            } else {
-              console.log('🔍 No matching assignment found in assignedInterviewers');
-            }
-          }
-          
-          if (!foundAssignment && survey.capiInterviewers && survey.capiInterviewers.length > 0) {
-            console.log('🔍 Checking capiInterviewers:', survey.capiInterviewers.length);
-            const assignment = survey.capiInterviewers.find((a: any) => {
-              const matchesStatus = a.status === 'assigned';
-              const matchesUser = currentUserId && (
-                (a.interviewer && (a.interviewer._id === currentUserId || a.interviewer.toString() === currentUserId || a.interviewer.id === currentUserId)) ||
-                (a.interviewerId && (a.interviewerId === currentUserId || a.interviewerId.toString() === currentUserId))
-              );
-              return matchesStatus && (currentUserId ? matchesUser : true);
-            });
-            
-            if (assignment) {
-              console.log('🔍 Found assignment in capiInterviewers:', assignment);
-              foundAssignment = true;
-              if (assignment.assignedACs && assignment.assignedACs.length > 0) {
-                requiresACSelection = survey.assignACs === true;
-                assignedACs = assignment.assignedACs || [];
-                console.log('🔍 Assignment has', assignedACs.length, 'assigned ACs:', assignedACs);
-              } else if (isTargetSurvey) {
-                requiresACSelection = survey.assignACs === true;
-                assignedACs = [];
-                console.log('🔍 Target survey with no assigned ACs - will show dropdown');
-              }
-            } else {
-              console.log('🔍 No matching assignment found in capiInterviewers');
-            }
-          }
-          
-          if (!foundAssignment && isTargetSurvey && survey.assignACs === true) {
-            requiresACSelection = true;
-            assignedACs = [];
-            console.log('🔍 No assignment found but target survey - will show dropdown with all ACs');
-          }
-          
-          console.log('🔍 Final result - requiresACSelection:', requiresACSelection, 'assignedACs:', assignedACs, '(length:', assignedACs.length, ')');
-          console.log('🔍 ================================================');
+          // PERFORMANCE OPTIMIZED: Use optimized assignment checking (O(1) Map lookup)
+          const assignmentResult = await this.checkAssignmentOptimized(survey, currentUserId);
+          requiresACSelection = assignmentResult.requiresACSelection;
+          assignedACs = assignmentResult.assignedACs;
         }
         
         // Create local session data
@@ -726,6 +938,60 @@ class ApiService {
       return {
         success: false,
         message: error.response?.data?.message || 'Failed to start interview',
+      };
+    }
+  }
+
+  /**
+   * Get survey response by responseId (UUID) or mongoId (_id) to verify audio upload
+   * Used to verify that audio was actually linked to the response
+   * 
+   * @param identifier - Can be UUID responseId or MongoDB _id
+   */
+  async getSurveyResponseById(identifier: string): Promise<{ success: boolean; response?: any; error?: string }> {
+    try {
+      const headers = await this.getHeaders();
+      
+      // Try by UUID responseId first, then by MongoDB _id if that fails
+      let response;
+      try {
+        // First try: search by responseId (UUID)
+        response = await axios.get(
+          `${this.baseURL}/api/survey-responses/${identifier}`,
+          { headers }
+        );
+      } catch (error: any) {
+        // If that fails, the endpoint might not support UUID lookup directly
+        // The backend endpoint accepts either UUID or MongoDB _id
+        console.log(`⚠️ Direct lookup failed, trying alternative method...`);
+        throw error; // Let it fall through to error handling
+      }
+      
+      if (response.data && response.data.success && response.data.interview) {
+        return {
+          success: true,
+          response: response.data.interview
+        };
+      } else {
+        return {
+          success: false,
+          error: 'Response not found or invalid format'
+        };
+      }
+    } catch (error: any) {
+      console.error('Error fetching survey response:', error);
+      
+      // If 404, try to provide helpful error message
+      if (error.response?.status === 404) {
+        return {
+          success: false,
+          error: `Response not found with identifier: ${identifier}`
+        };
+      }
+      
+      return {
+        success: false,
+        error: error.response?.data?.message || error.message || 'Failed to fetch response'
       };
     }
   }
@@ -828,9 +1094,9 @@ class ApiService {
   }
 
   // Upload audio file
-  async uploadAudioFile(audioUri: string, sessionId: string, surveyId: string) {
+  async uploadAudioFile(audioUri: string, sessionId: string, surveyId: string, responseId?: string) {
     try {
-      console.log('Uploading audio file:', { audioUri, sessionId, surveyId });
+      console.log('Uploading audio file:', { audioUri, sessionId, surveyId, responseId });
       
       // Check if this is a mock URI (for testing)
       // DO NOT allow mock URIs to be uploaded or saved to database
@@ -871,6 +1137,12 @@ class ApiService {
       formData.append('sessionId', sessionId);
       formData.append('surveyId', surveyId);
       
+      // CRITICAL: Include responseId if provided (for linking audio to completed response)
+      if (responseId) {
+        formData.append('responseId', responseId);
+        console.log('📎 Including responseId in audio upload:', responseId);
+      }
+      
       const headers = await this.getHeaders();
       // Remove Content-Type header to let FormData set it
       delete headers['Content-Type'];
@@ -880,46 +1152,119 @@ class ApiService {
       console.log('FormData file object:', file);
       
       // Use fetch with timeout and better error handling
+      // CRITICAL: Increased timeout to 120 seconds for large audio files and slow connections
+      // This matches backend timeout of 2 hours, but we use 2 minutes for client-side timeout
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+      const timeoutId = setTimeout(() => controller.abort(), 120000); // 120 second timeout (2 minutes)
       
-      const response = await fetch(`${this.baseURL}/api/survey-responses/upload-audio`, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Authorization': headers.Authorization,
-        },
-        signal: controller.signal,
-      });
-      
-      clearTimeout(timeoutId);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Upload failed:', response.status, errorText);
-        throw new Error(`Failed to upload audio: ${response.status} ${errorText}`);
+      try {
+        const response = await fetch(`${this.baseURL}/api/survey-responses/upload-audio`, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Authorization': headers.Authorization,
+          },
+          signal: controller.signal,
+        });
+        
+        clearTimeout(timeoutId);
+        
+        // CRITICAL: Handle 502 Bad Gateway errors specifically
+        if (response.status === 502) {
+          console.error('❌ 502 Bad Gateway during audio upload - backend server not responding');
+          const errorText = await response.text().catch(() => '');
+          return {
+            success: false,
+            message: 'Backend server is not responding (502 Bad Gateway). Please try again later.',
+            error: '502 Bad Gateway',
+          };
+        }
+        
+        if (!response.ok) {
+          const errorText = await response.text().catch(() => '');
+          console.error('Upload failed:', response.status, errorText);
+          
+          // Check for 502 in error text as well (some servers return it in body)
+          if (response.status === 502 || errorText.includes('502') || errorText.includes('Bad Gateway')) {
+            return {
+              success: false,
+              message: 'Backend server is not responding (502 Bad Gateway). Please try again later.',
+              error: '502 Bad Gateway',
+            };
+          }
+          
+          throw new Error(`Failed to upload audio: ${response.status} ${errorText}`);
+        }
+        
+        const result = await response.json();
+        console.log('Audio upload successful:', result);
+        
+        // CRITICAL: Check if result has success field
+        if (result && result.success !== undefined) {
+          if (result.success && result.data) {
+            return { success: true, response: result.data, audioUrl: result.data.audioUrl };
+          } else {
+            return {
+              success: false,
+              message: result.message || 'Audio upload failed',
+              error: result.message || 'Unknown error',
+            };
+          }
+        } else if (result && result.data) {
+          // Legacy format - just return data
+          return { success: true, response: result.data, audioUrl: result.data.audioUrl };
+        } else {
+          return {
+            success: false,
+            message: 'Unexpected response format from server',
+            error: 'Invalid response format',
+          };
+        }
+      } catch (fetchError: any) {
+        clearTimeout(timeoutId);
+        
+        // Check if it's a timeout or abort
+        if (fetchError.name === 'AbortError' || fetchError.message?.includes('timeout')) {
+          console.error('❌ Audio upload timeout - request took too long');
+          return {
+            success: false,
+            message: 'Audio upload timeout - request took too long. Please check your connection.',
+            error: 'Timeout',
+          };
+        }
+        
+        // Re-throw other errors to be caught by outer catch
+        throw fetchError;
       }
       
-      const result = await response.json();
-      console.log('Audio upload successful:', result);
-      return { success: true, response: result.data };
     } catch (error: any) {
       console.error('Upload audio error:', error);
       
+      // Check for 502 errors
+      if (error.message && (error.message.includes('502') || error.message.includes('Bad Gateway'))) {
+        console.error('❌ 502 Bad Gateway during audio upload');
+        return {
+          success: false,
+          message: 'Backend server is not responding (502 Bad Gateway). Please try again later.',
+          error: '502 Bad Gateway',
+        };
+      }
+      
       // If it's a network error, return failure - DO NOT use mock URLs
-      // The audio upload failed, so we should not save a mock URL to the database
-      // The interview can still be completed without audio if needed
+      // CRITICAL: Audio is REQUIRED - do NOT proceed without audio
       if (error.message.includes('Network request failed') || error.name === 'AbortError') {
         console.error('❌ Network error during audio upload - upload failed');
         return { 
           success: false,
-          message: 'Network error - audio upload failed. Interview can be completed without audio.',
+          message: 'Network error - audio upload failed. Audio is REQUIRED for CAPI interviews.',
+          error: 'Network error',
         };
       }
       
       return {
         success: false,
         message: error.message || 'Failed to upload audio',
+        error: error.message || 'Unknown error',
       };
     }
   }
@@ -931,13 +1276,58 @@ class ApiService {
       const response = await axios.post(
         `${this.baseURL}/api/survey-responses/session/${sessionId}/complete`,
         interviewData,
-        { headers }
+        { 
+          headers,
+          timeout: 60000 // 60 second timeout for large requests
+        }
       );
-      return { success: true, response: response.data.data };
+      
+      // CRITICAL: Check response structure
+      if (response.data && response.data.success !== undefined) {
+        // Backend returns { success: true, data: {...} } format
+        if (response.data.success && response.data.data) {
+          return { success: true, response: response.data.data };
+        } else {
+          // Backend returned success: false
+          return {
+            success: false,
+            message: response.data.message || 'Failed to complete interview',
+            isDuplicate: response.data.isDuplicate || false,
+          };
+        }
+      } else if (response.data && response.data.data) {
+        // Backend returns { data: {...} } format (legacy)
+        return { success: true, response: response.data.data };
+      } else {
+        // Unexpected response format
+        console.error('Unexpected response format:', response.data);
+        return {
+          success: false,
+          message: 'Unexpected response format from server',
+          isDuplicate: false,
+        };
+      }
     } catch (error: any) {
+      const statusCode = error.response?.status;
+      const errorMessage = error.message || '';
+      
+      // CRITICAL: Handle 502 Bad Gateway errors separately
+      // 502 means backend is not responding (down/overloaded/timeout)
+      if (statusCode === 502) {
+        console.error('❌ 502 Bad Gateway - Backend server is not responding');
+        console.error('❌ This is a temporary server issue - interview should be retried');
+        return {
+          success: false,
+          message: 'Backend server is not responding (502 Bad Gateway). Please try again later.',
+          isDuplicate: false,
+          isServerError: true, // Flag for retry logic
+          statusCode: 502,
+        };
+      }
+      
       // Check if this is a duplicate submission (409 Conflict)
       // This is not really an error - interview already exists on server
-      const isDuplicate = error.response?.status === 409 || 
+      const isDuplicate = statusCode === 409 || 
                          error.response?.data?.isDuplicate === true ||
                          (error.response?.data?.message && 
                           error.response.data.message.toLowerCase().includes('duplicate'));
@@ -947,12 +1337,15 @@ class ApiService {
         console.log('ℹ️ This is expected behavior - interview was already successfully submitted');
       } else {
         console.error('Complete interview error:', error);
+        console.error('Error status:', statusCode);
+        console.error('Error message:', errorMessage);
       }
       
       return {
         success: false,
-        message: error.response?.data?.message || 'Failed to complete interview',
+        message: error.response?.data?.message || errorMessage || 'Failed to complete interview',
         isDuplicate: isDuplicate, // Include flag for duplicate detection
+        statusCode: statusCode,
       };
     }
   }
@@ -960,15 +1353,46 @@ class ApiService {
   // Get interviewer statistics (lightweight endpoint)
   async getInterviewerStats() {
     try {
+      // PERFORMANCE: Check cache first (offline-first approach)
+      const cachedStats = await offlineStorage.getCachedInterviewerStats();
+      if (cachedStats) {
+        console.log('⚡ Interviewer stats loaded from cache (instant)');
+      }
+      
       const headers = await this.getHeaders();
       const response = await axios.get(`${this.baseURL}/api/survey-responses/interviewer-stats`, { headers });
       
       if (response.data.success) {
+        // API returns: { success: true, data: { totalCompleted, approved, rejected, pendingApproval } }
+        const stats = response.data.data || {};
+        
+        // CRITICAL: Cache stats for offline display (like WhatsApp/Meta/Google)
+        // Cache stats whenever they're successfully fetched so they're available offline
+        if (stats && typeof stats.totalCompleted === 'number') {
+          await offlineStorage.saveInterviewerStats({
+            totalCompleted: stats.totalCompleted || 0,
+            approved: stats.approved || 0,
+            rejected: stats.rejected || 0,
+            pendingApproval: stats.pendingApproval || 0,
+          });
+          console.log('✅ Interviewer stats cached for offline access');
+        }
+        
         return { 
           success: true, 
-          stats: response.data.data || {}
+          stats: stats
         };
       } else {
+        // API failed - return cached stats if available
+        if (cachedStats) {
+          console.log('⚠️ API failed, using cached stats:', cachedStats);
+          return {
+            success: true,
+            stats: cachedStats,
+            fromCache: true,
+          };
+        }
+        
         return {
           success: false,
           message: response.data.message || 'Failed to fetch interviewer statistics',
@@ -977,6 +1401,19 @@ class ApiService {
     } catch (error: any) {
       console.error('Get interviewer stats error:', error);
       console.error('Error response:', error.response?.data);
+      
+      // CRITICAL: If API call fails, return cached stats (offline-first)
+      // Like WhatsApp/Meta - show last known stats when offline
+      const cachedStats = await offlineStorage.getCachedInterviewerStats();
+      if (cachedStats) {
+        console.log('⚠️ Network error, using cached stats for offline display:', cachedStats);
+        return {
+          success: true,
+          stats: cachedStats,
+          fromCache: true,
+        };
+      }
+      
       return {
         success: false,
         message: error.response?.data?.message || error.message || 'Failed to fetch interviewer statistics',
@@ -2420,6 +2857,64 @@ class ApiService {
     } catch (error: any) {
       console.error('Error reporting offline interview status:', error);
       throw error;
+    }
+  }
+
+  // ============================================
+  // APP UPDATE API METHODS
+  // ============================================
+  
+  /**
+   * Check for app updates from server
+   * @param currentVersionCode Current app version code
+   * @returns Update information
+   */
+  async checkAppUpdate(currentVersionCode: number): Promise<{
+    success: boolean;
+    hasUpdate?: boolean;
+    latestVersion?: string;
+    latestVersionCode?: number;
+    downloadUrl?: string;
+    fileSize?: number;
+    fileHash?: string;
+    releaseNotes?: string;
+    isForceUpdate?: boolean;
+    minRequiredVersion?: string;
+    error?: string;
+  }> {
+    try {
+      const response = await axios.get(`${this.baseURL}/api/app/check-update`, {
+        params: {
+          versionCode: currentVersionCode
+        },
+        timeout: 10000 // 10 second timeout
+      });
+      
+      if (response.data.success) {
+        return {
+          success: true,
+          hasUpdate: response.data.hasUpdate || false,
+          latestVersion: response.data.latestVersion,
+          latestVersionCode: response.data.latestVersionCode,
+          downloadUrl: response.data.downloadUrl,
+          fileSize: response.data.fileSize,
+          fileHash: response.data.fileHash,
+          releaseNotes: response.data.releaseNotes,
+          isForceUpdate: response.data.isForceUpdate || false,
+          minRequiredVersion: response.data.minRequiredVersion
+        };
+      } else {
+        return {
+          success: false,
+          error: response.data.message || 'Failed to check for updates'
+        };
+      }
+    } catch (error: any) {
+      console.error('❌ Error checking app update:', error);
+      return {
+        success: false,
+        error: error.message || 'Network error while checking for updates'
+      };
     }
   }
 }

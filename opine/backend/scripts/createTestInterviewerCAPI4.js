@@ -118,7 +118,7 @@ const createTestInterviewerCAPI = async () => {
         cvUpload: 'cvUpload-1764630127133-571761495.docx', // Using same dummy file
         ownsSmartphone: true,
         smartphoneType: 'Both',
-        androidVersion: '14',
+        androidVersion: '15',
         iosVersion: '17',
         willingToTravel: true,
         hasVehicle: true,

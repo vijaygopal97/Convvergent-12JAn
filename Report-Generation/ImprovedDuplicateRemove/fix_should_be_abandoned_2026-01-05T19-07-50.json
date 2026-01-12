@@ -1,0 +1,124 @@
+{
+  "timestamp": "2026-01-05T19:07:50.922Z",
+  "operation": "Fix Responses That Should Be Abandoned (Missing Fields)",
+  "sourceReport": "should_be_abandoned_analysis_2026-01-05T19-04-11.json",
+  "sourceReportPath": "/var/www/Report-Generation/ImprovedDuplicateRemove/should_be_abandoned_analysis_2026-01-05T19-04-11.json",
+  "summary": {
+    "totalFound": 7,
+    "totalUpdated": 7,
+    "success": true,
+    "byMissingField": {
+      "missingAC": 0,
+      "missingGender": 5,
+      "missingAge": 7,
+      "missingAll": 0
+    },
+    "byMode": {
+      "capi": {
+        "total": 0,
+        "missingAC": 0,
+        "missingGender": 0,
+        "missingAge": 0
+      },
+      "cati": {
+        "total": 7,
+        "missingAC": 0,
+        "missingGender": 5,
+        "missingAge": 7
+      }
+    }
+  },
+  "updates": [
+    {
+      "responseId": "06b6704a-8a49-4e40-9233-93d79cb1f4de",
+      "mongoId": "695b28777f948a6b09ff2010",
+      "sessionId": "ea95db67-b5ba-4e88-8fe9-da5c951be0de",
+      "interviewMode": "cati",
+      "oldStatus": "Pending_Approval",
+      "newStatus": "abandoned",
+      "abandonedReason": "Missing Gender, Age",
+      "missingAC": false,
+      "missingGender": true,
+      "missingAge": true,
+      "updatedAt": "2026-01-05T19:07:50.875Z"
+    },
+    {
+      "responseId": "bc0478fd-6ed0-41f4-9409-2e6e9547bbc3",
+      "mongoId": "695b499ceee836b4778eff17",
+      "sessionId": "fb96986f-6724-4f1d-8bdf-b405ef6c50b5",
+      "interviewMode": "cati",
+      "oldStatus": "Pending_Approval",
+      "newStatus": "abandoned",
+      "abandonedReason": "Missing Gender, Age",
+      "missingAC": false,
+      "missingGender": true,
+      "missingAge": true,
+      "updatedAt": "2026-01-05T19:07:50.882Z"
+    },
+    {
+      "responseId": "bc727387-af9d-483a-821a-d146aaa69eb4",
+      "mongoId": "695b5fae50cfd657a0476e36",
+      "sessionId": "f82c4262-68e9-46a1-bd0e-9299e71e0f28",
+      "interviewMode": "cati",
+      "oldStatus": "Pending_Approval",
+      "newStatus": "abandoned",
+      "abandonedReason": "Missing Age",
+      "missingAC": false,
+      "missingGender": false,
+      "missingAge": true,
+      "updatedAt": "2026-01-05T19:07:50.892Z"
+    },
+    {
+      "responseId": "bec6a8f7-188c-4a03-8707-4e7bebac0f57",
+      "mongoId": "695b601a4f31bd114f17237e",
+      "sessionId": "7552847b-36f8-42ba-83fd-d7efd15d1500",
+      "interviewMode": "cati",
+      "oldStatus": "Pending_Approval",
+      "newStatus": "abandoned",
+      "abandonedReason": "Missing Gender, Age",
+      "missingAC": false,
+      "missingGender": true,
+      "missingAge": true,
+      "updatedAt": "2026-01-05T19:07:50.899Z"
+    },
+    {
+      "responseId": "dd22d1fe-0cc9-4669-9f43-9bd6bc1bfdfd",
+      "mongoId": "695b689a2468b2783cc5903a",
+      "sessionId": "aa44f4fd-1d0f-4118-800a-23ba7e290184",
+      "interviewMode": "cati",
+      "oldStatus": "Pending_Approval",
+      "newStatus": "abandoned",
+      "abandonedReason": "Missing Age",
+      "missingAC": false,
+      "missingGender": false,
+      "missingAge": true,
+      "updatedAt": "2026-01-05T19:07:50.907Z"
+    },
+    {
+      "responseId": "5e8aa83a-be09-41ab-89ad-dd9375061973",
+      "mongoId": "695b9366f7a77c2ddc9512b4",
+      "sessionId": "2079d282-4472-4c3a-8422-a3b507f6936d",
+      "interviewMode": "cati",
+      "oldStatus": "Pending_Approval",
+      "newStatus": "abandoned",
+      "abandonedReason": "Missing Gender, Age",
+      "missingAC": false,
+      "missingGender": true,
+      "missingAge": true,
+      "updatedAt": "2026-01-05T19:07:50.914Z"
+    },
+    {
+      "responseId": "99257e63-f9fc-433e-9913-6e7dcb6f018a",
+      "mongoId": "695b962be40ecc7bba65dbf0",
+      "sessionId": "63467a7d-161b-4198-9b55-a8fec326dd3d",
+      "interviewMode": "cati",
+      "oldStatus": "Pending_Approval",
+      "newStatus": "abandoned",
+      "abandonedReason": "Missing Gender, Age",
+      "missingAC": false,
+      "missingGender": true,
+      "missingAge": true,
+      "updatedAt": "2026-01-05T19:07:50.921Z"
+    }
+  ]
+}

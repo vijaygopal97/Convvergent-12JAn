@@ -197,9 +197,9 @@ const CompanySurveysManagement = () => {
     } else if (action === 'responses-v2') {
       // Navigate to survey responses V2 page (optimized)
       navigate(`/company/surveys/${surveyId}/responses-v2`);
-    } else if (action === 'caller-performance') {
-      // Navigate to caller performance page
-      navigate(`/company/surveys/${surveyId}/caller-performance`);
+    } else if (action === 'caller-performance-v2') {
+      // Navigate to caller performance V2 page (optimized)
+      navigate(`/company/surveys/${surveyId}/caller-performance-v2`);
     } else if (action === 'qc-batches') {
       // Navigate to QC batches page
       navigate(`/company/surveys/${surveyId}/qc-batches`);
@@ -290,30 +290,65 @@ const CompanySurveysManagement = () => {
   };
 
 
-  // Fetch overall statistics (optimized - uses aggregation endpoint)
+  // Fetch overall statistics (optimized - uses aggregation endpoint + localStorage cache)
+  // Top tech companies (Meta, Twitter) use client-side caching for instant display
   const fetchOverallStats = async () => {
     try {
-      // Use optimized aggregation endpoint instead of fetching all surveys
+      // CRITICAL FIX: Check localStorage cache first for instant display
+      // This provides instant feedback while fresh data loads in background
+      const cacheKey = 'overall-stats-cache';
+      const cacheTimestampKey = 'overall-stats-cache-timestamp';
+      const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+      
+      const cachedData = localStorage.getItem(cacheKey);
+      const cachedTimestamp = localStorage.getItem(cacheTimestampKey);
+      
+      // Show cached data immediately if available and fresh
+      if (cachedData && cachedTimestamp) {
+        const age = Date.now() - parseInt(cachedTimestamp);
+        if (age < CACHE_DURATION) {
+          try {
+            const stats = JSON.parse(cachedData);
+            setOverallStats(stats);
+            console.log('✅ Using cached stats (age:', Math.round(age / 1000), 's)');
+          } catch (e) {
+            console.warn('Failed to parse cached stats:', e);
+          }
+        }
+      }
+      
+      // Fetch fresh data from API (with Redis cache on backend)
       const response = await surveyAPI.getOverallStats();
       
       if (response.success && response.data.stats) {
-        setOverallStats({
+        const freshStats = {
           totalSurveys: response.data.stats.totalSurveys || 0,
           activeSurveys: response.data.stats.activeSurveys || 0,
           totalResponses: response.data.stats.totalResponses || 0,
           totalCost: response.data.stats.totalCost || 0
-        });
-        // Overall stats loaded successfully
+        };
+        
+        // Update state with fresh data
+        setOverallStats(freshStats);
+        
+        // Update localStorage cache for next time
+        localStorage.setItem(cacheKey, JSON.stringify(freshStats));
+        localStorage.setItem(cacheTimestampKey, Date.now().toString());
+        
+        console.log('✅ Fresh stats loaded and cached');
       }
     } catch (error) {
       console.error('Error fetching overall stats:', error);
-      // Set default values on error to prevent UI issues
-      setOverallStats({
-        totalSurveys: 0,
-        activeSurveys: 0,
-        totalResponses: 0,
-        totalCost: 0
-      });
+      // Only set defaults if we don't have cached data
+      const cachedData = localStorage.getItem('overall-stats-cache');
+      if (!cachedData) {
+        setOverallStats({
+          totalSurveys: 0,
+          activeSurveys: 0,
+          totalResponses: 0,
+          totalCost: 0
+        });
+      }
     }
   };
 
@@ -653,12 +688,12 @@ const CompanySurveysManagement = () => {
                     <span>Reports-V2</span>
                   </button>
                   <button
-                    onClick={() => handleSurveyAction(survey._id || survey.id, 'caller-performance')}
-                    className="flex items-center space-x-1 px-3 py-1.5 bg-teal-100 text-teal-700 rounded-lg hover:bg-teal-200 transition-colors text-sm font-medium"
-                    title="View Caller Performance"
+                    onClick={() => handleSurveyAction(survey._id || survey.id, 'caller-performance-v2')}
+                    className="flex items-center space-x-1 px-3 py-1.5 bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200 transition-colors text-sm font-medium"
+                    title="View Caller Performance V2 (Optimized for Big Data)"
                   >
                     <Phone className="w-4 h-4" />
-                    <span>Caller Performance</span>
+                    <span>Caller Performance-V2</span>
                   </button>
                   <button
                     onClick={() => handleSurveyAction(survey._id || survey.id, 'qc-batches')}

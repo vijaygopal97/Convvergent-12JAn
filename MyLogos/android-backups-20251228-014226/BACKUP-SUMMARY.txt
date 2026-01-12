@@ -1,0 +1,20 @@
+Android App Backup Summary
+==========================
+
+Backup Date: Sun Dec 28 01:42:43 IST 2025
+Device IP: 192.168.1.17:39711
+Package Name: com.convergentinterviewer
+App Name: convergent
+App Version: 11
+
+Backup Contents:
+
+APK:
+-rw-r--r--  1 vijaygopal  staff    84M Dec 28 01:42 convergent-20251228-014226.apk
+
+Data:
+-rw-r-----  1 vijaygopal  staff    47B Dec 28 01:42 convergent-data-20251228-014226.ab (failed - too small)
+-rw-r-----  1 vijaygopal  staff   190M Dec 28 01:47 convergent-data-with-shared.ab (✅ SUCCESS - includes app data and shared storage)
+
+Total Backup Size:
+ 84M	android-backups-20251228-014226

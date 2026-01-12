@@ -1,0 +1,99 @@
+{
+  "timestamp": "2026-01-04T15:13:49.503Z",
+  "summary": {
+    "totalResponsesToApprove": 17,
+    "databaseUpdates": {
+      "success": 17,
+      "failed": 0
+    },
+    "csvUpdated": true
+  },
+  "changes": [
+    {
+      "responseId": "20052cc5-7fcc-43a1-b127-b191d109d7da",
+      "phone": "7719236676",
+      "statusChange": "Rejected → Approved"
+    },
+    {
+      "responseId": "5e853982-61e1-4532-bb8f-450ccb5a521b",
+      "phone": "9932130240",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "a41d7d1a-5c49-4fe4-9a59-69a1b079b6ae",
+      "phone": "9332358621",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "b9449e73-a472-4139-b262-ff55c04d4842",
+      "phone": "9132526070",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "4ab3e93d-5af1-428c-bced-349a5721c3e8",
+      "phone": "9563252308",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "965c8eb9-c2b9-43a2-ae4d-6f9a8d3f29a1",
+      "phone": "9536258099",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "9561971a-7902-499f-ae6e-14ad0fd95588",
+      "phone": "9933326700",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "1d9d0286-48d5-4f4c-9a13-9e2f8330cda5",
+      "phone": "9332358601",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "cbc1eb28-b337-4dfe-a862-6186d62fe349",
+      "phone": "6295202563",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "e1214893-7bda-4deb-ab42-bf087e8d4fd1",
+      "phone": "7008302588",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "f3f50a6d-2224-4a76-8ef9-85c3a2ca90f3",
+      "phone": "9002506588",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "0d42985e-a72b-4a01-bbd4-30c22fd0415c",
+      "phone": "9965025830",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "a4bbd3a2-5caa-43dd-ae46-c8c1b916fd85",
+      "phone": "7797765830",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "b67234c9-e32b-4d4a-afdc-9343c410e319",
+      "phone": "9563258033",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "1fb1bcd9-28b3-47e3-bf25-99d1816962f4",
+      "phone": "7679257053",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "3b7b3943-ce97-437f-9637-f08d18cffb4c",
+      "phone": "9434564830",
+      "statusChange": "Pending_Approval → Approved"
+    },
+    {
+      "responseId": "bb6a5154-7cb0-4d90-a7f2-2eba84a8ffaa",
+      "phone": "9005687421",
+      "statusChange": "Pending_Approval → Approved"
+    }
+  ],
+  "failures": []
+}

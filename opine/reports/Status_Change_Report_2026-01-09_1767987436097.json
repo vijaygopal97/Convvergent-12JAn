@@ -1,0 +1,523 @@
+{
+  "metadata": {
+    "operation": "Change Auto-Rejected to Pending_Approval",
+    "criteria": {
+      "minQuestionsAnswered": 10,
+      "maxResponsesToChange": 100,
+      "sourceReport": "Auto_Rejected_Interviews_Report_Dulal_Ch Roy_2026-01-09.json"
+    },
+    "executedAt": "2026-01-09T19:37:16.048Z",
+    "executedBy": "Script: changeAutoRejectedToPendingApproval.js"
+  },
+  "summary": {
+    "totalInReport": 142,
+    "qualifyingResponses": 142,
+    "attemptedToChange": 100,
+    "successfullyChanged": 0,
+    "failed": 100,
+    "skipped": 0
+  },
+  "changes": [],
+  "errors": [
+    {
+      "responseId": "3e6ea5a1-58b1-4ef9-9b8d-d1b105320c97",
+      "error": "Cast to ObjectId failed for value \"3e6ea5a1-58b1-4ef9-9b8d-d1b105320c97\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.058Z"
+    },
+    {
+      "responseId": "ac7d102b-e057-4cab-a7c6-ef7e18766657",
+      "error": "Cast to ObjectId failed for value \"ac7d102b-e057-4cab-a7c6-ef7e18766657\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.059Z"
+    },
+    {
+      "responseId": "0af1acce-7d7f-4362-a5d3-4ac8be54efac",
+      "error": "Cast to ObjectId failed for value \"0af1acce-7d7f-4362-a5d3-4ac8be54efac\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.059Z"
+    },
+    {
+      "responseId": "6958d4db-8648-45fc-a3ae-1e39586e09f2",
+      "error": "Cast to ObjectId failed for value \"6958d4db-8648-45fc-a3ae-1e39586e09f2\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.060Z"
+    },
+    {
+      "responseId": "73f142a3-8ad6-4dba-9269-d3238d5d6345",
+      "error": "Cast to ObjectId failed for value \"73f142a3-8ad6-4dba-9269-d3238d5d6345\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.060Z"
+    },
+    {
+      "responseId": "b1dbccd8-2f14-481c-b1f9-b10b0fe15623",
+      "error": "Cast to ObjectId failed for value \"b1dbccd8-2f14-481c-b1f9-b10b0fe15623\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.061Z"
+    },
+    {
+      "responseId": "688d2e3f-4235-421f-85f7-5952ac0247cb",
+      "error": "Cast to ObjectId failed for value \"688d2e3f-4235-421f-85f7-5952ac0247cb\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.061Z"
+    },
+    {
+      "responseId": "b50b4e10-427b-4a49-9cf4-fccb8f25bca7",
+      "error": "Cast to ObjectId failed for value \"b50b4e10-427b-4a49-9cf4-fccb8f25bca7\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.062Z"
+    },
+    {
+      "responseId": "6e72408e-5435-49eb-87a9-afb81995cf81",
+      "error": "Cast to ObjectId failed for value \"6e72408e-5435-49eb-87a9-afb81995cf81\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.062Z"
+    },
+    {
+      "responseId": "816da24a-791f-45e9-9ea0-d21f14b0b292",
+      "error": "Cast to ObjectId failed for value \"816da24a-791f-45e9-9ea0-d21f14b0b292\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.063Z"
+    },
+    {
+      "responseId": "840b13c3-ecd0-4e71-885a-f0fe0ed31ffc",
+      "error": "Cast to ObjectId failed for value \"840b13c3-ecd0-4e71-885a-f0fe0ed31ffc\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.064Z"
+    },
+    {
+      "responseId": "eb947f11-019b-4267-afc2-7582180e5a5a",
+      "error": "Cast to ObjectId failed for value \"eb947f11-019b-4267-afc2-7582180e5a5a\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.064Z"
+    },
+    {
+      "responseId": "7823d08a-25e0-43a9-8ffb-cd40358f0bfe",
+      "error": "Cast to ObjectId failed for value \"7823d08a-25e0-43a9-8ffb-cd40358f0bfe\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.065Z"
+    },
+    {
+      "responseId": "cab54192-6bde-4f9b-8c5f-6598a9d419e0",
+      "error": "Cast to ObjectId failed for value \"cab54192-6bde-4f9b-8c5f-6598a9d419e0\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.065Z"
+    },
+    {
+      "responseId": "ae31b435-3ca3-4590-aa39-c00ff3649d7b",
+      "error": "Cast to ObjectId failed for value \"ae31b435-3ca3-4590-aa39-c00ff3649d7b\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.066Z"
+    },
+    {
+      "responseId": "96eb7254-d354-4fd7-9cf8-338ca8433b84",
+      "error": "Cast to ObjectId failed for value \"96eb7254-d354-4fd7-9cf8-338ca8433b84\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.066Z"
+    },
+    {
+      "responseId": "55d64476-a946-4b1b-98d4-6869c1a7c858",
+      "error": "Cast to ObjectId failed for value \"55d64476-a946-4b1b-98d4-6869c1a7c858\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.066Z"
+    },
+    {
+      "responseId": "6eda258d-7423-4ebc-8d2c-7f37827d1988",
+      "error": "Cast to ObjectId failed for value \"6eda258d-7423-4ebc-8d2c-7f37827d1988\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.067Z"
+    },
+    {
+      "responseId": "6c8390cd-d6e0-4346-b0d3-017b7007f304",
+      "error": "Cast to ObjectId failed for value \"6c8390cd-d6e0-4346-b0d3-017b7007f304\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.067Z"
+    },
+    {
+      "responseId": "5c15f6a7-06bc-400a-b4c4-167e12bc91eb",
+      "error": "Cast to ObjectId failed for value \"5c15f6a7-06bc-400a-b4c4-167e12bc91eb\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.068Z"
+    },
+    {
+      "responseId": "d7e08592-3067-4e23-827f-9679c7b3e930",
+      "error": "Cast to ObjectId failed for value \"d7e08592-3067-4e23-827f-9679c7b3e930\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.068Z"
+    },
+    {
+      "responseId": "0d0a5b01-9b1f-4036-a414-cad156705d7c",
+      "error": "Cast to ObjectId failed for value \"0d0a5b01-9b1f-4036-a414-cad156705d7c\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.069Z"
+    },
+    {
+      "responseId": "28fb0299-f959-4150-b9eb-70e1680193dc",
+      "error": "Cast to ObjectId failed for value \"28fb0299-f959-4150-b9eb-70e1680193dc\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.069Z"
+    },
+    {
+      "responseId": "458e8299-3213-4e9f-80bf-b8ebe2a09892",
+      "error": "Cast to ObjectId failed for value \"458e8299-3213-4e9f-80bf-b8ebe2a09892\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.070Z"
+    },
+    {
+      "responseId": "70360b59-ba3b-4774-a149-d4a6c772d10a",
+      "error": "Cast to ObjectId failed for value \"70360b59-ba3b-4774-a149-d4a6c772d10a\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.070Z"
+    },
+    {
+      "responseId": "4b3bc354-cdd3-42ef-a83a-b9a6c93b6535",
+      "error": "Cast to ObjectId failed for value \"4b3bc354-cdd3-42ef-a83a-b9a6c93b6535\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.071Z"
+    },
+    {
+      "responseId": "86ee960f-571c-4328-8a0a-4587f1c3464a",
+      "error": "Cast to ObjectId failed for value \"86ee960f-571c-4328-8a0a-4587f1c3464a\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.071Z"
+    },
+    {
+      "responseId": "33993b3e-2118-40ac-8fd4-fdc3f1bcd6b4",
+      "error": "Cast to ObjectId failed for value \"33993b3e-2118-40ac-8fd4-fdc3f1bcd6b4\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.071Z"
+    },
+    {
+      "responseId": "9a1cb9eb-bb03-4eeb-a7a9-aab3e46ca5d7",
+      "error": "Cast to ObjectId failed for value \"9a1cb9eb-bb03-4eeb-a7a9-aab3e46ca5d7\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.072Z"
+    },
+    {
+      "responseId": "fe646e94-fe66-4b28-8a49-12062255b02a",
+      "error": "Cast to ObjectId failed for value \"fe646e94-fe66-4b28-8a49-12062255b02a\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.072Z"
+    },
+    {
+      "responseId": "b6bd0c98-ac79-4f8d-86fa-db063cd2a25e",
+      "error": "Cast to ObjectId failed for value \"b6bd0c98-ac79-4f8d-86fa-db063cd2a25e\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.072Z"
+    },
+    {
+      "responseId": "76db19d5-0275-4e95-9a68-d11ffe059eae",
+      "error": "Cast to ObjectId failed for value \"76db19d5-0275-4e95-9a68-d11ffe059eae\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.073Z"
+    },
+    {
+      "responseId": "f91fddfe-3b4e-499e-8cbc-f09bd63a9b9c",
+      "error": "Cast to ObjectId failed for value \"f91fddfe-3b4e-499e-8cbc-f09bd63a9b9c\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.073Z"
+    },
+    {
+      "responseId": "f3dea935-d9dd-4d50-8b35-dc36b8e09fd3",
+      "error": "Cast to ObjectId failed for value \"f3dea935-d9dd-4d50-8b35-dc36b8e09fd3\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.074Z"
+    },
+    {
+      "responseId": "666cfd20-6b41-445e-b2be-9984424c8803",
+      "error": "Cast to ObjectId failed for value \"666cfd20-6b41-445e-b2be-9984424c8803\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.074Z"
+    },
+    {
+      "responseId": "0a97bbe6-ef29-406c-b7f0-82daf011ca0f",
+      "error": "Cast to ObjectId failed for value \"0a97bbe6-ef29-406c-b7f0-82daf011ca0f\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.074Z"
+    },
+    {
+      "responseId": "f91f190f-4783-4b62-84d7-ecb4e3b5dd42",
+      "error": "Cast to ObjectId failed for value \"f91f190f-4783-4b62-84d7-ecb4e3b5dd42\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.075Z"
+    },
+    {
+      "responseId": "cbb2c676-9c10-4a37-8d01-7b67e58de98c",
+      "error": "Cast to ObjectId failed for value \"cbb2c676-9c10-4a37-8d01-7b67e58de98c\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.075Z"
+    },
+    {
+      "responseId": "64a326b7-9a53-41ee-b529-7ad2c4dc75b4",
+      "error": "Cast to ObjectId failed for value \"64a326b7-9a53-41ee-b529-7ad2c4dc75b4\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.075Z"
+    },
+    {
+      "responseId": "1829a68b-f0a3-4d10-9d98-72c956079f72",
+      "error": "Cast to ObjectId failed for value \"1829a68b-f0a3-4d10-9d98-72c956079f72\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.076Z"
+    },
+    {
+      "responseId": "60027f02-e967-45c3-8e93-905129864a23",
+      "error": "Cast to ObjectId failed for value \"60027f02-e967-45c3-8e93-905129864a23\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.076Z"
+    },
+    {
+      "responseId": "5d6a65a9-9e1b-42da-86e5-49674b8dc8a5",
+      "error": "Cast to ObjectId failed for value \"5d6a65a9-9e1b-42da-86e5-49674b8dc8a5\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.077Z"
+    },
+    {
+      "responseId": "7ff1bbd7-a525-404f-8437-6a1bcd0dd171",
+      "error": "Cast to ObjectId failed for value \"7ff1bbd7-a525-404f-8437-6a1bcd0dd171\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.077Z"
+    },
+    {
+      "responseId": "d53256bf-35cc-43c2-98dc-d46114a513d2",
+      "error": "Cast to ObjectId failed for value \"d53256bf-35cc-43c2-98dc-d46114a513d2\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.077Z"
+    },
+    {
+      "responseId": "09cd3e80-02a5-4017-b294-edf902c9226b",
+      "error": "Cast to ObjectId failed for value \"09cd3e80-02a5-4017-b294-edf902c9226b\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.078Z"
+    },
+    {
+      "responseId": "92faa03f-5b02-4d50-ae29-9b603d709811",
+      "error": "Cast to ObjectId failed for value \"92faa03f-5b02-4d50-ae29-9b603d709811\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.078Z"
+    },
+    {
+      "responseId": "647669a3-7fed-4abf-89cc-7521832eed06",
+      "error": "Cast to ObjectId failed for value \"647669a3-7fed-4abf-89cc-7521832eed06\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.078Z"
+    },
+    {
+      "responseId": "a816ac53-3132-4619-a4d5-105f45b72819",
+      "error": "Cast to ObjectId failed for value \"a816ac53-3132-4619-a4d5-105f45b72819\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.079Z"
+    },
+    {
+      "responseId": "9bffbdb0-399d-47af-a392-bec046589bc5",
+      "error": "Cast to ObjectId failed for value \"9bffbdb0-399d-47af-a392-bec046589bc5\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.079Z"
+    },
+    {
+      "responseId": "301cca11-9b96-48f5-a0c3-e342ffee20aa",
+      "error": "Cast to ObjectId failed for value \"301cca11-9b96-48f5-a0c3-e342ffee20aa\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.079Z"
+    },
+    {
+      "responseId": "7052f607-63b6-4eae-a5da-ef91f31f7742",
+      "error": "Cast to ObjectId failed for value \"7052f607-63b6-4eae-a5da-ef91f31f7742\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.080Z"
+    },
+    {
+      "responseId": "7ba95dc3-da5a-4f23-aaa4-9f1ad782f050",
+      "error": "Cast to ObjectId failed for value \"7ba95dc3-da5a-4f23-aaa4-9f1ad782f050\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.080Z"
+    },
+    {
+      "responseId": "28578a67-cc81-47de-a1e1-ca3600ef2d4a",
+      "error": "Cast to ObjectId failed for value \"28578a67-cc81-47de-a1e1-ca3600ef2d4a\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.080Z"
+    },
+    {
+      "responseId": "c7adebb0-d520-4648-b1e0-85b22cec7a73",
+      "error": "Cast to ObjectId failed for value \"c7adebb0-d520-4648-b1e0-85b22cec7a73\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.081Z"
+    },
+    {
+      "responseId": "92f687d3-84f5-44cf-aae9-48c33dc489a3",
+      "error": "Cast to ObjectId failed for value \"92f687d3-84f5-44cf-aae9-48c33dc489a3\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.081Z"
+    },
+    {
+      "responseId": "18396f57-c49c-490d-92b3-10eb12324342",
+      "error": "Cast to ObjectId failed for value \"18396f57-c49c-490d-92b3-10eb12324342\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.082Z"
+    },
+    {
+      "responseId": "2f0781be-57e5-4ebd-963c-b3d911dbbd73",
+      "error": "Cast to ObjectId failed for value \"2f0781be-57e5-4ebd-963c-b3d911dbbd73\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.082Z"
+    },
+    {
+      "responseId": "9ade6df4-c73e-4d02-b5a4-8f0e76149073",
+      "error": "Cast to ObjectId failed for value \"9ade6df4-c73e-4d02-b5a4-8f0e76149073\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.082Z"
+    },
+    {
+      "responseId": "c73e971c-8836-4678-a460-115bdbe47184",
+      "error": "Cast to ObjectId failed for value \"c73e971c-8836-4678-a460-115bdbe47184\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.083Z"
+    },
+    {
+      "responseId": "13a35f58-23a3-4838-a394-abd542cf6cdc",
+      "error": "Cast to ObjectId failed for value \"13a35f58-23a3-4838-a394-abd542cf6cdc\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.083Z"
+    },
+    {
+      "responseId": "deb32596-3e84-4ae8-a827-ec1ef96e9248",
+      "error": "Cast to ObjectId failed for value \"deb32596-3e84-4ae8-a827-ec1ef96e9248\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.084Z"
+    },
+    {
+      "responseId": "cb2f1569-7235-4dfc-b4e1-39a6b50582a6",
+      "error": "Cast to ObjectId failed for value \"cb2f1569-7235-4dfc-b4e1-39a6b50582a6\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.084Z"
+    },
+    {
+      "responseId": "33a8084b-75d1-47ff-bdba-36c5f2caacf1",
+      "error": "Cast to ObjectId failed for value \"33a8084b-75d1-47ff-bdba-36c5f2caacf1\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.084Z"
+    },
+    {
+      "responseId": "47f9d64f-7ceb-49ca-9eea-f9138d68facb",
+      "error": "Cast to ObjectId failed for value \"47f9d64f-7ceb-49ca-9eea-f9138d68facb\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.085Z"
+    },
+    {
+      "responseId": "bb0faea3-de76-4c72-be20-ff36cf1af72c",
+      "error": "Cast to ObjectId failed for value \"bb0faea3-de76-4c72-be20-ff36cf1af72c\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.085Z"
+    },
+    {
+      "responseId": "bb9eac53-1b0b-45a4-942b-4f3d550ad5f1",
+      "error": "Cast to ObjectId failed for value \"bb9eac53-1b0b-45a4-942b-4f3d550ad5f1\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.085Z"
+    },
+    {
+      "responseId": "a8a60c75-951f-4948-8367-aa7c4ce700a1",
+      "error": "Cast to ObjectId failed for value \"a8a60c75-951f-4948-8367-aa7c4ce700a1\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.086Z"
+    },
+    {
+      "responseId": "fb5ae706-e018-44fb-be42-cff0502676f1",
+      "error": "Cast to ObjectId failed for value \"fb5ae706-e018-44fb-be42-cff0502676f1\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.086Z"
+    },
+    {
+      "responseId": "ec9b19cb-aede-41ba-8398-1e8771a5f537",
+      "error": "Cast to ObjectId failed for value \"ec9b19cb-aede-41ba-8398-1e8771a5f537\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.086Z"
+    },
+    {
+      "responseId": "a8937a39-7932-4e3b-ae6d-dc072183017e",
+      "error": "Cast to ObjectId failed for value \"a8937a39-7932-4e3b-ae6d-dc072183017e\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.087Z"
+    },
+    {
+      "responseId": "ae33140a-4366-4a9d-b6f4-5636679c1317",
+      "error": "Cast to ObjectId failed for value \"ae33140a-4366-4a9d-b6f4-5636679c1317\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.087Z"
+    },
+    {
+      "responseId": "b1bae9a4-ad76-445e-9942-7d27819f17c0",
+      "error": "Cast to ObjectId failed for value \"b1bae9a4-ad76-445e-9942-7d27819f17c0\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.087Z"
+    },
+    {
+      "responseId": "3880e203-2382-49ca-902f-40d84694bee6",
+      "error": "Cast to ObjectId failed for value \"3880e203-2382-49ca-902f-40d84694bee6\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.088Z"
+    },
+    {
+      "responseId": "1b44d62c-3d3f-4f7e-8963-4046e158775f",
+      "error": "Cast to ObjectId failed for value \"1b44d62c-3d3f-4f7e-8963-4046e158775f\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.088Z"
+    },
+    {
+      "responseId": "8c080a83-d0dc-4c2e-a8c2-4fec9a18bf4f",
+      "error": "Cast to ObjectId failed for value \"8c080a83-d0dc-4c2e-a8c2-4fec9a18bf4f\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.088Z"
+    },
+    {
+      "responseId": "8738206e-63ad-45ba-a098-1c2ecd434ab8",
+      "error": "Cast to ObjectId failed for value \"8738206e-63ad-45ba-a098-1c2ecd434ab8\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.089Z"
+    },
+    {
+      "responseId": "e5af68c2-6ab4-40b7-96c7-9d6e82ad822a",
+      "error": "Cast to ObjectId failed for value \"e5af68c2-6ab4-40b7-96c7-9d6e82ad822a\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.089Z"
+    },
+    {
+      "responseId": "588060cc-cef3-4870-81af-3c9c504c89e1",
+      "error": "Cast to ObjectId failed for value \"588060cc-cef3-4870-81af-3c9c504c89e1\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.090Z"
+    },
+    {
+      "responseId": "defc543b-b1c7-417e-9b6d-03325cceb070",
+      "error": "Cast to ObjectId failed for value \"defc543b-b1c7-417e-9b6d-03325cceb070\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.090Z"
+    },
+    {
+      "responseId": "6e4aafaa-8f7e-43ca-b722-d1f1075dade9",
+      "error": "Cast to ObjectId failed for value \"6e4aafaa-8f7e-43ca-b722-d1f1075dade9\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.090Z"
+    },
+    {
+      "responseId": "5cdb8c78-5b0a-45ed-8e54-e0a259b53408",
+      "error": "Cast to ObjectId failed for value \"5cdb8c78-5b0a-45ed-8e54-e0a259b53408\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.091Z"
+    },
+    {
+      "responseId": "6ac85c38-8173-4ddd-8783-cd89708a423e",
+      "error": "Cast to ObjectId failed for value \"6ac85c38-8173-4ddd-8783-cd89708a423e\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.091Z"
+    },
+    {
+      "responseId": "e82ef00b-cc7f-4d3a-9fe0-610eb521bcae",
+      "error": "Cast to ObjectId failed for value \"e82ef00b-cc7f-4d3a-9fe0-610eb521bcae\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.091Z"
+    },
+    {
+      "responseId": "c4b95067-20b8-4283-970f-d43229fda245",
+      "error": "Cast to ObjectId failed for value \"c4b95067-20b8-4283-970f-d43229fda245\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.092Z"
+    },
+    {
+      "responseId": "990c8ccd-bb9d-4051-9cbb-b1869b2de284",
+      "error": "Cast to ObjectId failed for value \"990c8ccd-bb9d-4051-9cbb-b1869b2de284\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.092Z"
+    },
+    {
+      "responseId": "bfe4715b-bc9e-483b-9f60-ca35b165eaad",
+      "error": "Cast to ObjectId failed for value \"bfe4715b-bc9e-483b-9f60-ca35b165eaad\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.092Z"
+    },
+    {
+      "responseId": "43982f8b-1be1-4cec-8e19-98817c7c7d40",
+      "error": "Cast to ObjectId failed for value \"43982f8b-1be1-4cec-8e19-98817c7c7d40\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.093Z"
+    },
+    {
+      "responseId": "783632e0-2dd3-4c81-b26a-70f18720950e",
+      "error": "Cast to ObjectId failed for value \"783632e0-2dd3-4c81-b26a-70f18720950e\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.093Z"
+    },
+    {
+      "responseId": "f24d8e06-7612-4ea2-9ba1-54ccc0ae3242",
+      "error": "Cast to ObjectId failed for value \"f24d8e06-7612-4ea2-9ba1-54ccc0ae3242\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.093Z"
+    },
+    {
+      "responseId": "6dc851d7-c272-4f19-b1c3-4854c55d977f",
+      "error": "Cast to ObjectId failed for value \"6dc851d7-c272-4f19-b1c3-4854c55d977f\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.094Z"
+    },
+    {
+      "responseId": "61df3fe3-3b80-492c-8d03-8cb473abea75",
+      "error": "Cast to ObjectId failed for value \"61df3fe3-3b80-492c-8d03-8cb473abea75\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.094Z"
+    },
+    {
+      "responseId": "f9d24f8a-7fd0-424d-bb87-74924e9b4db1",
+      "error": "Cast to ObjectId failed for value \"f9d24f8a-7fd0-424d-bb87-74924e9b4db1\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.094Z"
+    },
+    {
+      "responseId": "b925e0a1-637c-43a6-bb5d-924ef5388491",
+      "error": "Cast to ObjectId failed for value \"b925e0a1-637c-43a6-bb5d-924ef5388491\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.095Z"
+    },
+    {
+      "responseId": "67dfb3b7-9e81-44eb-b8ad-d194a0a545b3",
+      "error": "Cast to ObjectId failed for value \"67dfb3b7-9e81-44eb-b8ad-d194a0a545b3\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.095Z"
+    },
+    {
+      "responseId": "336962cf-8ec2-4de9-9baf-1c162a1af712",
+      "error": "Cast to ObjectId failed for value \"336962cf-8ec2-4de9-9baf-1c162a1af712\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.096Z"
+    },
+    {
+      "responseId": "b54c28d3-0d5d-4eda-9f11-aa82b690f99a",
+      "error": "Cast to ObjectId failed for value \"b54c28d3-0d5d-4eda-9f11-aa82b690f99a\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.096Z"
+    },
+    {
+      "responseId": "8dcf8676-de7f-41a4-bacc-3563d53044bc",
+      "error": "Cast to ObjectId failed for value \"8dcf8676-de7f-41a4-bacc-3563d53044bc\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.096Z"
+    },
+    {
+      "responseId": "bcab20b8-109c-49d2-a853-f01ec3fd05e1",
+      "error": "Cast to ObjectId failed for value \"bcab20b8-109c-49d2-a853-f01ec3fd05e1\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.097Z"
+    },
+    {
+      "responseId": "c8f977bc-55f9-4440-97d2-67c3d4bba374",
+      "error": "Cast to ObjectId failed for value \"c8f977bc-55f9-4440-97d2-67c3d4bba374\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.097Z"
+    },
+    {
+      "responseId": "3268a0fd-94ff-4cb4-803d-e5cb305055ab",
+      "error": "Cast to ObjectId failed for value \"3268a0fd-94ff-4cb4-803d-e5cb305055ab\" (type string) at path \"_id\" for model \"SurveyResponse\"",
+      "timestamp": "2026-01-09T19:37:16.097Z"
+    }
+  ]
+}

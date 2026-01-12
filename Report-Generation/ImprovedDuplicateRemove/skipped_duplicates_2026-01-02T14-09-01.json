@@ -1,0 +1,259 @@
+{
+  "timestamp": "2026-01-02T14:09:01.143Z",
+  "totalSkipped": 23,
+  "skippedDuplicates": [
+    {
+      "duplicateResponseId": "bd4c9657-739c-4182-b20b-d11a8914c82a",
+      "duplicateMongoId": "69550fd47acd8b3ce6081ffb",
+      "originalResponseId": "51241e08-2d4a-47b5-b527-2e1d8653d095",
+      "originalMongoId": "6954fb055d1f4aedca57ae0c",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-31T16-02-09.json",
+      "groupNumber": 8,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "42a1cd37-2411-43d9-b873-fd260c715313",
+      "duplicateMongoId": "6954fdae3dd344840ed3f09b",
+      "originalResponseId": "e58369a3-c119-4c7f-bd00-53c02086e024",
+      "originalMongoId": "6954fcef64752ac6d2f93d32",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-31T16-02-09.json",
+      "groupNumber": 48,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "86d9ebd6-defc-4b0f-9470-7b3982545977",
+      "duplicateMongoId": "695502177438828260462b71",
+      "originalResponseId": "2524ab41-9277-43a5-b66c-dc683b439ad3",
+      "originalMongoId": "6954feb7bcf9cd42015daab0",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-31T16-02-09.json",
+      "groupNumber": 49,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "02257be8-2c32-4b8c-9735-3fd225bcf4f1",
+      "duplicateMongoId": "6954f51939e934c16ee270a9",
+      "originalResponseId": "3cd5ef66-cee9-4335-9bc1-88888b60f3a5",
+      "originalMongoId": "6954f4dfdbe4f969a0b55822",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-31T16-02-09.json",
+      "groupNumber": 67,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "c2ae3c1f-1952-4329-9621-6a6ac3bf10f8",
+      "duplicateMongoId": "6955225a1e7037f3734bce84",
+      "originalResponseId": "330510cd-ac99-4229-85c0-9631bd4269c5",
+      "originalMongoId": "69551b5cafe674a27885adc9",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-31T16-02-09.json",
+      "groupNumber": 130,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "dbdf4cae-7b06-43d2-9d49-5bbdc8b52ad0",
+      "duplicateMongoId": "6955241f1805e3cd538ef79c",
+      "originalResponseId": "b623237a-0a71-4e7f-a94b-9b25d4319499",
+      "originalMongoId": "69551aee9dff3de5c8eabc31",
+      "currentStatus": "Terminated",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-31T16-02-09.json",
+      "groupNumber": 137,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "bd26d598-ade5-483c-bf5f-db782a725057",
+      "duplicateMongoId": "69550269e09282c3a29db546",
+      "originalResponseId": "fe9d9103-684e-47b2-9978-a98549612420",
+      "originalMongoId": "69550147f68fffd6ce3e2dbe",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-31T16-02-09.json",
+      "groupNumber": 150,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "2b9e4a26-6839-4973-800f-d64c067485bb",
+      "duplicateMongoId": "69552311a54fa29fbdf933a4",
+      "originalResponseId": "c4d67abb-d712-4eaa-8e22-a199a02919e5",
+      "originalMongoId": "695522d2ff8ba70627a4f66d",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-31T16-02-09.json",
+      "groupNumber": 159,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "1ceabd4a-ee9e-4186-b1fd-dc5a38badd5e",
+      "duplicateMongoId": "695406e8e611574d76c51486",
+      "originalResponseId": "f2f06db7-f17a-496b-b0f8-b40f8b5b1731",
+      "originalMongoId": "69535f68c3515a549dc728e9",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 67,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "4e939241-3cd6-4f90-9adf-0e8bf0240baf",
+      "duplicateMongoId": "69540700ad6f2bea7421d057",
+      "originalResponseId": "83d821a1-d5ac-4a40-8023-e2b0943730b8",
+      "originalMongoId": "6953f895d2196e0e2709c9d6",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 68,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "855dba49-d161-44f4-ac29-e172aa10f6a8",
+      "duplicateMongoId": "6953807cd4f6b822d8e9dc7e",
+      "originalResponseId": "c5bf8d5c-63fd-4715-8aec-15c0dc2289ab",
+      "originalMongoId": "69538054db9b748dea723546",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 154,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "a3981b72-f08e-4e7e-9884-8fb1cde2c2d1",
+      "duplicateMongoId": "6954068ac3f1a8b7bb7fec5e",
+      "originalResponseId": "ad5bb7be-c0eb-4473-abc8-9703d89a33f6",
+      "originalMongoId": "695340c76c29f3974f414d18",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 207,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "244422e6-f4a6-49f9-9224-c07e7aa1c5e5",
+      "duplicateMongoId": "69538865b10a86dbb753909b",
+      "originalResponseId": "2867abef-2539-45dd-89b0-402b6f75fc62",
+      "originalMongoId": "69538586676e13ccb4002a5a",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 271,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "a7d7767d-5363-4a8a-a47c-d76c4aae1328",
+      "duplicateMongoId": "695410ce64b5dd2c0a9d1509",
+      "originalResponseId": "d7becaf7-b903-41a4-a156-d46bb11c573d",
+      "originalMongoId": "6953b9cb2467b29b2755b963",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 280,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "6202e96b-bf40-40c9-9812-7dae2ec1b23e",
+      "duplicateMongoId": "695410f44762bc0dacf63804",
+      "originalResponseId": "3202a9da-3a7e-4507-a787-bcbd21e53037",
+      "originalMongoId": "6953bfe702188bb7b4369e96",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 282,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "43799034-aa23-4906-a2df-cf85f3dd575c",
+      "duplicateMongoId": "69540ad819d484da04b2055c",
+      "originalResponseId": "069b25e4-0100-4a80-8d6e-01e61b9cbbb2",
+      "originalMongoId": "6953459398e532f7ba967fc4",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 348,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "309cb43e-72eb-43a4-a98f-a6b7161aca32",
+      "duplicateMongoId": "69540adee8748ab2f64954bb",
+      "originalResponseId": "2626ec51-8df5-45c0-98a1-dd2128f61e8b",
+      "originalMongoId": "6953469b66264fd7512f61e3",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 349,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "85d92386-171d-467a-87e8-bb4d2f46e8b4",
+      "duplicateMongoId": "69540afc0240d7197d403ed9",
+      "originalResponseId": "284933ad-416c-4b5c-8153-18ceb82dbff5",
+      "originalMongoId": "695346d17ce16c1aad3b6588",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 350,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "97b10d57-c3d7-454b-bf84-2dcf27adbc91",
+      "duplicateMongoId": "69540c0f21989e29f993fd37",
+      "originalResponseId": "6246cb2a-2ea4-4555-b7ed-4002a599fb86",
+      "originalMongoId": "69535fb907cee037fa2e983e",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 409,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "376ce2b0-ef2f-406a-97e6-e7b27f97b5c6",
+      "duplicateMongoId": "69540c46af3fcd47bfd8fee5",
+      "originalResponseId": "d3a2c6fb-51b3-4e5f-be28-50656b12c9ec",
+      "originalMongoId": "69536024349901afbcc75626",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 410,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "01c1701b-d3cf-455c-b499-db936d540c4c",
+      "duplicateMongoId": "69540bd5db99e4ef58e44209",
+      "originalResponseId": "45cf215c-3bbc-4ae0-8a22-264864b40d2e",
+      "originalMongoId": "69536044d19514d6424fb43d",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 411,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "e2ee990e-d84f-45ff-97ee-d59e2bed0817",
+      "duplicateMongoId": "69540beb2e2e7ea6094bce9e",
+      "originalResponseId": "55ccb0b5-caad-4f1b-b791-98baea8276e8",
+      "originalMongoId": "6953607abaf15e154d92f0d0",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 412,
+      "mode": "CAPI"
+    },
+    {
+      "duplicateResponseId": "7ab26e40-fa3d-4a35-b7c4-0dfaf6dc3a40",
+      "duplicateMongoId": "69540c2acd3319ed2597a10d",
+      "originalResponseId": "d56b23eb-41d3-4b21-810a-a39616c8123a",
+      "originalMongoId": "695371279ed016c689357945",
+      "currentStatus": "Pending_Approval",
+      "abandonedReason": "Duplicate response detected and marked as abandoned",
+      "reportFile": "duplicate_detection_report_2025-12-30T20-35-07.json",
+      "groupNumber": 413,
+      "mode": "CAPI"
+    }
+  ]
+}

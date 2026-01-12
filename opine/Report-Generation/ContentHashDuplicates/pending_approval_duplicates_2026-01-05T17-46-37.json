@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-01-05T17:46:37.510Z",
+  "surveyId": "68fd1915d41841da463f0d46",
+  "summary": {
+    "totalDuplicateGroups": 0,
+    "skippedAllPendingGroups": 0,
+    "groupsWithMixedStatus": 0,
+    "totalPendingApprovalDuplicates": 0,
+    "byMode": {
+      "capi": 0,
+      "cati": 0
+    }
+  },
+  "groups": []
+}

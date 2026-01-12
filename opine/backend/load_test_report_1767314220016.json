@@ -1,0 +1,2423 @@
+{
+  "testInfo": {
+    "concurrentUsers": 1000,
+    "surveyId": "68fd1915d41841da463f0d46",
+    "duration": 749.966,
+    "timestamp": "2026-01-02T00:37:00.016Z"
+  },
+  "results": {
+    "aggregations": 5000,
+    "queries": 8000,
+    "totalBytes": 70713000,
+    "successful": 1000,
+    "failed": 0
+  },
+  "serverStats": {
+    "primary": 10000,
+    "secondary1": 0,
+    "secondary2": 0,
+    "errors": 2000
+  },
+  "monitoring": [
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:24:40.047Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:24:50.047Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:25:00.047Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:25:10.048Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 98.8
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:25:20.047Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:25:30.049Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 98.8
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 3.5
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:25:40.049Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 3.5
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 98.3
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:25:50.050Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 97.7
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:26:00.050Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.2
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 98.9
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:26:10.051Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 97.7
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:26:20.051Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 96.5
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:26:30.052Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 97.7
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:26:40.053Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 96.7
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:26:50.054Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 2.3
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 97.1
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 2.3
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:27:00.053Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:27:10.053Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 96.5
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:27:20.053Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 4.5
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:27:30.053Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:27:40.054Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:27:50.055Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 10.3
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 98.3
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:28:00.055Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:28:10.056Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 2.3
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 98.8
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:28:20.057Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:28:30.057Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 2.2
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 98.8
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:28:40.058Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.2
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.2
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:28:50.066Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 14.6
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 98.8
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:29:00.066Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:29:10.066Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 2.3
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:29:20.067Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:29:30.066Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 99.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:29:40.067Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 98.8
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:29:50.066Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 13.8
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 6.5
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:30:00.066Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:30:10.066Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:30:20.066Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 6
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:30:30.065Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:30:40.066Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:30:50.067Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:31:00.066Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 5.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:31:10.067Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:31:20.067Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 11.4
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 2.3
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:31:30.067Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 25.3
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 2.3
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:31:40.068Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0.6
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:31:50.068Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:32:00.068Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:32:10.068Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:32:20.069Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 2.2
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:32:30.068Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:32:40.069Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:32:50.070Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:33:00.069Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0.6
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:33:10.070Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:33:20.070Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 4.5
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:33:30.071Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 12.6
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 13.3
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:33:40.071Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0.6
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:33:50.072Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 2.3
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:34:00.071Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:34:10.072Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:34:20.073Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:34:30.073Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 3.4
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:34:40.072Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0.6
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:34:50.072Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0.6
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:35:00.072Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:35:10.073Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:35:20.074Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0.6
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:35:30.073Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0.6
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:35:40.074Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 2.2
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 19
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:35:50.075Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0.6
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 2.3
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:36:00.074Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:36:10.074Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 1.1
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0.6
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:36:20.075Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:36:30.075Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 4.8
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.1
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:36:40.076Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0.6
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "During Test",
+      "timestamp": "2026-01-02T00:36:50.076Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 1.2
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    },
+    {
+      "phase": "Final",
+      "timestamp": "2026-01-02T00:36:55.323Z",
+      "backend": {
+        "server1": {
+          "ip": "current",
+          "cpu": 0
+        },
+        "server2": {
+          "ip": "13.233.231.180",
+          "cpu": 0
+        },
+        "server3": {
+          "ip": "13.202.181.167",
+          "cpu": 0
+        }
+      },
+      "mongodb": {
+        "primary": {
+          "server": "13.202.181.167:27017",
+          "connections": 0
+        },
+        "secondary1": {
+          "server": "13.233.231.180:27017",
+          "connections": 0
+        },
+        "secondary2": {
+          "server": "3.109.186.86:27017",
+          "connections": 0
+        }
+      }
+    }
+  ]
+}

@@ -4,7 +4,8 @@ const {
   startCatiInterview,
   makeCallToRespondent,
   abandonInterview,
-  completeCatiInterview
+  completeCatiInterview,
+  getCallStatus
 } = require('../controllers/catiInterviewController');
 const { protect, authorize } = require('../middleware/auth');
 
@@ -24,8 +25,11 @@ router.post('/start/:surveyId', (req, res, next) => {
   next();
 }, startCatiInterview);
 
-// Make call to respondent
+// Make call to respondent (non-blocking: uses async job queue)
 router.post('/make-call/:queueId', makeCallToRespondent);
+
+// Get call status (for polling job status)
+router.get('/call-status/:queueId', getCallStatus);
 
 // Abandon interview
 router.post('/abandon/:queueId', abandonInterview);

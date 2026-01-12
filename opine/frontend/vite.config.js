@@ -45,10 +45,7 @@ export default defineConfig({
       transformMixedEsModules: true
     }
   },
-  // Optimize dependencies to ensure JSON is bundled
-  optimizeDeps: {
-    include: ['../data/assemblyConstituencies.json']
-  },
+  // JSON files are automatically handled by Vite, no need to include in optimizeDeps
   // Ensure public files are accessible
   publicDir: 'public'
 })

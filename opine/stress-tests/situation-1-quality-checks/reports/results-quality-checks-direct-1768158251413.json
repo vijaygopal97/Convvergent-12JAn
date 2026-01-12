@@ -1,0 +1,396 @@
+{
+  "testId": "quality-checks-direct-1768158251413",
+  "timestamp": "2026-01-11T19:04:12.591Z",
+  "surveyId": "68fd1915d41841da463f0d46",
+  "summary": {
+    "totalRequests": 500,
+    "processed": 50,
+    "successful": 0,
+    "failed": 50,
+    "totalTime": "1.18",
+    "stoppedEarly": true,
+    "crashDetected": false,
+    "crashReason": null,
+    "results": {
+      "successful": [],
+      "failed": [
+        {
+          "requestIndex": 0,
+          "startTime": 1768158251976,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 159
+        },
+        {
+          "requestIndex": 1,
+          "startTime": 1768158251979,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 249
+        },
+        {
+          "requestIndex": 2,
+          "startTime": 1768158251982,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 302
+        },
+        {
+          "requestIndex": 3,
+          "startTime": 1768158251985,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 249
+        },
+        {
+          "requestIndex": 4,
+          "startTime": 1768158251987,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 302
+        },
+        {
+          "requestIndex": 5,
+          "startTime": 1768158251989,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 304
+        },
+        {
+          "requestIndex": 6,
+          "startTime": 1768158251991,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 283
+        },
+        {
+          "requestIndex": 7,
+          "startTime": 1768158251994,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 368
+        },
+        {
+          "requestIndex": 8,
+          "startTime": 1768158251996,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 388
+        },
+        {
+          "requestIndex": 9,
+          "startTime": 1768158251998,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 514
+        },
+        {
+          "requestIndex": 10,
+          "startTime": 1768158252001,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 400
+        },
+        {
+          "requestIndex": 11,
+          "startTime": 1768158252004,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 527
+        },
+        {
+          "requestIndex": 12,
+          "startTime": 1768158252006,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 418
+        },
+        {
+          "requestIndex": 13,
+          "startTime": 1768158252009,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 533
+        },
+        {
+          "requestIndex": 14,
+          "startTime": 1768158252011,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 450
+        },
+        {
+          "requestIndex": 15,
+          "startTime": 1768158252014,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 542
+        },
+        {
+          "requestIndex": 16,
+          "startTime": 1768158252016,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 458
+        },
+        {
+          "requestIndex": 17,
+          "startTime": 1768158252018,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 474
+        },
+        {
+          "requestIndex": 18,
+          "startTime": 1768158252020,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 346
+        },
+        {
+          "requestIndex": 19,
+          "startTime": 1768158252023,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 348
+        },
+        {
+          "requestIndex": 20,
+          "startTime": 1768158252025,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 352
+        },
+        {
+          "requestIndex": 21,
+          "startTime": 1768158252027,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 251
+        },
+        {
+          "requestIndex": 22,
+          "startTime": 1768158252029,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 353
+        },
+        {
+          "requestIndex": 23,
+          "startTime": 1768158252031,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 251
+        },
+        {
+          "requestIndex": 24,
+          "startTime": 1768158252034,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 253
+        },
+        {
+          "requestIndex": 25,
+          "startTime": 1768158252036,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 351
+        },
+        {
+          "requestIndex": 26,
+          "startTime": 1768158252037,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 417
+        },
+        {
+          "requestIndex": 27,
+          "startTime": 1768158252039,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 278
+        },
+        {
+          "requestIndex": 28,
+          "startTime": 1768158252041,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 521
+        },
+        {
+          "requestIndex": 29,
+          "startTime": 1768158252043,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 467
+        },
+        {
+          "requestIndex": 30,
+          "startTime": 1768158252045,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 531
+        },
+        {
+          "requestIndex": 31,
+          "startTime": 1768158252047,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 482
+        },
+        {
+          "requestIndex": 32,
+          "startTime": 1768158252049,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 486
+        },
+        {
+          "requestIndex": 33,
+          "startTime": 1768158252051,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 503
+        },
+        {
+          "requestIndex": 34,
+          "startTime": 1768158252053,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 526
+        },
+        {
+          "requestIndex": 35,
+          "startTime": 1768158252055,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 503
+        },
+        {
+          "requestIndex": 36,
+          "startTime": 1768158252057,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 400
+        },
+        {
+          "requestIndex": 37,
+          "startTime": 1768158252059,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 400
+        },
+        {
+          "requestIndex": 38,
+          "startTime": 1768158252061,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 402
+        },
+        {
+          "requestIndex": 39,
+          "startTime": 1768158252063,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 260
+        },
+        {
+          "requestIndex": 40,
+          "startTime": 1768158252065,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 271
+        },
+        {
+          "requestIndex": 41,
+          "startTime": 1768158252067,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 398
+        },
+        {
+          "requestIndex": 42,
+          "startTime": 1768158252069,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 398
+        },
+        {
+          "requestIndex": 43,
+          "startTime": 1768158252071,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 273
+        },
+        {
+          "requestIndex": 44,
+          "startTime": 1768158252073,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 397
+        },
+        {
+          "requestIndex": 45,
+          "startTime": 1768158252075,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 401
+        },
+        {
+          "requestIndex": 46,
+          "startTime": 1768158252077,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 277
+        },
+        {
+          "requestIndex": 47,
+          "startTime": 1768158252079,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 406
+        },
+        {
+          "requestIndex": 48,
+          "startTime": 1768158252081,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 391
+        },
+        {
+          "requestIndex": 49,
+          "startTime": 1768158252083,
+          "success": false,
+          "error": "No assignment available",
+          "responseTime": 266
+        }
+      ],
+      "errors": []
+    }
+  },
+  "metrics": {
+    "cpu": {
+      "avg": "0.96",
+      "max": 0.96,
+      "min": 0.96
+    },
+    "memory": {
+      "avgUsed": "8307.00",
+      "maxUsed": 8307,
+      "avgPercent": "26.32",
+      "maxPercent": 26.32
+    },
+    "mongodbConnections": {
+      "avg": "54.00",
+      "max": 54,
+      "min": 54
+    },
+    "apiResponseTime": {
+      "avg": "385.10",
+      "max": 561,
+      "min": 159,
+      "p95": 533,
+      "p99": 561
+    }
+  }
+}

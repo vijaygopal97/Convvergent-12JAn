@@ -97,6 +97,14 @@ const SurveyApprovals = () => {
     }
   }, [showResponseDetails, selectedInterview]);
 
+  // CRITICAL FIX: Stop all audio when interview changes (new assignment)
+  useEffect(() => {
+    if (selectedInterview) {
+      // Stop all audio when a new interview is loaded
+      stopAllAudio();
+    }
+  }, [selectedInterview?._id]); // Only trigger when interview ID changes
+
   // Helper function to get target audience from survey object
   const getTargetAudience = (interview) => {
     // First try to get from full survey data if available
@@ -308,6 +316,10 @@ const SurveyApprovals = () => {
 
   // Get next available response from queue
   const handleStartQualityCheck = async () => {
+    // CRITICAL FIX: Stop all audio before getting new assignment
+    console.log('🛑 Starting new quality check - stopping all audio...');
+    stopAllAudio();
+    
     try {
       setIsGettingNextAssignment(true);
       const params = {
@@ -355,18 +367,32 @@ const SurveyApprovals = () => {
               console.log('✅ Call details fetched successfully:', callResponse.data);
               setCatiCallDetails(callResponse.data);
               // Fetch recording if available
-              if (callResponse.data.recordingUrl) {
+              if (callResponse.data.recordingUrl || callResponse.data.s3AudioUrl) {
                 try {
-                  const recordingResponse = await api.get(`/api/cati/recording/${callResponse.data._id}`, {
+                  const recordingId = callResponse.data._id || callResponse.data.id;
+                  const audioUrl = `/api/cati/recording/${recordingId}`;
+                  
+                  // LOG: Which audio source is being used
+                  console.log('🎵 [AUDIO URL LOG] Quality Agent - Fetching CATI recording:');
+                  console.log('🎵 [AUDIO URL LOG] Recording ID:', recordingId);
+                  console.log('🎵 [AUDIO URL LOG] API Endpoint:', audioUrl);
+                  console.log('🎵 [AUDIO URL LOG] Has S3 URL:', !!callResponse.data.s3AudioUrl);
+                  console.log('🎵 [AUDIO URL LOG] S3 URL:', callResponse.data.s3AudioUrl || 'N/A');
+                  console.log('🎵 [AUDIO URL LOG] Has DeepCall URL:', !!callResponse.data.recordingUrl);
+                  console.log('🎵 [AUDIO URL LOG] DeepCall URL:', callResponse.data.recordingUrl ? callResponse.data.recordingUrl.substring(0, 80) + '...' : 'N/A');
+                  console.log('🎵 [AUDIO URL LOG] S3 Upload Status:', callResponse.data.s3AudioUploadStatus || 'N/A');
+                  
+                  const recordingResponse = await api.get(audioUrl, {
                     responseType: 'blob'
                   });
                   if (recordingResponse.data) {
                     const blob = new Blob([recordingResponse.data], { type: 'audio/mpeg' });
                     const blobUrl = URL.createObjectURL(blob);
                     setCatiRecordingBlobUrl(blobUrl);
+                    console.log('🎵 [AUDIO URL LOG] Recording fetched successfully, blob URL created');
                   }
                 } catch (recordingError) {
-                  console.error('Error fetching CATI recording:', recordingError);
+                  console.error('🎵 [AUDIO URL LOG] Error fetching CATI recording:', recordingError);
                   // Don't show error for recording - it's optional
                 }
               }
@@ -669,18 +695,22 @@ const SurveyApprovals = () => {
       }
     }
     
-    // Q3: Upcoming Elections - if NOT option '1', hide ALL subsequent questions (Q4-Q8)
-    if (verificationForm.upcomingElectionsMatching && verificationForm.upcomingElectionsMatching !== '' && verificationForm.upcomingElectionsMatching !== '1') {
-      // If Q3 is not '1', only show Q1, Q2, Q3
+    // Q3: Upcoming Elections - if NOT option '1' or '3' (cannot hear), hide ALL subsequent questions (Q4-Q8)
+    // Allow both '1' (matched) and '3' (cannot hear) to proceed to next questions
+    if (verificationForm.upcomingElectionsMatching && verificationForm.upcomingElectionsMatching !== '' && 
+        verificationForm.upcomingElectionsMatching !== '1' && verificationForm.upcomingElectionsMatching !== '3') {
+      // If Q3 is not '1' or '3', only show Q1, Q2, Q3
       // Hide everything else (Q4-Q8 including Q6 name)
       if (questionType !== 'audioStatus' && questionType !== 'gender' && questionType !== 'upcomingElection') {
         return false;
       }
     }
     
-    // Q4: Previous Elections - if NOT option '1', hide ALL subsequent questions (Q5-Q8)
-    if (verificationForm.previousElectionsMatching && verificationForm.previousElectionsMatching !== '' && verificationForm.previousElectionsMatching !== '1') {
-      // If Q4 is not '1', only show Q1, Q2, Q3, Q4
+    // Q4: Previous Elections - if NOT option '1' or '3' (cannot hear), hide ALL subsequent questions (Q5-Q8)
+    // Allow both '1' (matched) and '3' (cannot hear) to proceed to next questions
+    if (verificationForm.previousElectionsMatching && verificationForm.previousElectionsMatching !== '' && 
+        verificationForm.previousElectionsMatching !== '1' && verificationForm.previousElectionsMatching !== '3') {
+      // If Q4 is not '1' or '3', only show Q1, Q2, Q3, Q4
       // Hide everything else (Q5-Q8 including Q6 name)
       if (questionType !== 'audioStatus' && questionType !== 'gender' && 
           questionType !== 'upcomingElection' && questionType !== 'assembly2021') {
@@ -688,9 +718,11 @@ const SurveyApprovals = () => {
       }
     }
     
-    // Q5: Previous Loksabha Elections - if NOT option '1', hide Q6, Q7, Q8 (informational questions)
-    if (verificationForm.previousLoksabhaElectionsMatching && verificationForm.previousLoksabhaElectionsMatching !== '' && verificationForm.previousLoksabhaElectionsMatching !== '1') {
-      // If Q5 is not '1', hide Q6, Q7, Q8
+    // Q5: Previous Loksabha Elections - if NOT option '1' or '3' (cannot hear), hide Q6, Q7, Q8 (informational questions)
+    // Allow both '1' (matched) and '3' (cannot hear) to proceed to next questions
+    if (verificationForm.previousLoksabhaElectionsMatching && verificationForm.previousLoksabhaElectionsMatching !== '' && 
+        verificationForm.previousLoksabhaElectionsMatching !== '1' && verificationForm.previousLoksabhaElectionsMatching !== '3') {
+      // If Q5 is not '1' or '3', hide Q6, Q7, Q8
       if (questionType === 'name' || questionType === 'age' || questionType === 'phoneNumber') {
         return false;
       }
@@ -810,12 +842,48 @@ const SurveyApprovals = () => {
     return 'approved';
   };
 
+  // Helper function to stop all audio playback
+  const stopAllAudio = () => {
+    // Stop CAPI audio
+    const capiAudioEl = document.querySelector('audio[data-interview-id]:not([data-cati="true"])');
+    if (capiAudioEl) {
+      capiAudioEl.pause();
+      capiAudioEl.currentTime = 0;
+    }
+    
+    // Stop CATI audio
+    const catiAudioEl = document.querySelector('audio[data-interview-id][data-cati="true"]');
+    if (catiAudioEl) {
+      catiAudioEl.pause();
+      catiAudioEl.currentTime = 0;
+    }
+    
+    // Stop any other audio elements
+    const allAudioElements = document.querySelectorAll('audio[data-interview-id]');
+    allAudioElements.forEach(el => {
+      el.pause();
+      el.currentTime = 0;
+    });
+    
+    if (audioElement) {
+      audioElement.pause();
+      audioElement.currentTime = 0;
+      setAudioElement(null);
+    }
+    
+    setAudioPlaying(null);
+  };
+
   // Submit verification form
   const handleSubmitVerification = async () => {
     if (!isVerificationFormValid()) {
       showError('Please answer all required questions before submitting');
       return;
     }
+
+    // CRITICAL FIX: Stop all audio before submitting
+    console.log('🛑 Submitting verification - stopping all audio...');
+    stopAllAudio();
 
     try {
       setIsSubmittingVerification(true);
@@ -4180,34 +4248,41 @@ const SurveyApprovals = () => {
                         }
                         
                         // If audioUrl is an S3 key, try to get signed URL
-                        if (audioUrl && (audioUrl.startsWith('audio/') || audioUrl.startsWith('documents/') || audioUrl.startsWith('reports/')) && !audioSignedUrls[selectedInterview._id]) {
+                        // Use proxy URL (from backend) or construct it from audioUrl
+                        const proxyUrl = selectedInterview.audioRecording?.proxyUrl || selectedInterview.audioRecording?.signedUrl;
+                        if (audioUrl && !audioSignedUrls[selectedInterview._id]) {
                           try {
                             const isProduction = window.location.protocol === 'https:' || window.location.hostname !== 'localhost';
                             const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (isProduction ? '' : 'http://localhost:5000');
-                            const token = localStorage.getItem('token');
-                            const signedUrlResponse = await fetch(`${API_BASE_URL}/api/survey-responses/audio-signed-url?audioUrl=${encodeURIComponent(audioUrl)}`, {
-                              headers: {
-                                'Authorization': `Bearer ${token}`
-                              }
-                            });
-                            if (signedUrlResponse.ok) {
-                              const data = await signedUrlResponse.json();
-                              if (data.signedUrl) {
-                                // Update the audio element src with signed URL
-                                setAudioSignedUrls(prev => ({ ...prev, [selectedInterview._id]: data.signedUrl }));
-                                audioEl.src = data.signedUrl;
-                                audioEl.load();
-                                // Try to play again
-                                audioEl.play().catch(playError => {
-                                  console.error('Error playing audio after loading signed URL:', playError);
-                                  showError('Failed to play audio. Please try again.');
-                                  setAudioPlaying(null);
-                                });
-                                return;
-                              }
+                            
+                            let fullAudioUrl;
+                            if (proxyUrl) {
+                              // Use proxy URL from backend
+                              fullAudioUrl = proxyUrl.startsWith('http') ? proxyUrl : `${API_BASE_URL}${proxyUrl.startsWith('/') ? proxyUrl : '/' + proxyUrl}`;
+                            } else if (audioUrl.startsWith('audio/') || audioUrl.startsWith('documents/') || audioUrl.startsWith('reports/')) {
+                              // S3 key - use proxy endpoint (eliminates cross-region charges)
+                              fullAudioUrl = `${API_BASE_URL}/api/survey-responses/audio/${encodeURIComponent(audioUrl)}`;
+                            } else if (audioUrl.startsWith('http')) {
+                              // Already a full URL
+                              fullAudioUrl = audioUrl;
+                            } else {
+                              // Local path
+                              fullAudioUrl = `${API_BASE_URL}${audioUrl}`;
                             }
+                            
+                            // Update the audio element src with proxy URL
+                            setAudioSignedUrls(prev => ({ ...prev, [selectedInterview._id]: fullAudioUrl }));
+                            audioEl.src = fullAudioUrl;
+                            audioEl.load();
+                            // Try to play again
+                            audioEl.play().catch(playError => {
+                              console.error('Error playing audio after loading proxy URL:', playError);
+                              showError('Failed to play audio. Please try again.');
+                              setAudioPlaying(null);
+                            });
+                            return;
                           } catch (error) {
-                            console.error('Error fetching signed URL:', error);
+                            console.error('Error setting up audio URL:', error);
                           }
                         }
                         

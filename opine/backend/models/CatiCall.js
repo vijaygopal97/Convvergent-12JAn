@@ -142,6 +142,25 @@ const catiCallSchema = new mongoose.Schema({
     type: Number // in bytes
   },
   
+  // S3 Audio Storage (for migrated recordings)
+  s3AudioUrl: {
+    type: String, // S3 key (e.g., 'audio/cati/2024/12/callId_timestamp.mp3')
+    default: null
+  },
+  s3AudioUploadedAt: {
+    type: Date,
+    default: null
+  },
+  s3AudioUploadStatus: {
+    type: String,
+    enum: ['pending', 'uploaded', 'failed', 'deleted'], // 'deleted' = DeepCall URL expired
+    default: null
+  },
+  s3AudioUploadError: {
+    type: String, // Error message if upload failed
+    default: null
+  },
+  
   // Call Quality Metrics
   callQuality: {
     type: String,

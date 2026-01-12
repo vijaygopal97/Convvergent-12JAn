@@ -28,6 +28,7 @@ const {
   getSurveyResponses,
   getSurveyResponsesV2,
   getSurveyResponsesV2ForCSV,
+  getSurveyResponseCounts,
   approveSurveyResponse,
   rejectSurveyResponse,
   setPendingApproval,
@@ -35,9 +36,15 @@ const {
   getInterviewerPerformanceStats,
   getLastCatiSetNumber,
   getAudioSignedUrl,
+  streamAudioProxy,
   getCSVFileInfo,
   downloadPreGeneratedCSV,
-  triggerCSVGeneration
+  triggerCSVGeneration,
+  downloadCSVWithFilters_OLD,
+  createCSVJob,
+  getCSVJobProgress,
+  downloadCSVFromJob,
+  verifyInterviewSync
 } = require('../controllers/surveyResponseController');
 const { protect, authorize } = require('../middleware/auth');
 
@@ -77,7 +84,17 @@ router.get('/test-skip-route', (req, res) => {
   res.json({ success: true, message: 'Skip route test endpoint is accessible' });
 });
 
-// All routes require authentication
+// Audio proxy endpoint - streams audio from S3 through server (eliminates cross-region charges)
+// IMPORTANT: This route must be PUBLIC (no authentication) because browser <audio> elements don't send auth headers
+// IMPORTANT: This route must come BEFORE /:responseId and BEFORE protect middleware to avoid conflicts
+// CRITICAL: Define audio routes BEFORE protect middleware to make them public
+// Use regex pattern that matches any path after /audio/ (including encoded slashes)
+// CRITICAL: Do NOT call next() - streamAudioProxy handles the response directly
+// If we call next(), it will pass to protect middleware and cause 401
+router.get(/^\/audio\/.+/, streamAudioProxy);
+router.get('/audio', streamAudioProxy);
+
+// All routes require authentication (except audio proxy above)
 router.use(protect);
 
 // Debug middleware to log all POST requests to survey-responses
@@ -131,7 +148,8 @@ router.get('/survey/:surveyId/last-cati-set', getLastCatiSetNumber);
 // Upload audio file for interview
 router.post('/upload-audio', upload.single('audio'), uploadAudioFile);
 
-// Get signed URL for audio file
+// Get signed URL for audio file (DEPRECATED - returns proxy URL instead of direct S3 URL)
+// Kept for backward compatibility
 router.get('/audio-signed-url', getAudioSignedUrl);
 router.get('/audio-signed-url/:responseId', getAudioSignedUrl);
 
@@ -172,7 +190,10 @@ router.get('/debug-responses', debugSurveyResponses);
 router.get('/survey/:surveyId/responses', getSurveyResponses);
 
 // Get survey responses V2 (Optimized for big data - No limits)
-router.get('/survey/:surveyId/responses-v2', getSurveyResponsesV2);
+router.get('/survey/:surveyId/responses-v2', protect, authorize('company_admin', 'project_manager'), getSurveyResponsesV2);
+
+// Get response counts (lightweight endpoint for counts only)
+router.get('/survey/:surveyId/responses-v2/counts', protect, authorize('company_admin', 'project_manager'), getSurveyResponseCounts);
 
 // Get all survey responses V2 for CSV download (no pagination, company admin only)
 router.get('/survey/:surveyId/responses-v2-csv', getSurveyResponsesV2ForCSV);
@@ -181,6 +202,19 @@ router.get('/survey/:surveyId/responses-v2-csv', getSurveyResponsesV2ForCSV);
 router.get('/survey/:surveyId/csv-info', getCSVFileInfo);
 router.get('/survey/:surveyId/csv-download', downloadPreGeneratedCSV);
 router.post('/survey/:surveyId/generate-csv', protect, authorize('company_admin'), triggerCSVGeneration);
+
+// Efficient CSV download with filters (server-side generation) - OLD synchronous version
+router.get('/survey/:surveyId/download-csv', protect, authorize('company_admin', 'project_manager'), downloadCSVWithFilters_OLD);
+
+// NEW: Async CSV generation with job queue
+// Create CSV generation job (returns immediately with job ID)
+router.post('/survey/:surveyId/create-csv-job', protect, authorize('company_admin', 'project_manager'), createCSVJob);
+
+// Get CSV job progress
+router.get('/csv-job/:jobId/progress', protect, authorize('company_admin', 'project_manager'), getCSVJobProgress);
+
+// Download completed CSV file
+router.get('/csv-job/:jobId/download', protect, authorize('company_admin', 'project_manager'), downloadCSVFromJob);
 
 // Get AC Performance Stats
 router.get('/survey/:surveyId/ac-performance', getACPerformanceStats);
@@ -207,6 +241,9 @@ const {
 router.post('/offline-interviews/report', reportOfflineInterviews);
 router.get('/offline-interviews/reports', authorize('company_admin', 'super_admin'), getOfflineInterviewReports);
 router.get('/offline-interviews/summary', authorize('company_admin', 'super_admin'), getOfflineInterviewSummary);
+
+// Verify interview sync (two-phase commit verification)
+router.post('/verify-sync', protect, verifyInterviewSync);
 
 // Get survey response details by ID (must be last to avoid conflicts with other routes)
 router.get('/:responseId', getSurveyResponseById);

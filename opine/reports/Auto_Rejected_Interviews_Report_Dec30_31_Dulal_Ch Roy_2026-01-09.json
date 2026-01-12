@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "projectManager": {
+      "name": "Dulal Ch Roy",
+      "email": "dulal.roy@convergent.com",
+      "id": "6942c422fe90bbe7745e053b"
+    },
+    "totalAssignedInterviewers": 100,
+    "reportDateRange": {
+      "from": "2024-12-30T00:00:00.000Z",
+      "to": "2024-12-31T23:59:59.999Z",
+      "description": "December 30-31, 2024"
+    },
+    "totalAutoRejectedFound": 0,
+    "confirmedAutoRejections": 0,
+    "uniqueAutoRejections": 0,
+    "duplicatesExcluded": 0,
+    "generatedAt": "2026-01-09T20:00:24.442Z"
+  },
+  "summary": {
+    "totalRecords": 0,
+    "byRejectionReason": {},
+    "byInterviewer": {},
+    "byInterviewMode": {}
+  },
+  "responses": [],
+  "excludedDuplicates": []
+}

@@ -1,0 +1,100 @@
+{
+  "timestamp": "2026-01-06T07:03:26.749Z",
+  "totalResponsesWithHash": 42152,
+  "duplicateGroups": 6,
+  "totalDuplicateResponses": 12,
+  "sameInterviewer": 0,
+  "differentInterviewers": 6,
+  "duplicates": [
+    {
+      "contentHash": "baa1359a737a8b87",
+      "count": 2,
+      "responseIds": [
+        "7e377907-d2fb-404b-9b68-3f003b1f1455",
+        "4a2013f7-2ce1-4c71-9b73-a12884cf0a33"
+      ],
+      "interviewers": [
+        "694d782095dcc6c0ba3fef2d",
+        "6942c36dfe90bbe7745bdf30"
+      ],
+      "statuses": [
+        "Pending_Approval"
+      ]
+    },
+    {
+      "contentHash": "ce504ae5e4a43bb1",
+      "count": 2,
+      "responseIds": [
+        "6836d666-820a-47a6-88a9-e4ce580c3941",
+        "37f5c591-f5a4-48e3-8332-c4d449515d4a"
+      ],
+      "interviewers": [
+        "694d782095dcc6c0ba3fef2d",
+        "6942c36dfe90bbe7745bdf30"
+      ],
+      "statuses": [
+        "Pending_Approval"
+      ]
+    },
+    {
+      "contentHash": "3cd3f5acc58bcc4d",
+      "count": 2,
+      "responseIds": [
+        "c1ca3bb8-f371-49a3-a30f-c189187d2d87",
+        "af7eeb82-349c-4358-a0f5-12b1e503941c"
+      ],
+      "interviewers": [
+        "694d782095dcc6c0ba3fef2d",
+        "6942c36dfe90bbe7745bdf30"
+      ],
+      "statuses": [
+        "Pending_Approval"
+      ]
+    },
+    {
+      "contentHash": "446960ac1384a77c",
+      "count": 2,
+      "responseIds": [
+        "0e39ca40-fa7a-438f-8d4d-d8ad6ae95241",
+        "74e0fb6f-bea4-4070-a303-4677457ba064"
+      ],
+      "interviewers": [
+        "6958a622afeb85b1034e41ff",
+        "694f553e0232e822667f5d09"
+      ],
+      "statuses": [
+        "Pending_Approval"
+      ]
+    },
+    {
+      "contentHash": "3d75ab29009d9c6c",
+      "count": 2,
+      "responseIds": [
+        "fcbe6784-e12b-427d-a925-eb66d197e0ee",
+        "68106040-f1a4-4e8f-914e-95b62809e03d"
+      ],
+      "interviewers": [
+        "6942c390fe90bbe7745c7a32",
+        "6942c368fe90bbe7745bd1ef"
+      ],
+      "statuses": [
+        "Pending_Approval"
+      ]
+    },
+    {
+      "contentHash": "d375494753f0d7d3",
+      "count": 2,
+      "responseIds": [
+        "466eeba1-3da3-4774-a998-9438e93d030c",
+        "89683e2a-fb45-46dc-ab33-002c474637f6"
+      ],
+      "interviewers": [
+        "6942c390fe90bbe7745c7a32",
+        "6942c368fe90bbe7745bd1ef"
+      ],
+      "statuses": [
+        "Pending_Approval"
+      ]
+    }
+  ]
+}

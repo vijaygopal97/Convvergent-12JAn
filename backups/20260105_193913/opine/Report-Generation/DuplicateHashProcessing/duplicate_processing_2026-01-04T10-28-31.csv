@@ -1,0 +1,1176 @@
+Group Number,Original Response ID,Original Status,New Original Response ID,New Original Status,Duplicates Marked,Reason
+1,9d85a033-c97f-4a15-a916-0f9801b7bdc7,Rejected,07213240-7161-43ee-a66e-3771faec799e,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+2,4ff73311-a37e-4dec-90be-6e056b553941,Rejected,fe7360ff-be02-4792-b38e-267f9a7fe33e,Pending_Approval,2,Reordered: Original was Rejected, kept Pending_Approval duplicate
+3,ca25e6cf-1729-45f8-b421-79ac20241f39,Rejected,ca25e6cf-1729-45f8-b421-79ac20241f39,Rejected,0,Normal: Marked duplicates as Rejected
+4,1443f87d-2cda-4eed-94d2-ec5ae40912c6,Rejected,f88f6e1e-da26-4e45-a93c-50d5bbb51fdf,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+5,7f80f584-8e26-40f3-b450-9fefd54c3454,Rejected,d1049750-0148-46ac-9021-0d8a90a179ee,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+6,f3fdcfda-20fe-45a0-857e-e205619efa91,Rejected,cbfa8d98-6eca-4293-a915-4b4c666cb1f9,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+7,0d22de8c-9e57-45e3-89e7-5396ba1f169b,Rejected,0d22de8c-9e57-45e3-89e7-5396ba1f169b,Rejected,0,Normal: Marked duplicates as Rejected
+8,127c61fb-541f-4181-ab2e-b7f634626526,Rejected,5b596adc-4d3f-4c04-8319-27ee26500c67,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+9,9c7ecb2d-87d9-455b-8a3d-a4a05dcd14ae,Rejected,61532755-7e11-432a-928c-d0ba9e66075c,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+10,b59b079b-e85f-4933-9a4b-786d22b8a21c,Rejected,f64b18b2-140b-406d-9232-9857578ed989,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+11,73684b83-64aa-4f51-946e-3210a00a9f13,Rejected,d701eb0c-174c-444b-9b67-b72d104dd5d4,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+12,06172de3-12ee-4d4d-a26d-43ebba0e9532,Pending_Approval,06172de3-12ee-4d4d-a26d-43ebba0e9532,Pending_Approval,3,Normal: Marked duplicates as Rejected
+13,2b9be73e-ae0f-4658-b32a-795ba2bc81b0,Rejected,baae68b0-c765-4e8c-8546-01d591874571,Pending_Approval,2,Reordered: Original was Rejected, kept Pending_Approval duplicate
+14,1383cd16-35f1-449e-a493-fe3851135fb4,Rejected,ed8afa07-e8ba-49c6-b838-5c17a7ba37aa,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+15,cc45ab6c-cb5d-430d-9d8d-054175cdc3ec,Rejected,32c57620-c5b6-45e0-9ad7-16a10427f2f5,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+16,832a528c-68b3-4be5-bab8-77de681b8d48,Pending_Approval,832a528c-68b3-4be5-bab8-77de681b8d48,Pending_Approval,2,Normal: Marked duplicates as Rejected
+17,6927781f-c688-4c4b-8bb0-8dd137331e4d,Rejected,2a24dfe0-9d9e-45dd-9735-8f49b3f62760,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+18,95a3148f-3f16-49da-9745-41aea194bc8d,Rejected,a0d1b9b8-65d9-4f83-b66b-f4ba49037bc1,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+19,f63e6558-b948-43ee-90d5-8452b202220d,Rejected,5a47efde-7a42-4955-a479-920962a53a77,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+20,dc0f4047-ca77-4675-a50b-c486c6cf11ce,Rejected,ec75c051-f702-4443-b9ad-4c31331360f9,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+21,26c0a591-7712-4e1e-8216-c00a93f26084,Pending_Approval,26c0a591-7712-4e1e-8216-c00a93f26084,Pending_Approval,3,Normal: Marked duplicates as Rejected
+22,9c39206b-c818-4de5-8ab5-65c568db9959,Rejected,53047c47-361b-4487-881a-d92153499b7a,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+23,500bcd7f-eb44-41a5-8841-842dabfcd7c4,Rejected,99cf8f4f-98ea-4ea9-ae3c-6c1a7f6fbeee,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+24,ab7f6329-c3ff-4dc4-9602-3a977d987b6c,Rejected,59ec96d6-53d8-4e8b-84a4-c835afe23988,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+25,b42f7c93-a4cf-499b-888c-df361605c74e,Pending_Approval,b42f7c93-a4cf-499b-888c-df361605c74e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+26,08d0b09a-3f8a-4d0d-adce-edee85210715,Rejected,20231cd2-49a6-4199-8f7b-880436a26e17,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+27,875aa358-10c9-4ea8-a2dc-1d94a271e479,Rejected,875aa358-10c9-4ea8-a2dc-1d94a271e479,Rejected,0,Normal: Marked duplicates as Rejected
+28,61be25e1-774a-442e-b6d0-240670e20c56,Pending_Approval,61be25e1-774a-442e-b6d0-240670e20c56,Pending_Approval,1,Normal: Marked duplicates as Rejected
+29,e714e207-a5ff-48d8-a640-c3b18a1e0e83,Rejected,efed127a-bda6-483e-bfd8-4e9c4864f95b,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+30,a81cae96-d817-44fe-9622-847006f6f564,Rejected,a81cae96-d817-44fe-9622-847006f6f564,Rejected,0,Normal: Marked duplicates as Rejected
+31,acfd6778-0d32-4d74-a27f-3a56a624a5a2,Rejected,c2d41d48-db5f-482d-bcfa-59faf53201cf,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+32,a8f443c6-cb9a-461b-80bf-53562472116e,Pending_Approval,a8f443c6-cb9a-461b-80bf-53562472116e,Pending_Approval,2,Normal: Marked duplicates as Rejected
+33,e0ee0d24-98e6-4140-9ebc-3591496ba661,Rejected,09bdd87b-c2f5-4678-ae28-175b7f6369f4,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+34,4882fc66-dd19-497e-b506-adb329c86c4f,Pending_Approval,4882fc66-dd19-497e-b506-adb329c86c4f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+35,91bb860a-e6c1-4dc0-8cae-2d27d9443f4c,Rejected,22d0c053-b4d2-4eed-a64a-911a617cb920,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+36,0b40f6ef-8462-4923-bccd-b87fdda00464,Rejected,0b40f6ef-8462-4923-bccd-b87fdda00464,Rejected,0,Normal: Marked duplicates as Rejected
+37,89e0e53e-91d6-403a-8bc2-b01714ad4a1a,Rejected,d36bc3d6-a6ac-40a5-a0b4-49c38f3493ca,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+38,b49dd22c-1243-40e6-9309-c87966f3f65a,Rejected,bc939945-3ed2-4e36-a659-80286fe7fa85,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+39,b6064269-8ddf-4d1d-a0d1-538de93cd2a0,Pending_Approval,b6064269-8ddf-4d1d-a0d1-538de93cd2a0,Pending_Approval,1,Normal: Marked duplicates as Rejected
+40,084e9e05-53aa-443f-8ca6-52c8f207b316,Rejected,96ad0c7e-859c-4514-833b-42317684fab1,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+41,c528e037-0f66-4dd8-800d-6c9daa1ba9ee,Rejected,e9943a10-becc-4877-9e72-adbdb68544c6,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+42,ca98d3e5-a18c-412a-99f5-0e07eeb1e991,Pending_Approval,ca98d3e5-a18c-412a-99f5-0e07eeb1e991,Pending_Approval,2,Normal: Marked duplicates as Rejected
+43,087e2dee-8105-480d-9803-6a044bbd2660,Pending_Approval,087e2dee-8105-480d-9803-6a044bbd2660,Pending_Approval,2,Normal: Marked duplicates as Rejected
+44,a816ac53-3132-4619-a4d5-105f45b72819,Rejected,a816ac53-3132-4619-a4d5-105f45b72819,Rejected,0,Normal: Marked duplicates as Rejected
+45,06ec2592-01b3-4711-bf2e-e57ccf4ff767,Rejected,a1194b70-ec82-4181-a7f6-94328593e6f4,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+46,525439d4-c72a-4c3c-a90a-13412fe3cd31,Rejected,71fcb51b-4ba8-48c1-93ef-dc74cd9250d5,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+47,2d5b6d83-fde0-4754-a80f-2d621189f41d,Pending_Approval,2d5b6d83-fde0-4754-a80f-2d621189f41d,Pending_Approval,1,Normal: Marked duplicates as Rejected
+48,6437296a-0539-490a-9d5c-a4c87c1bfc95,Rejected,6c6ef065-4951-4276-bf90-4fda6639ee25,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+49,927e2b5c-6326-4ab2-8089-d863288d6c1d,Pending_Approval,927e2b5c-6326-4ab2-8089-d863288d6c1d,Pending_Approval,1,Normal: Marked duplicates as Rejected
+50,f0c12be6-e9a7-4274-b8ea-5535396a28b2,Pending_Approval,f0c12be6-e9a7-4274-b8ea-5535396a28b2,Pending_Approval,2,Normal: Marked duplicates as Rejected
+51,24b8fc44-d5b8-4a55-b6cf-34c837195fe2,Rejected,90f5e219-3646-4065-839f-b0e2fdd01b65,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+52,97eb157b-7ddd-459f-8c0b-0c22d27d16e6,Rejected,62bc32f1-1be4-4033-ab89-504e4f41429d,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+53,aa7c3f86-1c6f-405e-821c-f3afbe5173f4,Pending_Approval,aa7c3f86-1c6f-405e-821c-f3afbe5173f4,Pending_Approval,2,Normal: Marked duplicates as Rejected
+54,c8143877-d352-452d-be2d-7f441ccdb4ab,Rejected,b5e9f1ec-35ba-488a-b93b-11edb01e2121,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+55,41c1601a-4dcd-4dd6-8e67-6d897512cc14,Rejected,34ab5ab6-acc7-4e4d-8b73-54398656bb93,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+56,f8399ac4-ec95-40ed-9c7c-a81def4f3c76,Pending_Approval,f8399ac4-ec95-40ed-9c7c-a81def4f3c76,Pending_Approval,2,Normal: Marked duplicates as Rejected
+57,e553f293-4c6c-45fe-9a41-221126d5f944,Rejected,cb6091b8-8cf8-4760-8a0e-e6b649746a56,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+58,3f25fb84-f5e6-49c4-97e5-1aa913b2a870,Rejected,00a36f06-8fa9-4223-bd17-cb63f5c9bf18,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+59,c7d78106-f02c-47c8-99e0-c40ddadc1a43,Rejected,d33052b3-d4ff-4f6d-8289-16b35be25da9,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+60,83c55ef6-f6b4-47b7-af11-4c5ba5a3c288,Rejected,719e9d52-465d-4bec-9b6c-6a73f02b990a,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+61,47d00400-a409-4541-8d19-13eaa7f2eac0,Pending_Approval,47d00400-a409-4541-8d19-13eaa7f2eac0,Pending_Approval,0,Normal: Marked duplicates as Rejected
+62,120e3511-6a40-4f33-998f-23d7ebb2112c,Pending_Approval,120e3511-6a40-4f33-998f-23d7ebb2112c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+63,2f5cfcce-953c-4920-8b0d-a79c07b57520,Rejected,e588446b-b06e-4cf1-9d04-078bbb414ae7,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+64,75503e84-0349-47c5-aa91-92cf7558c295,Rejected,f1764b20-a195-4576-8934-10d4b8476c80,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+65,5152ca78-dd5c-4315-9fc0-65a18d7a3804,Pending_Approval,5152ca78-dd5c-4315-9fc0-65a18d7a3804,Pending_Approval,1,Normal: Marked duplicates as Rejected
+66,03c0902d-8370-43a7-8d67-1312122a09dc,Rejected,4df381d1-58d7-4108-b3f7-624897110f8c,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+67,b870f29e-e071-45ee-bb71-668e9acf2ef5,Rejected,c73f0887-d06a-4b63-9525-87975c8db465,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+68,4ef3bee9-bc64-40f0-8d3f-691a05ce1607,Pending_Approval,4ef3bee9-bc64-40f0-8d3f-691a05ce1607,Pending_Approval,1,Normal: Marked duplicates as Rejected
+69,b503a7d8-1597-4a94-9688-494d41ab8b98,Rejected,58e8d344-7ad9-4039-a834-7962be699745,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+70,46ef7189-af38-4c04-ba58-7544fec6ad8e,Rejected,db20a671-2b93-4dae-80a8-e6a034f1b13c,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+71,0c128a4a-1b2f-41eb-8030-e3744994eb24,Rejected,2c480e9b-84c4-4d95-b702-0a2d2696f165,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+72,c1ca3bb8-f371-49a3-a30f-c189187d2d87,Rejected,af7eeb82-349c-4358-a0f5-12b1e503941c,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+73,84055b62-4831-4810-9a28-09b0f2fd56da,Rejected,92677f5a-e285-4fbb-b828-089d4183b77a,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+74,8fede718-cd80-4ef1-ae4d-e6ab7eddc8fd,Rejected,9ad16f30-40d0-4464-9d54-dc7bae3193a5,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+75,15a4e214-854e-4b97-a271-0b506c01b985,Pending_Approval,15a4e214-854e-4b97-a271-0b506c01b985,Pending_Approval,2,Normal: Marked duplicates as Rejected
+76,f66c07e1-5a91-4390-b1e6-ff92cc908b8d,Rejected,165fc0ad-de8d-4263-a6ce-2ec9394e9313,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+77,a122f753-58ce-44f1-8f26-2247d5eb69f6,Pending_Approval,a122f753-58ce-44f1-8f26-2247d5eb69f6,Pending_Approval,1,Normal: Marked duplicates as Rejected
+78,65320cc7-38e5-4498-8108-e78fdd822d62,Rejected,b5d7d3a5-2d9d-4342-a039-0b7e54b1bb21,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+79,e4475916-ee1a-46fb-a743-6292945828c5,Rejected,45910bf1-4bbb-49a2-918d-7079086f3dfa,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+80,1d4549cd-5fe0-4b12-8c57-425f8eccc97d,Rejected,41534cc1-e071-4306-a132-6859921d78ec,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+81,466d1689-c3c7-4d60-90f4-f67bf62d1940,Pending_Approval,466d1689-c3c7-4d60-90f4-f67bf62d1940,Pending_Approval,1,Normal: Marked duplicates as Rejected
+82,6ccae0fd-e916-459c-a93c-94849db0acc5,Rejected,e301bbb8-d284-4c19-adb0-33a727793e40,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+83,ef2c7f40-ffda-41ed-8377-c5036a778be8,Rejected,ef2c7f40-ffda-41ed-8377-c5036a778be8,Rejected,0,Normal: Marked duplicates as Rejected
+84,559a9e63-472b-4bad-8427-605d8619e88d,Rejected,d0727976-2742-49f1-bff3-099b54695746,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+85,ca384e15-ae01-447f-90e7-2c3c7acb694e,Rejected,77544905-e179-4faa-883e-4a77231b9784,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+86,529082d1-5b69-46ab-93ef-a70307c7ec90,Rejected,d7285a72-c6ca-44be-99f8-63616ecb0695,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+87,a7f06a35-3866-4435-b5c8-a65d0e4608cd,Pending_Approval,a7f06a35-3866-4435-b5c8-a65d0e4608cd,Pending_Approval,2,Normal: Marked duplicates as Rejected
+88,a3ab87c9-b48f-454f-b118-9218e694bcc7,Rejected,b8d7c0c1-2c51-4eea-8bc6-b8061b8422ac,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+89,69dd7855-3a39-4999-81a5-1a01c2705a0c,Rejected,8b352263-de8b-4776-b61e-faf2010c4070,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+90,8b877332-8383-487f-aaf2-fa502bb24a98,Rejected,8b877332-8383-487f-aaf2-fa502bb24a98,Rejected,0,Normal: Marked duplicates as Rejected
+91,da928eef-dd7b-472e-b2e1-fab9d859cf4c,Rejected,da928eef-dd7b-472e-b2e1-fab9d859cf4c,Rejected,0,Normal: Marked duplicates as Rejected
+92,61832a80-349a-4e6c-886b-ccf9c6ebe48b,Pending_Approval,61832a80-349a-4e6c-886b-ccf9c6ebe48b,Pending_Approval,2,Normal: Marked duplicates as Rejected
+93,4760c7f4-10d9-408d-a33f-5927bdbafa46,Rejected,e1a8aebb-61dd-4a9b-ad84-aa514071c45f,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+94,49f8e7b1-0a3b-4552-b177-62fbd3051203,Rejected,4482336b-625a-44d6-b230-94d00ead2c31,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+95,864560f1-3865-424d-8dc6-28f7b6263fa4,Rejected,69cd1cac-1136-4a7a-af1c-9b84b05d214c,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+96,570dd88d-ec09-4bb1-90c5-b027f8b74cf6,Pending_Approval,570dd88d-ec09-4bb1-90c5-b027f8b74cf6,Pending_Approval,2,Normal: Marked duplicates as Rejected
+97,49cb1b51-7804-48f6-be1a-091b2454176a,Pending_Approval,49cb1b51-7804-48f6-be1a-091b2454176a,Pending_Approval,1,Normal: Marked duplicates as Rejected
+98,0e2662ea-0edd-4352-82dd-0d430729a20e,Rejected,f7510a5c-96ea-4ec6-8f82-7672e04df929,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+99,2981d200-8b9e-4252-a505-ed92898bffc2,Rejected,b515e13f-2a3a-4427-a61e-94c31154bd65,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+100,c4cdd3ca-fa70-485a-986d-6951d6e5f28f,Rejected,1eed8df3-46a3-409e-a23e-2b1bc54e129b,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+101,0ad2e399-d82f-43c2-85e0-967bdf32f704,Rejected,5a37d23d-8972-466d-be72-767b2ab59c91,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+102,b75387a8-ca60-4f17-aa7e-755b784df99f,Rejected,5af47b55-958e-4908-b1e3-6eb22f289bd7,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+103,1d8306f3-572a-4cc9-804e-2da6403e1825,Rejected,1d8306f3-572a-4cc9-804e-2da6403e1825,Rejected,0,Normal: Marked duplicates as Rejected
+104,e50962f9-1774-4521-ae51-8df21ebf8cf7,Rejected,e50962f9-1774-4521-ae51-8df21ebf8cf7,Rejected,0,Normal: Marked duplicates as Rejected
+105,3de32ee1-e4ad-4195-bc6c-c2156f756475,Rejected,93b83923-4068-427c-8ff9-968ebeecf407,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+106,90778751-c8d9-4f79-aa7c-8b42b1667bf2,Rejected,a0426660-2b72-46aa-a531-5da38d9b617c,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+107,d7d05104-1c25-41ab-976a-637ee4e0191b,Rejected,60a09fac-6daa-40e1-a4f7-8c5ce2470e1f,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+108,51f570ac-0382-4e2d-9769-39b9f2cf83d1,Pending_Approval,51f570ac-0382-4e2d-9769-39b9f2cf83d1,Pending_Approval,2,Normal: Marked duplicates as Rejected
+109,8eefd494-1763-4152-a2e4-38a013ed5a97,Rejected,df9b26a4-5010-45f8-bf3e-1c91ea960105,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+110,44ff941c-08ad-47a8-84bc-9c737a77436a,Rejected,9fa91dc1-6708-4e7d-90d9-ec09b1edeb94,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+111,faffb118-e569-422e-a332-dfde527bf118,Rejected,526f4ec9-c175-437a-aed9-53e1cf3f54a4,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+112,0bd2e3fd-b79d-4254-bcf7-76c4042c0dc3,Rejected,20a0bf07-51c1-4e23-b3b9-c8b634133052,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+113,4fa9cf30-3712-4325-b5c3-186b4b129578,Rejected,4fa9cf30-3712-4325-b5c3-186b4b129578,Rejected,0,Normal: Marked duplicates as Rejected
+114,819bf5ee-3fbb-45f5-b594-2aeb0eff6daa,Rejected,69d66e96-ecb7-484c-999d-e1b0bf614a17,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+115,bf901847-676a-421f-aad6-c2fc0aa1f1b0,Rejected,bf901847-676a-421f-aad6-c2fc0aa1f1b0,Rejected,0,Normal: Marked duplicates as Rejected
+116,bff1fd72-97ef-4ec1-90f8-14f7ada51406,Rejected,bff1fd72-97ef-4ec1-90f8-14f7ada51406,Rejected,0,Normal: Marked duplicates as Rejected
+117,887bc97b-2045-4e07-85e7-3c24e1c32c80,Rejected,8ed66d2b-a163-4169-b3ef-2b71be73002c,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+118,5d5de9f1-340d-4ae4-a676-52384a6cd7fd,Rejected,dbb6b4ec-5e12-479a-944f-2bfafef7b780,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+119,a5a4176c-68bc-40cb-9a8b-6e7254570159,Rejected,b6e1f835-0ede-4542-8274-ca47f5322c84,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+120,bb38b6a8-17e0-43f8-b718-780a482096e6,Rejected,d42827d9-eed1-4797-827e-6c52b1c9c70c,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+121,e198dd7b-558c-48fa-91d2-a61dae02224a,Rejected,898c461c-75f7-41e8-8539-c4d140dc1347,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+122,9d2fa0d6-b971-43fa-b19e-3bef1a53558e,Rejected,9e3ca5eb-ed25-451c-b033-323107a8554d,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+123,2b8724c4-c2bc-450c-bed4-e56877ae14e9,Pending_Approval,2b8724c4-c2bc-450c-bed4-e56877ae14e9,Pending_Approval,1,Normal: Marked duplicates as Rejected
+124,3b334dcf-1933-4a8d-8dfb-72efa14e1519,Pending_Approval,3b334dcf-1933-4a8d-8dfb-72efa14e1519,Pending_Approval,1,Normal: Marked duplicates as Rejected
+125,39c58432-1721-4794-905c-76295f5fcb8e,Rejected,49f915e7-12fe-4d5e-a3d6-344996ae1ab0,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+126,1c81dd61-57bb-426b-8bf2-20f7ad03d011,Rejected,39617702-2374-407e-b88d-7beeb4304153,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+127,92689f06-48fe-41a0-88a4-7d3b151a53a1,Pending_Approval,92689f06-48fe-41a0-88a4-7d3b151a53a1,Pending_Approval,1,Normal: Marked duplicates as Rejected
+128,404e31f2-a09a-40b6-8cfb-952a2f6d49a7,Rejected,3d5e4296-a045-4e93-8950-8ac2622ee890,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+129,a98bc310-1557-46a5-882a-55f9995b2d1c,Rejected,57c84fcb-7a20-4a68-bd60-f17db97aba63,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+130,f64ad911-387b-4226-b557-293b487bf017,Pending_Approval,f64ad911-387b-4226-b557-293b487bf017,Pending_Approval,1,Normal: Marked duplicates as Rejected
+131,cc1ae537-c347-4322-8abd-79f9f1d7467f,Rejected,3f624275-6560-4081-b1ab-dfb7b0f07259,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+132,dd6b1e03-108c-461d-8cc5-78c5f5e126d3,Pending_Approval,dd6b1e03-108c-461d-8cc5-78c5f5e126d3,Pending_Approval,0,Normal: Marked duplicates as Rejected
+133,067649f1-b725-447d-9b71-a78c4dea0314,Rejected,84185034-cd92-4bf6-9d18-e68826e0d1ba,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+134,7b1fa672-63c1-4e97-964d-137a1767ff57,Pending_Approval,7b1fa672-63c1-4e97-964d-137a1767ff57,Pending_Approval,0,Normal: Marked duplicates as Rejected
+135,ccbca33c-65cd-415c-bc98-74784f2bdba0,Pending_Approval,ccbca33c-65cd-415c-bc98-74784f2bdba0,Pending_Approval,2,Normal: Marked duplicates as Rejected
+136,d8a78b35-38b1-4f1c-bb5c-42dda3ff61c6,Rejected,4533e079-723b-471d-8a7d-e00a0b9d89a7,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+137,4dafc353-ed68-48b8-babb-6948bd02d345,Rejected,4dafc353-ed68-48b8-babb-6948bd02d345,Rejected,0,Normal: Marked duplicates as Rejected
+138,0f3cd2ee-770b-48e3-99b8-cc1b1a5fcee7,Rejected,64c97d7b-801e-4e17-87a3-7777f9777ad7,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+139,6d7fef21-d8ea-46a1-aca2-1f8b37bfee4c,Pending_Approval,6d7fef21-d8ea-46a1-aca2-1f8b37bfee4c,Pending_Approval,1,Normal: Marked duplicates as Rejected
+140,d02156de-43a0-4280-9616-47fca2273f00,Rejected,c4968aa1-1fd8-4f77-a990-536bc83a5a63,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+141,88690a70-6698-4b5d-88ea-603a39f44f26,Rejected,296eb1a5-e582-4f65-84d4-c6ed9054f9da,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+142,1afd4da9-6b1a-4ada-b2c3-bab364fef21a,Pending_Approval,1afd4da9-6b1a-4ada-b2c3-bab364fef21a,Pending_Approval,2,Normal: Marked duplicates as Rejected
+143,961ef982-829d-4bee-9ae9-130df6c50cb6,Rejected,d3282dab-e891-4fa6-a2a8-09c061393d2b,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+144,96619c6a-cb39-4cc6-ad9b-c35a67a5a68c,Rejected,86d060eb-bf95-401b-9135-5871ead66232,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+145,547456ce-1077-4eee-b2a6-85add1992d56,Pending_Approval,547456ce-1077-4eee-b2a6-85add1992d56,Pending_Approval,1,Normal: Marked duplicates as Rejected
+146,24f99dad-38a6-4c3d-a17d-60cd1962d0c4,Rejected,3369e10c-c20d-4d57-8f38-b94f366b609c,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+147,01a8d536-c2d4-433a-8190-3be0e8f89bab,Pending_Approval,01a8d536-c2d4-433a-8190-3be0e8f89bab,Pending_Approval,2,Normal: Marked duplicates as Rejected
+148,a247a501-a076-49ed-bc20-30ea676a6ac1,Rejected,3c635ede-c439-4978-801e-df631d208fa0,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+149,1644a23c-dc90-4486-9228-313a6e4205f9,Pending_Approval,1644a23c-dc90-4486-9228-313a6e4205f9,Pending_Approval,2,Normal: Marked duplicates as Rejected
+150,d9ef1452-9d94-4c51-8b49-845bbaae9ec9,Rejected,f271e482-5f4a-4e0c-b054-15abf6e95e37,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+151,ed298196-56c8-4f82-84b8-d298f2e96bb1,Rejected,f92dfa90-63a9-4b8e-a2c2-77a627cbcd0f,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+152,aa2d800e-2e9f-49cc-a203-49c692b0d2a1,Pending_Approval,aa2d800e-2e9f-49cc-a203-49c692b0d2a1,Pending_Approval,1,Normal: Marked duplicates as Rejected
+153,2b2812f2-57a0-45dc-a237-d748710272a2,Rejected,2b2812f2-57a0-45dc-a237-d748710272a2,Rejected,0,Normal: Marked duplicates as Rejected
+154,3874552b-47fb-4ce4-8d9b-7247ddc16c29,Rejected,a19febb1-573d-42e4-8aef-dacb8cca44ec,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+155,3c3c13ab-d0f5-487c-8a9f-b98fead2dc3c,Rejected,87a977b0-b618-46b8-b79b-d99310508b76,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+156,13f8210e-6ddb-4609-9ea0-6346f3d3665d,Rejected,ee6d3c0d-86c0-493b-a443-5d03a0d53f57,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+157,a0939cc3-1519-4509-be5e-667d9c9396eb,Rejected,a0939cc3-1519-4509-be5e-667d9c9396eb,Rejected,0,Normal: Marked duplicates as Rejected
+158,55d32db1-41ea-40c9-bf53-6bfaacd7f2e2,Rejected,1dffb721-33f7-4dc7-ab4d-f42451edc4d2,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+159,320278f7-df3b-4a85-bcf0-30f082a2f845,Rejected,12b8224f-2272-4325-b83e-68dfb1acd965,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+160,db36e711-b313-4cf8-a535-1300692cfe47,Rejected,0f92489c-391e-4044-9d93-d63b69b0838a,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+161,b798b48a-6ed3-4480-9428-743eee86bd88,Pending_Approval,b798b48a-6ed3-4480-9428-743eee86bd88,Pending_Approval,2,Normal: Marked duplicates as Rejected
+162,f267c8f0-44b4-4b85-9f31-cba5423f8ddf,Pending_Approval,f267c8f0-44b4-4b85-9f31-cba5423f8ddf,Pending_Approval,2,Normal: Marked duplicates as Rejected
+163,d71d74ac-4769-4985-8fb8-e0b9216fa215,Pending_Approval,d71d74ac-4769-4985-8fb8-e0b9216fa215,Pending_Approval,2,Normal: Marked duplicates as Rejected
+164,7e377907-d2fb-404b-9b68-3f003b1f1455,Rejected,4a2013f7-2ce1-4c71-9b73-a12884cf0a33,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+165,44550b04-df30-4f5a-9b0b-a7a41e35e5a2,Pending_Approval,44550b04-df30-4f5a-9b0b-a7a41e35e5a2,Pending_Approval,1,Normal: Marked duplicates as Rejected
+166,b59137bb-5806-4721-9eca-02f919b936c1,Pending_Approval,b59137bb-5806-4721-9eca-02f919b936c1,Pending_Approval,0,Normal: Marked duplicates as Rejected
+167,cade85eb-1b1e-4b86-9e2f-817a90a836a5,Rejected,cade85eb-1b1e-4b86-9e2f-817a90a836a5,Rejected,0,Normal: Marked duplicates as Rejected
+168,4bdcbda5-15c4-4981-84c7-32f02ae4329b,Rejected,2aaff040-94dc-4a1f-9f58-6ca335fe2bcc,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+169,6320aa9a-75bf-4a82-a5f4-eee8c113f87a,Pending_Approval,6320aa9a-75bf-4a82-a5f4-eee8c113f87a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+170,1520f808-646d-494f-9536-080a02ff2596,Rejected,1520f808-646d-494f-9536-080a02ff2596,Rejected,0,Normal: Marked duplicates as Rejected
+171,5d339641-77b8-4f93-9e76-b836c7fdb575,Rejected,5703eae7-b24c-487a-9932-e61144c28bd9,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+172,acdb584f-8cb9-4965-a0b7-65f4e874e394,Rejected,acdb584f-8cb9-4965-a0b7-65f4e874e394,Rejected,0,Normal: Marked duplicates as Rejected
+173,51cd8756-3bf8-4359-8138-5f2f485f432e,Rejected,b5fc8ecf-5b25-4e91-a2d1-d87e2f1183bd,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+174,b09adf84-54c3-4536-bc4d-1e13dbf5dfa7,Rejected,88ffac9f-4d35-476c-8994-a039a7261268,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+175,5db1c95a-7da7-4418-bc1d-cf34680d680f,Rejected,80213bed-2b30-4030-a936-7bec9414027d,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+176,541c0b52-1935-4966-8e54-393161a005ab,Pending_Approval,541c0b52-1935-4966-8e54-393161a005ab,Pending_Approval,1,Normal: Marked duplicates as Rejected
+177,97c232b7-7ece-4395-9e6d-27b9e17536f7,Rejected,c2fb3d5a-33a4-4b28-a10c-2f99db940594,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+178,e36ed9cc-8fab-4957-be5d-6d38d3260fa4,Pending_Approval,e36ed9cc-8fab-4957-be5d-6d38d3260fa4,Pending_Approval,1,Normal: Marked duplicates as Rejected
+179,92eb90ab-3682-4522-85fa-153660a15e0d,Rejected,a3d9a102-2d8d-4e4e-8cc0-8e1ca63cc2d4,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+180,6836d666-820a-47a6-88a9-e4ce580c3941,Rejected,37f5c591-f5a4-48e3-8332-c4d449515d4a,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+181,80ed35a3-43d0-433b-ba86-4c16ac639998,Rejected,1ce86146-4d74-455c-82c7-2d3b5630b1ca,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+182,9f2a3c28-0e15-4a27-8ab9-f660d2c8842d,Pending_Approval,9f2a3c28-0e15-4a27-8ab9-f660d2c8842d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+183,c1160f65-dae8-4f46-83f7-7482d7797c2f,Rejected,21d12f14-5e94-4602-a23f-579c2c0fda49,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+184,5d23d98b-d156-4b12-9486-d3c163336112,Rejected,1ccf1b28-f31c-4d35-bea0-acee8411a09a,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+185,71064c31-145b-43de-a279-333723fa8a4c,Rejected,736d098d-27aa-4451-a761-487aaff0fd53,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+186,f98561bf-4c13-4a11-a2d4-8a21fa42e698,Rejected,20d719b5-c19a-4f6c-8e60-501efa9a8054,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+187,7df2cb55-cbc0-49f9-a2b4-255a6c4677c6,Rejected,0158588c-a6de-4b6c-95f2-22644ccf681d,Pending_Approval,1,Reordered: Original was Rejected, kept Pending_Approval duplicate
+188,3ae91354-e69b-4d0a-9ea2-266e961952fe,Rejected,0b5f344c-d8bc-4a5d-9d65-374b1fb9fd21,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+189,a524dc3d-7699-4ca6-b20f-a9b10ecad3fe,Rejected,a524dc3d-7699-4ca6-b20f-a9b10ecad3fe,Rejected,0,Normal: Marked duplicates as Rejected
+190,da5131eb-43bf-4bcc-9aa6-aa483a5c926c,Pending_Approval,da5131eb-43bf-4bcc-9aa6-aa483a5c926c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+191,249345a0-846e-4656-be26-c16c3179989c,Pending_Approval,249345a0-846e-4656-be26-c16c3179989c,Pending_Approval,1,Normal: Marked duplicates as Rejected
+192,cd06e95c-d33d-493b-a6b3-b88018fddd22,Pending_Approval,cd06e95c-d33d-493b-a6b3-b88018fddd22,Pending_Approval,2,Normal: Marked duplicates as Rejected
+193,c84d95fa-4998-4492-8b0b-0c11e81e11e6,Pending_Approval,c84d95fa-4998-4492-8b0b-0c11e81e11e6,Pending_Approval,2,Normal: Marked duplicates as Rejected
+194,c82b80f4-49f8-40fe-ac7a-b69fcf71b324,Rejected,8df45627-1bab-453f-8a7a-391fe36c142d,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+195,a6f991ea-464c-4f7a-bc04-17ae6fe2270c,Rejected,a6f991ea-464c-4f7a-bc04-17ae6fe2270c,Rejected,0,Normal: Marked duplicates as Rejected
+196,1362fd41-84d2-4b9a-9cd5-fe9c8124de6b,Pending_Approval,1362fd41-84d2-4b9a-9cd5-fe9c8124de6b,Pending_Approval,2,Normal: Marked duplicates as Rejected
+197,41395e9b-ae2a-4345-a648-56fd354c344e,Pending_Approval,41395e9b-ae2a-4345-a648-56fd354c344e,Pending_Approval,1,Normal: Marked duplicates as Rejected
+198,4ce43d55-b964-40bf-916e-fb1ec184d4b5,Rejected,7d912f5a-9c17-4a58-ba5b-e9ad618decbd,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+199,51942da0-7b9a-4598-bb84-199dcea3c7fa,Rejected,c22d8b15-1fc9-46de-bb90-b2b4bdd88bf4,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+200,69301a65-d2b7-4fca-b629-93dcd6a8e19b,Rejected,074a6325-05e2-4cfc-a543-214b7b5b5bf3,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+201,c404b92e-8da0-456b-8ac6-f87d7489e4db,Rejected,fa76a293-eae8-45cc-a72f-926ed69a0fee,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+202,9f5b8e1f-a8ba-4a01-8c7b-a2a94118e74c,Rejected,278265c2-3c45-497a-8f34-239dd35e9f74,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+203,be2bf417-d149-46b6-ad70-8c7e10c64ac4,Rejected,7d99f71b-abd9-4721-a4bf-1d8a633167d5,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+204,5483a8d5-b937-496d-9008-397e8fbac7fa,Pending_Approval,5483a8d5-b937-496d-9008-397e8fbac7fa,Pending_Approval,1,Normal: Marked duplicates as Rejected
+205,7cc770bf-c493-4c9f-92f1-df417d380f77,Rejected,69c572a0-2205-487f-9481-a4ef94ac978c,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+206,73d3e473-1ed4-4208-acf5-b389154f6994,Rejected,73d3e473-1ed4-4208-acf5-b389154f6994,Rejected,0,Normal: Marked duplicates as Rejected
+207,2213bfa4-42b8-47e1-8fda-8f0ebb454f3b,Rejected,2213bfa4-42b8-47e1-8fda-8f0ebb454f3b,Rejected,0,Normal: Marked duplicates as Rejected
+208,76177ea4-e248-4ef0-9e1c-d380cb91d273,Rejected,2b55d498-c646-4321-a1a6-e5adc5db3073,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+209,17327436-876e-4d82-8ec5-29fa39072aaa,Rejected,89efdc41-b127-4dbe-9f24-664a4c78eb68,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+210,d38b4e8f-c534-4f9a-a07f-9608e24e1912,Rejected,9761e17a-26d5-47b9-889b-632171771d4a,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+211,b43c6c60-bbce-4e77-a138-2346f2742384,Pending_Approval,b43c6c60-bbce-4e77-a138-2346f2742384,Pending_Approval,0,Normal: Marked duplicates as Rejected
+212,c6baeb3a-ce32-45af-be46-afccadb4a1c3,Pending_Approval,c6baeb3a-ce32-45af-be46-afccadb4a1c3,Pending_Approval,1,Normal: Marked duplicates as Rejected
+213,c48955ba-e676-4dcf-b8c1-5414bc12abfc,Pending_Approval,c48955ba-e676-4dcf-b8c1-5414bc12abfc,Pending_Approval,0,Normal: Marked duplicates as Rejected
+214,322d953a-80b2-45d6-a828-86549e2a752f,Pending_Approval,322d953a-80b2-45d6-a828-86549e2a752f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+215,5f1857a2-ace0-4dcf-9d50-19f733958192,Pending_Approval,5f1857a2-ace0-4dcf-9d50-19f733958192,Pending_Approval,0,Normal: Marked duplicates as Rejected
+216,b2322fa8-127a-4c13-b545-5220c2decd3b,Rejected,b2322fa8-127a-4c13-b545-5220c2decd3b,Rejected,0,Normal: Marked duplicates as Rejected
+217,47ae43a9-6b09-43bb-baf1-9ec6ee4ad4af,Pending_Approval,47ae43a9-6b09-43bb-baf1-9ec6ee4ad4af,Pending_Approval,0,Normal: Marked duplicates as Rejected
+218,f8f0c28f-ec4d-45a1-9e5e-141de91a9002,Rejected,f8f0c28f-ec4d-45a1-9e5e-141de91a9002,Rejected,0,Normal: Marked duplicates as Rejected
+219,e970a39f-6e7a-41e0-aa89-eacfd3780e66,Pending_Approval,e970a39f-6e7a-41e0-aa89-eacfd3780e66,Pending_Approval,1,Normal: Marked duplicates as Rejected
+220,56081caa-3e7a-410d-a508-66669aac866b,Pending_Approval,56081caa-3e7a-410d-a508-66669aac866b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+221,e8fd4de5-8806-4d59-996e-25fea3851036,Rejected,e2a5d574-3eeb-4462-9b60-98ab03bfc7a4,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+222,7aacdbc9-f95a-4339-86b9-e1454b4742e1,Rejected,7aacdbc9-f95a-4339-86b9-e1454b4742e1,Rejected,0,Normal: Marked duplicates as Rejected
+223,fd3256ca-2f54-47c8-beb4-65c0827019f8,Pending_Approval,fd3256ca-2f54-47c8-beb4-65c0827019f8,Pending_Approval,0,Normal: Marked duplicates as Rejected
+224,5d36eb43-5aef-4559-82e5-58ba7b3958e7,Pending_Approval,5d36eb43-5aef-4559-82e5-58ba7b3958e7,Pending_Approval,0,Normal: Marked duplicates as Rejected
+225,9ba6fef4-6a96-45b6-974a-55ba6529223f,Pending_Approval,9ba6fef4-6a96-45b6-974a-55ba6529223f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+226,4fc8d5eb-4f3b-4bc4-b92c-bc54cce7c448,Pending_Approval,4fc8d5eb-4f3b-4bc4-b92c-bc54cce7c448,Pending_Approval,1,Normal: Marked duplicates as Rejected
+227,aaf37ddc-cd3c-4bb9-a75f-54f01a93313d,Pending_Approval,aaf37ddc-cd3c-4bb9-a75f-54f01a93313d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+228,aec35b5d-e24f-4b52-87f1-b7bd1a247fdf,Pending_Approval,aec35b5d-e24f-4b52-87f1-b7bd1a247fdf,Pending_Approval,0,Normal: Marked duplicates as Rejected
+229,b9052683-d63b-4c75-831f-6207b41c5cc1,Pending_Approval,b9052683-d63b-4c75-831f-6207b41c5cc1,Pending_Approval,0,Normal: Marked duplicates as Rejected
+230,c41aaf46-07f6-456d-9377-9b2f7a568ff9,Rejected,a138bfad-b486-4873-b431-2974ae08c166,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+231,8152903f-f8e6-4acf-acb6-68ea2ba125b3,Rejected,a3cf2fb8-b315-4f83-9ee9-e3460c5661da,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+232,0748a4dc-62ed-4c64-858d-abf883a8dad3,Pending_Approval,0748a4dc-62ed-4c64-858d-abf883a8dad3,Pending_Approval,0,Normal: Marked duplicates as Rejected
+233,652e6910-b9c8-4e92-9362-34f2c703ccd5,Rejected,c6d0510e-37fa-4aef-8407-8347bc012486,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+234,d4d31845-41a6-4a2c-8f16-378d3b2d65ad,Pending_Approval,d4d31845-41a6-4a2c-8f16-378d3b2d65ad,Pending_Approval,1,Normal: Marked duplicates as Rejected
+235,47b8f0fd-f56c-4f17-b262-5ac96b5c4f69,Rejected,47b8f0fd-f56c-4f17-b262-5ac96b5c4f69,Rejected,0,Normal: Marked duplicates as Rejected
+236,e3b3cc60-885c-4ad6-966c-04d3c94f8f9d,Pending_Approval,e3b3cc60-885c-4ad6-966c-04d3c94f8f9d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+237,307cd623-a1d8-4be4-a0cf-a5100206f597,Pending_Approval,307cd623-a1d8-4be4-a0cf-a5100206f597,Pending_Approval,1,Normal: Marked duplicates as Rejected
+238,07f35b26-c4fa-47b2-89aa-76c53e6b208c,Pending_Approval,07f35b26-c4fa-47b2-89aa-76c53e6b208c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+239,eb2db3fb-feff-4bf1-8d2e-aee7efafe3aa,Pending_Approval,eb2db3fb-feff-4bf1-8d2e-aee7efafe3aa,Pending_Approval,0,Normal: Marked duplicates as Rejected
+240,083b70fd-44bf-470e-9069-c3f31251aaf4,Pending_Approval,083b70fd-44bf-470e-9069-c3f31251aaf4,Pending_Approval,0,Normal: Marked duplicates as Rejected
+241,edf544c8-c2b9-4cde-b3b6-2c954193065f,Pending_Approval,edf544c8-c2b9-4cde-b3b6-2c954193065f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+242,7e7d328e-34dc-4778-bcc4-eaf60180c203,Pending_Approval,7e7d328e-34dc-4778-bcc4-eaf60180c203,Pending_Approval,0,Normal: Marked duplicates as Rejected
+243,0db8aa7b-94ef-407d-bb5a-cd5af5dc33fc,Pending_Approval,0db8aa7b-94ef-407d-bb5a-cd5af5dc33fc,Pending_Approval,0,Normal: Marked duplicates as Rejected
+244,13c611fd-aeb0-4ee4-927c-f99aab9c6efc,Pending_Approval,13c611fd-aeb0-4ee4-927c-f99aab9c6efc,Pending_Approval,1,Normal: Marked duplicates as Rejected
+245,82811276-7874-4131-927e-cbd008b20609,Pending_Approval,82811276-7874-4131-927e-cbd008b20609,Pending_Approval,0,Normal: Marked duplicates as Rejected
+246,4113aa2f-0e7d-4475-935d-8dfc86b98b5d,Rejected,3df2a426-d18f-4024-8516-54795fb2496e,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+247,d9ec8ced-fefd-4cd7-a118-63e224b27cbe,Pending_Approval,d9ec8ced-fefd-4cd7-a118-63e224b27cbe,Pending_Approval,0,Normal: Marked duplicates as Rejected
+248,fe26e828-befb-4c77-b9f5-75c4f105a11b,Pending_Approval,fe26e828-befb-4c77-b9f5-75c4f105a11b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+249,58256fa1-316b-40d5-8522-1580bd5ece79,Pending_Approval,58256fa1-316b-40d5-8522-1580bd5ece79,Pending_Approval,0,Normal: Marked duplicates as Rejected
+250,6f3ac2ee-b70f-4335-b67f-bc61d1fb710c,Pending_Approval,6f3ac2ee-b70f-4335-b67f-bc61d1fb710c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+251,803ed10e-8cdc-41e5-9f9a-5caba5280557,Pending_Approval,803ed10e-8cdc-41e5-9f9a-5caba5280557,Pending_Approval,0,Normal: Marked duplicates as Rejected
+252,f30a1d85-1ed9-4bb1-b51e-4f5bcb2e47c0,Pending_Approval,f30a1d85-1ed9-4bb1-b51e-4f5bcb2e47c0,Pending_Approval,1,Normal: Marked duplicates as Rejected
+253,823d6369-55f1-4211-a365-09928c64975c,Rejected,823d6369-55f1-4211-a365-09928c64975c,Rejected,0,Normal: Marked duplicates as Rejected
+254,2acf20dc-d56e-4af5-b61e-c064046bea8b,Pending_Approval,2acf20dc-d56e-4af5-b61e-c064046bea8b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+255,f37bd989-fb9a-4e44-aff6-fc28c5eb8347,Pending_Approval,f37bd989-fb9a-4e44-aff6-fc28c5eb8347,Pending_Approval,0,Normal: Marked duplicates as Rejected
+256,ec7292b2-085c-4a75-844e-30e44ea7469f,Pending_Approval,ec7292b2-085c-4a75-844e-30e44ea7469f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+257,defb6339-9e4d-4582-a3f3-1dfdb14aa70a,Pending_Approval,defb6339-9e4d-4582-a3f3-1dfdb14aa70a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+258,c57f87a3-559c-4b76-bb78-a1525d7f0bdb,Rejected,c57f87a3-559c-4b76-bb78-a1525d7f0bdb,Rejected,0,Normal: Marked duplicates as Rejected
+259,55966c9d-cd50-4642-ac79-8fea593da044,Pending_Approval,55966c9d-cd50-4642-ac79-8fea593da044,Pending_Approval,0,Normal: Marked duplicates as Rejected
+260,008808ef-c2f7-4844-acc8-80b83dd4a39a,Rejected,0f9a9e25-3385-481d-96d6-ab3514948214,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+261,431c81b6-5fda-4b93-ae41-54d70a4d3587,Pending_Approval,431c81b6-5fda-4b93-ae41-54d70a4d3587,Pending_Approval,0,Normal: Marked duplicates as Rejected
+262,00ae5f63-2df5-4379-80e9-32ae793342a5,Pending_Approval,00ae5f63-2df5-4379-80e9-32ae793342a5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+263,141fa8c8-e9ae-4fe6-871e-9ce77d7761ec,Rejected,1a6ee089-270f-4118-9239-d3b711ec9d6f,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+264,0fb7a4d8-db22-409b-b225-7197953a144a,Rejected,c12b3cb8-2bdd-4744-b550-085c2acd87d6,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+265,d43b7abf-b7dd-4666-b95b-5355f6259517,Pending_Approval,d43b7abf-b7dd-4666-b95b-5355f6259517,Pending_Approval,0,Normal: Marked duplicates as Rejected
+266,ac3dec18-2b1a-4e4a-800c-767add80b8b9,Pending_Approval,ac3dec18-2b1a-4e4a-800c-767add80b8b9,Pending_Approval,0,Normal: Marked duplicates as Rejected
+267,98d99189-a34c-4b4b-acec-2520e691f516,Pending_Approval,98d99189-a34c-4b4b-acec-2520e691f516,Pending_Approval,0,Normal: Marked duplicates as Rejected
+268,14625185-c214-4efd-9efd-4d83b11dd83c,Rejected,bee81187-97a1-4d24-99de-ef1e026c511a,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+269,40fc5a87-7332-43eb-88aa-1075d569dea6,Pending_Approval,40fc5a87-7332-43eb-88aa-1075d569dea6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+270,16aa5752-7546-4392-a65c-6d268219fa3d,Pending_Approval,16aa5752-7546-4392-a65c-6d268219fa3d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+271,9604081c-c658-4675-90ec-6970983fb2ae,Pending_Approval,9604081c-c658-4675-90ec-6970983fb2ae,Pending_Approval,0,Normal: Marked duplicates as Rejected
+272,bb6a5154-7cb0-4d90-a7f2-2eba84a8ffaa,Pending_Approval,bb6a5154-7cb0-4d90-a7f2-2eba84a8ffaa,Pending_Approval,0,Normal: Marked duplicates as Rejected
+273,73c68aa4-4cdd-404d-be6a-bcc37aefff96,Pending_Approval,73c68aa4-4cdd-404d-be6a-bcc37aefff96,Pending_Approval,0,Normal: Marked duplicates as Rejected
+274,a49d102a-e56a-456c-bc75-085be0e656c8,Pending_Approval,a49d102a-e56a-456c-bc75-085be0e656c8,Pending_Approval,1,Normal: Marked duplicates as Rejected
+275,a7309c3c-2805-487c-a4fb-c770cdb526be,Pending_Approval,a7309c3c-2805-487c-a4fb-c770cdb526be,Pending_Approval,0,Normal: Marked duplicates as Rejected
+276,fe455bfc-e11a-4159-bbe0-2176f79cb811,Rejected,a00a8ffa-8f48-40c1-9b55-157e141bba15,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+277,82519cee-1108-4268-8530-579860590cb4,Pending_Approval,82519cee-1108-4268-8530-579860590cb4,Pending_Approval,1,Normal: Marked duplicates as Rejected
+278,97c46e74-ee32-4f44-972e-915642a8d15f,Pending_Approval,97c46e74-ee32-4f44-972e-915642a8d15f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+279,66bd5090-dc42-47a2-b0aa-6adf9372ed66,Rejected,de9f1152-4eac-4901-94fc-d5d47e3935a7,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+280,7bbb8013-1a51-4f7f-abf8-4e7fc00f3528,Rejected,7bbb8013-1a51-4f7f-abf8-4e7fc00f3528,Rejected,0,Normal: Marked duplicates as Rejected
+281,8fb2bd21-2b2c-4bc4-95eb-9a720419459a,Rejected,e201a595-3590-4a2a-916d-fe62e9922c8d,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+282,a0d11552-02aa-4e82-937d-72e68e9c4d40,Pending_Approval,a0d11552-02aa-4e82-937d-72e68e9c4d40,Pending_Approval,1,Normal: Marked duplicates as Rejected
+283,3df404e5-fe11-4c68-bed6-c43f0aa8383b,Pending_Approval,3df404e5-fe11-4c68-bed6-c43f0aa8383b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+284,8ed5802e-8db7-428b-8691-da20a58a4564,Rejected,270e4344-5ab5-483b-a412-b4fd73f10bbf,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+285,9103bf29-2c71-4e48-bd89-025daba0f09a,Pending_Approval,9103bf29-2c71-4e48-bd89-025daba0f09a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+286,9bffbdb0-399d-47af-a392-bec046589bc5,Rejected,9bffbdb0-399d-47af-a392-bec046589bc5,Rejected,0,Normal: Marked duplicates as Rejected
+287,ed673292-54ff-42b3-b21b-1087c8e9d763,Pending_Approval,ed673292-54ff-42b3-b21b-1087c8e9d763,Pending_Approval,1,Normal: Marked duplicates as Rejected
+288,17f97e02-1ab8-440a-af74-78a8e5bf5f9e,Pending_Approval,17f97e02-1ab8-440a-af74-78a8e5bf5f9e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+289,7cf0782c-580d-489d-b695-6ee4a2093c5d,Rejected,7cf0782c-580d-489d-b695-6ee4a2093c5d,Rejected,0,Normal: Marked duplicates as Rejected
+290,4bb23970-ecdf-42d0-8dde-7c3567229c95,Pending_Approval,4bb23970-ecdf-42d0-8dde-7c3567229c95,Pending_Approval,0,Normal: Marked duplicates as Rejected
+291,86a85ff6-217d-423a-962f-c4b552589b49,Pending_Approval,86a85ff6-217d-423a-962f-c4b552589b49,Pending_Approval,1,Normal: Marked duplicates as Rejected
+292,c39295b1-efdc-44d5-ac03-02c302036b53,Pending_Approval,c39295b1-efdc-44d5-ac03-02c302036b53,Pending_Approval,0,Normal: Marked duplicates as Rejected
+293,bd5b5b62-bb4e-43b4-a529-54bc9ecc39e1,Pending_Approval,bd5b5b62-bb4e-43b4-a529-54bc9ecc39e1,Pending_Approval,1,Normal: Marked duplicates as Rejected
+294,514b5e07-b06e-4ed7-b32f-b209eee6611b,Pending_Approval,514b5e07-b06e-4ed7-b32f-b209eee6611b,Pending_Approval,1,Normal: Marked duplicates as Rejected
+295,6cc31268-b328-4e54-9956-f030db27c617,Rejected,6cc31268-b328-4e54-9956-f030db27c617,Rejected,0,Normal: Marked duplicates as Rejected
+296,a9188a57-14cb-41cf-aa80-2c6dfdd93b32,Rejected,23b82bd7-99bf-41a9-a29a-cc05f3017caa,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+297,188c4b7b-8c0d-45ca-8e77-6282a409927a,Rejected,188c4b7b-8c0d-45ca-8e77-6282a409927a,Rejected,0,Normal: Marked duplicates as Rejected
+298,6d30d041-2765-419e-8ca6-a5b0fb7e87b8,Rejected,483ba054-97a9-4e11-bec1-fe7c14403525,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+299,5b77f8db-78d5-4dd0-8e45-f390341fe4e3,Pending_Approval,5b77f8db-78d5-4dd0-8e45-f390341fe4e3,Pending_Approval,0,Normal: Marked duplicates as Rejected
+300,6c57d49c-5690-4020-9f2a-06062171816d,Rejected,94de020a-087b-4781-afd8-cf661115c91d,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+301,7a319491-de0d-48ae-ac45-3d89cf0bcf0d,Pending_Approval,7a319491-de0d-48ae-ac45-3d89cf0bcf0d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+302,3c51b2d9-c47c-44c3-9544-da3387fa7d16,Pending_Approval,3c51b2d9-c47c-44c3-9544-da3387fa7d16,Pending_Approval,0,Normal: Marked duplicates as Rejected
+303,5102ece0-c285-4818-852b-5306bc6bea83,Pending_Approval,5102ece0-c285-4818-852b-5306bc6bea83,Pending_Approval,0,Normal: Marked duplicates as Rejected
+304,7924d634-33ea-4e41-b783-3335b16c62fb,Rejected,5095363f-5edb-459b-ab21-f3e31220179e,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+305,b31e05ec-489f-44d7-8230-f2bb533f9f2e,Rejected,b31e05ec-489f-44d7-8230-f2bb533f9f2e,Rejected,0,Normal: Marked duplicates as Rejected
+306,36142959-c2ff-4252-841e-59af8aa379c6,Pending_Approval,36142959-c2ff-4252-841e-59af8aa379c6,Pending_Approval,1,Normal: Marked duplicates as Rejected
+307,09cb570d-7a83-44bc-81a5-5e2f90c51e96,Pending_Approval,09cb570d-7a83-44bc-81a5-5e2f90c51e96,Pending_Approval,0,Normal: Marked duplicates as Rejected
+308,35505b33-4ca6-4b84-93d3-bba2a2deaa24,Pending_Approval,35505b33-4ca6-4b84-93d3-bba2a2deaa24,Pending_Approval,0,Normal: Marked duplicates as Rejected
+309,f9930b11-8a2d-459e-9e5d-94a774f89e72,Pending_Approval,f9930b11-8a2d-459e-9e5d-94a774f89e72,Pending_Approval,0,Normal: Marked duplicates as Rejected
+310,17f5e6b4-fb58-4c81-9ce3-420e8eef7998,Pending_Approval,17f5e6b4-fb58-4c81-9ce3-420e8eef7998,Pending_Approval,0,Normal: Marked duplicates as Rejected
+311,533a32eb-a081-46bc-ba48-dce5d27d2d56,Pending_Approval,533a32eb-a081-46bc-ba48-dce5d27d2d56,Pending_Approval,0,Normal: Marked duplicates as Rejected
+312,4d978e23-3793-4566-a7a8-d1e8da1c280f,Pending_Approval,4d978e23-3793-4566-a7a8-d1e8da1c280f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+313,67869a3c-1890-41f4-a229-80dd3d3cb852,Rejected,67869a3c-1890-41f4-a229-80dd3d3cb852,Rejected,0,Normal: Marked duplicates as Rejected
+314,cfad9bcd-26e5-4c34-8b48-c0cdb5e0311f,Pending_Approval,cfad9bcd-26e5-4c34-8b48-c0cdb5e0311f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+315,4fee4100-0d9c-435f-b93a-d0b9bc8f723e,Pending_Approval,4fee4100-0d9c-435f-b93a-d0b9bc8f723e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+316,1dcc9f17-6c32-4e58-8bab-552380f0d5c1,Pending_Approval,1dcc9f17-6c32-4e58-8bab-552380f0d5c1,Pending_Approval,0,Normal: Marked duplicates as Rejected
+317,d6e23eb3-2fee-4b49-8a5b-882893929385,Pending_Approval,d6e23eb3-2fee-4b49-8a5b-882893929385,Pending_Approval,1,Normal: Marked duplicates as Rejected
+318,bee92fe0-09fe-4860-bb89-9382d1f590a5,Pending_Approval,bee92fe0-09fe-4860-bb89-9382d1f590a5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+319,dd1586d2-4bbf-4f5f-8a85-03230e545b07,Pending_Approval,dd1586d2-4bbf-4f5f-8a85-03230e545b07,Pending_Approval,1,Normal: Marked duplicates as Rejected
+320,943a2c25-e950-43c6-947d-40b05e40eb12,Pending_Approval,943a2c25-e950-43c6-947d-40b05e40eb12,Pending_Approval,0,Normal: Marked duplicates as Rejected
+321,9a5c405b-801e-4023-98f9-4d879ab72b3f,Pending_Approval,9a5c405b-801e-4023-98f9-4d879ab72b3f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+322,28578a67-cc81-47de-a1e1-ca3600ef2d4a,Rejected,28578a67-cc81-47de-a1e1-ca3600ef2d4a,Rejected,0,Normal: Marked duplicates as Rejected
+323,6e51091e-c304-40ed-bc18-5fd341e18510,Pending_Approval,6e51091e-c304-40ed-bc18-5fd341e18510,Pending_Approval,0,Normal: Marked duplicates as Rejected
+324,77944102-bb40-42a1-b6a7-27dad1d60a23,Rejected,c1b02c07-2298-41de-b11a-e43523a7e8bf,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+325,881c8a47-4b86-47f9-bce4-83ac8a419725,Pending_Approval,881c8a47-4b86-47f9-bce4-83ac8a419725,Pending_Approval,1,Normal: Marked duplicates as Rejected
+326,e8700487-e65c-4dbb-abc8-4e05fc09a93f,Pending_Approval,e8700487-e65c-4dbb-abc8-4e05fc09a93f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+327,90ac34fb-d3eb-4348-a857-07e7e7d17c27,Pending_Approval,90ac34fb-d3eb-4348-a857-07e7e7d17c27,Pending_Approval,0,Normal: Marked duplicates as Rejected
+328,d4be88ff-3ca2-48ae-97f6-44e34da80a67,Pending_Approval,d4be88ff-3ca2-48ae-97f6-44e34da80a67,Pending_Approval,0,Normal: Marked duplicates as Rejected
+329,f5585923-b6a4-433f-b6b7-715245732183,Pending_Approval,f5585923-b6a4-433f-b6b7-715245732183,Pending_Approval,0,Normal: Marked duplicates as Rejected
+330,5836b528-3b92-4fa8-b0f8-1cef9760923d,Pending_Approval,5836b528-3b92-4fa8-b0f8-1cef9760923d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+331,551187f9-e170-4309-80eb-d6000091dde7,Pending_Approval,551187f9-e170-4309-80eb-d6000091dde7,Pending_Approval,1,Normal: Marked duplicates as Rejected
+332,cbd3c249-1b8a-4086-966e-7ae335011a75,Rejected,cbd3c249-1b8a-4086-966e-7ae335011a75,Rejected,0,Normal: Marked duplicates as Rejected
+333,2d2dc791-5792-43bb-9495-58556454aa3a,Pending_Approval,2d2dc791-5792-43bb-9495-58556454aa3a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+334,c5b45c17-f5b6-48d5-90ad-18387223cb0f,Pending_Approval,c5b45c17-f5b6-48d5-90ad-18387223cb0f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+335,a7bd5d09-84bc-4c15-ae19-3c47f2fbaca5,Pending_Approval,a7bd5d09-84bc-4c15-ae19-3c47f2fbaca5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+336,d5ff295a-1d13-40ee-8ecd-0d9c4673526d,Pending_Approval,d5ff295a-1d13-40ee-8ecd-0d9c4673526d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+337,d311ec85-df9e-441b-a730-8e4b066bd4e6,Pending_Approval,d311ec85-df9e-441b-a730-8e4b066bd4e6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+338,bcd34dba-4763-445b-aa9a-0ce68b742bc0,Pending_Approval,bcd34dba-4763-445b-aa9a-0ce68b742bc0,Pending_Approval,0,Normal: Marked duplicates as Rejected
+339,4b5b361d-bf3d-4c7a-916e-40791f58665d,Pending_Approval,4b5b361d-bf3d-4c7a-916e-40791f58665d,Pending_Approval,1,Normal: Marked duplicates as Rejected
+340,cddaa0ba-3f8f-44a5-906f-dbc1ab4ae327,Pending_Approval,cddaa0ba-3f8f-44a5-906f-dbc1ab4ae327,Pending_Approval,0,Normal: Marked duplicates as Rejected
+341,1e0089aa-cd5d-48db-afcc-02ba4a7f27be,Pending_Approval,1e0089aa-cd5d-48db-afcc-02ba4a7f27be,Pending_Approval,1,Normal: Marked duplicates as Rejected
+342,82a5e0c2-de33-4da6-92e4-df89b677fb67,Pending_Approval,82a5e0c2-de33-4da6-92e4-df89b677fb67,Pending_Approval,0,Normal: Marked duplicates as Rejected
+343,1b6d632d-583c-434e-88ce-2d15cb1815ee,Pending_Approval,1b6d632d-583c-434e-88ce-2d15cb1815ee,Pending_Approval,1,Normal: Marked duplicates as Rejected
+344,6aa972e1-1cfa-4e23-97e4-d46c933a32c7,Pending_Approval,6aa972e1-1cfa-4e23-97e4-d46c933a32c7,Pending_Approval,0,Normal: Marked duplicates as Rejected
+345,52aa7361-42da-4d8c-9235-5cc9f5092ec6,Rejected,55fb55ff-232d-46e0-b7a3-757c55efa968,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+346,eafa5239-5ed7-4b7f-9728-cf28b53fb179,Rejected,0fade4e5-4b5a-4f4c-bc55-865dbd32bbe1,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+347,30555885-3d96-4f1c-9c37-6112c70a6e63,Pending_Approval,30555885-3d96-4f1c-9c37-6112c70a6e63,Pending_Approval,0,Normal: Marked duplicates as Rejected
+348,58a598c6-09ec-4977-b486-b9361f601a9f,Pending_Approval,58a598c6-09ec-4977-b486-b9361f601a9f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+349,e5e37e51-f73a-439c-9a6c-a4f00d041f3b,Pending_Approval,e5e37e51-f73a-439c-9a6c-a4f00d041f3b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+350,baca89f3-f72d-4fd8-874e-21f2948fa183,Rejected,08467f9e-5922-4dbe-8864-acc4b5ced858,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+351,96bb8e34-2f19-418c-a51a-4267d1612e02,Pending_Approval,96bb8e34-2f19-418c-a51a-4267d1612e02,Pending_Approval,0,Normal: Marked duplicates as Rejected
+352,22b66703-208d-4a2d-bbe0-f6799808466c,Pending_Approval,22b66703-208d-4a2d-bbe0-f6799808466c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+353,58f7561b-a616-40d8-ab3c-842da372b2c8,Rejected,8ad8ae87-3bf9-4d1b-9d23-2c60755dbc39,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+354,c631d295-3bd9-4e0e-ad71-79cce0c75610,Pending_Approval,c631d295-3bd9-4e0e-ad71-79cce0c75610,Pending_Approval,1,Normal: Marked duplicates as Rejected
+355,5233b39a-f622-4679-8de9-61f2b93bb78e,Pending_Approval,5233b39a-f622-4679-8de9-61f2b93bb78e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+356,0ed56591-87d6-49d6-b7e3-52f9a5749dfc,Rejected,0ed56591-87d6-49d6-b7e3-52f9a5749dfc,Rejected,0,Normal: Marked duplicates as Rejected
+357,6e85174e-77b0-48a5-8c30-70c2952687f1,Rejected,a5532a56-f8d1-497c-b354-ed7038f61fa5,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+358,06205efd-5aa5-40bc-a66c-cd245c2c45e8,Pending_Approval,06205efd-5aa5-40bc-a66c-cd245c2c45e8,Pending_Approval,0,Normal: Marked duplicates as Rejected
+359,8e405769-7d4b-48b2-b1b9-7cbcc676c9bd,Pending_Approval,8e405769-7d4b-48b2-b1b9-7cbcc676c9bd,Pending_Approval,1,Normal: Marked duplicates as Rejected
+360,cf5d94f4-13c6-4b6d-8015-f2adb769ce1e,Pending_Approval,cf5d94f4-13c6-4b6d-8015-f2adb769ce1e,Pending_Approval,1,Normal: Marked duplicates as Rejected
+361,50fabf6f-c4ec-4cc9-b0ea-96fdd3878f27,Pending_Approval,50fabf6f-c4ec-4cc9-b0ea-96fdd3878f27,Pending_Approval,0,Normal: Marked duplicates as Rejected
+362,6ef05506-cfe0-4ccc-ab55-0d045c6c5741,Pending_Approval,6ef05506-cfe0-4ccc-ab55-0d045c6c5741,Pending_Approval,1,Normal: Marked duplicates as Rejected
+363,642e91e0-cb0b-401f-9199-1f88b3f5f86d,Pending_Approval,642e91e0-cb0b-401f-9199-1f88b3f5f86d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+364,583c9f97-2c84-40a4-9a5a-d70f6a2b58bb,Rejected,f38ee60d-a0c9-4a39-9040-6472026dda5d,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+365,b9d2fef1-b422-4dee-910f-49b4882cf5b1,Rejected,63f67a4e-c4c8-4ddf-a179-34d29ed8bb4e,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+366,f5ddb872-8e61-48b5-bfdc-3a57a8e83ece,Pending_Approval,f5ddb872-8e61-48b5-bfdc-3a57a8e83ece,Pending_Approval,0,Normal: Marked duplicates as Rejected
+367,897deff0-ee9c-4377-aa7b-fb0ef1f29654,Pending_Approval,897deff0-ee9c-4377-aa7b-fb0ef1f29654,Pending_Approval,0,Normal: Marked duplicates as Rejected
+368,da5bd7b9-98a5-411f-9243-7b38cd642933,Rejected,da5bd7b9-98a5-411f-9243-7b38cd642933,Rejected,0,Normal: Marked duplicates as Rejected
+369,9a28e945-c602-4675-a4a2-5338a5c65296,Pending_Approval,9a28e945-c602-4675-a4a2-5338a5c65296,Pending_Approval,0,Normal: Marked duplicates as Rejected
+370,aa7d5ffd-9da6-4d19-928d-170a215dc65b,Pending_Approval,aa7d5ffd-9da6-4d19-928d-170a215dc65b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+371,883b7ff2-ed97-43b3-bd8c-485b360dee2a,Pending_Approval,883b7ff2-ed97-43b3-bd8c-485b360dee2a,Pending_Approval,1,Normal: Marked duplicates as Rejected
+372,b582bcb8-c7be-4b09-a683-7904091cea8b,Pending_Approval,b582bcb8-c7be-4b09-a683-7904091cea8b,Pending_Approval,1,Normal: Marked duplicates as Rejected
+373,b5f9a6cb-c018-4e3d-b0cd-22d97956fccb,Pending_Approval,b5f9a6cb-c018-4e3d-b0cd-22d97956fccb,Pending_Approval,0,Normal: Marked duplicates as Rejected
+374,acf18312-6035-4e52-9184-87e1357cb9e7,Pending_Approval,acf18312-6035-4e52-9184-87e1357cb9e7,Pending_Approval,0,Normal: Marked duplicates as Rejected
+375,15257c41-7947-42d4-8a83-660176049bdf,Pending_Approval,15257c41-7947-42d4-8a83-660176049bdf,Pending_Approval,1,Normal: Marked duplicates as Rejected
+376,b73ad12f-8e20-44bd-bccc-a33edc74a47a,Pending_Approval,b73ad12f-8e20-44bd-bccc-a33edc74a47a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+377,672175c3-fa22-4c6a-8f87-5def65c8dad6,Pending_Approval,672175c3-fa22-4c6a-8f87-5def65c8dad6,Pending_Approval,1,Normal: Marked duplicates as Rejected
+378,5ef2de44-2006-4e68-897c-7bbf7cc5ebf5,Pending_Approval,5ef2de44-2006-4e68-897c-7bbf7cc5ebf5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+379,8ad50ddf-daa3-46dd-8492-25b31f84fc4c,Pending_Approval,8ad50ddf-daa3-46dd-8492-25b31f84fc4c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+380,9b267739-c08d-47b3-a4ff-e4b8d725aaa6,Rejected,ee50c108-96f3-4ea7-a4de-6dbe666a0f35,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+381,eaa83c9d-20d8-4013-9940-317b33ae1015,Pending_Approval,eaa83c9d-20d8-4013-9940-317b33ae1015,Pending_Approval,0,Normal: Marked duplicates as Rejected
+382,8d13e49f-721c-449f-9ad9-882048bfab40,Pending_Approval,8d13e49f-721c-449f-9ad9-882048bfab40,Pending_Approval,0,Normal: Marked duplicates as Rejected
+383,9f0af053-e4c4-4da0-a1c6-399878905f95,Pending_Approval,9f0af053-e4c4-4da0-a1c6-399878905f95,Pending_Approval,1,Normal: Marked duplicates as Rejected
+384,af246a01-4067-4c81-b149-b805d1431dd5,Pending_Approval,af246a01-4067-4c81-b149-b805d1431dd5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+385,17be71a5-d346-442a-a42d-cbd942003720,Pending_Approval,17be71a5-d346-442a-a42d-cbd942003720,Pending_Approval,0,Normal: Marked duplicates as Rejected
+386,a528d0c9-b8c9-4f64-ad5f-74ab36b80c36,Rejected,a528d0c9-b8c9-4f64-ad5f-74ab36b80c36,Rejected,0,Normal: Marked duplicates as Rejected
+387,0def927b-88dc-4ae6-94f9-72b7b81de474,Pending_Approval,0def927b-88dc-4ae6-94f9-72b7b81de474,Pending_Approval,0,Normal: Marked duplicates as Rejected
+388,eb4f208c-4f64-48af-8595-791cf8937850,Pending_Approval,eb4f208c-4f64-48af-8595-791cf8937850,Pending_Approval,1,Normal: Marked duplicates as Rejected
+389,52001b92-7b7f-41b1-a74d-f0c2225eea18,Rejected,3c66a247-60aa-49b5-a9a0-02a57f109b57,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+390,f95a41ee-f72b-43cb-8970-2833a6e26b58,Rejected,f95a41ee-f72b-43cb-8970-2833a6e26b58,Rejected,0,Normal: Marked duplicates as Rejected
+391,1dca109c-59a1-41e8-b007-d88426516540,Pending_Approval,1dca109c-59a1-41e8-b007-d88426516540,Pending_Approval,0,Normal: Marked duplicates as Rejected
+392,159df352-8ae3-4250-9373-589424202449,Pending_Approval,159df352-8ae3-4250-9373-589424202449,Pending_Approval,0,Normal: Marked duplicates as Rejected
+393,5aa3634c-67bb-4efe-a9fd-88b9cbc317e2,Rejected,5aa3634c-67bb-4efe-a9fd-88b9cbc317e2,Rejected,0,Normal: Marked duplicates as Rejected
+394,cf192723-bc7f-4b1f-91d6-a0c2881e76fc,Pending_Approval,cf192723-bc7f-4b1f-91d6-a0c2881e76fc,Pending_Approval,0,Normal: Marked duplicates as Rejected
+395,414a3e45-8295-40b7-8e5b-4c89ea4f4783,Pending_Approval,414a3e45-8295-40b7-8e5b-4c89ea4f4783,Pending_Approval,0,Normal: Marked duplicates as Rejected
+396,315c8286-aa94-4835-8009-e373ccceb036,Pending_Approval,315c8286-aa94-4835-8009-e373ccceb036,Pending_Approval,0,Normal: Marked duplicates as Rejected
+397,69474fb9-68ae-413d-99df-3de3b6f92b1b,Rejected,3ae98e6f-9d3c-4bb7-a43d-093ace421aa6,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+398,1445fba1-1c41-46a2-9461-43c3d1d79de0,Pending_Approval,1445fba1-1c41-46a2-9461-43c3d1d79de0,Pending_Approval,0,Normal: Marked duplicates as Rejected
+399,5c15f6a7-06bc-400a-b4c4-167e12bc91eb,Rejected,5c15f6a7-06bc-400a-b4c4-167e12bc91eb,Rejected,0,Normal: Marked duplicates as Rejected
+400,42be5b55-fe1d-494d-9e4e-1640c4bbb916,Pending_Approval,42be5b55-fe1d-494d-9e4e-1640c4bbb916,Pending_Approval,0,Normal: Marked duplicates as Rejected
+401,9cb8efc0-26ca-4858-b106-7f0fb64e374c,Pending_Approval,9cb8efc0-26ca-4858-b106-7f0fb64e374c,Pending_Approval,1,Normal: Marked duplicates as Rejected
+402,165519ba-68e1-45e9-9850-155915c3716e,Pending_Approval,165519ba-68e1-45e9-9850-155915c3716e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+403,49408369-0f24-423c-a9ee-920ac6cbb0f7,Pending_Approval,49408369-0f24-423c-a9ee-920ac6cbb0f7,Pending_Approval,1,Normal: Marked duplicates as Rejected
+404,60de0742-e629-4824-aef5-8cffdd8116cc,Rejected,251eb8ac-5310-4022-b2c0-cc360c3cbc63,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+405,efd349a1-0ae0-4dda-bbcd-3300866908a1,Pending_Approval,efd349a1-0ae0-4dda-bbcd-3300866908a1,Pending_Approval,0,Normal: Marked duplicates as Rejected
+406,da343a0d-ada2-4fc7-90a1-b98fd591e70d,Pending_Approval,da343a0d-ada2-4fc7-90a1-b98fd591e70d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+407,78a431b8-e74a-4f10-8588-ce3a36cacd8f,Pending_Approval,78a431b8-e74a-4f10-8588-ce3a36cacd8f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+408,207815b2-23ec-42a8-8d95-14e9314931a2,Pending_Approval,207815b2-23ec-42a8-8d95-14e9314931a2,Pending_Approval,1,Normal: Marked duplicates as Rejected
+409,55bb875a-2300-4af9-9e32-2fa658ed8ee7,Rejected,7ec6aec1-761b-460c-acf4-d76d54750f81,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+410,2064bd0a-f15e-4b09-a018-5a00b5e015c4,Pending_Approval,2064bd0a-f15e-4b09-a018-5a00b5e015c4,Pending_Approval,0,Normal: Marked duplicates as Rejected
+411,4a66da32-06ea-494d-8ec8-65c1cb595949,Pending_Approval,4a66da32-06ea-494d-8ec8-65c1cb595949,Pending_Approval,1,Normal: Marked duplicates as Rejected
+412,52c06f64-b031-40fb-831d-2de6797361fb,Pending_Approval,52c06f64-b031-40fb-831d-2de6797361fb,Pending_Approval,0,Normal: Marked duplicates as Rejected
+413,bcab20b8-109c-49d2-a853-f01ec3fd05e1,Rejected,bcab20b8-109c-49d2-a853-f01ec3fd05e1,Rejected,0,Normal: Marked duplicates as Rejected
+414,2f3564e1-736b-4817-8145-1645f1cf324a,Pending_Approval,2f3564e1-736b-4817-8145-1645f1cf324a,Pending_Approval,1,Normal: Marked duplicates as Rejected
+415,2055be35-d383-49c0-8d17-b9dd7b1f5623,Pending_Approval,2055be35-d383-49c0-8d17-b9dd7b1f5623,Pending_Approval,0,Normal: Marked duplicates as Rejected
+416,5f768c54-310b-4a6a-af10-77f38b6e3a39,Rejected,3e306baf-4ff5-4280-a2d2-52fc394d7cfd,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+417,10456641-42ed-4ec9-ae61-a72d44c1a03b,Pending_Approval,10456641-42ed-4ec9-ae61-a72d44c1a03b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+418,694f6cf9-8a7d-40a7-a26e-6a6e32f9bc10,Pending_Approval,694f6cf9-8a7d-40a7-a26e-6a6e32f9bc10,Pending_Approval,0,Normal: Marked duplicates as Rejected
+419,e72ad83d-0eea-403b-bd2b-78115918500b,Pending_Approval,e72ad83d-0eea-403b-bd2b-78115918500b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+420,aaa05114-d3ec-488c-ae7f-ce13f0f6c0fa,Pending_Approval,aaa05114-d3ec-488c-ae7f-ce13f0f6c0fa,Pending_Approval,0,Normal: Marked duplicates as Rejected
+421,b7407f41-fafd-4cdf-a315-aa7220710548,Pending_Approval,b7407f41-fafd-4cdf-a315-aa7220710548,Pending_Approval,0,Normal: Marked duplicates as Rejected
+422,88e59b40-9d49-4730-b1bd-b85cb077ae1a,Pending_Approval,88e59b40-9d49-4730-b1bd-b85cb077ae1a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+423,9d23c870-eb47-4338-b358-53952bb8a19d,Rejected,fe337bd3-cc87-497b-9fd7-9d4a20c3d5be,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+424,92f42e15-e058-4e35-b0c7-b3ce07091ec2,Pending_Approval,92f42e15-e058-4e35-b0c7-b3ce07091ec2,Pending_Approval,0,Normal: Marked duplicates as Rejected
+425,aa8de7e9-ae32-490a-8e0d-701661a207d6,Pending_Approval,aa8de7e9-ae32-490a-8e0d-701661a207d6,Pending_Approval,1,Normal: Marked duplicates as Rejected
+426,00388ec8-08f5-4ff1-84a1-c084337eca8f,Pending_Approval,00388ec8-08f5-4ff1-84a1-c084337eca8f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+427,054a0819-30be-4f79-8fe3-c7514dce7e66,Pending_Approval,054a0819-30be-4f79-8fe3-c7514dce7e66,Pending_Approval,0,Normal: Marked duplicates as Rejected
+428,4c5ada3d-735a-4f38-96ed-a6cc9cc564bd,Pending_Approval,4c5ada3d-735a-4f38-96ed-a6cc9cc564bd,Pending_Approval,0,Normal: Marked duplicates as Rejected
+429,aaa45e70-dcec-499d-be17-c0f5d79b8574,Pending_Approval,aaa45e70-dcec-499d-be17-c0f5d79b8574,Pending_Approval,0,Normal: Marked duplicates as Rejected
+430,bff43532-932d-40b3-bd65-aa2c3c8ec815,Pending_Approval,bff43532-932d-40b3-bd65-aa2c3c8ec815,Pending_Approval,0,Normal: Marked duplicates as Rejected
+431,9b774f0d-4c53-4d7c-9a33-3dd591c90ee1,Pending_Approval,9b774f0d-4c53-4d7c-9a33-3dd591c90ee1,Pending_Approval,0,Normal: Marked duplicates as Rejected
+432,630fa39d-2cbe-4db9-8249-3c4b061031da,Pending_Approval,630fa39d-2cbe-4db9-8249-3c4b061031da,Pending_Approval,0,Normal: Marked duplicates as Rejected
+433,0f8814b0-e817-4008-aff6-d5382e9b786b,Pending_Approval,0f8814b0-e817-4008-aff6-d5382e9b786b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+434,89c3868b-ed42-45af-a43c-02e4885ba998,Pending_Approval,89c3868b-ed42-45af-a43c-02e4885ba998,Pending_Approval,1,Normal: Marked duplicates as Rejected
+435,62f6ed94-3fdf-48b7-bcdb-cee4e79712c5,Pending_Approval,62f6ed94-3fdf-48b7-bcdb-cee4e79712c5,Pending_Approval,1,Normal: Marked duplicates as Rejected
+436,e7c965a6-d2a6-4588-95dd-d5315a83f5f7,Pending_Approval,e7c965a6-d2a6-4588-95dd-d5315a83f5f7,Pending_Approval,1,Normal: Marked duplicates as Rejected
+437,37eb7a78-f684-4ef5-918b-89b4f5fd4089,Rejected,084c2b1c-642f-42de-9035-f9813f6d3403,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+438,eac9cdb0-fedb-4e8b-b9ea-133c56ce2729,Pending_Approval,eac9cdb0-fedb-4e8b-b9ea-133c56ce2729,Pending_Approval,0,Normal: Marked duplicates as Rejected
+439,f1cde30a-649b-415e-81e1-bba9ecad810c,Pending_Approval,f1cde30a-649b-415e-81e1-bba9ecad810c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+440,ed4f7c70-f2c6-4c08-82b4-9c8d57f49137,Pending_Approval,ed4f7c70-f2c6-4c08-82b4-9c8d57f49137,Pending_Approval,0,Normal: Marked duplicates as Rejected
+441,f2e768d1-db77-4be9-9188-44392372c4c4,Pending_Approval,f2e768d1-db77-4be9-9188-44392372c4c4,Pending_Approval,0,Normal: Marked duplicates as Rejected
+442,da4c16d5-e863-4304-ac8a-0b882eac193a,Pending_Approval,da4c16d5-e863-4304-ac8a-0b882eac193a,Pending_Approval,1,Normal: Marked duplicates as Rejected
+443,0ef0e5ff-3a14-482f-a31a-c39c799af304,Pending_Approval,0ef0e5ff-3a14-482f-a31a-c39c799af304,Pending_Approval,0,Normal: Marked duplicates as Rejected
+444,b69e4021-9411-4e2b-81fb-dc2b52ee62f5,Pending_Approval,b69e4021-9411-4e2b-81fb-dc2b52ee62f5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+445,1ced8170-f8f2-4737-aa7d-b8e2fd9996d5,Pending_Approval,1ced8170-f8f2-4737-aa7d-b8e2fd9996d5,Pending_Approval,1,Normal: Marked duplicates as Rejected
+446,8d375ca7-312d-4dda-98a8-805fc6188df5,Pending_Approval,8d375ca7-312d-4dda-98a8-805fc6188df5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+447,e9ad03ff-535f-426b-876b-c585815b53a9,Pending_Approval,e9ad03ff-535f-426b-876b-c585815b53a9,Pending_Approval,0,Normal: Marked duplicates as Rejected
+448,99c8a4bd-e7f6-4903-bff9-3c8cbab61ab6,Pending_Approval,99c8a4bd-e7f6-4903-bff9-3c8cbab61ab6,Pending_Approval,1,Normal: Marked duplicates as Rejected
+449,ab6e13a6-3db1-4399-9c3b-9e06f0a0482b,Pending_Approval,ab6e13a6-3db1-4399-9c3b-9e06f0a0482b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+450,448dd5a8-734e-467f-857e-396b1b0aa8ac,Pending_Approval,448dd5a8-734e-467f-857e-396b1b0aa8ac,Pending_Approval,0,Normal: Marked duplicates as Rejected
+451,a67a19e8-59ec-41f1-9277-ccccdd1195c4,Rejected,edb31f11-2370-401b-9fe2-46bc3c19c268,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+452,c523d3c7-9256-406a-9a76-4e780642e395,Pending_Approval,c523d3c7-9256-406a-9a76-4e780642e395,Pending_Approval,0,Normal: Marked duplicates as Rejected
+453,237d17e3-374c-464b-b1c9-aa79a9962c64,Pending_Approval,237d17e3-374c-464b-b1c9-aa79a9962c64,Pending_Approval,1,Normal: Marked duplicates as Rejected
+454,38690f15-7019-4ff1-8774-72225cb9bd60,Rejected,38690f15-7019-4ff1-8774-72225cb9bd60,Rejected,0,Normal: Marked duplicates as Rejected
+455,fca4410f-ae46-4246-9ead-f6e4d737b214,Pending_Approval,fca4410f-ae46-4246-9ead-f6e4d737b214,Pending_Approval,0,Normal: Marked duplicates as Rejected
+456,2f1e4e45-84c6-41cb-9620-6908e2d64059,Pending_Approval,2f1e4e45-84c6-41cb-9620-6908e2d64059,Pending_Approval,0,Normal: Marked duplicates as Rejected
+457,a2641348-3851-4b70-acb4-e6a159ba76c8,Rejected,4b3e82d1-6083-48c6-9ccf-171d7130441e,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+458,3ad60fef-c1bf-476d-8c25-f9ce55237de0,Pending_Approval,3ad60fef-c1bf-476d-8c25-f9ce55237de0,Pending_Approval,0,Normal: Marked duplicates as Rejected
+459,deb192d2-958f-49ef-bb57-86cc30196aa4,Pending_Approval,deb192d2-958f-49ef-bb57-86cc30196aa4,Pending_Approval,0,Normal: Marked duplicates as Rejected
+460,c517bf1e-5ac2-4553-b7c4-ddf690a7c2fb,Rejected,c517bf1e-5ac2-4553-b7c4-ddf690a7c2fb,Rejected,0,Normal: Marked duplicates as Rejected
+461,07a19237-ed82-4058-a571-a7a01be2a544,Rejected,bccbf797-4201-46c2-9974-31834ef79a98,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+462,1e122c65-ab4f-47f9-8677-b1493e34152b,Rejected,1e122c65-ab4f-47f9-8677-b1493e34152b,Rejected,0,Normal: Marked duplicates as Rejected
+463,c792612c-b398-4a89-befc-11bac51b55e9,Pending_Approval,c792612c-b398-4a89-befc-11bac51b55e9,Pending_Approval,1,Normal: Marked duplicates as Rejected
+464,afe48118-235a-4155-9b6e-4b8ce604469c,Pending_Approval,afe48118-235a-4155-9b6e-4b8ce604469c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+465,88341156-886a-49f4-b6aa-4f56de1d9374,Pending_Approval,88341156-886a-49f4-b6aa-4f56de1d9374,Pending_Approval,1,Normal: Marked duplicates as Rejected
+466,cecd0a91-80fb-4e4f-ae92-84f08e089e42,Pending_Approval,cecd0a91-80fb-4e4f-ae92-84f08e089e42,Pending_Approval,0,Normal: Marked duplicates as Rejected
+467,776619f2-897c-42bf-bc37-274b9338dd3b,Rejected,776619f2-897c-42bf-bc37-274b9338dd3b,Rejected,0,Normal: Marked duplicates as Rejected
+468,bd61ff20-6de5-4d0f-a631-6a01f285acdc,Pending_Approval,bd61ff20-6de5-4d0f-a631-6a01f285acdc,Pending_Approval,0,Normal: Marked duplicates as Rejected
+469,b7ec6e8e-8983-42c1-8e62-b465264c6589,Rejected,b7ec6e8e-8983-42c1-8e62-b465264c6589,Rejected,0,Normal: Marked duplicates as Rejected
+470,acd49496-1252-4d00-aa5e-1c37f96e46d4,Pending_Approval,acd49496-1252-4d00-aa5e-1c37f96e46d4,Pending_Approval,0,Normal: Marked duplicates as Rejected
+471,4673f93c-0fc5-47c6-acd0-ad4161813801,Rejected,4673f93c-0fc5-47c6-acd0-ad4161813801,Rejected,0,Normal: Marked duplicates as Rejected
+472,7525724f-baba-42b6-ab97-33ec5624a288,Pending_Approval,7525724f-baba-42b6-ab97-33ec5624a288,Pending_Approval,0,Normal: Marked duplicates as Rejected
+473,af786a81-a878-4a87-8b04-85e0867f3e9a,Pending_Approval,af786a81-a878-4a87-8b04-85e0867f3e9a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+474,17599a0f-a172-4d86-8dbe-f161a359b6ad,Pending_Approval,17599a0f-a172-4d86-8dbe-f161a359b6ad,Pending_Approval,0,Normal: Marked duplicates as Rejected
+475,0e39ca40-fa7a-438f-8d4d-d8ad6ae95241,Rejected,74e0fb6f-bea4-4070-a303-4677457ba064,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+476,38fab220-247b-4e90-a148-a598db4ccb6f,Pending_Approval,38fab220-247b-4e90-a148-a598db4ccb6f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+477,efd1935b-e683-40bb-b528-884c39556f7a,Rejected,f9fe4b5e-d831-43f3-ac6f-bb43d9cfef9a,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+478,44efd595-44ab-4b34-a756-0c9723384c8b,Pending_Approval,44efd595-44ab-4b34-a756-0c9723384c8b,Pending_Approval,1,Normal: Marked duplicates as Rejected
+479,b407a542-131a-4930-b861-51295d987bf8,Pending_Approval,b407a542-131a-4930-b861-51295d987bf8,Pending_Approval,1,Normal: Marked duplicates as Rejected
+480,12612830-e201-498f-96f4-11fe085f467f,Pending_Approval,12612830-e201-498f-96f4-11fe085f467f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+481,5e8bdb70-9678-4d53-8863-c15ea387b751,Rejected,5e8bdb70-9678-4d53-8863-c15ea387b751,Rejected,0,Normal: Marked duplicates as Rejected
+482,7e59ece2-263c-471b-b480-fc0e9d561bbd,Pending_Approval,7e59ece2-263c-471b-b480-fc0e9d561bbd,Pending_Approval,0,Normal: Marked duplicates as Rejected
+483,35afda84-cb9b-4ce9-aedf-27daeef83d3c,Rejected,35afda84-cb9b-4ce9-aedf-27daeef83d3c,Rejected,0,Normal: Marked duplicates as Rejected
+484,9fddf237-c031-457f-9be0-cb8f822311e4,Pending_Approval,9fddf237-c031-457f-9be0-cb8f822311e4,Pending_Approval,1,Normal: Marked duplicates as Rejected
+485,89f14d74-6fbb-4fb2-8e92-5f08de11ddc8,Pending_Approval,89f14d74-6fbb-4fb2-8e92-5f08de11ddc8,Pending_Approval,0,Normal: Marked duplicates as Rejected
+486,d378c698-8475-4f0c-b539-4328a8926014,Pending_Approval,d378c698-8475-4f0c-b539-4328a8926014,Pending_Approval,0,Normal: Marked duplicates as Rejected
+487,2f6ede87-2fcb-404d-b5fe-7d4fe441c642,Rejected,6a6d039c-4450-457d-a3d6-965fa9384b45,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+488,934f964c-b6e1-434e-8bb3-d66a172a3649,Pending_Approval,934f964c-b6e1-434e-8bb3-d66a172a3649,Pending_Approval,0,Normal: Marked duplicates as Rejected
+489,7b67296a-e3f8-4bab-986c-c68b006a2102,Pending_Approval,7b67296a-e3f8-4bab-986c-c68b006a2102,Pending_Approval,1,Normal: Marked duplicates as Rejected
+490,97c0ff1b-6806-49b0-a598-56ade4a0c930,Pending_Approval,97c0ff1b-6806-49b0-a598-56ade4a0c930,Pending_Approval,0,Normal: Marked duplicates as Rejected
+491,a4bcbb41-a43e-4472-b60a-5d222c50bd43,Rejected,fcb485f3-50f5-4e4c-89e8-704573490c61,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+492,7440c2fc-05d7-4b2c-bc60-b7fe58c044ea,Rejected,7440c2fc-05d7-4b2c-bc60-b7fe58c044ea,Rejected,0,Normal: Marked duplicates as Rejected
+493,ac82e2b7-c450-4064-8260-e8f0bb9fa0c6,Pending_Approval,ac82e2b7-c450-4064-8260-e8f0bb9fa0c6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+494,4f1c3e80-6c9f-4e8d-aa66-edd4f9672a8e,Pending_Approval,4f1c3e80-6c9f-4e8d-aa66-edd4f9672a8e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+495,4e21059e-5021-46b5-a38d-1c2988602d2c,Rejected,4e21059e-5021-46b5-a38d-1c2988602d2c,Rejected,0,Normal: Marked duplicates as Rejected
+496,95bea6bc-d449-4383-8141-74023f6dac79,Rejected,51ab8243-b49a-49f4-bcd6-df3432831dbe,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+497,92b5efba-745b-4048-b945-986a09d77245,Pending_Approval,92b5efba-745b-4048-b945-986a09d77245,Pending_Approval,0,Normal: Marked duplicates as Rejected
+498,769ded16-2312-43ae-a77d-1a67607cb893,Pending_Approval,769ded16-2312-43ae-a77d-1a67607cb893,Pending_Approval,0,Normal: Marked duplicates as Rejected
+499,d2d6bbae-fe5c-44dd-8c81-4ea643740231,Rejected,b129be8f-1263-463b-ab1c-1f752460c6a8,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+500,e117b1f6-68bc-4e61-bed4-d93ef01e3831,Pending_Approval,e117b1f6-68bc-4e61-bed4-d93ef01e3831,Pending_Approval,0,Normal: Marked duplicates as Rejected
+501,a1b66e9c-a254-4f5b-acea-9ecaa912d341,Rejected,896f74c3-11da-491b-bcd2-5388b871a654,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+502,a365cf6e-2f91-45fd-bac6-54df5b6b6ab5,Pending_Approval,a365cf6e-2f91-45fd-bac6-54df5b6b6ab5,Pending_Approval,1,Normal: Marked duplicates as Rejected
+503,562d4fa6-9f4e-4932-9e62-e2881320d157,Pending_Approval,562d4fa6-9f4e-4932-9e62-e2881320d157,Pending_Approval,1,Normal: Marked duplicates as Rejected
+504,96ad6e92-fb3c-469b-ac4d-4210fc530353,Rejected,96ad6e92-fb3c-469b-ac4d-4210fc530353,Rejected,0,Normal: Marked duplicates as Rejected
+505,c59f8965-1c80-4f7b-b4d1-0bf60811a038,Pending_Approval,c59f8965-1c80-4f7b-b4d1-0bf60811a038,Pending_Approval,1,Normal: Marked duplicates as Rejected
+506,35969aeb-b24d-428c-97d2-07f6901c1f66,Pending_Approval,35969aeb-b24d-428c-97d2-07f6901c1f66,Pending_Approval,0,Normal: Marked duplicates as Rejected
+507,990b1a9d-c3a8-4fec-80f8-ebf55bdc77bb,Pending_Approval,990b1a9d-c3a8-4fec-80f8-ebf55bdc77bb,Pending_Approval,0,Normal: Marked duplicates as Rejected
+508,fb17ca11-dd28-4ded-975e-ac9987c607ec,Pending_Approval,fb17ca11-dd28-4ded-975e-ac9987c607ec,Pending_Approval,0,Normal: Marked duplicates as Rejected
+509,f18d0aa8-1a56-470d-a248-b7a8cfd2564a,Pending_Approval,f18d0aa8-1a56-470d-a248-b7a8cfd2564a,Pending_Approval,1,Normal: Marked duplicates as Rejected
+510,a3099716-06fc-4fe8-a902-c1d4595dbb43,Pending_Approval,a3099716-06fc-4fe8-a902-c1d4595dbb43,Pending_Approval,1,Normal: Marked duplicates as Rejected
+511,e6bc89b4-31a4-4543-9de8-205cc0b1fd5f,Rejected,7dfd4b7a-2cc8-4335-a3fa-e1eb2cca4a1b,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+512,3adc5644-ab55-463b-91e7-8a728dfd4abb,Pending_Approval,3adc5644-ab55-463b-91e7-8a728dfd4abb,Pending_Approval,0,Normal: Marked duplicates as Rejected
+513,0d81fe28-ba9b-41d8-a0ae-c91fd4d06086,Pending_Approval,0d81fe28-ba9b-41d8-a0ae-c91fd4d06086,Pending_Approval,1,Normal: Marked duplicates as Rejected
+514,371ade63-a9c2-47ac-ae42-1940084bc1e9,Pending_Approval,371ade63-a9c2-47ac-ae42-1940084bc1e9,Pending_Approval,0,Normal: Marked duplicates as Rejected
+515,3c0e2d2c-59a5-4771-9581-000075c624d6,Rejected,cd78ed9b-f3ed-4503-9f8c-743f7f11f279,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+516,18465121-34d4-437b-a6b0-232caae3f0df,Pending_Approval,18465121-34d4-437b-a6b0-232caae3f0df,Pending_Approval,0,Normal: Marked duplicates as Rejected
+517,d7dfa7ac-f1dc-4f14-8422-14c78f11fc89,Pending_Approval,d7dfa7ac-f1dc-4f14-8422-14c78f11fc89,Pending_Approval,1,Normal: Marked duplicates as Rejected
+518,6295f5cb-5687-4827-a666-808235b47837,Pending_Approval,6295f5cb-5687-4827-a666-808235b47837,Pending_Approval,0,Normal: Marked duplicates as Rejected
+519,127e15a7-070c-425d-8ce1-184a53c53e27,Pending_Approval,127e15a7-070c-425d-8ce1-184a53c53e27,Pending_Approval,0,Normal: Marked duplicates as Rejected
+520,bf84a365-de14-482f-b1ba-aca2fa466678,Pending_Approval,bf84a365-de14-482f-b1ba-aca2fa466678,Pending_Approval,0,Normal: Marked duplicates as Rejected
+521,92c913c1-3aa5-49a6-a355-1d891bfbbd68,Pending_Approval,92c913c1-3aa5-49a6-a355-1d891bfbbd68,Pending_Approval,1,Normal: Marked duplicates as Rejected
+522,8196af1c-8b5e-4b6e-b7a9-1d400256a4af,Rejected,39861d81-7fbc-4417-902c-5c337bc73316,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+523,3ac5086a-b982-49e8-aa0c-875882c9f16f,Rejected,3ac5086a-b982-49e8-aa0c-875882c9f16f,Rejected,0,Normal: Marked duplicates as Rejected
+524,7d6d9c1b-06b8-4b76-a0b0-7ff3b2e3d7fc,Pending_Approval,7d6d9c1b-06b8-4b76-a0b0-7ff3b2e3d7fc,Pending_Approval,0,Normal: Marked duplicates as Rejected
+525,23024cb3-240f-4b87-a29c-34ee42b74a9a,Pending_Approval,23024cb3-240f-4b87-a29c-34ee42b74a9a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+526,d89e18ac-7e93-4d67-8399-3caf6b7d5273,Pending_Approval,d89e18ac-7e93-4d67-8399-3caf6b7d5273,Pending_Approval,1,Normal: Marked duplicates as Rejected
+527,49156f2d-a575-48b1-b1d0-479f0be8f66d,Pending_Approval,49156f2d-a575-48b1-b1d0-479f0be8f66d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+528,1e3bffe7-8226-4b2a-bd43-57b9bc13dadf,Pending_Approval,1e3bffe7-8226-4b2a-bd43-57b9bc13dadf,Pending_Approval,0,Normal: Marked duplicates as Rejected
+529,e6a77717-292e-4172-abcc-860868fa3794,Pending_Approval,e6a77717-292e-4172-abcc-860868fa3794,Pending_Approval,1,Normal: Marked duplicates as Rejected
+530,f52473c4-29d1-4906-b32f-5638cd5e1769,Pending_Approval,f52473c4-29d1-4906-b32f-5638cd5e1769,Pending_Approval,1,Normal: Marked duplicates as Rejected
+531,758f1379-aa83-4eb9-91b3-a5bc57d80df5,Pending_Approval,758f1379-aa83-4eb9-91b3-a5bc57d80df5,Pending_Approval,1,Normal: Marked duplicates as Rejected
+532,eca4286f-3623-4e9d-9f17-234ad6b20553,Pending_Approval,eca4286f-3623-4e9d-9f17-234ad6b20553,Pending_Approval,0,Normal: Marked duplicates as Rejected
+533,aee870ab-6cee-4f9a-aa89-b9e510a88c48,Rejected,aee870ab-6cee-4f9a-aa89-b9e510a88c48,Rejected,0,Normal: Marked duplicates as Rejected
+534,57018424-7a8d-4434-a81d-97a68d3f7724,Pending_Approval,57018424-7a8d-4434-a81d-97a68d3f7724,Pending_Approval,0,Normal: Marked duplicates as Rejected
+535,eafa04df-5419-4407-910e-15ddc61fd957,Pending_Approval,eafa04df-5419-4407-910e-15ddc61fd957,Pending_Approval,1,Normal: Marked duplicates as Rejected
+536,8ed30c72-89c0-4687-a58d-0a67db278750,Pending_Approval,8ed30c72-89c0-4687-a58d-0a67db278750,Pending_Approval,0,Normal: Marked duplicates as Rejected
+537,8316c033-9a46-4cd9-92e9-1368f39936de,Pending_Approval,8316c033-9a46-4cd9-92e9-1368f39936de,Pending_Approval,0,Normal: Marked duplicates as Rejected
+538,d9749e65-b03b-42fc-be9f-ec820310ddd5,Rejected,579cb123-8b09-4819-ae62-9981e77df1fc,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+539,42cc79c8-ab65-4f17-b69f-77eb9468242b,Rejected,b52ff050-ef73-4895-8d4b-241cf97a1bb2,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+540,c804bc8e-96ca-4446-862f-f0212f396726,Rejected,aabab428-94e5-41f8-aaf2-641eae7af045,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+541,e84ec650-c85c-4d0a-a0e2-fb5604f7fec1,Pending_Approval,e84ec650-c85c-4d0a-a0e2-fb5604f7fec1,Pending_Approval,0,Normal: Marked duplicates as Rejected
+542,dd6b4c26-16f3-421a-9907-f0e36c1b5e15,Pending_Approval,dd6b4c26-16f3-421a-9907-f0e36c1b5e15,Pending_Approval,0,Normal: Marked duplicates as Rejected
+543,1169f620-5f80-4ed4-9902-5a45b84667d2,Pending_Approval,1169f620-5f80-4ed4-9902-5a45b84667d2,Pending_Approval,0,Normal: Marked duplicates as Rejected
+544,927a5353-363b-4bf3-85cb-45c4e222a006,Pending_Approval,927a5353-363b-4bf3-85cb-45c4e222a006,Pending_Approval,0,Normal: Marked duplicates as Rejected
+545,f49c124e-d2da-4605-a30b-d569e125b87a,Rejected,f49c124e-d2da-4605-a30b-d569e125b87a,Rejected,0,Normal: Marked duplicates as Rejected
+546,91ba857a-1233-4ef5-9aff-b326a3602c47,Pending_Approval,91ba857a-1233-4ef5-9aff-b326a3602c47,Pending_Approval,0,Normal: Marked duplicates as Rejected
+547,104b0fa9-3a9f-4be3-9c85-74bb71f836e1,Rejected,c10ec69a-18bb-4574-b8f3-2ec258810510,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+548,0b990183-0c4d-4941-a08d-43b6588b3e38,Pending_Approval,0b990183-0c4d-4941-a08d-43b6588b3e38,Pending_Approval,0,Normal: Marked duplicates as Rejected
+549,0a679907-322b-4a94-9766-d264916005b1,Pending_Approval,0a679907-322b-4a94-9766-d264916005b1,Pending_Approval,0,Normal: Marked duplicates as Rejected
+550,cd352f29-b16f-49e3-bf92-8247fac35fc1,Rejected,5bd9bbd6-b1fd-4d80-b835-c003ecf53866,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+551,52ad06dc-177c-4ecf-a60b-77d9d81887b1,Pending_Approval,52ad06dc-177c-4ecf-a60b-77d9d81887b1,Pending_Approval,1,Normal: Marked duplicates as Rejected
+552,b3164654-edde-4c70-954c-b9814139756e,Pending_Approval,b3164654-edde-4c70-954c-b9814139756e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+553,a062d0ac-6c3b-4628-93b6-1cdbddcc2b8e,Pending_Approval,a062d0ac-6c3b-4628-93b6-1cdbddcc2b8e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+554,344fdb56-451d-49e5-891e-ceab35ba9059,Rejected,8193fb31-aafb-4331-850e-d792ed30b213,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+555,a4616796-0923-4fbc-9485-381428051264,Pending_Approval,a4616796-0923-4fbc-9485-381428051264,Pending_Approval,0,Normal: Marked duplicates as Rejected
+556,86743a42-bdb8-458a-ba18-97f8f95fc4ca,Pending_Approval,86743a42-bdb8-458a-ba18-97f8f95fc4ca,Pending_Approval,0,Normal: Marked duplicates as Rejected
+557,484ad57c-a8ff-4a98-942f-6c607125dfd8,Pending_Approval,484ad57c-a8ff-4a98-942f-6c607125dfd8,Pending_Approval,0,Normal: Marked duplicates as Rejected
+558,d903fdac-060e-4b3e-9946-7a941813b521,Rejected,ccaba188-2fb0-4971-a6ec-581e9bfe523e,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+559,9afde3e1-1fef-447f-8c56-43f29f3855fb,Pending_Approval,9afde3e1-1fef-447f-8c56-43f29f3855fb,Pending_Approval,0,Normal: Marked duplicates as Rejected
+560,fe82fc95-136d-45ab-a065-b39f4c088a98,Pending_Approval,fe82fc95-136d-45ab-a065-b39f4c088a98,Pending_Approval,0,Normal: Marked duplicates as Rejected
+561,16cd8563-f733-4c91-9f98-b8e8af83f680,Rejected,0bed76de-7914-4312-9d17-561841b47b32,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+562,0446038d-f4eb-4029-af6e-72437f6107e7,Rejected,04a1a545-dce3-4390-b4d6-fd2686864d43,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+563,30135ca0-08a8-47b2-8857-e82ff20975f2,Pending_Approval,30135ca0-08a8-47b2-8857-e82ff20975f2,Pending_Approval,1,Normal: Marked duplicates as Rejected
+564,9a520975-2727-4467-a426-9d72fe135771,Rejected,9a520975-2727-4467-a426-9d72fe135771,Rejected,0,Normal: Marked duplicates as Rejected
+565,1d5903fe-cdc6-4e2d-a0d9-3595477c1df7,Pending_Approval,1d5903fe-cdc6-4e2d-a0d9-3595477c1df7,Pending_Approval,1,Normal: Marked duplicates as Rejected
+566,d27a61a3-7f0d-4853-acb4-932c4c03828b,Pending_Approval,d27a61a3-7f0d-4853-acb4-932c4c03828b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+567,b52c18a3-2ba4-4ed1-931c-24d6a427497d,Pending_Approval,b52c18a3-2ba4-4ed1-931c-24d6a427497d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+568,800c0952-e1be-4034-b82f-3ea62ed7ea43,Pending_Approval,800c0952-e1be-4034-b82f-3ea62ed7ea43,Pending_Approval,0,Normal: Marked duplicates as Rejected
+569,df2172b6-dc8a-4f6e-b642-ecba60ca61ca,Pending_Approval,df2172b6-dc8a-4f6e-b642-ecba60ca61ca,Pending_Approval,0,Normal: Marked duplicates as Rejected
+570,ff6c0b64-60e3-4d1e-bfd7-5e30c88e580e,Pending_Approval,ff6c0b64-60e3-4d1e-bfd7-5e30c88e580e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+571,6bfdb8a5-a070-4bc2-a9f5-3dcc54dfe881,Rejected,652ce9e1-6a1e-4d15-8726-75fb54c68664,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+572,5c2b72b7-e646-489f-81b7-f20ee6cdef59,Pending_Approval,5c2b72b7-e646-489f-81b7-f20ee6cdef59,Pending_Approval,1,Normal: Marked duplicates as Rejected
+573,f18a80e3-44d9-4dac-96ac-643ab47cffff,Pending_Approval,f18a80e3-44d9-4dac-96ac-643ab47cffff,Pending_Approval,0,Normal: Marked duplicates as Rejected
+574,2a147b93-7f92-4ebe-b71e-fc11074b64e4,Pending_Approval,2a147b93-7f92-4ebe-b71e-fc11074b64e4,Pending_Approval,0,Normal: Marked duplicates as Rejected
+575,7eb51ad8-f279-4fec-8e69-1860ec92f932,Pending_Approval,7eb51ad8-f279-4fec-8e69-1860ec92f932,Pending_Approval,1,Normal: Marked duplicates as Rejected
+576,d22a0a14-6233-4271-b31e-23911fef613f,Rejected,d22a0a14-6233-4271-b31e-23911fef613f,Rejected,0,Normal: Marked duplicates as Rejected
+577,e440e0e3-7b09-45c8-9293-cf9e068fd490,Pending_Approval,e440e0e3-7b09-45c8-9293-cf9e068fd490,Pending_Approval,0,Normal: Marked duplicates as Rejected
+578,3ee19d19-59c4-440a-a6c0-c2302b4c159f,Pending_Approval,3ee19d19-59c4-440a-a6c0-c2302b4c159f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+579,02c730f5-7a40-4924-9fe8-8b0a9f1eb231,Pending_Approval,02c730f5-7a40-4924-9fe8-8b0a9f1eb231,Pending_Approval,0,Normal: Marked duplicates as Rejected
+580,94cf4660-454a-4c40-b5fe-ddd30338c711,Pending_Approval,94cf4660-454a-4c40-b5fe-ddd30338c711,Pending_Approval,1,Normal: Marked duplicates as Rejected
+581,700e2845-3965-408e-951c-a416cb07884f,Pending_Approval,700e2845-3965-408e-951c-a416cb07884f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+582,6b835b57-9164-433a-a3ac-b42af95c3172,Pending_Approval,6b835b57-9164-433a-a3ac-b42af95c3172,Pending_Approval,1,Normal: Marked duplicates as Rejected
+583,79cbec9b-a067-43f3-b95a-139acefafac7,Pending_Approval,79cbec9b-a067-43f3-b95a-139acefafac7,Pending_Approval,0,Normal: Marked duplicates as Rejected
+584,fe3fb972-5944-4de8-9246-a552348cbdc9,Rejected,aec4c717-786b-4db5-93d5-1cf6c0e3c8df,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+585,25d7b645-03a2-4c03-ab36-80cc005d2769,Pending_Approval,25d7b645-03a2-4c03-ab36-80cc005d2769,Pending_Approval,0,Normal: Marked duplicates as Rejected
+586,9d521099-6512-4afb-a8a8-14c03f98612e,Pending_Approval,9d521099-6512-4afb-a8a8-14c03f98612e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+587,29069adf-224a-429e-a273-a9c5d95a56b9,Pending_Approval,29069adf-224a-429e-a273-a9c5d95a56b9,Pending_Approval,0,Normal: Marked duplicates as Rejected
+588,f1983847-f06d-44ea-9327-a45a35b407e1,Pending_Approval,f1983847-f06d-44ea-9327-a45a35b407e1,Pending_Approval,0,Normal: Marked duplicates as Rejected
+589,862468f9-0287-4719-a553-1a7126fd10bb,Pending_Approval,862468f9-0287-4719-a553-1a7126fd10bb,Pending_Approval,0,Normal: Marked duplicates as Rejected
+590,b0493ab9-86b9-499f-af4f-47daff87c044,Pending_Approval,b0493ab9-86b9-499f-af4f-47daff87c044,Pending_Approval,0,Normal: Marked duplicates as Rejected
+591,4455d7d1-11b5-4620-afa4-8e17026f2cfd,Pending_Approval,4455d7d1-11b5-4620-afa4-8e17026f2cfd,Pending_Approval,0,Normal: Marked duplicates as Rejected
+592,41b30148-2422-485f-902d-88e1793e6944,Pending_Approval,41b30148-2422-485f-902d-88e1793e6944,Pending_Approval,0,Normal: Marked duplicates as Rejected
+593,26f81ec5-cb03-4377-a8f8-4f6807c3869f,Pending_Approval,26f81ec5-cb03-4377-a8f8-4f6807c3869f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+594,e7fdddbd-a9d4-4494-80d9-c5fdd5ef3eaf,Pending_Approval,e7fdddbd-a9d4-4494-80d9-c5fdd5ef3eaf,Pending_Approval,0,Normal: Marked duplicates as Rejected
+595,899a4f3f-bc0f-4c1f-b5be-3cc01ac98cf8,Pending_Approval,899a4f3f-bc0f-4c1f-b5be-3cc01ac98cf8,Pending_Approval,0,Normal: Marked duplicates as Rejected
+596,690f0205-216c-4f51-a9a6-f39be97a054b,Pending_Approval,690f0205-216c-4f51-a9a6-f39be97a054b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+597,06dd8c66-75c9-4f7c-a1b9-e1f294402ad5,Pending_Approval,06dd8c66-75c9-4f7c-a1b9-e1f294402ad5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+598,c3b9c86b-94ce-421d-a457-b7a088d14044,Pending_Approval,c3b9c86b-94ce-421d-a457-b7a088d14044,Pending_Approval,1,Normal: Marked duplicates as Rejected
+599,ba1605c1-27ab-4714-b159-861d85403cfb,Pending_Approval,ba1605c1-27ab-4714-b159-861d85403cfb,Pending_Approval,0,Normal: Marked duplicates as Rejected
+600,b66f12a8-2560-4781-b674-248a6a8c3645,Pending_Approval,b66f12a8-2560-4781-b674-248a6a8c3645,Pending_Approval,1,Normal: Marked duplicates as Rejected
+601,9fc8ce71-e6ae-40c4-a901-ef5de68490dc,Pending_Approval,9fc8ce71-e6ae-40c4-a901-ef5de68490dc,Pending_Approval,1,Normal: Marked duplicates as Rejected
+602,357eae6f-a507-4649-a3a8-420bde0ef951,Pending_Approval,357eae6f-a507-4649-a3a8-420bde0ef951,Pending_Approval,0,Normal: Marked duplicates as Rejected
+603,791f9079-f753-4cb1-8639-1fea87639731,Pending_Approval,791f9079-f753-4cb1-8639-1fea87639731,Pending_Approval,0,Normal: Marked duplicates as Rejected
+604,8a8e6059-b86b-4fbd-aa73-99f4d339dc52,Pending_Approval,8a8e6059-b86b-4fbd-aa73-99f4d339dc52,Pending_Approval,1,Normal: Marked duplicates as Rejected
+605,784fe163-3d9e-4076-a475-c047653ef399,Pending_Approval,784fe163-3d9e-4076-a475-c047653ef399,Pending_Approval,0,Normal: Marked duplicates as Rejected
+606,dd820304-fb70-452c-9fd3-8ec85b344a1c,Pending_Approval,dd820304-fb70-452c-9fd3-8ec85b344a1c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+607,94d22b5f-451f-4cf9-927c-b38fadb8bcd6,Pending_Approval,94d22b5f-451f-4cf9-927c-b38fadb8bcd6,Pending_Approval,1,Normal: Marked duplicates as Rejected
+608,a62b68d5-1e2a-4af3-88ad-553d745dbbe5,Pending_Approval,a62b68d5-1e2a-4af3-88ad-553d745dbbe5,Pending_Approval,1,Normal: Marked duplicates as Rejected
+609,a78ffdfc-89c2-40e3-8a37-2ec07ca6c345,Rejected,a78ffdfc-89c2-40e3-8a37-2ec07ca6c345,Rejected,0,Normal: Marked duplicates as Rejected
+610,5df733f0-3641-4f4c-98b4-eff165712beb,Pending_Approval,5df733f0-3641-4f4c-98b4-eff165712beb,Pending_Approval,0,Normal: Marked duplicates as Rejected
+611,30952413-0207-4168-8640-929cfc9baa49,Pending_Approval,30952413-0207-4168-8640-929cfc9baa49,Pending_Approval,0,Normal: Marked duplicates as Rejected
+612,1a883b88-0a74-4324-b6ba-2ff95f3dc817,Pending_Approval,1a883b88-0a74-4324-b6ba-2ff95f3dc817,Pending_Approval,0,Normal: Marked duplicates as Rejected
+613,f9905bb8-ba01-414e-acfd-1ff85fa7e30e,Pending_Approval,f9905bb8-ba01-414e-acfd-1ff85fa7e30e,Pending_Approval,1,Normal: Marked duplicates as Rejected
+614,94102f6e-0ddc-43a7-ab27-19b3892c7cd6,Pending_Approval,94102f6e-0ddc-43a7-ab27-19b3892c7cd6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+615,4d250685-7fc2-4c5a-af37-1df1cd9075ac,Pending_Approval,4d250685-7fc2-4c5a-af37-1df1cd9075ac,Pending_Approval,0,Normal: Marked duplicates as Rejected
+616,829028db-4a14-46a3-9fa8-fd7356a173c3,Pending_Approval,829028db-4a14-46a3-9fa8-fd7356a173c3,Pending_Approval,0,Normal: Marked duplicates as Rejected
+617,2c8c31c8-e4ad-4fc7-a1ac-19bb1aa950d0,Rejected,1d704c3b-e098-4da6-b2b9-7d62deb60e92,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+618,e1275b44-0dd2-4f59-b704-917cd6f55325,Rejected,30829f82-305a-4834-a045-23d6de52ebe5,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+619,e87d59b5-c79d-4ddd-a513-750cd2178d0c,Rejected,597fb938-4ef3-4383-97e4-09a08c9fe16f,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+620,1ae377c0-4f5a-4bf4-bb12-231862cfcea1,Pending_Approval,1ae377c0-4f5a-4bf4-bb12-231862cfcea1,Pending_Approval,0,Normal: Marked duplicates as Rejected
+621,c82bd204-9556-44d0-a9c7-df46d49324d2,Rejected,c82bd204-9556-44d0-a9c7-df46d49324d2,Rejected,0,Normal: Marked duplicates as Rejected
+622,85a8f0a6-3495-44e8-b507-c6c5fce10025,Pending_Approval,85a8f0a6-3495-44e8-b507-c6c5fce10025,Pending_Approval,0,Normal: Marked duplicates as Rejected
+623,b6d3452d-f130-4c8f-ac77-3813ec3c170b,Pending_Approval,b6d3452d-f130-4c8f-ac77-3813ec3c170b,Pending_Approval,1,Normal: Marked duplicates as Rejected
+624,5bc89ecd-bdd1-463a-9a08-d6aba6e07c08,Rejected,5bc89ecd-bdd1-463a-9a08-d6aba6e07c08,Rejected,0,Normal: Marked duplicates as Rejected
+625,13dc65a9-f1ba-4cdd-927a-1c9c918ec312,Pending_Approval,13dc65a9-f1ba-4cdd-927a-1c9c918ec312,Pending_Approval,0,Normal: Marked duplicates as Rejected
+626,8dfbd490-7bfb-42d3-bf6f-614019f69ff5,Rejected,ea73a46e-d902-4bd1-994f-24eda474e409,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+627,44c6a29c-3a9d-42ab-93e6-026f49bf303d,Rejected,e57498fe-10ab-477a-a633-fedd16f7cf8a,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+628,fcfb87f0-55ae-4735-b623-b603eb1832f5,Pending_Approval,fcfb87f0-55ae-4735-b623-b603eb1832f5,Pending_Approval,1,Normal: Marked duplicates as Rejected
+629,77e1212b-c9d1-4fcd-bc0e-a9fa3205a5db,Pending_Approval,77e1212b-c9d1-4fcd-bc0e-a9fa3205a5db,Pending_Approval,0,Normal: Marked duplicates as Rejected
+630,7448f64a-b65d-4bb6-990e-45332a224caf,Pending_Approval,7448f64a-b65d-4bb6-990e-45332a224caf,Pending_Approval,0,Normal: Marked duplicates as Rejected
+631,b54e583b-a644-40f2-80e9-9e6a5c1c3fca,Rejected,c937a911-3369-4198-bfa6-a21852f24600,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+632,b3ae390a-5feb-442a-8a41-25f456940608,Rejected,ba2c4fce-dea2-4eb4-9e30-4fa191250b41,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+633,7e432b31-33f8-4679-a7a4-8fb3392065d8,Pending_Approval,7e432b31-33f8-4679-a7a4-8fb3392065d8,Pending_Approval,0,Normal: Marked duplicates as Rejected
+634,0790d42a-47a9-4040-9763-2a0705cfda1b,Pending_Approval,0790d42a-47a9-4040-9763-2a0705cfda1b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+635,e90bcc3b-d961-4e62-94d8-883a7dad5028,Rejected,c7168ef3-3e37-4a24-a375-3862d3d1aeda,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+636,b9a6f1f5-fc22-4314-9731-8836ef27a583,Pending_Approval,b9a6f1f5-fc22-4314-9731-8836ef27a583,Pending_Approval,1,Normal: Marked duplicates as Rejected
+637,39e3c9e0-342f-4699-829d-abd36635ee28,Pending_Approval,39e3c9e0-342f-4699-829d-abd36635ee28,Pending_Approval,0,Normal: Marked duplicates as Rejected
+638,4d38c13e-5f1b-40a1-bc3e-abf1e869cb9b,Rejected,96e37cb9-2d28-40cf-b877-59d5f6dd33a1,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+639,8acd3570-4718-42cd-96df-08e7f446ebae,Pending_Approval,8acd3570-4718-42cd-96df-08e7f446ebae,Pending_Approval,0,Normal: Marked duplicates as Rejected
+640,b3a57450-8dd5-4b7b-bcd6-ca3fb8ef7342,Rejected,aa3c3d63-22d1-4d75-8b4d-1f3b0b8dc39f,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+641,01d2dc43-d12d-4754-966e-8540286af8b4,Pending_Approval,01d2dc43-d12d-4754-966e-8540286af8b4,Pending_Approval,0,Normal: Marked duplicates as Rejected
+642,77e61158-6d74-400b-a0cb-1eedcd2b231b,Pending_Approval,77e61158-6d74-400b-a0cb-1eedcd2b231b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+643,a536b6c6-621c-4f0e-b0da-8a1499ac28ed,Pending_Approval,a536b6c6-621c-4f0e-b0da-8a1499ac28ed,Pending_Approval,0,Normal: Marked duplicates as Rejected
+644,26d86d3a-a81c-475a-a068-1620268ece47,Rejected,b5f34596-78ca-4e33-b989-c633f42db69f,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+645,163411ae-ab1e-4046-aeaf-f4c147362f24,Pending_Approval,163411ae-ab1e-4046-aeaf-f4c147362f24,Pending_Approval,1,Normal: Marked duplicates as Rejected
+646,bace7635-f5b7-4ea3-ae9e-e1067374c510,Pending_Approval,bace7635-f5b7-4ea3-ae9e-e1067374c510,Pending_Approval,0,Normal: Marked duplicates as Rejected
+647,4bf14bf7-130e-4ec3-8c36-a4785d5ef17c,Pending_Approval,4bf14bf7-130e-4ec3-8c36-a4785d5ef17c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+648,68e3edc9-cb8b-4a78-83be-567a130e0eca,Pending_Approval,68e3edc9-cb8b-4a78-83be-567a130e0eca,Pending_Approval,1,Normal: Marked duplicates as Rejected
+649,7052f607-63b6-4eae-a5da-ef91f31f7742,Rejected,7052f607-63b6-4eae-a5da-ef91f31f7742,Rejected,0,Normal: Marked duplicates as Rejected
+650,24056a79-0693-4258-a1eb-6e2f89a265f9,Pending_Approval,24056a79-0693-4258-a1eb-6e2f89a265f9,Pending_Approval,0,Normal: Marked duplicates as Rejected
+651,902c76eb-12ae-4c37-9c1a-e4432f390bff,Pending_Approval,902c76eb-12ae-4c37-9c1a-e4432f390bff,Pending_Approval,1,Normal: Marked duplicates as Rejected
+652,10b45bf4-e605-4e80-8272-b5407e2bebec,Pending_Approval,10b45bf4-e605-4e80-8272-b5407e2bebec,Pending_Approval,0,Normal: Marked duplicates as Rejected
+653,b7888dab-be38-4f5e-ab21-bec212bc5503,Pending_Approval,b7888dab-be38-4f5e-ab21-bec212bc5503,Pending_Approval,0,Normal: Marked duplicates as Rejected
+654,52880491-0b39-413c-bfe3-46cf08bc3ed0,Pending_Approval,52880491-0b39-413c-bfe3-46cf08bc3ed0,Pending_Approval,0,Normal: Marked duplicates as Rejected
+655,10a609b0-87b6-4d3b-aedb-544b57764b2f,Pending_Approval,10a609b0-87b6-4d3b-aedb-544b57764b2f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+656,4dd0a1f3-cfb2-485c-93e5-5e2dec66938a,Pending_Approval,4dd0a1f3-cfb2-485c-93e5-5e2dec66938a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+657,d4f8e0b5-a147-4cc3-a248-f3d2a6351878,Rejected,d4f8e0b5-a147-4cc3-a248-f3d2a6351878,Rejected,0,Normal: Marked duplicates as Rejected
+658,2c5374c3-fb85-46fa-8cb3-2dadc9768a39,Rejected,217b0181-131e-4de4-8386-5647f3641fa0,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+659,e477f6eb-52be-431c-ad19-bbb586ea9d1c,Pending_Approval,e477f6eb-52be-431c-ad19-bbb586ea9d1c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+660,24d234b8-5317-4940-89c5-a108158ba56f,Pending_Approval,24d234b8-5317-4940-89c5-a108158ba56f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+661,af322122-c524-4033-8393-b8df0b22c370,Pending_Approval,af322122-c524-4033-8393-b8df0b22c370,Pending_Approval,1,Normal: Marked duplicates as Rejected
+662,4dc61521-33c6-4ebc-b1e0-7b121bcadb81,Pending_Approval,4dc61521-33c6-4ebc-b1e0-7b121bcadb81,Pending_Approval,1,Normal: Marked duplicates as Rejected
+663,9d14ef79-7bfd-4b83-bb9a-ef1e0136af18,Pending_Approval,9d14ef79-7bfd-4b83-bb9a-ef1e0136af18,Pending_Approval,0,Normal: Marked duplicates as Rejected
+664,01d6de7f-5e3d-4501-b696-378e9c61dd88,Pending_Approval,01d6de7f-5e3d-4501-b696-378e9c61dd88,Pending_Approval,0,Normal: Marked duplicates as Rejected
+665,bf9d670e-d8be-4dbd-9921-a2272bad86d7,Pending_Approval,bf9d670e-d8be-4dbd-9921-a2272bad86d7,Pending_Approval,0,Normal: Marked duplicates as Rejected
+666,cf91a2ea-c9b9-4134-970e-3ea98d26c312,Pending_Approval,cf91a2ea-c9b9-4134-970e-3ea98d26c312,Pending_Approval,0,Normal: Marked duplicates as Rejected
+667,bc839c7b-0764-4bab-8dd9-06be422437df,Pending_Approval,bc839c7b-0764-4bab-8dd9-06be422437df,Pending_Approval,0,Normal: Marked duplicates as Rejected
+668,dc76a752-4847-44d5-994c-ddcccdd44560,Pending_Approval,dc76a752-4847-44d5-994c-ddcccdd44560,Pending_Approval,0,Normal: Marked duplicates as Rejected
+669,bb7f1b5f-f12e-45e3-924e-61b44f786bc2,Pending_Approval,bb7f1b5f-f12e-45e3-924e-61b44f786bc2,Pending_Approval,0,Normal: Marked duplicates as Rejected
+670,77615a76-14dc-42ad-8baf-335722b2d169,Rejected,77615a76-14dc-42ad-8baf-335722b2d169,Rejected,0,Normal: Marked duplicates as Rejected
+671,a9886425-ae6a-4250-9a70-9447b6cc6b45,Pending_Approval,a9886425-ae6a-4250-9a70-9447b6cc6b45,Pending_Approval,0,Normal: Marked duplicates as Rejected
+672,e4d1f73b-ce15-4035-9e9f-ead1b2a1e76c,Pending_Approval,e4d1f73b-ce15-4035-9e9f-ead1b2a1e76c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+673,b808f0b9-9223-409d-affa-1ef50d111b9f,Pending_Approval,b808f0b9-9223-409d-affa-1ef50d111b9f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+674,530c110d-ea91-4847-8fb7-4bd2ce50715c,Pending_Approval,530c110d-ea91-4847-8fb7-4bd2ce50715c,Pending_Approval,1,Normal: Marked duplicates as Rejected
+675,cbe2d428-a1eb-424c-b2d6-b2a2ca0fae90,Pending_Approval,cbe2d428-a1eb-424c-b2d6-b2a2ca0fae90,Pending_Approval,1,Normal: Marked duplicates as Rejected
+676,331ff7b8-70ce-464a-80df-bba535c8cbbe,Rejected,30c0452d-0d6f-4c10-8119-a4c86ca4906c,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+677,501d893c-0bbb-476f-9e86-e819643e2f54,Pending_Approval,501d893c-0bbb-476f-9e86-e819643e2f54,Pending_Approval,1,Normal: Marked duplicates as Rejected
+678,f9383943-aeea-404c-9464-59e50f389925,Pending_Approval,f9383943-aeea-404c-9464-59e50f389925,Pending_Approval,1,Normal: Marked duplicates as Rejected
+679,b23986b5-3aa6-4b01-b530-829a19c002ed,Pending_Approval,b23986b5-3aa6-4b01-b530-829a19c002ed,Pending_Approval,1,Normal: Marked duplicates as Rejected
+680,b44cdfbe-336c-40f6-aa6f-73c13fb6dbf3,Pending_Approval,b44cdfbe-336c-40f6-aa6f-73c13fb6dbf3,Pending_Approval,0,Normal: Marked duplicates as Rejected
+681,d17fad6c-a98d-46c6-88f2-4d1f054da77d,Pending_Approval,d17fad6c-a98d-46c6-88f2-4d1f054da77d,Pending_Approval,1,Normal: Marked duplicates as Rejected
+682,f9bf2e46-81ef-4c11-97c3-e62958adf5f2,Pending_Approval,f9bf2e46-81ef-4c11-97c3-e62958adf5f2,Pending_Approval,0,Normal: Marked duplicates as Rejected
+683,bdadc07c-d6da-4d86-b10e-b95708dff874,Rejected,cdc81086-5281-4365-8210-fa780410d5c7,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+684,566dbfcc-0e58-4f2d-a163-516f326dd6aa,Pending_Approval,566dbfcc-0e58-4f2d-a163-516f326dd6aa,Pending_Approval,1,Normal: Marked duplicates as Rejected
+685,63282a9c-097c-4637-9589-d396b0574668,Rejected,ffce5321-8025-4681-a160-0c6d0cd18c55,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+686,ade1edbe-208e-40d6-989a-8279bfe45ea1,Pending_Approval,ade1edbe-208e-40d6-989a-8279bfe45ea1,Pending_Approval,1,Normal: Marked duplicates as Rejected
+687,803283a0-c74a-4621-97a4-0665db9a0dfb,Pending_Approval,803283a0-c74a-4621-97a4-0665db9a0dfb,Pending_Approval,0,Normal: Marked duplicates as Rejected
+688,877725ac-e766-4f3f-a95e-2d4028116c04,Rejected,a84749a6-9a74-4f37-aabc-d5d3b0e8b7e5,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+689,a7eb018e-ec63-476d-b97b-5e33308e466e,Pending_Approval,a7eb018e-ec63-476d-b97b-5e33308e466e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+690,d72cb00f-a695-46da-803d-d79f438cc6ef,Pending_Approval,d72cb00f-a695-46da-803d-d79f438cc6ef,Pending_Approval,0,Normal: Marked duplicates as Rejected
+691,b5a5bb6c-179e-4d21-8e16-ea6a8e0d303e,Pending_Approval,b5a5bb6c-179e-4d21-8e16-ea6a8e0d303e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+692,824ca793-a9da-4e49-b5e8-deaef2d11f22,Pending_Approval,824ca793-a9da-4e49-b5e8-deaef2d11f22,Pending_Approval,0,Normal: Marked duplicates as Rejected
+693,eaf52654-abfd-4ec5-ab52-3f7821616def,Rejected,74911096-72a5-4d24-b2e1-f8d7632aa694,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+694,5cdb0c32-42d9-4c18-8901-d4883c6d416a,Pending_Approval,5cdb0c32-42d9-4c18-8901-d4883c6d416a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+695,860933b4-7d18-42ab-8b4e-ea991625437c,Pending_Approval,860933b4-7d18-42ab-8b4e-ea991625437c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+696,6239d7d8-dc45-41dc-acde-bc205b5d32d0,Pending_Approval,6239d7d8-dc45-41dc-acde-bc205b5d32d0,Pending_Approval,0,Normal: Marked duplicates as Rejected
+697,01c94d37-f283-4843-b98f-4d84a7a1a470,Pending_Approval,01c94d37-f283-4843-b98f-4d84a7a1a470,Pending_Approval,0,Normal: Marked duplicates as Rejected
+698,b47aec6f-065c-486e-a019-492ca409b30b,Pending_Approval,b47aec6f-065c-486e-a019-492ca409b30b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+699,7dfd952a-f564-43ac-8c4a-9dd85367e95f,Pending_Approval,7dfd952a-f564-43ac-8c4a-9dd85367e95f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+700,4be39b80-e871-4c41-a5c2-514adde114ae,Pending_Approval,4be39b80-e871-4c41-a5c2-514adde114ae,Pending_Approval,0,Normal: Marked duplicates as Rejected
+701,735bcb20-65aa-4677-93dd-c6c7654847a0,Rejected,7a989559-57be-4d2a-8c15-88ea5e22e11e,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+702,b1a716a3-e1cb-4ce4-9563-544e2b021d11,Pending_Approval,b1a716a3-e1cb-4ce4-9563-544e2b021d11,Pending_Approval,1,Normal: Marked duplicates as Rejected
+703,251fcc53-fa46-44ab-8ee6-d7029b9df887,Pending_Approval,251fcc53-fa46-44ab-8ee6-d7029b9df887,Pending_Approval,0,Normal: Marked duplicates as Rejected
+704,b701d3aa-a058-4687-8cda-e75f234a45b5,Pending_Approval,b701d3aa-a058-4687-8cda-e75f234a45b5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+705,fe701dc6-247a-47ef-9b89-15c48aabce24,Pending_Approval,fe701dc6-247a-47ef-9b89-15c48aabce24,Pending_Approval,0,Normal: Marked duplicates as Rejected
+706,73c5f33b-372a-401f-b6a3-2f28bc41af3e,Pending_Approval,73c5f33b-372a-401f-b6a3-2f28bc41af3e,Pending_Approval,1,Normal: Marked duplicates as Rejected
+707,5ec6eef8-42aa-463c-b398-c73631d58a59,Pending_Approval,5ec6eef8-42aa-463c-b398-c73631d58a59,Pending_Approval,0,Normal: Marked duplicates as Rejected
+708,845f9de8-8389-49f1-9f9d-b15571c09965,Pending_Approval,845f9de8-8389-49f1-9f9d-b15571c09965,Pending_Approval,1,Normal: Marked duplicates as Rejected
+709,95885f5f-9337-4ab1-aa99-27b2ec16f3c4,Pending_Approval,95885f5f-9337-4ab1-aa99-27b2ec16f3c4,Pending_Approval,0,Normal: Marked duplicates as Rejected
+710,ccf5f04e-4aa9-4a0d-8003-29fb8f3a00c9,Pending_Approval,ccf5f04e-4aa9-4a0d-8003-29fb8f3a00c9,Pending_Approval,0,Normal: Marked duplicates as Rejected
+711,7efd0bd0-5546-42f6-9af5-d88f60a052eb,Rejected,e2da42b4-e3a1-40d5-be14-de356d3e0242,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+712,957e6401-c354-4242-b0e5-fb8b788cf898,Pending_Approval,957e6401-c354-4242-b0e5-fb8b788cf898,Pending_Approval,0,Normal: Marked duplicates as Rejected
+713,a3fa3087-338f-41c9-b773-fb3d01113af8,Rejected,66a66ea3-1014-46f8-bba3-2c9307cc9a0e,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+714,2758aa37-04a3-4090-82c9-e847a9e1196b,Rejected,f23eb984-e08d-4ff2-9c32-0721935e5ae9,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+715,145ecb73-f447-4d65-8043-e191f050fdc4,Pending_Approval,145ecb73-f447-4d65-8043-e191f050fdc4,Pending_Approval,0,Normal: Marked duplicates as Rejected
+716,8cbf34f1-ea49-4601-9fd3-1cd348f38976,Rejected,bf57ecc4-bff0-446b-adcb-d446af73e308,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+717,35e1f9f3-f0c0-4050-b072-b07692b4e08c,Pending_Approval,35e1f9f3-f0c0-4050-b072-b07692b4e08c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+718,9c213a03-b2f4-4510-abdc-05c19107c405,Rejected,9c213a03-b2f4-4510-abdc-05c19107c405,Rejected,0,Normal: Marked duplicates as Rejected
+719,ca047f29-a3b3-4520-93bd-308ca8236c11,Pending_Approval,ca047f29-a3b3-4520-93bd-308ca8236c11,Pending_Approval,0,Normal: Marked duplicates as Rejected
+720,4301734d-a24c-4e38-8832-4de929e27a3e,Pending_Approval,4301734d-a24c-4e38-8832-4de929e27a3e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+721,39e922ea-90b1-4247-bf36-81e775ecaba8,Pending_Approval,39e922ea-90b1-4247-bf36-81e775ecaba8,Pending_Approval,1,Normal: Marked duplicates as Rejected
+722,a7c9038b-92bb-4741-94f8-5d02d327df95,Pending_Approval,a7c9038b-92bb-4741-94f8-5d02d327df95,Pending_Approval,1,Normal: Marked duplicates as Rejected
+723,6f263728-e0d2-4dc9-9e66-320fe1a31a59,Pending_Approval,6f263728-e0d2-4dc9-9e66-320fe1a31a59,Pending_Approval,0,Normal: Marked duplicates as Rejected
+724,17ff7ff7-9522-4b9a-a113-588561dd2846,Rejected,be96c505-05b6-4104-ae11-0f9f6536ca2a,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+725,ce4b6553-0952-4332-8ccc-f61e14b8d5a3,Rejected,0f25c374-7567-4553-8357-3b036a729b43,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+726,6a6a879b-c1ca-4e9b-a6ff-6376fa3b1c4f,Rejected,6a6a879b-c1ca-4e9b-a6ff-6376fa3b1c4f,Rejected,0,Normal: Marked duplicates as Rejected
+727,ac4ae985-e04c-43ef-b0aa-8243f5011320,Pending_Approval,ac4ae985-e04c-43ef-b0aa-8243f5011320,Pending_Approval,0,Normal: Marked duplicates as Rejected
+728,b99d8983-68ce-46dd-adad-a71bac5b2d6f,Rejected,f387ed37-04c2-4407-a312-7365765cc9f9,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+729,e307f8ac-7a50-4fce-935b-a6a6c3f538e6,Rejected,f5e723f3-5a4b-4160-becf-4cf77ce8890d,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+730,5ba55361-37dc-4f13-b49f-6de9578bbffc,Pending_Approval,5ba55361-37dc-4f13-b49f-6de9578bbffc,Pending_Approval,1,Normal: Marked duplicates as Rejected
+731,9fe8fdef-eed6-4419-b825-e4e728842d5f,Pending_Approval,9fe8fdef-eed6-4419-b825-e4e728842d5f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+732,c2a49cf6-ec2c-4a4a-be72-421a9f05ba37,Pending_Approval,c2a49cf6-ec2c-4a4a-be72-421a9f05ba37,Pending_Approval,1,Normal: Marked duplicates as Rejected
+733,3596865e-172e-4d02-9a3a-32ef12d0354a,Pending_Approval,3596865e-172e-4d02-9a3a-32ef12d0354a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+734,1d4bd26a-25de-45cc-b05e-49c6ac548a79,Pending_Approval,1d4bd26a-25de-45cc-b05e-49c6ac548a79,Pending_Approval,1,Normal: Marked duplicates as Rejected
+735,9f1817ca-f0f8-44e7-8afe-b413e2510f88,Pending_Approval,9f1817ca-f0f8-44e7-8afe-b413e2510f88,Pending_Approval,0,Normal: Marked duplicates as Rejected
+736,620384fb-d7cc-4aac-b0c7-ac62bed6e4c5,Pending_Approval,620384fb-d7cc-4aac-b0c7-ac62bed6e4c5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+737,929ad4b5-0a0a-48d8-833c-fbb47e7b7567,Pending_Approval,929ad4b5-0a0a-48d8-833c-fbb47e7b7567,Pending_Approval,0,Normal: Marked duplicates as Rejected
+738,38ea7f8a-2197-4513-8b14-84a8bca0ed4d,Pending_Approval,38ea7f8a-2197-4513-8b14-84a8bca0ed4d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+739,fcb28037-a038-4c21-b39c-f5de8d0e7818,Pending_Approval,fcb28037-a038-4c21-b39c-f5de8d0e7818,Pending_Approval,0,Normal: Marked duplicates as Rejected
+740,d27d2e90-ff81-4ea1-907a-ffcf6bcc5b79,Rejected,d27d2e90-ff81-4ea1-907a-ffcf6bcc5b79,Rejected,0,Normal: Marked duplicates as Rejected
+741,d1aa0ddc-97e7-4ed4-99f0-d0380cfbf2be,Pending_Approval,d1aa0ddc-97e7-4ed4-99f0-d0380cfbf2be,Pending_Approval,0,Normal: Marked duplicates as Rejected
+742,8e95ee1a-5a41-4d3b-a349-c08e471091ad,Pending_Approval,8e95ee1a-5a41-4d3b-a349-c08e471091ad,Pending_Approval,0,Normal: Marked duplicates as Rejected
+743,81171238-f660-4d74-b25a-c7037cfebfec,Pending_Approval,81171238-f660-4d74-b25a-c7037cfebfec,Pending_Approval,0,Normal: Marked duplicates as Rejected
+744,9c21b81c-c5aa-436a-82e5-57bbfca7c274,Pending_Approval,9c21b81c-c5aa-436a-82e5-57bbfca7c274,Pending_Approval,1,Normal: Marked duplicates as Rejected
+745,34fc7e90-3039-4a64-bc8c-bb4db6091e74,Pending_Approval,34fc7e90-3039-4a64-bc8c-bb4db6091e74,Pending_Approval,1,Normal: Marked duplicates as Rejected
+746,acc6782c-b982-4a80-8dd1-e75d2cbef70d,Pending_Approval,acc6782c-b982-4a80-8dd1-e75d2cbef70d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+747,f0222602-ec97-4720-8463-16c05a11a7a7,Pending_Approval,f0222602-ec97-4720-8463-16c05a11a7a7,Pending_Approval,0,Normal: Marked duplicates as Rejected
+748,c2b1821a-7632-4f9a-95e9-4a62175e58e9,Pending_Approval,c2b1821a-7632-4f9a-95e9-4a62175e58e9,Pending_Approval,0,Normal: Marked duplicates as Rejected
+749,3bc13272-0abd-49a2-a887-f7f021ab41b6,Rejected,3bc13272-0abd-49a2-a887-f7f021ab41b6,Rejected,0,Normal: Marked duplicates as Rejected
+750,553c7479-1873-4953-992d-ee5bbd803815,Pending_Approval,553c7479-1873-4953-992d-ee5bbd803815,Pending_Approval,0,Normal: Marked duplicates as Rejected
+751,3dba229f-4599-4e27-8632-5acdfcbb5c82,Pending_Approval,3dba229f-4599-4e27-8632-5acdfcbb5c82,Pending_Approval,0,Normal: Marked duplicates as Rejected
+752,a66f6eea-9a29-4fcb-9832-26a77f3f3235,Rejected,a66f6eea-9a29-4fcb-9832-26a77f3f3235,Rejected,0,Normal: Marked duplicates as Rejected
+753,6d1ae708-ffed-4928-808a-c71afbe6011e,Pending_Approval,6d1ae708-ffed-4928-808a-c71afbe6011e,Pending_Approval,1,Normal: Marked duplicates as Rejected
+754,381cdcaf-6617-4fa9-a4cc-d915a9a2c0a1,Pending_Approval,381cdcaf-6617-4fa9-a4cc-d915a9a2c0a1,Pending_Approval,1,Normal: Marked duplicates as Rejected
+755,7a1a763c-de8d-467e-8f98-416e31122f32,Rejected,529d076c-167e-4681-829a-c84b8f098b46,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+756,ce6f56a0-8e4e-4895-9ef9-15f5dc83569c,Pending_Approval,ce6f56a0-8e4e-4895-9ef9-15f5dc83569c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+757,a0bc9c32-de98-49de-bb89-bbdee7761bb0,Pending_Approval,a0bc9c32-de98-49de-bb89-bbdee7761bb0,Pending_Approval,0,Normal: Marked duplicates as Rejected
+758,0d0e8918-d796-4434-8110-fde5e24eaa13,Rejected,8111b392-42df-41c2-8682-1821756e86aa,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+759,8b18f146-f9f4-4382-bf27-df273315cf35,Pending_Approval,8b18f146-f9f4-4382-bf27-df273315cf35,Pending_Approval,1,Normal: Marked duplicates as Rejected
+760,86792af9-147d-4d08-98e3-09f3913db778,Pending_Approval,86792af9-147d-4d08-98e3-09f3913db778,Pending_Approval,1,Normal: Marked duplicates as Rejected
+761,8bf19dde-98b7-4e1b-9e8b-41ec8425b36d,Pending_Approval,8bf19dde-98b7-4e1b-9e8b-41ec8425b36d,Pending_Approval,1,Normal: Marked duplicates as Rejected
+762,be8c7008-efed-4afb-967b-cf93c2a110c9,Rejected,f88a34ed-69fe-4632-a7af-c48d5e302710,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+763,9f06fdfa-b9d3-47e8-a844-340195c9e814,Pending_Approval,9f06fdfa-b9d3-47e8-a844-340195c9e814,Pending_Approval,1,Normal: Marked duplicates as Rejected
+764,fe2d2153-9a44-4856-9e75-6808d4f674c4,Rejected,fe2d2153-9a44-4856-9e75-6808d4f674c4,Rejected,0,Normal: Marked duplicates as Rejected
+765,733ba5c7-7f9c-4b3b-b833-1f2c18a1f7da,Pending_Approval,733ba5c7-7f9c-4b3b-b833-1f2c18a1f7da,Pending_Approval,1,Normal: Marked duplicates as Rejected
+766,107fcca1-f2ab-46ce-8003-145efa05b107,Pending_Approval,107fcca1-f2ab-46ce-8003-145efa05b107,Pending_Approval,1,Normal: Marked duplicates as Rejected
+767,fd3c7e5b-12b9-4d09-a8f9-31695d4f6292,Pending_Approval,fd3c7e5b-12b9-4d09-a8f9-31695d4f6292,Pending_Approval,0,Normal: Marked duplicates as Rejected
+768,718947a2-aa81-44e1-9871-0c2e6540a945,Pending_Approval,718947a2-aa81-44e1-9871-0c2e6540a945,Pending_Approval,0,Normal: Marked duplicates as Rejected
+769,074e124d-20bd-4f2f-afee-e387536d7b0f,Pending_Approval,074e124d-20bd-4f2f-afee-e387536d7b0f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+770,0efb0a00-12bd-41a4-aeb5-4a13cd71f0c5,Pending_Approval,0efb0a00-12bd-41a4-aeb5-4a13cd71f0c5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+771,ee84cbb4-4372-48cc-b296-8e476829605f,Pending_Approval,ee84cbb4-4372-48cc-b296-8e476829605f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+772,ca4e5c90-4e97-4eee-b4f3-604e2cfb52c7,Pending_Approval,ca4e5c90-4e97-4eee-b4f3-604e2cfb52c7,Pending_Approval,0,Normal: Marked duplicates as Rejected
+773,e3c2853a-e557-4c7f-8e4c-6b583de17558,Rejected,e3c2853a-e557-4c7f-8e4c-6b583de17558,Rejected,0,Normal: Marked duplicates as Rejected
+774,d137b939-d685-416e-8b48-8fc68f3808a8,Pending_Approval,d137b939-d685-416e-8b48-8fc68f3808a8,Pending_Approval,0,Normal: Marked duplicates as Rejected
+775,52252def-03a1-4213-8b6f-4d341aedcd8a,Pending_Approval,52252def-03a1-4213-8b6f-4d341aedcd8a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+776,d880c58a-4747-4576-a105-14e86a1b72a2,Pending_Approval,d880c58a-4747-4576-a105-14e86a1b72a2,Pending_Approval,1,Normal: Marked duplicates as Rejected
+777,9e2d714e-5765-4f3d-8c86-bd6bf5bf100d,Rejected,9e2d714e-5765-4f3d-8c86-bd6bf5bf100d,Rejected,0,Normal: Marked duplicates as Rejected
+778,b07fb7a5-1ed5-4a9a-b8e8-f9654c03eadd,Pending_Approval,b07fb7a5-1ed5-4a9a-b8e8-f9654c03eadd,Pending_Approval,0,Normal: Marked duplicates as Rejected
+779,8fd77db6-7e8c-4b45-9a62-bd61215ab0c3,Pending_Approval,8fd77db6-7e8c-4b45-9a62-bd61215ab0c3,Pending_Approval,0,Normal: Marked duplicates as Rejected
+780,5d461de7-2ab5-442f-be7f-7b5193edbe4a,Pending_Approval,5d461de7-2ab5-442f-be7f-7b5193edbe4a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+781,2e116aa8-ae61-4e0e-b753-5a5cc1994e80,Pending_Approval,2e116aa8-ae61-4e0e-b753-5a5cc1994e80,Pending_Approval,0,Normal: Marked duplicates as Rejected
+782,51fdf99c-1c3f-42e2-a365-450ba8b2c395,Pending_Approval,51fdf99c-1c3f-42e2-a365-450ba8b2c395,Pending_Approval,1,Normal: Marked duplicates as Rejected
+783,a0c74b34-dbbd-4a8f-8e64-fb45b071983c,Pending_Approval,a0c74b34-dbbd-4a8f-8e64-fb45b071983c,Pending_Approval,1,Normal: Marked duplicates as Rejected
+784,b7f3bb61-7f16-4099-998b-65cc484dce05,Pending_Approval,b7f3bb61-7f16-4099-998b-65cc484dce05,Pending_Approval,0,Normal: Marked duplicates as Rejected
+785,f342fb3d-6cee-4d31-b2e3-c41071314f60,Pending_Approval,f342fb3d-6cee-4d31-b2e3-c41071314f60,Pending_Approval,0,Normal: Marked duplicates as Rejected
+786,3789c4ca-f304-4f72-94fb-fdbe65d17ef9,Pending_Approval,3789c4ca-f304-4f72-94fb-fdbe65d17ef9,Pending_Approval,0,Normal: Marked duplicates as Rejected
+787,8312b752-dbf9-4af3-b532-6a595cd8864e,Pending_Approval,8312b752-dbf9-4af3-b532-6a595cd8864e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+788,0b40bb09-1a5c-4622-b6f6-15a5c340b03d,Pending_Approval,0b40bb09-1a5c-4622-b6f6-15a5c340b03d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+789,81bcbcac-11c0-4f16-aa75-27ed40db7b29,Rejected,81bcbcac-11c0-4f16-aa75-27ed40db7b29,Rejected,0,Normal: Marked duplicates as Rejected
+790,fb4140e1-0493-4eee-9b4c-0b9006c0f5d2,Pending_Approval,fb4140e1-0493-4eee-9b4c-0b9006c0f5d2,Pending_Approval,0,Normal: Marked duplicates as Rejected
+791,d375a562-5cba-46fa-a790-893db5718507,Pending_Approval,d375a562-5cba-46fa-a790-893db5718507,Pending_Approval,0,Normal: Marked duplicates as Rejected
+792,9beee0d9-7107-436c-ac95-45e10f06388c,Pending_Approval,9beee0d9-7107-436c-ac95-45e10f06388c,Pending_Approval,1,Normal: Marked duplicates as Rejected
+793,a78b7177-5417-4ad5-8d88-865d5b2baa6f,Pending_Approval,a78b7177-5417-4ad5-8d88-865d5b2baa6f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+794,3e5f9990-f66b-4327-9bbb-03ac3813b081,Pending_Approval,3e5f9990-f66b-4327-9bbb-03ac3813b081,Pending_Approval,1,Normal: Marked duplicates as Rejected
+795,cdbd40e5-967d-47fd-b19a-3bca8f7ac9c6,Pending_Approval,cdbd40e5-967d-47fd-b19a-3bca8f7ac9c6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+796,8a844599-05eb-47a4-a967-9243d5ebaf08,Rejected,4723505a-bef5-4503-8857-2aac3743e35a,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+797,d881bbfb-e3cc-4fcb-82b3-07745bd6492c,Pending_Approval,d881bbfb-e3cc-4fcb-82b3-07745bd6492c,Pending_Approval,1,Normal: Marked duplicates as Rejected
+798,c4c27a8a-bc6b-42b6-bd2b-bbe87d8dd6a3,Pending_Approval,c4c27a8a-bc6b-42b6-bd2b-bbe87d8dd6a3,Pending_Approval,0,Normal: Marked duplicates as Rejected
+799,9b8192d6-e242-47bc-9d47-d32eb7014f0d,Pending_Approval,9b8192d6-e242-47bc-9d47-d32eb7014f0d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+800,d950fed3-66b1-44bf-a9dc-35dc9183f890,Rejected,d950fed3-66b1-44bf-a9dc-35dc9183f890,Rejected,0,Normal: Marked duplicates as Rejected
+801,80215b8f-b1c8-4944-b714-1cfbc3856745,Pending_Approval,80215b8f-b1c8-4944-b714-1cfbc3856745,Pending_Approval,1,Normal: Marked duplicates as Rejected
+802,7476d449-adee-4022-851c-c9e06a7109d8,Pending_Approval,7476d449-adee-4022-851c-c9e06a7109d8,Pending_Approval,0,Normal: Marked duplicates as Rejected
+803,bafd200f-2706-4897-af68-5fdbbf2a9384,Rejected,e4191ac4-54a5-42c4-b2ad-5ed209e0abfe,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+804,846651b3-fb69-4608-ba02-061de9ca3e8d,Pending_Approval,846651b3-fb69-4608-ba02-061de9ca3e8d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+805,43646551-6faa-49c9-8600-37bf04f991ea,Pending_Approval,43646551-6faa-49c9-8600-37bf04f991ea,Pending_Approval,0,Normal: Marked duplicates as Rejected
+806,2312d11b-9234-4be1-a10f-200a4dd946ea,Pending_Approval,2312d11b-9234-4be1-a10f-200a4dd946ea,Pending_Approval,0,Normal: Marked duplicates as Rejected
+807,03fe4b3a-5b30-4ea4-af90-8d90cf3086b6,Pending_Approval,03fe4b3a-5b30-4ea4-af90-8d90cf3086b6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+808,b7f238c3-3be8-448c-b51a-b3f872253f9e,Rejected,7429a948-d354-4c71-97e3-d754a4884cf4,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+809,b8033937-d312-4f00-b303-69ffaa472898,Rejected,a15e9ea3-1a4f-4812-9c83-e47c6f99db49,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+810,6cdd3805-8a1d-47b1-a4b7-94ed21faa49e,Rejected,6cdd3805-8a1d-47b1-a4b7-94ed21faa49e,Rejected,0,Normal: Marked duplicates as Rejected
+811,d5235def-0850-42c3-9d54-83fbe979e1db,Pending_Approval,d5235def-0850-42c3-9d54-83fbe979e1db,Pending_Approval,0,Normal: Marked duplicates as Rejected
+812,0c773e13-fda8-48bd-913b-022d06b8a6ef,Pending_Approval,0c773e13-fda8-48bd-913b-022d06b8a6ef,Pending_Approval,0,Normal: Marked duplicates as Rejected
+813,acd9d84d-66a2-4765-9fc1-30fb577a32bc,Rejected,af14f1bd-4581-4b69-922b-5075231c7a1f,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+814,ae224cd0-c7b8-4b36-8724-37b6f49f3823,Pending_Approval,ae224cd0-c7b8-4b36-8724-37b6f49f3823,Pending_Approval,0,Normal: Marked duplicates as Rejected
+815,1f8fad31-264a-4ba7-b623-81c0b7886aea,Pending_Approval,1f8fad31-264a-4ba7-b623-81c0b7886aea,Pending_Approval,1,Normal: Marked duplicates as Rejected
+816,8ec62041-9c86-4373-937c-5170b2135087,Rejected,cccd94fd-da04-4f97-82ca-cbf843cdb30c,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+817,bccb5ecf-0419-4917-a053-0c25add2d1d4,Rejected,bccb5ecf-0419-4917-a053-0c25add2d1d4,Rejected,0,Normal: Marked duplicates as Rejected
+818,404a38bb-ff4d-4fdb-b11b-7cbe5cbc537d,Pending_Approval,404a38bb-ff4d-4fdb-b11b-7cbe5cbc537d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+819,12352487-9ab1-4b38-80c6-919d409e5074,Rejected,807c5240-7a3e-4510-ac64-cca250c3273a,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+820,7ca897c2-a2af-4050-a609-2e7fc6295e33,Rejected,a4d43acb-78bc-4c50-9ee5-c5ae3665b275,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+821,2094b6c6-091a-46f1-b64a-71d3fcc14b2b,Rejected,2b606270-e133-43d0-9565-bb341b364227,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+822,5a8e1b2f-903b-4e79-8893-add485e513e7,Rejected,5a8e1b2f-903b-4e79-8893-add485e513e7,Rejected,0,Normal: Marked duplicates as Rejected
+823,9863bfb6-7849-4133-b890-c97edc55af8a,Pending_Approval,9863bfb6-7849-4133-b890-c97edc55af8a,Pending_Approval,1,Normal: Marked duplicates as Rejected
+824,b5570354-df84-48c9-a747-c5bf87e78540,Rejected,39049175-c645-486f-b592-fde3600ed17c,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+825,eb46f1ea-7b04-4c33-a182-0dcae8f62430,Pending_Approval,eb46f1ea-7b04-4c33-a182-0dcae8f62430,Pending_Approval,0,Normal: Marked duplicates as Rejected
+826,fc4b487f-c329-4591-b7d8-095b8df19e84,Rejected,0a93504a-d267-4ca8-9cae-68f0157c3210,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+827,b58e4cf2-26ba-4f56-8bbf-94878128d536,Pending_Approval,b58e4cf2-26ba-4f56-8bbf-94878128d536,Pending_Approval,1,Normal: Marked duplicates as Rejected
+828,2296253b-d8c4-42b0-8225-a15de0e6c4c2,Pending_Approval,2296253b-d8c4-42b0-8225-a15de0e6c4c2,Pending_Approval,0,Normal: Marked duplicates as Rejected
+829,6496289c-b9f0-4dd9-ba89-9ae2377494a9,Pending_Approval,6496289c-b9f0-4dd9-ba89-9ae2377494a9,Pending_Approval,0,Normal: Marked duplicates as Rejected
+830,a40a5139-92e1-4da4-aac7-6ecdde712886,Rejected,67021785-ee18-4752-bbc4-07e2a83399e2,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+831,1f357176-7fc6-428b-8d58-2f6a3478c286,Pending_Approval,1f357176-7fc6-428b-8d58-2f6a3478c286,Pending_Approval,1,Normal: Marked duplicates as Rejected
+832,6b77e2f3-7a72-498f-b83a-c057d6d6545e,Pending_Approval,6b77e2f3-7a72-498f-b83a-c057d6d6545e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+833,203e9832-269e-4a33-92c7-deeedc5bb482,Pending_Approval,203e9832-269e-4a33-92c7-deeedc5bb482,Pending_Approval,0,Normal: Marked duplicates as Rejected
+834,55e1c2b3-cdc0-41cb-bcae-99b1c21189f2,Pending_Approval,55e1c2b3-cdc0-41cb-bcae-99b1c21189f2,Pending_Approval,1,Normal: Marked duplicates as Rejected
+835,dab54448-4a2f-47fc-9148-3cb2becad4f1,Pending_Approval,dab54448-4a2f-47fc-9148-3cb2becad4f1,Pending_Approval,0,Normal: Marked duplicates as Rejected
+836,57c75b44-15cc-4ab3-a92d-be0fe2f874d8,Pending_Approval,57c75b44-15cc-4ab3-a92d-be0fe2f874d8,Pending_Approval,1,Normal: Marked duplicates as Rejected
+837,142c8d4e-ed5d-48a3-9fc6-9aa1dc4d4a54,Pending_Approval,142c8d4e-ed5d-48a3-9fc6-9aa1dc4d4a54,Pending_Approval,1,Normal: Marked duplicates as Rejected
+838,30740c96-84a8-4f7d-833a-ad54e7157651,Pending_Approval,30740c96-84a8-4f7d-833a-ad54e7157651,Pending_Approval,0,Normal: Marked duplicates as Rejected
+839,20b83fb7-07b7-44e8-9af0-70012763ff1a,Pending_Approval,20b83fb7-07b7-44e8-9af0-70012763ff1a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+840,5834e869-4470-42d5-8985-331d0bffd470,Pending_Approval,5834e869-4470-42d5-8985-331d0bffd470,Pending_Approval,1,Normal: Marked duplicates as Rejected
+841,0fd1c717-7279-42e0-9a4d-feccd953aa3c,Pending_Approval,0fd1c717-7279-42e0-9a4d-feccd953aa3c,Pending_Approval,1,Normal: Marked duplicates as Rejected
+842,b5948f86-f751-4b86-b186-add74ad3632a,Pending_Approval,b5948f86-f751-4b86-b186-add74ad3632a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+843,127b5904-4c51-4b12-a36e-d183912f0df6,Pending_Approval,127b5904-4c51-4b12-a36e-d183912f0df6,Pending_Approval,1,Normal: Marked duplicates as Rejected
+844,341f5cdf-433e-4d6a-a8ea-9534cc648caa,Pending_Approval,341f5cdf-433e-4d6a-a8ea-9534cc648caa,Pending_Approval,0,Normal: Marked duplicates as Rejected
+845,e0d25ed4-953b-41e1-9637-3bcd5907a098,Pending_Approval,e0d25ed4-953b-41e1-9637-3bcd5907a098,Pending_Approval,0,Normal: Marked duplicates as Rejected
+846,c240be92-ce80-4d9b-8bc5-a97ff788c01f,Pending_Approval,c240be92-ce80-4d9b-8bc5-a97ff788c01f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+847,2e7af948-7364-471d-ae52-036a5f723b89,Pending_Approval,2e7af948-7364-471d-ae52-036a5f723b89,Pending_Approval,1,Normal: Marked duplicates as Rejected
+848,47d508ab-8ca4-4ed7-8e8b-a7adcbc3c98c,Pending_Approval,47d508ab-8ca4-4ed7-8e8b-a7adcbc3c98c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+849,679af133-2bf7-4623-a796-989a23b47fc7,Pending_Approval,679af133-2bf7-4623-a796-989a23b47fc7,Pending_Approval,1,Normal: Marked duplicates as Rejected
+850,3fccc595-c03f-4cf5-bad7-c88bc1710bd7,Pending_Approval,3fccc595-c03f-4cf5-bad7-c88bc1710bd7,Pending_Approval,0,Normal: Marked duplicates as Rejected
+851,dd540492-a2c9-467b-81bd-bcb3b518db31,Rejected,eb98f438-5cc6-4f6f-a56d-745822281624,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+852,354cbd2e-955d-4947-856e-7ed827f5414f,Pending_Approval,354cbd2e-955d-4947-856e-7ed827f5414f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+853,26ff7779-f8a4-4ac1-9852-08caa563126b,Rejected,26ff7779-f8a4-4ac1-9852-08caa563126b,Rejected,0,Normal: Marked duplicates as Rejected
+854,20048d8d-6c1c-44b6-a100-b1d9ae9ea00c,Rejected,20048d8d-6c1c-44b6-a100-b1d9ae9ea00c,Rejected,0,Normal: Marked duplicates as Rejected
+855,12330302-f01d-49f8-8432-0e87ec7b7008,Rejected,3a3df278-fc57-4cc4-bd10-c7e9ca4b8e16,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+856,5e2d4b27-d88a-426c-9dd9-df93d61bfa58,Pending_Approval,5e2d4b27-d88a-426c-9dd9-df93d61bfa58,Pending_Approval,0,Normal: Marked duplicates as Rejected
+857,066a239c-551b-4128-af5a-3d5cc530877a,Pending_Approval,066a239c-551b-4128-af5a-3d5cc530877a,Pending_Approval,1,Normal: Marked duplicates as Rejected
+858,54671307-1894-4f92-9665-eb78894fd05f,Pending_Approval,54671307-1894-4f92-9665-eb78894fd05f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+859,301cca11-9b96-48f5-a0c3-e342ffee20aa,Rejected,301cca11-9b96-48f5-a0c3-e342ffee20aa,Rejected,0,Normal: Marked duplicates as Rejected
+860,ab1bd9e1-a45b-4288-a315-778f793dae2c,Pending_Approval,ab1bd9e1-a45b-4288-a315-778f793dae2c,Pending_Approval,1,Normal: Marked duplicates as Rejected
+861,a27a5d0b-7a29-4af6-9576-4b781dafd867,Pending_Approval,a27a5d0b-7a29-4af6-9576-4b781dafd867,Pending_Approval,0,Normal: Marked duplicates as Rejected
+862,2f366606-df98-458b-9501-d02f6c17d037,Rejected,1caf7a8d-9afe-4e76-8580-1e6c1acc3f57,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+863,03a86f81-da67-4070-844f-bfdc2a4751ca,Pending_Approval,03a86f81-da67-4070-844f-bfdc2a4751ca,Pending_Approval,0,Normal: Marked duplicates as Rejected
+864,8eb0b980-226c-483a-8837-0632c56c163a,Pending_Approval,8eb0b980-226c-483a-8837-0632c56c163a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+865,76a9f2a9-6027-4ba6-ae4a-b23d014a8825,Pending_Approval,76a9f2a9-6027-4ba6-ae4a-b23d014a8825,Pending_Approval,0,Normal: Marked duplicates as Rejected
+866,2f6fbef6-6f2f-4339-8064-25b37e721ce2,Pending_Approval,2f6fbef6-6f2f-4339-8064-25b37e721ce2,Pending_Approval,0,Normal: Marked duplicates as Rejected
+867,45608a6b-f6a4-418e-a8f4-0d3388a554b0,Pending_Approval,45608a6b-f6a4-418e-a8f4-0d3388a554b0,Pending_Approval,1,Normal: Marked duplicates as Rejected
+868,be38b54e-f52b-4606-b786-32985ec5a939,Pending_Approval,be38b54e-f52b-4606-b786-32985ec5a939,Pending_Approval,0,Normal: Marked duplicates as Rejected
+869,8960d07e-612b-4b27-a5ea-ecd3c28eda3b,Rejected,8960d07e-612b-4b27-a5ea-ecd3c28eda3b,Rejected,0,Normal: Marked duplicates as Rejected
+870,0824a20e-43c4-4ece-b712-5aaf0df6d6f9,Pending_Approval,0824a20e-43c4-4ece-b712-5aaf0df6d6f9,Pending_Approval,1,Normal: Marked duplicates as Rejected
+871,f04f4d36-80bd-4e46-9181-44df8319d61a,Pending_Approval,f04f4d36-80bd-4e46-9181-44df8319d61a,Pending_Approval,1,Normal: Marked duplicates as Rejected
+872,64a9a39b-bbb2-41e6-8eff-a04fddd5094b,Pending_Approval,64a9a39b-bbb2-41e6-8eff-a04fddd5094b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+873,bcc59acd-a1c1-4de9-b5d8-337ab860376f,Pending_Approval,bcc59acd-a1c1-4de9-b5d8-337ab860376f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+874,191ae125-d893-421b-83ca-d3d3b9ca4fa6,Pending_Approval,191ae125-d893-421b-83ca-d3d3b9ca4fa6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+875,f67d41f2-d6d1-45f4-83dc-8268f15b8f56,Pending_Approval,f67d41f2-d6d1-45f4-83dc-8268f15b8f56,Pending_Approval,1,Normal: Marked duplicates as Rejected
+876,9af106dd-9539-4cc3-b38f-3026683299fb,Pending_Approval,9af106dd-9539-4cc3-b38f-3026683299fb,Pending_Approval,1,Normal: Marked duplicates as Rejected
+877,1c1e3a25-49f8-430c-b7ad-42c6aafabb7a,Pending_Approval,1c1e3a25-49f8-430c-b7ad-42c6aafabb7a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+878,ff1c76b5-cd38-43b3-a01d-909ee43d7af4,Pending_Approval,ff1c76b5-cd38-43b3-a01d-909ee43d7af4,Pending_Approval,0,Normal: Marked duplicates as Rejected
+879,0b9f4b20-d762-4f35-8707-d8d835999718,Pending_Approval,0b9f4b20-d762-4f35-8707-d8d835999718,Pending_Approval,1,Normal: Marked duplicates as Rejected
+880,863dfe43-b78f-4ad6-b5a0-db64568d14c6,Pending_Approval,863dfe43-b78f-4ad6-b5a0-db64568d14c6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+881,9a8d295f-03e7-4684-984e-b2fb25cc8761,Rejected,9a8d295f-03e7-4684-984e-b2fb25cc8761,Rejected,0,Normal: Marked duplicates as Rejected
+882,c5841ce2-1d57-4044-9927-bf9ecb07e7d9,Pending_Approval,c5841ce2-1d57-4044-9927-bf9ecb07e7d9,Pending_Approval,1,Normal: Marked duplicates as Rejected
+883,502db03f-7d71-434f-a61a-8d262647aa15,Rejected,502db03f-7d71-434f-a61a-8d262647aa15,Rejected,0,Normal: Marked duplicates as Rejected
+884,a5241d74-706e-4a1f-92f8-0165b164b6fe,Pending_Approval,a5241d74-706e-4a1f-92f8-0165b164b6fe,Pending_Approval,0,Normal: Marked duplicates as Rejected
+885,59839405-a772-4146-b86d-7560d299deb3,Pending_Approval,59839405-a772-4146-b86d-7560d299deb3,Pending_Approval,0,Normal: Marked duplicates as Rejected
+886,8c953bec-3bde-480f-ae10-14c6b4b7eda5,Pending_Approval,8c953bec-3bde-480f-ae10-14c6b4b7eda5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+887,2f75feab-935a-45d8-a8cd-f8731999ebd2,Pending_Approval,2f75feab-935a-45d8-a8cd-f8731999ebd2,Pending_Approval,1,Normal: Marked duplicates as Rejected
+888,f033b39b-e5f4-490a-9374-4f2102e23966,Pending_Approval,f033b39b-e5f4-490a-9374-4f2102e23966,Pending_Approval,1,Normal: Marked duplicates as Rejected
+889,467d5216-6a19-4015-9214-c59cb11ca38c,Rejected,97ec0ac7-00d0-47be-af2f-e15464cb6697,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+890,89605d7f-0722-4ce4-a01a-aad64af2028a,Pending_Approval,89605d7f-0722-4ce4-a01a-aad64af2028a,Pending_Approval,1,Normal: Marked duplicates as Rejected
+891,0f919c0c-b1c2-4ab9-beb8-2233773897c6,Pending_Approval,0f919c0c-b1c2-4ab9-beb8-2233773897c6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+892,d45425eb-5dcf-462f-963d-59b83aa85f02,Pending_Approval,d45425eb-5dcf-462f-963d-59b83aa85f02,Pending_Approval,0,Normal: Marked duplicates as Rejected
+893,7404de38-976c-4fd7-b036-7844e9272ef2,Pending_Approval,7404de38-976c-4fd7-b036-7844e9272ef2,Pending_Approval,1,Normal: Marked duplicates as Rejected
+894,6c37de5a-1fdb-4f80-87f8-1223dcafad64,Pending_Approval,6c37de5a-1fdb-4f80-87f8-1223dcafad64,Pending_Approval,0,Normal: Marked duplicates as Rejected
+895,d3a89d55-9b59-4fdb-80bb-879fd18175b6,Pending_Approval,d3a89d55-9b59-4fdb-80bb-879fd18175b6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+896,ebb3b16b-4940-4ab8-ba98-1e50aa538720,Rejected,aa56e86d-f5cc-4d60-840f-7ed3b7754bf0,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+897,12541caf-79df-4946-96a2-0ea2f7777ad6,Pending_Approval,12541caf-79df-4946-96a2-0ea2f7777ad6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+898,2358895a-de21-4929-9cfc-493b4a951c71,Pending_Approval,2358895a-de21-4929-9cfc-493b4a951c71,Pending_Approval,0,Normal: Marked duplicates as Rejected
+899,dd8d880e-eee6-4768-b47c-834adbd82b30,Pending_Approval,dd8d880e-eee6-4768-b47c-834adbd82b30,Pending_Approval,1,Normal: Marked duplicates as Rejected
+900,bb575b65-efd9-4e10-96cb-e92ca4580215,Rejected,bb575b65-efd9-4e10-96cb-e92ca4580215,Rejected,0,Normal: Marked duplicates as Rejected
+901,997c1ba4-fe92-4069-8b29-d8d58b7a18e2,Pending_Approval,997c1ba4-fe92-4069-8b29-d8d58b7a18e2,Pending_Approval,0,Normal: Marked duplicates as Rejected
+902,7f1d37be-ff5c-4e1c-8bf8-1fc6434795fd,Pending_Approval,7f1d37be-ff5c-4e1c-8bf8-1fc6434795fd,Pending_Approval,1,Normal: Marked duplicates as Rejected
+903,ccf4f57d-c4c7-42ad-8f41-f15ce6052b5e,Pending_Approval,ccf4f57d-c4c7-42ad-8f41-f15ce6052b5e,Pending_Approval,1,Normal: Marked duplicates as Rejected
+904,5b19eb3d-8cb2-4a4a-a48c-310f4b8f103d,Pending_Approval,5b19eb3d-8cb2-4a4a-a48c-310f4b8f103d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+905,bd3fc2a0-f014-4f57-91d4-6c847e8aaabd,Pending_Approval,bd3fc2a0-f014-4f57-91d4-6c847e8aaabd,Pending_Approval,0,Normal: Marked duplicates as Rejected
+906,2c83a63a-6414-4d69-96ed-6f67db7eb0e6,Pending_Approval,2c83a63a-6414-4d69-96ed-6f67db7eb0e6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+907,2815d2e7-45ad-4db5-86e4-b14dee29c302,Pending_Approval,2815d2e7-45ad-4db5-86e4-b14dee29c302,Pending_Approval,0,Normal: Marked duplicates as Rejected
+908,d0896746-0be5-426e-8486-2b7031d126ee,Pending_Approval,d0896746-0be5-426e-8486-2b7031d126ee,Pending_Approval,0,Normal: Marked duplicates as Rejected
+909,10b1b7d7-4f4f-4ec4-af16-9b73db143c06,Rejected,10b1b7d7-4f4f-4ec4-af16-9b73db143c06,Rejected,0,Normal: Marked duplicates as Rejected
+910,d5e8efc0-a864-4c5c-b5ff-179648ac5bf2,Pending_Approval,d5e8efc0-a864-4c5c-b5ff-179648ac5bf2,Pending_Approval,0,Normal: Marked duplicates as Rejected
+911,5422697c-6cff-4542-8c22-ff57be31d033,Pending_Approval,5422697c-6cff-4542-8c22-ff57be31d033,Pending_Approval,1,Normal: Marked duplicates as Rejected
+912,9982cd8c-7a80-457f-9700-f888a85e99db,Rejected,9982cd8c-7a80-457f-9700-f888a85e99db,Rejected,0,Normal: Marked duplicates as Rejected
+913,c8c827d1-8132-4621-9f8d-22039d358218,Rejected,2255722b-f7d8-4538-830f-af741c7fab0b,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+914,3ab9cea9-a512-48d4-ba87-655bb8ce6a0f,Rejected,977f0cbc-fcb3-4565-8690-14065e141ab5,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+915,f21485e9-89e2-491d-85ad-a4c875716943,Pending_Approval,f21485e9-89e2-491d-85ad-a4c875716943,Pending_Approval,0,Normal: Marked duplicates as Rejected
+916,fb056af8-9414-4433-8d81-395da317d413,Pending_Approval,fb056af8-9414-4433-8d81-395da317d413,Pending_Approval,1,Normal: Marked duplicates as Rejected
+917,8f7d7ca7-f373-48d9-ab64-2bd8162678ae,Pending_Approval,8f7d7ca7-f373-48d9-ab64-2bd8162678ae,Pending_Approval,0,Normal: Marked duplicates as Rejected
+918,b0d2a847-e49b-4dea-b5a4-f2a25b478b3e,Pending_Approval,b0d2a847-e49b-4dea-b5a4-f2a25b478b3e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+919,28db97b8-4f89-4c3d-8f76-0217ab2e948f,Pending_Approval,28db97b8-4f89-4c3d-8f76-0217ab2e948f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+920,5ba4f0e8-28db-478f-ac92-a85a2e723a9d,Pending_Approval,5ba4f0e8-28db-478f-ac92-a85a2e723a9d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+921,09035616-3030-46d4-a8df-3424097d7e4e,Pending_Approval,09035616-3030-46d4-a8df-3424097d7e4e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+922,fca3e03f-df0d-4961-80e6-b4090f744cf6,Rejected,fca3e03f-df0d-4961-80e6-b4090f744cf6,Rejected,0,Normal: Marked duplicates as Rejected
+923,453b23df-e23b-45b7-9463-afcbae5a99f3,Pending_Approval,453b23df-e23b-45b7-9463-afcbae5a99f3,Pending_Approval,1,Normal: Marked duplicates as Rejected
+924,39e7f560-dcca-4dbb-886b-9e9b69fcf213,Rejected,c960d5fb-aeb8-46fe-b92a-5e1da12523a9,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+925,94deb76d-3dba-477b-88aa-7137180e448b,Rejected,76366764-4df9-4b6a-8523-782e2d2ef23b,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+926,29eaa571-7d87-448a-bcde-45ac68d8c59c,Rejected,8de2cb1e-c1d7-4672-b392-b04008490c4b,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+927,220ac3d5-d525-4e0e-8284-c99cd54c8008,Pending_Approval,220ac3d5-d525-4e0e-8284-c99cd54c8008,Pending_Approval,0,Normal: Marked duplicates as Rejected
+928,68f03268-392c-414d-9cfe-204dec11203e,Pending_Approval,68f03268-392c-414d-9cfe-204dec11203e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+929,941db625-ae7f-4774-8211-4a8d9f3137c5,Pending_Approval,941db625-ae7f-4774-8211-4a8d9f3137c5,Pending_Approval,1,Normal: Marked duplicates as Rejected
+930,a3529d50-80c8-4e4b-ac73-5e878c7ff36a,Pending_Approval,a3529d50-80c8-4e4b-ac73-5e878c7ff36a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+931,312cb286-f6bc-476d-9623-30e14bc5be64,Rejected,312cb286-f6bc-476d-9623-30e14bc5be64,Rejected,0,Normal: Marked duplicates as Rejected
+932,c5fe3d53-40a0-43fb-9374-3f8c1e36a495,Pending_Approval,c5fe3d53-40a0-43fb-9374-3f8c1e36a495,Pending_Approval,1,Normal: Marked duplicates as Rejected
+933,ef55fa00-8452-489c-9f7e-59d350518d93,Rejected,b5d93369-4954-4534-a147-347ab31e7f24,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+934,6ed51485-360b-458e-95a5-94dac9ef0233,Rejected,6ed51485-360b-458e-95a5-94dac9ef0233,Rejected,0,Normal: Marked duplicates as Rejected
+935,6605104b-3225-4859-8405-9deadc07b7b8,Rejected,6605104b-3225-4859-8405-9deadc07b7b8,Rejected,0,Normal: Marked duplicates as Rejected
+936,51b69d1f-b932-4bac-a3d5-e6ca94ca5a45,Pending_Approval,51b69d1f-b932-4bac-a3d5-e6ca94ca5a45,Pending_Approval,0,Normal: Marked duplicates as Rejected
+937,ce3c4edf-8fb3-4360-a585-d123e619844c,Pending_Approval,ce3c4edf-8fb3-4360-a585-d123e619844c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+938,39d05a92-d0c8-4826-b33f-a539fd025fef,Rejected,cae9ec45-9ef5-4a25-bd18-749d1bb082e5,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+939,5105c303-d94c-4af3-936e-975f893d4b80,Rejected,a608f29c-e050-42fc-803a-fcefc9acee88,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+940,68b279bc-0587-4347-8733-d1b93c79c8a6,Pending_Approval,68b279bc-0587-4347-8733-d1b93c79c8a6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+941,2365f356-8700-4069-aa52-563789035752,Pending_Approval,2365f356-8700-4069-aa52-563789035752,Pending_Approval,0,Normal: Marked duplicates as Rejected
+942,9fecee15-131c-47bf-9e22-fd2cbb8f18e2,Pending_Approval,9fecee15-131c-47bf-9e22-fd2cbb8f18e2,Pending_Approval,1,Normal: Marked duplicates as Rejected
+943,d51f0642-b7cc-4c5e-a8e9-d4cdd5f13557,Pending_Approval,d51f0642-b7cc-4c5e-a8e9-d4cdd5f13557,Pending_Approval,0,Normal: Marked duplicates as Rejected
+944,72d6ef32-0800-4240-b3f7-79bcf7b91d46,Pending_Approval,72d6ef32-0800-4240-b3f7-79bcf7b91d46,Pending_Approval,0,Normal: Marked duplicates as Rejected
+945,577535f3-5466-44b0-8886-254737c43597,Pending_Approval,577535f3-5466-44b0-8886-254737c43597,Pending_Approval,0,Normal: Marked duplicates as Rejected
+946,b8d8fe01-41a7-4a9c-9c0d-a4d64c1bc47c,Pending_Approval,b8d8fe01-41a7-4a9c-9c0d-a4d64c1bc47c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+947,a19ffbd7-5287-40a5-888e-572818b73a9a,Rejected,2869899f-cc78-41a3-9c40-7bb7f802f4e5,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+948,b099c27e-0391-4a07-9cc8-377ef35ece46,Pending_Approval,b099c27e-0391-4a07-9cc8-377ef35ece46,Pending_Approval,0,Normal: Marked duplicates as Rejected
+949,a21bdbaa-3894-4dfd-b20d-09b5b0b09e4b,Pending_Approval,a21bdbaa-3894-4dfd-b20d-09b5b0b09e4b,Pending_Approval,1,Normal: Marked duplicates as Rejected
+950,037cfa8e-ddcc-44ed-b6d1-e59db846ce49,Pending_Approval,037cfa8e-ddcc-44ed-b6d1-e59db846ce49,Pending_Approval,0,Normal: Marked duplicates as Rejected
+951,0c488d46-75f4-4a9d-b6cb-c15419476aa4,Pending_Approval,0c488d46-75f4-4a9d-b6cb-c15419476aa4,Pending_Approval,1,Normal: Marked duplicates as Rejected
+952,46ac120a-7b0b-41fa-ab98-54761ec9aa03,Pending_Approval,46ac120a-7b0b-41fa-ab98-54761ec9aa03,Pending_Approval,0,Normal: Marked duplicates as Rejected
+953,3b4b635f-b02b-4a2e-bacc-59ff1d5743f8,Pending_Approval,3b4b635f-b02b-4a2e-bacc-59ff1d5743f8,Pending_Approval,0,Normal: Marked duplicates as Rejected
+954,067dd032-0813-49ec-be64-c3b1dc47360b,Pending_Approval,067dd032-0813-49ec-be64-c3b1dc47360b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+955,0fadeccc-2940-4ab7-a235-2c68d9f45508,Rejected,ef57f820-aedc-4cf3-a820-bb1c21e9379a,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+956,a556bf11-cbd9-489e-a6fa-166bdbc8df47,Pending_Approval,a556bf11-cbd9-489e-a6fa-166bdbc8df47,Pending_Approval,1,Normal: Marked duplicates as Rejected
+957,18e4df49-d1f6-4615-91ff-28e1ecb31b3b,Pending_Approval,18e4df49-d1f6-4615-91ff-28e1ecb31b3b,Pending_Approval,1,Normal: Marked duplicates as Rejected
+958,14c62b65-95af-4ab4-907c-de1e3e3e44d5,Pending_Approval,14c62b65-95af-4ab4-907c-de1e3e3e44d5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+959,73d1e53c-c954-48b6-a427-a27163053990,Pending_Approval,73d1e53c-c954-48b6-a427-a27163053990,Pending_Approval,0,Normal: Marked duplicates as Rejected
+960,bef0e074-b260-48c0-a23a-ed11cf76cccd,Pending_Approval,bef0e074-b260-48c0-a23a-ed11cf76cccd,Pending_Approval,0,Normal: Marked duplicates as Rejected
+961,fb43c4eb-3099-4444-9cbe-c258a57e8347,Pending_Approval,fb43c4eb-3099-4444-9cbe-c258a57e8347,Pending_Approval,1,Normal: Marked duplicates as Rejected
+962,bb0abd61-582f-4560-b3a1-351e21509d05,Pending_Approval,bb0abd61-582f-4560-b3a1-351e21509d05,Pending_Approval,0,Normal: Marked duplicates as Rejected
+963,67ed2639-c4a6-4611-b987-a54d5c939531,Pending_Approval,67ed2639-c4a6-4611-b987-a54d5c939531,Pending_Approval,1,Normal: Marked duplicates as Rejected
+964,4b1a4cde-2db4-4c83-bf35-f1fecfcf9397,Pending_Approval,4b1a4cde-2db4-4c83-bf35-f1fecfcf9397,Pending_Approval,0,Normal: Marked duplicates as Rejected
+965,8630043d-3416-47fb-b8fc-96f0515f956f,Pending_Approval,8630043d-3416-47fb-b8fc-96f0515f956f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+966,2083704c-b6f9-44e0-bb1c-1bbdc4cc0de9,Pending_Approval,2083704c-b6f9-44e0-bb1c-1bbdc4cc0de9,Pending_Approval,0,Normal: Marked duplicates as Rejected
+967,0fa9a367-45a1-43d7-9a49-55eb1ed411cf,Pending_Approval,0fa9a367-45a1-43d7-9a49-55eb1ed411cf,Pending_Approval,0,Normal: Marked duplicates as Rejected
+968,a45581cd-e794-40af-8409-3d476a43d302,Pending_Approval,a45581cd-e794-40af-8409-3d476a43d302,Pending_Approval,0,Normal: Marked duplicates as Rejected
+969,5776c5b3-38e9-4bb0-9323-074507f5d139,Rejected,c85801d1-690f-4b3e-936e-f971e5baea08,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+970,bd9539f1-8ab3-428b-8786-c67104086e06,Pending_Approval,bd9539f1-8ab3-428b-8786-c67104086e06,Pending_Approval,0,Normal: Marked duplicates as Rejected
+971,a7ae8d3e-371c-41f1-ac66-6480e730609d,Rejected,a7ae8d3e-371c-41f1-ac66-6480e730609d,Rejected,0,Normal: Marked duplicates as Rejected
+972,93b50355-e9a6-4857-9898-b06b4d7ff720,Pending_Approval,93b50355-e9a6-4857-9898-b06b4d7ff720,Pending_Approval,0,Normal: Marked duplicates as Rejected
+973,e148a25a-75ca-4386-830b-a322666487a4,Rejected,e148a25a-75ca-4386-830b-a322666487a4,Rejected,0,Normal: Marked duplicates as Rejected
+974,72693287-660e-4a84-99b7-1d18e00e1aa3,Pending_Approval,72693287-660e-4a84-99b7-1d18e00e1aa3,Pending_Approval,0,Normal: Marked duplicates as Rejected
+975,47d87928-781e-440c-b5e1-ebb460327753,Pending_Approval,47d87928-781e-440c-b5e1-ebb460327753,Pending_Approval,0,Normal: Marked duplicates as Rejected
+976,114c642c-aed3-4c96-9205-85fa419e55f5,Pending_Approval,114c642c-aed3-4c96-9205-85fa419e55f5,Pending_Approval,1,Normal: Marked duplicates as Rejected
+977,d2f0f779-d31d-45d5-bdf0-cdcdcbff0517,Rejected,33ca16fe-b171-4c48-9efa-aca89e0c9460,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+978,766ebbfa-acab-480d-b723-5b6ea6aabe5e,Pending_Approval,766ebbfa-acab-480d-b723-5b6ea6aabe5e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+979,9ebe5a7e-2aab-4302-848f-e292382faa4c,Rejected,12132599-a9ac-4240-86c8-bceb78496c2a,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+980,145fbd3c-35aa-4eca-b717-b76636b38fae,Pending_Approval,145fbd3c-35aa-4eca-b717-b76636b38fae,Pending_Approval,1,Normal: Marked duplicates as Rejected
+981,73eadc90-d079-4bb5-82eb-077f53a72c2c,Rejected,1079c601-095e-4468-b27d-44d6743ddd67,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+982,3812e126-99f7-4c0d-9160-af6243db6176,Pending_Approval,3812e126-99f7-4c0d-9160-af6243db6176,Pending_Approval,1,Normal: Marked duplicates as Rejected
+983,087a8c02-022a-4ee2-a6c8-98ca4c3f9506,Pending_Approval,087a8c02-022a-4ee2-a6c8-98ca4c3f9506,Pending_Approval,1,Normal: Marked duplicates as Rejected
+984,ffc87b58-8304-4362-9067-5a4949d5e53f,Rejected,9c6d8c6f-2f78-49af-8374-4885db0893d2,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+985,2e9811d0-1254-409a-adef-1700cd0280b0,Pending_Approval,2e9811d0-1254-409a-adef-1700cd0280b0,Pending_Approval,1,Normal: Marked duplicates as Rejected
+986,7d6895fd-588c-4dde-b2d4-23ca68c3d45a,Pending_Approval,7d6895fd-588c-4dde-b2d4-23ca68c3d45a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+987,399b439b-e29b-4a72-9825-dacdd98cdcaf,Rejected,86c30d76-f685-4879-ab76-e68bf22e9763,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+988,b5e81921-a557-4037-9a04-a7a6fa845c3f,Pending_Approval,b5e81921-a557-4037-9a04-a7a6fa845c3f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+989,4c1fb80b-3494-463e-96be-ef306ef265ef,Pending_Approval,4c1fb80b-3494-463e-96be-ef306ef265ef,Pending_Approval,0,Normal: Marked duplicates as Rejected
+990,f17df5e4-fe73-4fb0-9a33-974bf72c8597,Rejected,f17df5e4-fe73-4fb0-9a33-974bf72c8597,Rejected,0,Normal: Marked duplicates as Rejected
+991,64723e55-7370-40be-a5c5-05007eea0b16,Rejected,64723e55-7370-40be-a5c5-05007eea0b16,Rejected,0,Normal: Marked duplicates as Rejected
+992,cc29af70-1dfc-4610-8ce0-350985743a13,Rejected,6322f567-d058-4998-bbba-ecbafc079850,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+993,3c47b83f-db30-45cf-8194-f62f0a818dc8,Pending_Approval,3c47b83f-db30-45cf-8194-f62f0a818dc8,Pending_Approval,0,Normal: Marked duplicates as Rejected
+994,2e667c85-dafb-43e3-b2fe-c60eea48a8e4,Pending_Approval,2e667c85-dafb-43e3-b2fe-c60eea48a8e4,Pending_Approval,1,Normal: Marked duplicates as Rejected
+995,2e14e62a-b925-44e9-b94a-21803b760d11,Pending_Approval,2e14e62a-b925-44e9-b94a-21803b760d11,Pending_Approval,0,Normal: Marked duplicates as Rejected
+996,9243f400-ca22-4b2d-9586-f40779ef6a01,Pending_Approval,9243f400-ca22-4b2d-9586-f40779ef6a01,Pending_Approval,1,Normal: Marked duplicates as Rejected
+997,933341dc-1c06-48b9-ac08-45217e01d470,Pending_Approval,933341dc-1c06-48b9-ac08-45217e01d470,Pending_Approval,0,Normal: Marked duplicates as Rejected
+998,5a296949-295c-405a-9079-ca32b903b7fa,Rejected,5318dacc-6a98-46b7-925e-3a0a857e0ff5,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+999,b27a6b6e-f8db-4580-b732-fd35d5f1fb78,Pending_Approval,b27a6b6e-f8db-4580-b732-fd35d5f1fb78,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1000,65bcf5ac-a1a3-4c52-8887-104fc0e2f53f,Pending_Approval,65bcf5ac-a1a3-4c52-8887-104fc0e2f53f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1001,00877f90-afc4-4a04-b4a4-1a361d176fb5,Pending_Approval,00877f90-afc4-4a04-b4a4-1a361d176fb5,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1002,170982c0-c238-4dea-b0d0-684f8c8d2fe0,Pending_Approval,170982c0-c238-4dea-b0d0-684f8c8d2fe0,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1003,57da3125-51ff-4b7e-9852-49136627ea59,Pending_Approval,57da3125-51ff-4b7e-9852-49136627ea59,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1004,389a9aba-5178-45e1-8eb4-a529a8f2b6d3,Rejected,a0204f36-b33d-40e4-83a5-bacdb026b741,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1005,c4325bea-d0b8-4b4b-804a-f3f1912ca973,Pending_Approval,c4325bea-d0b8-4b4b-804a-f3f1912ca973,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1006,373ae57d-ac04-495d-9810-e9d6f76085eb,Pending_Approval,373ae57d-ac04-495d-9810-e9d6f76085eb,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1007,cdbbdee5-8cc3-4998-8dd7-a293dd418f31,Pending_Approval,cdbbdee5-8cc3-4998-8dd7-a293dd418f31,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1008,8d4a81f6-7fe5-4cc9-aecf-fc44acc8890c,Pending_Approval,8d4a81f6-7fe5-4cc9-aecf-fc44acc8890c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1009,93fed345-50df-4e0c-986f-5183ace17120,Rejected,4d09a56a-c8e6-4419-bda9-68a4a2a40065,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1010,9b05814d-ee54-4b8f-8793-57e9e64ee80b,Pending_Approval,9b05814d-ee54-4b8f-8793-57e9e64ee80b,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1011,bb23d40f-f333-432a-9c7e-2174b9e6a293,Pending_Approval,bb23d40f-f333-432a-9c7e-2174b9e6a293,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1012,876bfc65-4297-4294-823e-44b08e15bf7d,Pending_Approval,876bfc65-4297-4294-823e-44b08e15bf7d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1013,55d869a6-1ea2-4454-8b4f-14b7baaf085b,Rejected,77537c03-41f5-4804-9b67-485b674c278b,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1014,71bcc412-f661-47de-9d3c-ee23cc513bf2,Pending_Approval,71bcc412-f661-47de-9d3c-ee23cc513bf2,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1015,6fb18e4b-baf2-4540-ab4b-cc7525a5de54,Rejected,864c503c-3f80-46a9-8c89-1badf17dc246,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1016,ec572b0d-7b85-4505-9401-56fabaaa5320,Rejected,ec572b0d-7b85-4505-9401-56fabaaa5320,Rejected,0,Normal: Marked duplicates as Rejected
+1017,87e995d1-8761-47c3-ae3b-06814c9206f1,Rejected,73dfa6f9-c52b-409c-ba8e-15ef4beea500,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1018,8412ae43-feef-4080-ba64-c55b25139cfd,Pending_Approval,8412ae43-feef-4080-ba64-c55b25139cfd,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1019,0eab83bf-a83f-4848-8265-df984fbb292b,Pending_Approval,0eab83bf-a83f-4848-8265-df984fbb292b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1020,03395da5-a5f1-473b-83fd-950e9b708789,Pending_Approval,03395da5-a5f1-473b-83fd-950e9b708789,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1021,1a77d8c6-8adc-49c7-9d48-3b35cdab0b55,Pending_Approval,1a77d8c6-8adc-49c7-9d48-3b35cdab0b55,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1022,b5a2633e-cc0f-4dcc-b8e5-b2067b517893,Pending_Approval,b5a2633e-cc0f-4dcc-b8e5-b2067b517893,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1023,20c47c69-2268-4251-8915-4c390ce524f0,Rejected,20c47c69-2268-4251-8915-4c390ce524f0,Rejected,0,Normal: Marked duplicates as Rejected
+1024,d2c17d77-c578-4374-97be-14703ad95b41,Pending_Approval,d2c17d77-c578-4374-97be-14703ad95b41,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1025,92fa4172-0b94-4200-8f9e-bc45bc9e58a4,Pending_Approval,92fa4172-0b94-4200-8f9e-bc45bc9e58a4,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1026,0cca5f99-bdcc-40ca-8785-298e347d91e7,Pending_Approval,0cca5f99-bdcc-40ca-8785-298e347d91e7,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1027,234bef4d-d274-43e8-a3bc-ba8d7feee90d,Pending_Approval,234bef4d-d274-43e8-a3bc-ba8d7feee90d,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1028,b31c7aa4-84ec-4f0a-a84f-8eea582cb80b,Pending_Approval,b31c7aa4-84ec-4f0a-a84f-8eea582cb80b,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1029,5a8c8e47-e3f0-4615-b11c-3e4d40bbc82c,Pending_Approval,5a8c8e47-e3f0-4615-b11c-3e4d40bbc82c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1030,3f111998-8cad-4e0e-86e0-6cd84b934907,Pending_Approval,3f111998-8cad-4e0e-86e0-6cd84b934907,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1031,d3dc3180-a2de-4364-bdf1-b4a00d553aa7,Rejected,d3dc3180-a2de-4364-bdf1-b4a00d553aa7,Rejected,0,Normal: Marked duplicates as Rejected
+1032,ef64a5aa-e126-42cd-a32a-1340624346bf,Pending_Approval,ef64a5aa-e126-42cd-a32a-1340624346bf,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1033,435e12bc-8b06-4ae3-9cf4-c45b62561127,Pending_Approval,435e12bc-8b06-4ae3-9cf4-c45b62561127,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1034,2a0189ab-f386-4e70-bedd-5d18a0ad8c2a,Pending_Approval,2a0189ab-f386-4e70-bedd-5d18a0ad8c2a,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1035,75660531-5460-48fd-82a9-0a8afd2a4671,Pending_Approval,75660531-5460-48fd-82a9-0a8afd2a4671,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1036,a6b8687f-9667-4369-b6e0-4cd0084007eb,Pending_Approval,a6b8687f-9667-4369-b6e0-4cd0084007eb,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1037,fcd8e3de-6d58-4462-83c6-191e5e2d0902,Pending_Approval,fcd8e3de-6d58-4462-83c6-191e5e2d0902,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1038,611c1165-3591-40d7-b854-07df538ad408,Rejected,87e8aaf0-cec4-454d-a538-d917804f5e16,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1039,6c18fa8b-6d60-4e94-872e-b73f05644da4,Rejected,436c0b4d-08c3-4e29-91c5-9bab18c027a4,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1040,6ab52c5f-1107-4628-aa1d-2b7a6d9d0e0f,Pending_Approval,6ab52c5f-1107-4628-aa1d-2b7a6d9d0e0f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1041,3f03809d-ad28-4816-a06c-6cbbe866933a,Pending_Approval,3f03809d-ad28-4816-a06c-6cbbe866933a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1042,e7858cb8-5a95-4260-9784-4cbb28ddbcab,Rejected,e7858cb8-5a95-4260-9784-4cbb28ddbcab,Rejected,0,Normal: Marked duplicates as Rejected
+1043,d4dcf554-6761-412b-9de6-b8db04a85273,Rejected,d4dcf554-6761-412b-9de6-b8db04a85273,Rejected,0,Normal: Marked duplicates as Rejected
+1044,b03502d4-3d12-4a98-8996-c36c2d669b63,Rejected,b03502d4-3d12-4a98-8996-c36c2d669b63,Rejected,0,Normal: Marked duplicates as Rejected
+1045,26e363c6-e52d-4118-b18c-b77390ee8378,Rejected,26e363c6-e52d-4118-b18c-b77390ee8378,Rejected,0,Normal: Marked duplicates as Rejected
+1046,9dac6b8a-d60d-48df-9d62-2c39344cb183,Pending_Approval,9dac6b8a-d60d-48df-9d62-2c39344cb183,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1047,19e24a3f-f2e4-4922-a586-0236f42849e5,Rejected,19e24a3f-f2e4-4922-a586-0236f42849e5,Rejected,0,Normal: Marked duplicates as Rejected
+1048,d7e95cf4-51fc-4659-be76-1dfd9265991c,Rejected,d833237e-a7fc-4180-b47a-331f4eeec57f,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1049,2faa2b8f-4e21-403e-9149-9ccbe398cdb7,Pending_Approval,2faa2b8f-4e21-403e-9149-9ccbe398cdb7,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1050,9548716d-50f6-41f5-b1ba-ec2bda7e45f8,Pending_Approval,9548716d-50f6-41f5-b1ba-ec2bda7e45f8,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1051,cba570d8-e306-453c-bb20-14331fe6d840,Pending_Approval,cba570d8-e306-453c-bb20-14331fe6d840,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1052,67e094ad-a2e6-44dd-9ae7-43ce04fcb25c,Pending_Approval,67e094ad-a2e6-44dd-9ae7-43ce04fcb25c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1053,5f3dd5d6-d1c0-4484-b93a-451bca0864e7,Pending_Approval,5f3dd5d6-d1c0-4484-b93a-451bca0864e7,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1054,5d019d7a-8769-4626-a960-c1f414677f49,Pending_Approval,5d019d7a-8769-4626-a960-c1f414677f49,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1055,f9923e3a-21c4-4738-b16e-f1250ef7a679,Rejected,4e28d3d8-efd2-4c77-885c-5d30b32daca5,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1056,7aa273ef-b7d3-4c0a-96ef-38b328b5c75f,Pending_Approval,7aa273ef-b7d3-4c0a-96ef-38b328b5c75f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1057,428a10d9-f612-4d5a-8edc-540fa1cd01e2,Rejected,ea12919c-d640-4c19-b90c-ef73a70e6409,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1058,5689eae1-ba29-44a7-a8a6-b6bac4a93e84,Pending_Approval,5689eae1-ba29-44a7-a8a6-b6bac4a93e84,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1059,29b0bed6-8ce0-4712-bed8-4b5a638cf3d0,Pending_Approval,29b0bed6-8ce0-4712-bed8-4b5a638cf3d0,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1060,7ba95dc3-da5a-4f23-aaa4-9f1ad782f050,Rejected,7ba95dc3-da5a-4f23-aaa4-9f1ad782f050,Rejected,0,Normal: Marked duplicates as Rejected
+1061,16838827-27e9-4aa4-bd2b-a6e676ca921c,Rejected,16838827-27e9-4aa4-bd2b-a6e676ca921c,Rejected,0,Normal: Marked duplicates as Rejected
+1062,e8bd33ec-dfe5-4b49-aae0-8dda622d2c8f,Pending_Approval,e8bd33ec-dfe5-4b49-aae0-8dda622d2c8f,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1063,ec15c86d-2c2a-4cb3-ba8d-7f5b52e62b6a,Rejected,6fae0eec-f400-44e9-8d3f-c1c5f53f200f,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1064,6e32a0c0-3b07-42c7-ab98-65ddd462c07f,Pending_Approval,6e32a0c0-3b07-42c7-ab98-65ddd462c07f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1065,85b8efa2-00d6-422a-8608-e788df0f7286,Pending_Approval,85b8efa2-00d6-422a-8608-e788df0f7286,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1066,e7a3710a-f77a-495e-83cb-5c0fa578c2b0,Pending_Approval,e7a3710a-f77a-495e-83cb-5c0fa578c2b0,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1067,233ab305-321a-4920-b016-595fe417c926,Pending_Approval,233ab305-321a-4920-b016-595fe417c926,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1068,1dc48b64-0772-44fa-b804-42b20ab69178,Pending_Approval,1dc48b64-0772-44fa-b804-42b20ab69178,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1069,3f6f2727-19db-4929-8511-f209e1e5d253,Pending_Approval,3f6f2727-19db-4929-8511-f209e1e5d253,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1070,15992cfa-2f5a-49a2-8150-ec24d5a9af20,Pending_Approval,15992cfa-2f5a-49a2-8150-ec24d5a9af20,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1071,01962c32-b69d-418b-a8ec-7885ad50c069,Pending_Approval,01962c32-b69d-418b-a8ec-7885ad50c069,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1072,bd907fa4-df7c-45e6-a166-1688747ca470,Pending_Approval,bd907fa4-df7c-45e6-a166-1688747ca470,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1073,d55d9f20-0fdc-4e13-ad6d-18af2f21a1a7,Pending_Approval,d55d9f20-0fdc-4e13-ad6d-18af2f21a1a7,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1074,07012ba9-1a43-4617-af55-a32432d00d69,Pending_Approval,07012ba9-1a43-4617-af55-a32432d00d69,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1075,6dd4240c-e468-4a55-934d-786dd5e96c41,Rejected,927d4fbf-6edb-48e4-a366-482ca2f0963f,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1076,eef689f1-770f-4391-9de9-ebcee5b61431,Pending_Approval,eef689f1-770f-4391-9de9-ebcee5b61431,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1077,94cec73f-361a-4914-9a78-ebe4c04a2271,Pending_Approval,94cec73f-361a-4914-9a78-ebe4c04a2271,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1078,91088f6f-165b-4eae-ae07-5a4b44261814,Pending_Approval,91088f6f-165b-4eae-ae07-5a4b44261814,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1079,338feebf-833c-4111-b2e1-ec039bd5284f,Pending_Approval,338feebf-833c-4111-b2e1-ec039bd5284f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1080,869c2e71-3be7-43e0-9d9b-75070aaac7c6,Pending_Approval,869c2e71-3be7-43e0-9d9b-75070aaac7c6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1081,ba658ae1-f374-477a-a3eb-9eff2bfbef29,Pending_Approval,ba658ae1-f374-477a-a3eb-9eff2bfbef29,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1082,3097e5c4-cadc-45c0-b1f9-3272c9822141,Rejected,cf59c87a-b2eb-46a1-9e4a-ef5ac79f985f,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1083,19a057fa-5eea-4403-af7c-a9c914d5f01b,Pending_Approval,19a057fa-5eea-4403-af7c-a9c914d5f01b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1084,9083c35c-2007-47c1-8fc0-4813e7ce6ab7,Pending_Approval,9083c35c-2007-47c1-8fc0-4813e7ce6ab7,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1085,8cb87af0-cec5-4e61-be21-86d9a00160e2,Rejected,8cb87af0-cec5-4e61-be21-86d9a00160e2,Rejected,0,Normal: Marked duplicates as Rejected
+1086,670e0b29-e7fc-4769-aed5-a0c4dcd0dfa9,Pending_Approval,670e0b29-e7fc-4769-aed5-a0c4dcd0dfa9,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1087,7e09d842-53c7-4719-bd17-c9b514fcf05b,Pending_Approval,7e09d842-53c7-4719-bd17-c9b514fcf05b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1088,a08ab204-311a-4bb9-9596-d52bde98757b,Rejected,a08ab204-311a-4bb9-9596-d52bde98757b,Rejected,0,Normal: Marked duplicates as Rejected
+1089,80d4255d-1339-40ec-877b-60ae5fa7ce53,Pending_Approval,80d4255d-1339-40ec-877b-60ae5fa7ce53,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1090,bd233d95-14ac-4596-9335-3c41f92e807f,Rejected,7f43dd89-898e-4188-84e3-5debe54464ae,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1091,521af6ad-1c0d-4de4-86c5-106776a7d34d,Pending_Approval,521af6ad-1c0d-4de4-86c5-106776a7d34d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1092,4c0663c6-e7bc-478a-8591-28fef7f90ade,Rejected,b24efa96-3c65-47b9-bef5-44b3be738735,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1093,72bc9bff-0b00-4a08-a559-54b1fe38592d,Pending_Approval,72bc9bff-0b00-4a08-a559-54b1fe38592d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1094,095d4245-2641-476c-a418-ba495afccba4,Rejected,89adb082-e2bf-49a8-998f-a3d72a2e9ec7,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1095,8630d2e1-0ab1-4c0d-a6e7-7a652e155725,Rejected,6638d67f-6144-4125-b231-86a79d527272,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1096,24a98a83-d8c1-4b9f-8781-baa0b57fff9a,Pending_Approval,24a98a83-d8c1-4b9f-8781-baa0b57fff9a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1097,e517139e-1e88-487b-bdad-1fb9fd7a09d4,Pending_Approval,e517139e-1e88-487b-bdad-1fb9fd7a09d4,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1098,03b9f79f-b4d1-4543-b13f-c4482228e0e7,Rejected,e976bf81-c6b5-44c3-86a1-734f23a4e5b6,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1099,6f00f7a2-713c-4291-a137-cc354e8a28c4,Rejected,6f00f7a2-713c-4291-a137-cc354e8a28c4,Rejected,0,Normal: Marked duplicates as Rejected
+1100,e3b86255-a646-4e47-9b58-c4e080fd8d93,Pending_Approval,e3b86255-a646-4e47-9b58-c4e080fd8d93,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1101,942f5ef6-774a-4f16-8d43-2252b5c06208,Rejected,88b07571-81bd-40c7-ab26-8324914712c3,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1102,e2241a8f-06df-4d88-8c1f-2b85b18c6c8a,Rejected,43347d48-6c92-402e-a98f-e4fe07a9636e,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1103,2b951b26-d51a-4c42-a51b-6745c34d0059,Pending_Approval,2b951b26-d51a-4c42-a51b-6745c34d0059,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1104,03e378b5-16ad-4bb7-9020-997616dde0fc,Pending_Approval,03e378b5-16ad-4bb7-9020-997616dde0fc,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1105,4df71eb7-2e63-40ab-8ce0-96d4ffb6746b,Rejected,4df71eb7-2e63-40ab-8ce0-96d4ffb6746b,Rejected,0,Normal: Marked duplicates as Rejected
+1106,4591bfe0-59a4-4760-82ad-5661953eed01,Pending_Approval,4591bfe0-59a4-4760-82ad-5661953eed01,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1107,8fd261b6-94c2-43d7-988f-6f8e776e3382,Rejected,0a63af63-8db1-441b-859f-b2e7a86a3088,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1108,8920a147-6eba-4971-99be-e26c5502fa0a,Pending_Approval,8920a147-6eba-4971-99be-e26c5502fa0a,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1109,8f3fcafe-fb3d-41fc-b390-9a9b47e25ef3,Pending_Approval,8f3fcafe-fb3d-41fc-b390-9a9b47e25ef3,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1110,ea0c6133-8283-447e-ad42-0e8c943989df,Pending_Approval,ea0c6133-8283-447e-ad42-0e8c943989df,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1111,17b656f4-2723-478f-b3a4-66aa4954ee55,Pending_Approval,17b656f4-2723-478f-b3a4-66aa4954ee55,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1112,1c9ac8ac-3924-4e7c-8b3d-da2697c3f55c,Pending_Approval,1c9ac8ac-3924-4e7c-8b3d-da2697c3f55c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1113,f59df622-2867-4bb8-8b6c-bb3062d4b650,Pending_Approval,f59df622-2867-4bb8-8b6c-bb3062d4b650,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1114,0c10d87b-87ee-4c03-9bfb-3498fcbe6ede,Pending_Approval,0c10d87b-87ee-4c03-9bfb-3498fcbe6ede,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1115,2874dedb-6e55-470c-b590-71d60194300b,Rejected,921da528-b173-4025-9429-6f6f1d5a200e,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1116,15688d57-62a1-41f7-873d-c52f0b1abab1,Rejected,b9725a7f-541c-4497-a5b1-c043b3f5f010,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1117,f9e9d578-a205-4735-a782-3b47d2f3884b,Pending_Approval,f9e9d578-a205-4735-a782-3b47d2f3884b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1118,4089e9b6-2689-4c51-9848-9371cf743539,Rejected,4089e9b6-2689-4c51-9848-9371cf743539,Rejected,0,Normal: Marked duplicates as Rejected
+1119,c10223fd-205b-4b50-96fb-b70a2dcad92e,Pending_Approval,c10223fd-205b-4b50-96fb-b70a2dcad92e,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1120,5ad5caaa-49af-4bd3-bc86-211cabcffb66,Rejected,87da4651-235d-496d-86d1-96d0a19298d4,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1121,36fe60a9-f7ff-416f-9ee3-8a946f672d65,Pending_Approval,36fe60a9-f7ff-416f-9ee3-8a946f672d65,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1122,7d13d061-3a3a-454f-b7f8-79af752aa4d6,Pending_Approval,7d13d061-3a3a-454f-b7f8-79af752aa4d6,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1123,8d292cfa-d24c-4307-a829-c1cfba0e33cd,Pending_Approval,8d292cfa-d24c-4307-a829-c1cfba0e33cd,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1124,709b36c7-336f-4ac4-aa9d-fee60a8b875b,Pending_Approval,709b36c7-336f-4ac4-aa9d-fee60a8b875b,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1125,11b24630-2f1b-4e81-a68d-83c5e95e1037,Rejected,11b24630-2f1b-4e81-a68d-83c5e95e1037,Rejected,0,Normal: Marked duplicates as Rejected
+1126,0a416225-d1db-4acf-8c46-780cce2f5934,Pending_Approval,0a416225-d1db-4acf-8c46-780cce2f5934,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1127,b51d1d08-2117-4721-a0c8-d74f2a649abe,Rejected,cebe2c52-fc83-4fad-819d-7b4872e42524,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1128,10ff96b1-4d21-4bfc-b04f-4089d0822473,Rejected,10ff96b1-4d21-4bfc-b04f-4089d0822473,Rejected,0,Normal: Marked duplicates as Rejected
+1129,d7e08592-3067-4e23-827f-9679c7b3e930,Rejected,d7e08592-3067-4e23-827f-9679c7b3e930,Rejected,0,Normal: Marked duplicates as Rejected
+1130,c0ef90c5-6a13-4d46-a6a2-32f1da107641,Pending_Approval,c0ef90c5-6a13-4d46-a6a2-32f1da107641,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1131,63fa47f4-97ee-48f6-a75d-83bc3b020373,Pending_Approval,63fa47f4-97ee-48f6-a75d-83bc3b020373,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1132,57a33fe5-91e2-4710-b896-ba27a4986830,Pending_Approval,57a33fe5-91e2-4710-b896-ba27a4986830,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1133,0e69a49a-027e-4610-98e8-527cb8cd737c,Rejected,93ba95c9-f3f7-4b90-a843-1d7d12030b0b,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1134,59f5936f-7163-4faa-9059-c273e679e955,Pending_Approval,59f5936f-7163-4faa-9059-c273e679e955,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1135,0a1bfa9d-9ee4-4fad-9895-4a02d9716628,Pending_Approval,0a1bfa9d-9ee4-4fad-9895-4a02d9716628,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1136,0e767534-eb77-44dd-99fe-4bb6852ab561,Pending_Approval,0e767534-eb77-44dd-99fe-4bb6852ab561,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1137,71f26eca-782a-48c0-b40e-1d9b3dba98b9,Rejected,38aa0d63-a360-4d11-ab0f-64bef0f1e6db,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1138,5f848132-477c-4ed7-8832-ffa55fbd4d98,Pending_Approval,5f848132-477c-4ed7-8832-ffa55fbd4d98,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1139,aa71102a-94fa-4a84-bfba-74cab282d6d2,Rejected,9314da34-996b-44e3-9f3b-14ef69b3b182,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1140,c41cfd2b-18e5-4041-b9ae-51b92a265db3,Pending_Approval,c41cfd2b-18e5-4041-b9ae-51b92a265db3,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1141,427cf67a-1f25-4cf1-9af7-e2eeb3e4895a,Pending_Approval,427cf67a-1f25-4cf1-9af7-e2eeb3e4895a,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1142,ed960a50-7665-4f32-af44-1ba9dd26ef01,Rejected,46c6ec86-72d7-45e9-a351-6832328419c7,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1143,8ec07a80-6bcb-4400-b8eb-dbaf5df4bc03,Pending_Approval,8ec07a80-6bcb-4400-b8eb-dbaf5df4bc03,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1144,ff39b3d7-8862-49a4-b5ea-68c82ad2702b,Approved,ff39b3d7-8862-49a4-b5ea-68c82ad2702b,Approved,1,Normal: Marked duplicates as Rejected
+1145,a9d85a0e-7293-4d3a-a52a-066dac40133f,Pending_Approval,a9d85a0e-7293-4d3a-a52a-066dac40133f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1146,92f6f90e-339f-47ad-aa97-70020fcad3b0,Pending_Approval,92f6f90e-339f-47ad-aa97-70020fcad3b0,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1147,215773b7-336c-483d-b6f9-719a37a2118d,Pending_Approval,215773b7-336c-483d-b6f9-719a37a2118d,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1148,18d8c0a0-e043-47f6-a155-b5bee2b66ecb,Pending_Approval,18d8c0a0-e043-47f6-a155-b5bee2b66ecb,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1149,1188c3a4-ab54-47a2-abef-d84b67a30798,Pending_Approval,1188c3a4-ab54-47a2-abef-d84b67a30798,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1150,9f5b1e4b-6544-4cf8-9620-25ad61fc5ce2,Pending_Approval,9f5b1e4b-6544-4cf8-9620-25ad61fc5ce2,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1151,81500e2c-d33b-457d-959a-1ef82dd2da26,Rejected,9211a12d-6873-496b-afc6-3f9a10902aae,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1152,4037b352-ef8f-4d00-a10f-68cf0eb904db,Pending_Approval,4037b352-ef8f-4d00-a10f-68cf0eb904db,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1153,e3ca9adf-6e1f-4810-8a96-410bab387668,Pending_Approval,e3ca9adf-6e1f-4810-8a96-410bab387668,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1154,a46a7a88-313e-4762-b01a-cf059012f355,Pending_Approval,a46a7a88-313e-4762-b01a-cf059012f355,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1155,6e4953ae-5fa8-4b42-9fe5-e15dd9cfb396,Pending_Approval,6e4953ae-5fa8-4b42-9fe5-e15dd9cfb396,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1156,7a3fe5e7-d407-49ee-abe6-7c8e5f635353,Pending_Approval,7a3fe5e7-d407-49ee-abe6-7c8e5f635353,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1157,95d7e290-4064-4bbd-86e6-96724e7cdbe5,Pending_Approval,95d7e290-4064-4bbd-86e6-96724e7cdbe5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1158,ca28a047-0731-4aa1-98c7-ff25f21eb8b5,Pending_Approval,ca28a047-0731-4aa1-98c7-ff25f21eb8b5,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1159,8fd180bc-001d-4712-a6da-c3ec65a012fa,Pending_Approval,8fd180bc-001d-4712-a6da-c3ec65a012fa,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1160,da9345f9-6a79-46ee-88cd-b6f0d65e4db7,Rejected,8ecd1ee7-d999-4316-812d-6a569cf9746b,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1161,e872a405-8259-4f84-ac23-e79668d166ea,Pending_Approval,e872a405-8259-4f84-ac23-e79668d166ea,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1162,e6cc3552-7a36-4a51-8048-a7d3221ad067,Pending_Approval,e6cc3552-7a36-4a51-8048-a7d3221ad067,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1163,34a9edab-0186-4c13-bc88-4a7449373e06,Rejected,3a2ff8a4-ba85-46b0-a765-fa26ce2e02bc,Pending_Approval,0,Reordered: Original was Rejected, kept Pending_Approval duplicate
+1164,976ec725-a508-416d-a913-43341ca1099b,Pending_Approval,976ec725-a508-416d-a913-43341ca1099b,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1165,67eb0211-4e80-48a6-84db-01c40e7dba1c,Pending_Approval,67eb0211-4e80-48a6-84db-01c40e7dba1c,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1166,961c807e-c7b4-4e35-b0b5-c3fad1883881,Pending_Approval,961c807e-c7b4-4e35-b0b5-c3fad1883881,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1167,1bd6fc27-30f6-4743-ba13-ea849c43647e,Rejected,1bd6fc27-30f6-4743-ba13-ea849c43647e,Rejected,0,Normal: Marked duplicates as Rejected
+1168,c6daf23f-541b-4834-b367-b853b1cdd948,Pending_Approval,c6daf23f-541b-4834-b367-b853b1cdd948,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1169,fd3041c5-e0f5-4803-a2e4-6f30fa714276,Pending_Approval,fd3041c5-e0f5-4803-a2e4-6f30fa714276,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1170,f29bd470-d1f2-4170-b8ba-acd6cdb4525f,Pending_Approval,f29bd470-d1f2-4170-b8ba-acd6cdb4525f,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1171,2ec64edd-535a-4b02-9631-6a30d17684e2,Pending_Approval,2ec64edd-535a-4b02-9631-6a30d17684e2,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1172,51001221-584c-498a-9def-3b403e699083,Pending_Approval,51001221-584c-498a-9def-3b403e699083,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1173,463ec09e-c47c-4e43-961b-5fe205faa471,Pending_Approval,463ec09e-c47c-4e43-961b-5fe205faa471,Pending_Approval,1,Normal: Marked duplicates as Rejected
+1174,9acfbe47-7538-417d-b2d5-2b9149406b45,Pending_Approval,9acfbe47-7538-417d-b2d5-2b9149406b45,Pending_Approval,0,Normal: Marked duplicates as Rejected
+1175,80cb2256-d59e-4d28-82a3-5f85bc230532,Pending_Approval,80cb2256-d59e-4d28-82a3-5f85bc230532,Pending_Approval,0,Normal: Marked duplicates as Rejected

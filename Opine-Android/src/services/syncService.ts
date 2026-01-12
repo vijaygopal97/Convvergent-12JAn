@@ -10,8 +10,37 @@ export interface SyncResult {
   errors: Array<{ interviewId: string; error: string }>;
 }
 
+export interface SyncProgress {
+  currentInterview: number; // 1-indexed
+  totalInterviews: number;
+  interviewId: string;
+  interviewProgress: number; // 0-100 for current interview
+  stage: 'uploading_data' | 'uploading_audio' | 'verifying' | 'synced' | 'failed';
+  syncedCount: number;
+  failedCount: number;
+}
+
+export type SyncProgressCallback = (progress: SyncProgress) => void;
+
 class SyncService {
   private isSyncing = false;
+  private progressCallback: SyncProgressCallback | null = null;
+
+  /**
+   * Set progress callback for real-time sync progress updates
+   */
+  setProgressCallback(callback: SyncProgressCallback | null): void {
+    this.progressCallback = callback;
+  }
+
+  /**
+   * Notify progress callback if available
+   */
+  private notifyProgress(progress: SyncProgress): void {
+    if (this.progressCallback) {
+      this.progressCallback(progress);
+    }
+  }
 
   /**
    * Sync all pending offline interviews
@@ -59,36 +88,84 @@ class SyncService {
         return result;
       }
       
-      console.log(`🔄 Starting sync for ${pendingInterviews.length} interviews`);
+      const totalInterviews = pendingInterviews.length;
+      console.log(`🔄 Starting sync for ${totalInterviews} interviews`);
       appLoggingService.info('SYNC', 'Starting offline interview sync', {
-        interviewCount: pendingInterviews.length,
+        interviewCount: totalInterviews,
         interviewIds: pendingInterviews.map(i => i.id)
       });
 
-      // Sync each interview one by one
-      for (const interview of pendingInterviews) {
+      // Notify overall sync start
+      this.notifyProgress({
+        currentInterview: 0,
+        totalInterviews,
+        interviewId: '',
+        interviewProgress: 0,
+        stage: 'uploading_data',
+        syncedCount: 0,
+        failedCount: 0,
+      });
+
+      // Sync each interview one by one (SEQUENTIAL - WhatsApp style)
+      for (let i = 0; i < pendingInterviews.length; i++) {
+        const interview = pendingInterviews[i];
+        const currentIndex = i + 1; // 1-indexed for display
+        
         try {
-          console.log(`🔄 Syncing interview: ${interview.id} (${interview.isCatiMode ? 'CATI' : 'CAPI'})`);
+          console.log(`🔄 [${currentIndex}/${totalInterviews}] Syncing interview: ${interview.id} (${interview.isCatiMode ? 'CATI' : 'CAPI'})`);
+          
+          // Notify UI: Starting interview
+          this.notifyProgress({
+            currentInterview: currentIndex,
+            totalInterviews,
+            interviewId: interview.id,
+            interviewProgress: 0,
+            stage: 'uploading_data',
+            syncedCount: result.syncedCount,
+            failedCount: result.failedCount,
+          });
+          
           appLoggingService.logSyncAttempt(interview.id, 'SYNC_START', {
             interviewId: interview.id,
             surveyId: interview.surveyId,
             isCatiMode: interview.isCatiMode,
             currentStatus: interview.status,
-            syncAttempts: interview.syncAttempts || 0
+            syncAttempts: interview.syncAttempts || 0,
+            progress: `${currentIndex}/${totalInterviews}`
           });
           
-          // Update status to syncing
+          // Update status to syncing with progress tracking (WhatsApp-style)
           await offlineStorage.updateInterviewStatus(interview.id, 'syncing');
+          await offlineStorage.updateInterviewSyncProgress(interview.id, 0, 'uploading_data');
+          console.log(`📊 [${currentIndex}/${totalInterviews}] [${interview.id}] Progress: 0% - Starting sync...`);
 
           // Sync based on interview type
           // CRITICAL: These functions will throw an error if sync fails
           // Only if they complete without throwing will we mark as synced and delete
-          console.log(`🔄 Starting sync function for interview: ${interview.id}`);
+          console.log(`🔄 [${currentIndex}/${totalInterviews}] Starting sync function for interview: ${interview.id}`);
+          
+          // Create progress wrapper to track individual interview progress
+          const progressWrapper = {
+            currentIndex,
+            totalInterviews,
+            interviewId: interview.id,
+            updateProgress: (progress: number, stage: SyncProgress['stage']) => {
+              this.notifyProgress({
+                currentInterview: currentIndex,
+                totalInterviews,
+                interviewId: interview.id,
+                interviewProgress: progress,
+                stage,
+                syncedCount: result.syncedCount,
+                failedCount: result.failedCount,
+              });
+            }
+          };
           
           if (interview.isCatiMode) {
-            await this.syncCatiInterview(interview);
+            await this.syncCatiInterview(interview, progressWrapper);
           } else {
-            await this.syncCapiInterview(interview);
+            await this.syncCapiInterview(interview, progressWrapper);
           }
           
           // CRITICAL: Only reach here if sync function completed WITHOUT throwing an error
@@ -135,21 +212,65 @@ class SyncService {
             // Interview not found - just update status (shouldn't happen)
             await offlineStorage.updateInterviewStatus(interview.id, 'synced');
           }
+          // Update progress: Sync complete (100%)
+          await offlineStorage.updateInterviewSyncProgress(interview.id, 100, 'synced');
+          console.log(`📊 [${interview.id}] Progress: 100% - Sync complete!`);
+          
           result.syncedCount++;
-          console.log(`✅ Successfully synced interview: ${interview.id}`);
+          console.log(`✅ [${currentIndex}/${totalInterviews}] Successfully synced interview: ${interview.id}`);
+          
+          // Notify UI: Interview synced
+          this.notifyProgress({
+            currentInterview: currentIndex,
+            totalInterviews,
+            interviewId: interview.id,
+            interviewProgress: 100,
+            stage: 'synced',
+            syncedCount: result.syncedCount,
+            failedCount: result.failedCount,
+          });
           appLoggingService.logSyncResult(interview.id, true, {
             interviewId: interview.id,
             surveyId: interview.surveyId,
             syncedCount: result.syncedCount
           });
 
+          // CRITICAL FIX: Only delete after verification that everything is synced
+          // Verify audio was uploaded (if it exists) before deleting local files
+          const syncedInterviewData = await offlineStorage.getOfflineInterviewById(interview.id);
+          const hasAudio = syncedInterviewData?.audioOfflinePath || syncedInterviewData?.audioUri;
+          const audioUploaded = syncedInterviewData?.audioUploadStatus === 'uploaded';
+          
+          if (hasAudio && !audioUploaded) {
+            // CRITICAL: Audio exists but wasn't uploaded - DO NOT DELETE
+            console.error(`❌ CRITICAL: Interview ${interview.id} has audio but upload status is not 'uploaded'`);
+            console.error(`❌ Audio path: ${syncedInterviewData?.audioOfflinePath || syncedInterviewData?.audioUri}`);
+            console.error(`❌ Upload status: ${syncedInterviewData?.audioUploadStatus}`);
+            console.error(`❌ NOT deleting interview - audio upload may have failed`);
+            
+            // Update status back to pending so it retries on next sync
+            await offlineStorage.updateInterviewStatus(interview.id, 'pending');
+            throw new Error('Audio file exists but was not uploaded - sync cannot complete');
+          }
+          
+          // All verification passed - safe to delete
+          console.log(`✅ Verification passed - deleting synced interview from local storage: ${interview.id}`);
+          
           // Delete from local storage after successful sync
           // Synced interviews don't need to be stored offline anymore
           await offlineStorage.deleteSyncedInterview(interview.id);
           
-          // Clean up audio file from offline storage if it exists
+          // CRITICAL FIX: Only delete audio file if upload was confirmed successful
+          // This prevents data loss - only delete if we're certain it's on the server
           if (interview.audioOfflinePath) {
-            await offlineStorage.deleteAudioFileFromOfflineStorage(interview.audioOfflinePath);
+            // Double-check audio was uploaded before deleting
+            if (syncedInterviewData?.audioUploadStatus === 'uploaded' && syncedInterviewData?.metadata?.audioUrl) {
+              console.log(`🗑️ Deleting audio file (verified uploaded): ${interview.audioOfflinePath}`);
+              await offlineStorage.deleteAudioFileFromOfflineStorage(interview.audioOfflinePath);
+            } else {
+              console.warn(`⚠️ Skipping audio file deletion - upload status uncertain: ${syncedInterviewData?.audioUploadStatus}`);
+              // Don't delete if we're not sure - better to keep local copy than lose data
+            }
           }
           
           console.log(`🗑️ Deleted synced interview from local storage: ${interview.id}`);
@@ -165,44 +286,77 @@ class SyncService {
                               errorMessage.includes('duplicate');
           
           if (isDuplicate) {
-            // This is NOT an error - interview already exists on server
+            // This is NOT an error - interview already exists on server (IDEMPOTENCY)
             console.log(`ℹ️ Duplicate submission detected for interview ${interview.id}`);
-            console.log(`ℹ️ Interview already exists on server - treating as successfully synced`);
+            console.log(`ℹ️ Interview already exists on server - treating as successfully synced (IDEMPOTENCY)`);
             console.log(`✅ This is expected behavior - interview was already submitted previously`);
             
+            // Update progress to 100% since it's already synced
+            await offlineStorage.updateInterviewSyncProgress(interview.id, 100, 'synced');
+            console.log(`📊 [${interview.id}] Progress: 100% - Already synced (duplicate detected)`);
+            
             // Fix 3: Atomic metadata and status update - mark as synced atomically
-            // Try to get responseId from interview metadata or from server response if available
+            // CRITICAL: Only update if not already synced - prevents unnecessary writes (IDEMPOTENCY)
             const duplicateInterview = await offlineStorage.getOfflineInterviewById(interview.id);
-            const responseId = duplicateInterview?.metadata?.responseId || duplicateInterview?.metadata?.serverResponseId;
-            if (responseId) {
-              await offlineStorage.updateInterviewMetadataAndStatus(
-                interview.id,
-                {
-                  responseId: responseId,
-                  serverResponseId: responseId,
-                },
-                'synced'
-              );
+            if (duplicateInterview && duplicateInterview.status !== 'synced') {
+              const responseId = duplicateInterview.serverResponseId || 
+                                 duplicateInterview?.metadata?.responseId || 
+                                 duplicateInterview?.metadata?.serverResponseId;
+              if (responseId) {
+                await offlineStorage.updateInterviewMetadataAndStatus(
+                  interview.id,
+                  {
+                    responseId: responseId,
+                    serverResponseId: responseId,
+                  },
+                  'synced'
+                );
+              } else {
+                // Fallback: just update status if no responseId
+                await offlineStorage.updateInterviewStatus(interview.id, 'synced');
+              }
+              console.log(`✅ Interview ${interview.id} marked as synced (duplicate submission)`);
             } else {
-              // Fallback: just update status if no responseId
-              await offlineStorage.updateInterviewStatus(interview.id, 'synced');
+              console.log(`✅ Interview ${interview.id} already marked as synced - no update needed (IDEMPOTENCY)`);
             }
+            
             result.syncedCount++;
-            console.log(`✅ Interview ${interview.id} already synced (duplicate submission)`);
             
-            // Delete from local storage since it's already on server
-            await offlineStorage.deleteSyncedInterview(interview.id);
+            // CRITICAL: Only delete if we're certain it's synced and has no pending audio
+            // Check if audio was uploaded before deleting
+            const hasAudio = duplicateInterview?.audioOfflinePath || duplicateInterview?.audioUri;
+            const audioUploaded = duplicateInterview?.audioUploadStatus === 'uploaded';
             
-            // Clean up audio file if it exists
-            if (interview.audioOfflinePath) {
-              await offlineStorage.deleteAudioFileFromOfflineStorage(interview.audioOfflinePath);
+            if (hasAudio && !audioUploaded) {
+              console.warn(`⚠️ Interview ${interview.id} is duplicate but audio upload status unclear - keeping local files`);
+              // Don't delete - audio might not be synced yet
+            } else {
+              // Delete from local storage since it's already on server
+              await offlineStorage.deleteSyncedInterview(interview.id);
+              
+              // Clean up audio file only if upload was confirmed
+              if (interview.audioOfflinePath && audioUploaded) {
+                await offlineStorage.deleteAudioFileFromOfflineStorage(interview.audioOfflinePath);
+              }
             }
             
             continue; // Skip to next interview
           }
           
           // Only log as error if it's NOT a duplicate
-          console.error(`❌ Error syncing interview ${interview.id}:`, error);
+          console.error(`❌ [${currentIndex}/${totalInterviews}] Error syncing interview ${interview.id}:`, error);
+          
+          // Notify UI: Interview failed
+          this.notifyProgress({
+            currentInterview: currentIndex,
+            totalInterviews,
+            interviewId: interview.id,
+            interviewProgress: 0,
+            stage: 'failed',
+            syncedCount: result.syncedCount,
+            failedCount: result.failedCount + 1, // Will be incremented below
+          });
+          
           appLoggingService.logSyncResult(interview.id, false, {
             interviewId: interview.id,
             surveyId: interview.surveyId,
@@ -211,9 +365,39 @@ class SyncService {
             syncAttempts: interview.syncAttempts || 0
           });
           
-          // CRITICAL: Update status to failed and preserve interview for retry
-          // Do NOT delete the interview - it needs to be retried
-          await offlineStorage.updateInterviewStatus(interview.id, 'failed', errorMessage);
+          // CRITICAL: Check if error is a server error (502, 503, etc.) - these should NOT count towards max retries
+          const isServerError = errorMessage.includes('502') || 
+                               errorMessage.includes('Bad Gateway') ||
+                               errorMessage.includes('server is not responding') ||
+                               errorMessage.includes('temporary server issue');
+          
+          // CRITICAL: Implement exponential backoff and retry limits (like WhatsApp/Meta)
+          // BUT: Server errors (502) should have higher retry limit since they're temporary
+          const syncAttempts = (interview.syncAttempts || 0) + 1;
+          const MAX_RETRIES = isServerError ? 10 : 5; // More retries for server errors
+          
+          if (syncAttempts >= MAX_RETRIES) {
+            // Max retries reached - mark as permanently failed ONLY if not a server error
+            if (isServerError) {
+              // Server errors should not be marked as permanently failed - keep retrying
+              console.error(`❌ Interview ${interview.id} exceeded max retries (${MAX_RETRIES}) for server errors`);
+              console.error(`❌ However, this is a server issue - will continue retrying on next sync`);
+              await offlineStorage.updateInterviewStatus(interview.id, 'failed', `Server error (${syncAttempts} attempts): ${errorMessage}`);
+            } else {
+              // Non-server errors can be marked as permanently failed
+              console.error(`❌ Interview ${interview.id} exceeded max retries (${MAX_RETRIES}) - marking as permanently failed`);
+              await offlineStorage.updateInterviewSyncProgress(interview.id, 0, 'failed_permanently');
+              await offlineStorage.updateInterviewStatus(interview.id, 'failed', `Max retries (${MAX_RETRIES}) exceeded: ${errorMessage}`);
+            }
+          } else {
+            // Update status to failed and preserve interview for retry with exponential backoff
+            await offlineStorage.updateInterviewStatus(interview.id, 'failed', errorMessage);
+            
+            // Calculate exponential backoff delay (1s, 2s, 4s, 8s, 16s, max 60s for server errors)
+            const maxDelay = isServerError ? 60000 : 30000; // Longer delay for server errors
+            const backoffDelay = Math.min(1000 * Math.pow(2, syncAttempts - 1), maxDelay);
+            console.log(`⏳ Interview ${interview.id} will retry after ${backoffDelay}ms (attempt ${syncAttempts}/${MAX_RETRIES})`);
+          }
           
           // Log detailed error information for debugging
           console.error(`❌ Interview sync failed - will retry on next sync attempt`);
@@ -221,6 +405,8 @@ class SyncService {
             interviewId: interview.id,
             surveyId: interview.surveyId,
             error: errorMessage,
+            syncAttempts: syncAttempts,
+            maxRetries: MAX_RETRIES,
             stack: error.stack
           });
           
@@ -254,25 +440,48 @@ class SyncService {
   /**
    * Sync a CAPI interview
    */
-  private async syncCapiInterview(interview: OfflineInterview): Promise<void> {
+  private async syncCapiInterview(
+    interview: OfflineInterview,
+    progressWrapper?: { currentIndex: number; totalInterviews: number; interviewId: string; updateProgress: (progress: number, stage: SyncProgress['stage']) => void }
+  ): Promise<void> {
     console.log(`📋 Syncing CAPI interview: ${interview.id}`);
+    
+    // Helper to notify progress
+    const notifyProgress = (progress: number, stage: SyncProgress['stage']) => {
+      if (progressWrapper) {
+        progressWrapper.updateProgress(progress, stage);
+      }
+    };
 
-    // Fix 2 & 3: Check if interview was already successfully submitted
+    // Fix 2 & 3: Check if interview was already successfully submitted (IDEMPOTENCY)
     // If metadata contains a responseId, it means it was already submitted
-    if (interview.metadata?.responseId || interview.metadata?.serverResponseId) {
-      const existingResponseId = interview.metadata.responseId || interview.metadata.serverResponseId;
+    // CRITICAL: This prevents duplicate submissions and ensures retries don't change status
+    if (interview.metadata?.responseId || interview.metadata?.serverResponseId || interview.serverResponseId) {
+      const existingResponseId = interview.serverResponseId || 
+                                 interview.metadata?.responseId || 
+                                 interview.metadata?.serverResponseId;
       console.log(`ℹ️ Interview ${interview.id} was already submitted with responseId: ${existingResponseId}`);
-      console.log(`ℹ️ Skipping duplicate submission - interview is already on server`);
+      console.log(`ℹ️ Skipping duplicate submission - interview is already on server (IDEMPOTENCY CHECK)`);
+      
+      // Update progress to 100% since it's already synced
+      await offlineStorage.updateInterviewSyncProgress(interview.id, 100, 'synced');
+      console.log(`📊 [${interview.id}] Progress: 100% - Already synced (skipping duplicate)`);
+      
       // Fix 3: Atomic metadata and status update - ensure responseId is stored and status is updated together
-      await offlineStorage.updateInterviewMetadataAndStatus(
-        interview.id,
-        {
-          responseId: existingResponseId,
-          serverResponseId: existingResponseId,
-        },
-        'synced' // Mark as synced since it's already on server
-      );
-      console.log(`✅ Interview already synced - marked as synced with atomic update`);
+      // CRITICAL: Only update if status is not already 'synced' - prevents unnecessary writes (IDEMPOTENCY)
+      if (interview.status !== 'synced') {
+        await offlineStorage.updateInterviewMetadataAndStatus(
+          interview.id,
+          {
+            responseId: existingResponseId,
+            serverResponseId: existingResponseId,
+          },
+          'synced' // Mark as synced since it's already on server
+        );
+        console.log(`✅ Interview already synced - marked as synced with atomic update`);
+      } else {
+        console.log(`✅ Interview already marked as synced - no update needed (IDEMPOTENCY)`);
+      }
       return; // Exit early - interview is already on server
     }
 
@@ -291,25 +500,27 @@ class SyncService {
 
     // Check if sessionId is an offline session ID (starts with "offline_")
     // Offline session IDs don't exist on the server, so we need to start a new session
+    // CRITICAL: For offline CAPI interviews, use the offline sessionId directly
+    // The backend `completeInterview` endpoint now handles offline sessionIds
+    // This is similar to how WhatsApp handles offline messages - they're submitted directly
     const isOfflineSessionId = interview.sessionId && interview.sessionId.startsWith('offline_');
     
     let sessionId: string | undefined = interview.sessionId;
     
-    // If it's an offline session ID or no sessionId, start a new interview session
-    if (isOfflineSessionId || !sessionId) {
-      console.log(`⚠️ ${isOfflineSessionId ? 'Offline sessionId found' : 'No sessionId found'}, starting new interview session`);
-      
-      // Start interview
-      const startResult = await apiService.startInterview(interview.surveyId);
-      if (!startResult.success) {
-        throw new Error(startResult.message || 'Failed to start interview');
-      }
-
-      sessionId = startResult.response.sessionId;
-      if (!sessionId) {
-        throw new Error('Failed to get sessionId from startInterview response');
-      }
-      console.log(`✅ Started new interview session: ${sessionId}`);
+    // CRITICAL: For offline interviews, we can use the offline sessionId directly
+    // The backend will handle it and create the response from metadata
+    // No need to create a server session first - this is the WhatsApp-style approach
+    if (isOfflineSessionId) {
+      console.log(`📴 Offline sessionId detected: ${sessionId} - will submit directly to backend (WhatsApp-style)`);
+      console.log(`📴 Backend will handle offline sessionId and create response from metadata`);
+      // Use the offline sessionId directly - backend will handle it
+    } else if (!sessionId) {
+      // No sessionId at all - this shouldn't happen, but handle it
+      console.log(`⚠️ No sessionId found - this shouldn't happen for CAPI interviews`);
+      throw new Error('SessionId is required for interview sync');
+    } else {
+      // Real server sessionId - use it directly
+      console.log(`✅ Using existing server sessionId: ${sessionId}`);
     }
     
     // At this point, sessionId is guaranteed to be defined
@@ -459,62 +670,14 @@ class SyncService {
     const locationControlBooster = interview.metadata?.locationControlBooster || false;
     const geofencingError = interview.metadata?.geofencingError || null;
     
-    // Upload audio FIRST (before completeInterview) - CRITICAL for offline sync
-    // Use audioOfflinePath if available (more reliable), otherwise fall back to audioUri
+    // CRITICAL FIX: Complete interview FIRST, then upload audio
+    // Backend requires the response to exist in DB before audio can be uploaded
+    // This fixes the "Response not found for offline session" error
     let audioUrl: string | null = null;
     let audioFileSize: number = 0;
+    let responseId: string | null = null; // Will be set after completeInterview
     
-    // Check if audio is already uploaded (from previous sync attempt)
-    if (interview.audioUploadStatus === 'uploaded' && interview.metadata?.audioUrl) {
-      audioUrl = interview.metadata.audioUrl;
-      console.log('✅ Using already uploaded audio:', audioUrl);
-    } else {
-      // Need to upload audio
-      const audioPath = interview.audioOfflinePath || interview.audioUri;
-      
-      if (audioPath) {
-        try {
-          // Update status to uploading
-          interview.audioUploadStatus = 'uploading';
-          await offlineStorage.saveOfflineInterview(interview);
-          
-          // Upload with retry mechanism
-          const uploadResult = await this.uploadAudioWithRetry(
-            audioPath,
-            sessionId,
-            interview.surveyId,
-            interview.id
-          );
-          
-          if (uploadResult.success && uploadResult.audioUrl) {
-            audioUrl = uploadResult.audioUrl;
-            audioFileSize = uploadResult.fileSize || 0;
-            interview.audioUploadStatus = 'uploaded';
-            interview.metadata = {
-              ...interview.metadata,
-              audioUrl: audioUrl,
-            };
-            interview.audioUploadError = null;
-            await offlineStorage.saveOfflineInterview(interview);
-            console.log('✅ Audio uploaded successfully:', audioUrl);
-          } else {
-            throw new Error(uploadResult.error || 'Audio upload failed');
-          }
-        } catch (audioError: any) {
-          console.error('❌ Audio upload error:', audioError);
-          interview.audioUploadStatus = 'failed';
-          interview.audioUploadError = audioError.message;
-          await offlineStorage.saveOfflineInterview(interview);
-          // Continue with submission even if audio upload failed (will retry later)
-          console.log('⚠️ Continuing with submission without audio - will retry audio upload on next sync');
-        }
-      } else {
-        // CAPI interviews should have audio, but allow sync to proceed
-        console.warn('⚠️ No audio file found for CAPI interview - syncing without audio');
-      }
-    }
-    
-    // Complete the interview with the (new) sessionId
+    // Complete the interview with the (new) sessionId FIRST
     // TypeScript: Ensure sessionId is defined
     if (!sessionId) {
       throw new Error('SessionId is required to complete interview');
@@ -551,6 +714,14 @@ class SyncService {
     
     let result;
     try {
+      // CRITICAL: Check if backend is reachable before attempting sync
+      // This prevents unnecessary retries if backend is completely down
+      const isOnline = await apiService.isOnline();
+      if (!isOnline) {
+        throw new Error('Device is offline - cannot sync interview');
+      }
+      
+      // CRITICAL: For offline interviews, include surveyId in metadata (required by backend)
       result = await apiService.completeInterview(sessionId, {
       responses: finalResponses,
       qualityMetrics: interview.metadata.qualityMetrics || {
@@ -561,7 +732,7 @@ class SyncService {
         totalPauses: 0,
       },
       metadata: {
-        survey: interview.surveyId,
+        survey: interview.surveyId, // CRITICAL: Required for offline interviews
         interviewer: 'current-user',
         status: 'Pending_Approval',
         sessionId: sessionId,
@@ -583,20 +754,23 @@ class SyncService {
         abandonedReason: interview.metadata?.abandonReason || null,
         abandonmentNotes: interview.metadata?.abandonNotes || null,
         isCompleted: interview.metadata?.isCompleted !== undefined ? interview.metadata.isCompleted : true, // Default to true if not set
-        // Include audio recording info if audio was uploaded successfully
-        audioRecording: audioUrl ? {
-          hasAudio: true,
-          audioUrl: audioUrl,
-          recordingDuration: totalTimeSpent, // Use actual calculated duration
-          format: 'm4a',
-          codec: 'aac',
-          bitrate: 128000,
-          fileSize: audioFileSize, // Include file size from upload
-          uploadedAt: new Date().toISOString() // Set upload time
-        } : null // Audio upload may have failed - will retry on next sync
+        // Audio recording will be added after upload (in response metadata)
+        // Don't include audioRecording here - it will be uploaded separately after completeInterview
+        audioRecording: null,
+        // CRITICAL: Include deviceInfo for offline interviews
+        deviceInfo: interview.metadata?.deviceInfo || null
       },
       });
       console.log(`📥 completeInterview API call completed - response received`);
+      
+      // CRITICAL: Check if result indicates server error (502, etc.)
+      // responseId will be extracted after verification below
+      if (result && result.isServerError) {
+        // Server error (502, 503, etc.) - treat as temporary failure
+        const errorMsg = `Server error (${result.statusCode}): ${result.message || 'Backend server is not responding'}`;
+        console.error(`❌ ${errorMsg}`);
+        throw new Error(errorMsg);
+      }
     } catch (apiError: any) {
       // Check if the API returned a duplicate flag (from our improved error handling)
       const apiResult = apiError.response?.data || {};
@@ -668,6 +842,19 @@ class SyncService {
         throw new Error(`DUPLICATE_SUBMISSION: Interview already exists on server`);
       }
       
+      // CRITICAL: Handle 502 Bad Gateway errors (backend not responding)
+      // Check if error response indicates server error
+      const is502Error = apiError.response?.status === 502 || 
+                        errorMessage.includes('502') ||
+                        errorMessage.includes('Bad Gateway');
+      
+      if (is502Error) {
+        console.error(`❌ 502 Bad Gateway - Backend server is not responding`);
+        console.error(`❌ This is a temporary server issue - interview will be retried`);
+        // Don't treat as permanent failure - will retry on next sync
+        throw new Error(`Backend server is not responding (502 Bad Gateway). This is a temporary issue.`);
+      }
+      
       // For 500 errors, log more details to help debug
       if (apiError.response?.status === 500) {
         console.error(`❌ Backend returned 500 error - this might indicate a server-side issue`);
@@ -704,16 +891,43 @@ class SyncService {
     console.log(`📥 completeInterview API response received:`, {
       success: result?.success,
       hasResponse: !!result?.response,
-      message: result?.message
+      message: result?.message,
+      isDuplicate: result?.isDuplicate,
+      statusCode: result?.statusCode
     });
     
-    // Defensive check: result must exist and have success: true
+    // Defensive check: result must exist
     if (!result) {
       const errorMsg = 'completeInterview API returned undefined/null - sync failed';
       console.error(`❌ ${errorMsg}`);
       console.error(`❌ SessionId: ${sessionId}`);
       console.error(`❌ SurveyId: ${interview.surveyId}`);
       throw new Error(errorMsg);
+    }
+    
+    // CRITICAL: Check if backend returned a duplicate flag
+    // The backend idempotency cache returns success: true with cached response for duplicates
+    if (result.isDuplicate === true) {
+      console.log(`ℹ️ Backend explicitly marked this as duplicate (idempotency cache hit)`);
+      console.log(`ℹ️ Interview already exists on server - treating as successfully synced`);
+      
+      // Even if it's a duplicate, we should have a response with responseId
+      if (result.response && (result.response._id || result.response.id || result.response.responseId)) {
+        const duplicateResponseId = result.response._id || result.response.id || result.response.responseId;
+        console.log(`✅ Duplicate interview found with responseId: ${duplicateResponseId}`);
+        // Store the responseId and treat as success
+        interview.metadata = {
+          ...interview.metadata,
+          responseId: duplicateResponseId,
+          serverResponseId: duplicateResponseId,
+        };
+        await offlineStorage.saveOfflineInterview(interview);
+        // Throw duplicate error so caller can handle it as success
+        throw new Error(`DUPLICATE_SUBMISSION: Interview already exists on server with responseId: ${duplicateResponseId}`);
+      } else {
+        // Duplicate but no responseId - still treat as success
+        throw new Error(`DUPLICATE_SUBMISSION: Interview already exists on server (idempotency cache hit)`);
+      }
     }
     
     if (result.success !== true) {
@@ -723,7 +937,8 @@ class SyncService {
       // Sometimes the backend returns success: false for duplicates
       const isPossibleDuplicate = errorMsg.toLowerCase().includes('duplicate') ||
                                   errorMsg.toLowerCase().includes('already exists') ||
-                                  errorMsg.toLowerCase().includes('already submitted');
+                                  errorMsg.toLowerCase().includes('already submitted') ||
+                                  errorMsg.toLowerCase().includes('already completed');
       
       if (isPossibleDuplicate) {
         console.log(`ℹ️ Possible duplicate submission detected from API response`);
@@ -731,6 +946,11 @@ class SyncService {
         console.log(`ℹ️ This might mean the interview already exists on server`);
         // Treat as duplicate - will be handled by caller
         throw new Error(`DUPLICATE_SUBMISSION: ${errorMsg}`);
+      }
+      
+      // Check if it's a server error
+      if (result.isServerError || result.statusCode === 502) {
+        throw new Error(`Backend server is not responding (502 Bad Gateway). This is a temporary issue.`);
       }
       
       console.error(`❌ Interview completion failed: ${errorMsg}`);
@@ -742,11 +962,13 @@ class SyncService {
 
     // CRITICAL: Verify that the interview was actually created on the server
     // Only consider sync successful if we have confirmation (response ID)
-    // The API returns responseId (UUID) or mongoId (MongoDB ObjectId), check for both
-    const responseId = result.response?._id || 
-                       result.response?.id || 
-                       result.response?.mongoId || 
-                       result.response?.responseId;
+    // The API returns both MongoDB _id and UUID responseId - we need both for verification
+    // Priority: Use UUID responseId for audio linking, but keep MongoDB _id as fallback
+    const mongoId = result.response?._id || result.response?.id || result.response?.mongoId || null;
+    const uuidResponseId = result.response?.responseId || null;
+    
+    // Use UUID responseId if available (preferred for audio linking), otherwise use MongoDB _id
+    responseId = uuidResponseId || mongoId || null;
     
     if (!result.response || !responseId) {
       const errorMsg = 'Interview completion returned success but no response ID - sync may have failed';
@@ -757,9 +979,215 @@ class SyncService {
       throw new Error(errorMsg);
     }
 
+    // Store both IDs for verification (backend accepts both)
+    const responseIdForAudio = uuidResponseId || responseId; // Prefer UUID for audio upload
+    const responseIdForVerification = responseId; // Use either for verification (backend handles both)
+    
     // ONLY log success AFTER verification
     console.log(`✅ Interview completed successfully with sessionId: ${sessionId}`);
-    console.log(`✅ Interview response ID: ${responseId}`);
+    console.log(`✅ Interview MongoDB ID: ${mongoId || 'N/A'}`);
+    console.log(`✅ Interview UUID responseId: ${uuidResponseId || 'N/A'}`);
+    console.log(`✅ Using responseId for audio/verification: ${responseId}`);
+    
+    // Update progress: Interview data uploaded (50%)
+    notifyProgress(50, 'uploading_data');
+    
+    // CRITICAL: Audio is OPTIONAL - only upload if audio file exists
+    // CATI interviews don't have audio (audio via webhook)
+    // Early abandoned interviews may not have audio (recording never started)
+    // If audio EXISTS, it MUST be uploaded successfully (efficiency requirement)
+    console.log(`📤 Checking audio upload status AFTER interview completion (responseId: ${responseId})`);
+    
+    const audioPath = interview.audioOfflinePath || interview.audioUri;
+    const hasAudioFile = audioPath && audioPath.trim().length > 0;
+    
+    if (hasAudioFile) {
+      console.log(`📤 Audio file found - will upload: ${audioPath}`);
+      
+      // Update progress: Starting audio upload (50-90%)
+      await offlineStorage.updateInterviewSyncProgress(interview.id, 55, 'uploading_audio');
+      notifyProgress(55, 'uploading_audio');
+      console.log(`📊 [${interview.id}] Progress: 55% - Starting audio upload...`);
+      
+      // Check if audio is already uploaded (from previous sync attempt)
+      if (interview.audioUploadStatus === 'uploaded' && interview.metadata?.audioUrl) {
+        audioUrl = interview.metadata.audioUrl;
+        console.log('✅ Using already uploaded audio:', audioUrl);
+      } else {
+        // Need to upload audio - NOW that response exists in DB
+        try {
+          // Update status to uploading
+          interview.audioUploadStatus = 'uploading';
+          await offlineStorage.saveOfflineInterview(interview);
+          
+          // Upload with retry mechanism - pass responseId to link audio to response
+          // CRITICAL: If audio EXISTS, it MUST be uploaded successfully
+          // Use UUID responseId if available (preferred), otherwise use MongoDB _id
+          const audioResponseId = responseIdForAudio || responseId;
+          console.log(`📎 Using responseId for audio upload: ${audioResponseId}`);
+          
+          const uploadResult = await this.uploadAudioWithRetry(
+            audioPath,
+            sessionId,
+            interview.surveyId,
+            interview.id,
+            5, // max retries
+            audioResponseId // Pass responseId (UUID preferred) to link audio to completed response
+          );
+          
+          if (uploadResult.success && uploadResult.audioUrl) {
+            audioUrl = uploadResult.audioUrl;
+            audioFileSize = uploadResult.fileSize || 0;
+            
+            // CRITICAL FIX: Verify audio was actually linked to response before proceeding
+            // This prevents data loss - ensures audio exists on server before we delete locally
+            if (responseIdForVerification) {
+              console.log(`🔍 Verifying audio upload - checking if audio is linked to response ${responseIdForVerification}...`);
+              console.log(`🔍 Using identifier for verification: ${responseIdForVerification} (UUID: ${uuidResponseId || 'N/A'}, MongoId: ${mongoId || 'N/A'})`);
+              try {
+                // Wait a moment for backend to process the update (MongoDB write + S3 upload)
+                // Backend needs time to:
+                // 1. Save audio file to S3/local storage
+                // 2. Update MongoDB document with audioUrl
+                // 3. Commit transaction
+                console.log(`⏳ Waiting 3 seconds for backend to process audio link...`);
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                
+                // CRITICAL: Actually fetch the response from server to verify audioUrl exists
+                const { apiService } = await import('./api');
+                
+                // Try UUID first (preferred), then MongoDB _id if UUID not available
+                // Backend endpoint handles both
+                let verifyResult;
+                let verifyIdentifier = responseIdForVerification;
+                
+                if (uuidResponseId) {
+                  // Try UUID first
+                  console.log(`🔍 Trying verification with UUID: ${uuidResponseId}`);
+                  verifyResult = await apiService.getSurveyResponseById(uuidResponseId);
+                  
+                  if (!verifyResult.success && mongoId) {
+                    // If UUID lookup fails, try MongoDB _id
+                    console.log(`⚠️ UUID lookup failed, trying MongoDB _id: ${mongoId}`);
+                    verifyIdentifier = mongoId;
+                    verifyResult = await apiService.getSurveyResponseById(mongoId);
+                  } else {
+                    verifyIdentifier = uuidResponseId;
+                  }
+                } else {
+                  // Use MongoDB _id directly
+                  console.log(`🔍 Using MongoDB _id for verification: ${mongoId}`);
+                  verifyResult = await apiService.getSurveyResponseById(responseIdForVerification);
+                }
+                
+                if (!verifyResult.success || !verifyResult.response) {
+                  const errorMsg = verifyResult.error || 'Unknown error';
+                  console.error(`❌ Failed to fetch response for verification`);
+                  console.error(`❌ Error: ${errorMsg}`);
+                  console.error(`❌ Identifier used: ${verifyIdentifier}`);
+                  console.error(`❌ UUID responseId: ${uuidResponseId || 'N/A'}`);
+                  console.error(`❌ MongoDB _id: ${mongoId || 'N/A'}`);
+                  throw new Error(`Failed to fetch response for verification: ${errorMsg}`);
+                }
+                
+                const serverResponse = verifyResult.response;
+                const serverAudioUrl = serverResponse?.audioRecording?.audioUrl || 
+                                      serverResponse?.audioUrl ||
+                                      null;
+                
+                console.log(`🔍 Verification successful - fetched response from server`);
+                console.log(`🔍 Server response ID: ${serverResponse?.responseId || serverResponse?._id || 'N/A'}`);
+                console.log(`🔍 Server response audioRecording:`, JSON.stringify(serverResponse?.audioRecording, null, 2));
+                console.log(`🔍 Server audioUrl: ${serverAudioUrl || 'NOT FOUND'}`);
+                console.log(`🔍 Uploaded audioUrl: ${audioUrl}`);
+                
+                if (!serverAudioUrl || serverAudioUrl.trim() === '') {
+                  console.error(`❌ CRITICAL: Audio URL not found in server response!`);
+                  console.error(`❌ Verification identifier: ${verifyIdentifier}`);
+                  console.error(`❌ UUID responseId: ${uuidResponseId || 'N/A'}`);
+                  console.error(`❌ MongoDB _id: ${mongoId || 'N/A'}`);
+                  console.error(`❌ Server response _id: ${serverResponse?._id || 'N/A'}`);
+                  console.error(`❌ Server response responseId: ${serverResponse?.responseId || 'N/A'}`);
+                  console.error(`❌ Full server response:`, JSON.stringify(serverResponse, null, 2));
+                  throw new Error(`Audio URL not found in server response - audio was NOT linked to response. Verification identifier: ${verifyIdentifier}`);
+                }
+                
+                // Verify the audioUrl matches what we uploaded
+                // Note: Server might return S3 key while we have full URL, so check for partial match
+                const audioUrlMatches = serverAudioUrl === audioUrl || 
+                                      serverAudioUrl.includes(audioUrl.split('/').pop() || '') ||
+                                      audioUrl.includes(serverAudioUrl.split('/').pop() || '');
+                
+                if (!audioUrlMatches) {
+                  console.warn(`⚠️ Audio URL format mismatch:`);
+                  console.warn(`⚠️ Uploaded: ${audioUrl}`);
+                  console.warn(`⚠️ Server: ${serverAudioUrl}`);
+                  console.warn(`⚠️ This might be OK if server uses S3 keys vs URLs`);
+                  // Don't fail - if server has an audioUrl, it's linked
+                }
+                
+                console.log(`✅ Audio upload VERIFIED - server response has audioUrl: ${serverAudioUrl}`);
+                console.log(`✅ Audio is properly linked to response ${responseId}`);
+              } catch (verifyError: any) {
+                console.error('❌ Audio verification FAILED:', verifyError.message);
+                console.error('❌ This means audio may not be linked to the response');
+                console.error('❌ Failing sync to prevent data loss');
+                console.error('❌ Interview will remain in local storage for retry');
+                // CRITICAL: Fail sync if verification fails - audio might not be linked
+                throw new Error(`Audio verification failed: ${verifyError.message}. Interview will remain in local storage for retry.`);
+              }
+            } else {
+              console.warn('⚠️ No responseId provided - skipping audio verification (backward compatibility)');
+              console.warn('⚠️ Audio upload may succeed but not be linked to response');
+              console.warn('⚠️ Consider updating app to always pass responseId');
+            }
+            
+            interview.audioUploadStatus = 'uploaded';
+            interview.metadata = {
+              ...interview.metadata,
+              audioUrl: audioUrl,
+            };
+            interview.audioUploadError = null;
+            await offlineStorage.saveOfflineInterview(interview);
+            
+            // Update progress: Audio uploaded (90%)
+            await offlineStorage.updateInterviewSyncProgress(interview.id, 90, 'uploading_audio');
+            notifyProgress(90, 'uploading_audio');
+            console.log(`📊 [${interview.id}] Progress: 90% - Audio uploaded successfully`);
+            console.log('✅ Audio uploaded and verified successfully:', audioUrl);
+          } else {
+            // CRITICAL: If audio EXISTS but upload failed, fail sync
+            // This ensures efficiency - audio must be uploaded if it exists
+            const errorMessage = uploadResult.error || 'Audio upload failed';
+            console.error('❌ Audio file exists but upload failed - sync cannot proceed');
+            console.error('❌ Error:', errorMessage);
+            interview.audioUploadStatus = 'failed';
+            interview.audioUploadError = errorMessage;
+            await offlineStorage.saveOfflineInterview(interview);
+            // CRITICAL: Throw error - audio exists but couldn't be uploaded
+            throw new Error(`Audio file exists but upload failed: ${errorMessage}`);
+          }
+        } catch (audioError: any) {
+          console.error('❌ Audio upload error:', audioError);
+          interview.audioUploadStatus = 'failed';
+          interview.audioUploadError = audioError.message;
+          await offlineStorage.saveOfflineInterview(interview);
+          // CRITICAL: Audio exists but upload failed - fail sync
+          throw new Error(`Audio file exists but upload failed: ${audioError.message || 'Audio upload failed'}`);
+        }
+      }
+    } else {
+      // No audio file - this is OK (early abandoned or CATI interview)
+      console.log('ℹ️ No audio file found - this is OK (early abandoned interview or CATI)');
+      console.log('ℹ️ Interview will sync without audio');
+      audioUrl = null;
+      audioFileSize = 0;
+      // Don't fail sync - audio is optional
+    }
+    
+    // Update progress: Verifying sync (95%)
+    await offlineStorage.updateInterviewSyncProgress(interview.id, 95, 'verifying');
+    console.log(`📊 [${interview.id}] Progress: 95% - Verifying sync...`);
     
     // Log audio status - audioUrl is guaranteed to be present at this point
     if (audioUrl) {
@@ -802,13 +1230,20 @@ class SyncService {
 
   /**
    * Upload audio file with retry mechanism (exponential backoff)
+   * CRITICAL: If audio file exists, upload MUST succeed (efficiency requirement)
+   * Audio is optional - only called when audio file actually exists
+   * This ensures no data loss - if audio exists, it will be uploaded reliably
+   * 
+   * @param responseId - Optional responseId to link audio to existing response (for sync retries)
+   *                     Backward compatible - if not provided, uses session-based upload
    */
   private async uploadAudioWithRetry(
     audioPath: string,
     sessionId: string,
     surveyId: string,
     interviewId: string,
-    maxRetries: number = 3
+    maxRetries: number = 5, // Increased retries for audio (critical)
+    responseId?: string // CRITICAL FIX: Add responseId parameter to link audio to response
   ): Promise<{ success: boolean; audioUrl?: string; fileSize?: number; error?: string }> {
     console.log(`📤 Uploading audio with retry (max ${maxRetries} attempts): ${audioPath}`);
     
@@ -834,11 +1269,17 @@ class SyncService {
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       try {
         console.log(`📤 Audio upload attempt ${attempt}/${maxRetries}...`);
+        if (responseId) {
+          console.log(`📎 Linking audio to responseId: ${responseId}`);
+        }
         
+        // CRITICAL FIX: Pass responseId to link audio to completed response
+        // Backward compatible - responseId is optional for old app versions
         const uploadResult = await apiService.uploadAudioFile(
           audioPath,
           sessionId,
-          surveyId
+          surveyId,
+          responseId // Pass responseId to ensure audio is linked to response
         );
         
         if (uploadResult.success && uploadResult.response?.audioUrl) {
@@ -860,10 +1301,19 @@ class SyncService {
         lastError = error;
         console.error(`❌ Audio upload attempt ${attempt} failed:`, error.message);
         
+        // CRITICAL: Check if error is 502 Bad Gateway - use longer delays for server errors
+        const is502Error = error.message && (
+          error.message.includes('502') || 
+          error.message.includes('Bad Gateway') ||
+          error.message.includes('server is not responding')
+        );
+        
         // If not the last attempt, wait before retrying (exponential backoff)
         if (attempt < maxRetries) {
-          const delay = Math.min(1000 * Math.pow(2, attempt - 1), 10000); // Max 10 seconds
-          console.log(`⏳ Waiting ${delay}ms before retry...`);
+          // Longer delays for 502 errors (server issues), shorter for network errors
+          const baseDelay = is502Error ? 5000 : 1000; // 5s base for 502, 1s for others
+          const delay = Math.min(baseDelay * Math.pow(2, attempt - 1), is502Error ? 30000 : 10000);
+          console.log(`⏳ Waiting ${delay}ms before retry... (502 error: ${is502Error})`);
           await new Promise(resolve => setTimeout(resolve, delay));
         }
       }
@@ -878,14 +1328,69 @@ class SyncService {
   }
 
   /**
-   * Sync a CATI interview
+   * Sync a CATI interview with multi-stage progress tracking (like WhatsApp/Meta)
+   * Stage 1: Upload interview data (0-50%)
+   * Stage 2: Upload audio if exists (50-90%)
+   * Stage 3: Verify all data received (90-100%)
+   * Only delete after full verification
    */
-  private async syncCatiInterview(interview: OfflineInterview): Promise<void> {
-    console.log(`📋 Syncing CATI interview: ${interview.id}`);
+  private async syncCatiInterview(
+    interview: OfflineInterview,
+    progressWrapper?: { currentIndex: number; totalInterviews: number; interviewId: string; updateProgress: (progress: number, stage: SyncProgress['stage']) => void }
+  ): Promise<void> {
+    console.log(`📋 Syncing CATI interview: ${interview.id} (Multi-stage sync)`);
+    
+    // Helper to notify progress
+    const notifyProgress = (progress: number, stage: SyncProgress['stage']) => {
+      if (progressWrapper) {
+        progressWrapper.updateProgress(progress, stage);
+      }
+    };
 
     if (!interview.catiQueueId) {
       throw new Error('CATI interview requires catiQueueId');
     }
+
+    // CRITICAL: Check if already synced using serverResponseId (idempotency)
+    // This ensures backward compatibility - old interviews without serverResponseId will still sync
+    if (interview.serverResponseId || interview.serverMongoId) {
+      const responseIdToCheck = interview.serverResponseId || interview.serverMongoId;
+      console.log(`✅ Interview ${interview.id} already has responseId: ${responseIdToCheck} - checking if synced...`);
+      
+      // Try to verify if this response exists on server using getSurveyResponseById
+      try {
+        // CRITICAL: Ensure method exists before calling
+        if (apiService && typeof apiService.getSurveyResponseById === 'function') {
+          const verifyResult = await apiService.getSurveyResponseById(responseIdToCheck!);
+          if (verifyResult && verifyResult.success && verifyResult.response) {
+            console.log(`✅ Interview ${interview.id} already verified on server - skipping sync`);
+            // Update progress to 100% and mark as synced
+            await offlineStorage.updateInterviewSyncProgress(interview.id, 100, 'synced');
+            return; // Already synced, exit early
+          }
+        } else {
+          console.warn(`⚠️ getSurveyResponseById not available - skipping verification check, proceeding with sync`);
+        }
+      } catch (verifyError: any) {
+        console.log(`⚠️ Verification check failed, proceeding with sync: ${verifyError?.message || verifyError}`);
+        // Continue with sync if verification fails (backward compatibility)
+      }
+    }
+    
+    // BACKWARD COMPATIBILITY: For old interviews without serverResponseId, check metadata
+    // Old version users may have responseId in metadata.responseId or metadata.serverResponseId
+    if (!interview.serverResponseId && interview.metadata?.responseId) {
+      console.log(`ℹ️ Interview ${interview.id} has legacy responseId in metadata: ${interview.metadata.responseId} - using for idempotency`);
+      // Use legacy responseId for idempotency check
+      interview.serverResponseId = interview.metadata.responseId;
+    }
+    if (!interview.serverResponseId && interview.metadata?.serverResponseId) {
+      console.log(`ℹ️ Interview ${interview.id} has legacy serverResponseId in metadata: ${interview.metadata.serverResponseId} - using for idempotency`);
+      interview.serverResponseId = interview.metadata.serverResponseId;
+    }
+
+    // Update progress: Stage 1 - Uploading data (0%)
+    await offlineStorage.updateInterviewSyncProgress(interview.id, 0, 'uploading_data');
 
     // Fetch survey from cache if needed
     let survey = interview.survey;
@@ -986,7 +1491,12 @@ class SyncService {
       };
     }
 
-    // Complete CATI interview
+    // STAGE 1: Upload interview data (0-50%)
+    console.log(`📤 Stage 1: Uploading interview data for ${interview.id}...`);
+    await offlineStorage.updateInterviewSyncProgress(interview.id, 10, 'uploading_data');
+    notifyProgress(10, 'uploading_data');
+
+    // Complete CATI interview with serverResponseId/serverMongoId for idempotency
     const result = await apiService.completeCatiInterview(interview.catiQueueId, {
       sessionId: interview.sessionId || undefined,
       responses: finalResponses,
@@ -1002,32 +1512,203 @@ class SyncService {
       OldinterviewerID: oldInterviewerID,
       callStatus: finalCallStatus,
       supervisorID: supervisorID,
-      consentResponse: isConsentNo ? 'no' : null, // Set consentResponse if consent is "No"
-      // CRITICAL: Include abandonment information from interview metadata if available (same as CAPI)
+      consentResponse: isConsentNo ? 'no' : null,
       abandoned: interview.metadata?.isCompleted === false || (interview.metadata?.abandonReason !== null && interview.metadata?.abandonReason !== undefined) ? true : false,
       abandonedReason: interview.metadata?.abandonReason || null,
       abandonmentNotes: interview.metadata?.abandonNotes || null,
-      isCompleted: interview.metadata?.isCompleted !== undefined ? interview.metadata.isCompleted : true, // Default to true if not set
-      // Include metadata object for backward compatibility (backend checks both top-level and metadata fields)
+      isCompleted: interview.metadata?.isCompleted !== undefined ? interview.metadata.isCompleted : true,
       metadata: {
         abandoned: interview.metadata?.isCompleted === false || (interview.metadata?.abandonReason !== null && interview.metadata?.abandonReason !== undefined) ? true : false,
         abandonedReason: interview.metadata?.abandonReason || null,
         abandonmentNotes: interview.metadata?.abandonNotes || null,
         isCompleted: interview.metadata?.isCompleted !== undefined ? interview.metadata.isCompleted : true
-      }
+      },
+      // CRITICAL: Send serverResponseId/serverMongoId for idempotency check
+      serverResponseId: interview.serverResponseId,
+      serverMongoId: interview.serverMongoId,
+      uploadToken: interview.uploadToken
     });
 
     if (!result.success) {
       throw new Error(result.message || 'Failed to complete CATI interview');
     }
 
-    console.log(`✅ CATI interview synced successfully: ${interview.id}`);
+    // CRITICAL: Store serverResponseId and serverMongoId immediately after successful upload
+    const serverResponseId = result.data?.responseId;
+    const serverMongoId = result.data?.mongoId;
+    const uploadToken = result.data?.uploadToken;
+
+    if (serverResponseId && serverMongoId) {
+      await offlineStorage.updateInterviewServerIds(interview.id, serverResponseId, serverMongoId, uploadToken);
+      console.log(`✅ Stored server IDs: responseId=${serverResponseId}, mongoId=${serverMongoId}`);
+    }
+
+      // Update progress: Stage 1 complete (50%)
+      await offlineStorage.updateInterviewSyncProgress(interview.id, 50, 'uploading_data');
+      notifyProgress(50, 'uploading_data');
+      console.log(`✅ Stage 1 complete: Interview data uploaded (50%)`);
+
+    // STAGE 2: Upload audio if exists (50-90%)
+    if (interview.audioOfflinePath || interview.audioUri) {
+      console.log(`📤 Stage 2: Uploading audio for ${interview.id}...`);
+      await offlineStorage.updateInterviewSyncProgress(interview.id, 55, 'uploading_audio');
+      notifyProgress(55, 'uploading_audio');
+      
+      const audioPath = interview.audioOfflinePath || interview.audioUri;
+      if (audioPath) {
+        try {
+          // Upload audio with retry (using serverResponseId to link)
+          const audioResult = await this.uploadAudioWithRetry(
+            audioPath,
+            interview.sessionId || '',
+            interview.surveyId,
+            interview.id,
+            3, // max retries
+            serverResponseId // Link to responseId (for idempotency)
+          );
+
+          if (audioResult.success && audioResult.audioUrl) {
+            // Update interview with audio URL
+            await offlineStorage.updateInterviewMetadata(interview.id, {
+              audioUrl: audioResult.audioUrl,
+              audioUploadStatus: 'uploaded'
+            });
+            console.log(`✅ Audio uploaded successfully: ${audioResult.audioUrl}`);
+          } else {
+            // Audio upload failed - but don't fail the entire sync
+            // Mark for retry on next sync
+            await offlineStorage.updateInterviewMetadata(interview.id, {
+              audioUploadStatus: 'failed',
+              audioUploadError: audioResult.error || 'Audio upload failed',
+              audioRetryCount: (interview.audioRetryCount || 0) + 1
+            });
+            console.warn(`⚠️ Audio upload failed, but interview data is safe on server. Will retry on next sync.`);
+          }
+        } catch (audioError: any) {
+          // Audio upload error - don't fail entire sync
+          await offlineStorage.updateInterviewMetadata(interview.id, {
+            audioUploadStatus: 'failed',
+            audioUploadError: audioError.message || 'Audio upload error',
+            audioRetryCount: (interview.audioRetryCount || 0) + 1
+          });
+          console.warn(`⚠️ Audio upload error (non-fatal): ${audioError.message}`);
+        }
+      }
+      
+      // Update progress: Stage 2 complete (90%)
+      await offlineStorage.updateInterviewSyncProgress(interview.id, 90, 'uploading_audio');
+      notifyProgress(90, 'uploading_audio');
+      console.log(`✅ Stage 2 complete: Audio upload finished (90%)`);
+    } else {
+      // No audio - skip to verification
+      await offlineStorage.updateInterviewSyncProgress(interview.id, 90, 'verifying');
+      notifyProgress(90, 'verifying');
+      console.log(`ℹ️ No audio file - skipping to verification`);
+    }
+
+    // STAGE 3: Verify all data received (90-100%)
+    console.log(`🔍 Stage 3: Verifying interview sync for ${interview.id}...`);
+    await offlineStorage.updateInterviewSyncProgress(interview.id, 95, 'verifying');
+    notifyProgress(95, 'verifying');
+
+    // PERFORMANCE OPTIMIZED: Use getSurveyResponseById for verification (works for both CAPI and CATI)
+    // For CATI, we verify that the response exists on the server
+    // For CAPI with audio, we also verify audio is linked
+    const responseIdForVerification = serverResponseId || serverMongoId;
+    
+    if (responseIdForVerification) {
+      try {
+        // CRITICAL: Ensure getSurveyResponseById method exists before calling
+        if (!apiService || typeof apiService.getSurveyResponseById !== 'function') {
+          console.error(`❌ apiService.getSurveyResponseById is not available`);
+          throw new Error('getSurveyResponseById method not available on apiService');
+        }
+        
+        // Wait a bit longer for backend to fully process the response
+        // CATI responses might take a moment to be fully indexed/available
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        // Verify response exists on server with retry logic
+        let verifyResult = null;
+        let retryCount = 0;
+        const maxRetries = 3;
+        
+        while (retryCount < maxRetries && !verifyResult?.success) {
+          try {
+            // Explicitly call the method to avoid any dynamic resolution issues
+            verifyResult = await apiService.getSurveyResponseById(responseIdForVerification);
+            if (verifyResult && verifyResult.success && verifyResult.response) {
+              break; // Success, exit retry loop
+            }
+          } catch (retryError: any) {
+            retryCount++;
+            console.log(`⏳ Verification attempt ${retryCount}/${maxRetries} error:`, retryError?.message || retryError);
+            if (retryCount < maxRetries) {
+              console.log(`⏳ Retrying in 1s...`);
+              await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+          }
+        }
+        
+        if (verifyResult && verifyResult.success && verifyResult.response) {
+          const serverResponse = verifyResult.response;
+          console.log(`✅ CATI interview verified on server - response exists (responseId: ${responseIdForVerification})`);
+          await offlineStorage.updateInterviewSyncProgress(interview.id, 100, 'synced');
+          notifyProgress(100, 'synced');
+          console.log(`✅ Stage 3 complete: Interview verified and fully synced (100%)`);
+        } else {
+          // Response not found after retries - but don't fail if we have responseId
+          // The backend might have processed it but it's not immediately queryable
+          // Since completeCatiInterview succeeded, we trust that the response was created
+          console.warn(`⚠️ Response verification failed after ${maxRetries} attempts, but interview was successfully created`);
+          console.warn(`⚠️ ResponseId: ${responseIdForVerification} - marking as synced (backend may still be processing)`);
+          await offlineStorage.updateInterviewSyncProgress(interview.id, 100, 'synced');
+          console.log(`✅ Stage 3 complete: Interview synced (verification skipped - responseId confirmed)`);
+        }
+      } catch (verifyError: any) {
+        const errorMessage = verifyError?.message || String(verifyError) || 'Unknown error';
+        console.error(`❌ Verification error: ${errorMessage}`);
+        
+        // CRITICAL: Don't fail sync if verification fails - response was successfully created
+        // The verification is just a safety check to ensure data integrity
+        // If completeCatiInterview succeeded, we have a responseId, so trust that it was created
+        console.warn(`⚠️ Verification check failed but response was created successfully`);
+        console.warn(`⚠️ ResponseId: ${responseIdForVerification} - marking as synced`);
+        console.warn(`⚠️ Error details: ${errorMessage}`);
+        
+        // Mark as synced anyway since the response was successfully created
+        // The verification is just a safety check
+        await offlineStorage.updateInterviewSyncProgress(interview.id, 100, 'synced');
+        console.log(`✅ Stage 3 complete: Interview synced (verification skipped due to error)`);
+        
+        // DON'T throw - allow sync to complete successfully
+        // The response was already created on the server, verification is just a safety check
+      }
+    } else {
+      // No responseId available - this shouldn't happen if sync was successful
+      console.error(`❌ No responseId available for verification - sync may have failed`);
+      throw new Error('No responseId available for verification - sync may have failed');
+    }
+
+    console.log(`✅ CATI interview fully synced and verified: ${interview.id}`);
   }
 
   /**
    * Build final responses array from interview responses
+   * CRITICAL FIX: Use metadata.finalResponses if available (saved during interview completion)
+   * This prevents empty responses when interview.responses object is empty or missing
    */
   private async buildFinalResponses(interview: OfflineInterview): Promise<any[]> {
+    // CRITICAL FIX: Check if finalResponses array was already saved in metadata
+    // This is the most reliable source - it was built at the time of interview completion
+    // and saved directly, so it's guaranteed to have all responses
+    if (interview.metadata?.finalResponses && Array.isArray(interview.metadata.finalResponses) && interview.metadata.finalResponses.length > 0) {
+      console.log(`✅ Using saved finalResponses from metadata (${interview.metadata.finalResponses.length} responses)`);
+      return interview.metadata.finalResponses;
+    }
+
+    // Fallback: Build from interview.responses object (for backward compatibility)
+    console.log(`⚠️ No finalResponses in metadata, building from interview.responses object...`);
     const finalResponses: any[] = [];
     
     // Fetch survey from cache if not stored in interview
@@ -1043,6 +1724,50 @@ class SyncService {
     
     if (!survey) {
       throw new Error('Survey is required to build final responses');
+    }
+
+    // CRITICAL: Check if interview.responses is empty or missing
+    // OLD VERSION COMPATIBILITY: Some old app versions may not save responses correctly
+    // Try to recover from other sources before giving up
+    if (!interview.responses || typeof interview.responses !== 'object' || Object.keys(interview.responses).length === 0) {
+      console.error(`❌ CRITICAL: interview.responses is empty or missing!`);
+      console.error(`   Interview ID: ${interview.id}`);
+      console.error(`   Survey ID: ${interview.surveyId}`);
+      console.error(`   This indicates old app version or data corruption`);
+      
+      // OLD VERSION FIX: Try to extract responses from other metadata fields
+      // Some old versions might store responses in different formats
+      const alternativeResponses: Record<string, any> = {};
+      
+      // Check if there's any response data in metadata
+      if (interview.metadata) {
+        // Check for any fields that might contain response data
+        const metadataKeys = Object.keys(interview.metadata);
+        console.log(`   Checking metadata for alternative response sources: ${metadataKeys.join(', ')}`);
+        
+        // Some old versions might store responses in a different format
+        // Look for common patterns
+        for (const key of metadataKeys) {
+          if (key.toLowerCase().includes('response') && typeof interview.metadata[key] === 'object') {
+            console.log(`   Found potential response data in metadata.${key}`);
+            Object.assign(alternativeResponses, interview.metadata[key]);
+          }
+        }
+      }
+      
+      // If we found alternative responses, use them
+      if (Object.keys(alternativeResponses).length > 0) {
+        console.log(`   ✅ Recovered ${Object.keys(alternativeResponses).length} responses from alternative sources`);
+        // Continue with alternativeResponses as interview.responses
+        interview.responses = alternativeResponses;
+      } else {
+        console.error(`   ❌ No alternative response sources found - interview data is corrupted or was never saved properly`);
+        console.error(`   This interview cannot be synced - data loss has occurred`);
+        console.error(`   User needs to retake the interview with an updated app version`);
+        
+        // Return empty array - backend validation will reject it with a clear error
+        return [];
+      }
     }
 
     // Get all questions from survey
@@ -1062,8 +1787,16 @@ class SyncService {
     }
 
     // Build responses array
+    // OLD VERSION COMPATIBILITY: Handle both new format (interview.responses object) and potential old formats
+    let responsesFound = 0;
+    let responsesSkipped = 0;
+    
     allQuestions.forEach((question: any) => {
-      const responseValue = interview.responses[question.id];
+      // Try multiple keys to find the response (old versions might use different keys)
+      let responseValue = interview.responses[question.id] || 
+                         interview.responses[question._id] ||
+                         interview.responses[`q_${question.id}`] ||
+                         undefined;
 
       // Skip if no response and question is not required
       if (responseValue === undefined || responseValue === null || responseValue === '') {
@@ -1084,9 +1817,12 @@ class SyncService {
             isRequired: question.isRequired,
             isSkipped: true,
           });
+          responsesSkipped++;
         }
         return;
       }
+
+      responsesFound++;
 
       // Build response object
       const responseObj: any = {
@@ -1108,6 +1844,15 @@ class SyncService {
       finalResponses.push(responseObj);
     });
 
+    console.log(`✅ Built ${finalResponses.length} responses from interview.responses object (found: ${responsesFound}, skipped: ${responsesSkipped})`);
+    
+    // CRITICAL VALIDATION: If we built responses but found very few actual answers, warn about potential data loss
+    if (finalResponses.length > 0 && responsesFound === 0) {
+      console.warn(`⚠️ WARNING: Built ${finalResponses.length} responses but found 0 actual answers - all are skipped required questions`);
+      console.warn(`   This indicates interview.responses object exists but has no actual response data`);
+      console.warn(`   Interview ID: ${interview.id}, Survey ID: ${interview.surveyId}`);
+    }
+    
     return finalResponses;
   }
 

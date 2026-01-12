@@ -1,0 +1,77 @@
+{
+  "testId": "comprehensive-5min-1768172450449",
+  "timestamp": "2026-01-11T23:06:14.834Z",
+  "surveyId": "68fd1915d41841da463f0d46",
+  "testDuration": 300,
+  "cleanup": {
+    "deletedResponses": 100,
+    "revertedQualityChecks": 173
+  },
+  "finalStats": {
+    "qualityAgents": {
+      "totalRequests": 2150,
+      "totalSuccesses": 473,
+      "totalFailures": 1677,
+      "totalTime": 6642850,
+      "successRate": "22.00",
+      "avgResponseTime": "3089.70"
+    },
+    "catiInterviewers": {
+      "totalRequests": 2050,
+      "totalSuccesses": 953,
+      "totalFailures": 1097,
+      "totalTime": 10881644,
+      "successRate": "46.49",
+      "avgResponseTime": "5308.12"
+    },
+    "capiInterviewers": {
+      "totalRequests": 5200,
+      "totalSuccesses": 5200,
+      "totalFailures": 0,
+      "totalTime": 10036790,
+      "successRate": "100.00",
+      "avgResponseTime": "1930.15"
+    },
+    "projectManagers": {
+      "totalRequests": 930,
+      "totalSuccesses": 930,
+      "totalFailures": 0,
+      "totalTime": 2338736,
+      "successRate": "100.00",
+      "avgResponseTime": "2514.77"
+    },
+    "companyAdmins": {
+      "totalRequests": 246,
+      "totalSuccesses": 246,
+      "totalFailures": 0,
+      "totalTime": 541601,
+      "successRate": "100.00",
+      "avgResponseTime": "2201.63"
+    }
+  },
+  "metrics": {
+    "cpu": {
+      "avg": "29.32",
+      "max": 57.03,
+      "min": 0.64
+    },
+    "memory": {
+      "avgUsed": "10887.49",
+      "maxUsed": 12032,
+      "avgPercent": "34.50",
+      "maxPercent": 38.13
+    },
+    "mongodbConnections": {
+      "avg": "171.50",
+      "max": 193,
+      "min": 122
+    },
+    "apiResponseTime": {
+      "avg": "2878.37",
+      "max": 12278,
+      "min": 99,
+      "p95": 6401,
+      "p99": 7731
+    }
+  }
+}

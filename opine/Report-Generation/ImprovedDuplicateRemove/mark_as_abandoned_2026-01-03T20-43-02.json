@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-01-03T20:43:02.720Z",
+  "operation": "Mark Should Be Abandoned Responses as Abandoned",
+  "sourceReport": "/var/www/opine/Report-Generation/ImprovedDuplicateRemove/should_be_abandoned_analysis_2026-01-03T20-32-35.json",
+  "summary": {
+    "totalInReport": 2989,
+    "totalUpdated": 2989,
+    "totalSkipped": 0,
+    "totalErrors": 0,
+    "byMissing": {
+      "missingAC": 181,
+      "missingGender": 2636,
+      "missingAge": 2984,
+      "missingAll": 181,
+      "missingACAndGender": 0,
+      "missingACAndAge": 0,
+      "missingGenderAndAge": 2450
+    }
+  },
+  "errors": []
+}

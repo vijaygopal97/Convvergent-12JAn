@@ -1,0 +1,5775 @@
+{
+  "generatedAt": "2026-01-05T18:55:46.254Z",
+  "timeRange": {
+    "from": "2026-01-04T18:55:45.746Z",
+    "to": "2026-01-05T18:55:46.254Z",
+    "hours": 24
+  },
+  "summary": {
+    "totalPendingApproval": 3595,
+    "shouldBeAbandoned": 203,
+    "correctlyMarked": 3392,
+    "percentageShouldBeAbandoned": "5.65%"
+  },
+  "statistics": {
+    "total": 203,
+    "byMode": {
+      "capi": 61,
+      "cati": 142
+    },
+    "byAbandonReason": {
+      "technical_issue": 27,
+      "Call_Not_Connected": 134,
+      "location_issue": 10,
+      "respondent_not_available": 14,
+      "Interview_Abandoned_Early": 6,
+      "respondent_refused": 4,
+      "other": 1,
+      "language_barrier": 3,
+      "respondent_busy": 2,
+      "consent_refused": 1,
+      "Not_Registered_Voter_In_AC": 1
+    },
+    "byCallStatus": {
+      "unknown": 17,
+      "busy": 37,
+      "did_not_pick_up": 27,
+      "not_reachable": 22,
+      "didnt_get_call": 14,
+      "switched_off": 8,
+      "number_does_not_exist": 10
+    },
+    "bySurvey": {
+      "68fd1915d41841da463f0d46": {
+        "count": 203,
+        "capi": 61,
+        "cati": 142
+      }
+    },
+    "byInterviewer": {
+      "Pritikona Dey": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI1058"
+      },
+      "Vishals Interviewer": {
+        "count": 8,
+        "capi": 0,
+        "cati": 8,
+        "memberId": "130848"
+      },
+      "Nurjahan Khatun": {
+        "count": 10,
+        "capi": 0,
+        "cati": 10,
+        "memberId": "3510"
+      },
+      "Lili Kadar": {
+        "count": 6,
+        "capi": 0,
+        "cati": 6,
+        "memberId": "3260"
+      },
+      "Mosaraf Mondal": {
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI1006"
+      },
+      "Suvhamoy Sanbighna": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI805"
+      },
+      "MALA MONDAL": {
+        "count": 30,
+        "capi": 0,
+        "cati": 30,
+        "memberId": "3558"
+      },
+      "Rumpa Das": {
+        "count": 1,
+        "capi": 0,
+        "cati": 1,
+        "memberId": "3501"
+      },
+      "Sujit Halder": {
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI483"
+      },
+      "RUPALI MONDAL": {
+        "count": 5,
+        "capi": 0,
+        "cati": 5,
+        "memberId": "3571"
+      },
+      "Md Sahid Jamal": {
+        "count": 3,
+        "capi": 3,
+        "cati": 0,
+        "memberId": "CAPI190"
+      },
+      "SUMAN CHAKRABORTY": {
+        "count": 30,
+        "capi": 0,
+        "cati": 30,
+        "memberId": "3556"
+      },
+      "Sourav Dutta": {
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI417"
+      },
+      "Sukanta Mandal": {
+        "count": 3,
+        "capi": 3,
+        "cati": 0,
+        "memberId": "CAPI225"
+      },
+      "Surajit Mondal": {
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI250"
+      },
+      "KOUSHIK DAS": {
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI227"
+      },
+      "Prabir Mondal": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI232"
+      },
+      "MD SAHIL SK": {
+        "count": 3,
+        "capi": 3,
+        "cati": 0,
+        "memberId": "CAPI132"
+      },
+      "Wahida Nasrin": {
+        "count": 2,
+        "capi": 0,
+        "cati": 2,
+        "memberId": "3503"
+      },
+      "MADHURIMA SUR": {
+        "count": 9,
+        "capi": 9,
+        "cati": 0,
+        "memberId": "CAPI274"
+      },
+      "Roni Sarkar": {
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI189"
+      },
+      "Anita Sarkar": {
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI196"
+      },
+      "Golam Mohammad": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI138"
+      },
+      "Sibsankar Das": {
+        "count": 1,
+        "capi": 0,
+        "cati": 1,
+        "memberId": "3010"
+      },
+      "Biswajit Sikder": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI264"
+      },
+      "Champarul Haque": {
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI725"
+      },
+      "Surajit Ghosh..": {
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI412"
+      },
+      "SUPARNA DET": {
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI269"
+      },
+      "Karina khatoon": {
+        "count": 13,
+        "capi": 0,
+        "cati": 13,
+        "memberId": "1052"
+      },
+      "Anita Maiti": {
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI1412"
+      },
+      "NIBADITA GIRI": {
+        "count": 4,
+        "capi": 4,
+        "cati": 0,
+        "memberId": "CAPI323"
+      },
+      "Sifa khatun": {
+        "count": 12,
+        "capi": 0,
+        "cati": 12,
+        "memberId": "1050"
+      },
+      "Rakhi Chowrasia": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI591"
+      },
+      "SUMAIYA KHATUN": {
+        "count": 22,
+        "capi": 0,
+        "cati": 22,
+        "memberId": "3575"
+      },
+      "SUKUNTALA KAIBARTA": {
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI466"
+      },
+      "ALAMIN SK": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI123"
+      },
+      "Tousik Sk": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI195"
+      },
+      "Asikul Sk": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI118"
+      },
+      "ENAKSHI DE HAZRA": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI458"
+      },
+      "Sarika khatoon": {
+        "count": 1,
+        "capi": 0,
+        "cati": 1,
+        "memberId": "1051"
+      },
+      "PINTU KAPRI": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI812"
+      },
+      "TAPAS MANNA": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI469"
+      },
+      "AKTAR REJA": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI131"
+      },
+      "Enamul sk": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI199"
+      },
+      "GOLAM RASUL": {
+        "count": 1,
+        "capi": 1,
+        "cati": 0,
+        "memberId": "CAPI139"
+      },
+      "SUPRITI PURKAIT": {
+        "count": 1,
+        "capi": 0,
+        "cati": 1,
+        "memberId": "3561"
+      }
+    },
+    "withAbandonReason": 203,
+    "withMetadataAbandoned": 0,
+    "withCallStatus": 135
+  },
+  "breakdowns": {
+    "byMode": {
+      "capi": 61,
+      "cati": 142
+    },
+    "byAbandonReason": [
+      {
+        "reason": "Call_Not_Connected",
+        "count": 134
+      },
+      {
+        "reason": "technical_issue",
+        "count": 27
+      },
+      {
+        "reason": "respondent_not_available",
+        "count": 14
+      },
+      {
+        "reason": "location_issue",
+        "count": 10
+      },
+      {
+        "reason": "Interview_Abandoned_Early",
+        "count": 6
+      },
+      {
+        "reason": "respondent_refused",
+        "count": 4
+      },
+      {
+        "reason": "language_barrier",
+        "count": 3
+      },
+      {
+        "reason": "respondent_busy",
+        "count": 2
+      },
+      {
+        "reason": "other",
+        "count": 1
+      },
+      {
+        "reason": "consent_refused",
+        "count": 1
+      },
+      {
+        "reason": "Not_Registered_Voter_In_AC",
+        "count": 1
+      }
+    ],
+    "byCallStatus": [
+      {
+        "status": "busy",
+        "count": 37
+      },
+      {
+        "status": "did_not_pick_up",
+        "count": 27
+      },
+      {
+        "status": "not_reachable",
+        "count": 22
+      },
+      {
+        "status": "unknown",
+        "count": 17
+      },
+      {
+        "status": "didnt_get_call",
+        "count": 14
+      },
+      {
+        "status": "number_does_not_exist",
+        "count": 10
+      },
+      {
+        "status": "switched_off",
+        "count": 8
+      }
+    ],
+    "bySurvey": [
+      {
+        "survey": "68fd1915d41841da463f0d46",
+        "count": 203,
+        "capi": 61,
+        "cati": 142
+      }
+    ],
+    "byInterviewer": [
+      {
+        "interviewer": "MALA MONDAL",
+        "count": 30,
+        "capi": 0,
+        "cati": 30,
+        "memberId": "3558"
+      },
+      {
+        "interviewer": "SUMAN CHAKRABORTY",
+        "count": 30,
+        "capi": 0,
+        "cati": 30,
+        "memberId": "3556"
+      },
+      {
+        "interviewer": "SUMAIYA KHATUN",
+        "count": 22,
+        "capi": 0,
+        "cati": 22,
+        "memberId": "3575"
+      },
+      {
+        "interviewer": "Karina khatoon",
+        "count": 13,
+        "capi": 0,
+        "cati": 13,
+        "memberId": "1052"
+      },
+      {
+        "interviewer": "Sifa khatun",
+        "count": 12,
+        "capi": 0,
+        "cati": 12,
+        "memberId": "1050"
+      },
+      {
+        "interviewer": "Nurjahan Khatun",
+        "count": 10,
+        "capi": 0,
+        "cati": 10,
+        "memberId": "3510"
+      },
+      {
+        "interviewer": "MADHURIMA SUR",
+        "count": 9,
+        "capi": 9,
+        "cati": 0,
+        "memberId": "CAPI274"
+      },
+      {
+        "interviewer": "Vishals Interviewer",
+        "count": 8,
+        "capi": 0,
+        "cati": 8,
+        "memberId": "130848"
+      },
+      {
+        "interviewer": "Lili Kadar",
+        "count": 6,
+        "capi": 0,
+        "cati": 6,
+        "memberId": "3260"
+      },
+      {
+        "interviewer": "RUPALI MONDAL",
+        "count": 5,
+        "capi": 0,
+        "cati": 5,
+        "memberId": "3571"
+      },
+      {
+        "interviewer": "NIBADITA GIRI",
+        "count": 4,
+        "capi": 4,
+        "cati": 0,
+        "memberId": "CAPI323"
+      },
+      {
+        "interviewer": "Md Sahid Jamal",
+        "count": 3,
+        "capi": 3,
+        "cati": 0,
+        "memberId": "CAPI190"
+      },
+      {
+        "interviewer": "Sukanta Mandal",
+        "count": 3,
+        "capi": 3,
+        "cati": 0,
+        "memberId": "CAPI225"
+      },
+      {
+        "interviewer": "MD SAHIL SK",
+        "count": 3,
+        "capi": 3,
+        "cati": 0,
+        "memberId": "CAPI132"
+      },
+      {
+        "interviewer": "Mosaraf Mondal",
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI1006"
+      },
+      {
+        "interviewer": "Sujit Halder",
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI483"
+      },
+      {
+        "interviewer": "Sourav Dutta",
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI417"
+      },
+      {
+        "interviewer": "Surajit Mondal",
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI250"
+      },
+      {
+        "interviewer": "KOUSHIK DAS",
+        "count": 2,
+        "capi": 2,
+        "cati": 0,
+        "memberId": "CAPI227"
+      },
+      {
+        "interviewer": "Wahida Nasrin",
+        "count": 2,
+        "capi": 0,
+        "cati": 2,
+        "memberId": "3503"
+      }
+    ]
+  },
+  "responses": [
+    {
+      "responseId": "8cdc0ec7-8e6a-48a5-9d1d-47f204d0c9a1",
+      "sessionId": "af97331f-2525-474c-9591-0d54f1117b14",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-04T19:19:17.995Z",
+      "updatedAt": "2026-01-05T18:30:35.478Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6958663c627eb8f9c10673bd",
+        "name": "Pritikona Dey",
+        "memberId": "CAPI1058",
+        "email": "capicapi1058@gmail.com"
+      },
+      "_id": "695abd35309ecf7a3fc4d828"
+    },
+    {
+      "responseId": "618acb71-b5ac-4f4f-8cf7-48ed07d1374b",
+      "sessionId": "0eba1791-5231-4743-b621-b86985aab29e",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-04T20:01:22.066Z",
+      "updatedAt": "2026-01-05T18:31:23.874Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "68ebf124ab86ea29f3c0f1f8",
+        "name": "Vishals Interviewer",
+        "memberId": "130848",
+        "email": "vishalinterviewer@gmail.com"
+      },
+      "_id": "695ac712fb20c21c5fe94444"
+    },
+    {
+      "responseId": "9eaddb27-e54b-41f0-9bf0-0217bcfbb63d",
+      "sessionId": "5dc274d3-034f-4d32-8338-18629ae8c0ec",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-04T20:52:55.880Z",
+      "updatedAt": "2026-01-05T18:31:23.874Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "68ebf124ab86ea29f3c0f1f8",
+        "name": "Vishals Interviewer",
+        "memberId": "130848",
+        "email": "vishalinterviewer@gmail.com"
+      },
+      "_id": "695ad327fb20c21c5fe9c196"
+    },
+    {
+      "responseId": "0e8c2df3-eb28-4b9d-a76b-74643620322f",
+      "sessionId": "bc4aa213-707b-40b4-bb50-fa1e92636659",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-04T21:32:46.550Z",
+      "updatedAt": "2026-01-05T18:31:23.874Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "68ebf124ab86ea29f3c0f1f8",
+        "name": "Vishals Interviewer",
+        "memberId": "130848",
+        "email": "vishalinterviewer@gmail.com"
+      },
+      "_id": "695adc7efb20c21c5fea1f16"
+    },
+    {
+      "responseId": "acecf81c-b792-48dc-920e-071eb36ba7b3",
+      "sessionId": "4c30d925-92b4-469b-a7e7-22750c4effb4",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-04T22:04:48.016Z",
+      "updatedAt": "2026-01-05T18:30:37.876Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d44ebcba171e81f4d0145",
+        "name": "Nurjahan Khatun",
+        "memberId": "3510",
+        "email": "cati3510@gmail.com"
+      },
+      "_id": "695ae40011601f9e6b0f463d"
+    },
+    {
+      "responseId": "82f03028-10c5-4d90-a9b2-1240d2c7b72d",
+      "sessionId": "86ffa7ef-4233-4150-a79e-f07c3c67b653",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-04T22:21:26.910Z",
+      "updatedAt": "2026-01-05T18:31:23.874Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "68ebf124ab86ea29f3c0f1f8",
+        "name": "Vishals Interviewer",
+        "memberId": "130848",
+        "email": "vishalinterviewer@gmail.com"
+      },
+      "_id": "695ae7e6eb6ab72ffb2aa7c5"
+    },
+    {
+      "responseId": "b5ff5bca-e147-4247-aaf0-c2aab7ac3a37",
+      "sessionId": "e621b626-be11-4812-8903-dc9eca6e1047",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-04T22:27:08.423Z",
+      "updatedAt": "2026-01-05T18:31:25.210Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6938a50fa3f38fb8cfd5a35d",
+        "name": "Lili Kadar",
+        "memberId": "3260",
+        "email": "3260@gmail.com"
+      },
+      "_id": "695ae93ceb6ab72ffb2aaf68"
+    },
+    {
+      "responseId": "e88a1cc1-e02a-44cc-a600-9682df767db9",
+      "sessionId": "eb02f1bf-1c4f-4508-97d3-792d1f1ff33a",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-04T22:27:33.201Z",
+      "updatedAt": "2026-01-05T18:31:25.210Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6938a50fa3f38fb8cfd5a35d",
+        "name": "Lili Kadar",
+        "memberId": "3260",
+        "email": "3260@gmail.com"
+      },
+      "_id": "695ae955fb20c21c5feab92a"
+    },
+    {
+      "responseId": "5be7bcfd-38c3-45bc-ab28-6af8beee2cc0",
+      "sessionId": "cabe7a67-407b-4d88-a09b-77a1287bb024",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-04T22:29:04.957Z",
+      "updatedAt": "2026-01-05T18:31:25.210Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6938a50fa3f38fb8cfd5a35d",
+        "name": "Lili Kadar",
+        "memberId": "3260",
+        "email": "3260@gmail.com"
+      },
+      "_id": "695ae9b03b07f8018508e1e9"
+    },
+    {
+      "responseId": "71a2f621-a517-417b-9cfd-f2e2940071fa",
+      "sessionId": "a90f4ef7-77ff-4760-b5fc-9f6752b3722e",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-04T22:41:52.346Z",
+      "updatedAt": "2026-01-05T18:31:25.210Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6938a50fa3f38fb8cfd5a35d",
+        "name": "Lili Kadar",
+        "memberId": "3260",
+        "email": "3260@gmail.com"
+      },
+      "_id": "695aecb011601f9e6b0fc2d5"
+    },
+    {
+      "responseId": "29c1b131-c544-41f5-bd5a-0dd135b7739c",
+      "sessionId": "50a09aa7-a4f5-4b75-8fb6-891f78148b16",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-05T00:02:44.626Z",
+      "updatedAt": "2026-01-05T18:31:25.210Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6938a50fa3f38fb8cfd5a35d",
+        "name": "Lili Kadar",
+        "memberId": "3260",
+        "email": "3260@gmail.com"
+      },
+      "_id": "695affa4d8f58c204ee7a25c"
+    },
+    {
+      "responseId": "47dde788-f0a3-4a34-9b80-e42861ad6e75",
+      "sessionId": "114d061f-1ec5-4dde-a84f-44e17d9e80cf",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-05T00:02:45.227Z",
+      "updatedAt": "2026-01-05T18:31:25.210Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6938a50fa3f38fb8cfd5a35d",
+        "name": "Lili Kadar",
+        "memberId": "3260",
+        "email": "3260@gmail.com"
+      },
+      "_id": "695affa5244dc58cc760328e"
+    },
+    {
+      "responseId": "261f44ae-84c2-4594-9c57-654ccebe18a5",
+      "sessionId": "54500db0-5035-4c6b-bfef-6ff33c089b5f",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "location_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"location_issue\""
+      ],
+      "createdAt": "2026-01-05T01:39:21.717Z",
+      "updatedAt": "2026-01-05T18:30:04.115Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694cf3a9c950299123ec48fa",
+        "name": "Mosaraf Mondal",
+        "memberId": "CAPI1006",
+        "email": "capicapi1006@gmail.com"
+      },
+      "_id": "695b16493a52b21dae4efc89"
+    },
+    {
+      "responseId": "eedca019-e087-4bbb-9253-b20b182474c7",
+      "sessionId": "54a38ce6-9c39-49ee-8297-733165c3412d",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "location_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"location_issue\""
+      ],
+      "createdAt": "2026-01-05T02:26:08.369Z",
+      "updatedAt": "2026-01-05T18:30:33.923Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6954a5578884dbbee551a5f8",
+        "name": "Suvhamoy Sanbighna",
+        "memberId": "CAPI805",
+        "email": "capicapi805@gmail.com"
+      },
+      "_id": "695b2140e131a07b40e840a5"
+    },
+    {
+      "responseId": "94f0f3cb-3300-42d2-8cae-2957e9b6b29c",
+      "sessionId": "01b0db42-0f0f-4709-8e78-242f2994d480",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T02:54:07.811Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b27cf27d861b414f58992"
+    },
+    {
+      "responseId": "73f66df7-a82a-40e6-b6db-0ab02628e92c",
+      "sessionId": "685fc0fc-aa66-4783-841d-03da31ce22bf",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T02:57:43.875Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b28a77f948a6b09ff3497"
+    },
+    {
+      "responseId": "cdaf9900-8e11-4ba1-b2e2-1666c770de6e",
+      "sessionId": "87f60d23-f469-4c78-bbc9-e909c9a7bd6d",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T02:59:49.950Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b29254e0fc489e720611c"
+    },
+    {
+      "responseId": "ebdf2d9a-dc8a-4ae6-befd-baf739c2ddaf",
+      "sessionId": "c50b1884-a0b0-4228-bab3-13aa73deaad4",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T03:01:04.668Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b2970e9ff9649602940bf"
+    },
+    {
+      "responseId": "41a2386b-1ef5-48e8-9747-de1abcee6131",
+      "sessionId": "7ac7771a-7ea3-4bc1-b742-d56b4c870f0f",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T03:02:35.691Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b29cbe94e941a2aa923b7"
+    },
+    {
+      "responseId": "71898491-f068-42c0-8c39-f469889b60c4",
+      "sessionId": "42844a65-1564-4bde-abef-72360c3fd929",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T03:17:11.790Z",
+      "updatedAt": "2026-01-05T18:30:14.764Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d44d3cba171e81f4cddcc",
+        "name": "Rumpa Das",
+        "memberId": "3501",
+        "email": "cati3501@gmail.com"
+      },
+      "_id": "695b2d37990f6a035e7260d7"
+    },
+    {
+      "responseId": "6a5d3ee3-c10f-4970-a061-ee4727d6fab9",
+      "sessionId": "6a18e060-0390-4759-a750-05c199595a4d",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T03:21:38.001Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b2e41e5d9adb57615adc9"
+    },
+    {
+      "responseId": "acf2aded-8078-4c0b-b484-8483de0daa58",
+      "sessionId": "f61a32c9-1ca7-4838-b329-9f569cbad5d6",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T03:44:30.307Z",
+      "updatedAt": "2026-01-05T18:30:23.564Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694433a156275b9dd83346fb",
+        "name": "Sujit Halder",
+        "memberId": "CAPI483",
+        "email": "capi483@gmail.com"
+      },
+      "_id": "695b339ee2ffb6ad4123674f"
+    },
+    {
+      "responseId": "f1ca866e-4b2c-4de7-b27b-8e24df59ec3d",
+      "sessionId": "bace7aab-8f35-4b68-a298-46b6c796b16b",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T03:45:53.838Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b33f1e58d6d92ca7ccd7e"
+    },
+    {
+      "responseId": "16829e12-aef0-413c-9686-33790105c4be",
+      "sessionId": "9ef9cac5-0bab-4396-83f9-f0fe03999d2e",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T03:47:50.976Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b34669bd3a586d709beb8"
+    },
+    {
+      "responseId": "db722e02-c3f1-42f0-a6f9-03246a5e88fb",
+      "sessionId": "65f18111-b361-412e-8192-d0011260457a",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "switched_off",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"switched_off\""
+      ],
+      "createdAt": "2026-01-05T03:47:52.022Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b34689bd3a586d709c53f"
+    },
+    {
+      "responseId": "c6859745-5ab1-4b26-a725-f283a170a440",
+      "sessionId": "d4b04d33-471c-48e7-98a6-2541e611208c",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T03:48:12.380Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b347caaabd8b1b04bb303"
+    },
+    {
+      "responseId": "44f0d37c-8719-4f3b-9579-e32880ed481a",
+      "sessionId": "9f8c9f5a-f973-459d-b395-9e235e893f9a",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T03:48:37.491Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b3495aaabd8b1b04bd7f3"
+    },
+    {
+      "responseId": "15afda54-5817-41bf-a7bf-9cbcb9b74a98",
+      "sessionId": "54386105-693e-413d-96e9-bb02b5df250a",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T03:50:07.993Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b34ef8df3825d2c02507a"
+    },
+    {
+      "responseId": "c1cc6e68-8c94-4a12-9420-614a4bdcc6a3",
+      "sessionId": "27623f2c-3a07-4497-a39c-73c82a13bac8",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T04:01:57.339Z",
+      "updatedAt": "2026-01-05T18:30:15.386Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4584cba171e81f4ded76",
+        "name": "RUPALI MONDAL",
+        "memberId": "3571",
+        "email": "cati3571@gmail.com"
+      },
+      "_id": "695b37b5a153a3451f80a8f2"
+    },
+    {
+      "responseId": "92f9f582-67e9-4fd3-b015-dc41c88b1c23",
+      "sessionId": "8db7c841-2ee3-458a-a663-8abffe3e6d16",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T04:02:45.096Z",
+      "updatedAt": "2026-01-05T18:30:15.386Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4584cba171e81f4ded76",
+        "name": "RUPALI MONDAL",
+        "memberId": "3571",
+        "email": "cati3571@gmail.com"
+      },
+      "_id": "695b37e51f5fa5d6e4a7e3ba"
+    },
+    {
+      "responseId": "87a0cc61-d300-4ede-9d26-82cb9ffe6494",
+      "sessionId": "c133cc75-5a80-4b51-982d-a65fe8d5bceb",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T04:36:32.455Z",
+      "updatedAt": "2026-01-05T18:30:15.386Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4584cba171e81f4ded76",
+        "name": "RUPALI MONDAL",
+        "memberId": "3571",
+        "email": "cati3571@gmail.com"
+      },
+      "_id": "695b3fd055ebefe46a0fe557"
+    },
+    {
+      "responseId": "b69a2553-86fd-4b75-86f1-b93684b67140",
+      "sessionId": "c188b6eb-0dcf-4517-860a-ce2ac800ec6f",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T04:43:57.847Z",
+      "updatedAt": "2026-01-05T18:30:23.564Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694433a156275b9dd83346fb",
+        "name": "Sujit Halder",
+        "memberId": "CAPI483",
+        "email": "capi483@gmail.com"
+      },
+      "_id": "695b418dbf8dec8683b2782c"
+    },
+    {
+      "responseId": "3d2b70b3-e242-4cd7-b480-ec3c4c884e0e",
+      "sessionId": "0c3dbd81-95b9-41de-8e78-15936082df89",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T04:50:56.680Z",
+      "updatedAt": "2026-01-05T18:30:19.561Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944333f56275b9dd8309acc",
+        "name": "Md Sahid Jamal",
+        "memberId": "CAPI190",
+        "email": "capi190@gmail.com"
+      },
+      "_id": "695b433097341776a0698ca4"
+    },
+    {
+      "responseId": "e5a757e5-a669-4dcf-b362-c7f6b7739451",
+      "sessionId": "bf8f3a40-40d8-45f0-920f-8c26bbee4aae",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T04:53:38.069Z",
+      "updatedAt": "2026-01-05T18:30:15.386Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4584cba171e81f4ded76",
+        "name": "RUPALI MONDAL",
+        "memberId": "3571",
+        "email": "cati3571@gmail.com"
+      },
+      "_id": "695b43d2559005b7221d9614"
+    },
+    {
+      "responseId": "2ab1ccf4-6985-49a8-87eb-2e82a9ed3c04",
+      "sessionId": "be239b8b-3039-4de5-89ae-bff2d1c0e8b3",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T05:00:49.680Z",
+      "updatedAt": "2026-01-05T18:30:19.561Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944333f56275b9dd8309acc",
+        "name": "Md Sahid Jamal",
+        "memberId": "CAPI190",
+        "email": "capi190@gmail.com"
+      },
+      "_id": "695b4581e7c9690ef9bead13"
+    },
+    {
+      "responseId": "af481f7f-48ee-4e3b-a9ef-f44f0e5fdf2f",
+      "sessionId": "89914838-5772-442e-86c0-e9d73a09385e",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T05:02:23.555Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b45dfb6fc26f3650c9e5b"
+    },
+    {
+      "responseId": "f9e62d97-a8a9-4d9f-be20-1638f7181d0c",
+      "sessionId": "463314d5-6874-4c24-9598-aab9f1bc60ce",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T05:12:44.418Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b484c3c9f6e402486a3f1"
+    },
+    {
+      "responseId": "9db84bdc-ad10-43ca-9603-5ff921cb772e",
+      "sessionId": "433aa493-af54-4d9a-a178-40b199f47c97",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T05:21:27.244Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b4a575ba49b479cc7e034"
+    },
+    {
+      "responseId": "f5cae9e7-5fd4-4587-8643-6789269fa82d",
+      "sessionId": "0fde27a1-3dd0-4673-bf02-57eb4555e94b",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T05:21:30.561Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b4a5a07909e3436aecfa8"
+    },
+    {
+      "responseId": "276dff2a-7e84-4afe-897b-ae640632612a",
+      "sessionId": "66f9653f-1122-42a4-b079-56a3c99f127c",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T05:22:08.166Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b4a805ba49b479cc7f43c"
+    },
+    {
+      "responseId": "31f04993-e034-4cf1-8800-c43114dc9f80",
+      "sessionId": "b5e19175-f04d-4033-8cf0-157e42596179",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "switched_off",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"switched_off\""
+      ],
+      "createdAt": "2026-01-05T05:23:42.291Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b4adebfcd465443e6c408"
+    },
+    {
+      "responseId": "8b65326a-8784-4ffb-a9b7-79bfddca8763",
+      "sessionId": "99c23923-3159-4a95-82ca-3f9bd2b637cd",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T05:23:43.654Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b4adfbfcd465443e6ca90"
+    },
+    {
+      "responseId": "990ca1b0-f566-4189-957f-fcf994fc0c10",
+      "sessionId": "64445c75-2f8b-4f08-aff1-eb58214ba3ae",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Interview_Abandoned_Early",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"Interview_Abandoned_Early\""
+      ],
+      "createdAt": "2026-01-05T05:24:49.453Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b4b211a34cf36f63eaa15"
+    },
+    {
+      "responseId": "0bae46e2-83d3-4258-9239-42508d15602f",
+      "sessionId": "ea6551a2-835a-45c1-a83d-892bd1c08728",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T05:28:07.308Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b4be7a270e80ee51ca954"
+    },
+    {
+      "responseId": "52f258ff-b791-4aa9-9c27-35affe85f526",
+      "sessionId": "6c45e320-f3bb-4e28-83cc-ff5f4641efb2",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "number_does_not_exist",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"number_does_not_exist\""
+      ],
+      "createdAt": "2026-01-05T05:28:57.700Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b4c198f5b7a1e6c166974"
+    },
+    {
+      "responseId": "562e74b8-e33a-4b53-805e-db282321e862",
+      "sessionId": "220cdbb0-3b4a-4933-b938-2bd96165b48a",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "number_does_not_exist",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"number_does_not_exist\""
+      ],
+      "createdAt": "2026-01-05T05:31:12.773Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b4ca0512b8738a5dc1f2d"
+    },
+    {
+      "responseId": "2a1424d6-d707-4aee-86cb-d3db426e38e4",
+      "sessionId": "f71217dc-2632-4551-bf8c-c5dc4750e292",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T05:31:36.273Z",
+      "updatedAt": "2026-01-05T18:30:15.386Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4584cba171e81f4ded76",
+        "name": "RUPALI MONDAL",
+        "memberId": "3571",
+        "email": "cati3571@gmail.com"
+      },
+      "_id": "695b4cb87a0e883c4146eecb"
+    },
+    {
+      "responseId": "9684f34f-abc0-4a8e-9bd3-f0a36db9e971",
+      "sessionId": "ee5cfcb4-9d12-4954-8e3e-74344e1e2fc3",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_refused",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_refused\""
+      ],
+      "createdAt": "2026-01-05T05:42:39.267Z",
+      "updatedAt": "2026-01-05T18:30:12.629Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944336d56275b9dd832abb5",
+        "name": "Sourav Dutta",
+        "memberId": "CAPI417",
+        "email": "capi417@gmail.com"
+      },
+      "_id": "695b4f4ff608306a872958b7"
+    },
+    {
+      "responseId": "5bdcd993-e29a-45a1-b047-8818268f50d4",
+      "sessionId": "c2736ee6-88cf-4364-9e7c-55ad31eff251",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T05:43:10.690Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b4f6e1b07877504e011ec"
+    },
+    {
+      "responseId": "16bbad26-f21a-4cbd-ac68-28a4c5c81363",
+      "sessionId": "67291e2c-48f3-44b7-a00e-d1fead24352a",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T05:43:17.609Z",
+      "updatedAt": "2026-01-05T18:30:53.607Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694433ca56275b9dd833ca3f",
+        "name": "Sukanta Mandal",
+        "memberId": "CAPI225",
+        "email": "capi2251@gmail.com"
+      },
+      "_id": "695b4f75f608306a872987f8"
+    },
+    {
+      "responseId": "99f9cd5e-ee4c-4de5-8a0c-1aaff8c8d16a",
+      "sessionId": "9b339074-ee14-438f-9179-2af7c391eac5",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T05:43:56.558Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b4f9c58a32b9846b8d223"
+    },
+    {
+      "responseId": "0cd0c9bd-9e7e-4d7a-bbc4-b477767ed12d",
+      "sessionId": "2dd21a5c-375a-4b30-a540-ecfa35594221",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T05:44:04.779Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b4fa404b2de0205213cdb"
+    },
+    {
+      "responseId": "967bb9d5-40cd-4c0d-b104-d14c84cd7d35",
+      "sessionId": "ff56bc62-c453-449f-9315-2a45a3c8af6d",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T05:44:13.340Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b4fad58a32b9846b8df9e"
+    },
+    {
+      "responseId": "d24cdf0b-88fc-4af1-ae11-78bc3960fcc1",
+      "sessionId": "34c35d08-5866-4e30-be67-3dafdf0d2b40",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T05:44:45.018Z",
+      "updatedAt": "2026-01-05T18:30:29.671Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694e4fbbe1d89e6a7c504f3e",
+        "name": "Surajit Mondal",
+        "memberId": "CAPI250",
+        "email": "capicapi250@gmail.com"
+      },
+      "_id": "695b4fccafc08d3f04d55677"
+    },
+    {
+      "responseId": "fdd2a27c-6c64-41c6-a9c2-2bfaeed33ea7",
+      "sessionId": "18401415-19c4-40c5-b57c-1d9093c64a10",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T05:45:04.794Z",
+      "updatedAt": "2026-01-05T18:30:49.188Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694433cd56275b9dd833d56f",
+        "name": "KOUSHIK DAS",
+        "memberId": "CAPI227",
+        "email": "capi2271@gmail.com"
+      },
+      "_id": "695b4fe0afc08d3f04d563c5"
+    },
+    {
+      "responseId": "de090e2d-2b11-405e-ba38-325ead225606",
+      "sessionId": "4ec3ecb8-31e8-4202-be8c-8c57d02f2d32",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T05:45:16.307Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b4fecf608306a8729c3f4"
+    },
+    {
+      "responseId": "56de6d2c-49d6-4cfb-b817-636564546924",
+      "sessionId": "d0b249f3-d054-4797-a848-531b72fd7165",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "number_does_not_exist",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"number_does_not_exist\""
+      ],
+      "createdAt": "2026-01-05T05:55:10.286Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b523e1717750de7a1a330"
+    },
+    {
+      "responseId": "432fb233-4b0d-43c3-bec5-0229c105ca27",
+      "sessionId": "8fc5cce8-4024-455d-81ea-181b2c7ebc94",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T05:55:37.704Z",
+      "updatedAt": "2026-01-05T18:30:57.901Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c438fe90bbe7745e6af9",
+        "name": "Prabir Mondal",
+        "memberId": "CAPI232",
+        "email": "capi232@gmail.com"
+      },
+      "_id": "695b5259c6f0701ac02ee41d"
+    },
+    {
+      "responseId": "6d747837-aca1-4674-9510-a6e8e3084990",
+      "sessionId": "de526fff-566d-4316-a2c7-b46a53187c2b",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T05:57:26.352Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b52c61e008f840c3ed240"
+    },
+    {
+      "responseId": "759e3eab-b108-4ced-b62a-d2b86ad6da7a",
+      "sessionId": "141d1317-5cc1-4a3f-b797-ef87e0bd33b5",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T06:08:29.587Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b555df35271a705883c15"
+    },
+    {
+      "responseId": "4abf4249-4867-4bd0-83f8-e0e54816a9e6",
+      "sessionId": "eeb7af1f-1d70-4170-bb35-4dcf9eced008",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T06:12:57.030Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b5669ede6d2e91748b6e2"
+    },
+    {
+      "responseId": "2ba0e121-c754-41de-87cf-804fb5b8c666",
+      "sessionId": "26efc05e-2558-4d6e-8380-44a1329886b0",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T06:16:01.634Z",
+      "updatedAt": "2026-01-05T18:30:21.177Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c364fe90bbe7745bc923",
+        "name": "MD SAHIL SK",
+        "memberId": "CAPI132",
+        "email": "sahilsk44454@gmail.com"
+      },
+      "_id": "695b5721175ade5ba096beb2"
+    },
+    {
+      "responseId": "f986bb6e-1215-4b79-a95c-87d8b3729919",
+      "sessionId": "a8bc4b63-db45-4133-9ca7-809541468c25",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T06:16:50.222Z",
+      "updatedAt": "2026-01-05T18:30:34.619Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d44d9cba171e81f4ce5a7",
+        "name": "Wahida Nasrin",
+        "memberId": "3503",
+        "email": "cati3503@gmail.com"
+      },
+      "_id": "695b57528d7a7f7d25d84087"
+    },
+    {
+      "responseId": "c79ea56a-0207-43aa-9104-24bfafcc0020",
+      "sessionId": "9b477539-c99c-41fa-906e-2a9a05efd4cd",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T06:20:11.296Z",
+      "updatedAt": "2026-01-05T18:31:21.045Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c461fe90bbe7745f11d4",
+        "name": "MADHURIMA SUR",
+        "memberId": "CAPI274",
+        "email": "capi274@gmail.com"
+      },
+      "_id": "695b581b7e58065c7caf05e2"
+    },
+    {
+      "responseId": "ca0c8ea1-5a33-46f3-b4b6-db0184421ff4",
+      "sessionId": "8092222a-aa79-4ea1-8fb9-1d1fa0bd1c8d",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T06:22:36.070Z",
+      "updatedAt": "2026-01-05T18:31:14.274Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944333d56275b9dd8309565",
+        "name": "Roni Sarkar",
+        "memberId": "CAPI189",
+        "email": "capi189@gmail.com"
+      },
+      "_id": "695b58ac7e58065c7caf8536"
+    },
+    {
+      "responseId": "8a5a918c-92c9-4556-ae22-1f22b385b716",
+      "sessionId": "187177cd-15d3-46b7-ae68-15a91b0d366b",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-05T06:31:25.578Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b5abd6f8d5010a304bbfe"
+    },
+    {
+      "responseId": "09f5ce76-d5c9-401f-bc52-9143073f969a",
+      "sessionId": "bd3ebed8-15ea-49a7-8368-b05553994ced",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T06:33:03.042Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b5b1fd8edd7622cce6a0b"
+    },
+    {
+      "responseId": "46ed2b65-afde-4f43-a10d-8b3001a88487",
+      "sessionId": "56cd4b28-6fa8-4eb3-8a2c-6a97ce33b7ae",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_refused",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_refused\""
+      ],
+      "createdAt": "2026-01-05T06:34:28.411Z",
+      "updatedAt": "2026-01-05T18:30:55.717Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944334456275b9dd830bb39",
+        "name": "Anita Sarkar",
+        "memberId": "CAPI196",
+        "email": "capi196@gmail.com"
+      },
+      "_id": "695b5b748b79c7a0bd0c5e9a"
+    },
+    {
+      "responseId": "3b0d6569-5aa7-4440-928a-3c83bf0c3173",
+      "sessionId": "81a9121b-3296-41a5-bae8-5e2d1a386638",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T06:41:09.777Z",
+      "updatedAt": "2026-01-05T18:30:29.671Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694e4fbbe1d89e6a7c504f3e",
+        "name": "Surajit Mondal",
+        "memberId": "CAPI250",
+        "email": "capicapi250@gmail.com"
+      },
+      "_id": "695b5d052fed5b1554a73753"
+    },
+    {
+      "responseId": "e23f6574-c5ce-403f-bfa4-ff02fcb8b661",
+      "sessionId": "05872f2e-d768-43f1-9b9e-801a2d3e3826",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T06:41:15.377Z",
+      "updatedAt": "2026-01-05T18:30:49.188Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694433cd56275b9dd833d56f",
+        "name": "KOUSHIK DAS",
+        "memberId": "CAPI227",
+        "email": "capi2271@gmail.com"
+      },
+      "_id": "695b5d0be449b3b6c9884022"
+    },
+    {
+      "responseId": "49be259c-c5d4-4ea4-abca-54c3fb026d2d",
+      "sessionId": "6cf057c2-2694-4108-8603-abfdeb0abde6",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "other",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"other\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T06:43:54.419Z",
+      "updatedAt": "2026-01-05T18:30:37.876Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d44ebcba171e81f4d0145",
+        "name": "Nurjahan Khatun",
+        "memberId": "3510",
+        "email": "cati3510@gmail.com"
+      },
+      "_id": "695b5daad6829f48f9c3cc30"
+    },
+    {
+      "responseId": "7942a1fa-ef4c-4939-b105-6a1b17fb9aed",
+      "sessionId": "2e88efff-a1fe-4146-aabe-87c96639266f",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T06:45:09.976Z",
+      "updatedAt": "2026-01-05T18:30:37.876Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d44ebcba171e81f4d0145",
+        "name": "Nurjahan Khatun",
+        "memberId": "3510",
+        "email": "cati3510@gmail.com"
+      },
+      "_id": "695b5df530f08006040994ec"
+    },
+    {
+      "responseId": "dc4a27ba-24a7-4cbb-b467-8792559f7d12",
+      "sessionId": "e0605996-bdd3-44ce-a746-85277ffe67d9",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T06:46:18.320Z",
+      "updatedAt": "2026-01-05T18:30:37.876Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d44ebcba171e81f4d0145",
+        "name": "Nurjahan Khatun",
+        "memberId": "3510",
+        "email": "cati3510@gmail.com"
+      },
+      "_id": "695b5e3a005d6cdd4bcbf4ef"
+    },
+    {
+      "responseId": "a9332124-da44-4f05-950f-56d44efef868",
+      "sessionId": "9d6634f2-29be-4a3f-a116-1cb36b657d6b",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T06:47:10.880Z",
+      "updatedAt": "2026-01-05T18:30:37.876Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d44ebcba171e81f4d0145",
+        "name": "Nurjahan Khatun",
+        "memberId": "3510",
+        "email": "cati3510@gmail.com"
+      },
+      "_id": "695b5e6eb32a8b5e7a14ff36"
+    },
+    {
+      "responseId": "fe3eb24e-2389-4740-afc6-d83bbaf6a473",
+      "sessionId": "fdf1bce5-e4ee-4124-82bb-66c16848b0f9",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T06:47:56.033Z",
+      "updatedAt": "2026-01-05T18:30:53.607Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694433ca56275b9dd833ca3f",
+        "name": "Sukanta Mandal",
+        "memberId": "CAPI225",
+        "email": "capi2251@gmail.com"
+      },
+      "_id": "695b5e9cfc38da062d6c4803"
+    },
+    {
+      "responseId": "b4718b53-d6c9-460a-b428-115946bcda0f",
+      "sessionId": "64726acb-76d0-466b-81c4-859daaca2736",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "number_does_not_exist",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"number_does_not_exist\""
+      ],
+      "createdAt": "2026-01-05T06:49:18.788Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b5eee6eb3072540e41850"
+    },
+    {
+      "responseId": "d9131ede-0a1f-45f9-a259-34e364ae1fd5",
+      "sessionId": "9d1acfb1-f4b4-4121-a28d-a9ae96cca2e9",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "location_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"location_issue\""
+      ],
+      "createdAt": "2026-01-05T06:49:22.802Z",
+      "updatedAt": "2026-01-05T18:30:21.871Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c369fe90bbe7745bd658",
+        "name": "Golam Mohammad",
+        "memberId": "CAPI138",
+        "email": "bingworkplace@gmail.com"
+      },
+      "_id": "695b5ef202e61bb1172e03a1"
+    },
+    {
+      "responseId": "5c20c9b0-4301-4fab-8b49-47eeca0db1f0",
+      "sessionId": "9c883e61-a6bd-43e8-b87c-6efee89fae43",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-05T06:50:48.510Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b5f4886daa5ae6432342d"
+    },
+    {
+      "responseId": "b7138205-9be8-411d-879f-f014e71474e4",
+      "sessionId": "e1c5f2b2-5855-4f03-b2b9-3183017d435b",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T06:56:39.754Z",
+      "updatedAt": "2026-01-05T18:31:21.045Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c461fe90bbe7745f11d4",
+        "name": "MADHURIMA SUR",
+        "memberId": "CAPI274",
+        "email": "capi274@gmail.com"
+      },
+      "_id": "695b60a7b6ac75e2741e38d3"
+    },
+    {
+      "responseId": "2cbff64f-4833-4890-b950-94a47d4e8f02",
+      "sessionId": "e178677a-26d0-46bf-8205-8728b751eb5b",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "location_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"location_issue\""
+      ],
+      "createdAt": "2026-01-05T06:57:04.346Z",
+      "updatedAt": "2026-01-05T18:30:12.629Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944336d56275b9dd832abb5",
+        "name": "Sourav Dutta",
+        "memberId": "CAPI417",
+        "email": "capi417@gmail.com"
+      },
+      "_id": "695b60c02e35bf3cfd6152e8"
+    },
+    {
+      "responseId": "da1ef4da-e385-4397-944e-8767b3b5908a",
+      "sessionId": "0f7799e3-129c-4f16-9355-d7c41666ff5e",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T07:04:27.832Z",
+      "updatedAt": "2026-01-05T18:31:03.732Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6938a563a3f38fb8cfd648f3",
+        "name": "Sibsankar Das",
+        "memberId": "3010",
+        "email": "3010@gmail.com"
+      },
+      "_id": "695b627b97cfe2eaec3b7f31"
+    },
+    {
+      "responseId": "8c56b3d4-95b4-47f6-9248-6440ffd2851b",
+      "sessionId": "3385139c-2117-422a-be8b-ce8db0d9b3b4",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Interview_Abandoned_Early",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"Interview_Abandoned_Early\""
+      ],
+      "createdAt": "2026-01-05T07:18:48.088Z",
+      "updatedAt": "2026-01-05T18:31:23.874Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "68ebf124ab86ea29f3c0f1f8",
+        "name": "Vishals Interviewer",
+        "memberId": "130848",
+        "email": "vishalinterviewer@gmail.com"
+      },
+      "_id": "695b65d833d161bbad84c994"
+    },
+    {
+      "responseId": "523536c3-ce85-4262-9e7a-f0c2da259c98",
+      "sessionId": "e7a69bf5-0396-4e5b-8c7d-a7b27bfebd81",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T07:20:32.825Z",
+      "updatedAt": "2026-01-05T18:30:35.885Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694433f556275b9dd8348aec",
+        "name": "Biswajit Sikder",
+        "memberId": "CAPI264",
+        "email": "capi2641@gmail.com"
+      },
+      "_id": "695b6640982203e37e197764"
+    },
+    {
+      "responseId": "0af02c4a-f434-43b7-9509-e40b9d48f97f",
+      "sessionId": "9a8357a3-0501-42f5-a8de-18bf41327d38",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T07:23:12.220Z",
+      "updatedAt": "2026-01-05T18:30:37.876Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d44ebcba171e81f4d0145",
+        "name": "Nurjahan Khatun",
+        "memberId": "3510",
+        "email": "cati3510@gmail.com"
+      },
+      "_id": "695b66e04c3ae592835dda2b"
+    },
+    {
+      "responseId": "a709cade-6df2-4c30-bf2b-6c1431c0166b",
+      "sessionId": "e41f1662-f98a-41f5-b0ce-ed1b8e85ffb6",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T07:26:26.365Z",
+      "updatedAt": "2026-01-05T18:31:09.065Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "695713621d2d92d691a025ea",
+        "name": "Champarul Haque",
+        "memberId": "CAPI725",
+        "email": "capicapi725@gmail.com"
+      },
+      "_id": "695b67a219a99f8a8eb0539e"
+    },
+    {
+      "responseId": "502d1dde-e51b-4a5e-bcb0-e1753447b20a",
+      "sessionId": "e99ea6dc-91a8-4095-8724-3f3aff298c9a",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T07:26:32.639Z",
+      "updatedAt": "2026-01-05T18:31:09.065Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "695713621d2d92d691a025ea",
+        "name": "Champarul Haque",
+        "memberId": "CAPI725",
+        "email": "capicapi725@gmail.com"
+      },
+      "_id": "695b67a8eed7ecdb477e8033"
+    },
+    {
+      "responseId": "480d406e-358f-43e4-9334-df86ee4740ce",
+      "sessionId": "21dff0e2-c1f9-414a-b6b3-1ae98918d733",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T07:29:57.406Z",
+      "updatedAt": "2026-01-05T18:30:34.619Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d44d9cba171e81f4ce5a7",
+        "name": "Wahida Nasrin",
+        "memberId": "3503",
+        "email": "cati3503@gmail.com"
+      },
+      "_id": "695b68752468b2783cc56f66"
+    },
+    {
+      "responseId": "c1108faf-37fc-42a6-92e4-c02fb9296c35",
+      "sessionId": "efe3cbe6-af2b-40bf-a69b-2d5906182c4e",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_refused",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_refused\""
+      ],
+      "createdAt": "2026-01-05T07:42:46.386Z",
+      "updatedAt": "2026-01-05T18:30:00.873Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944336456275b9dd8329283",
+        "name": "Surajit Ghosh..",
+        "memberId": "CAPI412",
+        "email": "capi412@gmail.com"
+      },
+      "_id": "695b6b76a0e627cee16b30a1"
+    },
+    {
+      "responseId": "249aae5c-3d0d-4f73-89a7-c643d190eafd",
+      "sessionId": "3603102a-183e-4bae-aa22-d4ce525db2b9",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "number_does_not_exist",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"number_does_not_exist\""
+      ],
+      "createdAt": "2026-01-05T07:53:36.236Z",
+      "updatedAt": "2026-01-05T18:30:37.876Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d44ebcba171e81f4d0145",
+        "name": "Nurjahan Khatun",
+        "memberId": "3510",
+        "email": "cati3510@gmail.com"
+      },
+      "_id": "695b6e0068646cdd460aad26"
+    },
+    {
+      "responseId": "e7eae401-8a47-440e-88c8-d8daf4958f76",
+      "sessionId": "cfbf809a-18ca-49ca-a352-c6ea5a5a03fb",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T07:59:11.681Z",
+      "updatedAt": "2026-01-05T18:30:35.678Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c442fe90bbe7745e92a4",
+        "name": "SUPARNA DET",
+        "memberId": "CAPI269",
+        "email": "capi240@gmail.com"
+      },
+      "_id": "695b6f4f02056c7885c4c927"
+    },
+    {
+      "responseId": "e65bdea6-14e8-4a81-a27f-051bb66e5df9",
+      "sessionId": "a08a16b7-485c-453f-8cdb-25365455cb8b",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T08:01:45.630Z",
+      "updatedAt": "2026-01-05T18:30:35.678Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c442fe90bbe7745e92a4",
+        "name": "SUPARNA DET",
+        "memberId": "CAPI269",
+        "email": "capi240@gmail.com"
+      },
+      "_id": "695b6fe9a5626ee3fbb63c8f"
+    },
+    {
+      "responseId": "e77eb1bd-05b2-43df-8093-49a6bfa754e3",
+      "sessionId": "0b7d6d63-4ea0-4101-8c6a-d669757eb1f5",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T08:41:46.323Z",
+      "updatedAt": "2026-01-05T18:30:46.693Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eae3cc341552a72118e1",
+        "name": "Karina khatoon",
+        "memberId": "1052",
+        "email": "cati1052@gmail.com"
+      },
+      "_id": "695b794ae39f1fbbde298799"
+    },
+    {
+      "responseId": "7a754539-5f10-4ba4-a47d-c389d68a0756",
+      "sessionId": "fefc2934-4ec0-4a1d-bf63-4b4c207764ff",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T08:42:11.450Z",
+      "updatedAt": "2026-01-05T18:31:21.045Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c461fe90bbe7745f11d4",
+        "name": "MADHURIMA SUR",
+        "memberId": "CAPI274",
+        "email": "capi274@gmail.com"
+      },
+      "_id": "695b7963a19b18f1b8bcd98e"
+    },
+    {
+      "responseId": "a7c7497b-50fe-4786-bf16-6e77c44efa3c",
+      "sessionId": "9e722c02-e988-4290-b7e8-b0ca90e12329",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T08:42:16.244Z",
+      "updatedAt": "2026-01-05T18:30:08.633Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694433ab56275b9dd83366e1",
+        "name": "Anita Maiti",
+        "memberId": "CAPI1412",
+        "email": "capi1412@gmail.com"
+      },
+      "_id": "695b7968898e94646a110c15"
+    },
+    {
+      "responseId": "9732aee6-583b-4b84-8a9e-e9020a38db25",
+      "sessionId": "b2baafaa-c582-4d15-b962-4c4fab43ecd0",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T08:43:02.337Z",
+      "updatedAt": "2026-01-05T18:30:46.693Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eae3cc341552a72118e1",
+        "name": "Karina khatoon",
+        "memberId": "1052",
+        "email": "cati1052@gmail.com"
+      },
+      "_id": "695b7996b17563644ea920ef"
+    },
+    {
+      "responseId": "8266c659-11dc-409b-8e41-bb6fb335b691",
+      "sessionId": "018e7239-8aa6-4c43-8ff2-303119b39d87",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Interview_Abandoned_Early",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"Interview_Abandoned_Early\""
+      ],
+      "createdAt": "2026-01-05T08:47:35.040Z",
+      "updatedAt": "2026-01-05T18:31:23.874Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "68ebf124ab86ea29f3c0f1f8",
+        "name": "Vishals Interviewer",
+        "memberId": "130848",
+        "email": "vishalinterviewer@gmail.com"
+      },
+      "_id": "695b7aa76ca0b7270f8d8516"
+    },
+    {
+      "responseId": "f284357d-f9db-4e9d-afaa-ad850ea786fb",
+      "sessionId": "6396b4be-948a-4f8f-9fcd-71477fbcc157",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T08:51:16.713Z",
+      "updatedAt": "2026-01-05T18:30:46.693Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eae3cc341552a72118e1",
+        "name": "Karina khatoon",
+        "memberId": "1052",
+        "email": "cati1052@gmail.com"
+      },
+      "_id": "695b7b8457f92ca7d086bad6"
+    },
+    {
+      "responseId": "4cdb7fb9-6bb4-4ba6-b19b-05a00622ccc5",
+      "sessionId": "97ca75f6-cc09-4174-a085-24d02fd6fb50",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T08:52:05.290Z",
+      "updatedAt": "2026-01-05T18:30:46.693Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eae3cc341552a72118e1",
+        "name": "Karina khatoon",
+        "memberId": "1052",
+        "email": "cati1052@gmail.com"
+      },
+      "_id": "695b7bb51796783ad4705967"
+    },
+    {
+      "responseId": "81e1046a-99e9-4884-bb2a-a977700aeef6",
+      "sessionId": "f17c4dda-b5a9-4697-8f45-2a32c51fb6b4",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T09:18:09.171Z",
+      "updatedAt": "2026-01-05T18:31:21.045Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c461fe90bbe7745f11d4",
+        "name": "MADHURIMA SUR",
+        "memberId": "CAPI274",
+        "email": "capi274@gmail.com"
+      },
+      "_id": "695b81d1d7b55dcb9563dd04"
+    },
+    {
+      "responseId": "6c8ea155-956b-4f36-97b7-778d75e1d6dc",
+      "sessionId": "2e639b7f-b20d-4754-9ae2-bf6e93441780",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "location_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"location_issue\""
+      ],
+      "createdAt": "2026-01-05T09:19:56.505Z",
+      "updatedAt": "2026-01-05T18:30:03.234Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c3e0fe90bbe7745d4f42",
+        "name": "NIBADITA GIRI",
+        "memberId": "CAPI323",
+        "email": "capi323@gmail.com"
+      },
+      "_id": "695b823ccaa461989fb4779a"
+    },
+    {
+      "responseId": "02476ef8-12ac-4cca-a835-1f1e3347d37b",
+      "sessionId": "e740edd7-fecf-47f6-8243-63f217944f38",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T09:20:41.731Z",
+      "updatedAt": "2026-01-05T18:30:44.939Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948ea8acc341552a71fbb28",
+        "name": "Sifa khatun",
+        "memberId": "1050",
+        "email": "cati1050@gmail.com"
+      },
+      "_id": "695b82697e982ab34a457c25"
+    },
+    {
+      "responseId": "5cec3d6b-6cb1-401c-b301-cf126352da77",
+      "sessionId": "6ba4cd04-8b47-43f0-b278-99475cffa075",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "location_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"location_issue\""
+      ],
+      "createdAt": "2026-01-05T09:20:47.772Z",
+      "updatedAt": "2026-01-05T18:30:03.234Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c3e0fe90bbe7745d4f42",
+        "name": "NIBADITA GIRI",
+        "memberId": "CAPI323",
+        "email": "capi323@gmail.com"
+      },
+      "_id": "695b826f7e982ab34a458ad2"
+    },
+    {
+      "responseId": "77c2445e-ec6e-449e-94f3-adc0b813e0b8",
+      "sessionId": "9187ccb8-ff76-4a45-96a8-48dc7c7cd6ec",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "location_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"location_issue\""
+      ],
+      "createdAt": "2026-01-05T09:21:50.291Z",
+      "updatedAt": "2026-01-05T18:30:03.234Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c3e0fe90bbe7745d4f42",
+        "name": "NIBADITA GIRI",
+        "memberId": "CAPI323",
+        "email": "capi323@gmail.com"
+      },
+      "_id": "695b82ae7e982ab34a45c88a"
+    },
+    {
+      "responseId": "2c395692-3152-44b9-91a6-15124e24f00b",
+      "sessionId": "6d00ed74-9c8d-42f9-bb94-1dc45e54e83e",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T09:22:07.995Z",
+      "updatedAt": "2026-01-05T18:30:44.939Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948ea8acc341552a71fbb28",
+        "name": "Sifa khatun",
+        "memberId": "1050",
+        "email": "cati1050@gmail.com"
+      },
+      "_id": "695b82bfcb1a97018656c43f"
+    },
+    {
+      "responseId": "9914b012-4415-4b9c-932d-2cb6cc9a0acc",
+      "sessionId": "cf94a54b-dfb3-4ad0-b520-6e3c9c29ad9a",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "location_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"location_issue\""
+      ],
+      "createdAt": "2026-01-05T09:26:50.814Z",
+      "updatedAt": "2026-01-05T18:30:04.115Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694cf3a9c950299123ec48fa",
+        "name": "Mosaraf Mondal",
+        "memberId": "CAPI1006",
+        "email": "capicapi1006@gmail.com"
+      },
+      "_id": "695b83da439481ca2e1d8d7b"
+    },
+    {
+      "responseId": "329c3d43-b071-4c5e-82ee-7e0f3b8af95b",
+      "sessionId": "aa9ec9cc-75bf-4446-aa31-df10b4dcde5e",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T09:28:01.135Z",
+      "updatedAt": "2026-01-05T18:30:44.939Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948ea8acc341552a71fbb28",
+        "name": "Sifa khatun",
+        "memberId": "1050",
+        "email": "cati1050@gmail.com"
+      },
+      "_id": "695b84215a9a3a1b77aa00a3"
+    },
+    {
+      "responseId": "97fac717-1417-498b-89df-975c7bacf93b",
+      "sessionId": "6289d3ad-acb6-49de-81a9-f5f4ef948a28",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T09:29:36.253Z",
+      "updatedAt": "2026-01-05T18:30:44.939Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948ea8acc341552a71fbb28",
+        "name": "Sifa khatun",
+        "memberId": "1050",
+        "email": "cati1050@gmail.com"
+      },
+      "_id": "695b8480325887891bfe12c8"
+    },
+    {
+      "responseId": "e45f4c48-89fd-4da7-82bb-0a975661f225",
+      "sessionId": "7962b2f0-3713-4f4d-a966-31c559ab3a7f",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "location_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"location_issue\""
+      ],
+      "createdAt": "2026-01-05T09:29:53.256Z",
+      "updatedAt": "2026-01-05T18:30:02.503Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6946cd5d962d7e42c4036dc1",
+        "name": "Rakhi Chowrasia",
+        "memberId": "CAPI591",
+        "email": "capi591@gmail.com"
+      },
+      "_id": "695b8491a43c082bb0efba0a"
+    },
+    {
+      "responseId": "fb8947c6-f653-4e80-a96b-e3ca6b041c76",
+      "sessionId": "ffef45b0-0e13-46d7-a049-6e8c9c00c4c7",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T09:30:14.542Z",
+      "updatedAt": "2026-01-05T18:30:44.939Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948ea8acc341552a71fbb28",
+        "name": "Sifa khatun",
+        "memberId": "1050",
+        "email": "cati1050@gmail.com"
+      },
+      "_id": "695b84a6325887891bfe1fc2"
+    },
+    {
+      "responseId": "55aea131-a41a-4fed-b222-6b4383802e80",
+      "sessionId": "e93983bb-1f58-438b-92e2-3a022fd773f6",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T09:32:03.992Z",
+      "updatedAt": "2026-01-05T18:30:44.939Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948ea8acc341552a71fbb28",
+        "name": "Sifa khatun",
+        "memberId": "1050",
+        "email": "cati1050@gmail.com"
+      },
+      "_id": "695b851310856441eca95ef2"
+    },
+    {
+      "responseId": "acfcfb6a-fe22-4f9e-8f21-909f3f7bed1d",
+      "sessionId": "94dacde6-647e-44c6-ab84-439651bc0ac7",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T09:32:04.672Z",
+      "updatedAt": "2026-01-05T18:30:44.939Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948ea8acc341552a71fbb28",
+        "name": "Sifa khatun",
+        "memberId": "1050",
+        "email": "cati1050@gmail.com"
+      },
+      "_id": "695b8514217089a336b74f3e"
+    },
+    {
+      "responseId": "e4f3808c-6650-4560-b0e5-d616256e4482",
+      "sessionId": "add2355f-4c80-4e17-bff6-c23f8d1bfc7a",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T09:32:10.784Z",
+      "updatedAt": "2026-01-05T18:31:21.045Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c461fe90bbe7745f11d4",
+        "name": "MADHURIMA SUR",
+        "memberId": "CAPI274",
+        "email": "capi274@gmail.com"
+      },
+      "_id": "695b851a0f732df98c9fbdfe"
+    },
+    {
+      "responseId": "fca73654-4478-4288-888c-9c6182cd3cbc",
+      "sessionId": "38b0b460-2239-4efd-9a54-7ee44ac68d34",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T09:33:48.868Z",
+      "updatedAt": "2026-01-05T18:31:21.045Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c461fe90bbe7745f11d4",
+        "name": "MADHURIMA SUR",
+        "memberId": "CAPI274",
+        "email": "capi274@gmail.com"
+      },
+      "_id": "695b857c30b3885430188e5f"
+    },
+    {
+      "responseId": "c68a470b-3540-43b3-a4ec-503d1759e4a9",
+      "sessionId": "8073c461-db0b-4cd2-89fb-eb345efe983f",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T09:34:19.857Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695b859b628c67d0369bdbba"
+    },
+    {
+      "responseId": "927edd78-fc32-4331-91f1-dcaa8089b40f",
+      "sessionId": "91205797-e42c-4daa-9ff0-616983f48541",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T09:35:00.071Z",
+      "updatedAt": "2026-01-05T18:30:46.693Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eae3cc341552a72118e1",
+        "name": "Karina khatoon",
+        "memberId": "1052",
+        "email": "cati1052@gmail.com"
+      },
+      "_id": "695b85c44c57ffdd69354648"
+    },
+    {
+      "responseId": "c5e059e6-b76a-49b4-bf6b-0300bf4ca75c",
+      "sessionId": "19a7c620-b869-454e-897f-bb2670de0b9f",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T09:35:25.651Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695b85dd33c95694a842b206"
+    },
+    {
+      "responseId": "4117c3ec-93b3-4918-bd13-825d3851006f",
+      "sessionId": "77a9252d-58cf-499b-b83b-6e0c8ad4f880",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T09:35:45.958Z",
+      "updatedAt": "2026-01-05T18:30:46.693Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eae3cc341552a72118e1",
+        "name": "Karina khatoon",
+        "memberId": "1052",
+        "email": "cati1052@gmail.com"
+      },
+      "_id": "695b85f178bde40e575f4eb8"
+    },
+    {
+      "responseId": "9abac073-cad9-4290-94f0-c7653d1c79c5",
+      "sessionId": "e1dba786-1691-483d-817d-ece68dc2eb7e",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T09:36:21.075Z",
+      "updatedAt": "2026-01-05T18:30:46.693Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eae3cc341552a72118e1",
+        "name": "Karina khatoon",
+        "memberId": "1052",
+        "email": "cati1052@gmail.com"
+      },
+      "_id": "695b8615d8da677fad4dcd26"
+    },
+    {
+      "responseId": "0767b609-b6d5-43d3-82a5-9a90ddf2b872",
+      "sessionId": "93c47aa0-0dae-419d-8c46-9cd5e170f3b3",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T09:36:50.418Z",
+      "updatedAt": "2026-01-05T18:30:46.693Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eae3cc341552a72118e1",
+        "name": "Karina khatoon",
+        "memberId": "1052",
+        "email": "cati1052@gmail.com"
+      },
+      "_id": "695b863223a16f9267e86f46"
+    },
+    {
+      "responseId": "3f3e2c87-834f-4f60-b565-e1af2423eb00",
+      "sessionId": "9dfbd08a-dd1f-4570-9396-a2911bd80946",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "location_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"location_issue\""
+      ],
+      "createdAt": "2026-01-05T09:40:15.990Z",
+      "updatedAt": "2026-01-05T18:30:03.234Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c3e0fe90bbe7745d4f42",
+        "name": "NIBADITA GIRI",
+        "memberId": "CAPI323",
+        "email": "capi323@gmail.com"
+      },
+      "_id": "695b86ff5e32b97939ab12b7"
+    },
+    {
+      "responseId": "bb2a32f5-3e4c-43be-8b77-c9d069e4285a",
+      "sessionId": "17f418a5-2095-4ffe-849e-2ab261257880",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T09:41:00.760Z",
+      "updatedAt": "2026-01-05T18:30:46.693Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eae3cc341552a72118e1",
+        "name": "Karina khatoon",
+        "memberId": "1052",
+        "email": "cati1052@gmail.com"
+      },
+      "_id": "695b872cd108beb6583b4bd3"
+    },
+    {
+      "responseId": "51d77d85-95d5-4611-b097-d1d444d24e22",
+      "sessionId": "97fc02aa-bd7e-4059-b1ad-7a0857eba4aa",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T09:42:16.443Z",
+      "updatedAt": "2026-01-05T18:30:46.693Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eae3cc341552a72118e1",
+        "name": "Karina khatoon",
+        "memberId": "1052",
+        "email": "cati1052@gmail.com"
+      },
+      "_id": "695b8778c7f5e49bcb077dd8"
+    },
+    {
+      "responseId": "24162e1a-0b0d-4dfc-a0ec-c4e210c1c186",
+      "sessionId": "deb12bdf-2a02-4369-aa29-0e8256153ef9",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "number_does_not_exist",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"number_does_not_exist\""
+      ],
+      "createdAt": "2026-01-05T09:42:43.862Z",
+      "updatedAt": "2026-01-05T18:30:46.693Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eae3cc341552a72118e1",
+        "name": "Karina khatoon",
+        "memberId": "1052",
+        "email": "cati1052@gmail.com"
+      },
+      "_id": "695b87932ea452d72d208efa"
+    },
+    {
+      "responseId": "c2477cc9-ee9f-4641-b445-623e6439f817",
+      "sessionId": "7fbaf5a0-8d04-414e-953d-963cbc4f2a18",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T09:50:35.805Z",
+      "updatedAt": "2026-01-05T18:30:44.939Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948ea8acc341552a71fbb28",
+        "name": "Sifa khatun",
+        "memberId": "1050",
+        "email": "cati1050@gmail.com"
+      },
+      "_id": "695b896bf5fdf5af56f68c96"
+    },
+    {
+      "responseId": "0b77ae7f-1110-4b19-85e9-0f5efc8dd3cf",
+      "sessionId": "4f43ecd4-3910-484a-90a2-16dcc4bcb193",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T09:52:42.543Z",
+      "updatedAt": "2026-01-05T18:30:44.939Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948ea8acc341552a71fbb28",
+        "name": "Sifa khatun",
+        "memberId": "1050",
+        "email": "cati1050@gmail.com"
+      },
+      "_id": "695b89ea97f0af76c0011578"
+    },
+    {
+      "responseId": "eaf4f240-ba83-4c96-9baa-0d6b03cdd3eb",
+      "sessionId": "5bf4027c-766e-49e6-beab-e873049549de",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T09:53:43.251Z",
+      "updatedAt": "2026-01-05T18:30:44.939Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948ea8acc341552a71fbb28",
+        "name": "Sifa khatun",
+        "memberId": "1050",
+        "email": "cati1050@gmail.com"
+      },
+      "_id": "695b8a27e74019c5aac704e3"
+    },
+    {
+      "responseId": "0eae5449-715e-48d4-9f55-d84a627902f6",
+      "sessionId": "f2389bd5-3966-4e90-a1df-fc848c2dcf31",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T09:54:56.920Z",
+      "updatedAt": "2026-01-05T18:30:00.873Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944336456275b9dd8329283",
+        "name": "Surajit Ghosh..",
+        "memberId": "CAPI412",
+        "email": "capi412@gmail.com"
+      },
+      "_id": "695b8a70093c4bab7bfc9d22"
+    },
+    {
+      "responseId": "f34b1ee3-714f-4c00-a2fc-394d36f4a207",
+      "sessionId": "f68fa3ca-95ad-423c-82b5-6349ac1475bf",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T09:55:13.517Z",
+      "updatedAt": "2026-01-05T18:30:55.717Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944334456275b9dd830bb39",
+        "name": "Anita Sarkar",
+        "memberId": "CAPI196",
+        "email": "capi196@gmail.com"
+      },
+      "_id": "695b8a818145ad3ec3e02c80"
+    },
+    {
+      "responseId": "3b434d94-116e-4fac-802f-2522a8a5705c",
+      "sessionId": "c5559b64-dfe7-4fe6-96f0-3634015c73da",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T09:56:26.689Z",
+      "updatedAt": "2026-01-05T18:30:44.939Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948ea8acc341552a71fbb28",
+        "name": "Sifa khatun",
+        "memberId": "1050",
+        "email": "cati1050@gmail.com"
+      },
+      "_id": "695b8aca841b129a4320aaef"
+    },
+    {
+      "responseId": "4619c95f-fd65-4144-bc59-e00096cfd3f6",
+      "sessionId": "664a9344-8e39-4d76-9b7c-1cd84d61f512",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T09:56:43.239Z",
+      "updatedAt": "2026-01-05T18:30:44.939Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948ea8acc341552a71fbb28",
+        "name": "Sifa khatun",
+        "memberId": "1050",
+        "email": "cati1050@gmail.com"
+      },
+      "_id": "695b8adbb15195f07c86368e"
+    },
+    {
+      "responseId": "ef227b0f-5a7f-40e9-87d3-0caf8c042b54",
+      "sessionId": "2b8a12f4-6407-4283-a266-45d60b268f44",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T09:56:57.493Z",
+      "updatedAt": "2026-01-05T18:30:42.466Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694bb3149cf18db6a8801939",
+        "name": "SUKUNTALA KAIBARTA",
+        "memberId": "CAPI466",
+        "email": "capicapi466@gmail.com"
+      },
+      "_id": "695b8ae9b15195f07c864aaf"
+    },
+    {
+      "responseId": "b2c9491d-29aa-4681-9df3-9aa8fcbc5a89",
+      "sessionId": "1b9965a8-9a51-4da3-9bb3-30627be52283",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T09:57:03.230Z",
+      "updatedAt": "2026-01-05T18:30:42.466Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694bb3149cf18db6a8801939",
+        "name": "SUKUNTALA KAIBARTA",
+        "memberId": "CAPI466",
+        "email": "capicapi466@gmail.com"
+      },
+      "_id": "695b8aefb15195f07c8657a2"
+    },
+    {
+      "responseId": "377bc4ee-390d-43bd-a3db-fe7e85367a47",
+      "sessionId": "cf8128ce-f9c5-4c28-8294-ec1ba66dd738",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T09:59:49.711Z",
+      "updatedAt": "2026-01-05T18:31:21.045Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c461fe90bbe7745f11d4",
+        "name": "MADHURIMA SUR",
+        "memberId": "CAPI274",
+        "email": "capi274@gmail.com"
+      },
+      "_id": "695b8b955ab90128c8134b96"
+    },
+    {
+      "responseId": "5d03ecd8-e5ab-40bf-be86-3c96be220bbf",
+      "sessionId": "a7f8acd2-66f1-4eab-af10-f675acd1fe50",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T10:00:27.132Z",
+      "updatedAt": "2026-01-05T18:31:21.045Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c461fe90bbe7745f11d4",
+        "name": "MADHURIMA SUR",
+        "memberId": "CAPI274",
+        "email": "capi274@gmail.com"
+      },
+      "_id": "695b8bbb509c6af7f5027363"
+    },
+    {
+      "responseId": "de5b8831-3440-4b66-9e0d-50678011f0cd",
+      "sessionId": "00d21ed3-bd00-4f2a-a335-e7546c5ae318",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T10:00:48.748Z",
+      "updatedAt": "2026-01-05T18:30:37.876Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d44ebcba171e81f4d0145",
+        "name": "Nurjahan Khatun",
+        "memberId": "3510",
+        "email": "cati3510@gmail.com"
+      },
+      "_id": "695b8bd0509c6af7f502959d"
+    },
+    {
+      "responseId": "a20bd230-4836-4571-9629-b798aa353bdb",
+      "sessionId": "5304e4dd-2417-47c7-91c7-2e3e43c8f5ae",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "language_barrier",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"language_barrier\""
+      ],
+      "createdAt": "2026-01-05T10:06:19.870Z",
+      "updatedAt": "2026-01-05T18:30:15.590Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694432fe56275b9dd82faeed",
+        "name": "ALAMIN SK",
+        "memberId": "CAPI123",
+        "email": "capi123@gmail.com"
+      },
+      "_id": "695b8d1bbab4e262015c571c"
+    },
+    {
+      "responseId": "ee309e39-c82a-4c22-8e66-b92f04699a27",
+      "sessionId": "2e6eab52-532a-4525-b1b9-8688532c3fa8",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T10:21:35.909Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695b90af390fe3dd3904ad8b"
+    },
+    {
+      "responseId": "65b990c1-6a44-4bee-a36e-2a68fc4997a5",
+      "sessionId": "0a2546fc-259a-4be4-b6f0-db7af544829c",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T10:21:50.550Z",
+      "updatedAt": "2026-01-05T18:30:08.633Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694433ab56275b9dd83366e1",
+        "name": "Anita Maiti",
+        "memberId": "CAPI1412",
+        "email": "capi1412@gmail.com"
+      },
+      "_id": "695b90bec9960c292ed2b562"
+    },
+    {
+      "responseId": "cb54e99c-6fe4-4310-9220-1e841db5eab1",
+      "sessionId": "2fd60106-fd4c-4844-91f6-86f81e252809",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T10:22:38.004Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695b90ee325e42e95731077b"
+    },
+    {
+      "responseId": "a1fe540a-d200-4766-ac13-6f0eb4fc9c7b",
+      "sessionId": "8c35d8ca-8531-4595-a618-8eac1b572ddb",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T10:24:28.652Z",
+      "updatedAt": "2026-01-05T18:30:37.876Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d44ebcba171e81f4d0145",
+        "name": "Nurjahan Khatun",
+        "memberId": "3510",
+        "email": "cati3510@gmail.com"
+      },
+      "_id": "695b915c272bb36eea2d27e7"
+    },
+    {
+      "responseId": "395451a7-94c8-43e4-a602-c1212b78df23",
+      "sessionId": "7eda79f5-893f-46cb-a6ba-6dccee1c2396",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "switched_off",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"switched_off\""
+      ],
+      "createdAt": "2026-01-05T10:24:52.184Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b9174f3de789b529839ce"
+    },
+    {
+      "responseId": "00001709-4ef3-49a3-88be-276a4cdb1983",
+      "sessionId": "d3d6f948-11ce-4050-aba8-ddf1af20918d",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T10:25:25.916Z",
+      "updatedAt": "2026-01-05T18:31:14.274Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944333d56275b9dd8309565",
+        "name": "Roni Sarkar",
+        "memberId": "CAPI189",
+        "email": "capi189@gmail.com"
+      },
+      "_id": "695b9195cc547ff50f6d9aa9"
+    },
+    {
+      "responseId": "85794c39-01ac-482c-a228-2963cc4d47c1",
+      "sessionId": "7c0bf1c6-fcf2-4a7b-b2f4-aee28a0cf35b",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T10:25:38.908Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695b91a2fd7fae36bcce2f8b"
+    },
+    {
+      "responseId": "d446eebd-ce09-44a1-b7ba-ac9cb6655aad",
+      "sessionId": "3209bbc5-8f00-42bd-8f74-7c9a23987b26",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T10:26:27.053Z",
+      "updatedAt": "2026-01-05T18:30:37.876Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d44ebcba171e81f4d0145",
+        "name": "Nurjahan Khatun",
+        "memberId": "3510",
+        "email": "cati3510@gmail.com"
+      },
+      "_id": "695b91d3e00e41bfa77ec99b"
+    },
+    {
+      "responseId": "82004af0-acfb-4c85-86a6-48c7e1d0bab0",
+      "sessionId": "0faea722-c5dc-4484-95f3-6ca115eee268",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T10:30:31.837Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b92c7c923ca962640f0fa"
+    },
+    {
+      "responseId": "e92955f3-1629-4cd3-808c-f2e0ccb58003",
+      "sessionId": "d350c4fb-ec34-4241-accc-96d1c58fa371",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "switched_off",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"switched_off\""
+      ],
+      "createdAt": "2026-01-05T10:30:38.624Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695b92ce6be0018e3a27348a"
+    },
+    {
+      "responseId": "5a465b90-57a5-4462-b29d-106baeb40638",
+      "sessionId": "a25d410d-508f-4930-99e6-883849913e29",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T10:30:58.749Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b92e2c2fa4486fbcbf9e4"
+    },
+    {
+      "responseId": "c3f4b6eb-f0fc-437c-bdcf-20aa7b7229ba",
+      "sessionId": "be07b484-f830-492c-9a1e-0c1a481baa19",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T10:31:01.107Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695b92e56be0018e3a273b17"
+    },
+    {
+      "responseId": "9e5c642c-f268-4000-a406-ebbb6fa75cf3",
+      "sessionId": "5197b93f-741b-43e9-a7a4-87fc7f1888a2",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T10:32:08.263Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695b9328c3a539285561c854"
+    },
+    {
+      "responseId": "c00dfd2a-7830-4cbd-9f29-a061c406add7",
+      "sessionId": "7d031144-94fe-4c26-9be7-e74f2078a38f",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "language_barrier",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"language_barrier\""
+      ],
+      "createdAt": "2026-01-05T10:33:13.300Z",
+      "updatedAt": "2026-01-05T18:30:55.422Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944334256275b9dd830b5cc",
+        "name": "Tousik Sk",
+        "memberId": "CAPI195",
+        "email": "capi195@gmail.com"
+      },
+      "_id": "695b936907f314baa8341a3c"
+    },
+    {
+      "responseId": "31a6ff2d-8a90-480e-ad51-2b9f734f9d1b",
+      "sessionId": "29fa1322-232c-46d4-b8ca-bcfeb9a7d09a",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T10:34:23.501Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b93afd75357d6c619a28c"
+    },
+    {
+      "responseId": "c386fb5a-5405-4c1c-8f44-f3976cb2a268",
+      "sessionId": "6765d032-872e-45b2-9c7e-565759887fdd",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T10:36:52.800Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b9444f83230937c4968fb"
+    },
+    {
+      "responseId": "a86e9301-722c-4279-af30-d01c69f24f8b",
+      "sessionId": "5bc825d9-352a-4c4b-bb9c-88967e9dfb4d",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-05T10:38:31.452Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b94a7677d5e88d99990df"
+    },
+    {
+      "responseId": "4a77e76d-6b87-4e4d-b8a0-3dc1374c3717",
+      "sessionId": "697468ce-c87f-4e68-b034-e16acc3ccc0a",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T10:39:13.873Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695b94d1018df4adde4f89a1"
+    },
+    {
+      "responseId": "1c5df83e-f9eb-499e-a25a-01ab3c7c9139",
+      "sessionId": "4771415a-f7b3-48cd-921f-35fdb92f75aa",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Interview_Abandoned_Early",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"Interview_Abandoned_Early\""
+      ],
+      "createdAt": "2026-01-05T10:39:59.222Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b94ff57cd1258cb079e52"
+    },
+    {
+      "responseId": "3fa662b9-11e7-43ce-93ec-a3f088af8b48",
+      "sessionId": "e616de00-6db7-4a70-b4ba-9b7a9d885333",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "switched_off",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"switched_off\""
+      ],
+      "createdAt": "2026-01-05T10:41:59.407Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695b957702f18bdc8fcf8f03"
+    },
+    {
+      "responseId": "d3c55926-1ff9-4e56-8744-8f564b13f8d7",
+      "sessionId": "8895ec56-c0d1-46f5-be21-57c730ca3739",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "switched_off",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"switched_off\""
+      ],
+      "createdAt": "2026-01-05T10:43:15.401Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695b95c3639711c46fdf5b02"
+    },
+    {
+      "responseId": "0963d922-f297-4e71-aa27-d03b51cc67b4",
+      "sessionId": "d2e3947b-3a3e-48de-b1aa-ca34be3f17b7",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-05T10:43:34.046Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b95d6c1ecc3cce5e0236b"
+    },
+    {
+      "responseId": "c57fa9c7-7fe6-4a57-857e-6f455fa253a8",
+      "sessionId": "2c9ca384-accf-46f0-a0f3-85e01e1d3ec5",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T10:46:07.857Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b966f09858e7833d4adc7"
+    },
+    {
+      "responseId": "f5e83699-7c85-4bdb-a011-ef042b079e6f",
+      "sessionId": "1520dd17-63cf-4ad3-b8bc-d978bb2baad6",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "number_does_not_exist",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"number_does_not_exist\""
+      ],
+      "createdAt": "2026-01-05T10:50:13.290Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695b976553a0eea0de738672"
+    },
+    {
+      "responseId": "eecb7753-0ce7-4efe-b6b8-5aad4e1a5d2e",
+      "sessionId": "b16d3866-499a-48fb-9de0-25474e533cf6",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "number_does_not_exist",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"number_does_not_exist\""
+      ],
+      "createdAt": "2026-01-05T10:50:46.812Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695b978611c725661ec70e4d"
+    },
+    {
+      "responseId": "1e5033d8-aaed-4015-ae22-e8258c07ab29",
+      "sessionId": "4638d52b-9600-4611-8b2e-78e7c68224d6",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T10:55:24.396Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695b989c48ca958b7af6646e"
+    },
+    {
+      "responseId": "e49a4f38-6e53-4f3f-b9f3-75d342ef2d82",
+      "sessionId": "4effd5bd-169d-4114-abba-283ddbb77964",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T10:56:09.960Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b98c948ca958b7af6ae67"
+    },
+    {
+      "responseId": "cda091cb-9608-45b4-a45a-078d230d4295",
+      "sessionId": "2c3976ce-b5d1-4497-8168-51083702ef85",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T10:58:08.768Z",
+      "updatedAt": "2026-01-05T18:30:53.607Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694433ca56275b9dd833ca3f",
+        "name": "Sukanta Mandal",
+        "memberId": "CAPI225",
+        "email": "capi2251@gmail.com"
+      },
+      "_id": "695b99400be63403474f9ce7"
+    },
+    {
+      "responseId": "81efd110-5b13-464e-acd9-6dee95b7b35d",
+      "sessionId": "cfe722be-b387-4aa6-b767-0c0203fc1693",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T10:58:27.733Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695b9953ee39fc5a0b4ccd64"
+    },
+    {
+      "responseId": "d51adbab-7041-4cec-9a12-59a548966d7d",
+      "sessionId": "ae6e6677-87cf-4b4c-ad60-97893ff37bc3",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_busy",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_busy\""
+      ],
+      "createdAt": "2026-01-05T11:06:02.271Z",
+      "updatedAt": "2026-01-05T18:30:27.186Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6958c449845e2dcc03fcb08b",
+        "name": "Asikul Sk",
+        "memberId": "CAPI118",
+        "email": "capicapi118@gmail.com"
+      },
+      "_id": "695b9b1a60b95f2f18da868a"
+    },
+    {
+      "responseId": "4f6a5096-796c-4a6a-9163-19b11a8ea145",
+      "sessionId": "a5e5c18b-02c2-494c-96fb-c006c48f1d2b",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_not_available",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_not_available\""
+      ],
+      "createdAt": "2026-01-05T11:20:42.423Z",
+      "updatedAt": "2026-01-05T18:31:21.045Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c461fe90bbe7745f11d4",
+        "name": "MADHURIMA SUR",
+        "memberId": "CAPI274",
+        "email": "capi274@gmail.com"
+      },
+      "_id": "695b9e8a45cc3cca6833b172"
+    },
+    {
+      "responseId": "bb76a157-a6ea-49b1-8444-0602c8c3e50a",
+      "sessionId": "96120089-5e63-4039-a77c-7f5fe2e32855",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T11:27:01.505Z",
+      "updatedAt": "2026-01-05T18:31:11.323Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694f8134d4fe33808611c61e",
+        "name": "ENAKSHI DE HAZRA",
+        "memberId": "CAPI458",
+        "email": "capicapi458@gmail.com"
+      },
+      "_id": "695ba00579c5d38c976779a5"
+    },
+    {
+      "responseId": "6ea33ffc-3ae6-4ec7-8041-b31f2fd36a18",
+      "sessionId": "e4bd0c0e-7ac0-4947-9c9e-477107595d54",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T11:31:04.337Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695ba0f83a4ab46275472d8d"
+    },
+    {
+      "responseId": "13524773-ac7b-44f2-acc9-ca72bbb16ce7",
+      "sessionId": "294cbafa-b77f-4c43-aa22-0f9d767bca62",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T11:32:22.816Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695ba1460455edee4863c558"
+    },
+    {
+      "responseId": "3683d533-e317-4f16-a813-2e381cf4a8f8",
+      "sessionId": "d270b2e5-f52c-420c-b676-5227ab9ac4d9",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T11:35:15.010Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695ba1f3e07342321962b34a"
+    },
+    {
+      "responseId": "e16c809c-33dd-48c8-9622-b94aec50b20c",
+      "sessionId": "9cd51785-1878-4252-83e0-7d16b9469a70",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T11:37:51.486Z",
+      "updatedAt": "2026-01-05T18:30:11.903Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4562cba171e81f4db761",
+        "name": "MALA MONDAL",
+        "memberId": "3558",
+        "email": "cati3558@gmail.com"
+      },
+      "_id": "695ba28f91a3b57f3d6b6c6a"
+    },
+    {
+      "responseId": "12ea67d2-a106-49e7-9582-64c0bab3e5e5",
+      "sessionId": "492a46a7-7cfb-4035-88d9-ba2cb0c56334",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "switched_off",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"switched_off\""
+      ],
+      "createdAt": "2026-01-05T12:06:26.915Z",
+      "updatedAt": "2026-01-05T18:30:46.693Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eae3cc341552a72118e1",
+        "name": "Karina khatoon",
+        "memberId": "1052",
+        "email": "cati1052@gmail.com"
+      },
+      "_id": "695ba942a0e2490961f209e8"
+    },
+    {
+      "responseId": "dbbfc389-4f91-4946-a3e4-2e878ae33f42",
+      "sessionId": "b4fbf898-d5c4-4b52-a461-f643c49db814",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T12:09:47.802Z",
+      "updatedAt": "2026-01-05T18:30:25.632Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eab6cc341552a720792b",
+        "name": "Sarika khatoon",
+        "memberId": "1051",
+        "email": "cati1051@gmail.com"
+      },
+      "_id": "695baa0be50870336f017865"
+    },
+    {
+      "responseId": "2e9fa5ac-8c35-41c4-9f9b-7ca8a5306b17",
+      "sessionId": "5614aae7-de9a-408b-a75b-5e4dd51f9a19",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_refused",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_refused\""
+      ],
+      "createdAt": "2026-01-05T12:11:39.870Z",
+      "updatedAt": "2026-01-05T18:30:47.494Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948dda3a5db6d8d12ce0b4c",
+        "name": "PINTU KAPRI",
+        "memberId": "CAPI812",
+        "email": "capicapi812@gmail.com"
+      },
+      "_id": "695baa7bdb9575e32bfdbfdc"
+    },
+    {
+      "responseId": "1620498c-226e-4c22-9ede-9b1626a450bd",
+      "sessionId": "a5a3fafa-4cd5-4c28-9910-cfc0d591eab0",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "consent_refused",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"consent_refused\""
+      ],
+      "createdAt": "2026-01-05T12:15:13.941Z",
+      "updatedAt": "2026-01-05T18:30:19.561Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944333f56275b9dd8309acc",
+        "name": "Md Sahid Jamal",
+        "memberId": "CAPI190",
+        "email": "capi190@gmail.com"
+      },
+      "_id": "695bab51a0b156a88ba7bd96"
+    },
+    {
+      "responseId": "237c2e2a-112b-4628-8223-e4873de0aad8",
+      "sessionId": "398027e9-eaa1-4337-b92e-5b892e91e837",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T12:16:37.378Z",
+      "updatedAt": "2026-01-05T18:30:11.004Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "694bd8bc9cf18db6a83e5efa",
+        "name": "TAPAS MANNA",
+        "memberId": "CAPI469",
+        "email": "capicapi469@gmail.com"
+      },
+      "_id": "695baba5f84ff7e01271e0a7"
+    },
+    {
+      "responseId": "7ab582d6-0b2d-41b1-936e-9cbc59a8d3aa",
+      "sessionId": "00ac1d77-d115-4776-81c2-6cb319e1e5e6",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "Not_Registered_Voter_In_AC",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"Not_Registered_Voter_In_AC\""
+      ],
+      "createdAt": "2026-01-05T12:58:26.532Z",
+      "updatedAt": "2026-01-05T18:30:21.037Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944330a56275b9dd82fd2f0",
+        "name": "AKTAR REJA",
+        "memberId": "CAPI131",
+        "email": "capi131@gmail.com"
+      },
+      "_id": "695bb5726b9416bd6445004d"
+    },
+    {
+      "responseId": "7fdbef8f-203d-4ab6-81cf-71eef81f37e5",
+      "sessionId": "031fdc79-522b-4c7d-b561-43eb63e83826",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "respondent_busy",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"respondent_busy\""
+      ],
+      "createdAt": "2026-01-05T12:59:51.126Z",
+      "updatedAt": "2026-01-05T18:30:21.177Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c364fe90bbe7745bc923",
+        "name": "MD SAHIL SK",
+        "memberId": "CAPI132",
+        "email": "sahilsk44454@gmail.com"
+      },
+      "_id": "695bb5c7496a02d82cfa2d1c"
+    },
+    {
+      "responseId": "7baa4623-b7e4-4568-9cbb-df5ab63d2b84",
+      "sessionId": "4a1a71d4-53fe-487e-8363-045f88eb9cd2",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T13:00:02.966Z",
+      "updatedAt": "2026-01-05T18:30:21.177Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c364fe90bbe7745bc923",
+        "name": "MD SAHIL SK",
+        "memberId": "CAPI132",
+        "email": "sahilsk44454@gmail.com"
+      },
+      "_id": "695bb5d21acdd6ee50a51384"
+    },
+    {
+      "responseId": "fb897541-6f86-4eb1-b649-f895f2650d18",
+      "sessionId": "offline_1767618344377_9pakdy107",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "language_barrier",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"language_barrier\""
+      ],
+      "createdAt": "2026-01-05T13:07:22.460Z",
+      "updatedAt": "2026-01-05T18:30:14.587Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6944334956275b9dd830cb8c",
+        "name": "Enamul sk",
+        "memberId": "CAPI199",
+        "email": "capi199@gmail.com"
+      },
+      "_id": "695bb78a913b4f0bc38df8a7"
+    },
+    {
+      "responseId": "aa2de7a0-c8ce-49bc-98e5-10b9cda134d6",
+      "sessionId": "3754dab2-4fda-4b5a-ba16-79571d2b9e0c",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "number_does_not_exist",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"number_does_not_exist\""
+      ],
+      "createdAt": "2026-01-05T13:24:40.096Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695bbb986143ae9206297c90"
+    },
+    {
+      "responseId": "96faa442-935e-470b-884b-13c0153c0b59",
+      "sessionId": "0ad8b9f3-b700-4335-994a-c582eb1445fb",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-05T13:29:41.215Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695bbcc589acb8e46bd68730"
+    },
+    {
+      "responseId": "b5485f74-cb8d-49a5-9679-85cb2715eed1",
+      "sessionId": "e7cf7238-41cf-4a6d-9246-4db16ac9033d",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T13:30:13.561Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695bbce5c9ce111ae853448f"
+    },
+    {
+      "responseId": "5ad8ad74-6c4a-451f-bfa3-e90337b4e745",
+      "sessionId": "1db48dc9-76ed-4bf9-b73d-24b3bc139e0c",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T13:31:19.202Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695bbd27cd93925149a1fafb"
+    },
+    {
+      "responseId": "f4d73f09-9378-4f30-bb54-c66e12d04880",
+      "sessionId": "9f5568fe-a4f3-465c-9d0c-afd1f3befb8d",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T14:03:41.643Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695bc4bd8b02325e195032b9"
+    },
+    {
+      "responseId": "afc382fd-f791-4245-a75d-2b071234ed34",
+      "sessionId": "20fd8032-7eb7-498a-82eb-360d416abe19",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "number_does_not_exist",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"number_does_not_exist\""
+      ],
+      "createdAt": "2026-01-05T14:03:47.694Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695bc4c38b02325e19503947"
+    },
+    {
+      "responseId": "59342488-bb1e-4a3b-a81f-7fc73c558c30",
+      "sessionId": "83857dc3-5466-4b65-9d07-51c6b3dbac73",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T14:03:49.272Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695bc4c58b02325e19503fd2"
+    },
+    {
+      "responseId": "3045ce54-4944-4aa9-9e3b-42cc40b90791",
+      "sessionId": "d0393a45-d30c-4d3d-addb-45d62e8eb016",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Interview_Abandoned_Early",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"Interview_Abandoned_Early\""
+      ],
+      "createdAt": "2026-01-05T14:03:51.758Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695bc4c76db66dd0abf99186"
+    },
+    {
+      "responseId": "e489546f-817f-4211-bed5-1b828e4279de",
+      "sessionId": "9d1a6e78-c784-4dfc-826c-453cb948bcd0",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Interview_Abandoned_Early",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"Interview_Abandoned_Early\""
+      ],
+      "createdAt": "2026-01-05T14:03:53.535Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695bc4c9608650abab3ac83b"
+    },
+    {
+      "responseId": "a05b8d57-0e81-457c-8727-71a42c937d39",
+      "sessionId": "8c93c56a-7cca-4b8b-a534-d045c3da5cdc",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-05T14:04:58.226Z",
+      "updatedAt": "2026-01-05T18:30:26.417Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d455ccba171e81f4daf1e",
+        "name": "SUMAN CHAKRABORTY",
+        "memberId": "3556",
+        "email": "cati3556@gmail.com"
+      },
+      "_id": "695bc50a19c330322452ac5f"
+    },
+    {
+      "responseId": "af568d45-eeca-4f7f-87d4-f5cf0e0f5634",
+      "sessionId": "11d3cfd3-93ee-478a-887a-071f5b2546a6",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T14:08:22.801Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695bc5d6e37617f9b97b821c"
+    },
+    {
+      "responseId": "b7ef6dfc-7e04-47d6-9c9b-de14cc353fb0",
+      "sessionId": "4d8b107a-739c-40e2-9b2f-b1e82a902f21",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T14:13:56.200Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695bc7244ff6b9cf74482dae"
+    },
+    {
+      "responseId": "9fe5191a-0da2-4fe8-aae5-edc879b8accb",
+      "sessionId": "bb45637f-0be6-42b6-afeb-4eecfae5a4b3",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "switched_off",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"switched_off\""
+      ],
+      "createdAt": "2026-01-05T14:14:29.370Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695bc7454c10f51a7042535c"
+    },
+    {
+      "responseId": "68721e8f-93e1-46ce-bef5-288eaa1ea3d2",
+      "sessionId": "ab114fe0-965d-46f4-97f4-7e3eb99e5bba",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T14:16:19.712Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695bc7b3efd4c003342b7ee5"
+    },
+    {
+      "responseId": "10b7aa2f-6872-40c9-abf3-86ed9910b3dc",
+      "sessionId": "03c11116-d08f-44d6-96ab-5358034865d9",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T14:17:21.381Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695bc7f1703470d9ca51cb30"
+    },
+    {
+      "responseId": "c78b143f-228c-4ecc-91e6-d6dd2a532066",
+      "sessionId": "778574f1-c8a5-49c5-ac83-8a0478807176",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "did_not_pick_up",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"did_not_pick_up\""
+      ],
+      "createdAt": "2026-01-05T14:19:30.450Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695bc872467b398f64bfc15d"
+    },
+    {
+      "responseId": "1513cccc-92ff-4f7b-b8d0-61dca2514355",
+      "sessionId": "4e5e4cdb-262a-4e77-9c4b-ac9317802e31",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "busy",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"busy\""
+      ],
+      "createdAt": "2026-01-05T14:20:23.357Z",
+      "updatedAt": "2026-01-05T18:31:17.237Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d458ecba171e81f4dfe3c",
+        "name": "SUMAIYA KHATUN",
+        "memberId": "3575",
+        "email": "cati3575@gmail.com"
+      },
+      "_id": "695bc8a7dad371bff7334657"
+    },
+    {
+      "responseId": "fe2b7c28-ad74-4ae1-953f-3136f1945189",
+      "sessionId": "15d38e99-493c-46cd-b40e-6200800a7c49",
+      "interviewMode": "capi",
+      "status": "Pending_Approval",
+      "abandonReason": "technical_issue",
+      "knownCallStatus": null,
+      "indicators": [
+        "abandonedReason: \"technical_issue\""
+      ],
+      "createdAt": "2026-01-05T14:35:15.426Z",
+      "updatedAt": "2026-01-05T18:30:46.849Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6942c36bfe90bbe7745bdac3",
+        "name": "GOLAM RASUL",
+        "memberId": "CAPI139",
+        "email": "ska854733@gmail.com"
+      },
+      "_id": "695bcc2315222be6df8c7fc3"
+    },
+    {
+      "responseId": "88f10385-6d18-44c1-bd9e-8d50344da7d6",
+      "sessionId": "3eb5c4ba-30db-4711-9042-ea176c15a214",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "not_reachable",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"not_reachable\""
+      ],
+      "createdAt": "2026-01-05T14:55:33.973Z",
+      "updatedAt": "2026-01-05T18:30:46.693Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "6948eae3cc341552a72118e1",
+        "name": "Karina khatoon",
+        "memberId": "1052",
+        "email": "cati1052@gmail.com"
+      },
+      "_id": "695bd0e55193472c8a242038"
+    },
+    {
+      "responseId": "d1715ed7-024e-4716-bbfd-43884b5ef1ab",
+      "sessionId": "f50283f2-cb23-4171-a10e-e5141c888b7d",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-05T17:26:03.037Z",
+      "updatedAt": "2026-01-05T18:31:23.874Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "68ebf124ab86ea29f3c0f1f8",
+        "name": "Vishals Interviewer",
+        "memberId": "130848",
+        "email": "vishalinterviewer@gmail.com"
+      },
+      "_id": "695bf42b1e853eac107a4420"
+    },
+    {
+      "responseId": "6f970180-c772-4cb8-9a32-e443644ba206",
+      "sessionId": "c9c861e4-5b31-4931-ac4b-f062ef2abb65",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "unknown",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"unknown\""
+      ],
+      "createdAt": "2026-01-05T18:08:30.404Z",
+      "updatedAt": "2026-01-05T18:31:23.874Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "68ebf124ab86ea29f3c0f1f8",
+        "name": "Vishals Interviewer",
+        "memberId": "130848",
+        "email": "vishalinterviewer@gmail.com"
+      },
+      "_id": "695bfe1e18c1546e530a1dd8"
+    },
+    {
+      "responseId": "8b3d2423-9c7c-43d5-9373-54b04f9ae25a",
+      "sessionId": "a2aa3157-65b7-498d-a9af-cffc8cfde578",
+      "interviewMode": "cati",
+      "status": "Pending_Approval",
+      "abandonReason": "Call_Not_Connected",
+      "knownCallStatus": "didnt_get_call",
+      "indicators": [
+        "abandonedReason: \"Call_Not_Connected\"",
+        "callStatus: \"didnt_get_call\""
+      ],
+      "createdAt": "2026-01-05T18:12:41.233Z",
+      "updatedAt": "2026-01-05T18:30:27.591Z",
+      "survey": {
+        "id": "68fd1915d41841da463f0d46",
+        "name": "Unknown",
+        "mode": "multi_mode"
+      },
+      "interviewer": {
+        "id": "693d4569cba171e81f4dc3cd",
+        "name": "SUPRITI PURKAIT",
+        "memberId": "3561",
+        "email": "cati3561@gmail.com"
+      },
+      "_id": "695bff19cd0d49b3c7a86f61"
+    }
+  ]
+}

@@ -1,0 +1,1500 @@
+{
+  "timestamp": "2026-01-04T10:04:13.881Z",
+  "operation": "recalculate_content_hashes",
+  "summary": {
+    "total": 164583,
+    "processed": 164649,
+    "updated": 53081,
+    "unchanged": 111568,
+    "errors": 0,
+    "durationMs": 412893,
+    "durationFormatted": "412s"
+  },
+  "batches": [
+    {
+      "batchNumber": 1,
+      "processed": 1000,
+      "updated": 142,
+      "unchanged": 858,
+      "errors": 0,
+      "timeMs": 890,
+      "progress": "0.61%"
+    },
+    {
+      "batchNumber": 2,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 264,
+      "progress": "1.22%"
+    },
+    {
+      "batchNumber": 3,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 204,
+      "progress": "1.82%"
+    },
+    {
+      "batchNumber": 4,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 143,
+      "progress": "2.43%"
+    },
+    {
+      "batchNumber": 5,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 255,
+      "progress": "3.04%"
+    },
+    {
+      "batchNumber": 6,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 143,
+      "progress": "3.65%"
+    },
+    {
+      "batchNumber": 7,
+      "processed": 1000,
+      "updated": 16,
+      "unchanged": 984,
+      "errors": 0,
+      "timeMs": 255,
+      "progress": "4.25%"
+    },
+    {
+      "batchNumber": 8,
+      "processed": 1000,
+      "updated": 5,
+      "unchanged": 995,
+      "errors": 0,
+      "timeMs": 382,
+      "progress": "4.86%"
+    },
+    {
+      "batchNumber": 9,
+      "processed": 1000,
+      "updated": 12,
+      "unchanged": 988,
+      "errors": 0,
+      "timeMs": 212,
+      "progress": "5.47%"
+    },
+    {
+      "batchNumber": 10,
+      "processed": 1000,
+      "updated": 5,
+      "unchanged": 995,
+      "errors": 0,
+      "timeMs": 213,
+      "progress": "6.08%"
+    },
+    {
+      "batchNumber": 11,
+      "processed": 1000,
+      "updated": 5,
+      "unchanged": 995,
+      "errors": 0,
+      "timeMs": 221,
+      "progress": "6.68%"
+    },
+    {
+      "batchNumber": 12,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 224,
+      "progress": "7.29%"
+    },
+    {
+      "batchNumber": 13,
+      "processed": 1000,
+      "updated": 3,
+      "unchanged": 997,
+      "errors": 0,
+      "timeMs": 393,
+      "progress": "7.90%"
+    },
+    {
+      "batchNumber": 14,
+      "processed": 1000,
+      "updated": 2,
+      "unchanged": 998,
+      "errors": 0,
+      "timeMs": 256,
+      "progress": "8.51%"
+    },
+    {
+      "batchNumber": 15,
+      "processed": 1000,
+      "updated": 1,
+      "unchanged": 999,
+      "errors": 0,
+      "timeMs": 242,
+      "progress": "9.11%"
+    },
+    {
+      "batchNumber": 16,
+      "processed": 1000,
+      "updated": 13,
+      "unchanged": 987,
+      "errors": 0,
+      "timeMs": 196,
+      "progress": "9.72%"
+    },
+    {
+      "batchNumber": 17,
+      "processed": 1000,
+      "updated": 22,
+      "unchanged": 978,
+      "errors": 0,
+      "timeMs": 206,
+      "progress": "10.33%"
+    },
+    {
+      "batchNumber": 18,
+      "processed": 1000,
+      "updated": 1,
+      "unchanged": 999,
+      "errors": 0,
+      "timeMs": 265,
+      "progress": "10.94%"
+    },
+    {
+      "batchNumber": 19,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 251,
+      "progress": "11.54%"
+    },
+    {
+      "batchNumber": 20,
+      "processed": 1000,
+      "updated": 2,
+      "unchanged": 998,
+      "errors": 0,
+      "timeMs": 361,
+      "progress": "12.15%"
+    },
+    {
+      "batchNumber": 21,
+      "processed": 1000,
+      "updated": 31,
+      "unchanged": 969,
+      "errors": 0,
+      "timeMs": 277,
+      "progress": "12.76%"
+    },
+    {
+      "batchNumber": 22,
+      "processed": 1000,
+      "updated": 13,
+      "unchanged": 987,
+      "errors": 0,
+      "timeMs": 271,
+      "progress": "13.37%"
+    },
+    {
+      "batchNumber": 23,
+      "processed": 1000,
+      "updated": 3,
+      "unchanged": 997,
+      "errors": 0,
+      "timeMs": 236,
+      "progress": "13.97%"
+    },
+    {
+      "batchNumber": 24,
+      "processed": 1000,
+      "updated": 2,
+      "unchanged": 998,
+      "errors": 0,
+      "timeMs": 1091,
+      "progress": "14.58%"
+    },
+    {
+      "batchNumber": 25,
+      "processed": 1000,
+      "updated": 3,
+      "unchanged": 997,
+      "errors": 0,
+      "timeMs": 205,
+      "progress": "15.19%"
+    },
+    {
+      "batchNumber": 26,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 436,
+      "progress": "15.80%"
+    },
+    {
+      "batchNumber": 27,
+      "processed": 1000,
+      "updated": 5,
+      "unchanged": 995,
+      "errors": 0,
+      "timeMs": 334,
+      "progress": "16.41%"
+    },
+    {
+      "batchNumber": 28,
+      "processed": 1000,
+      "updated": 20,
+      "unchanged": 980,
+      "errors": 0,
+      "timeMs": 712,
+      "progress": "17.01%"
+    },
+    {
+      "batchNumber": 29,
+      "processed": 1000,
+      "updated": 14,
+      "unchanged": 986,
+      "errors": 0,
+      "timeMs": 279,
+      "progress": "17.62%"
+    },
+    {
+      "batchNumber": 30,
+      "processed": 1000,
+      "updated": 2,
+      "unchanged": 998,
+      "errors": 0,
+      "timeMs": 215,
+      "progress": "18.23%"
+    },
+    {
+      "batchNumber": 31,
+      "processed": 1000,
+      "updated": 1,
+      "unchanged": 999,
+      "errors": 0,
+      "timeMs": 744,
+      "progress": "18.84%"
+    },
+    {
+      "batchNumber": 32,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 461,
+      "progress": "19.44%"
+    },
+    {
+      "batchNumber": 33,
+      "processed": 1000,
+      "updated": 8,
+      "unchanged": 992,
+      "errors": 0,
+      "timeMs": 215,
+      "progress": "20.05%"
+    },
+    {
+      "batchNumber": 34,
+      "processed": 1000,
+      "updated": 5,
+      "unchanged": 995,
+      "errors": 0,
+      "timeMs": 187,
+      "progress": "20.66%"
+    },
+    {
+      "batchNumber": 35,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 373,
+      "progress": "21.27%"
+    },
+    {
+      "batchNumber": 36,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 484,
+      "progress": "21.87%"
+    },
+    {
+      "batchNumber": 37,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 308,
+      "progress": "22.48%"
+    },
+    {
+      "batchNumber": 38,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 190,
+      "progress": "23.09%"
+    },
+    {
+      "batchNumber": 39,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 285,
+      "progress": "23.70%"
+    },
+    {
+      "batchNumber": 40,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 276,
+      "progress": "24.30%"
+    },
+    {
+      "batchNumber": 41,
+      "processed": 1000,
+      "updated": 0,
+      "unchanged": 1000,
+      "errors": 0,
+      "timeMs": 470,
+      "progress": "24.91%"
+    },
+    {
+      "batchNumber": 42,
+      "processed": 1000,
+      "updated": 16,
+      "unchanged": 984,
+      "errors": 0,
+      "timeMs": 279,
+      "progress": "25.52%"
+    },
+    {
+      "batchNumber": 43,
+      "processed": 1000,
+      "updated": 65,
+      "unchanged": 935,
+      "errors": 0,
+      "timeMs": 619,
+      "progress": "26.13%"
+    },
+    {
+      "batchNumber": 44,
+      "processed": 1000,
+      "updated": 34,
+      "unchanged": 966,
+      "errors": 0,
+      "timeMs": 868,
+      "progress": "26.73%"
+    },
+    {
+      "batchNumber": 45,
+      "processed": 1000,
+      "updated": 34,
+      "unchanged": 966,
+      "errors": 0,
+      "timeMs": 478,
+      "progress": "27.34%"
+    },
+    {
+      "batchNumber": 46,
+      "processed": 1000,
+      "updated": 116,
+      "unchanged": 884,
+      "errors": 0,
+      "timeMs": 1069,
+      "progress": "27.95%"
+    },
+    {
+      "batchNumber": 47,
+      "processed": 1000,
+      "updated": 76,
+      "unchanged": 924,
+      "errors": 0,
+      "timeMs": 397,
+      "progress": "28.56%"
+    },
+    {
+      "batchNumber": 48,
+      "processed": 1000,
+      "updated": 74,
+      "unchanged": 926,
+      "errors": 0,
+      "timeMs": 691,
+      "progress": "29.16%"
+    },
+    {
+      "batchNumber": 49,
+      "processed": 1000,
+      "updated": 117,
+      "unchanged": 883,
+      "errors": 0,
+      "timeMs": 473,
+      "progress": "29.77%"
+    },
+    {
+      "batchNumber": 50,
+      "processed": 1000,
+      "updated": 141,
+      "unchanged": 859,
+      "errors": 0,
+      "timeMs": 1162,
+      "progress": "30.38%"
+    },
+    {
+      "batchNumber": 51,
+      "processed": 1000,
+      "updated": 232,
+      "unchanged": 768,
+      "errors": 0,
+      "timeMs": 1020,
+      "progress": "30.99%"
+    },
+    {
+      "batchNumber": 52,
+      "processed": 1000,
+      "updated": 136,
+      "unchanged": 864,
+      "errors": 0,
+      "timeMs": 1710,
+      "progress": "31.60%"
+    },
+    {
+      "batchNumber": 53,
+      "processed": 1000,
+      "updated": 128,
+      "unchanged": 872,
+      "errors": 0,
+      "timeMs": 432,
+      "progress": "32.20%"
+    },
+    {
+      "batchNumber": 54,
+      "processed": 1000,
+      "updated": 124,
+      "unchanged": 876,
+      "errors": 0,
+      "timeMs": 1643,
+      "progress": "32.81%"
+    },
+    {
+      "batchNumber": 55,
+      "processed": 1000,
+      "updated": 138,
+      "unchanged": 862,
+      "errors": 0,
+      "timeMs": 519,
+      "progress": "33.42%"
+    },
+    {
+      "batchNumber": 56,
+      "processed": 1000,
+      "updated": 110,
+      "unchanged": 890,
+      "errors": 0,
+      "timeMs": 898,
+      "progress": "34.03%"
+    },
+    {
+      "batchNumber": 57,
+      "processed": 1000,
+      "updated": 335,
+      "unchanged": 665,
+      "errors": 0,
+      "timeMs": 2307,
+      "progress": "34.63%"
+    },
+    {
+      "batchNumber": 58,
+      "processed": 1000,
+      "updated": 164,
+      "unchanged": 836,
+      "errors": 0,
+      "timeMs": 866,
+      "progress": "35.24%"
+    },
+    {
+      "batchNumber": 59,
+      "processed": 1000,
+      "updated": 114,
+      "unchanged": 886,
+      "errors": 0,
+      "timeMs": 1815,
+      "progress": "35.85%"
+    },
+    {
+      "batchNumber": 60,
+      "processed": 1000,
+      "updated": 140,
+      "unchanged": 860,
+      "errors": 0,
+      "timeMs": 1869,
+      "progress": "36.46%"
+    },
+    {
+      "batchNumber": 61,
+      "processed": 1000,
+      "updated": 250,
+      "unchanged": 750,
+      "errors": 0,
+      "timeMs": 574,
+      "progress": "37.06%"
+    },
+    {
+      "batchNumber": 62,
+      "processed": 1000,
+      "updated": 233,
+      "unchanged": 767,
+      "errors": 0,
+      "timeMs": 1273,
+      "progress": "37.67%"
+    },
+    {
+      "batchNumber": 63,
+      "processed": 1000,
+      "updated": 296,
+      "unchanged": 704,
+      "errors": 0,
+      "timeMs": 1112,
+      "progress": "38.28%"
+    },
+    {
+      "batchNumber": 64,
+      "processed": 1000,
+      "updated": 190,
+      "unchanged": 810,
+      "errors": 0,
+      "timeMs": 540,
+      "progress": "38.89%"
+    },
+    {
+      "batchNumber": 65,
+      "processed": 1000,
+      "updated": 202,
+      "unchanged": 798,
+      "errors": 0,
+      "timeMs": 1482,
+      "progress": "39.49%"
+    },
+    {
+      "batchNumber": 66,
+      "processed": 1000,
+      "updated": 140,
+      "unchanged": 860,
+      "errors": 0,
+      "timeMs": 492,
+      "progress": "40.10%"
+    },
+    {
+      "batchNumber": 67,
+      "processed": 1000,
+      "updated": 263,
+      "unchanged": 737,
+      "errors": 0,
+      "timeMs": 866,
+      "progress": "40.71%"
+    },
+    {
+      "batchNumber": 68,
+      "processed": 1000,
+      "updated": 259,
+      "unchanged": 741,
+      "errors": 0,
+      "timeMs": 4048,
+      "progress": "41.32%"
+    },
+    {
+      "batchNumber": 69,
+      "processed": 1000,
+      "updated": 147,
+      "unchanged": 853,
+      "errors": 0,
+      "timeMs": 513,
+      "progress": "41.92%"
+    },
+    {
+      "batchNumber": 70,
+      "processed": 1000,
+      "updated": 145,
+      "unchanged": 855,
+      "errors": 0,
+      "timeMs": 449,
+      "progress": "42.53%"
+    },
+    {
+      "batchNumber": 71,
+      "processed": 1000,
+      "updated": 166,
+      "unchanged": 834,
+      "errors": 0,
+      "timeMs": 521,
+      "progress": "43.14%"
+    },
+    {
+      "batchNumber": 72,
+      "processed": 1000,
+      "updated": 249,
+      "unchanged": 751,
+      "errors": 0,
+      "timeMs": 3089,
+      "progress": "43.75%"
+    },
+    {
+      "batchNumber": 73,
+      "processed": 1000,
+      "updated": 373,
+      "unchanged": 627,
+      "errors": 0,
+      "timeMs": 810,
+      "progress": "44.35%"
+    },
+    {
+      "batchNumber": 74,
+      "processed": 1000,
+      "updated": 232,
+      "unchanged": 768,
+      "errors": 0,
+      "timeMs": 687,
+      "progress": "44.96%"
+    },
+    {
+      "batchNumber": 75,
+      "processed": 1000,
+      "updated": 163,
+      "unchanged": 837,
+      "errors": 0,
+      "timeMs": 591,
+      "progress": "45.57%"
+    },
+    {
+      "batchNumber": 76,
+      "processed": 1000,
+      "updated": 166,
+      "unchanged": 834,
+      "errors": 0,
+      "timeMs": 608,
+      "progress": "46.18%"
+    },
+    {
+      "batchNumber": 77,
+      "processed": 1000,
+      "updated": 209,
+      "unchanged": 791,
+      "errors": 0,
+      "timeMs": 573,
+      "progress": "46.78%"
+    },
+    {
+      "batchNumber": 78,
+      "processed": 1000,
+      "updated": 249,
+      "unchanged": 751,
+      "errors": 0,
+      "timeMs": 1612,
+      "progress": "47.39%"
+    },
+    {
+      "batchNumber": 79,
+      "processed": 1000,
+      "updated": 310,
+      "unchanged": 690,
+      "errors": 0,
+      "timeMs": 3273,
+      "progress": "48.00%"
+    },
+    {
+      "batchNumber": 80,
+      "processed": 1000,
+      "updated": 460,
+      "unchanged": 540,
+      "errors": 0,
+      "timeMs": 2880,
+      "progress": "48.61%"
+    },
+    {
+      "batchNumber": 81,
+      "processed": 1000,
+      "updated": 699,
+      "unchanged": 301,
+      "errors": 0,
+      "timeMs": 3293,
+      "progress": "49.22%"
+    },
+    {
+      "batchNumber": 82,
+      "processed": 1000,
+      "updated": 396,
+      "unchanged": 604,
+      "errors": 0,
+      "timeMs": 943,
+      "progress": "49.82%"
+    },
+    {
+      "batchNumber": 83,
+      "processed": 1000,
+      "updated": 386,
+      "unchanged": 614,
+      "errors": 0,
+      "timeMs": 2954,
+      "progress": "50.43%"
+    },
+    {
+      "batchNumber": 84,
+      "processed": 1000,
+      "updated": 209,
+      "unchanged": 791,
+      "errors": 0,
+      "timeMs": 719,
+      "progress": "51.04%"
+    },
+    {
+      "batchNumber": 85,
+      "processed": 1000,
+      "updated": 136,
+      "unchanged": 864,
+      "errors": 0,
+      "timeMs": 573,
+      "progress": "51.65%"
+    },
+    {
+      "batchNumber": 86,
+      "processed": 1000,
+      "updated": 164,
+      "unchanged": 836,
+      "errors": 0,
+      "timeMs": 3578,
+      "progress": "52.25%"
+    },
+    {
+      "batchNumber": 87,
+      "processed": 1000,
+      "updated": 140,
+      "unchanged": 860,
+      "errors": 0,
+      "timeMs": 2786,
+      "progress": "52.86%"
+    },
+    {
+      "batchNumber": 88,
+      "processed": 1000,
+      "updated": 217,
+      "unchanged": 783,
+      "errors": 0,
+      "timeMs": 579,
+      "progress": "53.47%"
+    },
+    {
+      "batchNumber": 89,
+      "processed": 1000,
+      "updated": 330,
+      "unchanged": 670,
+      "errors": 0,
+      "timeMs": 801,
+      "progress": "54.08%"
+    },
+    {
+      "batchNumber": 90,
+      "processed": 1000,
+      "updated": 382,
+      "unchanged": 618,
+      "errors": 0,
+      "timeMs": 1020,
+      "progress": "54.68%"
+    },
+    {
+      "batchNumber": 91,
+      "processed": 1000,
+      "updated": 266,
+      "unchanged": 734,
+      "errors": 0,
+      "timeMs": 5157,
+      "progress": "55.29%"
+    },
+    {
+      "batchNumber": 92,
+      "processed": 1000,
+      "updated": 315,
+      "unchanged": 685,
+      "errors": 0,
+      "timeMs": 3993,
+      "progress": "55.90%"
+    },
+    {
+      "batchNumber": 93,
+      "processed": 1000,
+      "updated": 428,
+      "unchanged": 572,
+      "errors": 0,
+      "timeMs": 981,
+      "progress": "56.51%"
+    },
+    {
+      "batchNumber": 94,
+      "processed": 1000,
+      "updated": 673,
+      "unchanged": 327,
+      "errors": 0,
+      "timeMs": 1397,
+      "progress": "57.11%"
+    },
+    {
+      "batchNumber": 95,
+      "processed": 1000,
+      "updated": 450,
+      "unchanged": 550,
+      "errors": 0,
+      "timeMs": 1067,
+      "progress": "57.72%"
+    },
+    {
+      "batchNumber": 96,
+      "processed": 1000,
+      "updated": 190,
+      "unchanged": 810,
+      "errors": 0,
+      "timeMs": 609,
+      "progress": "58.33%"
+    },
+    {
+      "batchNumber": 97,
+      "processed": 1000,
+      "updated": 258,
+      "unchanged": 742,
+      "errors": 0,
+      "timeMs": 697,
+      "progress": "58.94%"
+    },
+    {
+      "batchNumber": 98,
+      "processed": 1000,
+      "updated": 394,
+      "unchanged": 606,
+      "errors": 0,
+      "timeMs": 5473,
+      "progress": "59.54%"
+    },
+    {
+      "batchNumber": 99,
+      "processed": 1000,
+      "updated": 603,
+      "unchanged": 397,
+      "errors": 0,
+      "timeMs": 1267,
+      "progress": "60.15%"
+    },
+    {
+      "batchNumber": 100,
+      "processed": 1000,
+      "updated": 557,
+      "unchanged": 443,
+      "errors": 0,
+      "timeMs": 5263,
+      "progress": "60.76%"
+    },
+    {
+      "batchNumber": 101,
+      "processed": 1000,
+      "updated": 378,
+      "unchanged": 622,
+      "errors": 0,
+      "timeMs": 4394,
+      "progress": "61.37%"
+    },
+    {
+      "batchNumber": 102,
+      "processed": 1000,
+      "updated": 473,
+      "unchanged": 527,
+      "errors": 0,
+      "timeMs": 5334,
+      "progress": "61.97%"
+    },
+    {
+      "batchNumber": 103,
+      "processed": 1000,
+      "updated": 481,
+      "unchanged": 519,
+      "errors": 0,
+      "timeMs": 1420,
+      "progress": "62.58%"
+    },
+    {
+      "batchNumber": 104,
+      "processed": 1000,
+      "updated": 434,
+      "unchanged": 566,
+      "errors": 0,
+      "timeMs": 6840,
+      "progress": "63.19%"
+    },
+    {
+      "batchNumber": 105,
+      "processed": 1000,
+      "updated": 623,
+      "unchanged": 377,
+      "errors": 0,
+      "timeMs": 1591,
+      "progress": "63.80%"
+    },
+    {
+      "batchNumber": 106,
+      "processed": 1000,
+      "updated": 603,
+      "unchanged": 397,
+      "errors": 0,
+      "timeMs": 1325,
+      "progress": "64.41%"
+    },
+    {
+      "batchNumber": 107,
+      "processed": 1000,
+      "updated": 710,
+      "unchanged": 290,
+      "errors": 0,
+      "timeMs": 1517,
+      "progress": "65.01%"
+    },
+    {
+      "batchNumber": 108,
+      "processed": 1000,
+      "updated": 848,
+      "unchanged": 152,
+      "errors": 0,
+      "timeMs": 1782,
+      "progress": "65.62%"
+    },
+    {
+      "batchNumber": 109,
+      "processed": 1000,
+      "updated": 791,
+      "unchanged": 209,
+      "errors": 0,
+      "timeMs": 8685,
+      "progress": "66.23%"
+    },
+    {
+      "batchNumber": 110,
+      "processed": 1000,
+      "updated": 852,
+      "unchanged": 148,
+      "errors": 0,
+      "timeMs": 1781,
+      "progress": "66.84%"
+    },
+    {
+      "batchNumber": 111,
+      "processed": 1000,
+      "updated": 756,
+      "unchanged": 244,
+      "errors": 0,
+      "timeMs": 8145,
+      "progress": "67.44%"
+    },
+    {
+      "batchNumber": 112,
+      "processed": 1000,
+      "updated": 786,
+      "unchanged": 214,
+      "errors": 0,
+      "timeMs": 1611,
+      "progress": "68.05%"
+    },
+    {
+      "batchNumber": 113,
+      "processed": 1000,
+      "updated": 713,
+      "unchanged": 287,
+      "errors": 0,
+      "timeMs": 10295,
+      "progress": "68.66%"
+    },
+    {
+      "batchNumber": 114,
+      "processed": 1000,
+      "updated": 799,
+      "unchanged": 201,
+      "errors": 0,
+      "timeMs": 6732,
+      "progress": "69.27%"
+    },
+    {
+      "batchNumber": 115,
+      "processed": 1000,
+      "updated": 378,
+      "unchanged": 622,
+      "errors": 0,
+      "timeMs": 1061,
+      "progress": "69.87%"
+    },
+    {
+      "batchNumber": 116,
+      "processed": 1000,
+      "updated": 410,
+      "unchanged": 590,
+      "errors": 0,
+      "timeMs": 1003,
+      "progress": "70.48%"
+    },
+    {
+      "batchNumber": 117,
+      "processed": 1000,
+      "updated": 462,
+      "unchanged": 538,
+      "errors": 0,
+      "timeMs": 6642,
+      "progress": "71.09%"
+    },
+    {
+      "batchNumber": 118,
+      "processed": 1000,
+      "updated": 483,
+      "unchanged": 517,
+      "errors": 0,
+      "timeMs": 1159,
+      "progress": "71.70%"
+    },
+    {
+      "batchNumber": 119,
+      "processed": 1000,
+      "updated": 493,
+      "unchanged": 507,
+      "errors": 0,
+      "timeMs": 1257,
+      "progress": "72.30%"
+    },
+    {
+      "batchNumber": 120,
+      "processed": 1000,
+      "updated": 536,
+      "unchanged": 464,
+      "errors": 0,
+      "timeMs": 7794,
+      "progress": "72.91%"
+    },
+    {
+      "batchNumber": 121,
+      "processed": 1000,
+      "updated": 501,
+      "unchanged": 499,
+      "errors": 0,
+      "timeMs": 1189,
+      "progress": "73.52%"
+    },
+    {
+      "batchNumber": 122,
+      "processed": 1000,
+      "updated": 555,
+      "unchanged": 445,
+      "errors": 0,
+      "timeMs": 1215,
+      "progress": "74.13%"
+    },
+    {
+      "batchNumber": 123,
+      "processed": 1000,
+      "updated": 613,
+      "unchanged": 387,
+      "errors": 0,
+      "timeMs": 1434,
+      "progress": "74.73%"
+    },
+    {
+      "batchNumber": 124,
+      "processed": 1000,
+      "updated": 1000,
+      "unchanged": 0,
+      "errors": 0,
+      "timeMs": 8824,
+      "progress": "75.34%"
+    },
+    {
+      "batchNumber": 125,
+      "processed": 1000,
+      "updated": 1000,
+      "unchanged": 0,
+      "errors": 0,
+      "timeMs": 9304,
+      "progress": "75.95%"
+    },
+    {
+      "batchNumber": 126,
+      "processed": 1000,
+      "updated": 676,
+      "unchanged": 324,
+      "errors": 0,
+      "timeMs": 1412,
+      "progress": "76.56%"
+    },
+    {
+      "batchNumber": 127,
+      "processed": 1000,
+      "updated": 325,
+      "unchanged": 675,
+      "errors": 0,
+      "timeMs": 819,
+      "progress": "77.16%"
+    },
+    {
+      "batchNumber": 128,
+      "processed": 1000,
+      "updated": 416,
+      "unchanged": 584,
+      "errors": 0,
+      "timeMs": 962,
+      "progress": "77.77%"
+    },
+    {
+      "batchNumber": 129,
+      "processed": 1000,
+      "updated": 432,
+      "unchanged": 568,
+      "errors": 0,
+      "timeMs": 5245,
+      "progress": "78.38%"
+    },
+    {
+      "batchNumber": 130,
+      "processed": 1000,
+      "updated": 530,
+      "unchanged": 470,
+      "errors": 0,
+      "timeMs": 8665,
+      "progress": "78.99%"
+    },
+    {
+      "batchNumber": 131,
+      "processed": 1000,
+      "updated": 549,
+      "unchanged": 451,
+      "errors": 0,
+      "timeMs": 913,
+      "progress": "79.60%"
+    },
+    {
+      "batchNumber": 132,
+      "processed": 1000,
+      "updated": 608,
+      "unchanged": 392,
+      "errors": 0,
+      "timeMs": 958,
+      "progress": "80.20%"
+    },
+    {
+      "batchNumber": 133,
+      "processed": 1000,
+      "updated": 453,
+      "unchanged": 547,
+      "errors": 0,
+      "timeMs": 6060,
+      "progress": "80.81%"
+    },
+    {
+      "batchNumber": 134,
+      "processed": 1000,
+      "updated": 511,
+      "unchanged": 489,
+      "errors": 0,
+      "timeMs": 934,
+      "progress": "81.42%"
+    },
+    {
+      "batchNumber": 135,
+      "processed": 1000,
+      "updated": 604,
+      "unchanged": 396,
+      "errors": 0,
+      "timeMs": 7012,
+      "progress": "82.03%"
+    },
+    {
+      "batchNumber": 136,
+      "processed": 1000,
+      "updated": 465,
+      "unchanged": 535,
+      "errors": 0,
+      "timeMs": 6872,
+      "progress": "82.63%"
+    },
+    {
+      "batchNumber": 137,
+      "processed": 1000,
+      "updated": 672,
+      "unchanged": 328,
+      "errors": 0,
+      "timeMs": 1309,
+      "progress": "83.24%"
+    },
+    {
+      "batchNumber": 138,
+      "processed": 1000,
+      "updated": 366,
+      "unchanged": 634,
+      "errors": 0,
+      "timeMs": 726,
+      "progress": "83.85%"
+    },
+    {
+      "batchNumber": 139,
+      "processed": 1000,
+      "updated": 447,
+      "unchanged": 553,
+      "errors": 0,
+      "timeMs": 12318,
+      "progress": "84.46%"
+    },
+    {
+      "batchNumber": 140,
+      "processed": 1000,
+      "updated": 444,
+      "unchanged": 556,
+      "errors": 0,
+      "timeMs": 938,
+      "progress": "85.06%"
+    },
+    {
+      "batchNumber": 141,
+      "processed": 1000,
+      "updated": 583,
+      "unchanged": 417,
+      "errors": 0,
+      "timeMs": 8525,
+      "progress": "85.67%"
+    },
+    {
+      "batchNumber": 142,
+      "processed": 1000,
+      "updated": 552,
+      "unchanged": 448,
+      "errors": 0,
+      "timeMs": 7878,
+      "progress": "86.28%"
+    },
+    {
+      "batchNumber": 143,
+      "processed": 1000,
+      "updated": 643,
+      "unchanged": 357,
+      "errors": 0,
+      "timeMs": 1461,
+      "progress": "86.89%"
+    },
+    {
+      "batchNumber": 144,
+      "processed": 1000,
+      "updated": 465,
+      "unchanged": 535,
+      "errors": 0,
+      "timeMs": 994,
+      "progress": "87.49%"
+    },
+    {
+      "batchNumber": 145,
+      "processed": 1000,
+      "updated": 464,
+      "unchanged": 536,
+      "errors": 0,
+      "timeMs": 1089,
+      "progress": "88.10%"
+    },
+    {
+      "batchNumber": 146,
+      "processed": 1000,
+      "updated": 526,
+      "unchanged": 474,
+      "errors": 0,
+      "timeMs": 1144,
+      "progress": "88.71%"
+    },
+    {
+      "batchNumber": 147,
+      "processed": 1000,
+      "updated": 711,
+      "unchanged": 289,
+      "errors": 0,
+      "timeMs": 7879,
+      "progress": "89.32%"
+    },
+    {
+      "batchNumber": 148,
+      "processed": 1000,
+      "updated": 598,
+      "unchanged": 402,
+      "errors": 0,
+      "timeMs": 1311,
+      "progress": "89.92%"
+    },
+    {
+      "batchNumber": 149,
+      "processed": 1000,
+      "updated": 728,
+      "unchanged": 272,
+      "errors": 0,
+      "timeMs": 1360,
+      "progress": "90.53%"
+    },
+    {
+      "batchNumber": 150,
+      "processed": 1000,
+      "updated": 364,
+      "unchanged": 636,
+      "errors": 0,
+      "timeMs": 885,
+      "progress": "91.14%"
+    },
+    {
+      "batchNumber": 151,
+      "processed": 1000,
+      "updated": 443,
+      "unchanged": 557,
+      "errors": 0,
+      "timeMs": 1111,
+      "progress": "91.75%"
+    },
+    {
+      "batchNumber": 152,
+      "processed": 1000,
+      "updated": 474,
+      "unchanged": 526,
+      "errors": 0,
+      "timeMs": 7210,
+      "progress": "92.35%"
+    },
+    {
+      "batchNumber": 153,
+      "processed": 1000,
+      "updated": 348,
+      "unchanged": 652,
+      "errors": 0,
+      "timeMs": 12457,
+      "progress": "92.96%"
+    },
+    {
+      "batchNumber": 154,
+      "processed": 1000,
+      "updated": 479,
+      "unchanged": 521,
+      "errors": 0,
+      "timeMs": 1266,
+      "progress": "93.57%"
+    },
+    {
+      "batchNumber": 155,
+      "processed": 1000,
+      "updated": 540,
+      "unchanged": 460,
+      "errors": 0,
+      "timeMs": 1367,
+      "progress": "94.18%"
+    },
+    {
+      "batchNumber": 156,
+      "processed": 1000,
+      "updated": 603,
+      "unchanged": 397,
+      "errors": 0,
+      "timeMs": 13279,
+      "progress": "94.79%"
+    },
+    {
+      "batchNumber": 157,
+      "processed": 1000,
+      "updated": 710,
+      "unchanged": 290,
+      "errors": 0,
+      "timeMs": 1577,
+      "progress": "95.39%"
+    },
+    {
+      "batchNumber": 158,
+      "processed": 1000,
+      "updated": 414,
+      "unchanged": 586,
+      "errors": 0,
+      "timeMs": 961,
+      "progress": "96.00%"
+    },
+    {
+      "batchNumber": 159,
+      "processed": 1000,
+      "updated": 785,
+      "unchanged": 215,
+      "errors": 0,
+      "timeMs": 11475,
+      "progress": "96.61%"
+    },
+    {
+      "batchNumber": 160,
+      "processed": 1000,
+      "updated": 912,
+      "unchanged": 88,
+      "errors": 0,
+      "timeMs": 13233,
+      "progress": "97.22%"
+    },
+    {
+      "batchNumber": 161,
+      "processed": 1000,
+      "updated": 837,
+      "unchanged": 163,
+      "errors": 0,
+      "timeMs": 1784,
+      "progress": "97.82%"
+    },
+    {
+      "batchNumber": 162,
+      "processed": 1000,
+      "updated": 836,
+      "unchanged": 164,
+      "errors": 0,
+      "timeMs": 10990,
+      "progress": "98.43%"
+    },
+    {
+      "batchNumber": 163,
+      "processed": 1000,
+      "updated": 945,
+      "unchanged": 55,
+      "errors": 0,
+      "timeMs": 14605,
+      "progress": "99.04%"
+    },
+    {
+      "batchNumber": 164,
+      "processed": 1000,
+      "updated": 940,
+      "unchanged": 60,
+      "errors": 0,
+      "timeMs": 1773,
+      "progress": "99.65%"
+    },
+    {
+      "batchNumber": 165,
+      "processed": 649,
+      "updated": 480,
+      "unchanged": 169,
+      "errors": 0,
+      "timeMs": 11466,
+      "progress": "100.04%"
+    }
+  ]
+}

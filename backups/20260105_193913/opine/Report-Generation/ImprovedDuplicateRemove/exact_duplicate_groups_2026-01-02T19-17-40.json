@@ -1,0 +1,124 @@
+{
+  "generatedAt": "2026-01-02T19:17:40.630Z",
+  "totalDuplicateGroups": 3,
+  "totalDuplicateResponses": 3,
+  "groups": [
+    {
+      "groupNumber": 1,
+      "original": {
+        "responseId": "c5bf8d5c-63fd-4715-8aec-15c0dc2289ab",
+        "mongoId": "69538054db9b748dea723546",
+        "sessionId": "9d99a3eb-82cf-4069-8caa-874e015d3eea",
+        "createdAt": "2025-12-30T07:33:40.448Z",
+        "interviewer": {
+          "objectId": "694433f856275b9dd834967c",
+          "memberId": "CAPI266",
+          "name": "ANANYA DAS",
+          "email": "capi2661@gmail.com"
+        },
+        "projectManager": null
+      },
+      "duplicates": [
+        {
+          "responseId": "855dba49-d161-44f4-ac29-e172aa10f6a8",
+          "mongoId": "6953807cd4f6b822d8e9dc7e",
+          "sessionId": "97365490-1fbe-4c31-85e1-cbad9240f2c9",
+          "createdAt": "2025-12-30T07:34:20.232Z",
+          "interviewer": {
+            "objectId": "694433f856275b9dd834967c",
+            "memberId": "CAPI266",
+            "name": "ANANYA DAS",
+            "email": "capi2661@gmail.com"
+          },
+          "projectManager": null
+        }
+      ],
+      "matchDetails": {
+        "startTime": "2025-12-30T06:56:36.849Z",
+        "endTime": "2025-12-30T06:56:57.283Z",
+        "responsesCount": 0,
+        "audioDuration": 20,
+        "audioFileSize": null,
+        "audioFormat": "m4a"
+      }
+    },
+    {
+      "groupNumber": 2,
+      "original": {
+        "responseId": "80dea54f-9058-431c-966c-22d90919b26b",
+        "mongoId": "6953c570725bc6cf066ba5d2",
+        "sessionId": "8878b80f-25ae-442c-917f-83d6d143b157",
+        "createdAt": "2025-12-30T12:28:32.386Z",
+        "interviewer": {
+          "objectId": "6942c3cbfe90bbe7745d168b",
+          "memberId": "CAPI398",
+          "name": "Sourav Das",
+          "email": "capi398@gmail.com"
+        },
+        "projectManager": null
+      },
+      "duplicates": [
+        {
+          "responseId": "d2d5007b-18f9-4dde-9396-e75821954905",
+          "mongoId": "6954c8bae8edc6b1b43c0f54",
+          "sessionId": "df43bef9-a538-47a5-892d-6b17a34beb93",
+          "createdAt": "2025-12-31T06:54:50.113Z",
+          "interviewer": {
+            "objectId": "6942c3cbfe90bbe7745d168b",
+            "memberId": "CAPI398",
+            "name": "Sourav Das",
+            "email": "capi398@gmail.com"
+          },
+          "projectManager": null
+        }
+      ],
+      "matchDetails": {
+        "startTime": "2025-12-27T05:22:28.412Z",
+        "endTime": "2025-12-27T05:33:55.129Z",
+        "responsesCount": 0,
+        "audioDuration": null,
+        "audioFileSize": null,
+        "audioFormat": "webm"
+      }
+    },
+    {
+      "groupNumber": 3,
+      "original": {
+        "responseId": "170930fa-0ce2-44d7-af41-0ba3576c8509",
+        "mongoId": "6957585921661160e5086bd1",
+        "sessionId": "d0ca9b89-eb16-418c-b5d4-6b7d81586c3c",
+        "createdAt": "2026-01-02T05:32:09.901Z",
+        "interviewer": {
+          "objectId": "6942c439fe90bbe7745e6fe8",
+          "memberId": "CAPI233",
+          "name": "Sudipta Mondal",
+          "email": "capi233@gmail.com"
+        },
+        "projectManager": null
+      },
+      "duplicates": [
+        {
+          "responseId": "8b20f036-5533-45b7-89c4-470d8460e30d",
+          "mongoId": "6957588fc9ecf16f193a359c",
+          "sessionId": "06fe1123-5c70-41b8-b6a5-6d600bc7f7cc",
+          "createdAt": "2026-01-02T05:33:03.524Z",
+          "interviewer": {
+            "objectId": "6942c439fe90bbe7745e6fe8",
+            "memberId": "CAPI233",
+            "name": "Sudipta Mondal",
+            "email": "capi233@gmail.com"
+          },
+          "projectManager": null
+        }
+      ],
+      "matchDetails": {
+        "startTime": "2026-01-01T15:15:12.136Z",
+        "endTime": "2026-01-01T15:16:22.536Z",
+        "responsesCount": 0,
+        "audioDuration": 70,
+        "audioFileSize": null,
+        "audioFormat": "m4a"
+      }
+    }
+  ]
+}

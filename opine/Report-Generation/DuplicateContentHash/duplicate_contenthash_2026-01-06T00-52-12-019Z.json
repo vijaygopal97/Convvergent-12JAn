@@ -1,0 +1,1110 @@
+{
+  "timestamp": "2026-01-06T00:52:12.019Z",
+  "summary": {
+    "totalDuplicateHashes": 50,
+    "totalDuplicateResponses": 100,
+    "averageDuplicatesPerHash": "2.00"
+  },
+  "duplicates": [
+    {
+      "contentHash": "a4fce8057ce4a24a",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "853d7309-a3cf-422b-9032-f32e0c6d26b0",
+          "status": "Pending_Approval",
+          "createdAt": "2025-12-25T06:14:00.146Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Rijwanur rahaman",
+          "interviewerEmail": "capi937@gmail.com"
+        },
+        {
+          "responseId": "3457efe7-979e-4a7e-b63c-6bfd5fe19be0",
+          "status": "Pending_Approval",
+          "createdAt": "2025-12-25T06:15:20.274Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Rijwanur rahaman",
+          "interviewerEmail": "capi937@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "aa7df7736b4e1cf1",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "d9ef1452-9d94-4c51-8b49-845bbaae9ec9",
+          "status": "Pending_Approval",
+          "createdAt": "2025-12-26T12:50:50.118Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SURAJ SK",
+          "interviewerEmail": "capicapi718@gmail.com"
+        },
+        {
+          "responseId": "f271e482-5f4a-4e0c-b054-15abf6e95e37",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-01T12:56:54.272Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SURAJ SK",
+          "interviewerEmail": "capicapi718@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "baa1359a737a8b87",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "7e377907-d2fb-404b-9b68-3f003b1f1455",
+          "status": "Pending_Approval",
+          "createdAt": "2025-12-31T13:26:08.015Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SURAJ SK",
+          "interviewerEmail": "capicapi718@gmail.com"
+        },
+        {
+          "responseId": "4a2013f7-2ce1-4c71-9b73-a12884cf0a33",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T08:53:07.620Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "TUSAR SK",
+          "interviewerEmail": "stusar968@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "ce504ae5e4a43bb1",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "6836d666-820a-47a6-88a9-e4ce580c3941",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-01T13:31:49.531Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SURAJ SK",
+          "interviewerEmail": "capicapi718@gmail.com"
+        },
+        {
+          "responseId": "37f5c591-f5a4-48e3-8332-c4d449515d4a",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T05:57:00.478Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "TUSAR SK",
+          "interviewerEmail": "stusar968@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "3cd3f5acc58bcc4d",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "c1ca3bb8-f371-49a3-a30f-c189187d2d87",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-01T13:51:51.416Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SURAJ SK",
+          "interviewerEmail": "capicapi718@gmail.com"
+        },
+        {
+          "responseId": "af7eeb82-349c-4358-a0f5-12b1e503941c",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T06:04:17.479Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "TUSAR SK",
+          "interviewerEmail": "stusar968@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "eee26a21e07f6dbd",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "9c39206b-c818-4de5-8ab5-65c568db9959",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-01T16:37:11.629Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SAGAR SK",
+          "interviewerEmail": "capicapi717@gmail.com"
+        },
+        {
+          "responseId": "53047c47-361b-4487-881a-d92153499b7a",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T03:59:34.676Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SAGAR SK",
+          "interviewerEmail": "capicapi717@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "f986e2208a7bba5d",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "17327436-876e-4d82-8ec5-29fa39072aaa",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T06:44:49.082Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "ANKITA ROY",
+          "interviewerEmail": "capi293@gmail.com"
+        },
+        {
+          "responseId": "89efdc41-b127-4dbe-9f24-664a4c78eb68",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T06:46:38.554Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "ANKITA ROY",
+          "interviewerEmail": "capi293@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "73eca5cbe497621c",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "bb38b6a8-17e0-43f8-b718-780a482096e6",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T09:45:26.835Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "RAHUL PAL",
+          "interviewerEmail": "capi337@gmail.com"
+        },
+        {
+          "responseId": "d42827d9-eed1-4797-827e-6c52b1c9c70c",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T07:12:02.203Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "RAHUL PAL",
+          "interviewerEmail": "capi337@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "d82685a9c1e4acf9",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "5d23d98b-d156-4b12-9486-d3c163336112",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T10:53:35.809Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Manoj Panda",
+          "interviewerEmail": "capi581@gmail.com"
+        },
+        {
+          "responseId": "1ccf1b28-f31c-4d35-bea0-acee8411a09a",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T03:43:09.621Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Manoj Panda",
+          "interviewerEmail": "capi581@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "4426b2df6d791b90",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "1d4549cd-5fe0-4b12-8c57-425f8eccc97d",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T12:49:50.593Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "MD SAHIDUL HOQUE",
+          "interviewerEmail": "capi109@gmail.com"
+        },
+        {
+          "responseId": "41534cc1-e071-4306-a132-6859921d78ec",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T05:07:41.007Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "MD SAHIDUL HOQUE",
+          "interviewerEmail": "capi109@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "39d85ea18b85c800",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "127c61fb-541f-4181-ab2e-b7f634626526",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T13:16:05.786Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Insan sk",
+          "interviewerEmail": "capi182@gmail.com"
+        },
+        {
+          "responseId": "5b596adc-4d3f-4c04-8319-27ee26500c67",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T11:24:18.817Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Insan sk",
+          "interviewerEmail": "capi182@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "394ae3d8e3ae2664",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "0c128a4a-1b2f-41eb-8030-e3744994eb24",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T14:11:40.696Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SK Haider Ali",
+          "interviewerEmail": "capicapi300@gmail.com"
+        },
+        {
+          "responseId": "2c480e9b-84c4-4d95-b702-0a2d2696f165",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T16:17:16.264Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SK Haider Ali",
+          "interviewerEmail": "capicapi300@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "1959b9f8093070a0",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "525439d4-c72a-4c3c-a90a-13412fe3cd31",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T14:13:27.646Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SK Haider Ali",
+          "interviewerEmail": "capicapi300@gmail.com"
+        },
+        {
+          "responseId": "71fcb51b-4ba8-48c1-93ef-dc74cd9250d5",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-02T18:24:15.270Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SK Haider Ali",
+          "interviewerEmail": "capicapi300@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "0c5798196f12693e",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "0fb7a4d8-db22-409b-b225-7197953a144a",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T03:25:19.041Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "RAHUL PAL",
+          "interviewerEmail": "capi337@gmail.com"
+        },
+        {
+          "responseId": "c12b3cb8-2bdd-4744-b550-085c2acd87d6",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T07:13:26.289Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "RAHUL PAL",
+          "interviewerEmail": "capi337@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "6fb45a0ddb750b24",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "887bc97b-2045-4e07-85e7-3c24e1c32c80",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T06:04:37.175Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Md Injamamul Hoque",
+          "interviewerEmail": "capi105@gmail.com"
+        },
+        {
+          "responseId": "8ed66d2b-a163-4169-b3ef-2b71be73002c",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T07:09:14.976Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Md Injamamul Hoque",
+          "interviewerEmail": "capi105@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "417debb9d97195f6",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "65320cc7-38e5-4498-8108-e78fdd822d62",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T06:24:11.554Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "MOSTAK SK",
+          "interviewerEmail": "capicapi133@gmail.com"
+        },
+        {
+          "responseId": "b5d7d3a5-2d9d-4342-a039-0b7e54b1bb21",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T08:07:16.467Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "MOSTAK SK",
+          "interviewerEmail": "capicapi133@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "44d4bbcc98a83aef",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "efd1935b-e683-40bb-b528-884c39556f7a",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T07:00:29.428Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Halima Khatun",
+          "interviewerEmail": "capicapi1004@gmail.com"
+        },
+        {
+          "responseId": "f9fe4b5e-d831-43f3-ac6f-bb43d9cfef9a",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T08:52:48.222Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Halima Khatun",
+          "interviewerEmail": "capicapi1004@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "446960ac1384a77c",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "0e39ca40-fa7a-438f-8d4d-d8ad6ae95241",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T07:05:56.138Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "MOSTAK SK",
+          "interviewerEmail": "capicapi133@gmail.com"
+        },
+        {
+          "responseId": "74e0fb6f-bea4-4070-a303-4677457ba064",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T10:29:21.146Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "HASAN SK",
+          "interviewerEmail": "capicapi721@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "1081efcaa14c96b2",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "c528e037-0f66-4dd8-800d-6c9daa1ba9ee",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T08:12:32.127Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Manindra Mistry",
+          "interviewerEmail": "capi211@gmail.com"
+        },
+        {
+          "responseId": "e9943a10-becc-4877-9e72-adbdb68544c6",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T16:09:09.775Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Manindra Mistry",
+          "interviewerEmail": "capi211@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "7d1609fb99d2437c",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "877725ac-e766-4f3f-a95e-2d4028116c04",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T08:15:39.586Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Manindra Mistry",
+          "interviewerEmail": "capi211@gmail.com"
+        },
+        {
+          "responseId": "a84749a6-9a74-4f37-aabc-d5d3b0e8b7e5",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T08:34:29.980Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Manindra Mistry",
+          "interviewerEmail": "capi211@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "588bf46eda1436e8",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "b59b079b-e85f-4933-9a4b-786d22b8a21c",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T08:30:43.435Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "JYOTSNA PRAMANIK",
+          "interviewerEmail": "capicapi465@gmail.com"
+        },
+        {
+          "responseId": "f64b18b2-140b-406d-9232-9857578ed989",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T09:25:24.316Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "JYOTSNA PRAMANIK",
+          "interviewerEmail": "capicapi465@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "c86c794e6541d096",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "b09adf84-54c3-4536-bc4d-1e13dbf5dfa7",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T12:55:50.378Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SURAJ SK",
+          "interviewerEmail": "capicapi718@gmail.com"
+        },
+        {
+          "responseId": "88ffac9f-4d35-476c-8994-a039a7261268",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T13:38:49.651Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SURAJ SK",
+          "interviewerEmail": "capicapi718@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "71dec2d4199a95fb",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "2b9be73e-ae0f-4658-b32a-795ba2bc81b0",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T13:42:12.072Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SURAJ SK",
+          "interviewerEmail": "capicapi718@gmail.com"
+        },
+        {
+          "responseId": "baae68b0-c765-4e8c-8546-01d591874571",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-03T13:58:50.884Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "SURAJ SK",
+          "interviewerEmail": "capicapi718@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "aac998b3faf9d949",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "0824a20e-43c4-4ece-b712-5aaf0df6d6f9",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T01:48:43.181Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Kunal Hambir",
+          "interviewerEmail": "capi471@gmail.com"
+        },
+        {
+          "responseId": "9e96acf8-c4de-4152-a332-fb44d00022ba",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T02:07:34.544Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Kunal Hambir",
+          "interviewerEmail": "capi471@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "c64c9a0a06647461",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "a556bf11-cbd9-489e-a6fa-166bdbc8df47",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T03:17:54.561Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Suman Ghorui",
+          "interviewerEmail": "capi419@gmail.com"
+        },
+        {
+          "responseId": "ee4d0657-f77c-4748-9b74-5f445fa944ef",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T03:18:58.457Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Suman Ghorui",
+          "interviewerEmail": "capi419@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "7c17597945d6e6a7",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "566dbfcc-0e58-4f2d-a163-516f326dd6aa",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T03:27:32.539Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Kunal Hambir",
+          "interviewerEmail": "capi471@gmail.com"
+        },
+        {
+          "responseId": "d6b4f550-b9ab-4e9a-b74a-0addda076020",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T03:28:33.425Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Kunal Hambir",
+          "interviewerEmail": "capi471@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "b5a222f8edaeab0a",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "ccf4f57d-c4c7-42ad-8f41-f15ce6052b5e",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T04:25:26.822Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "TAPAS MANNA",
+          "interviewerEmail": "capicapi469@gmail.com"
+        },
+        {
+          "responseId": "c630b085-fd6f-49cd-9b30-b152fc1204a7",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T04:29:10.457Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "TAPAS MANNA",
+          "interviewerEmail": "capicapi469@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "9500f1da9f14bd58",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "a0c74b34-dbbd-4a8f-8e64-fb45b071983c",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T04:40:52.113Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Halima Khatun",
+          "interviewerEmail": "capicapi1004@gmail.com"
+        },
+        {
+          "responseId": "9b03ee85-af94-4d2c-98bf-8c9318dca972",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T05:22:47.737Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Halima Khatun",
+          "interviewerEmail": "capicapi1004@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "93fb4600c81fcc37",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "51fdf99c-1c3f-42e2-a365-450ba8b2c395",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T04:48:31.964Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Haradhan Lohar",
+          "interviewerEmail": "capi415@gmail.com"
+        },
+        {
+          "responseId": "d94660fe-c17f-4b2a-8011-74006fb18421",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T04:51:05.385Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Haradhan Lohar",
+          "interviewerEmail": "capi415@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "3ae0c8733cfa648c",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "e7c965a6-d2a6-4588-95dd-d5315a83f5f7",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T04:59:32.772Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Joysankar Singh",
+          "interviewerEmail": "capi478@gmail.com"
+        },
+        {
+          "responseId": "21904612-f3a1-4269-ab54-9a87ce0be412",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T05:10:30.299Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Joysankar Singh",
+          "interviewerEmail": "capi478@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "8c89bb343d67daed",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "381cdcaf-6617-4fa9-a4cc-d915a9a2c0a1",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T05:00:40.569Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Sujit Halder",
+          "interviewerEmail": "capi483@gmail.com"
+        },
+        {
+          "responseId": "5bdf3c06-8077-403c-9179-b4e5ccca8eb1",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T05:01:08.584Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Sujit Halder",
+          "interviewerEmail": "capi483@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "205aecfb32ce3e3d",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "1b6d632d-583c-434e-88ce-2d15cb1815ee",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T05:51:42.726Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Shampa Das",
+          "interviewerEmail": "capi441@gmail.com"
+        },
+        {
+          "responseId": "72e2e256-339c-4556-bbe2-116265156903",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T05:54:16.146Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Shampa Das",
+          "interviewerEmail": "capi441@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "88050a9697cfd25f",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "c2a49cf6-ec2c-4a4a-be72-421a9f05ba37",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T05:53:05.149Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Shampa Das",
+          "interviewerEmail": "capi441@gmail.com"
+        },
+        {
+          "responseId": "f7bdec08-d81b-4583-a6a8-5203e46d1d2f",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T05:54:17.150Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Shampa Das",
+          "interviewerEmail": "capi441@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "05e959978866e5c6",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "307cd623-a1d8-4be4-a0cf-a5100206f597",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T07:13:18.731Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Jharna Mondal",
+          "interviewerEmail": "capi499@gmail.com"
+        },
+        {
+          "responseId": "4545574a-3435-45b2-a12c-146222d4afb1",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T07:14:05.686Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Jharna Mondal",
+          "interviewerEmail": "capi499@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "13b875957c086384",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "86a85ff6-217d-423a-962f-c4b552589b49",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T07:27:11.753Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Sandip Ghosh",
+          "interviewerEmail": "capi485@gmail.com"
+        },
+        {
+          "responseId": "6788a8fc-a489-4816-ae73-3c9488761e67",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T07:27:35.589Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Sandip Ghosh",
+          "interviewerEmail": "capi485@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "27281bbdf5fe8151",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "b582bcb8-c7be-4b09-a683-7904091cea8b",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T07:40:10.727Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Jharna Mondal",
+          "interviewerEmail": "capi499@gmail.com"
+        },
+        {
+          "responseId": "7d108245-f9c7-42ca-a93b-591f2e2c757a",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T07:45:41.464Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Jharna Mondal",
+          "interviewerEmail": "capi499@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "881443442db74ee4",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "1d4bd26a-25de-45cc-b05e-49c6ac548a79",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T07:44:33.299Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Sandip Ghosh",
+          "interviewerEmail": "capi485@gmail.com"
+        },
+        {
+          "responseId": "f5190e6c-ecaa-4fba-9453-cc3df273a3c6",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T07:45:04.825Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Sandip Ghosh",
+          "interviewerEmail": "capi485@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "71a1baec2ff2c074",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "b9a6f1f5-fc22-4314-9731-8836ef27a583",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T08:31:40.844Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Haradhan Lohar",
+          "interviewerEmail": "capi415@gmail.com"
+        },
+        {
+          "responseId": "bfdb60e9-2075-4610-9a54-59c2726ca9d8",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T08:33:46.260Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Haradhan Lohar",
+          "interviewerEmail": "capi415@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "79497fb26ccd1307",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "b808f0b9-9223-409d-affa-1ef50d111b9f",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T08:42:07.837Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Sujit Halder",
+          "interviewerEmail": "capi483@gmail.com"
+        },
+        {
+          "responseId": "99bc6d30-88a6-4d7c-92af-fc0920eb7f84",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T08:43:03.731Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Sujit Halder",
+          "interviewerEmail": "capi483@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "62f586b67e67f02d",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "7eb51ad8-f279-4fec-8e69-1860ec92f932",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T08:42:39.759Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Sujit Halder",
+          "interviewerEmail": "capi483@gmail.com"
+        },
+        {
+          "responseId": "4dad5f3a-ad81-4de9-a3d2-4919395b231f",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T09:30:59.006Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Sujit Halder",
+          "interviewerEmail": "capi483@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "5f873322105ad5ae",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "1d5903fe-cdc6-4e2d-a0d9-3595477c1df7",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T08:44:34.660Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Sourav Dutta",
+          "interviewerEmail": "capi417@gmail.com"
+        },
+        {
+          "responseId": "22ca3ed6-344e-47bf-8a07-1d23fd46eccc",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T08:47:05.693Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Sourav Dutta",
+          "interviewerEmail": "capi417@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "08e8e095891bc637",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "a8f443c6-cb9a-461b-80bf-53562472116e",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T08:54:46.531Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Haradhan Lohar",
+          "interviewerEmail": "capi415@gmail.com"
+        },
+        {
+          "responseId": "1cf647b3-fadb-4cc3-8536-cedf4323af5e",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T09:19:28.533Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Haradhan Lohar",
+          "interviewerEmail": "capi415@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "79ea5aa16ee34fc6",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "530c110d-ea91-4847-8fb7-4bd2ce50715c",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T08:54:54.444Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Haradhan Lohar",
+          "interviewerEmail": "capi415@gmail.com"
+        },
+        {
+          "responseId": "f829ff06-ee7e-4021-861c-606dfd315938",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T09:18:27.825Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Haradhan Lohar",
+          "interviewerEmail": "capi415@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "ca0906e08e07b397",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "114c642c-aed3-4c96-9205-85fa419e55f5",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T09:20:30.870Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Jharna Mondal",
+          "interviewerEmail": "capi499@gmail.com"
+        },
+        {
+          "responseId": "48fe89c3-7fb9-4244-bbf4-e4284579a31f",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T09:21:10.132Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Jharna Mondal",
+          "interviewerEmail": "capi499@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "542fe4a6cde35126",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "f52473c4-29d1-4906-b32f-5638cd5e1769",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T09:27:21.587Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Shampa Das",
+          "interviewerEmail": "capi441@gmail.com"
+        },
+        {
+          "responseId": "25da0c02-99fb-4a65-8d2c-e68d85313315",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T09:28:13.681Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Shampa Das",
+          "interviewerEmail": "capi441@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "af2f0cb05ca04e07",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "7404de38-976c-4fd7-b036-7844e9272ef2",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T09:27:45.279Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Shampa Das",
+          "interviewerEmail": "capi441@gmail.com"
+        },
+        {
+          "responseId": "7a94efab-92b7-4568-ac09-cc3e31348764",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T09:28:14.609Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Shampa Das",
+          "interviewerEmail": "capi441@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "6cd2dbf30790ca4b",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "a62b68d5-1e2a-4af3-88ad-553d745dbbe5",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T09:44:47.518Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Suman Ghorui",
+          "interviewerEmail": "capi419@gmail.com"
+        },
+        {
+          "responseId": "5cfdf417-2231-4488-ba87-de2f4cab463f",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-04T09:44:53.019Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Suman Ghorui",
+          "interviewerEmail": "capi419@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "3d75ab29009d9c6c",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "fcbe6784-e12b-427d-a925-eb66d197e0ee",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-05T11:08:14.407Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Satabdi Chakrabroty",
+          "interviewerEmail": "bagsatabdi628@gmail.com"
+        },
+        {
+          "responseId": "68106040-f1a4-4e8f-914e-95b62809e03d",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-05T17:25:59.486Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "BIDDES SARKAR",
+          "interviewerEmail": "biddessarkar08@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "d375494753f0d7d3",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "466eeba1-3da3-4774-a998-9438e93d030c",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-05T11:08:47.698Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "Satabdi Chakrabroty",
+          "interviewerEmail": "bagsatabdi628@gmail.com"
+        },
+        {
+          "responseId": "89683e2a-fb45-46dc-ab33-002c474637f6",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-05T17:25:42.183Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "BIDDES SARKAR",
+          "interviewerEmail": "biddessarkar08@gmail.com"
+        }
+      ]
+    },
+    {
+      "contentHash": "c2fe193625c8d422",
+      "count": 2,
+      "responses": [
+        {
+          "responseId": "09017ee4-241f-4b6e-9186-3fe7c8197dd1",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-05T13:42:21.121Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "PINTU KAPRI",
+          "interviewerEmail": "capicapi812@gmail.com"
+        },
+        {
+          "responseId": "0567f25f-9470-427a-85b6-3a9b9ecb0a94",
+          "status": "Pending_Approval",
+          "createdAt": "2026-01-05T17:25:56.987Z",
+          "surveyName": "West Bengal Opinion Poll (2025 - 2026)",
+          "interviewer": "PINTU KAPRI",
+          "interviewerEmail": "capicapi812@gmail.com"
+        }
+      ]
+    }
+  ]
+}

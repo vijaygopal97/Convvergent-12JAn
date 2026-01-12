@@ -65,9 +65,7 @@ const getPartyLogo = (optionText: string | null | undefined, questionText?: stri
   }
   
   // Set API URL based on environment
-  const API_BASE_URL = __DEV__ 
-    ? 'https://opine.exypnossolutions.com'  // Development server
-    : 'https://convo.convergentview.com';    // Production server
+  const API_BASE_URL = 'https://convo.convergentview.com';  // Development server
   const text = String(optionText).toLowerCase();
   const mainText = getMainText(optionText).toLowerCase();
   
@@ -225,6 +223,10 @@ export default function InterviewInterface({ navigation, route }: any) {
   const [shuffledOptions, setShuffledOptions] = useState<Record<string, any[]>>({}); // Store shuffled options per questionId to maintain consistent order
   const scrollViewRef = React.useRef<ScrollView>(null); // Ref for ScrollView to scroll to top
   const lastFetchedACRef = useRef<string | null>(null); // Track last AC we fetched MP/MLA for
+  // TOP-TIER TECH COMPANY SOLUTION: Prevent duplicate CATI calls
+  // Pattern used by: Meta (WhatsApp), Twitter, Google
+  const catiCallInitiatedRef = useRef<boolean>(false); // Track if call has been initiated
+  const catiCallTimeoutRef = useRef<NodeJS.Timeout | null>(null); // Track setTimeout for cleanup
   
   // CATI interview state
   const [catiQueueId, setCatiQueueId] = useState<string | null>(null);
@@ -1202,10 +1204,29 @@ export default function InterviewInterface({ navigation, route }: any) {
           setRequiresACSelection(needsACSelection);
           setAssignedACs([]);
           
+          // TOP-TIER TECH COMPANY SOLUTION: Prevent duplicate calls with idempotency guard
+          // Clear any existing timeout first (defense against re-renders)
+          if (catiCallTimeoutRef.current) {
+            clearTimeout(catiCallTimeoutRef.current);
+            catiCallTimeoutRef.current = null;
+          }
+          // Reset call initiation flag for new interview
+          catiCallInitiatedRef.current = false;
+          
           // Auto-make call after a short delay
           // Use the respondent ID directly from data, not from state (to avoid timing issues)
-          setTimeout(() => {
+          // Only initiate if not already initiated (idempotency guard)
+          catiCallTimeoutRef.current = setTimeout(() => {
+            // Double-check guard to prevent duplicate calls (React StrictMode protection)
+            if (catiCallInitiatedRef.current) {
+              console.log('⚠️ Call already initiated, skipping duplicate call attempt');
+              return;
+            }
+            
             if (data.respondent && data.respondent.id) {
+              // Mark as initiated immediately to prevent race conditions
+              catiCallInitiatedRef.current = true;
+              
               // Call the API directly with the queue ID from data
               apiService.makeCallToRespondent(data.respondent.id)
                 .then((callResult) => {
@@ -1215,6 +1236,8 @@ export default function InterviewInterface({ navigation, route }: any) {
                     setCallStatus('connected'); // Set to 'connected' to show "Call Started" instead of loading
                     showSnackbar('Call initiated successfully');
                   } else {
+                    // Reset flag on failure to allow retry
+                    catiCallInitiatedRef.current = false;
                     setCallStatus('failed');
                     const errorMsg = callResult.message || 'Failed to initiate call';
                     showSnackbar(`Call failed: ${errorMsg}. You can abandon this interview.`);
@@ -1222,6 +1245,8 @@ export default function InterviewInterface({ navigation, route }: any) {
                 })
                 .catch((error: any) => {
                   console.error('📞 Error making call:', error);
+                  // Reset flag on error to allow retry
+                  catiCallInitiatedRef.current = false;
                   setCallStatus('failed');
                   const errorMsg = error.response?.data?.message || error.message || 'Failed to make call';
                   showSnackbar(`Call failed: ${errorMsg}. You can abandon this interview.`);
@@ -1231,6 +1256,8 @@ export default function InterviewInterface({ navigation, route }: any) {
               setCallStatus('failed');
               showSnackbar('No respondent ID available. Cannot make call.');
             }
+            // Clear timeout ref after execution
+            catiCallTimeoutRef.current = null;
           }, 1500);
         } else {
           // CAPI mode - get location and start normal interview
@@ -1328,6 +1355,20 @@ export default function InterviewInterface({ navigation, route }: any) {
 
     initializeInterview();
   }, [survey._id, isCatiMode]); // Include isCatiMode in dependencies
+
+  // TOP-TIER TECH COMPANY SOLUTION: Cleanup CATI call timeout on unmount
+  // Prevents memory leaks and duplicate calls from stale timeouts
+  useEffect(() => {
+    return () => {
+      // Clear CATI call timeout if component unmounts
+      if (catiCallTimeoutRef.current) {
+        clearTimeout(catiCallTimeoutRef.current);
+        catiCallTimeoutRef.current = null;
+      }
+      // Reset call initiation flag on unmount
+      catiCallInitiatedRef.current = false;
+    };
+  }, []);
 
   // Update duration
   // For CATI interviews, only start timer after call status question is passed (call_connected selected)

@@ -1,0 +1,529 @@
+{
+  "testId": "comprehensive-5min-1768162194849",
+  "startTime": "2026-01-11T20:09:54.877Z",
+  "endTime": "2026-01-11T20:10:03.536Z",
+  "duration": "8.66",
+  "totalSamples": 7,
+  "summary": {
+    "cpu": {
+      "avg": "1.80",
+      "max": 2.38,
+      "min": 0.6
+    },
+    "memory": {
+      "avgUsed": "9140.57",
+      "maxUsed": 9174,
+      "avgPercent": "28.96",
+      "maxPercent": 29.07
+    },
+    "mongodbConnections": {
+      "avg": "108.14",
+      "max": 109,
+      "min": 108
+    },
+    "apiResponseTime": null
+  },
+  "metrics": {
+    "timestamps": [
+      "2026-01-11T20:09:55.878Z",
+      "2026-01-11T20:09:56.878Z",
+      "2026-01-11T20:09:58.701Z",
+      "2026-01-11T20:09:59.701Z",
+      "2026-01-11T20:10:00.701Z",
+      "2026-01-11T20:10:01.701Z",
+      "2026-01-11T20:10:02.701Z"
+    ],
+    "cpu": [
+      {
+        "percent": 0.6,
+        "user": 527136,
+        "system": 75735
+      },
+      {
+        "percent": 0.68,
+        "user": 597829,
+        "system": 80844
+      },
+      {
+        "percent": 2.06,
+        "user": 1895960,
+        "system": 168885
+      },
+      {
+        "percent": 2.24,
+        "user": 2066669,
+        "system": 173949
+      },
+      {
+        "percent": 2.32,
+        "user": 2137726,
+        "system": 182124
+      },
+      {
+        "percent": 2.35,
+        "user": 2158398,
+        "system": 189836
+      },
+      {
+        "percent": 2.38,
+        "user": 2181041,
+        "system": 197800
+      }
+    ],
+    "memory": [
+      {
+        "used": 9089,
+        "total": 31557,
+        "percent": 28.8,
+        "heapUsed": 20,
+        "heapTotal": 33,
+        "external": 21
+      },
+      {
+        "used": 9106,
+        "total": 31557,
+        "percent": 28.85,
+        "heapUsed": 22,
+        "heapTotal": 34,
+        "external": 21
+      },
+      {
+        "used": 9126,
+        "total": 31557,
+        "percent": 28.92,
+        "heapUsed": 22,
+        "heapTotal": 54,
+        "external": 21
+      },
+      {
+        "used": 9152,
+        "total": 31557,
+        "percent": 29,
+        "heapUsed": 27,
+        "heapTotal": 55,
+        "external": 22
+      },
+      {
+        "used": 9174,
+        "total": 31557,
+        "percent": 29.07,
+        "heapUsed": 28,
+        "heapTotal": 55,
+        "external": 22
+      },
+      {
+        "used": 9165,
+        "total": 31557,
+        "percent": 29.04,
+        "heapUsed": 30,
+        "heapTotal": 55,
+        "external": 22
+      },
+      {
+        "used": 9172,
+        "total": 31557,
+        "percent": 29.06,
+        "heapUsed": 31,
+        "heapTotal": 55,
+        "external": 22
+      }
+    ],
+    "mongodbConnections": [
+      108,
+      108,
+      108,
+      108,
+      108,
+      108,
+      109
+    ],
+    "mongodbReplicaSet": [
+      {
+        "set": "rs0",
+        "members": [
+          {
+            "name": "172.31.43.71:27017",
+            "stateStr": "PRIMARY",
+            "health": 1,
+            "uptime": 82672,
+            "optimeDate": "2026-01-11T20:09:55.000Z",
+            "lastHeartbeat": "",
+            "lag": 901
+          },
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82112,
+            "optimeDate": "2026-01-11T20:09:45.000Z",
+            "lastHeartbeat": "",
+            "lag": 10901
+          }
+        ],
+        "primary": {
+          "name": "172.31.43.71:27017",
+          "stateStr": "PRIMARY",
+          "health": 1,
+          "uptime": 82672,
+          "optimeDate": "2026-01-11T20:09:55.000Z",
+          "lastHeartbeat": "",
+          "lag": 901
+        },
+        "secondaries": [
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82112,
+            "optimeDate": "2026-01-11T20:09:45.000Z",
+            "lastHeartbeat": "",
+            "lag": 10901
+          }
+        ],
+        "healthy": true,
+        "totalMembers": 2
+      },
+      {
+        "set": "rs0",
+        "members": [
+          {
+            "name": "172.31.43.71:27017",
+            "stateStr": "PRIMARY",
+            "health": 1,
+            "uptime": 82673,
+            "optimeDate": "2026-01-11T20:09:55.000Z",
+            "lastHeartbeat": "",
+            "lag": 1898
+          },
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82113,
+            "optimeDate": "2026-01-11T20:09:55.000Z",
+            "lastHeartbeat": "",
+            "lag": 1898
+          }
+        ],
+        "primary": {
+          "name": "172.31.43.71:27017",
+          "stateStr": "PRIMARY",
+          "health": 1,
+          "uptime": 82673,
+          "optimeDate": "2026-01-11T20:09:55.000Z",
+          "lastHeartbeat": "",
+          "lag": 1898
+        },
+        "secondaries": [
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82113,
+            "optimeDate": "2026-01-11T20:09:55.000Z",
+            "lastHeartbeat": "",
+            "lag": 1898
+          }
+        ],
+        "healthy": true,
+        "totalMembers": 2
+      },
+      {
+        "set": "rs0",
+        "members": [
+          {
+            "name": "172.31.43.71:27017",
+            "stateStr": "PRIMARY",
+            "health": 1,
+            "uptime": 82675,
+            "optimeDate": "2026-01-11T20:09:55.000Z",
+            "lastHeartbeat": "",
+            "lag": 3878
+          },
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82115,
+            "optimeDate": "2026-01-11T20:09:55.000Z",
+            "lastHeartbeat": "",
+            "lag": 3878
+          }
+        ],
+        "primary": {
+          "name": "172.31.43.71:27017",
+          "stateStr": "PRIMARY",
+          "health": 1,
+          "uptime": 82675,
+          "optimeDate": "2026-01-11T20:09:55.000Z",
+          "lastHeartbeat": "",
+          "lag": 3878
+        },
+        "secondaries": [
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82115,
+            "optimeDate": "2026-01-11T20:09:55.000Z",
+            "lastHeartbeat": "",
+            "lag": 3878
+          }
+        ],
+        "healthy": true,
+        "totalMembers": 2
+      },
+      {
+        "set": "rs0",
+        "members": [
+          {
+            "name": "172.31.43.71:27017",
+            "stateStr": "PRIMARY",
+            "health": 1,
+            "uptime": 82676,
+            "optimeDate": "2026-01-11T20:09:59.000Z",
+            "lastHeartbeat": "",
+            "lag": 729
+          },
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82116,
+            "optimeDate": "2026-01-11T20:09:55.000Z",
+            "lastHeartbeat": "",
+            "lag": 4729
+          }
+        ],
+        "primary": {
+          "name": "172.31.43.71:27017",
+          "stateStr": "PRIMARY",
+          "health": 1,
+          "uptime": 82676,
+          "optimeDate": "2026-01-11T20:09:59.000Z",
+          "lastHeartbeat": "",
+          "lag": 729
+        },
+        "secondaries": [
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82116,
+            "optimeDate": "2026-01-11T20:09:55.000Z",
+            "lastHeartbeat": "",
+            "lag": 4729
+          }
+        ],
+        "healthy": true,
+        "totalMembers": 2
+      },
+      {
+        "set": "rs0",
+        "members": [
+          {
+            "name": "172.31.43.71:27017",
+            "stateStr": "PRIMARY",
+            "health": 1,
+            "uptime": 82677,
+            "optimeDate": "2026-01-11T20:10:00.000Z",
+            "lastHeartbeat": "",
+            "lag": 780
+          },
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82117,
+            "optimeDate": "2026-01-11T20:10:00.000Z",
+            "lastHeartbeat": "",
+            "lag": 781
+          }
+        ],
+        "primary": {
+          "name": "172.31.43.71:27017",
+          "stateStr": "PRIMARY",
+          "health": 1,
+          "uptime": 82677,
+          "optimeDate": "2026-01-11T20:10:00.000Z",
+          "lastHeartbeat": "",
+          "lag": 780
+        },
+        "secondaries": [
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82117,
+            "optimeDate": "2026-01-11T20:10:00.000Z",
+            "lastHeartbeat": "",
+            "lag": 781
+          }
+        ],
+        "healthy": true,
+        "totalMembers": 2
+      },
+      {
+        "set": "rs0",
+        "members": [
+          {
+            "name": "172.31.43.71:27017",
+            "stateStr": "PRIMARY",
+            "health": 1,
+            "uptime": 82678,
+            "optimeDate": "2026-01-11T20:10:01.000Z",
+            "lastHeartbeat": "",
+            "lag": 729
+          },
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82118,
+            "optimeDate": "2026-01-11T20:10:00.000Z",
+            "lastHeartbeat": "",
+            "lag": 1729
+          }
+        ],
+        "primary": {
+          "name": "172.31.43.71:27017",
+          "stateStr": "PRIMARY",
+          "health": 1,
+          "uptime": 82678,
+          "optimeDate": "2026-01-11T20:10:01.000Z",
+          "lastHeartbeat": "",
+          "lag": 729
+        },
+        "secondaries": [
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82118,
+            "optimeDate": "2026-01-11T20:10:00.000Z",
+            "lastHeartbeat": "",
+            "lag": 1729
+          }
+        ],
+        "healthy": true,
+        "totalMembers": 2
+      },
+      {
+        "set": "rs0",
+        "members": [
+          {
+            "name": "172.31.43.71:27017",
+            "stateStr": "PRIMARY",
+            "health": 1,
+            "uptime": 82679,
+            "optimeDate": "2026-01-11T20:10:02.000Z",
+            "lastHeartbeat": "",
+            "lag": 756
+          },
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82119,
+            "optimeDate": "2026-01-11T20:10:02.000Z",
+            "lastHeartbeat": "",
+            "lag": 756
+          }
+        ],
+        "primary": {
+          "name": "172.31.43.71:27017",
+          "stateStr": "PRIMARY",
+          "health": 1,
+          "uptime": 82679,
+          "optimeDate": "2026-01-11T20:10:02.000Z",
+          "lastHeartbeat": "",
+          "lag": 756
+        },
+        "secondaries": [
+          {
+            "name": "172.31.47.152:27017",
+            "stateStr": "SECONDARY",
+            "health": 1,
+            "uptime": 82119,
+            "optimeDate": "2026-01-11T20:10:02.000Z",
+            "lastHeartbeat": "",
+            "lag": 756
+          }
+        ],
+        "healthy": true,
+        "totalMembers": 2
+      }
+    ],
+    "apiResponseTimes": [],
+    "loadAverage": [
+      {
+        "1min": 0.69,
+        "5min": 1.85,
+        "15min": 2.9
+      },
+      {
+        "1min": 0.69,
+        "5min": 1.85,
+        "15min": 2.9
+      },
+      {
+        "1min": 0.69,
+        "5min": 1.85,
+        "15min": 2.9
+      },
+      {
+        "1min": 1.68,
+        "5min": 2.04,
+        "15min": 2.96
+      },
+      {
+        "1min": 1.68,
+        "5min": 2.04,
+        "15min": 2.96
+      },
+      {
+        "1min": 1.68,
+        "5min": 2.04,
+        "15min": 2.96
+      },
+      {
+        "1min": 1.68,
+        "5min": 2.04,
+        "15min": 2.96
+      }
+    ],
+    "networkIO": [],
+    "loadBalancer": {
+      "upstreamServers": [
+        {
+          "available": true,
+          "status": "{\"success\":false,\"message\":\"Route not found\"}"
+        },
+        {
+          "available": true,
+          "status": "{\"success\":false,\"message\":\"Route not found\"}"
+        },
+        {
+          "available": false
+        },
+        {
+          "available": false
+        },
+        {
+          "available": true,
+          "status": "{\"success\":false,\"message\":\"Route not found\"}"
+        },
+        {
+          "available": true,
+          "status": "{\"success\":false,\"message\":\"Route not found\"}"
+        },
+        {
+          "available": true,
+          "status": "{\"success\":false,\"message\":\"Route not found\"}"
+        }
+      ],
+      "requestDistribution": [],
+      "responseTimes": []
+    }
+  }
+}

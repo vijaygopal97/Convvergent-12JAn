@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-01-03T20:51:41.601Z",
+  "operation": "Find CAPI Responses with Duplicate Phone Numbers Not Auto-Rejected",
+  "surveyId": "68fd1915d41841da463f0d46",
+  "summary": {
+    "totalCapiResponses": 0,
+    "responsesWithPhones": 0,
+    "duplicatePhoneGroups": 0,
+    "problematicDuplicateGroups": 0,
+    "totalProblematicResponses": 0,
+    "byStatus": {
+      "pendingApproval": 0,
+      "approved": 0,
+      "terminated": 0,
+      "correctlyRejected": 0
+    }
+  },
+  "problematicDuplicates": []
+}

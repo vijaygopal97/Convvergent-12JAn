@@ -1,0 +1,240 @@
+{
+  "testId": "stress-test-1768158411960",
+  "startTime": "2026-01-11T19:06:51.987Z",
+  "endTime": "2026-01-11T19:07:02.040Z",
+  "duration": "10.05",
+  "totalSamples": 10,
+  "summary": {
+    "cpu": {
+      "avg": "1.17",
+      "max": 1.4,
+      "min": 1
+    },
+    "memory": {
+      "avgUsed": "8594.10",
+      "maxUsed": 8604,
+      "avgPercent": "27.23",
+      "maxPercent": 27.27
+    },
+    "mongodbConnections": {
+      "avg": "54.00",
+      "max": 54,
+      "min": 54
+    },
+    "apiResponseTime": null
+  },
+  "metrics": {
+    "timestamps": [
+      "2026-01-11T19:06:52.988Z",
+      "2026-01-11T19:06:53.987Z",
+      "2026-01-11T19:06:54.987Z",
+      "2026-01-11T19:06:55.986Z",
+      "2026-01-11T19:06:56.987Z",
+      "2026-01-11T19:06:57.987Z",
+      "2026-01-11T19:06:58.987Z",
+      "2026-01-11T19:06:59.987Z",
+      "2026-01-11T19:07:00.988Z",
+      "2026-01-11T19:07:01.989Z"
+    ],
+    "cpu": [
+      {
+        "percent": 1,
+        "user": 894028,
+        "system": 102006
+      },
+      {
+        "percent": 1.05,
+        "user": 942750,
+        "system": 106200
+      },
+      {
+        "percent": 1.09,
+        "user": 977693,
+        "system": 107969
+      },
+      {
+        "percent": 1.1,
+        "user": 989625,
+        "system": 110849
+      },
+      {
+        "percent": 1.12,
+        "user": 1008911,
+        "system": 111882
+      },
+      {
+        "percent": 1.17,
+        "user": 1056190,
+        "system": 114806
+      },
+      {
+        "percent": 1.18,
+        "user": 1066921,
+        "system": 115786
+      },
+      {
+        "percent": 1.19,
+        "user": 1075327,
+        "system": 118488
+      },
+      {
+        "percent": 1.39,
+        "user": 1250733,
+        "system": 140197
+      },
+      {
+        "percent": 1.4,
+        "user": 1258838,
+        "system": 144099
+      }
+    ],
+    "memory": [
+      {
+        "used": 8604,
+        "total": 31557,
+        "percent": 27.27,
+        "heapUsed": 28,
+        "heapTotal": 58,
+        "external": 38
+      },
+      {
+        "used": 8587,
+        "total": 31557,
+        "percent": 27.21,
+        "heapUsed": 30,
+        "heapTotal": 59,
+        "external": 38
+      },
+      {
+        "used": 8586,
+        "total": 31557,
+        "percent": 27.21,
+        "heapUsed": 31,
+        "heapTotal": 59,
+        "external": 38
+      },
+      {
+        "used": 8584,
+        "total": 31557,
+        "percent": 27.2,
+        "heapUsed": 32,
+        "heapTotal": 59,
+        "external": 38
+      },
+      {
+        "used": 8588,
+        "total": 31557,
+        "percent": 27.21,
+        "heapUsed": 33,
+        "heapTotal": 59,
+        "external": 38
+      },
+      {
+        "used": 8603,
+        "total": 31557,
+        "percent": 27.26,
+        "heapUsed": 35,
+        "heapTotal": 59,
+        "external": 39
+      },
+      {
+        "used": 8598,
+        "total": 31557,
+        "percent": 27.25,
+        "heapUsed": 36,
+        "heapTotal": 59,
+        "external": 39
+      },
+      {
+        "used": 8596,
+        "total": 31557,
+        "percent": 27.24,
+        "heapUsed": 37,
+        "heapTotal": 59,
+        "external": 39
+      },
+      {
+        "used": 8597,
+        "total": 31557,
+        "percent": 27.24,
+        "heapUsed": 26,
+        "heapTotal": 28,
+        "external": 38
+      },
+      {
+        "used": 8598,
+        "total": 31557,
+        "percent": 27.24,
+        "heapUsed": 26,
+        "heapTotal": 31,
+        "external": 38
+      }
+    ],
+    "mongodbConnections": [
+      54,
+      54,
+      54,
+      54,
+      54,
+      54,
+      54,
+      54,
+      54,
+      54
+    ],
+    "apiResponseTimes": [],
+    "loadAverage": [
+      {
+        "1min": 0.32,
+        "5min": 0.76,
+        "15min": 0.77
+      },
+      {
+        "1min": 0.37,
+        "5min": 0.76,
+        "15min": 0.77
+      },
+      {
+        "1min": 0.37,
+        "5min": 0.76,
+        "15min": 0.77
+      },
+      {
+        "1min": 0.37,
+        "5min": 0.76,
+        "15min": 0.77
+      },
+      {
+        "1min": 0.37,
+        "5min": 0.76,
+        "15min": 0.77
+      },
+      {
+        "1min": 0.37,
+        "5min": 0.76,
+        "15min": 0.77
+      },
+      {
+        "1min": 0.42,
+        "5min": 0.77,
+        "15min": 0.78
+      },
+      {
+        "1min": 0.42,
+        "5min": 0.77,
+        "15min": 0.78
+      },
+      {
+        "1min": 0.42,
+        "5min": 0.77,
+        "15min": 0.78
+      },
+      {
+        "1min": 0.42,
+        "5min": 0.77,
+        "15min": 0.78
+      }
+    ],
+    "networkIO": []
+  }
+}

@@ -26,7 +26,7 @@ module.exports = {
       name: 'opine-backend',
       script: 'server.js',
       cwd: '/var/www/opine/backend',
-      instances: 5,
+      instances: 8,
       autorestart: true,
       watch: false,
       env: {
@@ -57,6 +57,55 @@ module.exports = {
       error_file: '../logs/frontend-error.log',
       out_file: '../logs/frontend-out.log',
       log_file: '../logs/frontend-combined.log',
+      time: true
+    },
+    {
+      name: 'opine-csv-worker',
+      script: 'workers/csvGenerationWorker.js',
+      cwd: '/var/www/opine/backend',
+      instances: 1,
+      autorestart: true,
+      watch: false,
+      env: {
+        NODE_ENV: envVars.NODE_ENV || 'development',
+        MONGODB_URI: envVars.MONGODB_URI,
+        DB_NAME: envVars.DB_NAME,
+        REDIS_URL: envVars.REDIS_URL || envVars.REDIS_HOST || undefined,
+        REDIS_HOST: envVars.REDIS_HOST || 'localhost',
+        REDIS_PORT: envVars.REDIS_PORT || 6379,
+        REDIS_PASSWORD: envVars.REDIS_PASSWORD || undefined,
+        REDIS_DB: envVars.REDIS_DB || 0,
+        ...envVars // Spread all other env vars
+      },
+      error_file: '../logs/csv-worker-error.log',
+      out_file: '../logs/csv-worker-out.log',
+      log_file: '../logs/csv-worker-combined.log',
+      time: true
+    },
+    {
+      name: 'opine-cati-call-worker',
+      script: 'workers/catiCallWorker.js',
+      cwd: '/var/www/opine/backend',
+      instances: 1,
+      autorestart: true,
+      watch: false,
+      env: {
+        NODE_ENV: envVars.NODE_ENV || 'development',
+        MONGODB_URI: envVars.MONGODB_URI,
+        DB_NAME: envVars.DB_NAME,
+        REDIS_URL: envVars.REDIS_URL || envVars.REDIS_HOST || undefined,
+        REDIS_HOST: envVars.REDIS_HOST || 'localhost',
+        REDIS_PORT: envVars.REDIS_PORT || 6379,
+        REDIS_PASSWORD: envVars.REDIS_PASSWORD || undefined,
+        REDIS_DB: envVars.REDIS_DB || 0,
+        DEEPCALL_USER_ID: envVars.DEEPCALL_USER_ID,
+        DEEPCALL_TOKEN: envVars.DEEPCALL_TOKEN,
+        WEBHOOK_BASE_URL: envVars.WEBHOOK_BASE_URL,
+        ...envVars // Spread all other env vars
+      },
+      error_file: '../logs/cati-call-worker-error.log',
+      out_file: '../logs/cati-call-worker-out.log',
+      log_file: '../logs/cati-call-worker-combined.log',
       time: true
     }
   ]

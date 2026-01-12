@@ -22,6 +22,25 @@ exports.protect = async (req, res, next) => {
       token = req.cookies.token;
     }
 
+    // CRITICAL: Skip authentication for audio proxy routes (browser <audio> elements don't send auth headers)
+    // Check if this is an audio proxy request - check multiple path variations
+    // req.path might be relative to router mount point, req.originalUrl is full path
+    const pathToCheck = req.path || req.originalUrl || req.url || '';
+    const isAudioRoute = pathToCheck.includes('/audio') || 
+                        (req.originalUrl && req.originalUrl.includes('/audio')) ||
+                        (req.url && req.url.includes('/audio'));
+    
+    if (isAudioRoute) {
+      // This is an audio proxy request - skip authentication
+      console.log('✅ protect middleware - Skipping auth for audio route:', {
+        path: req.path,
+        originalUrl: req.originalUrl,
+        url: req.url,
+        pathToCheck: pathToCheck
+      });
+      return next();
+    }
+
     // Make sure token exists
     if (!token) {
       console.error('❌ AUTH FAILED: No token provided', {

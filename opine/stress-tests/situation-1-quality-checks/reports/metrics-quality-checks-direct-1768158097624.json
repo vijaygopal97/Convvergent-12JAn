@@ -1,0 +1,43 @@
+{
+  "testId": "quality-checks-direct-1768158097624",
+  "startTime": "2026-01-11T19:01:37.624Z",
+  "endTime": "2026-01-11T19:01:38.345Z",
+  "duration": "0.72",
+  "totalSamples": 0,
+  "summary": {
+    "cpu": {
+      "avg": 0,
+      "max": null,
+      "min": null
+    },
+    "memory": {
+      "avgUsed": 0,
+      "maxUsed": null,
+      "avgPercent": 0,
+      "maxPercent": null
+    },
+    "mongodbConnections": {
+      "avg": 0,
+      "max": null,
+      "min": null
+    },
+    "apiResponseTime": {
+      "avg": "718.00",
+      "max": 718,
+      "min": 718,
+      "p95": 718,
+      "p99": 718
+    }
+  },
+  "metrics": {
+    "timestamps": [],
+    "cpu": [],
+    "memory": [],
+    "mongodbConnections": [],
+    "apiResponseTimes": [
+      718
+    ],
+    "loadAverage": [],
+    "networkIO": []
+  }
+}

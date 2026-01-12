@@ -1,0 +1,907 @@
+{
+  "generatedAt": "2026-01-12T19:36:07.368Z",
+  "surveyId": "68fd1915d41841da463f0d46",
+  "questionId": "question_1767953047865_319",
+  "totalResponsesChecked": 2418,
+  "multiselectResponsesFound": 34,
+  "summary": {
+    "byStatus": {
+      "Pending_Approval": 34
+    },
+    "byInterviewMode": {
+      "capi": 34
+    },
+    "byAnswerType": {
+      "array": 34
+    },
+    "byAnswerCount": {
+      "2": 34
+    }
+  },
+  "details": [
+    {
+      "responseId": "242a6494-f163-40ef-aa71-96e8434a9292",
+      "mongoId": "6961228f414d75384a9fd83e",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-09T15:45:19.595Z",
+      "startTime": "2026-01-09T16:27:10.963Z",
+      "interviewer": {
+        "name": "Subhendu Adhakary",
+        "memberId": "CAPI481",
+        "email": "capi481@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "a2401f82-beda-4f96-b505-77c23e9fe9b8",
+      "mongoId": "696122af414d75384a9fddab",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-09T15:45:51.058Z",
+      "startTime": "2026-01-09T16:50:40.311Z",
+      "interviewer": {
+        "name": "Subhendu Adhakary",
+        "memberId": "CAPI481",
+        "email": "capi481@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "3025a018-67bb-4c7d-ac80-d187094dfab0",
+      "mongoId": "696122dd414d75384a9ffd9b",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-09T15:46:37.447Z",
+      "startTime": "2026-01-09T17:26:12.483Z",
+      "interviewer": {
+        "name": "Subhendu Adhakary",
+        "memberId": "CAPI481",
+        "email": "capi481@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "c52d68a3-d381-4492-b265-8539c792ba7b",
+      "mongoId": "696122e7414d75384aa00044",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-09T15:46:47.642Z",
+      "startTime": "2026-01-09T16:34:03.862Z",
+      "interviewer": {
+        "name": "Subhendu Adhakary",
+        "memberId": "CAPI481",
+        "email": "capi481@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "88b055b1-7b8b-4e7a-b3f9-276df332131f",
+      "mongoId": "6961230a414d75384aa024e6",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-09T15:47:22.287Z",
+      "startTime": "2026-01-09T04:54:10.816Z",
+      "interviewer": {
+        "name": "Subhendu Adhakary",
+        "memberId": "CAPI481",
+        "email": "capi481@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "8e298c05-11fc-4bd7-846b-952b367f4a58",
+      "mongoId": "6961de2e6cb8972b1fab4826",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T05:05:50.882Z",
+      "startTime": "2026-01-10T04:59:23.360Z",
+      "interviewer": {
+        "name": "Chandana Low",
+        "memberId": "CAPI443",
+        "email": "capi443@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "a4c23498-2c6e-422c-acc2-926c1e686798",
+      "mongoId": "6961e11f6cb8972b1fabd335",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T05:18:23.550Z",
+      "startTime": "2026-01-10T04:59:48.122Z",
+      "interviewer": {
+        "name": "Sandip Ghosh",
+        "memberId": "CAPI485",
+        "email": "capi485@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "dd31fd6e-75f1-4af7-9d98-fdf73abc78ce",
+      "mongoId": "6961e12d6cb8972b1fabf15b",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T05:18:37.139Z",
+      "startTime": "2026-01-10T05:04:57.997Z",
+      "interviewer": {
+        "name": "Sandip Ghosh",
+        "memberId": "CAPI485",
+        "email": "capi485@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "5846a189-b428-4daf-a3ae-248d01f17e79",
+      "mongoId": "6961e7aa6cb8972b1fad95e6",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T05:46:18.975Z",
+      "startTime": "2026-01-10T05:42:26.897Z",
+      "interviewer": {
+        "name": "Tanu Das",
+        "memberId": "CAPI444",
+        "email": "capi444@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "626cb773-756b-4a85-9c1a-b0ac611d0e22",
+      "mongoId": "6961e7cd130de316f7350d9c",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T05:46:53.774Z",
+      "startTime": "2026-01-10T05:30:52.401Z",
+      "interviewer": {
+        "name": "Sandip Ghosh",
+        "memberId": "CAPI485",
+        "email": "capi485@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "eb0c8888-940a-49a7-9fec-920916ff1ff8",
+      "mongoId": "6961fbd4a787339dd1f09961",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T07:12:20.551Z",
+      "startTime": "2026-01-10T05:35:31.524Z",
+      "interviewer": {
+        "name": "Sandip Ghosh",
+        "memberId": "CAPI485",
+        "email": "capi485@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "bda643b1-6947-4731-b597-258ee1a41b7d",
+      "mongoId": "696200f4f39600d2a2ee24bc",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T07:34:12.909Z",
+      "startTime": "2026-01-10T06:34:07.359Z",
+      "interviewer": {
+        "name": "Paramita Dhara",
+        "memberId": "CAPI482",
+        "email": "capi482@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "de614e8f-1c6b-4264-98c5-18106567644f",
+      "mongoId": "696200fef39600d2a2ee26ad",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T07:34:22.136Z",
+      "startTime": "2026-01-10T06:47:28.913Z",
+      "interviewer": {
+        "name": "Paramita Dhara",
+        "memberId": "CAPI482",
+        "email": "capi482@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "a1441112-f00b-4078-ac50-b35ddbe38d61",
+      "mongoId": "6962155ca787339dd1f2b254",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T09:01:16.459Z",
+      "startTime": "2026-01-10T08:57:34.446Z",
+      "interviewer": {
+        "name": "Chandana Low",
+        "memberId": "CAPI443",
+        "email": "capi443@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "346fa778-04de-4e23-84db-5576cd18d767",
+      "mongoId": "69622b81a787339dd1f3ac7a",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T10:35:45.820Z",
+      "startTime": "2026-01-10T07:49:13.287Z",
+      "interviewer": {
+        "name": "Paramita Dhara",
+        "memberId": "CAPI482",
+        "email": "capi482@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "0514b9c7-e325-4890-993f-ff3cb073157d",
+      "mongoId": "69622be4f39600d2a2f04cdf",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T10:37:24.984Z",
+      "startTime": "2026-01-10T07:59:09.881Z",
+      "interviewer": {
+        "name": "Paramita Dhara",
+        "memberId": "CAPI482",
+        "email": "capi482@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "0179a134-8d6b-4807-92da-dda24c44d176",
+      "mongoId": "69622bfaa787339dd1f3b248",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T10:37:46.959Z",
+      "startTime": "2026-01-10T10:02:06.365Z",
+      "interviewer": {
+        "name": "Sandip Ghosh",
+        "memberId": "CAPI485",
+        "email": "capi485@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "820fb120-1684-41b9-bbf9-35ac4e749e9e",
+      "mongoId": "69622c36a787339dd1f3b7b7",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T10:38:46.561Z",
+      "startTime": "2026-01-10T10:14:37.468Z",
+      "interviewer": {
+        "name": "Sandip Ghosh",
+        "memberId": "CAPI485",
+        "email": "capi485@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "4e776812-fba7-4bc8-8f40-664b0bac9d53",
+      "mongoId": "69622c62f39600d2a2f05d96",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T10:39:30.344Z",
+      "startTime": "2026-01-10T10:01:46.315Z",
+      "interviewer": {
+        "name": "Paramita Dhara",
+        "memberId": "CAPI482",
+        "email": "capi482@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "1a823a19-91e3-4d46-8e89-a692b5e54a7e",
+      "mongoId": "69622d45f39600d2a2f0709b",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T10:43:17.316Z",
+      "startTime": "2026-01-10T10:39:05.870Z",
+      "interviewer": {
+        "name": "Chandana Low",
+        "memberId": "CAPI443",
+        "email": "capi443@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "ea8b9240-bc27-4f70-afcd-67038a91b4ff",
+      "mongoId": "69623900f39600d2a2f179cb",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T11:33:20.626Z",
+      "startTime": "2026-01-10T11:21:55.090Z",
+      "interviewer": {
+        "name": "Tanu Das",
+        "memberId": "CAPI444",
+        "email": "capi444@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "61d8afcf-069b-48c4-acf1-b12620d3f2b7",
+      "mongoId": "69626597f39600d2a2f2eb04",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T14:43:35.133Z",
+      "startTime": "2026-01-10T11:36:51.357Z",
+      "interviewer": {
+        "name": "Paramita Dhara",
+        "memberId": "CAPI482",
+        "email": "capi482@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "9c23be5d-868f-4b64-8f39-31c74cfc58aa",
+      "mongoId": "696267a2f39600d2a2f2fc1c",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T14:52:18.917Z",
+      "startTime": "2026-01-10T14:26:21.137Z",
+      "interviewer": {
+        "name": "Paramita Dhara",
+        "memberId": "CAPI482",
+        "email": "capi482@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "96d04edd-ac66-4d13-8acf-eb769df22dca",
+      "mongoId": "696280e5f39600d2a2f377c3",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-10T16:40:05.065Z",
+      "startTime": "2026-01-10T07:29:19.621Z",
+      "interviewer": {
+        "name": "Subhendu Adhakary",
+        "memberId": "CAPI481",
+        "email": "capi481@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "b8d9ee22-44ce-45c3-bc5d-a4ff4150a61b",
+      "mongoId": "69633b2a9afab926b5122057",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-11T05:54:50.672Z",
+      "startTime": "2026-01-11T04:57:04.847Z",
+      "interviewer": {
+        "name": "Sandip Ghosh",
+        "memberId": "CAPI485",
+        "email": "capi485@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "dd9a03be-1dd0-417d-8dce-5e97e89fec7a",
+      "mongoId": "69633c909afab926b51290f1",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-11T06:00:48.471Z",
+      "startTime": "2026-01-11T05:26:41.360Z",
+      "interviewer": {
+        "name": "Sandip Ghosh",
+        "memberId": "CAPI485",
+        "email": "capi485@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "cf3d49fd-7c0c-4f17-8681-b98e3f10ff7e",
+      "mongoId": "69634c9e9afab926b513f655",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-11T07:09:18.601Z",
+      "startTime": "2026-01-11T06:12:13.277Z",
+      "interviewer": {
+        "name": "Sandip Ghosh",
+        "memberId": "CAPI485",
+        "email": "capi485@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "34f3d728-0deb-4ef0-93ef-3511a6426c86",
+      "mongoId": "69634ea19afab926b514234a",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-11T07:17:53.258Z",
+      "startTime": "2026-01-11T07:00:01.943Z",
+      "interviewer": {
+        "name": "Anima Ghosh",
+        "memberId": "CAPI445",
+        "email": "capi445@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "e5206447-e2a2-48e8-a0f6-debfef888a36",
+      "mongoId": "696351d03769db33472ae7b3",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-11T07:31:28.111Z",
+      "startTime": "2026-01-11T06:37:50.815Z",
+      "interviewer": {
+        "name": "Paramita Dhara",
+        "memberId": "CAPI482",
+        "email": "capi482@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "ffe0a54b-0f41-49a2-92eb-1e6666611e29",
+      "mongoId": "69636b6f3769db33472cca10",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-11T09:20:47.020Z",
+      "startTime": "2026-01-11T09:15:47.019Z",
+      "interviewer": {
+        "name": "Rahul Sarkar",
+        "memberId": "CAPI731",
+        "email": "capicapi731@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "rural_{গ্রামীণ{ग्रामीण}}",
+        "urban_{শহুরে?{शहरी}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "rural_{গ্রামীণ{ग्रामीण}}",
+        "urban_{শহুরে?{शहरी}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "0101e899-dea2-43fa-abf5-28b2a2bac792",
+      "mongoId": "69636d863769db33472cffd0",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-11T09:29:42.472Z",
+      "startTime": "2026-01-11T09:24:43.622Z",
+      "interviewer": {
+        "name": "Rahul Sarkar",
+        "memberId": "CAPI731",
+        "email": "capicapi731@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "rural_{গ্রামীণ{ग्रामीण}}",
+        "urban_{শহুরে?{शहरी}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "rural_{গ্রামীণ{ग्रामीण}}",
+        "urban_{শহুরে?{शहरी}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "33a83511-9053-4dec-82df-fca41d70b6df",
+      "mongoId": "69636f253769db33472d0a83",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-11T09:36:37.719Z",
+      "startTime": "2026-01-11T09:33:12.968Z",
+      "interviewer": {
+        "name": "SUBHA BAPARI",
+        "memberId": "CAPI1416",
+        "email": "capicapi1416@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "19049a29-95b3-4770-ac86-c59f03589d38",
+      "mongoId": "696482c5f6a6e0efd04fa9a5",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-12T05:12:37.404Z",
+      "startTime": "2026-01-12T04:47:11.159Z",
+      "interviewer": {
+        "name": "Sabir Mondal",
+        "memberId": "CAPI236",
+        "email": "capi2361@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    },
+    {
+      "responseId": "e3cddac2-d2bc-450f-9ff7-7f4977b4a8db",
+      "mongoId": "69648ae9f6a6e0efd0502335",
+      "status": "Pending_Approval",
+      "interviewMode": "capi",
+      "createdAt": "2026-01-12T05:47:21.708Z",
+      "startTime": "2026-01-12T04:18:28.490Z",
+      "interviewer": {
+        "name": "Manoj Panda",
+        "memberId": "CAPI581",
+        "email": "capi581@gmail.com"
+      },
+      "questionId": "question_1767953047865_319",
+      "answerValue": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "answerType": "array",
+      "answerCount": 2,
+      "rawAnswer": [
+        "urban_{শহুরে?{शहरी}}",
+        "rural_{গ্রামীণ{ग्रामीण}}"
+      ],
+      "responseCodes": null,
+      "responseWithCodes": null
+    }
+  ]
+}

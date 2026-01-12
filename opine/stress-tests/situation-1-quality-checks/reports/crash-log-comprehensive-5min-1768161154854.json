@@ -1,0 +1,88 @@
+{
+  "type": "CPU_CRITICAL",
+  "timestamp": "2026-01-11T20:00:33.437Z",
+  "elapsed": "478.56",
+  "reason": "CRITICAL: CPU usage exceeded 95% (current: 143.79%)",
+  "metrics": {
+    "timestamp": "2026-01-11T20:00:33.369Z",
+    "elapsed": 478.49,
+    "cpu": {
+      "percent": 143.79,
+      "user": 126336747,
+      "system": 17451340
+    },
+    "memory": {
+      "used": 14062,
+      "total": 31557,
+      "percent": 44.56,
+      "heapUsed": 30,
+      "heapTotal": 82,
+      "external": 22
+    },
+    "mongodbConnections": 560,
+    "mongodbReplicaSet": {
+      "set": "rs0",
+      "members": [
+        {
+          "name": "172.31.43.71:27017",
+          "stateStr": "PRIMARY",
+          "health": 1,
+          "uptime": 82110,
+          "optimeDate": "2026-01-11T20:00:33.000Z",
+          "lastHeartbeat": "",
+          "lag": 375
+        },
+        {
+          "name": "172.31.47.152:27017",
+          "stateStr": "SECONDARY",
+          "health": 1,
+          "uptime": 81550,
+          "optimeDate": "2026-01-11T20:00:31.000Z",
+          "lastHeartbeat": "",
+          "lag": 2375
+        }
+      ],
+      "primary": {
+        "name": "172.31.43.71:27017",
+        "stateStr": "PRIMARY",
+        "health": 1,
+        "uptime": 82110,
+        "optimeDate": "2026-01-11T20:00:33.000Z",
+        "lastHeartbeat": "",
+        "lag": 375
+      },
+      "secondaries": [
+        {
+          "name": "172.31.47.152:27017",
+          "stateStr": "SECONDARY",
+          "health": 1,
+          "uptime": 81550,
+          "optimeDate": "2026-01-11T20:00:31.000Z",
+          "lastHeartbeat": "",
+          "lag": 2375
+        }
+      ],
+      "healthy": true,
+      "totalMembers": 2
+    },
+    "networkConnections": 2929,
+    "loadAverage": {
+      "1min": 6.56,
+      "5min": 6.66,
+      "15min": 4.48
+    },
+    "loadBalancer": {
+      "available": true,
+      "status": "{\"success\":false,\"message\":\"Route not found\"}"
+    },
+    "apiResponseTime": null
+  },
+  "thresholds": {
+    "cpu": 95,
+    "memory": 95,
+    "mongodbConnections": 800,
+    "consecutiveHighCPU": 5,
+    "consecutiveHighMemory": 5,
+    "apiTimeout": 30000
+  }
+}

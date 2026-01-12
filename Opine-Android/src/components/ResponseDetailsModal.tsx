@@ -91,6 +91,12 @@ export default function ResponseDetailsModal({
   const catiSliderRef = useRef<View>(null);
   const [catiSliderWidth, setCatiSliderWidth] = useState(0);
   
+  // CRITICAL FIX: Operation locks to prevent race conditions and concurrent async operations
+  const audioOperationLockRef = useRef<boolean>(false);
+  const catiAudioOperationLockRef = useRef<boolean>(false);
+  const seekDebounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const catiSeekDebounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  
   // Update ref whenever audioSound state changes
   useEffect(() => {
     audioSoundRef.current = audioSound;
@@ -100,6 +106,18 @@ export default function ResponseDetailsModal({
   useEffect(() => {
     catiAudioSoundRef.current = catiAudioSound;
   }, [catiAudioSound]);
+  
+  // Cleanup debounce timers on unmount
+  useEffect(() => {
+    return () => {
+      if (seekDebounceTimerRef.current) {
+        clearTimeout(seekDebounceTimerRef.current);
+      }
+      if (catiSeekDebounceTimerRef.current) {
+        clearTimeout(catiSeekDebounceTimerRef.current);
+      }
+    };
+  }, []);
 
   // Function to stop and cleanup audio completely (using ref to avoid dependency cycles)
   const cleanupAudio = useCallback(async () => {
@@ -108,9 +126,11 @@ export default function ResponseDetailsModal({
       try {
         const status = await currentAudio.getStatusAsync();
         if (status.isLoaded) {
-          // Stop playback if playing
-          if (status.isPlaying) {
-            await currentAudio.stopAsync();
+          // CRITICAL FIX: Always stop before unloading to prevent audio from continuing
+          try {
+            await currentAudio.stopAsync(); // Stop first (even if not playing, ensures cleanup)
+          } catch (stopError) {
+            console.error('Error stopping audio during cleanup:', stopError);
           }
           // Unload the sound
           await currentAudio.unloadAsync();
@@ -119,6 +139,7 @@ export default function ResponseDetailsModal({
         console.error('Error cleaning up audio:', error);
         // Force unload even if there's an error
         try {
+          await currentAudio.stopAsync(); // Try to stop first
           await currentAudio.unloadAsync();
         } catch (unloadError) {
           console.error('Error force unloading audio:', unloadError);
@@ -126,17 +147,19 @@ export default function ResponseDetailsModal({
       }
       audioSoundRef.current = null;
     }
-    // Always reset all audio state, even if no audio was loaded
+    // Reset audio playback state, but preserve capiAudioUriRef for restoration
     setAudioSound(null);
     setIsPlaying(false);
     setAudioPosition(0);
     setAudioDuration(0);
     setPlaybackRate(1.0);
     setIsLoadingAudio(false);
+    // Note: We DON'T clear capiAudioUriRef or capiAudioResponseIdRef here
+    // They are preserved so audio can be restored after lock/unlock
   }, []); // Empty dependency array - uses ref instead
 
-  // Function to stop and cleanup CATI audio
-  const cleanupCatiAudio = useCallback(async () => {
+  // Function to stop CATI audio playback only (preserves state for restoration)
+  const stopCatiAudio = useCallback(async () => {
     const currentAudio = catiAudioSoundRef.current;
     if (currentAudio) {
       try {
@@ -148,8 +171,39 @@ export default function ResponseDetailsModal({
           await currentAudio.unloadAsync();
         }
       } catch (error) {
+        console.error('Error stopping CATI audio:', error);
+        try {
+          await currentAudio.unloadAsync();
+        } catch (unloadError) {
+          console.error('Error force unloading CATI audio:', unloadError);
+        }
+      }
+      catiAudioSoundRef.current = null;
+      setCatiAudioSound(null);
+    }
+    // Only stop playback, don't reset position/duration/URI - preserve for restoration
+    setIsPlayingCatiAudio(false);
+  }, []);
+
+  // Function to stop and cleanup CATI audio (full cleanup - used when modal closes or interview changes)
+  const cleanupCatiAudio = useCallback(async () => {
+    const currentAudio = catiAudioSoundRef.current;
+    if (currentAudio) {
+      try {
+        const status = await currentAudio.getStatusAsync();
+        if (status.isLoaded) {
+          // CRITICAL FIX: Always stop before unloading to prevent audio from continuing
+          try {
+            await currentAudio.stopAsync(); // Stop first (even if not playing, ensures cleanup)
+          } catch (stopError) {
+            console.error('Error stopping CATI audio during cleanup:', stopError);
+          }
+          await currentAudio.unloadAsync();
+        }
+      } catch (error) {
         console.error('Error cleaning up CATI audio:', error);
         try {
+          await currentAudio.stopAsync(); // Try to stop first
           await currentAudio.unloadAsync();
         } catch (unloadError) {
           console.error('Error force unloading CATI audio:', unloadError);
@@ -164,26 +218,154 @@ export default function ResponseDetailsModal({
     setCatiAudioDuration(0);
     setCatiPlaybackRate(1.0);
     setLoadingCatiRecording(false);
+    // Note: We preserve catiRecordingUri and catiCallDetails for restoration
   }, []);
+
+  // Store the call_id associated with the current catiRecordingUri to prevent resetting on re-render
+  const catiRecordingUriCallIdRef = useRef<string | null>(null);
+  // Store the responseId and audio URI for CAPI audio to prevent re-loading after lock/unlock
+  const capiAudioUriRef = useRef<string | null>(null);
+  const capiAudioResponseIdRef = useRef<string | null>(null);
 
   // OPTIMIZED: Lazy load audio and CATI details - don't block modal opening
   useEffect(() => {
     if (!visible || !interview) {
-      // Cleanup when modal closes or interview is not available
-      cleanupAudio();
-      cleanupCatiAudio();
+      // CRITICAL FIX: Cleanup when modal closes or interview is not available
+      // Use immediate stop to prevent audio from continuing to play
+      (async () => {
+        // Immediately stop all audio playback (blocking)
+        try {
+          const capiAudio = audioSoundRef.current;
+          const catiAudio = catiAudioSoundRef.current;
+          
+          // Stop CAPI audio immediately
+          if (capiAudio) {
+            try {
+              const status = await capiAudio.getStatusAsync();
+              if (status.isLoaded && status.isPlaying) {
+                await capiAudio.stopAsync(); // Stop immediately
+              }
+            } catch (error) {
+              console.error('Error stopping CAPI audio:', error);
+            }
+          }
+          
+          // Stop CATI audio immediately
+          if (catiAudio) {
+            try {
+              const status = await catiAudio.getStatusAsync();
+              if (status.isLoaded && status.isPlaying) {
+                await catiAudio.stopAsync(); // Stop immediately
+              }
+            } catch (error) {
+              console.error('Error stopping CATI audio:', error);
+            }
+          }
+        } catch (error) {
+          console.error('Error in immediate audio stop:', error);
+        }
+        
+        // Then cleanup fully
+        await Promise.all([
+          cleanupAudio(),
+          cleanupCatiAudio()
+        ]);
+        // Clear debounce timers
+        if (seekDebounceTimerRef.current) {
+          clearTimeout(seekDebounceTimerRef.current);
+          seekDebounceTimerRef.current = null;
+        }
+        if (catiSeekDebounceTimerRef.current) {
+          clearTimeout(catiSeekDebounceTimerRef.current);
+          catiSeekDebounceTimerRef.current = null;
+        }
+      })();
       setCatiCallDetails(null);
       setCatiRecordingUri(null);
+      catiRecordingUriCallIdRef.current = null;
+      capiAudioUriRef.current = null;
+      capiAudioResponseIdRef.current = null;
       return;
     }
 
-    // Always cleanup audio state when interview changes (even if visible stays true)
-    // This ensures clean state when skipping to a new response
-    cleanupAudio();
-    cleanupCatiAudio();
-    // Reset CATI call details when interview changes to prevent showing stale data
-    setCatiCallDetails(null);
-    setCatiRecordingUri(null);
+    const currentCallId = interview.call_id;
+    const currentResponseId = interview?.responseId;
+    const isNewInterview = catiRecordingUriCallIdRef.current !== currentCallId;
+
+    // Only cleanup audio state when interview actually changes (different call_id)
+    // This prevents resetting state when component re-renders after unlocking screen
+    if (isNewInterview) {
+      console.log('🔄 Interview changed - cleaning up previous audio state');
+      // CRITICAL FIX: Immediately stop and cleanup previous audio before loading new interview
+      (async () => {
+        // Stop audio immediately to prevent overlap
+        try {
+          const capiAudio = audioSoundRef.current;
+          const catiAudio = catiAudioSoundRef.current;
+          
+          if (capiAudio) {
+            try {
+              const status = await capiAudio.getStatusAsync();
+              if (status.isLoaded && status.isPlaying) {
+                await capiAudio.stopAsync();
+              }
+            } catch (error) {
+              console.error('Error stopping previous CAPI audio:', error);
+            }
+          }
+          
+          if (catiAudio) {
+            try {
+              const status = await catiAudio.getStatusAsync();
+              if (status.isLoaded && status.isPlaying) {
+                await catiAudio.stopAsync();
+              }
+            } catch (error) {
+              console.error('Error stopping previous CATI audio:', error);
+            }
+          }
+        } catch (error) {
+          console.error('Error in immediate audio stop on interview change:', error);
+        }
+        
+        // Then cleanup fully
+        await Promise.all([
+          cleanupAudio(),
+          cleanupCatiAudio()
+        ]);
+      })();
+      // Reset CATI call details when interview changes to prevent showing stale data
+      setCatiCallDetails(null);
+      // Only reset URI if it's for a different call
+      if (catiRecordingUriCallIdRef.current && catiRecordingUriCallIdRef.current !== currentCallId) {
+        setCatiRecordingUri(null);
+      }
+      catiRecordingUriCallIdRef.current = currentCallId;
+      // Reset CAPI audio URI if responseId changed
+      const currentResponseId = interview?.responseId;
+      if (capiAudioResponseIdRef.current && capiAudioResponseIdRef.current !== currentResponseId) {
+        capiAudioUriRef.current = null;
+        capiAudioResponseIdRef.current = null;
+      }
+    } else {
+      console.log('✅ Same interview - preserving audio state');
+      console.log('💾 Preserved state:', {
+        catiRecordingUri,
+        storedCallId: catiRecordingUriCallIdRef.current,
+        hasCallDetails: !!catiCallDetails,
+        capiAudioUri: capiAudioUriRef.current,
+        capiResponseId: capiAudioResponseIdRef.current
+      });
+      // Same interview - preserve catiRecordingUri, catiCallDetails, and CAPI audio URI
+      // Only cleanup audio playback, not the state
+      cleanupAudio();
+      // For CATI, only stop playback if it's playing, don't reset state
+      if (catiAudioSoundRef.current) {
+        stopCatiAudio();
+      }
+      // IMPORTANT: Don't reset catiCallDetails, catiRecordingUri, or capiAudioUri for same interview
+      // This ensures the UI can still show the recording section even after re-render
+    }
       
     // OPTIMIZED: Don't load audio immediately - lazy load when user clicks play
     // This prevents blocking the modal opening
@@ -193,34 +375,261 @@ export default function ResponseDetailsModal({
     // Use setTimeout to defer this until after modal renders
     if (interview.interviewMode === 'cati' && interview.call_id) {
       // Defer CATI details fetch to avoid blocking modal opening
-      setTimeout(() => {
-        fetchCatiCallDetails(interview.call_id);
+      setTimeout(async () => {
+        // First, check if we already have a local file for this call (from previous session)
+        // This handles the case where the user locked screen and came back
+        if (catiRecordingUri && catiRecordingUriCallIdRef.current === interview.call_id) {
+          try {
+            const fileInfo = await FileSystem.getInfoAsync(catiRecordingUri);
+            if (fileInfo.exists) {
+              console.log('🔄 Found existing local CATI audio file for same call, restoring:', catiRecordingUri);
+              // Restore audio from local file if not already loaded
+              if (!catiAudioSound) {
+                await loadCatiAudio(catiRecordingUri);
+              }
+              // Always fetch call details for metadata (even if we have URI) to ensure UI shows properly
+              // This is important because catiCallDetails might have been reset on re-render
+              if (!catiCallDetails) {
+                console.log('📋 Fetching call details to restore UI state');
+                fetchCatiCallDetails(interview.call_id);
+              }
+              return;
+            } else {
+              console.log('⚠️ Previous local file no longer exists, will fetch fresh');
+              setCatiRecordingUri(null);
+              catiRecordingUriCallIdRef.current = null;
+            }
+          } catch (error) {
+            console.error('Error checking existing local file:', error);
+            setCatiRecordingUri(null);
+            catiRecordingUriCallIdRef.current = null;
+          }
+        }
+        // Fetch call details (will trigger audio download if needed)
+        // Always fetch if we don't have call details, even if we have a URI
+        // This ensures the UI can display properly
+        if (!catiCallDetails) {
+          fetchCatiCallDetails(interview.call_id);
+        }
       }, 100); // Small delay to let modal render first
     }
 
+    // PERFORMANCE FIX: Auto-load CAPI audio when modal opens (similar to CATI)
+    // This matches the behavior where CATI audio automatically downloads
+    if (interview.interviewMode === 'capi') {
+      // Defer CAPI audio load to avoid blocking modal opening
+      setTimeout(async () => {
+        // Check if we already have audio loaded for this response
+        if (audioSoundRef.current && capiAudioResponseIdRef.current === interview?.responseId) {
+          try {
+            const status = await audioSoundRef.current.getStatusAsync();
+            if (status.isLoaded) {
+              console.log('✅ CAPI audio already loaded for this response');
+              return; // Already loaded, no need to reload
+            }
+          } catch (error) {
+            console.log('Audio status check failed, will reload:', error);
+          }
+        }
+
+        // Check if we have a stored URI for this response
+        if (capiAudioUriRef.current && capiAudioResponseIdRef.current === interview?.responseId) {
+          console.log('🔄 Reloading CAPI audio from stored URI:', capiAudioUriRef.current);
+          try {
+            setIsLoadingAudio(true);
+            await loadAudio(capiAudioUriRef.current);
+            console.log('✅ CAPI audio reloaded from stored URI');
+          } catch (error) {
+            console.error('Error reloading CAPI audio from stored URI:', error);
+            // If reload fails, try loading from original source
+            capiAudioUriRef.current = null;
+            capiAudioResponseIdRef.current = null;
+          } finally {
+            setIsLoadingAudio(false);
+          }
+          return;
+        }
+
+        // Auto-load CAPI audio from interview data (similar to CATI auto-download)
+        // Check for signedUrl/proxyUrl first (preferred for S3), then fallback to audioUrl
+        const signedUrl = interview.metadata?.audioRecording?.signedUrl || 
+                         interview.audioRecording?.signedUrl ||
+                         interview.signedUrl ||
+                         interview.audioRecording?.proxyUrl; // Also check proxyUrl
+        const audioUrl = interview.metadata?.audioRecording?.audioUrl || 
+                        interview.audioUrl || 
+                        interview.audioRecording?.url ||
+                        interview.audioRecording?.audioUrl;
+        
+        // Use signedUrl/proxyUrl if available, otherwise use audioUrl
+        const audioSource = signedUrl || audioUrl;
+        
+        if (audioSource) {
+          console.log('📥 Auto-loading CAPI audio when modal opens (similar to CATI):', audioSource);
+          setIsLoadingAudio(true);
+          try {
+            // loadAudio expects the audioUrl parameter, but it also uses interview from closure
+            // Pass the audioSource which will be used to construct the full URL
+            await loadAudio(audioSource);
+            console.log('✅ CAPI audio auto-loaded successfully');
+          } catch (error) {
+            console.error('Error auto-loading CAPI audio:', error);
+            // Don't show error to user - just log it
+          } finally {
+            setIsLoadingAudio(false);
+          }
+        } else {
+          console.log('ℹ️ No CAPI audio URL available for auto-loading');
+        }
+      }, 100); // Small delay to let modal render first (same as CATI)
+    }
+
     return () => {
-      // Cleanup audio on unmount or when interview changes
-      cleanupAudio();
-      cleanupCatiAudio();
+      // CRITICAL: Cleanup audio on unmount or when modal closes
+      if (!visible) {
+        // Await cleanup to ensure audio is properly stopped
+        (async () => {
+          await Promise.all([
+            cleanupAudio(),
+            cleanupCatiAudio()
+          ]);
+          // Clear debounce timers
+          if (seekDebounceTimerRef.current) {
+            clearTimeout(seekDebounceTimerRef.current);
+            seekDebounceTimerRef.current = null;
+          }
+          if (catiSeekDebounceTimerRef.current) {
+            clearTimeout(catiSeekDebounceTimerRef.current);
+            catiSeekDebounceTimerRef.current = null;
+          }
+        })();
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible, interview?.responseId]);
+  }, [visible, interview?.responseId, interview?.call_id]);
 
-  // Listen to app state changes to stop audio when app goes to background or closes
+  // Listen to app state changes to stop audio when app goes to background and restore when coming back
   useEffect(() => {
-    const subscription = AppState.addEventListener('change', (nextAppState) => {
-      if (nextAppState === 'background' || nextAppState === 'inactive') {
-        // App is going to background or closing - stop audio immediately
-        console.log('🛑 App going to background/inactive - stopping audio');
-        cleanupAudio();
-        cleanupCatiAudio();
+    if (!visible) return; // Don't handle AppState changes when modal is closed
+    
+    let previousAppState = AppState.currentState;
+    
+    const subscription = AppState.addEventListener('change', async (nextAppState) => {
+      // CRITICAL FIX: Only handle AppState changes when modal is visible
+      if (!visible) {
+        previousAppState = nextAppState;
+        return;
       }
+      
+      if (nextAppState === 'background' || nextAppState === 'inactive') {
+        // App is going to background or closing - stop audio playback immediately
+        console.log('🛑 App going to background/inactive - stopping audio playback immediately');
+        try {
+          // Stop audio immediately (blocking)
+          const capiAudio = audioSoundRef.current;
+          const catiAudio = catiAudioSoundRef.current;
+          
+          if (capiAudio) {
+            try {
+              const status = await capiAudio.getStatusAsync();
+              if (status.isLoaded && status.isPlaying) {
+                await capiAudio.stopAsync();
+              }
+            } catch (error) {
+              console.error('Error stopping CAPI audio on background:', error);
+            }
+          }
+          
+          if (catiAudio) {
+            try {
+              const status = await catiAudio.getStatusAsync();
+              if (status.isLoaded && status.isPlaying) {
+                await catiAudio.stopAsync();
+              }
+            } catch (error) {
+              console.error('Error stopping CATI audio on background:', error);
+            }
+          }
+        } catch (error) {
+          console.error('Error stopping audio on background:', error);
+        }
+      } else if (nextAppState === 'active' && previousAppState === 'background') {
+        // App is coming back to foreground - restore audio if it was previously loaded
+        console.log('✅ App coming back to foreground - checking for audio restoration');
+        
+        // Restore CATI audio if we have a local file URI and modal is still visible
+        // Also verify the URI is for the current call_id
+        if (visible && interview?.interviewMode === 'cati' && catiRecordingUri && 
+            catiRecordingUriCallIdRef.current === interview?.call_id) {
+          console.log('🔍 AppState restoration check:', {
+            visible,
+            interviewMode: interview?.interviewMode,
+            callId: interview?.call_id,
+            storedCallId: catiRecordingUriCallIdRef.current,
+            hasUri: !!catiRecordingUri
+          });
+          try {
+            // Check if the local file still exists
+            const fileInfo = await FileSystem.getInfoAsync(catiRecordingUri);
+            if (fileInfo.exists) {
+              console.log('🔄 Restoring CATI audio from local file:', catiRecordingUri);
+              // Reload audio from the local file (no re-download needed)
+              await loadCatiAudio(catiRecordingUri);
+            } else {
+              console.log('⚠️ Local CATI audio file no longer exists, will need to re-download');
+              // File was deleted, clear the URI so it can be re-downloaded
+              setCatiRecordingUri(null);
+              catiRecordingUriCallIdRef.current = null;
+            }
+          } catch (error) {
+            console.error('Error checking/restoring CATI audio file:', error);
+            // If there's an error, clear the URI so it can be re-downloaded
+            setCatiRecordingUri(null);
+            catiRecordingUriCallIdRef.current = null;
+          }
+        }
+        
+        // Restore CAPI audio if we have the audio URI and modal is still visible
+        // Also verify the URI is for the current responseId
+        if (visible && interview?.interviewMode === 'capi' && capiAudioUriRef.current && 
+            capiAudioResponseIdRef.current === interview?.responseId) {
+          console.log('🔍 AppState restoration check (CAPI):', {
+            visible,
+            interviewMode: interview?.interviewMode,
+            responseId: interview?.responseId,
+            storedResponseId: capiAudioResponseIdRef.current,
+            hasUri: !!capiAudioUriRef.current,
+            hasAudioSound: !!audioSound
+          });
+          try {
+            // Check if audio is still loaded
+            if (audioSoundRef.current) {
+              const status = await audioSoundRef.current.getStatusAsync();
+              if (status.isLoaded) {
+                console.log('✅ CAPI audio still loaded, no action needed');
+                return;
+              }
+            }
+            
+            // Audio was unloaded, reload from the same URI (no re-download, uses cached URL)
+            console.log('🔄 Reloading CAPI audio from stored URI:', capiAudioUriRef.current);
+            await loadAudio(capiAudioUriRef.current);
+          } catch (error) {
+            console.error('Error checking/restoring CAPI audio:', error);
+            // If there's an error, clear the URI so it can be re-loaded
+            capiAudioUriRef.current = null;
+            capiAudioResponseIdRef.current = null;
+          }
+        }
+      }
+      
+      previousAppState = nextAppState;
     });
 
     return () => {
       subscription.remove();
     };
-  }, [cleanupAudio, cleanupCatiAudio]);
+  }, [visible, interview?.interviewMode, interview?.responseId, interview?.call_id, catiRecordingUri, cleanupAudio, stopCatiAudio, loadCatiAudio, loadAudio]);
 
   // Helper function to format duration
   const formatDuration = (seconds: number): string => {
@@ -242,11 +651,56 @@ export default function ResponseDetailsModal({
     try {
       const result = await apiService.getCatiCallById(callId);
       if (result.success && result.data) {
-        setCatiCallDetails(result.data);
-        // Only fetch recording if recordingUrl is explicitly available
+        const callData = result.data;
+        setCatiCallDetails(callData);
+        
+        // LOG: Show which audio sources are available
+        console.log('🎵 [AUDIO URL LOG] Quality Agent - CATI Call Details:');
+        console.log('🎵 [AUDIO URL LOG] Call ID:', callId);
+        console.log('🎵 [AUDIO URL LOG] S3 Audio URL:', callData.s3AudioUrl || 'NOT AVAILABLE');
+        console.log('🎵 [AUDIO URL LOG] S3 Upload Status:', callData.s3AudioUploadStatus || 'NOT SET');
+        console.log('🎵 [AUDIO URL LOG] DeepCall Recording URL:', callData.recordingUrl ? 'AVAILABLE' : 'NOT AVAILABLE');
+        console.log('🎵 [AUDIO URL LOG] Audio Source Priority:', 
+          callData.s3AudioUrl && callData.s3AudioUploadStatus === 'uploaded' 
+            ? 'S3 (migrated)' 
+            : callData.recordingUrl 
+              ? 'DeepCall (fallback)' 
+              : 'NONE');
+        
+        // CRITICAL: Check if we already have a local file for this call before downloading
+        // This prevents re-downloading when app comes back from background
+        if (catiRecordingUri && catiRecordingUriCallIdRef.current === callId) {
+          try {
+            const fileInfo = await FileSystem.getInfoAsync(catiRecordingUri);
+            if (fileInfo.exists) {
+              console.log('✅ Already have local CATI audio file, skipping download:', catiRecordingUri);
+              // Only load audio if not already loaded
+              if (!catiAudioSound) {
+                console.log('🔄 Loading audio from existing local file');
+                await loadCatiAudio(catiRecordingUri);
+              } else {
+                console.log('✅ Audio already loaded, no action needed');
+              }
+              return; // Don't download again
+            } else {
+              console.log('⚠️ Local file no longer exists, will download');
+              setCatiRecordingUri(null);
+              catiRecordingUriCallIdRef.current = null;
+            }
+          } catch (error) {
+            console.error('Error checking local file:', error);
+            setCatiRecordingUri(null);
+            catiRecordingUriCallIdRef.current = null;
+          }
+        }
+        
+        // Only fetch recording if recordingUrl is explicitly available AND we don't have local file
         // Don't fetch just based on _id to avoid unnecessary 404 errors
-        if (result.data.recordingUrl) {
-          await fetchCatiRecording(result.data._id || callId);
+        if ((callData.recordingUrl || callData.s3AudioUrl) && !catiRecordingUri) {
+          console.log('📥 No local file found, downloading recording...');
+          await fetchCatiRecording(callData._id || callId);
+        } else if (catiRecordingUri) {
+          console.log('✅ Using existing local file, skipping download');
         }
       }
     } catch (error) {
@@ -256,6 +710,33 @@ export default function ResponseDetailsModal({
 
   const fetchCatiRecording = async (callId: string) => {
     try {
+      // CRITICAL: Check if we already have a local file for this call before downloading
+      // This prevents re-downloading when app comes back from background or when play is clicked
+      if (catiRecordingUri && catiRecordingUriCallIdRef.current === callId) {
+        try {
+          const fileInfo = await FileSystem.getInfoAsync(catiRecordingUri);
+          if (fileInfo.exists) {
+            console.log('✅ Already have local CATI audio file, using it instead of downloading:', catiRecordingUri);
+            // Only load audio if not already loaded
+            if (!catiAudioSound) {
+              console.log('🔄 Loading audio from existing local file');
+              await loadCatiAudio(catiRecordingUri);
+            } else {
+              console.log('✅ Audio already loaded, no action needed');
+            }
+            return; // Don't download again
+          } else {
+            console.log('⚠️ Local file no longer exists, will download');
+            setCatiRecordingUri(null);
+            catiRecordingUriCallIdRef.current = null;
+          }
+        } catch (error) {
+          console.error('Error checking local file:', error);
+          setCatiRecordingUri(null);
+          catiRecordingUriCallIdRef.current = null;
+        }
+      }
+      
       setLoadingCatiRecording(true);
       
       // Use expo-file-system to download the recording directly
@@ -269,6 +750,11 @@ export default function ResponseDetailsModal({
 
       const API_BASE_URL = 'https://convo.convergentview.com';
       const recordingUrl = `${API_BASE_URL}/api/cati/recording/${callId}`;
+      
+      // LOG: Show the API endpoint being called
+      console.log('🎵 [AUDIO URL LOG] Quality Agent - Fetching CATI Recording:');
+      console.log('🎵 [AUDIO URL LOG] API Endpoint:', recordingUrl);
+      console.log('🎵 [AUDIO URL LOG] Note: Backend will prioritize S3 if available, fallback to DeepCall');
       
       // Download to a temporary file using legacy API
       const fileUri = `${FileSystem.cacheDirectory}cati_recording_${callId}_${Date.now()}.mp3`;
@@ -285,6 +771,9 @@ export default function ResponseDetailsModal({
         );
 
         if (downloadResult.status === 200) {
+          // LOG: Show successful download
+          console.log('🎵 [AUDIO URL LOG] Quality Agent - Recording downloaded successfully');
+          console.log('🎵 [AUDIO URL LOG] Local File URI:', downloadResult.uri);
           // Load the audio from the downloaded file
           await loadCatiAudio(downloadResult.uri);
         } else {
@@ -319,6 +808,10 @@ export default function ResponseDetailsModal({
           encoding: FileSystem.EncodingType.Base64,
         });
         
+        // LOG: Show successful download via fetch fallback
+        console.log('🎵 [AUDIO URL LOG] Quality Agent - Recording downloaded via fetch fallback');
+        console.log('🎵 [AUDIO URL LOG] Local File URI:', fileUri);
+        
         await loadCatiAudio(fileUri);
       }
     } catch (error: any) {
@@ -334,7 +827,7 @@ export default function ResponseDetailsModal({
     }
   };
 
-  const loadCatiAudio = async (audioUri: string) => {
+  const loadCatiAudio = useCallback(async (audioUri: string) => {
     try {
       // Clean up existing CATI audio
       if (catiAudioSoundRef.current) {
@@ -347,7 +840,10 @@ export default function ResponseDetailsModal({
         setCatiAudioSound(null);
       }
 
-      console.log('Loading CATI audio from URI');
+      // LOG: Show the actual URI being loaded
+      console.log('🎵 [AUDIO URL LOG] Quality Agent - Loading CATI audio:');
+      console.log('🎵 [AUDIO URL LOG] Audio URI:', audioUri);
+      console.log('🎵 [AUDIO URL LOG] URI Type:', audioUri.startsWith('file://') ? 'Local File' : audioUri.startsWith('http') ? 'Remote URL' : 'Unknown');
 
       const { sound } = await Audio.Sound.createAsync(
         { uri: audioUri },
@@ -360,6 +856,11 @@ export default function ResponseDetailsModal({
       catiAudioSoundRef.current = sound;
       setCatiAudioSound(sound);
       setCatiRecordingUri(audioUri);
+      // Store the call_id associated with this URI so we can preserve it across re-renders
+      if (interview?.call_id) {
+        catiRecordingUriCallIdRef.current = interview.call_id;
+        console.log('💾 Stored catiRecordingUri for call_id:', interview.call_id);
+      }
 
       // Set up status update listener
       sound.setOnPlaybackStatusUpdate((status) => {
@@ -380,29 +881,121 @@ export default function ResponseDetailsModal({
       console.error('Error loading CATI audio:', error);
       setLoadingCatiRecording(false);
     }
-  };
+  }, [catiPlaybackRate, catiIsSeeking]);
 
-  const playCatiAudio = async () => {
+  // PROFESSIONAL FIX: CATI play function with operation lock
+  const playCatiAudio = useCallback(async () => {
+    if (catiAudioOperationLockRef.current) {
+      console.log('▶️ CATI play operation already in progress, ignoring');
+      return;
+    }
+    
+    catiAudioOperationLockRef.current = true;
+    
     try {
+      // If audio is already loaded, just play it
       if (catiAudioSoundRef.current) {
-        await catiAudioSoundRef.current.playAsync();
-        setIsPlayingCatiAudio(true);
+        try {
+          const status = await catiAudioSoundRef.current.getStatusAsync();
+          if (status.isLoaded) {
+            if (!status.isPlaying) {
+              await catiAudioSoundRef.current.playAsync();
+              // CRITICAL: Verify play actually worked
+              const verifyStatus = await catiAudioSoundRef.current.getStatusAsync();
+              setIsPlayingCatiAudio(verifyStatus.isPlaying || false);
+              console.log('✅ CATI audio playing successfully');
+            } else {
+              setIsPlayingCatiAudio(true);
+            }
+            return;
+          }
+        } catch (error) {
+          console.log('CATI audio status check failed, will reload:', error);
+        }
+      }
+      
+      // If audio is not loaded but we have a local file, load it first
+      if (catiRecordingUri && interview?.call_id && catiRecordingUriCallIdRef.current === interview.call_id) {
+        try {
+          const fileInfo = await FileSystem.getInfoAsync(catiRecordingUri);
+          if (fileInfo.exists) {
+            console.log('🔄 Loading audio from local file before playing:', catiRecordingUri);
+            await loadCatiAudio(catiRecordingUri);
+            // After loading, play it
+            if (catiAudioSoundRef.current) {
+              await catiAudioSoundRef.current.playAsync();
+              // CRITICAL: Verify play actually worked
+              const verifyStatus = await catiAudioSoundRef.current.getStatusAsync();
+              setIsPlayingCatiAudio(verifyStatus.isPlaying || false);
+              console.log('✅ CATI audio loaded and playing successfully');
+            }
+            return;
+          } else {
+            console.log('⚠️ Local file no longer exists, will need to download');
+            setCatiRecordingUri(null);
+            catiRecordingUriCallIdRef.current = null;
+          }
+        } catch (error) {
+          console.error('Error checking local file:', error);
+          setCatiRecordingUri(null);
+          catiRecordingUriCallIdRef.current = null;
+        }
+      }
+      
+      // If no local file, trigger download (this will be handled by fetchCatiRecording)
+      if (interview?.call_id && !catiRecordingUri) {
+        console.log('📥 No local file, triggering download...');
+        await fetchCatiRecording(interview.call_id);
+        // After download completes, play will be handled by loadCatiAudio callback
       }
     } catch (error) {
-      console.error('Error playing CATI audio:', error);
+      console.error('❌ Error playing CATI audio:', error);
+      setIsPlayingCatiAudio(false);
+    } finally {
+      catiAudioOperationLockRef.current = false;
     }
-  };
+  }, [interview?.call_id, catiRecordingUri]);
 
-  const pauseCatiAudio = async () => {
+  // PROFESSIONAL FIX: Separate CATI pause function with operation lock
+  const pauseCatiAudio = useCallback(async () => {
+    if (catiAudioOperationLockRef.current) {
+      console.log('⏸️ CATI pause operation already in progress, ignoring');
+      return;
+    }
+    
+    catiAudioOperationLockRef.current = true;
+    
     try {
-      if (catiAudioSoundRef.current) {
-        await catiAudioSoundRef.current.pauseAsync();
+      const currentAudio = catiAudioSoundRef.current;
+      if (!currentAudio) {
         setIsPlayingCatiAudio(false);
+        return;
       }
-    } catch (error) {
-      console.error('Error pausing CATI audio:', error);
+
+      try {
+        const status = await currentAudio.getStatusAsync();
+        if (status.isLoaded && status.isPlaying) {
+          await currentAudio.pauseAsync();
+          // CRITICAL: Verify pause actually worked
+          const verifyStatus = await currentAudio.getStatusAsync();
+          setIsPlayingCatiAudio(verifyStatus.isPlaying || false);
+          console.log('✅ CATI audio paused successfully');
+        } else {
+          setIsPlayingCatiAudio(false);
+        }
+      } catch (error) {
+        console.error('❌ Error pausing CATI audio:', error);
+        setIsPlayingCatiAudio(false);
+        try {
+          await currentAudio.stopAsync();
+        } catch (stopError) {
+          console.error('❌ Error stopping CATI audio as fallback:', stopError);
+        }
+      }
+    } finally {
+      catiAudioOperationLockRef.current = false;
     }
-  };
+  }, []);
 
   const formatTime = (milliseconds: number): string => {
     const totalSeconds = Math.floor(milliseconds / 1000);
@@ -441,30 +1034,72 @@ export default function ResponseDetailsModal({
   };
 
   // CATI Audio seek handler
-  const handleCatiSeek = async (positionMillis: number) => {
+  // PROFESSIONAL FIX: Smooth CATI seeking with debouncing
+  const handleCatiSeek = useCallback(async (positionMillis: number) => {
     if (!catiAudioSoundRef.current || catiAudioDuration === 0) return;
     
-    try {
-      const clampedPosition = Math.max(0, Math.min(positionMillis, catiAudioDuration));
-      await catiAudioSoundRef.current.setPositionAsync(clampedPosition);
-      setCatiAudioPosition(clampedPosition);
-    } catch (error) {
-      console.error('Error seeking CATI audio:', error);
-    } finally {
-      setCatiIsSeeking(false);
+    // Update UI immediately for smooth feedback
+    const clampedPosition = Math.max(0, Math.min(positionMillis, catiAudioDuration));
+    setCatiAudioPosition(clampedPosition);
+    setCatiIsSeeking(true);
+    
+    // Clear any pending seek operation
+    if (catiSeekDebounceTimerRef.current) {
+      clearTimeout(catiSeekDebounceTimerRef.current);
     }
-  };
+    
+    // Debounce the actual seek operation for smooth performance
+    catiSeekDebounceTimerRef.current = setTimeout(async () => {
+      try {
+        const currentAudio = catiAudioSoundRef.current;
+        if (!currentAudio) {
+          setCatiIsSeeking(false);
+          return;
+        }
+        
+        await currentAudio.setPositionAsync(clampedPosition);
+        console.log('✅ CATI audio seeked to:', clampedPosition);
+      } catch (error) {
+        console.error('❌ Error seeking CATI audio:', error);
+      } finally {
+        setCatiIsSeeking(false);
+      }
+    }, 100); // 100ms debounce for smooth seeking
+  }, [catiAudioDuration]);
 
   // CATI Audio slider handler
-  const handleCatiSliderPress = (event: any) => {
+  const handleCatiSliderPress = useCallback((event: any) => {
     if (!catiSliderRef.current || catiSliderWidth === 0 || catiAudioDuration === 0) return;
     
     const { locationX } = event.nativeEvent;
     const percentage = Math.max(0, Math.min(1, locationX / catiSliderWidth));
     const positionMillis = Math.floor(percentage * catiAudioDuration);
-    setCatiIsSeeking(true);
     handleCatiSeek(positionMillis);
-  };
+  }, [catiSliderWidth, catiAudioDuration, handleCatiSeek]);
+  
+  // PROFESSIONAL FIX: 10 seconds forward/backward functions for CATI
+  const skipCatiForward10s = useCallback(async () => {
+    if (!catiAudioSoundRef.current || catiAudioDuration === 0) return;
+    
+    const newPosition = Math.min(catiAudioPosition + 10000, catiAudioDuration);
+    await handleCatiSeek(newPosition);
+  }, [catiAudioPosition, catiAudioDuration, handleCatiSeek]);
+  
+  const skipCatiBackward10s = useCallback(async () => {
+    if (!catiAudioSoundRef.current || catiAudioDuration === 0) return;
+    
+    const newPosition = Math.max(catiAudioPosition - 10000, 0);
+    await handleCatiSeek(newPosition);
+  }, [catiAudioPosition, handleCatiSeek]);
+  
+  // Toggle CATI play/pause
+  const toggleCatiPlayPause = useCallback(async () => {
+    if (isPlayingCatiAudio) {
+      await pauseCatiAudio();
+    } else {
+      await playCatiAudio();
+    }
+  }, [isPlayingCatiAudio, playCatiAudio, pauseCatiAudio]);
 
   const loadAudio = async (audioUrl: string) => {
     try {
@@ -479,68 +1114,35 @@ export default function ResponseDetailsModal({
         setAudioSound(null);
       }
 
-      // Check if we have a signed URL (preferred for S3)
+      // Use proxy URL (from backend) or construct it from audioUrl to prevent cross-region charges
       let fullAudioUrl = audioUrl;
+      const API_BASE_URL = 'https://convo.convergentview.com';
       
-      // If it's an S3 key (starts with audio/, documents/, reports/), we need to get a signed URL
-      if (audioUrl && (audioUrl.startsWith('audio/') || audioUrl.startsWith('documents/') || audioUrl.startsWith('reports/')) && 
-          !audioUrl.startsWith('http')) {
-        try {
-          // Check if interview has signedUrl already
-          const signedUrl = interview.metadata?.audioRecording?.signedUrl || 
-                           interview.audioRecording?.signedUrl ||
-                           interview.signedUrl;
-          
-          if (signedUrl) {
-            fullAudioUrl = signedUrl;
-            console.log('✅ Using provided signed URL for audio');
-          } else if (audioUrl) {
-            // Fetch signed URL from API only if we have an audioUrl
-            console.log('📥 Fetching signed URL for S3 key:', audioUrl);
-            try {
-              const token = await AsyncStorage.getItem('authToken');
-              if (!token) {
-                throw new Error('No auth token available');
-              }
-              const API_BASE_URL = 'https://convo.convergentview.com';
-              const response = await fetch(`${API_BASE_URL}/api/survey-responses/audio-signed-url?audioUrl=${encodeURIComponent(audioUrl)}`, {
-                headers: {
-                  'Authorization': `Bearer ${token}`,
-                  'Content-Type': 'application/json'
-                }
-              });
-              
-              if (response.ok) {
-                const data = await response.json();
-                if (data.success && data.signedUrl) {
-                  fullAudioUrl = data.signedUrl;
-                  console.log('✅ Successfully fetched signed URL for audio');
-                } else {
-                  console.warn('⚠️ No signed URL in response:', data);
-                  throw new Error('No signed URL in response');
-                }
-              } else {
-                const errorText = await response.text();
-                console.error('❌ Failed to fetch signed URL:', response.status, errorText);
-                throw new Error(`Failed to fetch signed URL: ${response.status}`);
-              }
-            } catch (fetchError) {
-              console.error('❌ Error fetching signed URL:', fetchError);
-              throw fetchError; // Re-throw to trigger fallback
-            }
-          }
-        } catch (error) {
-          console.error('Error fetching signed URL:', error);
-          // Fallback: try to construct URL using production API base URL
-          const API_BASE_URL = 'https://convo.convergentview.com';
+      // Check if interview has proxyUrl or signedUrl (which now contains proxy URL)
+      const proxyUrl = interview.metadata?.audioRecording?.proxyUrl || 
+                      interview.audioRecording?.proxyUrl ||
+                      interview.metadata?.audioRecording?.signedUrl || 
+                      interview.audioRecording?.signedUrl ||
+                      interview.signedUrl;
+      
+      if (proxyUrl) {
+        // Use proxy URL from backend (already includes full path or relative)
+        fullAudioUrl = proxyUrl.startsWith('http') ? proxyUrl : `${API_BASE_URL}${proxyUrl.startsWith('/') ? proxyUrl : '/' + proxyUrl}`;
+        console.log('✅ Using provided proxy URL for audio');
+      } else if (audioUrl) {
+        // Construct proxy URL from audioUrl
+        if (audioUrl.startsWith('http://') || audioUrl.startsWith('https://')) {
+          // Already a full URL
+          fullAudioUrl = audioUrl;
+        } else if (audioUrl.startsWith('audio/') || audioUrl.startsWith('documents/') || audioUrl.startsWith('reports/')) {
+          // S3 key - use proxy endpoint (eliminates cross-region charges)
+          fullAudioUrl = `${API_BASE_URL}/api/survey-responses/audio/${encodeURIComponent(audioUrl)}`;
+          console.log('✅ Using proxy endpoint for S3 audio:', fullAudioUrl);
+        } else {
+          // Local path - construct full URL
           fullAudioUrl = `${API_BASE_URL}${audioUrl.startsWith('/') ? audioUrl : '/' + audioUrl}`;
-          console.log('Using fallback URL for audio:', fullAudioUrl);
+          console.log('Constructed audio URL from relative path:', fullAudioUrl);
         }
-      } else if (!audioUrl.startsWith('http://') && !audioUrl.startsWith('https://')) {
-        // If it's a relative URL, prepend the production base URL
-        const API_BASE_URL = 'https://convo.convergentview.com';
-        fullAudioUrl = `${API_BASE_URL}${audioUrl.startsWith('/') ? audioUrl : '/' + audioUrl}`;
-        console.log('Constructed audio URL from relative path:', fullAudioUrl);
       }
 
       console.log('Loading audio from URL:', fullAudioUrl);
@@ -557,6 +1159,13 @@ export default function ResponseDetailsModal({
       // Update both state and ref
       audioSoundRef.current = sound;
       setAudioSound(sound);
+      
+      // Store the audio URI and responseId for restoration after lock/unlock
+      capiAudioUriRef.current = fullAudioUrl;
+      if (interview?.responseId) {
+        capiAudioResponseIdRef.current = interview.responseId;
+        console.log('💾 Stored CAPI audio URI for responseId:', interview.responseId, 'URI:', fullAudioUrl);
+      }
       
       const status = await sound.getStatusAsync();
       if (status.isLoaded) {
@@ -586,11 +1195,111 @@ export default function ResponseDetailsModal({
     }
   };
 
-  const playAudio = async () => {
+  // PROFESSIONAL FIX: Separate play and pause functions with operation locks for reliability
+  const pauseAudio = useCallback(async () => {
+    // Prevent concurrent operations
+    if (audioOperationLockRef.current) {
+      console.log('⏸️ Pause operation already in progress, ignoring');
+      return;
+    }
+    
+    audioOperationLockRef.current = true;
+    
     try {
+      const currentAudio = audioSoundRef.current;
+      if (!currentAudio) {
+        setIsPlaying(false);
+        return;
+      }
+
+      try {
+        const status = await currentAudio.getStatusAsync();
+        if (status.isLoaded && status.isPlaying) {
+          await currentAudio.pauseAsync();
+          // CRITICAL: Verify pause actually worked
+          const verifyStatus = await currentAudio.getStatusAsync();
+          setIsPlaying(verifyStatus.isPlaying || false);
+          console.log('✅ Audio paused successfully');
+        } else {
+          setIsPlaying(false);
+        }
+      } catch (error) {
+        console.error('❌ Error pausing audio:', error);
+        // Force update state even if API call fails
+        setIsPlaying(false);
+        // Try to stop as fallback
+        try {
+          await currentAudio.stopAsync();
+        } catch (stopError) {
+          console.error('❌ Error stopping audio as fallback:', stopError);
+        }
+      }
+    } finally {
+      audioOperationLockRef.current = false;
+    }
+  }, []);
+
+  const playAudio = useCallback(async () => {
+    // Prevent concurrent operations
+    if (audioOperationLockRef.current) {
+      console.log('▶️ Play operation already in progress, ignoring');
+      return;
+    }
+    
+    audioOperationLockRef.current = true;
+    
+    try {
+      // CRITICAL: Check if we already have audio loaded for this response
+      if (audioSoundRef.current && capiAudioResponseIdRef.current === interview?.responseId) {
+        try {
+          const status = await audioSoundRef.current.getStatusAsync();
+          if (status.isLoaded) {
+            console.log('✅ CAPI audio already loaded, playing directly');
+            // Audio is already loaded, just play it
+            if (!status.isPlaying) {
+              await audioSoundRef.current.setRateAsync(playbackRate, true);
+              await audioSoundRef.current.playAsync();
+              // CRITICAL: Verify play actually worked
+              const verifyStatus = await audioSoundRef.current.getStatusAsync();
+              setIsPlaying(verifyStatus.isPlaying || false);
+              console.log('✅ Audio playing successfully');
+            } else {
+              setIsPlaying(true);
+            }
+            return;
+          }
+        } catch (error) {
+          console.log('Audio status check failed, will reload:', error);
+        }
+      }
+      
+      // CRITICAL: Check if we have a stored URI for this response before loading from URL
+      if (capiAudioUriRef.current && capiAudioResponseIdRef.current === interview?.responseId) {
+        console.log('🔄 Reloading CAPI audio from stored URI (no re-download):', capiAudioUriRef.current);
+        setIsLoadingAudio(true);
+        try {
+          await loadAudio(capiAudioUriRef.current);
+          // After loading, play it
+          const currentAudio = audioSoundRef.current;
+          if (currentAudio) {
+            await currentAudio.setRateAsync(playbackRate, true);
+            await currentAudio.playAsync();
+            // CRITICAL: Verify play actually worked
+            const verifyStatus = await currentAudio.getStatusAsync();
+            setIsPlaying(verifyStatus.isPlaying || false);
+            setIsLoadingAudio(false);
+          }
+        } catch (loadError) {
+          console.error('Error reloading audio from stored URI:', loadError);
+          capiAudioUriRef.current = null;
+          capiAudioResponseIdRef.current = null;
+          setIsLoadingAudio(false);
+        }
+        return;
+      }
+      
       if (!audioSound) {
         // OPTIMIZED: Lazy load audio only when user clicks play
-        // Check for signedUrl first (preferred for S3), then fallback to audioUrl
         const signedUrl = interview.metadata?.audioRecording?.signedUrl || 
                          interview.audioRecording?.signedUrl ||
                          interview.signedUrl;
@@ -598,52 +1307,60 @@ export default function ResponseDetailsModal({
                         interview.audioUrl || 
                         interview.audioRecording?.url ||
                         interview.audioRecording?.audioUrl;
-        // Use signedUrl if available, otherwise use audioUrl
         const audioSource = signedUrl || audioUrl;
         if (audioSource) {
-          setIsLoadingAudio(true); // Show loading state
+          setIsLoadingAudio(true);
           try {
             await loadAudio(audioSource);
-            // After loading, check if audioSound was set and play it
-            // Use audioSoundRef to get the latest value
             const currentAudio = audioSoundRef.current;
             if (currentAudio) {
               await currentAudio.setRateAsync(playbackRate, true);
               await currentAudio.playAsync();
-              setIsPlaying(true);
+              // CRITICAL: Verify play actually worked
+              const verifyStatus = await currentAudio.getStatusAsync();
+              setIsPlaying(verifyStatus.isPlaying || false);
+              console.log('✅ Audio loaded and playing successfully');
             }
           } catch (loadError) {
             console.error('Error loading audio:', loadError);
-            // Don't show snackbar - just log the error
           } finally {
             setIsLoadingAudio(false);
           }
           return;
         }
-        // Don't show snackbar - just return silently
         return;
       }
 
-      // Get current status to check if actually playing
-      const status = await audioSound.getStatusAsync();
-      if (status.isLoaded) {
-        if (status.isPlaying) {
-          // Actually playing - pause it
-          await audioSound.pauseAsync();
-          setIsPlaying(false);
-        } else {
-          // Not playing - play it
+      // Audio already loaded, just play it
+      try {
+        const status = await audioSound.getStatusAsync();
+        if (status.isLoaded && !status.isPlaying) {
           await audioSound.setRateAsync(playbackRate, true);
           await audioSound.playAsync();
+          // CRITICAL: Verify play actually worked
+          const verifyStatus = await audioSound.getStatusAsync();
+          setIsPlaying(verifyStatus.isPlaying || false);
+          console.log('✅ Audio playing successfully');
+        } else if (status.isPlaying) {
           setIsPlaying(true);
         }
+      } catch (error) {
+        console.error('Error playing audio:', error);
+        setIsPlaying(false);
       }
-    } catch (error) {
-      console.error('Error playing audio:', error);
-      setIsLoadingAudio(false);
-      // Don't show snackbar - just log the error
+    } finally {
+      audioOperationLockRef.current = false;
     }
-  };
+  }, [interview?.responseId, playbackRate]);
+  
+  // Toggle play/pause (for button click)
+  const togglePlayPause = useCallback(async () => {
+    if (isPlaying) {
+      await pauseAudio();
+    } else {
+      await playAudio();
+    }
+  }, [isPlaying, playAudio, pauseAudio]);
 
   const stopAudio = async () => {
     if (audioSound) {
@@ -702,58 +1419,95 @@ export default function ResponseDetailsModal({
     }
   };
 
-  const handleSeek = async (positionMillis: number) => {
-    if (!audioSound || audioDuration === 0) return;
+  // PROFESSIONAL FIX: Smooth seeking with debouncing and immediate UI feedback
+  const handleSeek = useCallback(async (positionMillis: number) => {
+    if (!audioSoundRef.current || audioDuration === 0) return;
     
-    try {
-      const clampedPosition = Math.max(0, Math.min(positionMillis, audioDuration));
-      await audioSound.setPositionAsync(clampedPosition);
-      setAudioPosition(clampedPosition);
-    } catch (error) {
-      console.error('Error seeking audio:', error);
-    } finally {
-      setIsSeeking(false);
+    // Update UI immediately for smooth feedback
+    const clampedPosition = Math.max(0, Math.min(positionMillis, audioDuration));
+    setAudioPosition(clampedPosition);
+    setIsSeeking(true);
+    
+    // Clear any pending seek operation
+    if (seekDebounceTimerRef.current) {
+      clearTimeout(seekDebounceTimerRef.current);
     }
-  };
+    
+    // Debounce the actual seek operation for smooth performance
+    seekDebounceTimerRef.current = setTimeout(async () => {
+      try {
+        const currentAudio = audioSoundRef.current;
+        if (!currentAudio) {
+          setIsSeeking(false);
+          return;
+        }
+        
+        await currentAudio.setPositionAsync(clampedPosition);
+        console.log('✅ Audio seeked to:', clampedPosition);
+      } catch (error) {
+        console.error('❌ Error seeking audio:', error);
+      } finally {
+        setIsSeeking(false);
+      }
+    }, 100); // 100ms debounce for smooth seeking
+  }, [audioDuration]);
 
-  const handleSliderPress = (event: any) => {
+  const handleSliderPress = useCallback((event: any) => {
     if (!sliderRef.current || sliderWidth === 0 || audioDuration === 0) return;
     
     const { locationX } = event.nativeEvent;
     const percentage = Math.max(0, Math.min(1, locationX / sliderWidth));
     const positionMillis = Math.floor(percentage * audioDuration);
     handleSeek(positionMillis);
-  };
+  }, [sliderWidth, audioDuration, handleSeek]);
 
-  const panResponder = PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onMoveShouldSetPanResponder: () => true,
-    onPanResponderGrant: (event) => {
-      setIsSeeking(true);
-      if (sliderWidth === 0 || audioDuration === 0) return;
-      const { locationX } = event.nativeEvent;
-      const percentage = Math.max(0, Math.min(1, locationX / sliderWidth));
-      const positionMillis = Math.floor(percentage * audioDuration);
-      setAudioPosition(positionMillis);
-    },
-    onPanResponderMove: (event) => {
-      if (sliderWidth === 0 || audioDuration === 0) return;
-      const { locationX } = event.nativeEvent;
-      const percentage = Math.max(0, Math.min(1, locationX / sliderWidth));
-      const positionMillis = Math.floor(percentage * audioDuration);
-      setAudioPosition(positionMillis);
-    },
-    onPanResponderRelease: (event) => {
-      if (sliderWidth === 0 || audioDuration === 0) {
-        setIsSeeking(false);
-        return;
-      }
-      const { locationX } = event.nativeEvent;
-      const percentage = Math.max(0, Math.min(1, locationX / sliderWidth));
-      const positionMillis = Math.floor(percentage * audioDuration);
-      handleSeek(positionMillis);
-    },
-  });
+  // PROFESSIONAL FIX: Smooth pan responder with immediate visual feedback
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderGrant: (event) => {
+        setIsSeeking(true);
+        if (sliderWidth === 0 || audioDuration === 0) return;
+        const { locationX } = event.nativeEvent;
+        const percentage = Math.max(0, Math.min(1, locationX / sliderWidth));
+        const positionMillis = Math.floor(percentage * audioDuration);
+        setAudioPosition(positionMillis);
+      },
+      onPanResponderMove: (event) => {
+        if (sliderWidth === 0 || audioDuration === 0) return;
+        const { locationX } = event.nativeEvent;
+        const percentage = Math.max(0, Math.min(1, locationX / sliderWidth));
+        const positionMillis = Math.floor(percentage * audioDuration);
+        setAudioPosition(positionMillis);
+      },
+      onPanResponderRelease: (event) => {
+        if (sliderWidth === 0 || audioDuration === 0) {
+          setIsSeeking(false);
+          return;
+        }
+        const { locationX } = event.nativeEvent;
+        const percentage = Math.max(0, Math.min(1, locationX / sliderWidth));
+        const positionMillis = Math.floor(percentage * audioDuration);
+        handleSeek(positionMillis);
+      },
+    })
+  ).current;
+  
+  // PROFESSIONAL FIX: 10 seconds forward/backward functions
+  const skipForward10s = useCallback(async () => {
+    if (!audioSoundRef.current || audioDuration === 0) return;
+    
+    const newPosition = Math.min(audioPosition + 10000, audioDuration);
+    await handleSeek(newPosition);
+  }, [audioPosition, audioDuration, handleSeek]);
+  
+  const skipBackward10s = useCallback(async () => {
+    if (!audioSoundRef.current || audioDuration === 0) return;
+    
+    const newPosition = Math.max(audioPosition - 10000, 0);
+    await handleSeek(newPosition);
+  }, [audioPosition, handleSeek]);
 
   const showSnackbar = (message: string) => {
     setSnackbarMessage(message);
@@ -844,18 +1598,22 @@ export default function ResponseDetailsModal({
       }
     }
     
-    // Q3: Upcoming Elections - if NOT option '1', hide ALL subsequent questions (Q4-Q8)
-    if (verificationForm.upcomingElectionsMatching && verificationForm.upcomingElectionsMatching !== '' && verificationForm.upcomingElectionsMatching !== '1') {
-      // If Q3 is not '1', only show Q1, Q2, Q3
+    // Q3: Upcoming Elections - if NOT option '1' or '3' (cannot hear), hide ALL subsequent questions (Q4-Q8)
+    // Allow both '1' (matched) and '3' (cannot hear) to proceed to next questions
+    if (verificationForm.upcomingElectionsMatching && verificationForm.upcomingElectionsMatching !== '' && 
+        verificationForm.upcomingElectionsMatching !== '1' && verificationForm.upcomingElectionsMatching !== '3') {
+      // If Q3 is not '1' or '3', only show Q1, Q2, Q3
       // Hide everything else (Q4-Q8 including Q6 name)
       if (questionType !== 'audioStatus' && questionType !== 'gender' && questionType !== 'upcomingElection') {
         return false;
       }
     }
     
-    // Q4: Previous Elections - if NOT option '1', hide ALL subsequent questions (Q5-Q8)
-    if (verificationForm.previousElectionsMatching && verificationForm.previousElectionsMatching !== '' && verificationForm.previousElectionsMatching !== '1') {
-      // If Q4 is not '1', only show Q1, Q2, Q3, Q4
+    // Q4: Previous Elections - if NOT option '1' or '3' (cannot hear), hide ALL subsequent questions (Q5-Q8)
+    // Allow both '1' (matched) and '3' (cannot hear) to proceed to next questions
+    if (verificationForm.previousElectionsMatching && verificationForm.previousElectionsMatching !== '' && 
+        verificationForm.previousElectionsMatching !== '1' && verificationForm.previousElectionsMatching !== '3') {
+      // If Q4 is not '1' or '3', only show Q1, Q2, Q3, Q4
       // Hide everything else (Q5-Q8 including Q6 name)
       if (questionType !== 'audioStatus' && questionType !== 'gender' && 
           questionType !== 'upcomingElection' && questionType !== 'assembly2021') {
@@ -863,9 +1621,11 @@ export default function ResponseDetailsModal({
       }
     }
     
-    // Q5: Previous Loksabha Elections - if NOT option '1', hide Q6, Q7, Q8 (informational questions)
-    if (verificationForm.previousLoksabhaElectionsMatching && verificationForm.previousLoksabhaElectionsMatching !== '' && verificationForm.previousLoksabhaElectionsMatching !== '1') {
-      // If Q5 is not '1', hide Q6, Q7, Q8
+    // Q5: Previous Loksabha Elections - if NOT option '1' or '3' (cannot hear), hide Q6, Q7, Q8 (informational questions)
+    // Allow both '1' (matched) and '3' (cannot hear) to proceed to next questions
+    if (verificationForm.previousLoksabhaElectionsMatching && verificationForm.previousLoksabhaElectionsMatching !== '' && 
+        verificationForm.previousLoksabhaElectionsMatching !== '1' && verificationForm.previousLoksabhaElectionsMatching !== '3') {
+      // If Q5 is not '1' or '3', hide Q6, Q7, Q8
       if (questionType === 'name' || questionType === 'age' || questionType === 'phoneNumber') {
         return false;
       }
@@ -979,6 +1739,86 @@ export default function ResponseDetailsModal({
       return;
     }
 
+    // CRITICAL FIX: Stop all audio before submitting
+    console.log('🛑 Submitting review - stopping all audio...');
+    try {
+      // Immediately stop all audio playback (blocking)
+      const capiAudio = audioSoundRef.current;
+      const catiAudio = catiAudioSoundRef.current;
+      
+      // Stop CAPI audio immediately
+      if (capiAudio) {
+        try {
+          const status = await capiAudio.getStatusAsync();
+          if (status.isLoaded && status.isPlaying) {
+            await capiAudio.stopAsync(); // Stop immediately
+          }
+        } catch (error) {
+          console.error('Error stopping CAPI audio on submit:', error);
+        }
+      }
+      
+      // Stop CATI audio immediately
+      if (catiAudio) {
+        try {
+          const status = await catiAudio.getStatusAsync();
+          if (status.isLoaded && status.isPlaying) {
+            await catiAudio.stopAsync(); // Stop immediately
+          }
+        } catch (error) {
+          console.error('Error stopping CATI audio on submit:', error);
+        }
+      }
+      
+      // Then cleanup fully
+      await Promise.all([
+        cleanupAudio(),
+        cleanupCatiAudio()
+      ]);
+      
+      // Clear debounce timers
+      if (seekDebounceTimerRef.current) {
+        clearTimeout(seekDebounceTimerRef.current);
+        seekDebounceTimerRef.current = null;
+      }
+      if (catiSeekDebounceTimerRef.current) {
+        clearTimeout(catiSeekDebounceTimerRef.current);
+        catiSeekDebounceTimerRef.current = null;
+      }
+      
+      console.log('✅ Audio cleanup complete before submit');
+    } catch (error) {
+      console.error('Error cleaning up audio on submit:', error);
+      // Force cleanup even if there's an error
+      try {
+        const capiAudio = audioSoundRef.current;
+        const catiAudio = catiAudioSoundRef.current;
+        
+        if (capiAudio) {
+          try {
+            await capiAudio.stopAsync();
+          } catch (stopError) {
+            console.error('Error force stopping CAPI audio:', stopError);
+          }
+        }
+        
+        if (catiAudio) {
+          try {
+            await catiAudio.stopAsync();
+          } catch (stopError) {
+            console.error('Error force stopping CATI audio:', stopError);
+          }
+        }
+        
+        await Promise.all([
+          cleanupAudio(),
+          cleanupCatiAudio()
+        ]);
+      } catch (cleanupError) {
+        console.error('Error during force cleanup on submit:', cleanupError);
+      }
+    }
+
     try {
       setIsSubmitting(true);
       
@@ -1008,103 +1848,88 @@ export default function ResponseDetailsModal({
     }
   };
 
-  // Handle close with confirmation dialog
-  const handleClose = () => {
-    // Check if audio is playing using ref
-    const currentAudio = audioSoundRef.current;
-    if (currentAudio) {
-      currentAudio.getStatusAsync().then((status) => {
-        if (status.isLoaded && status.isPlaying) {
-          // Audio is playing - show confirmation
-          Alert.alert(
-            'Close Quality Check?',
-            'Audio is currently playing. Are you sure you want to close the Quality Check? The audio will be stopped.',
-            [
-              {
-                text: 'Cancel',
-                style: 'cancel',
-              },
-              {
-                text: 'Close',
-                style: 'destructive',
-                onPress: async () => {
-                  // Stop and cleanup audio
-                  await cleanupAudio();
-                  // Close modal
-                  onClose();
-                },
-              },
-            ],
-            { cancelable: true }
-          );
-        } else {
-          // Audio not playing - still show confirmation but simpler message
-          Alert.alert(
-            'Close Quality Check?',
-            'Are you sure you want to close the Quality Check?',
-            [
-              {
-                text: 'Cancel',
-                style: 'cancel',
-              },
-              {
-                text: 'Close',
-                style: 'destructive',
-                onPress: async () => {
-                  // Cleanup audio anyway (in case it's loaded but paused)
-                  await cleanupAudio();
-                  // Close modal
-                  onClose();
-                },
-              },
-            ],
-            { cancelable: true }
-          );
+  // PROFESSIONAL FIX: Improved close handler with proper audio cleanup
+  const handleClose = async () => {
+    console.log('🛑 Closing modal - cleaning up all audio...');
+    try {
+      // CRITICAL FIX: Immediately stop all audio playback (blocking)
+      const capiAudio = audioSoundRef.current;
+      const catiAudio = catiAudioSoundRef.current;
+      
+      // Stop CAPI audio immediately
+      if (capiAudio) {
+        try {
+          const status = await capiAudio.getStatusAsync();
+          if (status.isLoaded && status.isPlaying) {
+            await capiAudio.stopAsync(); // Stop immediately
+          }
+        } catch (error) {
+          console.error('Error stopping CAPI audio on close:', error);
         }
-      }).catch(() => {
-        // If we can't get status, assume audio might be playing and show confirmation
-        Alert.alert(
-          'Close Quality Check?',
-          'Are you sure you want to close the Quality Check? Any playing audio will be stopped.',
-          [
-            {
-              text: 'Cancel',
-              style: 'cancel',
-            },
-            {
-              text: 'Close',
-              style: 'destructive',
-              onPress: async () => {
-                // Cleanup audio
-                await cleanupAudio();
-                // Close modal
-                onClose();
-              },
-            },
-          ],
-          { cancelable: true }
-        );
-      });
-    } else {
-      // No audio loaded - show simple confirmation
-      Alert.alert(
-        'Close Quality Check?',
-        'Are you sure you want to close the Quality Check?',
-        [
-          {
-            text: 'Cancel',
-            style: 'cancel',
-          },
-          {
-            text: 'Close',
-            style: 'destructive',
-            onPress: () => {
-              onClose();
-            },
-          },
-        ],
-        { cancelable: true }
-      );
+      }
+      
+      // Stop CATI audio immediately
+      if (catiAudio) {
+        try {
+          const status = await catiAudio.getStatusAsync();
+          if (status.isLoaded && status.isPlaying) {
+            await catiAudio.stopAsync(); // Stop immediately
+          }
+        } catch (error) {
+          console.error('Error stopping CATI audio on close:', error);
+        }
+      }
+      
+      // Then cleanup fully
+      await Promise.all([
+        cleanupAudio(),
+        cleanupCatiAudio()
+      ]);
+      
+      // Clear debounce timers
+      if (seekDebounceTimerRef.current) {
+        clearTimeout(seekDebounceTimerRef.current);
+        seekDebounceTimerRef.current = null;
+      }
+      if (catiSeekDebounceTimerRef.current) {
+        clearTimeout(catiSeekDebounceTimerRef.current);
+        catiSeekDebounceTimerRef.current = null;
+      }
+      
+      console.log('✅ Audio cleanup complete, closing modal');
+      onClose();
+    } catch (error) {
+      console.error('Error in handleClose:', error);
+      // Force cleanup and close even if there's an error
+      try {
+        // Try to stop audio immediately
+        const capiAudio = audioSoundRef.current;
+        const catiAudio = catiAudioSoundRef.current;
+        
+        if (capiAudio) {
+          try {
+            await capiAudio.stopAsync();
+          } catch (stopError) {
+            console.error('Error force stopping CAPI audio:', stopError);
+          }
+        }
+        
+        if (catiAudio) {
+          try {
+            await catiAudio.stopAsync();
+          } catch (stopError) {
+            console.error('Error force stopping CATI audio:', stopError);
+          }
+        }
+        
+        await Promise.all([
+          cleanupAudio(),
+          cleanupCatiAudio()
+        ]);
+      } catch (cleanupError) {
+        console.error('Error during force cleanup:', cleanupError);
+      }
+      onClose();
     }
   };
 
@@ -1115,16 +1940,33 @@ export default function ResponseDetailsModal({
       return;
     }
 
-    // Stop audio if playing
-    const currentAudio = audioSoundRef.current;
-    if (currentAudio) {
+    // CRITICAL FIX: Fully cleanup ALL audio (CAPI and CATI) before skipping
+    console.log('🛑 Skipping interview - cleaning up all audio...');
+    try {
+      await Promise.all([
+        cleanupAudio(),
+        cleanupCatiAudio()
+      ]);
+      // Clear debounce timers
+      if (seekDebounceTimerRef.current) {
+        clearTimeout(seekDebounceTimerRef.current);
+        seekDebounceTimerRef.current = null;
+      }
+      if (catiSeekDebounceTimerRef.current) {
+        clearTimeout(catiSeekDebounceTimerRef.current);
+        catiSeekDebounceTimerRef.current = null;
+      }
+      console.log('✅ Audio cleanup complete before skip');
+    } catch (error) {
+      console.error('Error cleaning up audio on skip:', error);
+      // Force cleanup even if there's an error
       try {
-        const status = await currentAudio.getStatusAsync();
-        if (status.isLoaded && status.isPlaying) {
-          await currentAudio.pauseAsync();
-        }
-      } catch (error) {
-        console.log('Error stopping audio on skip:', error);
+        await Promise.all([
+          cleanupAudio(),
+          cleanupCatiAudio()
+        ]);
+      } catch (cleanupError) {
+        console.error('Error during force cleanup on skip:', cleanupError);
       }
     }
 
@@ -1463,6 +2305,118 @@ export default function ResponseDetailsModal({
     return match ? match[1].trim() : text.trim();
   };
 
+  // Helper function to find question by keywords in survey
+  const findQuestionByKeywords = (keywords: string[], survey: any) => {
+    if (!survey) return null;
+    
+    const actualSurvey = survey.survey || survey;
+    const allQuestions: any[] = [];
+    
+    // Collect all questions
+    if (actualSurvey.sections) {
+      actualSurvey.sections.forEach((section: any) => {
+        if (section.questions) {
+          allQuestions.push(...section.questions);
+        }
+      });
+    }
+    if (actualSurvey.questions) {
+      allQuestions.push(...actualSurvey.questions);
+    }
+    
+    // Find question matching keywords
+    const keywordsLower = keywords.map(k => k.toLowerCase());
+    return allQuestions.find((q: any) => {
+      const questionText = (q.text || q.questionText || '').toLowerCase();
+      return keywordsLower.some(keyword => questionText.includes(keyword));
+    });
+  };
+
+  // Helper function to get failed questions from verification criteria
+  const getFailedQuestions = (verificationData: any, survey: any) => {
+    if (!verificationData || !verificationData.criteria) return [];
+    
+    const criteria = verificationData.criteria;
+    const failedQuestions: Array<{ criterion: string; questionText: string; reason: string }> = [];
+    
+    // Map criteria to question types and check if they failed
+    // Based on getApprovalStatus logic from SurveyApprovals.jsx
+    
+    // Audio Status - fails if not '1', '4', or '7'
+    if (criteria.audioStatus && !['1', '4', '7'].includes(criteria.audioStatus)) {
+      failedQuestions.push({
+        criterion: 'audioStatus',
+        questionText: 'Audio Quality',
+        reason: 'Audio quality did not match'
+      });
+    }
+    
+    // Gender Matching - fails if not '1'
+    if (criteria.genderMatching && criteria.genderMatching !== '1') {
+      const genderQuestion = findQuestionByKeywords(['gender'], survey) || 
+                            findQuestionByText('What is your gender?', survey);
+      failedQuestions.push({
+        criterion: 'genderMatching',
+        questionText: genderQuestion?.text || genderQuestion?.questionText || 'Gender question',
+        reason: 'Gender response did not match'
+      });
+    }
+    
+    // Upcoming Elections Matching - fails if not '1' or '3'
+    if (criteria.upcomingElectionsMatching && !['1', '3'].includes(criteria.upcomingElectionsMatching)) {
+      const upcomingElectionsQuestion = findQuestionByKeywords(['upcoming', 'election', 'tomorrow', 'assembly election'], survey);
+      failedQuestions.push({
+        criterion: 'upcomingElectionsMatching',
+        questionText: upcomingElectionsQuestion?.text || upcomingElectionsQuestion?.questionText || 'Upcoming elections question',
+        reason: 'Upcoming elections response did not match'
+      });
+    }
+    
+    // Previous Elections Matching - fails if not '1' or '3'
+    if (criteria.previousElectionsMatching && !['1', '3'].includes(criteria.previousElectionsMatching)) {
+      const previousElectionsQuestion = findQuestionByKeywords(['previous', 'election', 'last assembly', 'voted'], survey);
+      failedQuestions.push({
+        criterion: 'previousElectionsMatching',
+        questionText: previousElectionsQuestion?.text || previousElectionsQuestion?.questionText || 'Previous elections question',
+        reason: 'Previous elections response did not match'
+      });
+    }
+    
+    // Previous Lok Sabha Elections Matching - fails if not '1' or '3'
+    if (criteria.previousLoksabhaElectionsMatching && !['1', '3'].includes(criteria.previousLoksabhaElectionsMatching)) {
+      const loksabhaQuestion = findQuestionByKeywords(['lok sabha', 'loksabha', 'parliamentary'], survey);
+      failedQuestions.push({
+        criterion: 'previousLoksabhaElectionsMatching',
+        questionText: loksabhaQuestion?.text || loksabhaQuestion?.questionText || 'Previous Lok Sabha elections question',
+        reason: 'Previous Lok Sabha elections response did not match'
+      });
+    }
+    
+    // Name Matching - fails if not '1' or '3'
+    if (criteria.nameMatching && !['1', '3'].includes(criteria.nameMatching)) {
+      const nameQuestion = findQuestionByText('What is your full name?', survey) ||
+                           findQuestionByKeywords(['name', 'full name'], survey);
+      failedQuestions.push({
+        criterion: 'nameMatching',
+        questionText: nameQuestion?.text || nameQuestion?.questionText || 'Name question',
+        reason: 'Name response did not match'
+      });
+    }
+    
+    // Age Matching - fails if not '1' or '3'
+    if (criteria.ageMatching && !['1', '3'].includes(criteria.ageMatching)) {
+      const ageQuestion = findQuestionByText('Could you please tell me your age in complete years?', survey) ||
+                          findQuestionByKeywords(['age', 'year'], survey);
+      failedQuestions.push({
+        criterion: 'ageMatching',
+        questionText: ageQuestion?.text || ageQuestion?.questionText || 'Age question',
+        reason: 'Age response did not match'
+      });
+    }
+    
+    return failedQuestions;
+  };
+
   // Get specific responses for verification questions
   const getVerificationResponses = () => {
     const responses = interview.responses || [];
@@ -1486,14 +2440,76 @@ export default function ResponseDetailsModal({
       ? (Array.isArray(upcomingElectionResponse.response) ? upcomingElectionResponse.response[0] : upcomingElectionResponse.response)
       : null;
     
-    // 2021 Assembly election response (Q6) - "Which party did you vote for in the last assembly elections (MLA) in 2021?"
-    let assembly2021Response = findResponseBySurveyQuestion([
-      'last assembly elections', 'mla', '2021', 'which party did you vote'
-    ], survey, false);
+    // 2021 Assembly election response (Q5) - "Q8: 2021 AE Party Choices" (AE = Assembly Election)
+    // FIXED: Search for the actual question format: "2021 AE Party Choices" or "2021 ae party choice"
+    // Strategy 1: Try finding by question number Q8 first (most reliable)
+    let assembly2021Response = null;
+    if (survey) {
+      const actualSurvey = survey.survey || survey;
+      let q8Question = null;
+      
+      // Search in sections
+      if (actualSurvey.sections) {
+        for (const section of actualSurvey.sections) {
+          if (section.questions) {
+            q8Question = section.questions.find((q: any) => {
+              const qText = getMainText(q.text || q.questionText || '').toLowerCase();
+              const qNumber = String(q.questionNumber || '').toLowerCase();
+              // Match Q8 with 2021 and (AE or assembly) and party
+              return (qNumber === '8' || qNumber === 'q8' || qNumber.includes('q8') || qNumber.includes('question 8')) &&
+                     qText.includes('2021') && 
+                     (qText.includes('ae') || qText.includes('assembly')) && 
+                     qText.includes('party');
+            });
+            if (q8Question) break;
+          }
+        }
+      }
+      
+      // Search in top-level questions
+      if (!q8Question && actualSurvey.questions) {
+        q8Question = actualSurvey.questions.find((q: any) => {
+          const qText = getMainText(q.text || q.questionText || '').toLowerCase();
+          const qNumber = String(q.questionNumber || '').toLowerCase();
+          return (qNumber === '8' || qNumber === 'q8' || qNumber.includes('q8') || qNumber.includes('question 8')) &&
+                 qText.includes('2021') && 
+                 (qText.includes('ae') || qText.includes('assembly')) && 
+                 qText.includes('party');
+        });
+      }
+      
+      if (q8Question) {
+        const q8QuestionText = getMainText(q8Question.text || q8Question.questionText || '');
+        assembly2021Response = findResponseByQuestionText(q8QuestionText);
+      }
+    }
+    
+    // Strategy 2: Look for "2021" AND "ae" AND "party choice" (specific keyword match)
+    if (!assembly2021Response) {
+      assembly2021Response = findResponseBySurveyQuestion([
+        '2021', 'ae', 'party choice'
+      ], survey, true, ['2024', 'lok sabha', 'loksabha', 'mp', 'by-election', 'by election', 'after 2021', 'parliamentary', 'ge party choice']);
+    }
+    
+    // Strategy 3: Try with "2021", "ae", and "party" separately
+    if (!assembly2021Response) {
+      assembly2021Response = findResponseBySurveyQuestion([
+        '2021', 'ae', 'party'
+      ], survey, true, ['2024', 'lok sabha', 'loksabha', 'mp', 'by-election', 'by election', 'after 2021', 'parliamentary', 'ge party choice']);
+    }
+    
+    // Strategy 4: Fallback - search by keywords directly in responses with exclusions
     if (!assembly2021Response) {
       assembly2021Response = findResponseByKeywords([
-        'last assembly elections', 'mla', '2021', 'which party did you vote'
-      ], false);
+        '2021', 'ae', 'party choice'
+      ], true, ['2024', 'lok sabha', 'loksabha', 'mp', 'by-election', 'by election', 'after 2021', 'parliamentary', 'ge party choice']);
+    }
+    
+    // Strategy 5: Last fallback - search for "2021" and "assembly" with exclusions
+    if (!assembly2021Response) {
+      assembly2021Response = findResponseByKeywords([
+        '2021', 'assembly', 'party'
+      ], true, ['2024', 'lok sabha', 'loksabha', 'mp', 'by-election', 'by election', 'after 2021', 'parliamentary', 'ge party choice']);
     }
     const assembly2021Value = assembly2021Response?.response 
       ? (Array.isArray(assembly2021Response.response) ? assembly2021Response.response[0] : assembly2021Response.response)
@@ -1709,19 +2725,46 @@ export default function ResponseDetailsModal({
                     {audioDuration > 0 ? (
                       <>
                         <View style={styles.audioTimelineContainer}>
+                          {/* Play/Pause Button */}
                           <Button
                             mode="contained"
-                            onPress={playAudio}
+                            onPress={togglePlayPause}
                             icon={isPlaying ? "pause" : "play"}
                             style={styles.audioButtonInline}
-                            disabled={!audioSound}
+                            disabled={!audioSound || isLoadingAudio || audioOperationLockRef.current}
                             compact
+                            loading={audioOperationLockRef.current}
                           >
                             {isPlaying ? 'Pause' : 'Play'}
                           </Button>
+                          
+                          {/* 10 Seconds Backward Button */}
+                          <TouchableOpacity
+                            onPress={skipBackward10s}
+                            disabled={!audioSound || audioPosition <= 0}
+                            style={[
+                              styles.audioSkipButton,
+                              (!audioSound || audioPosition <= 0) && styles.audioSkipButtonDisabled
+                            ]}
+                          >
+                            <View style={styles.skipButtonContainer}>
+                              <Ionicons 
+                                name="play-skip-back" 
+                                size={24} 
+                                color={(!audioSound || audioPosition <= 0) ? '#9ca3af' : '#2563eb'} 
+                              />
+                              <Text style={[styles.skipButtonText, (!audioSound || audioPosition <= 0) && styles.skipButtonTextDisabled]}>
+                                10
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                          
+                          {/* Current Time */}
                           <Text style={styles.audioTime}>
                             {formatTime(audioPosition)}
                           </Text>
+                          
+                          {/* Seek Bar */}
                           <TouchableOpacity
                             activeOpacity={1}
                             style={styles.sliderContainer}
@@ -1750,9 +2793,32 @@ export default function ResponseDetailsModal({
                               />
                             </View>
                           </TouchableOpacity>
+                          
+                          {/* Total Time */}
                           <Text style={styles.audioTime}>
                             {formatTime(audioDuration)}
                           </Text>
+                          
+                          {/* 10 Seconds Forward Button */}
+                          <TouchableOpacity
+                            onPress={skipForward10s}
+                            disabled={!audioSound || audioPosition >= audioDuration}
+                            style={[
+                              styles.audioSkipButton,
+                              (!audioSound || audioPosition >= audioDuration) && styles.audioSkipButtonDisabled
+                            ]}
+                          >
+                            <View style={styles.skipButtonContainer}>
+                              <Ionicons 
+                                name="play-skip-forward" 
+                                size={24} 
+                                color={(!audioSound || audioPosition >= audioDuration) ? '#9ca3af' : '#2563eb'} 
+                              />
+                              <Text style={[styles.skipButtonText, (!audioSound || audioPosition >= audioDuration) && styles.skipButtonTextDisabled]}>
+                                10
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
                         </View>
                         {/* Speed Control */}
                         <View style={styles.speedControlContainer}>
@@ -1785,11 +2851,11 @@ export default function ResponseDetailsModal({
                     ) : (
                       <Button
                         mode="contained"
-                        onPress={playAudio}
+                        onPress={togglePlayPause}
                         icon={isLoadingAudio ? undefined : (isPlaying ? "pause" : "play")}
                         style={styles.audioButton}
-                        disabled={isLoadingAudio}
-                        loading={isLoadingAudio}
+                        disabled={isLoadingAudio || audioOperationLockRef.current}
+                        loading={isLoadingAudio || audioOperationLockRef.current}
                       >
                         {isLoadingAudio ? 'Loading...' : (isPlaying ? 'Pause' : 'Play')}
                       </Button>
@@ -1797,6 +2863,181 @@ export default function ResponseDetailsModal({
                   </View>
                 ) : (
                   <Text style={styles.noDataText}>No Recording Found</Text>
+                )}
+              </Card.Content>
+            </Card>
+          </View>
+        )}
+
+        {/* Audio Recording (CATI) - Sticky at top (same as CAPI) */}
+        {interview.interviewMode === 'cati' && (catiCallDetails?.recordingUrl || catiCallDetails?.s3AudioUrl || catiRecordingUri) && (
+          <View style={styles.stickyAudioSection}>
+            <Card style={styles.audioCard}>
+              <Card.Content style={styles.audioCardContent}>
+                <Text style={styles.audioSectionTitle}>Call Recording</Text>
+                
+                {loadingCatiRecording ? (
+                  <View style={styles.audioControls}>
+                    <ActivityIndicator size="small" color="#2563eb" />
+                    <Text style={styles.noDataText}>Loading recording...</Text>
+                  </View>
+                ) : catiAudioSound ? (
+                  <View style={styles.audioControls}>
+                    {catiAudioDuration > 0 ? (
+                      <>
+                        <View style={styles.audioTimelineContainer}>
+                          {/* Play/Pause Button */}
+                          <Button
+                            mode="contained"
+                            onPress={toggleCatiPlayPause}
+                            icon={isPlayingCatiAudio ? "pause" : "play"}
+                            style={styles.audioButtonInline}
+                            disabled={!catiAudioSound || catiAudioOperationLockRef.current}
+                            compact
+                            loading={catiAudioOperationLockRef.current}
+                          >
+                            {isPlayingCatiAudio ? 'Pause' : 'Play'}
+                          </Button>
+                          
+                          {/* 10 Seconds Backward Button */}
+                          <TouchableOpacity
+                            onPress={skipCatiBackward10s}
+                            disabled={!catiAudioSound || catiAudioPosition <= 0}
+                            style={[
+                              styles.audioSkipButton,
+                              (!catiAudioSound || catiAudioPosition <= 0) && styles.audioSkipButtonDisabled
+                            ]}
+                          >
+                            <View style={styles.skipButtonContainer}>
+                              <Ionicons 
+                                name="play-skip-back" 
+                                size={24} 
+                                color={(!catiAudioSound || catiAudioPosition <= 0) ? '#9ca3af' : '#2563eb'} 
+                              />
+                              <Text style={[styles.skipButtonText, (!catiAudioSound || catiAudioPosition <= 0) && styles.skipButtonTextDisabled]}>
+                                10
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                          
+                          {/* Current Time */}
+                          <Text style={styles.audioTime}>
+                            {formatTime(catiAudioPosition)}
+                          </Text>
+                          
+                          {/* Seek Bar */}
+                          <TouchableOpacity
+                            activeOpacity={1}
+                            style={styles.sliderContainer}
+                            onLayout={(event) => {
+                              const { width } = event.nativeEvent.layout;
+                              setCatiSliderWidth(width);
+                            }}
+                            onPress={handleCatiSliderPress}
+                          >
+                            <View 
+                              ref={catiSliderRef}
+                              style={styles.sliderTrack}
+                            >
+                              <View 
+                                style={[
+                                  styles.sliderProgress,
+                                  { width: `${catiAudioDuration > 0 ? (catiAudioPosition / catiAudioDuration) * 100 : 0}%` }
+                                ]}
+                              />
+                              <View
+                                style={[
+                                  styles.sliderThumb,
+                                  { left: `${catiAudioDuration > 0 ? (catiAudioPosition / catiAudioDuration) * 100 : 0}%` }
+                                ]}
+                              />
+                            </View>
+                          </TouchableOpacity>
+                          
+                          {/* Total Time */}
+                          <Text style={styles.audioTime}>
+                            {formatTime(catiAudioDuration)}
+                          </Text>
+                          
+                          {/* 10 Seconds Forward Button */}
+                          <TouchableOpacity
+                            onPress={skipCatiForward10s}
+                            disabled={!catiAudioSound || catiAudioPosition >= catiAudioDuration}
+                            style={[
+                              styles.audioSkipButton,
+                              (!catiAudioSound || catiAudioPosition >= catiAudioDuration) && styles.audioSkipButtonDisabled
+                            ]}
+                          >
+                            <View style={styles.skipButtonContainer}>
+                              <Ionicons 
+                                name="play-skip-forward" 
+                                size={24} 
+                                color={(!catiAudioSound || catiAudioPosition >= catiAudioDuration) ? '#9ca3af' : '#2563eb'} 
+                              />
+                              <Text style={[styles.skipButtonText, (!catiAudioSound || catiAudioPosition >= catiAudioDuration) && styles.skipButtonTextDisabled]}>
+                                10
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                        </View>
+                        {/* Speed Control */}
+                        <View style={styles.speedControlContainer}>
+                          <Text style={styles.speedLabel}>Speed:</Text>
+                          <TouchableOpacity
+                            onPress={decreaseCatiSpeed}
+                            disabled={catiPlaybackRate <= 0.5}
+                            style={[styles.speedButtonTouchable, catiPlaybackRate <= 0.5 && styles.speedButtonDisabled]}
+                          >
+                            <Ionicons 
+                              name="remove-circle-outline" 
+                              size={24} 
+                              color={catiPlaybackRate <= 0.5 ? '#9ca3af' : '#2563eb'} 
+                            />
+                          </TouchableOpacity>
+                          <Text style={styles.speedValue}>{catiPlaybackRate.toFixed(2)}x</Text>
+                          <TouchableOpacity
+                            onPress={increaseCatiSpeed}
+                            disabled={catiPlaybackRate >= 4.0}
+                            style={[styles.speedButtonTouchable, catiPlaybackRate >= 4.0 && styles.speedButtonDisabled]}
+                          >
+                            <Ionicons 
+                              name="add-circle-outline" 
+                              size={24} 
+                              color={catiPlaybackRate >= 4.0 ? '#9ca3af' : '#2563eb'} 
+                            />
+                          </TouchableOpacity>
+                        </View>
+                      </>
+                    ) : (
+                      <Button
+                        mode="contained"
+                        onPress={toggleCatiPlayPause}
+                        icon={isPlayingCatiAudio ? "pause" : "play"}
+                        style={styles.audioButton}
+                        disabled={!catiAudioSound}
+                      >
+                        {isPlayingCatiAudio ? 'Pause' : 'Play'}
+                      </Button>
+                    )}
+                  </View>
+                ) : (catiCallDetails?.recordingUrl || catiCallDetails?.s3AudioUrl || catiRecordingUri) ? (
+                  <View style={styles.audioControls}>
+                    <Text style={styles.noDataText}>
+                      {catiRecordingUri ? 'Recording ready - tap to load' : 'Recording available - tap to download'}
+                    </Text>
+                    <Button
+                      mode="contained"
+                      onPress={playCatiAudio}
+                      icon="play"
+                      style={styles.audioButton}
+                      loading={loadingCatiRecording}
+                      disabled={loadingCatiRecording}
+                    >
+                      {loadingCatiRecording ? 'Loading...' : 'Load Recording'}
+                    </Button>
+                  </View>
+                ) : (
+                  <Text style={styles.noDataText}>No Recording Available</Text>
                 )}
               </Card.Content>
             </Card>
@@ -2066,124 +3307,7 @@ export default function ResponseDetailsModal({
               </Card>
             )}
 
-            {/* CATI Call Recording */}
-            {interview.interviewMode === 'cati' && catiCallDetails?.recordingUrl && (
-              <Card style={styles.card}>
-                <Card.Content>
-                  <Text style={styles.sectionTitle}>Call Recording</Text>
-                  
-                  {loadingCatiRecording ? (
-                    <View style={styles.audioControls}>
-                      <ActivityIndicator size="small" color="#2563eb" />
-                      <Text style={styles.noDataText}>Loading recording...</Text>
-                    </View>
-                  ) : catiAudioSound ? (
-                    <View style={styles.audioControls}>
-                      {catiAudioDuration > 0 ? (
-                        <>
-                          <View style={styles.audioTimelineContainer}>
-                            <Button
-                              mode="contained"
-                              onPress={isPlayingCatiAudio ? pauseCatiAudio : playCatiAudio}
-                              icon={isPlayingCatiAudio ? "pause" : "play"}
-                              style={styles.audioButtonInline}
-                              disabled={!catiAudioSound}
-                              compact
-                            >
-                              {isPlayingCatiAudio ? 'Pause' : 'Play'}
-                            </Button>
-                            <Text style={styles.audioTime}>
-                              {formatTime(catiAudioPosition)}
-                            </Text>
-                            <TouchableOpacity
-                              activeOpacity={1}
-                              style={styles.sliderContainer}
-                              onLayout={(event) => {
-                                const { width } = event.nativeEvent.layout;
-                                setCatiSliderWidth(width);
-                              }}
-                              onPress={handleCatiSliderPress}
-                            >
-                              <View 
-                                ref={catiSliderRef}
-                                style={styles.sliderTrack}
-                              >
-                                <View 
-                                  style={[
-                                    styles.sliderProgress,
-                                    { width: `${catiAudioDuration > 0 ? (catiAudioPosition / catiAudioDuration) * 100 : 0}%` }
-                                  ]}
-                                />
-                                <View
-                                  style={[
-                                    styles.sliderThumb,
-                                    { left: `${catiAudioDuration > 0 ? (catiAudioPosition / catiAudioDuration) * 100 : 0}%` }
-                                  ]}
-                                />
-                              </View>
-                            </TouchableOpacity>
-                            <Text style={styles.audioTime}>
-                              {formatTime(catiAudioDuration)}
-                            </Text>
-                          </View>
-                          {/* Speed Control */}
-                          <View style={styles.speedControlContainer}>
-                            <Text style={styles.speedLabel}>Speed:</Text>
-                            <TouchableOpacity
-                              onPress={decreaseCatiSpeed}
-                              disabled={catiPlaybackRate <= 0.5}
-                              style={[styles.speedButtonTouchable, catiPlaybackRate <= 0.5 && styles.speedButtonDisabled]}
-                            >
-                              <Ionicons 
-                                name="remove-circle-outline" 
-                                size={24} 
-                                color={catiPlaybackRate <= 0.5 ? '#9ca3af' : '#2563eb'} 
-                              />
-                            </TouchableOpacity>
-                            <Text style={styles.speedValue}>{catiPlaybackRate.toFixed(2)}x</Text>
-                            <TouchableOpacity
-                              onPress={increaseCatiSpeed}
-                              disabled={catiPlaybackRate >= 4.0}
-                              style={[styles.speedButtonTouchable, catiPlaybackRate >= 4.0 && styles.speedButtonDisabled]}
-                            >
-                              <Ionicons 
-                                name="add-circle-outline" 
-                                size={24} 
-                                color={catiPlaybackRate >= 4.0 ? '#9ca3af' : '#2563eb'} 
-                              />
-                            </TouchableOpacity>
-                          </View>
-                          <View style={styles.audioInfoContainer}>
-                            <Text style={styles.audioInfoText}>
-                              Call Duration: {catiCallDetails?.callDuration ? formatDuration(catiCallDetails.callDuration) : 'N/A'}
-                            </Text>
-                            <Text style={styles.audioInfoText}>
-                              Talk Duration: {catiCallDetails?.talkDuration ? formatDuration(catiCallDetails.talkDuration) : 'N/A'}
-                            </Text>
-                            <Text style={styles.audioInfoText}>Format: MP3</Text>
-                            <Text style={styles.audioInfoText}>
-                              Status: {catiCallDetails?.callStatusDescription || catiCallDetails?.callStatus || 'N/A'}
-                            </Text>
-                          </View>
-                        </>
-                      ) : (
-                        <Button
-                          mode="contained"
-                          onPress={playCatiAudio}
-                          icon={isPlayingCatiAudio ? "pause" : "play"}
-                          style={styles.audioButton}
-                          disabled={!catiAudioSound}
-                        >
-                          {isPlayingCatiAudio ? 'Pause' : 'Play'}
-                        </Button>
-                      )}
-                    </View>
-                  ) : catiCallDetails?.recordingUrl ? (
-                    <Text style={styles.noDataText}>No recording available</Text>
-                  ) : null}
-                </Card.Content>
-              </Card>
-            )}
+            {/* CATI Call Recording - REMOVED: Now in sticky section at top (same as CAPI) */}
 
             {/* Responses - Collapsible */}
             <Card style={styles.card}>
@@ -2230,6 +3354,50 @@ export default function ResponseDetailsModal({
                 )}
               </Card.Content>
             </Card>
+
+            {/* Rejection Reason - Only show if status is Rejected */}
+            {interview.status === 'Rejected' && interview.verificationData && (
+              <Card style={styles.card}>
+                <Card.Content>
+                  <Text style={styles.sectionTitle}>Rejection Reason</Text>
+                  <View style={[styles.infoCard, { backgroundColor: '#fef2f2', borderColor: '#fecaca', borderWidth: 1, padding: 12, borderRadius: 8 }]}>
+                    {interview.verificationData.feedback && (
+                      <View style={styles.verificationRow}>
+                        <Text style={[styles.verificationLabel, { color: '#991b1b', fontWeight: '600' }]}>Reason:</Text>
+                        <Text style={[styles.verificationValue, { color: '#7f1d1d', flex: 1, marginLeft: 8 }]}>
+                          {interview.verificationData.feedback}
+                        </Text>
+                      </View>
+                    )}
+                    {(() => {
+                      const failedQuestions = getFailedQuestions(interview.verificationData, survey);
+                      if (failedQuestions.length > 0) {
+                        return (
+                          <View style={{ marginTop: 12 }}>
+                            <Text style={[styles.verificationLabel, { color: '#991b1b', marginBottom: 8, fontWeight: '600' }]}>
+                              Questions that failed quality review:
+                            </Text>
+                            {failedQuestions.map((failed, index) => (
+                              <View key={index} style={{ marginBottom: 8, paddingLeft: 8 }}>
+                                <Text style={[styles.verificationValue, { color: '#7f1d1d', fontWeight: '500' }]}>
+                                  • {failed.questionText}
+                                </Text>
+                                {failed.reason && (
+                                  <Text style={[styles.verificationValue, { color: '#991b1b', fontSize: 12, marginTop: 2, marginLeft: 8 }]}>
+                                    {failed.reason}
+                                  </Text>
+                                )}
+                              </View>
+                            ))}
+                          </View>
+                        );
+                      }
+                      return null;
+                    })()}
+                  </View>
+                </Card.Content>
+              </Card>
+            )}
 
             {/* Verification Form */}
             <Card style={styles.card}>
@@ -2677,6 +3845,30 @@ const styles = StyleSheet.create({
     color: '#1f2937',
     flex: 1,
   },
+  // PERFORMANCE FIX: Compact info layout for CATI call details (reduces height)
+  compactInfoContainer: {
+    marginTop: 4,
+  },
+  compactInfoRow: {
+    flexDirection: 'row',
+    marginBottom: 6,
+    gap: 12,
+  },
+  compactInfoItem: {
+    flex: 1,
+    minWidth: '45%',
+  },
+  compactInfoLabel: {
+    fontSize: 12,
+    color: '#6b7280',
+    fontWeight: '500',
+    marginBottom: 2,
+  },
+  compactInfoValue: {
+    fontSize: 13,
+    color: '#1f2937',
+    flexWrap: 'wrap',
+  },
   audioCardContent: {
     paddingVertical: 8,
     paddingHorizontal: 8,
@@ -2785,6 +3977,32 @@ const styles = StyleSheet.create({
   },
   speedButtonDisabled: {
     opacity: 0.5,
+  },
+  audioSkipButton: {
+    padding: 4,
+    borderRadius: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+    minWidth: 44,
+    minHeight: 36,
+  },
+  audioSkipButtonDisabled: {
+    opacity: 0.4,
+  },
+  skipButtonContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 2,
+  },
+  skipButtonText: {
+    fontSize: 10,
+    fontWeight: '600',
+    color: '#2563eb',
+    marginTop: -2,
+  },
+  skipButtonTextDisabled: {
+    color: '#9ca3af',
   },
   responseItem: {
     marginBottom: 16,
@@ -2909,6 +4127,32 @@ const styles = StyleSheet.create({
   },
   responsesContent: {
     marginTop: 12,
+  },
+  infoCard: {
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    padding: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  verificationRow: {
+    flexDirection: 'row',
+    marginBottom: 8,
+    alignItems: 'flex-start',
+  },
+  verificationLabel: {
+    fontSize: 14,
+    color: '#6b7280',
+    fontWeight: '500',
+    minWidth: 100,
+  },
+  verificationValue: {
+    fontSize: 14,
+    color: '#1f2937',
+    flex: 1,
   },
 });
 

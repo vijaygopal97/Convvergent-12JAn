@@ -460,11 +460,19 @@ exports.logout = async (req, res) => {
 // @access  Private
 exports.getMe = async (req, res) => {
   try {
+    // OPTIMIZED: Use lean() to reduce memory overhead (returns plain objects, not Mongoose documents)
+    // Top tech companies use lean() for read-only queries to minimize memory usage
+    // Limit assignedTeamMembers population fields to only what's needed
     const user = await User.findById(req.user.id)
       .populate('company', 'companyName companyCode status industry')
       .populate('referredBy', 'firstName lastName email')
-      .populate('assignedTeamMembers.user', 'firstName lastName email phone memberId userType interviewModes status preferences createdAt')
-      .select('-password -emailVerificationToken -phoneVerificationOTP');
+      .populate({
+        path: 'assignedTeamMembers.user',
+        select: 'firstName lastName email phone memberId userType interviewModes status createdAt', // Removed 'preferences' to reduce memory (can be fetched separately if needed)
+        options: { lean: false } // Keep as Mongoose documents for nested populate compatibility
+      })
+      .select('-password -emailVerificationToken -phoneVerificationOTP')
+      .lean(); // Use lean() to return plain object instead of Mongoose document
 
     if (!user) {
       return res.status(404).json({
@@ -2946,11 +2954,51 @@ exports.searchInterviewerByMemberId = async (req, res) => {
     // For project managers, filter by assigned interviewers
     if (req.user.userType === 'project_manager') {
       const currentUser = await User.findById(req.user.id);
+      
       if (currentUser && currentUser.assignedTeamMembers && currentUser.assignedTeamMembers.length > 0) {
-        const assignedIds = currentUser.assignedTeamMembers.map(id => 
-          mongoose.Types.ObjectId.isValid(id) ? new mongoose.Types.ObjectId(id) : id
-        );
+        // assignedTeamMembers is an array of objects with { user: ObjectId, userType: String }
+        // Extract the user IDs from the assignedTeamMembers array
+        // Note: assignedTeamMembers.user can be an ObjectId (not populated) or a populated object
+        const assignedIds = currentUser.assignedTeamMembers
+          .map(member => {
+            // Handle both populated objects and ObjectIds
+            const user = member.user;
+            if (!user) return null;
+            
+            // If populated, user is an object with _id
+            if (user._id) {
+              return user._id instanceof mongoose.Types.ObjectId ? user._id : new mongoose.Types.ObjectId(user._id);
+            }
+            
+            // If not populated, user is already an ObjectId
+            if (user instanceof mongoose.Types.ObjectId) {
+              return user;
+            }
+            
+            // If it's a string, convert to ObjectId
+            if (mongoose.Types.ObjectId.isValid(user)) {
+              return new mongoose.Types.ObjectId(user);
+            }
+            
+            return null;
+          })
+          .filter(id => id !== null); // Remove any null values
+        
+        if (assignedIds.length > 0) {
         query._id = { $in: assignedIds };
+        } else {
+          // If no valid assigned IDs, return empty result
+          return res.status(200).json({
+            success: true,
+            data: []
+          });
+        }
+      } else {
+        // If no assigned team members, return empty result for project managers
+        return res.status(200).json({
+          success: true,
+          data: []
+        });
       }
     }
 

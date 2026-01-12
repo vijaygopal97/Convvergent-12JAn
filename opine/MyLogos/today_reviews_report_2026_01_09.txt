@@ -1,0 +1,121 @@
+================================================================================
+TODAY'S REVIEWS REPORT
+================================================================================
+Generated: 2026-01-09T09:59:35.113Z
+Date (IST): 2026-01-09
+Total Reviews: 1875
+
+────────────────────────────────────────────────────────────────────────────────
+SUMMARY BY REVIEWER
+────────────────────────────────────────────────────────────────────────────────
+
+Reviewer Name                 Email                         Member ID      Total     Approved  Rejected  Pending
+--------------------------------------------------------------------------------
+Moumita Halder                8670177107@gmail.com          2043           78        58        20        0
+Ravindranath Basak            1018@gmail.com                1018           77        48        29        0
+Subroto Das                   1016@gmail.com                1016           75        57        18        0
+Souvik Saha                   1017@gmail.com                1017           70        51        19        0
+Pritam Dey                    8391905122@gmail.com          2063           69        42        27        0
+Prashant Majee                1007@gmail.com                1007           69        36        33        0
+Abhijeet Sarkar               1013@gmail.com                1013           68        32        36        0
+Test QC 2                     1001@gmail.com                1001           68        29        39        0
+Rumi Santra                   1009@gmail.com                1009           68        46        22        0
+Prakash Nandy                 8001416006@gmail.com          2064           68        31        37        0
+Suman Mali                    1020@gmail.com                1020           67        36        31        0
+Baby Saha                     7003457864@gmail.com          2066           64        22        42        0
+Kaushik Biswas                1008@gmail.com                1008           64        25        39        0
+Jaidev Haldhar                1006@gmail.com                1006           63        31        32        0
+Annanya Banik                 8670595984@gmail.com          2003           62        55        7         0
+Deepshikha Das                6290679554@gmail.com          2059           61        37        24        0
+Anima Ghosh                   1015@gmail.com                1015           60        38        22        0
+Biswajit Sarkar               1014@gmail.com                1014           57        35        22        0
+Subho Sarkar                  9836038214@gmail.com          2042           54        28        26        0
+Rimpa Chakraborty             7864995573@gmail.com          2074           51        37        14        0
+Jaya Gupta                    6291308944@gmail.com          2051           46        22        24        0
+Sumit Kumar Roy               8670475453@gmail.com          2045           45        25        20        0
+Avi Mondal                    9748361727@gmail.com          2055           42        16        26        0
+Rohan Parsad                  1021@gmail.com                1021           41        16        25        0
+Debasmita Bhattacharya        8348458341@gmail.com          2047           40        19        21        0
+Arushi Das                    9330342865@gmail.com          2046           40        22        18        0
+Swati Mondal                  7980064408@gmail.com          2000           34        21        13        0
+Nur Apsa Khatun               9647853250@gmail.com          2057           32        24        8         0
+Ankita Dey                    9874345662@gmail.com          2070           29        15        14        0
+Anish Ghoshal                 6296893855@gmail.com          2073           28        17        11        0
+Ujjwal Mondal                 8910083693@gmail.com          2075           26        13        13        0
+Moumita Mondal Saha           9062438646@gmail.com          2056           25        16        9         0
+Disha Mayur                   7044715053@gmail.com          2062           25        17        8         0
+Sarmistha Das                 9674208124@gmail.com          2072           22        12        10        0
+Tanusree Maji                 7980979814@gmail.com          2049           21        11        10        0
+Nikhat Saina                  6290100681@gmail.com          2076           20        14        6         0
+Sayan Das                     9147092575@gmail.com          2061           20        10        10        0
+Pamela Basu Das               8622962546@gmail.com          2048           16        6         10        0
+Mahua Mistry                  8017607102@gmail.com          2065           10        6         4         0
+
+────────────────────────────────────────────────────────────────────────────────
+SUMMARY BY SURVEY
+────────────────────────────────────────────────────────────────────────────────
+
+Survey Name                                       Total     Approved  Rejected  Pending
+--------------------------------------------------------------------------------
+West Bengal Opinion Poll (2025 - 2026)            1875      1076      799       0
+
+────────────────────────────────────────────────────────────────────────────────
+DETAILED REVIEWS (Last 50)
+────────────────────────────────────────────────────────────────────────────────
+
+Response ID         Reviewer                      Survey                        Status         Reviewed At
+--------------------------------------------------------------------------------
+d47029c9-ee7c-4910-a7f7-252d056e639dSwati Mondal                  West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:58:49.703Z
+4b82e355-5643-4404-a305-286f4f56f1c2Baby Saha                     West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:58:47.589Z
+af7f4851-60dc-42cb-bf1d-a1927e6b1745Abhijeet Sarkar               West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:58:40.261Z
+ac4acba6-8b64-4962-a09a-b97f4447030eJaya Gupta                    West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:58:35.653Z
+8a478fc1-05ff-442e-8e16-b8b34993d1c8Test QC 2                     West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:58:27.195Z
+5f09cffb-3ff2-4616-8281-0424a61471c7Ujjwal Mondal                 West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:58:21.554Z
+91345286-62ef-4c72-ad80-1e773fda99cdJaya Gupta                    West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:58:19.623Z
+10825272-21bd-4232-affe-6e5143f8ef57Rumi Santra                   West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:58:16.769Z
+7c2ca038-ded6-4719-b79c-1cf1f5251498Nikhat Saina                  West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:58:14.941Z
+93ad26af-5c76-4cfd-a1ac-323977e74c57Moumita Mondal Saha           West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:58:14.432Z
+7b31c436-28c2-4b1c-be64-a95a1ea1f6daMoumita Halder                West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:58:11.330Z
+56222d2c-5af2-4c67-b610-19e2617b247fSubho Sarkar                  West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:58:08.854Z
+7c504837-4789-426e-9831-2a464e63df15Debasmita Bhattacharya        West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:58:03.321Z
+8dc9db21-41ca-4a9a-b0a9-ca9e3d6576edAnima Ghosh                   West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:57:59.821Z
+acf06380-155d-4baa-af22-d041d3a8ea78Subho Sarkar                  West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:57:58.655Z
+1c9ba2f5-ecfd-4385-bbc9-bea949b23ea9Moumita Halder                West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:57:52.508Z
+90c9138d-979a-4e16-ae43-db8c4d046074Jaya Gupta                    West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:57:35.078Z
+974c52bb-a635-4462-a4a9-63ed03fba085Moumita Mondal Saha           West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:57:25.183Z
+818d83e6-6de0-473b-8e7f-0c73acce5f31Debasmita Bhattacharya        West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:57:05.510Z
+f059affa-8e41-4dbe-adf7-61095607bfd0Abhijeet Sarkar               West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:57:04.202Z
+d750f6a6-8fee-49a2-b9a6-778a5b10f35eMoumita Halder                West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:56:56.423Z
+7d1560b7-0959-4785-851a-5afc0f016c1bAbhijeet Sarkar               West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:56:56.396Z
+8331c93a-c99c-487f-98a8-521266c44620Suman Mali                    West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:56:50.206Z
+0338c097-029b-4f7a-9a92-da5a88bbc724Debasmita Bhattacharya        West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:56:43.244Z
+b434a422-4881-4e6e-b331-8d098db4729fPritam Dey                    West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:56:37.845Z
+a13e8129-8323-48ed-926d-2a8e588dab15Arushi Das                    West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:56:35.230Z
+58b7adbf-20dc-4e5f-975c-191c55e238e5Swati Mondal                  West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:56:31.899Z
+4d10bc1e-5a67-437c-abce-f03760eb5815Moumita Mondal Saha           West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:56:30.720Z
+ad4ceb4f-5f6f-4b30-b89b-adbb56ab525cDebasmita Bhattacharya        West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:56:26.967Z
+aaf332bc-d564-4070-8872-84a8ceb31b51Avi Mondal                    West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:56:25.203Z
+59f8c9d5-bf02-4065-9fbc-e94e78bcc080Pritam Dey                    West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:56:19.557Z
+779b1e59-35ab-4105-89d2-f90cbfba2883Moumita Halder                West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:56:18.810Z
+8989d782-b963-4047-be43-c6586088fc03Rumi Santra                   West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:56:18.148Z
+8269733c-5019-4e35-a998-950384378ce5Annanya Banik                 West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:55:53.345Z
+ae924188-fa44-4053-a53d-766c827c8798Swati Mondal                  West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:55:48.327Z
+e6291d0d-0855-46a4-80fd-0ffcd028facaSuman Mali                    West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:55:44.264Z
+b60e2452-0412-4d93-8661-e50aaa7b38c0Prashant Majee                West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:55:44.186Z
+35d7c0d6-ee50-40c4-ac3a-1a0e660b8ffcPrakash Nandy                 West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:55:40.380Z
+9fef2697-40b2-4939-93f5-818b71db4f95Moumita Halder                West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:55:34.054Z
+75a0c1fa-e85a-45d7-8c2e-50dc035a5a6cKaushik Biswas                West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:55:27.988Z
+d4e5c212-ea0b-4251-80d5-c0df04fb07e7Abhijeet Sarkar               West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:55:27.609Z
+e73be6be-71e4-4250-ade9-7476bc9b661bPritam Dey                    West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:55:25.847Z
+9e2bcea5-49de-4948-bcb3-53729cae0ba5Baby Saha                     West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:55:22.206Z
+4c0b7d50-725a-439a-bd25-30fa13d39532Abhijeet Sarkar               West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:55:19.003Z
+b4f87be9-a7e5-4d4e-bc52-443549edd4d5Kaushik Biswas                West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:55:18.451Z
+a2dc916c-b5f0-4c1f-98d0-aaf8ee4f9953Test QC 2                     West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:55:17.881Z
+7de7e087-79d2-4ec3-b645-fa9546c0389aAnnanya Banik                 West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:55:00.748Z
+4ae50e57-2552-4beb-9b85-85039d44343fMoumita Halder                West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:54:57.354Z
+5bdf66ca-15f4-42b8-8538-731c801b1da7Pamela Basu Das               West Bengal Opinion Poll (2025 - 2026)Rejected       2026-01-09T09:54:54.864Z
+fda6682b-704c-4f9d-97a9-4ea0012f55f1Swati Mondal                  West Bengal Opinion Poll (2025 - 2026)Approved       2026-01-09T09:54:53.921Z
+
+... and 1825 more reviews
+
+================================================================================

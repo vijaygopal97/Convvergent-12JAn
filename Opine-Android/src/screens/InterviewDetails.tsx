@@ -148,11 +148,24 @@ const InterviewDetails: React.FC<InterviewDetailsProps> = ({ route, navigation }
         }
       } else {
         setIsLoadingAudio(true);
-        // Set API URL based on environment
-        const API_BASE_URL = __DEV__ 
-          ? 'https://opine.exypnossolutions.com'  // Development server
-          : 'https://convo.convergentview.com';    // Production server
-        const fullAudioUrl = audioUrl.startsWith('http') ? audioUrl : `${API_BASE_URL}${audioUrl}`;
+        // Use proxy URL (from backend) or construct it from audioUrl to prevent cross-region charges
+        const API_BASE_URL = 'https://convo.convergentview.com';
+        const proxyUrl = interview.audioRecording?.proxyUrl || interview.audioRecording?.signedUrl;
+        
+        let fullAudioUrl;
+        if (proxyUrl) {
+          // Use proxy URL from backend
+          fullAudioUrl = proxyUrl.startsWith('http') ? proxyUrl : `${API_BASE_URL}${proxyUrl.startsWith('/') ? proxyUrl : '/' + proxyUrl}`;
+        } else if (audioUrl.startsWith('http')) {
+          // Already a full URL
+          fullAudioUrl = audioUrl;
+        } else if (audioUrl.startsWith('audio/') || audioUrl.startsWith('documents/') || audioUrl.startsWith('reports/')) {
+          // S3 key - use proxy endpoint (eliminates cross-region charges)
+          fullAudioUrl = `${API_BASE_URL}/api/survey-responses/audio/${encodeURIComponent(audioUrl)}`;
+        } else {
+          // Local path
+          fullAudioUrl = `${API_BASE_URL}${audioUrl.startsWith('/') ? audioUrl : '/' + audioUrl}`;
+        }
         
         const { sound: newSound } = await Audio.Sound.createAsync(
           { uri: fullAudioUrl },

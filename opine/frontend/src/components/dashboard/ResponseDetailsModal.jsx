@@ -27,7 +27,12 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
   }, [response]);
 
   // Fetch CATI call details when modal opens for CATI responses
+  // OPTIMIZED: Uses AbortController to prevent stacking requests when opening/closing modals quickly
   useEffect(() => {
+    // Create AbortController for this effect
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+    
     // Reset state when response changes
     setCatiCallDetails(null);
     if (catiRecordingBlobUrl) {
@@ -35,97 +40,182 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
       setCatiRecordingBlobUrl(null);
     }
     
-    if (currentResponse?.interviewMode === 'cati') {
-      const callId = currentResponse.call_id;
+    if (currentResponse?.interviewMode === 'cati' || currentResponse?.interviewMode === 'CATI') {
+      // Try multiple ways to get call_id
+      const callId = currentResponse.call_id || 
+                     currentResponse.metadata?.call_id || 
+                     currentResponse.metadata?.callId ||
+                     (currentResponse.metadata?.catiCall && currentResponse.metadata.catiCall.callId);
+      
       if (callId) {
         const fetchCallDetails = async () => {
           try {
-            const callResponse = await catiAPI.getCallById(callId);
+            // Check if aborted before making request
+            if (signal.aborted) return;
+            
+            const callResponse = await catiAPI.getCallById(callId, signal);
+            
+            // Check again after request
+            if (signal.aborted) return;
+            
             if (callResponse.success && callResponse.data) {
               setCatiCallDetails(callResponse.data);
               
               // Fetch recording if available
-              if (callResponse.data.recordingUrl) {
+              const recordingUrl = callResponse.data.recordingUrl || 
+                                   callResponse.data.webhookData?.recordingUrl ||
+                                   callResponse.data.webhookData?.recording_url;
+              
+              if (recordingUrl && !signal.aborted) {
                 try {
+                  const recordingId = callResponse.data._id || callResponse.data.id;
+                  
                   const recordingResponse = await api.get(
-                    `/api/cati/recording/${callResponse.data._id}`,
-                    { responseType: 'blob' }
+                    `/api/cati/recording/${recordingId}`,
+                    { 
+                      responseType: 'blob',
+                      signal // Add AbortController signal
+                    }
                   );
+                  
+                  // Check if aborted before processing
+                  if (signal.aborted) {
+                    // Cleanup blob if request was aborted
+                    if (recordingResponse.data) {
+                      URL.revokeObjectURL(URL.createObjectURL(recordingResponse.data));
+                    }
+                    return;
+                  }
+                  
                   if (recordingResponse.data) {
                     const blob = new Blob([recordingResponse.data], { type: 'audio/mpeg' });
                     const blobUrl = URL.createObjectURL(blob);
                     setCatiRecordingBlobUrl(blobUrl);
                   }
                 } catch (recordingError) {
-                  console.error('Error fetching CATI recording:', recordingError);
-                  // Don't show error for recording - it's optional
+                  // Ignore aborted requests
+                  if (recordingError.name === 'AbortError' || recordingError.code === 'ERR_CANCELED') {
+                    return;
+                  }
+                  console.error('❌ Error fetching CATI recording:', recordingError);
                 }
               }
             }
           } catch (error) {
-            console.error('Error fetching CATI call details:', error);
-            // Don't show error - call details are optional
+            // Ignore aborted requests
+            if (error.name === 'AbortError' || error.code === 'ERR_CANCELED') {
+              return;
+            }
+            console.error('❌ Error fetching CATI call details:', error);
           }
         };
         fetchCallDetails();
       }
     }
     
-    // Cleanup blob URL on unmount
+    // Cleanup: Abort requests and revoke blob URLs on unmount or response change
     return () => {
+      abortController.abort(); // Cancel any pending requests
       if (catiRecordingBlobUrl) {
         URL.revokeObjectURL(catiRecordingBlobUrl);
       }
     };
   }, [currentResponse?._id, currentResponse?.interviewMode, currentResponse?.call_id]);
 
-  // Fetch signed URL for S3 audio if needed
-  useEffect(() => {
-    const fetchSignedUrl = async () => {
-      // Reset audioSignedUrl when response changes
-      setAudioSignedUrl(null);
-      
-      if (currentResponse?.audioRecording?.audioUrl) {
-        const audioUrl = currentResponse.audioRecording.audioUrl;
-        
-        // If we already have a signedUrl from backend, use it
-        if (currentResponse.audioRecording.signedUrl) {
-          setAudioSignedUrl(currentResponse.audioRecording.signedUrl);
-          return;
-        }
-        
-        // Check if it's an S3 key (not a local path or full URL)
-        if ((audioUrl.startsWith('audio/') || audioUrl.startsWith('documents/') || audioUrl.startsWith('reports/')) && 
-            !audioUrl.startsWith('http') && !audioUrl.startsWith('/')) {
-          try {
-            const isProduction = window.location.protocol === 'https:' || window.location.hostname !== 'localhost';
-            const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (isProduction ? '' : 'http://localhost:5000');
-            const token = localStorage.getItem('token');
-            const fetchResponse = await fetch(`${API_BASE_URL}/api/survey-responses/audio-signed-url?audioUrl=${encodeURIComponent(audioUrl)}`, {
-              headers: {
-                'Authorization': `Bearer ${token}`
-              }
-            });
-            if (fetchResponse.ok) {
-              const data = await fetchResponse.json();
-              if (data.signedUrl) {
-                setAudioSignedUrl(data.signedUrl);
-              }
-            }
-          } catch (error) {
-            console.error('Error fetching signed URL:', error);
-          }
-        } else if (audioUrl.startsWith('/') || audioUrl.startsWith('http')) {
-          // For local paths or full URLs, we can use them directly
-          // But we don't need to set audioSignedUrl for these
-        }
-      } else if (currentResponse?.audioRecording?.signedUrl) {
-        setAudioSignedUrl(currentResponse.audioRecording.signedUrl);
+  // Helper function to extract S3 key from a full S3 URL
+  const extractS3Key = (url) => {
+    if (!url) return null;
+    // If it's already an S3 key (starts with audio/, documents/, reports/), return as-is
+    if (url.startsWith('audio/') || url.startsWith('documents/') || url.startsWith('reports/')) {
+      return url;
+    }
+    // If it's a full S3 URL, extract the key
+    if (url.includes('.s3.') || url.includes('amazonaws.com')) {
+      // Extract key from URL like: https://bucket.s3.region.amazonaws.com/key?params
+      const match = url.match(/\.s3\.[^\/]+\/([^?]+)/) || url.match(/amazonaws\.com\/([^?]+)/);
+      if (match && match[1]) {
+        return decodeURIComponent(match[1]);
       }
-    };
+    }
+    return null;
+  };
 
-    fetchSignedUrl();
-  }, [currentResponse?._id, currentResponse?.audioRecording?.audioUrl, currentResponse?.audioRecording?.signedUrl]);
+  // Helper function to get proxy URL (always use proxy, never direct S3 URLs)
+  const getProxyUrl = (audioUrl, signedUrl, proxyUrl) => {
+    if (!audioUrl) return null;
+    if (audioUrl.startsWith('mock://') || audioUrl.includes('mock://')) return null;
+    
+    const isProduction = window.location.protocol === 'https:' || window.location.hostname !== 'localhost';
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (isProduction ? '' : 'http://localhost:5000');
+    
+    // CRITICAL: If audioUrl itself is a full S3 URL, extract the key first
+    let s3Key = audioUrl;
+    if (audioUrl.includes('.s3.') || audioUrl.includes('amazonaws.com')) {
+      console.warn('⚠️ getProxyUrl - audioUrl is a full S3 URL, extracting key:', audioUrl.substring(0, 100));
+      s3Key = extractS3Key(audioUrl);
+      if (!s3Key) {
+        console.error('❌ getProxyUrl - Could not extract S3 key from audioUrl');
+        return null;
+      }
+    }
+    
+    // If proxyUrl is provided and is a proxy URL (not S3), use it
+    if (proxyUrl && !proxyUrl.includes('.s3.') && !proxyUrl.includes('amazonaws.com') && !proxyUrl.includes('X-Amz-')) {
+      return proxyUrl.startsWith('http') ? proxyUrl : `${API_BASE_URL}${proxyUrl.startsWith('/') ? proxyUrl : '/' + proxyUrl}`;
+    }
+    
+    // If signedUrl is provided, check if it's a direct S3 URL
+    if (signedUrl) {
+      // CRITICAL: If it's a direct S3 URL, ALWAYS ignore it and construct proxy URL
+      if (signedUrl.includes('.s3.') || signedUrl.includes('amazonaws.com') || signedUrl.includes('X-Amz-') || signedUrl.includes('&amp;X-Amz-')) {
+        // This is a direct S3 signed URL - IGNORE IT and construct proxy URL instead
+        console.warn('⚠️ getProxyUrl - Detected direct S3 URL in signedUrl, ignoring and using proxy:', signedUrl.substring(0, 100));
+        if (s3Key && (s3Key.startsWith('audio/') || s3Key.startsWith('documents/') || s3Key.startsWith('reports/'))) {
+          return `${API_BASE_URL}/api/survey-responses/audio/${encodeURIComponent(s3Key)}`;
+        }
+        // If no s3Key, return null (can't construct proxy without it)
+        return null;
+      } else {
+        // signedUrl is already a proxy URL, use it
+        return signedUrl.startsWith('http') ? signedUrl : `${API_BASE_URL}${signedUrl.startsWith('/') ? signedUrl : '/' + signedUrl}`;
+      }
+    }
+    
+    // Construct proxy URL from s3Key
+    // For S3 keys (audio/, documents/, reports/), encode the entire key
+    if (s3Key && (s3Key.startsWith('audio/') || s3Key.startsWith('documents/') || s3Key.startsWith('reports/'))) {
+      // Encode the S3 key for URL safety
+      const encodedKey = encodeURIComponent(s3Key);
+      const proxyUrlResult = `${API_BASE_URL}/api/survey-responses/audio/${encodedKey}`;
+      console.log('🔍 getProxyUrl - Constructed proxy URL:', { audioUrl, s3Key, encodedKey, proxyUrlResult });
+      return proxyUrlResult;
+    } else if (s3Key && s3Key.startsWith('/')) {
+      return `${API_BASE_URL}${s3Key}`;
+    } else if (s3Key && s3Key.startsWith('http') && !s3Key.includes('.s3.') && !s3Key.includes('amazonaws.com')) {
+      return s3Key;
+    }
+    
+    return null;
+  };
+
+  // Set proxy URL when response changes (lazy loading - only when needed)
+  useEffect(() => {
+    // Reset audioSignedUrl when response changes
+    setAudioSignedUrl(null);
+    
+    // Always construct proxy URL (never use direct S3 URLs)
+    if (currentResponse?.audioRecording?.audioUrl) {
+      const proxyUrl = getProxyUrl(
+        currentResponse.audioRecording.audioUrl,
+        currentResponse.audioRecording.signedUrl,
+        currentResponse.audioRecording.proxyUrl
+      );
+      // Set it so it's available when user clicks play
+      if (proxyUrl) {
+        setAudioSignedUrl(proxyUrl);
+      }
+    }
+  }, [currentResponse?._id, currentResponse?.audioRecording?.audioUrl, currentResponse?.audioRecording?.signedUrl, currentResponse?.audioRecording?.proxyUrl]);
 
   // Helper function to format duration
   const formatDuration = (seconds) => {
@@ -144,14 +234,39 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
   };
 
   // Helper function to get district from AC using assemblyConstituencies.json
+  // Uses robust matching like ViewResponsesPage.jsx for better accuracy
   const getDistrictFromAC = (acName) => {
     if (!acName || acName === 'N/A' || !assemblyConstituencies.states) return 'N/A';
     
+    // Clean AC name: remove translations (e.g., "Bhangar_{ভাঙর}" -> "Bhangar")
+    // Also remove special characters and extra spaces
+    let acNameStr = String(acName).trim();
+    if (!acNameStr || acNameStr === 'N/A') return 'N/A';
+    
+    // Use getMainText to remove translations (handles formats like "Bhangar_{ভাঙর}")
+    acNameStr = getMainText(acNameStr).trim();
+    
+    // Remove common suffixes/prefixes that might prevent matching
+    // Remove patterns like " (SC)", " (ST)", " I", " II", etc.
+    acNameStr = acNameStr.replace(/\s*\(SC\)\s*/gi, '').replace(/\s*\(ST\)\s*/gi, '');
+    acNameStr = acNameStr.replace(/\s+I\s*$/, '').replace(/\s+II\s*$/, '').replace(/\s+III\s*$/, '');
+    acNameStr = acNameStr.trim();
+    
+    if (!acNameStr || acNameStr === 'N/A') return 'N/A';
+    
     for (const state of Object.values(assemblyConstituencies.states)) {
       if (state.assemblyConstituencies) {
-        const constituency = state.assemblyConstituencies.find(ac => 
-          ac.acName === acName || ac.acName.toLowerCase() === acName.toLowerCase()
-        );
+        const constituency = state.assemblyConstituencies.find(ac => {
+          if (!ac || !ac.acName) return false;
+          const acNameLower = String(ac.acName).toLowerCase().trim();
+          const searchNameLower = acNameStr.toLowerCase().trim();
+          // Try exact match first, then case-insensitive match
+          // Also try partial match (starts with) for cases like "Bhangar" matching "Bhangar (SC)"
+          return ac.acName === acNameStr || 
+                 acNameLower === searchNameLower ||
+                 acNameLower.startsWith(searchNameLower) ||
+                 searchNameLower.startsWith(acNameLower);
+        });
         if (constituency && constituency.district) {
           return constituency.district;
         }
@@ -161,14 +276,39 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
   };
 
   // Helper function to get Lok Sabha from AC
+  // Uses robust matching like ViewResponsesPage.jsx for better accuracy
   const getLokSabhaFromAC = (acName) => {
     if (!acName || acName === 'N/A' || !assemblyConstituencies.states) return 'N/A';
     
+    // Clean AC name: remove translations (e.g., "Bhangar_{ভাঙর}" -> "Bhangar")
+    // Also remove special characters and extra spaces
+    let acNameStr = String(acName).trim();
+    if (!acNameStr || acNameStr === 'N/A') return 'N/A';
+    
+    // Use getMainText to remove translations (handles formats like "Bhangar_{ভাঙর}")
+    acNameStr = getMainText(acNameStr).trim();
+    
+    // Remove common suffixes/prefixes that might prevent matching
+    // Remove patterns like " (SC)", " (ST)", " I", " II", etc.
+    acNameStr = acNameStr.replace(/\s*\(SC\)\s*/gi, '').replace(/\s*\(ST\)\s*/gi, '');
+    acNameStr = acNameStr.replace(/\s+I\s*$/, '').replace(/\s+II\s*$/, '').replace(/\s+III\s*$/, '');
+    acNameStr = acNameStr.trim();
+    
+    if (!acNameStr || acNameStr === 'N/A') return 'N/A';
+    
     for (const state of Object.values(assemblyConstituencies.states)) {
       if (state.assemblyConstituencies) {
-        const constituency = state.assemblyConstituencies.find(ac => 
-          ac.acName === acName || ac.acName.toLowerCase() === acName.toLowerCase()
-        );
+        const constituency = state.assemblyConstituencies.find(ac => {
+          if (!ac || !ac.acName) return false;
+          const acNameLower = String(ac.acName).toLowerCase().trim();
+          const searchNameLower = acNameStr.toLowerCase().trim();
+          // Try exact match first, then case-insensitive match
+          // Also try partial match (starts with) for cases like "Bhangar" matching "Bhangar (SC)"
+          return ac.acName === acNameStr || 
+                 acNameLower === searchNameLower ||
+                 acNameLower.startsWith(searchNameLower) ||
+                 searchNameLower.startsWith(acNameLower);
+        });
         if (constituency && constituency.lokSabha) {
           return constituency.lokSabha;
         }
@@ -234,6 +374,44 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
     return { interviewInfoQuestions, regularQuestions };
   };
 
+  // Helper function to validate if a value is a valid AC name (not yes/no/consent answers)
+  const isValidACName = (value) => {
+    if (!value || typeof value !== 'string') return false;
+    const cleaned = getMainText(value).trim();
+    if (!cleaned || cleaned === 'N/A' || cleaned === '') return false;
+    
+    const lower = cleaned.toLowerCase();
+    // Reject common non-AC values
+    const invalidValues = ['yes', 'no', 'y', 'n', 'true', 'false', 'ok', 'okay', 'sure', 'agree', 'disagree', 'consent'];
+    if (invalidValues.includes(lower)) return false;
+    if (lower.startsWith('yes') || lower.startsWith('no')) return false;
+    if (lower.match(/^yes[_\s]/i) || lower.match(/^no[_\s]/i)) return false;
+    
+    // Must be longer than 2 characters
+    if (cleaned.length <= 2) return false;
+    
+    // Should look like a valid name (has capital letters or multiple words)
+    const hasCapitalLetters = /[A-Z]/.test(cleaned);
+    const hasMultipleWords = cleaned.split(/\s+/).length > 1;
+    const looksLikeName = hasCapitalLetters || hasMultipleWords;
+    
+    return looksLikeName;
+  };
+
+  // Helper function to check if a question is a consent/agreement question
+  const isConsentQuestion = (questionText) => {
+    if (!questionText) return false;
+    const text = getMainText(questionText).toLowerCase();
+    return text.includes('consent') || 
+           text.includes('agree') ||
+           text.includes('participate') ||
+           text.includes('willing') ||
+           text.includes('do you') ||
+           text.includes('would you') ||
+           text.includes('can we') ||
+           text.includes('may we');
+  };
+
   // Helper function to extract AC and polling station info from responses
   const getACAndPollingStationFromResponses = (responses, survey) => {
     if (!responses || !Array.isArray(responses)) {
@@ -245,14 +423,93 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
     let pollingStation = null;
     let groupName = null;
     
+    // Priority 1: Check questionId === 'ac-selection' (most reliable)
+    const acSelectionResponse = responses.find(r => r.questionId === 'ac-selection' && r.response);
+    if (acSelectionResponse) {
+      const acValue = acSelectionResponse.response;
+      if (acValue) {
+        let extractedAC = null;
+        if (typeof acValue === 'string') {
+          extractedAC = getMainText(acValue).trim();
+        } else if (typeof acValue === 'object' && acValue !== null) {
+          const extractedValue = acValue.value || acValue.text || acValue.acName || String(acValue);
+          extractedAC = getMainText(extractedValue).trim();
+        } else {
+          extractedAC = getMainText(String(acValue)).trim();
+        }
+        if (isValidACName(extractedAC)) {
+          ac = extractedAC;
+        }
+      }
+    }
+    
+    // Priority 2: Check questionType that indicates AC selection
+    if (!ac) {
+      const acTypeResponse = responses.find(r => 
+        (r.questionType === 'ac_selection' || 
+         r.questionType === 'assembly_constituency' ||
+         r.questionType === 'ac') && 
+        r.response
+      );
+      if (acTypeResponse) {
+        const acValue = acTypeResponse.response;
+        if (acValue) {
+          let extractedAC = null;
+          if (typeof acValue === 'string') {
+            extractedAC = getMainText(acValue).trim();
+          } else if (typeof acValue === 'object' && acValue !== null) {
+            const extractedValue = acValue.value || acValue.text || acValue.acName || String(acValue);
+            extractedAC = getMainText(extractedValue).trim();
+          } else {
+            extractedAC = getMainText(String(acValue)).trim();
+          }
+          if (isValidACName(extractedAC)) {
+            ac = extractedAC;
+          }
+        }
+      }
+    }
+    
+    // Priority 3: Search by question text containing "assembly" or "constituency"
+    // BUT exclude consent/agreement questions
+    if (!ac) {
+      const acTextResponses = responses.filter(r => {
+        if (!r.questionText || !r.response) return false;
+        const questionText = getMainText(r.questionText).toLowerCase();
+        const hasAssembly = questionText.includes('assembly');
+        const hasConstituency = questionText.includes('constituency');
+        const hasSelect = questionText.includes('select');
+        
+        // Exclude consent/agreement questions
+        if (isConsentQuestion(r.questionText)) return false;
+        
+        // Must have "select" or be clearly an AC selection question
+        return (hasAssembly || hasConstituency) && (hasSelect || questionText.includes('assembly constituency'));
+      });
+      
+      // Try each potential AC response and validate it
+      for (const acResponse of acTextResponses) {
+        const acValue = acResponse.response;
+        if (acValue) {
+          let extractedAC = null;
+          if (typeof acValue === 'string') {
+            extractedAC = getMainText(acValue).trim();
+          } else if (typeof acValue === 'object' && acValue !== null) {
+            const extractedValue = acValue.value || acValue.text || acValue.acName || String(acValue);
+            extractedAC = getMainText(extractedValue).trim();
+          } else {
+            extractedAC = getMainText(String(acValue)).trim();
+          }
+          if (isValidACName(extractedAC)) {
+            ac = extractedAC;
+            break; // Found valid AC, stop searching
+          }
+        }
+      }
+    }
+    
     responses.forEach((responseItem) => {
       const surveyQuestion = findQuestionByText(responseItem.questionText, actualSurvey);
-      
-      // Check if this is AC selection question
-      if (responseItem.questionId === 'ac-selection' || 
-          (surveyQuestion && surveyQuestion.id === 'ac-selection')) {
-        ac = responseItem.response || null;
-      }
       
       // Check if this is polling station question
       if (surveyQuestion?.type === 'polling_station' || 
@@ -485,10 +742,25 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
       r.questionText?.toLowerCase().includes('year')
     );
 
-    const acResponse = responses.find(r => 
-      r.questionText?.toLowerCase().includes('assembly') ||
-      r.questionText?.toLowerCase().includes('constituency')
-    );
+    // Extract AC - ONLY use selectedAC field, then selectedPollingStation.acName
+    // DO NOT search through responses array
+    let acName = 'N/A';
+    
+    // Priority 1: selectedAC field (direct field from backend)
+    if (responseData?.selectedAC) {
+      const cleanedAC = getMainText(String(responseData.selectedAC)).trim();
+      if (cleanedAC && cleanedAC !== '' && cleanedAC !== 'N/A') {
+        acName = cleanedAC;
+      }
+    }
+    
+    // Priority 2: selectedPollingStation.acName (fallback)
+    if (acName === 'N/A' && responseData?.selectedPollingStation?.acName) {
+      const cleanedAC = getMainText(String(responseData.selectedPollingStation.acName)).trim();
+      if (cleanedAC && cleanedAC !== '' && cleanedAC !== 'N/A') {
+        acName = cleanedAC;
+      }
+    }
 
     // Get city from GPS location if available, otherwise from responses
     let city = 'N/A';
@@ -503,7 +775,6 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
     }
 
     // Get district from AC using assemblyConstituencies.json
-    const acName = extractValue(acResponse?.response) || 'N/A';
     const district = getDistrictFromAC(acName);
 
     // Get Lok Sabha from AC using assemblyConstituencies.json
@@ -569,7 +840,62 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
     };
   };
 
+  // Helper function to normalize response codes (strips trailing underscores and normalizes for matching)
+  // CRITICAL: Some responses are stored with codes like "yes_" but options have "yes" (without underscore)
+  // This ensures proper matching between response codes and option values/codes
+  const normalizeResponseCode = (value) => {
+    if (value === null || value === undefined) return value;
+    const strValue = String(value);
+    // Strip trailing underscores (e.g., "yes_" -> "yes")
+    return strValue.replace(/_+$/, '').trim();
+  };
+
+  // Helper function to find matching option by normalized code/value
+  // CRITICAL: This handles cases where response codes have underscores but options don't
+  const findMatchingOption = (value, options) => {
+    if (!options || !Array.isArray(options) || value === null || value === undefined) {
+      return null;
+    }
+    
+    const normalizedValue = normalizeResponseCode(value);
+    const valueStr = String(value).toLowerCase();
+    const normalizedValueStr = normalizedValue.toLowerCase();
+    
+    // Try multiple matching strategies
+    for (const option of options) {
+      // Strategy 1: Exact match on value
+      if (option.value === value || String(option.value).toLowerCase() === valueStr) {
+        return option;
+      }
+      // Strategy 2: Normalized match on value (handles underscore differences)
+      if (option.value !== null && option.value !== undefined && 
+          normalizeResponseCode(option.value).toLowerCase() === normalizedValueStr) {
+        return option;
+      }
+      // Strategy 3: Exact match on code
+      if (option.code === value || String(option.code).toLowerCase() === valueStr) {
+        return option;
+      }
+      // Strategy 4: Normalized match on code (handles underscore differences)
+      if (option.code !== null && option.code !== undefined && 
+          normalizeResponseCode(option.code).toLowerCase() === normalizedValueStr) {
+        return option;
+      }
+      // Strategy 5: Match on option text (main text, without translation)
+      if (option.text) {
+        const optionTextMain = getMainText(option.text).toLowerCase();
+        const valueMain = getMainText(String(value)).toLowerCase();
+        if (optionTextMain === valueMain || optionTextMain === normalizedValueStr) {
+          return option;
+        }
+      }
+    }
+    
+    return null;
+  };
+
   // Helper function to format response display text (shows only main text, no translation)
+  // CRITICAL FIX: Properly handles response codes with underscores and matches them to option text
   const formatResponseDisplay = (response, surveyQuestion, languageIndex = 0) => {
     if (!response || response === null || response === undefined) {
       return 'No response';
@@ -586,21 +912,21 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
           return value; // Return as-is (e.g., "Others: Custom text")
         }
         
+        // CRITICAL: Use findMatchingOption which handles code normalization
         if (surveyQuestion && surveyQuestion.options) {
-          const option = surveyQuestion.options.find(opt => 
-            opt.value === value || 
-            opt.value?.toString() === value?.toString() ||
-            opt.code === value ||
-            opt.code?.toString() === value?.toString()
-          );
+          const option = findMatchingOption(value, surveyQuestion.options);
           if (option) {
             // Use getLanguageText to get the selected language
-            return getLanguageText(option.text || option.value || value, languageIndex);
+            // Return main text (without translation) for display
+            const displayText = option.text || option.value || value;
+            return getLanguageText(displayText, languageIndex);
           }
         }
         // If value has translation format, use getLanguageText
         if (typeof value === 'string') {
-          return getLanguageText(value, languageIndex);
+          // Strip translation and normalize code before returning
+          const normalized = normalizeResponseCode(value);
+          return getLanguageText(normalized, languageIndex);
         }
         return value;
       });
@@ -629,28 +955,29 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
         return response.toString();
       }
       
-      // Map to display text using question options
+      // CRITICAL: Use findMatchingOption which handles code normalization (handles "yes_" -> "yes")
       if (surveyQuestion && surveyQuestion.options) {
-        const option = surveyQuestion.options.find(opt => 
-          opt.value === response || 
-          opt.value?.toString() === response?.toString() ||
-          opt.code === response ||
-          opt.code?.toString() === response?.toString()
-        );
+        const option = findMatchingOption(response, surveyQuestion.options);
         if (option) {
           // Use getLanguageText to get the selected language
-          return getLanguageText(option.text || option.value || response.toString(), languageIndex);
+          // Return main text (without translation) for display
+          const displayText = option.text || option.value || response.toString();
+          return getLanguageText(displayText, languageIndex);
         }
         // If response has translation format, use getLanguageText
         if (typeof response === 'string') {
-          return getLanguageText(response, languageIndex);
+          // Strip translation and normalize code before returning
+          const normalized = normalizeResponseCode(response);
+          return getLanguageText(normalized, languageIndex);
         }
         return response.toString();
       }
       
       // If response has translation format, use getLanguageText
       if (typeof response === 'string') {
-        return getLanguageText(response, languageIndex);
+        // Strip translation and normalize code before returning
+        const normalized = normalizeResponseCode(response);
+        return getLanguageText(normalized, languageIndex);
       }
       
       return response.toString();
@@ -760,34 +1087,63 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
     // Find the target question to get its options for proper comparison
     const targetQuestion = findQuestionById(condition.questionId, survey);
 
+    // Helper function to normalize response codes (strips trailing underscores and normalizes for matching)
+    // CRITICAL: Same normalization as formatResponseDisplay to ensure consistent matching
+    const normalizeResponseCode = (value) => {
+      if (value === null || value === undefined) return value;
+      const strValue = String(value);
+      // Strip trailing underscores (e.g., "yes_" -> "yes")
+      return strValue.replace(/_+$/, '').trim();
+    };
+
     // Helper function to get main text (without translation) for comparison
-    // This matches the logic from SurveyApprovals.jsx
+    // CRITICAL FIX: Properly handles response codes with underscores (e.g., "yes_" matches "yes")
+    // This matches the logic from SurveyApprovals.jsx but with code normalization
     const getComparisonValue = (val) => {
       if (val === null || val === undefined) return String(val || '').toLowerCase().trim();
       const strVal = String(val);
+      const normalizedVal = normalizeResponseCode(strVal);
       
       // If we have the target question and it has options, try to match the value to an option
       if (targetQuestion && targetQuestion.options && Array.isArray(targetQuestion.options)) {
-        // Check if val matches any option.value or option.text (after stripping translations)
+        // Check if val matches any option.value or option.text (after stripping translations and normalizing codes)
         for (const option of targetQuestion.options) {
           const optionValue = typeof option === 'object' ? (option.value || option.text) : option;
           const optionText = typeof option === 'object' ? option.text : option;
+          const normalizedOptionValue = normalizeResponseCode(String(optionValue));
+          const normalizedOptionText = normalizeResponseCode(String(optionText));
           
-          // Check if val matches option.value or option.text (with or without translations)
+          // Strategy 1: Exact match on value or code (original logic)
           if (strVal === String(optionValue) || strVal === String(optionText)) {
             // Return the main text of the option (without translation)
             return getMainText(String(optionText)).toLowerCase().trim();
           }
           
-          // Also check if main texts match (in case translations differ)
-          if (getMainText(strVal).toLowerCase().trim() === getMainText(String(optionText)).toLowerCase().trim()) {
+          // Strategy 2: Normalized match (handles underscore differences like "yes_" vs "yes")
+          if (normalizedVal === normalizedOptionValue || normalizedVal === normalizedOptionText) {
+            // Return the main text of the option (without translation)
             return getMainText(String(optionText)).toLowerCase().trim();
+          }
+          
+          // Strategy 3: Match on main text (in case translations differ)
+          const valMainText = getMainText(strVal).toLowerCase().trim();
+          const optionMainText = getMainText(String(optionText)).toLowerCase().trim();
+          if (valMainText === optionMainText) {
+            return optionMainText;
+          }
+          
+          // Strategy 4: Normalized match on main text
+          const normalizedValMainText = normalizeResponseCode(valMainText);
+          const normalizedOptionMainText = normalizeResponseCode(optionMainText);
+          if (normalizedValMainText === normalizedOptionMainText) {
+            return normalizedOptionMainText;
           }
         }
       }
       
-      // Fallback: just strip translations from the value itself
-      return getMainText(strVal).toLowerCase().trim();
+      // Fallback: strip translations and normalize code from the value itself
+      const mainText = getMainText(strVal);
+      return normalizeResponseCode(mainText).toLowerCase().trim();
     };
 
     // Get comparison values for both response and condition value
@@ -884,24 +1240,31 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
         const operator = getOperatorDescription(condition.operator);
         let value = condition.value;
         
-        // If value is an option value, try to find the option text (without translation)
+        // CRITICAL FIX: Use normalized matching to handle codes with underscores (e.g., "yes_" -> "yes")
+        // This ensures condition value display in conditional logic works correctly
         if (targetQuestion && targetQuestion.options) {
-          const matchingOption = targetQuestion.options.find(opt => 
-            opt.value === value || 
-            opt.value?.toString() === value?.toString() ||
-            opt.code === value ||
-            opt.code?.toString() === value?.toString()
-          );
+          // Use findMatchingOption which handles code normalization
+          const matchingOption = findMatchingOption(value, targetQuestion.options);
           if (matchingOption) {
-            // Use main text (without translation)
+            // Use main text (without translation) for display
             value = getMainText(matchingOption.text || matchingOption.value || value);
-          } else if (typeof value === 'string' && value.includes('_{')) {
-            // If value has translation format, extract main text
-            value = value.split('_{')[0];
+          } else if (typeof value === 'string') {
+            // If value has translation format or underscore code, extract/normalize
+            if (value.includes('_{')) {
+              value = value.split('_{')[0];
+            } else {
+              // Normalize code (strip trailing underscores)
+              value = normalizeResponseCode(value);
+            }
           }
-        } else if (typeof value === 'string' && value.includes('_{')) {
+        } else if (typeof value === 'string') {
           // If value has translation format, extract main text
-          value = value.split('_{')[0];
+          if (value.includes('_{')) {
+            value = value.split('_{')[0];
+          } else {
+            // Normalize code (strip trailing underscores)
+            value = normalizeResponseCode(value);
+          }
         }
         
         return `${targetQuestionText} ${operator} "${value}"`;
@@ -941,12 +1304,42 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
   const questions = getAllQuestions();
   const respondentInfo = getRespondentInfo(currentResponse.responses, currentResponse);
 
+  // Helper function to stop all audio playback
+  const stopAllAudio = () => {
+    // Stop CAPI audio
+    const capiAudioEl = document.querySelector('audio[data-interview-id]:not([data-cati="true"])');
+    if (capiAudioEl) {
+      capiAudioEl.pause();
+      capiAudioEl.currentTime = 0;
+    }
+    
+    // Stop CATI audio
+    const catiAudioEl = document.querySelector('audio[data-interview-id][data-cati="true"]');
+    if (catiAudioEl) {
+      catiAudioEl.pause();
+      catiAudioEl.currentTime = 0;
+    }
+    
+    // Stop any other audio elements
+    const allAudioElements = document.querySelectorAll('audio[data-interview-id]');
+    allAudioElements.forEach(el => {
+      el.pause();
+      el.currentTime = 0;
+    });
+    
+    setAudioPlaying(false);
+  };
+
   // Handle response rejection
   const handleRejectResponse = async () => {
     if (!rejectReason.trim()) {
       showError('Please provide a reason for rejection');
       return;
     }
+
+    // CRITICAL FIX: Stop all audio before submitting
+    console.log('🛑 Rejecting response - stopping all audio...');
+    stopAllAudio();
 
     setIsSubmitting(true);
     try {
@@ -977,6 +1370,10 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
 
   // Handle response approval
   const handleApproveResponse = async () => {
+    // CRITICAL FIX: Stop all audio before submitting
+    console.log('🛑 Approving response - stopping all audio...');
+    stopAllAudio();
+
     setIsSubmitting(true);
     try {
       const result = await surveyResponseAPI.approveResponse(currentResponse._id || currentResponse.responseId);
@@ -1168,15 +1565,83 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
             <div className="bg-[#E6F0F8] rounded-lg p-4 mb-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Demographics</h3>
               {(() => {
-                // Extract AC and polling station from responses
-                const { ac: acFromResponse, pollingStation: pollingStationFromResponse, groupName: groupNameFromResponse } = getACAndPollingStationFromResponses(currentResponse.responses, survey);
-                const displayAC = acFromResponse || currentResponse.selectedPollingStation?.acName || currentResponse.selectedAC || respondentInfo.ac;
+                // Extract AC - ONLY use selectedAC field, then selectedPollingStation.acName
+                // DO NOT search through responses array
+                let displayAC = null;
+                
+                // Priority 1: selectedAC field (direct field from backend)
+                if (currentResponse?.selectedAC) {
+                  const cleanedAC = getMainText(String(currentResponse.selectedAC)).trim();
+                  if (cleanedAC && cleanedAC !== '' && cleanedAC !== 'N/A') {
+                    displayAC = cleanedAC;
+                  }
+                }
+                
+                // Priority 2: selectedPollingStation.acName (fallback)
+                if (!displayAC && currentResponse?.selectedPollingStation?.acName) {
+                  const cleanedAC = getMainText(String(currentResponse.selectedPollingStation.acName)).trim();
+                  if (cleanedAC && cleanedAC !== '' && cleanedAC !== 'N/A') {
+                    displayAC = cleanedAC;
+                  }
+                }
+                
+                // Extract polling station and group name from selectedPollingStation (not from responses)
+                const pollingStationFromResponse = currentResponse?.selectedPollingStation?.stationName || null;
+                const groupNameFromResponse = currentResponse?.selectedPollingStation?.groupName || null;
                 // Format polling station to show both code and name
                 const pollingStationValue = pollingStationFromResponse || currentResponse.selectedPollingStation?.stationName;
                 const displayPollingStation = formatPollingStationDisplay(pollingStationValue, currentResponse.selectedPollingStation);
                 const displayGroupName = groupNameFromResponse || currentResponse.selectedPollingStation?.groupName;
                 const displayPC = currentResponse.selectedPollingStation?.pcName;
-                const displayDistrict = currentResponse.selectedPollingStation?.district || respondentInfo.district;
+                
+                // Extract city, district, state, and lokSabha using the same logic as CSV export
+                // City: from location.city or selectedPollingStation.city or responses
+                let displayCity = currentResponse.location?.city || 
+                                 currentResponse.selectedPollingStation?.city || 
+                                 respondentInfo.city || 
+                                 'N/A';
+                
+                // District: from selectedPollingStation.district OR derive from AC using getDistrictFromAC
+                // Priority: selectedPollingStation.district > getDistrictFromAC(displayAC) > respondentInfo.district
+                let displayDistrict = currentResponse.selectedPollingStation?.district || '';
+                if (!displayDistrict || displayDistrict === '' || displayDistrict === 'N/A') {
+                  // Try to derive from AC if we have a valid AC name
+                  if (displayAC && displayAC !== 'N/A' && displayAC !== '' && String(displayAC).trim() !== '') {
+                    const districtFromAC = getDistrictFromAC(displayAC);
+                    if (districtFromAC && districtFromAC !== 'N/A' && districtFromAC !== '') {
+                      displayDistrict = districtFromAC;
+                    }
+                  }
+                }
+                // Final fallback to respondentInfo
+                if (!displayDistrict || displayDistrict === '' || displayDistrict === 'N/A') {
+                  displayDistrict = respondentInfo.district || 'N/A';
+                }
+                
+                // State: from location.state or selectedPollingStation.state or GPS
+                let displayState = currentResponse.location?.state || 
+                                  currentResponse.location?.address?.state ||
+                                  currentResponse.location?.administrative_area_level_1 ||
+                                  currentResponse.selectedPollingStation?.state ||
+                                  getStateFromGPS(currentResponse.location, currentResponse.selectedPollingStation, currentResponse.interviewMode) ||
+                                  'N/A';
+                
+                // Lok Sabha: from selectedPollingStation.pcName OR derive from AC using getLokSabhaFromAC
+                // Priority: selectedPollingStation.pcName > getLokSabhaFromAC(displayAC) > respondentInfo.lokSabha
+                let displayLokSabha = currentResponse.selectedPollingStation?.pcName || '';
+                if (!displayLokSabha || displayLokSabha === '' || displayLokSabha === 'N/A') {
+                  // Try to derive from AC if we have a valid AC name
+                  if (displayAC && displayAC !== 'N/A' && displayAC !== '' && String(displayAC).trim() !== '') {
+                    const lokSabhaFromAC = getLokSabhaFromAC(displayAC);
+                    if (lokSabhaFromAC && lokSabhaFromAC !== 'N/A' && lokSabhaFromAC !== '') {
+                      displayLokSabha = lokSabhaFromAC;
+                    }
+                  }
+                }
+                // Final fallback to respondentInfo
+                if (!displayLokSabha || displayLokSabha === '' || displayLokSabha === 'N/A') {
+                  displayLokSabha = respondentInfo.lokSabha || 'N/A';
+                }
                 
                 return (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -1197,7 +1662,7 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
                     
                     <div>
                       <p className="text-sm font-medium text-gray-700">City</p>
-                      <p className="text-sm text-gray-600">{respondentInfo.city}</p>
+                      <p className="text-sm text-gray-600">{displayCity}</p>
                     </div>
                     
                     <div>
@@ -1207,10 +1672,10 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
                     
                     <div>
                       <p className="text-sm font-medium text-gray-700">State</p>
-                      <p className="text-sm text-gray-600">{respondentInfo.state}</p>
+                      <p className="text-sm text-gray-600">{displayState}</p>
                     </div>
                     
-                    {displayAC && (
+                    {displayAC && displayAC !== 'N/A' && (
                       <div>
                         <p className="text-sm font-medium text-gray-700">Assembly Constituency (AC)</p>
                         <p className="text-sm text-gray-600">{displayAC}</p>
@@ -1233,7 +1698,7 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
                     
                     <div>
                       <p className="text-sm font-medium text-gray-700">Lok Sabha</p>
-                      <p className="text-sm text-gray-600">{displayPC || respondentInfo.lokSabha}</p>
+                      <p className="text-sm text-gray-600">{displayLokSabha}</p>
                     </div>
                     
                     {currentResponse.location && (
@@ -1465,56 +1930,33 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
                       <div>File Size: {(currentResponse.audioRecording.fileSize / 1024 / 1024).toFixed(2)} MB</div>
                     )}
                   </div>
-                    {(audioSignedUrl || currentResponse.audioRecording.signedUrl || currentResponse.audioRecording.audioUrl) && (
+                    {(audioSignedUrl || currentResponse.audioRecording.audioUrl) && (
                       <audio
                         data-response-id={currentResponse._id || currentResponse.responseId}
-                        src={audioSignedUrl || currentResponse.audioRecording.signedUrl || (() => {
-                          // Only return valid URLs, not S3 keys or empty strings
-                          const audioUrl = currentResponse.audioRecording.audioUrl;
-                          if (!audioUrl) return null;
-                          // If it's a local path or full URL, return it
-                          if (audioUrl.startsWith('/') || audioUrl.startsWith('http')) {
-                            return audioUrl;
+                        src={(() => {
+                          // ALWAYS use proxy URL - never use direct S3 URLs
+                          const url = audioSignedUrl || getProxyUrl(
+                            currentResponse.audioRecording.audioUrl,
+                            currentResponse.audioRecording.signedUrl,
+                            currentResponse.audioRecording.proxyUrl
+                          );
+                          // Double-check: if somehow we got a direct S3 URL, construct proxy URL
+                          if (url && (url.includes('.s3.') || url.includes('amazonaws.com'))) {
+                            console.warn('⚠️ Detected direct S3 URL in audio src, converting to proxy URL');
+                            const audioUrl = currentResponse.audioRecording.audioUrl;
+                            if (audioUrl && (audioUrl.startsWith('audio/') || audioUrl.startsWith('documents/') || audioUrl.startsWith('reports/'))) {
+                              const isProduction = window.location.protocol === 'https:' || window.location.hostname !== 'localhost';
+                              const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (isProduction ? '' : 'http://localhost:5000');
+                              return `${API_BASE_URL}/api/survey-responses/audio/${encodeURIComponent(audioUrl)}`;
+                            }
                           }
-                          // If it's an S3 key, return null (will be fetched in useEffect or onError)
-                          return null;
+                          return url;
                         })()}
                         onEnded={() => setAudioPlaying(false)}
                         onPause={() => setAudioPlaying(false)}
                         onPlay={() => setAudioPlaying(true)}
-                        onError={async (e) => {
+                        onError={(e) => {
                           console.error('Audio element error:', e);
-                          // If audioUrl is an S3 key, try to get signed URL
-                          const audioUrl = currentResponse.audioRecording?.audioUrl;
-                          if (audioUrl && (audioUrl.startsWith('audio/') || audioUrl.startsWith('documents/') || audioUrl.startsWith('reports/')) && !audioSignedUrl) {
-                            try {
-                              const isProduction = window.location.protocol === 'https:' || window.location.hostname !== 'localhost';
-                              const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (isProduction ? '' : 'http://localhost:5000');
-                              const token = localStorage.getItem('token');
-                              const signedUrlResponse = await fetch(`${API_BASE_URL}/api/survey-responses/audio-signed-url?audioUrl=${encodeURIComponent(audioUrl)}`, {
-                                headers: {
-                                  'Authorization': `Bearer ${token}`
-                                }
-                              });
-                              if (signedUrlResponse.ok) {
-                                const data = await signedUrlResponse.json();
-                                if (data.signedUrl) {
-                                  // Update the audio element src with signed URL
-                                  setAudioSignedUrl(data.signedUrl);
-                                  const audioEl = e.target;
-                                  audioEl.src = data.signedUrl;
-                                  audioEl.load();
-                                  // Try to play again
-                                  audioEl.play().catch(playError => {
-                                    console.error('Error playing audio after loading signed URL:', playError);
-                                  });
-                                  return;
-                                }
-                              }
-                            } catch (error) {
-                              console.error('Error fetching signed URL:', error);
-                            }
-                          }
                           showError('Failed to load audio file. The file may have been deleted or moved.');
                           setAudioPlaying(false);
                         }}
@@ -1524,16 +1966,24 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
                     )}
                   {(currentResponse.audioRecording.audioUrl || audioSignedUrl) && (
                     <a
-                      href={audioSignedUrl || currentResponse.audioRecording.signedUrl || (() => {
-                        let audioUrl = currentResponse.audioRecording.audioUrl || '';
-                        if (audioUrl.startsWith('/')) {
-                          return `${window.location.origin}${audioUrl}`;
+                      href={(() => {
+                        // ALWAYS use proxy URL - never use direct S3 URLs
+                        const url = audioSignedUrl || getProxyUrl(
+                          currentResponse.audioRecording.audioUrl,
+                          currentResponse.audioRecording.signedUrl,
+                          currentResponse.audioRecording.proxyUrl
+                        );
+                        // Double-check: if somehow we got a direct S3 URL, construct proxy URL
+                        if (url && (url.includes('.s3.') || url.includes('amazonaws.com'))) {
+                          console.warn('⚠️ Detected direct S3 URL in download href, converting to proxy URL');
+                          const audioUrl = currentResponse.audioRecording.audioUrl;
+                          if (audioUrl && (audioUrl.startsWith('audio/') || audioUrl.startsWith('documents/') || audioUrl.startsWith('reports/'))) {
+                            const isProduction = window.location.protocol === 'https:' || window.location.hostname !== 'localhost';
+                            const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (isProduction ? '' : 'http://localhost:5000');
+                            return `${API_BASE_URL}/api/survey-responses/audio/${encodeURIComponent(audioUrl)}`;
+                          }
                         }
-                        // If it's an S3 key, use signed URL
-                        if (audioUrl.startsWith('audio/') || audioUrl.startsWith('documents/') || audioUrl.startsWith('reports/')) {
-                          return audioSignedUrl || audioUrl; // Will use signed URL if available
-                        }
-                        return audioUrl;
+                        return url;
                       })()}
                       download={`capi_recording_${currentResponse.responseId || currentResponse._id || 'recording'}.${currentResponse.audioRecording.format || 'webm'}`}
                       className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-[#001D48] hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -1716,7 +2166,17 @@ const ResponseDetailsModal = ({ response, survey, onClose, hideActions = false, 
                             {responseItem.isSkipped ? (
                               <span className="text-yellow-600 italic">Question was skipped</span>
                             ) : (
-                              formatResponseDisplay(responseItem.response, surveyQuestion, selectedLanguageIndex)
+                              // CRITICAL FIX: Properly handle response codes vs response text
+                              // If responseCodes exists, use it for lookup (codes like "yes_")
+                              // Otherwise use response (might be text or code)
+                              // formatResponseDisplay will normalize codes (strip underscores) and match to option text
+                              formatResponseDisplay(
+                                responseItem.responseCodes !== null && responseItem.responseCodes !== undefined 
+                                  ? responseItem.responseCodes 
+                                  : responseItem.response, 
+                                surveyQuestion, 
+                                selectedLanguageIndex
+                              )
                             )}
                           </p>
                           {responseItem.responseTime > 0 && (

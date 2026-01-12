@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-01-05T18:22:54.628Z",
+  "method": "contentHash-based duplicate detection (Pending_Approval filter)",
+  "summary": {
+    "totalDuplicateGroups": 0,
+    "capiDuplicateGroups": 0,
+    "catiDuplicateGroups": 0,
+    "totalDuplicatesToMark": 0,
+    "totalOriginals": 0,
+    "pendingApprovalDuplicates": 0
+  },
+  "statistics": {
+    "totalProcessed": 170280,
+    "capiProcessed": 0,
+    "catiProcessed": 0,
+    "capiDuplicatesFound": 0,
+    "catiDuplicatesFound": 0,
+    "excludedGroups": 0
+  },
+  "groups": []
+}

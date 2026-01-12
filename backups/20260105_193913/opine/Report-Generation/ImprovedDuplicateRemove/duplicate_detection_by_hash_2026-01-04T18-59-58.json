@@ -1,0 +1,4332 @@
+{
+  "timestamp": "2026-01-04T19:00:33.639Z",
+  "method": "contentHash-based duplicate detection (without audio, excluding Terminated/abandoned)",
+  "summary": {
+    "totalDuplicateGroups": 62,
+    "capiDuplicateGroups": 62,
+    "catiDuplicateGroups": 0,
+    "totalDuplicatesToMark": 62,
+    "totalOriginals": 62
+  },
+  "statistics": {
+    "totalProcessed": 124,
+    "capiProcessed": 124,
+    "catiProcessed": 0,
+    "capiDuplicatesFound": 62,
+    "catiDuplicatesFound": 0
+  },
+  "groups": [
+    {
+      "groupNumber": 1,
+      "mode": "CAPI",
+      "contentHash": "03df667a93778262",
+      "original": {
+        "responseId": "4fc8d5eb-4f3b-4bc4-b92c-bc54cce7c448",
+        "mongoId": "6958eb041b2d20746e7bd2e9",
+        "sessionId": "3b76eea0-f0e2-4503-9d4e-48e9a3b02404",
+        "interviewer": {
+          "id": "6944339456275b9dd833221f",
+          "name": "Biswajit Dolui",
+          "email": "capi475@gmail.com",
+          "phone": "983293142",
+          "memberId": "CAPI475"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T09:20:12.246Z",
+        "endTime": "2026-01-03T09:24:20.724Z",
+        "duration": 248,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/3b76eea0-f0e2-4503-9d4e-48e9a3b02404_1767435011308_interview_3b76eea0-f0e2-4503-9d4e-48e9a3b02404_1767435011308.m4a",
+        "audioDuration": 248,
+        "audioFileSize": 3993442,
+        "location": {
+          "latitude": 22.8808213,
+          "longitude": 88.024356,
+          "accuracy": 19.309999465942383,
+          "address": "22.880821, 88.024356",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-03T09:20:13.270Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-03T10:10:12.346Z",
+        "contentHash": "03df667a93778262"
+      },
+      "duplicates": [
+        {
+          "responseId": "311c9c92-056a-4f39-be63-a2293485c70b",
+          "mongoId": "695905dbe46d585e8277c124",
+          "sessionId": "eaea78e0-7887-4232-972d-3285aa2bd9fd",
+          "startTime": "2026-01-03T09:20:12.246Z",
+          "endTime": "2026-01-03T09:24:20.724Z",
+          "duration": 248,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/3b76eea0-f0e2-4503-9d4e-48e9a3b02404_1767435011308_interview_3b76eea0-f0e2-4503-9d4e-48e9a3b02404_1767435011308.m4a",
+          "audioDuration": 248,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.8808213,
+            "longitude": 88.024356,
+            "accuracy": 19.309999465942383,
+            "address": "22.880821, 88.024356",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-03T09:20:13.270Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T12:04:43.996Z",
+          "timeDifference": 6871650,
+          "contentHash": "03df667a93778262"
+        }
+      ]
+    },
+    {
+      "groupNumber": 2,
+      "mode": "CAPI",
+      "contentHash": "0a97b39e1d722640",
+      "original": {
+        "responseId": "148929b7-2098-4b7a-8444-6de8d1af0ef7",
+        "mongoId": "6950d8001619ca2252885b3d",
+        "sessionId": "9ecdbfb5-f308-4544-972c-3e1dac3f4eab",
+        "interviewer": {
+          "id": "694903ceea2c17c631334901",
+          "name": "RAJIB DAS",
+          "email": "capicapi928@gmail.com",
+          "phone": "7031164681",
+          "memberId": "CAPI928"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T07:02:19.829Z",
+        "endTime": "2025-12-28T07:09:08.617Z",
+        "duration": 408,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/9ecdbfb5-f308-4544-972c-3e1dac3f4eab_1766905855139_interview_9ecdbfb5-f308-4544-972c-3e1dac3f4eab_1766905855139.m4a",
+        "audioDuration": 408,
+        "audioFileSize": 4951862,
+        "location": {
+          "latitude": 26.5464219,
+          "longitude": 88.7095784,
+          "accuracy": 68.4000015258789,
+          "address": "26.546422, 88.709578",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-28T07:02:21.343Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-28T07:10:56.638Z",
+        "contentHash": "0a97b39e1d722640"
+      },
+      "duplicates": [
+        {
+          "responseId": "86895f23-969f-4009-bc30-7737caa4fcbc",
+          "mongoId": "6950d842efe8c4aa349b92ca",
+          "sessionId": "54e0a1a8-b289-4d6f-a858-6c5945f51426",
+          "startTime": "2025-12-28T07:02:19.829Z",
+          "endTime": "2025-12-28T07:09:08.617Z",
+          "duration": 408,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/9ecdbfb5-f308-4544-972c-3e1dac3f4eab_1766905855139_interview_9ecdbfb5-f308-4544-972c-3e1dac3f4eab_1766905855139.m4a",
+          "audioDuration": 408,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.5464219,
+            "longitude": 88.7095784,
+            "accuracy": 68.4000015258789,
+            "address": "26.546422, 88.709578",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-28T07:02:21.343Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-28T07:12:02.237Z",
+          "timeDifference": 65599,
+          "contentHash": "0a97b39e1d722640"
+        }
+      ]
+    },
+    {
+      "groupNumber": 3,
+      "mode": "CAPI",
+      "contentHash": "0cc20fea2ce30f5c",
+      "original": {
+        "responseId": "91bb860a-e6c1-4dc0-8cae-2d27d9443f4c",
+        "mongoId": "6958eaaedf683033950e759c",
+        "sessionId": "268189c8-780c-4999-bf14-b87febb6e142",
+        "interviewer": {
+          "id": "6942c3c2fe90bbe7745cff3e",
+          "name": "Riyanka Sen",
+          "email": "capi393@gmail.com",
+          "phone": "7003258964",
+          "memberId": "CAPI393"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T07:12:58.382Z",
+        "endTime": "2026-01-03T07:18:14.481Z",
+        "duration": 316,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/b7f54c69-3bc4-406c-87db-db01c37d4292_1767435421702_interview_b7f54c69-3bc4-406c-87db-db01c37d4292_1767435421300.m4a",
+        "audioDuration": 316,
+        "audioFileSize": 0,
+        "location": {
+          "latitude": 22.5999012,
+          "longitude": 88.3660569,
+          "accuracy": 17.91900062561035,
+          "address": "22.599901, 88.366057",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-03T07:13:02.379Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-03T10:08:46.726Z",
+        "contentHash": "0cc20fea2ce30f5c"
+      },
+      "duplicates": [
+        {
+          "responseId": "22d0c053-b4d2-4eed-a64a-911a617cb920",
+          "mongoId": "6958ec9e2ae6da9aad4dd208",
+          "sessionId": "b7f54c69-3bc4-406c-87db-db01c37d4292",
+          "startTime": "2026-01-03T07:12:58.382Z",
+          "endTime": "2026-01-03T07:18:14.481Z",
+          "duration": 316,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/b7f54c69-3bc4-406c-87db-db01c37d4292_1767435421702_interview_b7f54c69-3bc4-406c-87db-db01c37d4292_1767435421300.m4a",
+          "audioDuration": 316,
+          "audioFileSize": 3779915,
+          "location": {
+            "latitude": 22.5999012,
+            "longitude": 88.3660569,
+            "accuracy": 17.91900062561035,
+            "address": "22.599901, 88.366057",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-03T07:13:02.379Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T10:17:02.926Z",
+          "timeDifference": 496200,
+          "contentHash": "0cc20fea2ce30f5c"
+        }
+      ]
+    },
+    {
+      "groupNumber": 4,
+      "mode": "CAPI",
+      "contentHash": "1374bfc6742271f2",
+      "original": {
+        "responseId": "c7c357a4-ab7d-4bba-b6a5-e4f5962c5bb3",
+        "mongoId": "69510995db30d77daee22519",
+        "sessionId": "ed2b42c3-aa5d-4c86-9731-edbfe75066cf",
+        "interviewer": {
+          "id": "694903ceea2c17c631334901",
+          "name": "RAJIB DAS",
+          "email": "capicapi928@gmail.com",
+          "phone": "7031164681",
+          "memberId": "CAPI928"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T10:33:39.149Z",
+        "endTime": "2025-12-28T10:40:31.904Z",
+        "duration": 412,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/ed2b42c3-aa5d-4c86-9731-edbfe75066cf_1766918548852_interview_ed2b42c3-aa5d-4c86-9731-edbfe75066cf_1766918548852.m4a",
+        "audioDuration": 412,
+        "audioFileSize": 5007865,
+        "location": {
+          "latitude": 26.5475695,
+          "longitude": 88.7163666,
+          "accuracy": 48.54199981689453,
+          "address": "26.547570, 88.716367",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-28T10:33:40.102Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-28T10:42:29.831Z",
+        "contentHash": "1374bfc6742271f2"
+      },
+      "duplicates": [
+        {
+          "responseId": "8b3690ac-fe06-4710-bb78-e1ef765f71ea",
+          "mongoId": "695109d09c319ee2dcc7a2e1",
+          "sessionId": "4010da2e-aa2c-427c-8fea-5c1f49a09f75",
+          "startTime": "2025-12-28T10:33:39.149Z",
+          "endTime": "2025-12-28T10:40:31.904Z",
+          "duration": 412,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/ed2b42c3-aa5d-4c86-9731-edbfe75066cf_1766918548852_interview_ed2b42c3-aa5d-4c86-9731-edbfe75066cf_1766918548852.m4a",
+          "audioDuration": 412,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.5475695,
+            "longitude": 88.7163666,
+            "accuracy": 48.54199981689453,
+            "address": "26.547570, 88.716367",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-28T10:33:40.102Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-28T10:43:28.319Z",
+          "timeDifference": 58488,
+          "contentHash": "1374bfc6742271f2"
+        }
+      ]
+    },
+    {
+      "groupNumber": 5,
+      "mode": "CAPI",
+      "contentHash": "1ad450df45a84229",
+      "original": {
+        "responseId": "6238ebba-982f-4aa2-a03d-e9d28580d097",
+        "mongoId": "695256d20eee2cc0b2443d3d",
+        "sessionId": "a337905f-e5d0-42e3-afc3-40eedaa33e51",
+        "interviewer": {
+          "id": "6942c3c9fe90bbe7745d11de",
+          "name": "Banani Ghosh",
+          "email": "capi397@gmail.com",
+          "phone": "6291990663",
+          "memberId": "CAPI397"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T14:24:04.384Z",
+        "endTime": "2025-12-28T14:33:24.872Z",
+        "duration": 560,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/a337905f-e5d0-42e3-afc3-40eedaa33e51_1767003857249_interview_a337905f-e5d0-42e3-afc3-40eedaa33e51_1767003857000.m4a",
+        "audioDuration": 560,
+        "audioFileSize": 8656276,
+        "location": {
+          "latitude": 22.5977943,
+          "longitude": 88.360535,
+          "accuracy": 149.60000610351562,
+          "address": "22.597794, 88.360535",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-28T14:24:28.609Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-29T10:24:18.044Z",
+        "contentHash": "1ad450df45a84229"
+      },
+      "duplicates": [
+        {
+          "responseId": "c507ac47-54c4-463f-9c17-b894c858b49e",
+          "mongoId": "6952590eca52611e625f4e0e",
+          "sessionId": "e29e511c-4faa-410f-9181-87dfdb70aa85",
+          "startTime": "2025-12-28T14:24:04.384Z",
+          "endTime": "2025-12-28T14:33:24.872Z",
+          "duration": 560,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/a337905f-e5d0-42e3-afc3-40eedaa33e51_1767003857249_interview_a337905f-e5d0-42e3-afc3-40eedaa33e51_1767003857000.m4a",
+          "audioDuration": 560,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.5977943,
+            "longitude": 88.360535,
+            "accuracy": 149.60000610351562,
+            "address": "22.597794, 88.360535",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-28T14:24:28.609Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T10:33:50.262Z",
+          "timeDifference": 572218,
+          "contentHash": "1ad450df45a84229"
+        }
+      ]
+    },
+    {
+      "groupNumber": 6,
+      "mode": "CAPI",
+      "contentHash": "1ba26642855d6a74",
+      "original": {
+        "responseId": "1443f87d-2cda-4eed-94d2-ec5ae40912c6",
+        "mongoId": "6958be38251a7fa86d43da27",
+        "sessionId": "6738df44-202e-4686-83bf-f1a05756c056",
+        "interviewer": {
+          "id": "694903ceea2c17c631334901",
+          "name": "RAJIB DAS",
+          "email": "capicapi928@gmail.com",
+          "phone": "7031164681",
+          "memberId": "CAPI928"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-31T07:31:21.659Z",
+        "endTime": "2025-12-31T07:39:38.671Z",
+        "duration": 497,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/de32f1d6-863f-4d7a-ba9a-906cc90dba1c_1767424116091_interview_de32f1d6-863f-4d7a-ba9a-906cc90dba1c_1767424116091.m4a",
+        "audioDuration": 497,
+        "audioFileSize": 0,
+        "location": {
+          "latitude": 26.5470688,
+          "longitude": 88.7124309,
+          "accuracy": 82.5,
+          "address": ", Jalpaiguri, West Bengal, India",
+          "city": "Jalpaiguri",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-31T07:31:23.406Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-03T06:59:04.251Z",
+        "contentHash": "1ba26642855d6a74"
+      },
+      "duplicates": [
+        {
+          "responseId": "f88f6e1e-da26-4e45-a93c-50d5bbb51fdf",
+          "mongoId": "6958c0769bade8e0d3b18aed",
+          "sessionId": "de32f1d6-863f-4d7a-ba9a-906cc90dba1c",
+          "startTime": "2025-12-31T07:31:21.659Z",
+          "endTime": "2025-12-31T07:39:38.671Z",
+          "duration": 497,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/de32f1d6-863f-4d7a-ba9a-906cc90dba1c_1767424116091_interview_de32f1d6-863f-4d7a-ba9a-906cc90dba1c_1767424116091.m4a",
+          "audioDuration": 497,
+          "audioFileSize": 6023133,
+          "location": {
+            "latitude": 26.5470688,
+            "longitude": 88.7124309,
+            "accuracy": 82.5,
+            "address": ", Jalpaiguri, West Bengal, India",
+            "city": "Jalpaiguri",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-31T07:31:23.406Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T07:08:38.224Z",
+          "timeDifference": 573973,
+          "contentHash": "1ba26642855d6a74"
+        }
+      ]
+    },
+    {
+      "groupNumber": 7,
+      "mode": "CAPI",
+      "contentHash": "1e6e94f63ac3e132",
+      "original": {
+        "responseId": "551187f9-e170-4309-80eb-d6000091dde7",
+        "mongoId": "6959b246c7b422a49009091f",
+        "sessionId": "77e07849-583b-4dd7-8295-b039c2a7afe5",
+        "interviewer": {
+          "id": "694433b056275b9dd8337758",
+          "name": "Subham paul.",
+          "email": "capi2011@gmail.com",
+          "phone": "6297497603",
+          "memberId": "CAPI201"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T07:54:14.713Z",
+        "endTime": "2026-01-03T07:59:46.479Z",
+        "duration": 331,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/77e07849-583b-4dd7-8295-b039c2a7afe5_1767486021113_interview_77e07849-583b-4dd7-8295-b039c2a7afe5_1767486020989.m4a",
+        "audioDuration": 331,
+        "audioFileSize": 5319433,
+        "location": {
+          "latitude": 22.69485092163086,
+          "longitude": 88.37460327148438,
+          "accuracy": 1,
+          "address": "22.694851, 88.374603",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-03T07:54:16.777Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-04T00:20:22.058Z",
+        "contentHash": "1e6e94f63ac3e132"
+      },
+      "duplicates": [
+        {
+          "responseId": "51cdcf40-3e52-4f75-a421-22560a0fa033",
+          "mongoId": "6959b396869cce38281cf38d",
+          "sessionId": "024107f5-c334-4a15-b223-b7af561e3847",
+          "startTime": "2026-01-03T07:54:14.713Z",
+          "endTime": "2026-01-03T07:59:46.479Z",
+          "duration": 331,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/77e07849-583b-4dd7-8295-b039c2a7afe5_1767486021113_interview_77e07849-583b-4dd7-8295-b039c2a7afe5_1767486020989.m4a",
+          "audioDuration": 331,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.69485092163086,
+            "longitude": 88.37460327148438,
+            "accuracy": 1,
+            "address": "22.694851, 88.374603",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-03T07:54:16.777Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-04T00:25:59.008Z",
+          "timeDifference": 336950,
+          "contentHash": "1e6e94f63ac3e132"
+        }
+      ]
+    },
+    {
+      "groupNumber": 8,
+      "mode": "CAPI",
+      "contentHash": "200e288b17417e7e",
+      "original": {
+        "responseId": "4f2303c0-1481-429d-a0f0-32984c239825",
+        "mongoId": "695146da8242e5f9251d6654",
+        "sessionId": "f017776f-f000-44c0-8599-08eabbf98936",
+        "interviewer": {
+          "id": "6942c3bdfe90bbe7745cf15b",
+          "name": "Soma Das",
+          "email": "capi390@gmail.com",
+          "phone": "8910200135",
+          "memberId": "CAPI390"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T13:05:32.841Z",
+        "endTime": "2025-12-28T13:13:46.419Z",
+        "duration": 493,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/f017776f-f000-44c0-8599-08eabbf98936_1766934233385_interview_f017776f-f000-44c0-8599-08eabbf98936_1766934233106.m4a",
+        "audioDuration": 493,
+        "audioFileSize": 7943956,
+        "location": {
+          "latitude": 22.5966653,
+          "longitude": 88.361183,
+          "accuracy": 22.08300018310547,
+          "address": "22.596665, 88.361183",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-28T13:05:34.576Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-28T15:03:54.481Z",
+        "contentHash": "200e288b17417e7e"
+      },
+      "duplicates": [
+        {
+          "responseId": "c1edbe2e-acd2-4b07-9d76-2f52996b5488",
+          "mongoId": "695251aad50d0c185a38f16c",
+          "sessionId": "be2ae3bb-61b4-497a-9f5a-9316495a093d",
+          "startTime": "2025-12-28T13:05:32.841Z",
+          "endTime": "2025-12-28T13:13:46.419Z",
+          "duration": 493,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/f017776f-f000-44c0-8599-08eabbf98936_1766934233385_interview_f017776f-f000-44c0-8599-08eabbf98936_1766934233106.m4a",
+          "audioDuration": 493,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.5966653,
+            "longitude": 88.361183,
+            "accuracy": 22.08300018310547,
+            "address": "22.596665, 88.361183",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-28T13:05:34.576Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T10:02:18.849Z",
+          "timeDifference": 68304368,
+          "contentHash": "200e288b17417e7e"
+        }
+      ]
+    },
+    {
+      "groupNumber": 9,
+      "mode": "CAPI",
+      "contentHash": "23f227e20baab4be",
+      "original": {
+        "responseId": "8e405769-7d4b-48b2-b1b9-7cbcc676c9bd",
+        "mongoId": "69590f9742e263368634d111",
+        "sessionId": "2924b076-d4c7-4e4d-a77a-6559f6b4569a",
+        "interviewer": {
+          "id": "694433b056275b9dd8337758",
+          "name": "Subham paul.",
+          "email": "capi2011@gmail.com",
+          "phone": "6297497603",
+          "memberId": "CAPI201"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T12:05:27.740Z",
+        "endTime": "2026-01-03T12:10:29.596Z",
+        "duration": 301,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/2924b076-d4c7-4e4d-a77a-6559f6b4569a_1767444363397_interview_2924b076-d4c7-4e4d-a77a-6559f6b4569a_1767444363396.m4a",
+        "audioDuration": 301,
+        "audioFileSize": 4862812,
+        "location": {
+          "latitude": 22.69754981994629,
+          "longitude": 88.37377166748047,
+          "accuracy": 1,
+          "address": ", Khardaha, West Bengal, India",
+          "city": "Khardaha",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2026-01-03T12:05:28.281Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-03T12:46:15.707Z",
+        "contentHash": "23f227e20baab4be"
+      },
+      "duplicates": [
+        {
+          "responseId": "b2ff55b3-5bfc-4318-b35c-f715056915f3",
+          "mongoId": "695915875d70a4513aa555cb",
+          "sessionId": "9419f9f0-ced4-409e-a49b-53f247f1c9da",
+          "startTime": "2026-01-03T12:05:27.740Z",
+          "endTime": "2026-01-03T12:10:29.596Z",
+          "duration": 301,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/2924b076-d4c7-4e4d-a77a-6559f6b4569a_1767444363397_interview_2924b076-d4c7-4e4d-a77a-6559f6b4569a_1767444363396.m4a",
+          "audioDuration": 301,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.69754981994629,
+            "longitude": 88.37377166748047,
+            "accuracy": 1,
+            "address": ", Khardaha, West Bengal, India",
+            "city": "Khardaha",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-03T12:05:28.281Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T13:11:35.548Z",
+          "timeDifference": 1519841,
+          "contentHash": "23f227e20baab4be"
+        }
+      ]
+    },
+    {
+      "groupNumber": 10,
+      "mode": "CAPI",
+      "contentHash": "25b2f76c5c3c999f",
+      "original": {
+        "responseId": "1ef5a3aa-d13f-4793-9242-e509917de8b0",
+        "mongoId": "69521a2c02d4046d106a205f",
+        "sessionId": "9ccc808d-404b-40f7-8312-6ca9d7bb2cd4",
+        "interviewer": {
+          "id": "6948d83a3f3054d9a2647d0d",
+          "name": "Bablu Adhikari",
+          "email": "capicapi945@gmail.com",
+          "phone": "9475382714",
+          "memberId": "CAPI945"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T07:01:49.308Z",
+        "endTime": "2025-12-28T07:07:01.415Z",
+        "duration": 312,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/9ccc808d-404b-40f7-8312-6ca9d7bb2cd4_1766988328941_interview_9ccc808d-404b-40f7-8312-6ca9d7bb2cd4_1766988328611.m4a",
+        "audioDuration": 312,
+        "audioFileSize": 4984630,
+        "location": {
+          "latitude": 26.3334658,
+          "longitude": 89.3094662,
+          "accuracy": 30,
+          "address": ", Dumniguri, West Bengal, India",
+          "city": "Dumniguri",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-28T07:01:50.965Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-29T06:05:32.946Z",
+        "contentHash": "25b2f76c5c3c999f"
+      },
+      "duplicates": [
+        {
+          "responseId": "e33a3ba6-3662-4674-862b-2ef18f74ca0c",
+          "mongoId": "69521b687c1a6279abdb369f",
+          "sessionId": "67f8bbf7-f769-4aa9-8ced-77474cd0e915",
+          "startTime": "2025-12-28T07:01:49.308Z",
+          "endTime": "2025-12-28T07:07:01.415Z",
+          "duration": 312,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/9ccc808d-404b-40f7-8312-6ca9d7bb2cd4_1766988328941_interview_9ccc808d-404b-40f7-8312-6ca9d7bb2cd4_1766988328611.m4a",
+          "audioDuration": 312,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.3334658,
+            "longitude": 89.3094662,
+            "accuracy": 30,
+            "address": ", Dumniguri, West Bengal, India",
+            "city": "Dumniguri",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-28T07:01:50.965Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T06:10:48.596Z",
+          "timeDifference": 315650,
+          "contentHash": "25b2f76c5c3c999f"
+        }
+      ]
+    },
+    {
+      "groupNumber": 11,
+      "mode": "CAPI",
+      "contentHash": "2d4b2b777cc1ef85",
+      "original": {
+        "responseId": "3f25fb84-f5e6-49c4-97e5-1aa913b2a870",
+        "mongoId": "69590d6dbdd55d3cb2803f9c",
+        "sessionId": "ada642b0-b6a1-44d7-83bd-661b1f115101",
+        "interviewer": {
+          "id": "6942c3dafe90bbe7745d40f9",
+          "name": "MITALI BERA",
+          "email": "capi320@gmail.com",
+          "phone": "9064677214",
+          "memberId": "CAPI320"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T12:25:01.818Z",
+        "endTime": "2026-01-03T12:30:53.481Z",
+        "duration": 351,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/819b0f40-47fa-4b75-b8d9-56cb1a50b62b_1767453909306_interview_819b0f40-47fa-4b75-b8d9-56cb1a50b62b_1767453909306.m4a",
+        "audioDuration": 351,
+        "audioFileSize": 0,
+        "location": {
+          "latitude": 21.8548584,
+          "longitude": 87.5486328,
+          "accuracy": 96.19999694824219,
+          "address": ", EGRA, West Bengal, India",
+          "city": "EGRA",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2026-01-03T12:25:13.666Z"
+        },
+        "responseCount": 26,
+        "createdAt": "2026-01-03T12:37:01.528Z",
+        "contentHash": "2d4b2b777cc1ef85"
+      },
+      "duplicates": [
+        {
+          "responseId": "00a36f06-8fa9-4223-bd17-cb63f5c9bf18",
+          "mongoId": "69593531a244abd2fd0486e8",
+          "sessionId": "819b0f40-47fa-4b75-b8d9-56cb1a50b62b",
+          "startTime": "2026-01-03T12:25:01.818Z",
+          "endTime": "2026-01-03T12:30:53.481Z",
+          "duration": 351,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/819b0f40-47fa-4b75-b8d9-56cb1a50b62b_1767453909306_interview_819b0f40-47fa-4b75-b8d9-56cb1a50b62b_1767453909306.m4a",
+          "audioDuration": 351,
+          "audioFileSize": 5486539,
+          "location": {
+            "latitude": 21.8548584,
+            "longitude": 87.5486328,
+            "accuracy": 96.19999694824219,
+            "address": ", EGRA, West Bengal, India",
+            "city": "EGRA",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-03T12:25:13.666Z"
+          },
+          "responseCount": 26,
+          "createdAt": "2026-01-03T15:26:41.259Z",
+          "timeDifference": 10179731,
+          "contentHash": "2d4b2b777cc1ef85"
+        }
+      ]
+    },
+    {
+      "groupNumber": 12,
+      "mode": "CAPI",
+      "contentHash": "31c41c71aa6ad9b2",
+      "original": {
+        "responseId": "a0263ba4-08bf-472c-8e1b-70f93c3b62bc",
+        "mongoId": "694e8cd2eeb27d9e73123fd2",
+        "sessionId": "c5c8b2e0-5fac-4928-bc40-3d96bec2d92c",
+        "interviewer": {
+          "id": "6946cd93962d7e42c40417ad",
+          "name": "Belal sk",
+          "email": "capi934@gmail.com",
+          "phone": "8597089366",
+          "memberId": "CAPI934"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-26T13:12:23.310Z",
+        "endTime": "2025-12-26T13:19:18.241Z",
+        "duration": 414,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/c5c8b2e0-5fac-4928-bc40-3d96bec2d92c_1766755537406_interview_c5c8b2e0-5fac-4928-bc40-3d96bec2d92c_1766755536596.m4a",
+        "audioDuration": 414,
+        "audioFileSize": 4474233,
+        "location": {
+          "latitude": 26.714399004512835,
+          "longitude": 88.4051102399826,
+          "accuracy": 1,
+          "address": ", Tomba, West Bengal, India",
+          "city": "Tomba",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-26T13:12:25.079Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-26T13:25:38.732Z",
+        "contentHash": "31c41c71aa6ad9b2"
+      },
+      "duplicates": [
+        {
+          "responseId": "6641eae5-0077-4373-b634-cdeedf4cae60",
+          "mongoId": "694e8d6a86828545a0b1f9a5",
+          "sessionId": "75c4ac43-59c7-44c9-b0f5-1bc719ef3912",
+          "startTime": "2025-12-26T13:12:23.310Z",
+          "endTime": "2025-12-26T13:19:18.241Z",
+          "duration": 414,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/c5c8b2e0-5fac-4928-bc40-3d96bec2d92c_1766755537406_interview_c5c8b2e0-5fac-4928-bc40-3d96bec2d92c_1766755536596.m4a",
+          "audioDuration": 414,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.714399004512835,
+            "longitude": 88.4051102399826,
+            "accuracy": 1,
+            "address": ", Tomba, West Bengal, India",
+            "city": "Tomba",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-26T13:12:25.079Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-26T13:28:10.650Z",
+          "timeDifference": 151918,
+          "contentHash": "31c41c71aa6ad9b2"
+        }
+      ]
+    },
+    {
+      "groupNumber": 13,
+      "mode": "CAPI",
+      "contentHash": "36c8d5a940313fbb",
+      "original": {
+        "responseId": "002b62b5-1fe8-4302-a0f3-ae24881adba3",
+        "mongoId": "694e8c2dbe97c8432581ae4d",
+        "sessionId": "1b10abb1-7606-4771-83dd-467b96310055",
+        "interviewer": {
+          "id": "6946cd8f962d7e42c4040c21",
+          "name": "Bilas sekh",
+          "email": "capi932@gmail.com",
+          "phone": "6295229456",
+          "memberId": "CAPI932"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-26T13:12:21.939Z",
+        "endTime": "2025-12-26T13:19:16.596Z",
+        "duration": 414,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/1b10abb1-7606-4771-83dd-467b96310055_1766755368422_interview_1b10abb1-7606-4771-83dd-467b96310055_1766755368422.m4a",
+        "audioDuration": 414,
+        "audioFileSize": 5968035,
+        "location": {
+          "latitude": 26.68771866607647,
+          "longitude": 88.3857560902834,
+          "accuracy": 1,
+          "address": "Noukaghat Road , Thiknikata, West Bengal, India",
+          "city": "Thiknikata",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-26T13:12:23.615Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-26T13:22:53.644Z",
+        "contentHash": "36c8d5a940313fbb"
+      },
+      "duplicates": [
+        {
+          "responseId": "a40d8e44-c23d-49f0-9ffd-e75eba3c443b",
+          "mongoId": "694e8c81ab0762bac27e8e27",
+          "sessionId": "0075cbfa-ae3f-455f-b558-b2406e392cbe",
+          "startTime": "2025-12-26T13:12:21.939Z",
+          "endTime": "2025-12-26T13:19:16.596Z",
+          "duration": 414,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/1b10abb1-7606-4771-83dd-467b96310055_1766755368422_interview_1b10abb1-7606-4771-83dd-467b96310055_1766755368422.m4a",
+          "audioDuration": 414,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.68771866607647,
+            "longitude": 88.3857560902834,
+            "accuracy": 1,
+            "address": "Noukaghat Road , Thiknikata, West Bengal, India",
+            "city": "Thiknikata",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-26T13:12:23.615Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-26T13:24:17.835Z",
+          "timeDifference": 84191,
+          "contentHash": "36c8d5a940313fbb"
+        }
+      ]
+    },
+    {
+      "groupNumber": 14,
+      "mode": "CAPI",
+      "contentHash": "3e6f0fa04d457eb0",
+      "original": {
+        "responseId": "af1406f7-ee43-4554-9c86-9887241939a0",
+        "mongoId": "695147c037dddf4425efc31c",
+        "sessionId": "d52c21c2-dc52-4e82-92c9-8bb95bb78a62",
+        "interviewer": {
+          "id": "6942c3c9fe90bbe7745d11de",
+          "name": "Banani Ghosh",
+          "email": "capi397@gmail.com",
+          "phone": "6291990663",
+          "memberId": "CAPI397"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T13:28:22.505Z",
+        "endTime": "2025-12-28T13:37:57.347Z",
+        "duration": 574,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/d52c21c2-dc52-4e82-92c9-8bb95bb78a62_1766934462341_interview_d52c21c2-dc52-4e82-92c9-8bb95bb78a62_1766934462045.m4a",
+        "audioDuration": 574,
+        "audioFileSize": 9258182,
+        "location": {
+          "latitude": 22.597746,
+          "longitude": 88.3605402,
+          "accuracy": 29.11400032043457,
+          "address": "Chittaranjan Avenue 279 A, Kolkata, West Bengal, India",
+          "city": "Kolkata",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-28T13:28:23.880Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-28T15:07:44.991Z",
+        "contentHash": "3e6f0fa04d457eb0"
+      },
+      "duplicates": [
+        {
+          "responseId": "114845f7-3cf3-484e-82d9-6944b17075ee",
+          "mongoId": "69523c19e70c66b1e8af3dcc",
+          "sessionId": "60960a5f-9fb6-4b92-9435-3d8c86a599cf",
+          "startTime": "2025-12-28T13:28:22.505Z",
+          "endTime": "2025-12-28T13:37:57.347Z",
+          "duration": 574,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/d52c21c2-dc52-4e82-92c9-8bb95bb78a62_1766934462341_interview_d52c21c2-dc52-4e82-92c9-8bb95bb78a62_1766934462045.m4a",
+          "audioDuration": 574,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.597746,
+            "longitude": 88.3605402,
+            "accuracy": 29.11400032043457,
+            "address": "Chittaranjan Avenue 279 A, Kolkata, West Bengal, India",
+            "city": "Kolkata",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-28T13:28:23.880Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T08:30:17.233Z",
+          "timeDifference": 62552242,
+          "contentHash": "3e6f0fa04d457eb0"
+        }
+      ]
+    },
+    {
+      "groupNumber": 15,
+      "mode": "CAPI",
+      "contentHash": "4851f32959804397",
+      "original": {
+        "responseId": "fcb485f3-50f5-4e4c-89e8-704573490c61",
+        "mongoId": "695273adb8e9784765cf669b",
+        "sessionId": "19bf0445-012d-4ddb-8c5d-166e0e109da9",
+        "interviewer": {
+          "id": "694903ceea2c17c631334901",
+          "name": "RAJIB DAS",
+          "email": "capicapi928@gmail.com",
+          "phone": "7031164681",
+          "memberId": "CAPI928"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-29T06:28:30.381Z",
+        "endTime": "2025-12-29T06:36:57.448Z",
+        "duration": 507,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/19bf0445-012d-4ddb-8c5d-166e0e109da9_1767011243636_interview_19bf0445-012d-4ddb-8c5d-166e0e109da9_1767011243155.m4a",
+        "audioDuration": 507,
+        "audioFileSize": 6151248,
+        "location": {
+          "latitude": 26.5394119,
+          "longitude": 88.7197197,
+          "accuracy": 54.68299865722656,
+          "address": "26.539412, 88.719720",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-29T06:28:31.884Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-29T12:27:25.402Z",
+        "contentHash": "4851f32959804397"
+      },
+      "duplicates": [
+        {
+          "responseId": "5857f9e4-0e0a-4cc6-8e03-89844a215f21",
+          "mongoId": "695275afc472fa7f1edd4702",
+          "sessionId": "cc170cfb-b4de-42ee-9b7d-4d5433e9af49",
+          "startTime": "2025-12-29T06:28:30.381Z",
+          "endTime": "2025-12-29T06:36:57.448Z",
+          "duration": 507,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/19bf0445-012d-4ddb-8c5d-166e0e109da9_1767011243636_interview_19bf0445-012d-4ddb-8c5d-166e0e109da9_1767011243155.m4a",
+          "audioDuration": 507,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.5394119,
+            "longitude": 88.7197197,
+            "accuracy": 54.68299865722656,
+            "address": "26.539412, 88.719720",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-29T06:28:31.884Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T12:35:59.973Z",
+          "timeDifference": 514571,
+          "contentHash": "4851f32959804397"
+        }
+      ]
+    },
+    {
+      "groupNumber": 16,
+      "mode": "CAPI",
+      "contentHash": "5b916d95480926b2",
+      "original": {
+        "responseId": "5bd9bbd6-b1fd-4d80-b835-c003ecf53866",
+        "mongoId": "69527c9ecef9ed5e8586fd28",
+        "sessionId": "f2638b64-c171-4196-986f-ecf65a7eea70",
+        "interviewer": {
+          "id": "694903ceea2c17c631334901",
+          "name": "RAJIB DAS",
+          "email": "capicapi928@gmail.com",
+          "phone": "7031164681",
+          "memberId": "CAPI928"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-29T12:02:41.054Z",
+        "endTime": "2025-12-29T12:09:48.567Z",
+        "duration": 427,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/f2638b64-c171-4196-986f-ecf65a7eea70_1767013533191_interview_f2638b64-c171-4196-986f-ecf65a7eea70_1767013533191.m4a",
+        "audioDuration": 427,
+        "audioFileSize": 5181219,
+        "location": {
+          "latitude": 26.5444593,
+          "longitude": 88.7126322,
+          "accuracy": 98.4000015258789,
+          "address": "Goshala More Road. , Jalpaiguri, West Bengal, India",
+          "city": "Jalpaiguri",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-29T12:02:42.503Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-29T13:05:34.426Z",
+        "contentHash": "5b916d95480926b2"
+      },
+      "duplicates": [
+        {
+          "responseId": "8394c727-1081-4418-a41b-0ec355933417",
+          "mongoId": "69529baf791190e54896014b",
+          "sessionId": "83099b20-ddc6-401c-9dd4-3752ee30e148",
+          "startTime": "2025-12-29T12:02:41.054Z",
+          "endTime": "2025-12-29T12:09:48.567Z",
+          "duration": 427,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/f2638b64-c171-4196-986f-ecf65a7eea70_1767013533191_interview_f2638b64-c171-4196-986f-ecf65a7eea70_1767013533191.m4a",
+          "audioDuration": 427,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.5444593,
+            "longitude": 88.7126322,
+            "accuracy": 98.4000015258789,
+            "address": "Goshala More Road. , Jalpaiguri, West Bengal, India",
+            "city": "Jalpaiguri",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-29T12:02:42.503Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T15:18:07.233Z",
+          "timeDifference": 7952807,
+          "contentHash": "5b916d95480926b2"
+        }
+      ]
+    },
+    {
+      "groupNumber": 17,
+      "mode": "CAPI",
+      "contentHash": "5f2947055835c305",
+      "original": {
+        "responseId": "f160c812-eb27-498b-8bf6-ceb100a7748d",
+        "mongoId": "69525679630737b2e64eb48d",
+        "sessionId": "03949dfc-e49f-4b30-ac5d-897152adbdc2",
+        "interviewer": {
+          "id": "6942c3c9fe90bbe7745d11de",
+          "name": "Banani Ghosh",
+          "email": "capi397@gmail.com",
+          "phone": "6291990663",
+          "memberId": "CAPI397"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T14:02:09.270Z",
+        "endTime": "2025-12-28T14:11:39.974Z",
+        "duration": 570,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/03949dfc-e49f-4b30-ac5d-897152adbdc2_1767003767495_interview_03949dfc-e49f-4b30-ac5d-897152adbdc2_1767003767014.m4a",
+        "audioDuration": 570,
+        "audioFileSize": 8913855,
+        "location": {
+          "latitude": 22.5978208,
+          "longitude": 88.3605492,
+          "accuracy": 128.8990020751953,
+          "address": "22.597821, 88.360549",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-28T14:02:27.739Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-29T10:22:49.276Z",
+        "contentHash": "5f2947055835c305"
+      },
+      "duplicates": [
+        {
+          "responseId": "739a6bb7-5402-4d94-a2cf-2147ec837411",
+          "mongoId": "695258cc297a2989382a9708",
+          "sessionId": "e07002ea-97a2-42ef-8fc4-62b3a09a2449",
+          "startTime": "2025-12-28T14:02:09.270Z",
+          "endTime": "2025-12-28T14:11:39.974Z",
+          "duration": 570,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/03949dfc-e49f-4b30-ac5d-897152adbdc2_1767003767495_interview_03949dfc-e49f-4b30-ac5d-897152adbdc2_1767003767014.m4a",
+          "audioDuration": 570,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.5978208,
+            "longitude": 88.3605492,
+            "accuracy": 128.8990020751953,
+            "address": "22.597821, 88.360549",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-28T14:02:27.739Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T10:32:44.645Z",
+          "timeDifference": 595369,
+          "contentHash": "5f2947055835c305"
+        }
+      ]
+    },
+    {
+      "groupNumber": 18,
+      "mode": "CAPI",
+      "contentHash": "62b62ee653f4efc1",
+      "original": {
+        "responseId": "759425fc-b4ae-4757-b41c-06da0f45ffbb",
+        "mongoId": "695219a767fe188e64661c02",
+        "sessionId": "bc467d0d-6879-47ad-b792-4371c5595033",
+        "interviewer": {
+          "id": "6948d83a3f3054d9a2647d0d",
+          "name": "Bablu Adhikari",
+          "email": "capicapi945@gmail.com",
+          "phone": "9475382714",
+          "memberId": "CAPI945"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-27T06:38:16.857Z",
+        "endTime": "2025-12-27T06:45:27.488Z",
+        "duration": 430,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/bc467d0d-6879-47ad-b792-4371c5595033_1766988198086_interview_bc467d0d-6879-47ad-b792-4371c5595033_1766988198086.m4a",
+        "audioDuration": 430,
+        "audioFileSize": 6836654,
+        "location": {
+          "latitude": 26.3314967,
+          "longitude": 89.3085817,
+          "accuracy": 9.100000381469727,
+          "address": "Road , Nishiganj, West Bengal, India",
+          "city": "Nishiganj",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-27T06:38:24.094Z"
+        },
+        "responseCount": 24,
+        "createdAt": "2025-12-29T06:03:19.305Z",
+        "contentHash": "62b62ee653f4efc1"
+      },
+      "duplicates": [
+        {
+          "responseId": "f4f0425d-fd64-4b96-8e0c-2bf58be846b1",
+          "mongoId": "69521abe8f82c4193b8edba2",
+          "sessionId": "74ec24a3-c047-4891-85bf-e5215af789bc",
+          "startTime": "2025-12-27T06:38:16.857Z",
+          "endTime": "2025-12-27T06:45:27.488Z",
+          "duration": 430,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/bc467d0d-6879-47ad-b792-4371c5595033_1766988198086_interview_bc467d0d-6879-47ad-b792-4371c5595033_1766988198086.m4a",
+          "audioDuration": 430,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.3314967,
+            "longitude": 89.3085817,
+            "accuracy": 9.100000381469727,
+            "address": "Road , Nishiganj, West Bengal, India",
+            "city": "Nishiganj",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-27T06:38:24.094Z"
+          },
+          "responseCount": 24,
+          "createdAt": "2025-12-29T06:07:58.146Z",
+          "timeDifference": 278841,
+          "contentHash": "62b62ee653f4efc1"
+        }
+      ]
+    },
+    {
+      "groupNumber": 19,
+      "mode": "CAPI",
+      "contentHash": "646d20966f0d0bf0",
+      "original": {
+        "responseId": "73684b83-64aa-4f51-946e-3210a00a9f13",
+        "mongoId": "695277d828e2a2f3b13b574a",
+        "sessionId": "d0efbca8-5b51-4acc-b3ad-44436e44aeb7",
+        "interviewer": {
+          "id": "694903ceea2c17c631334901",
+          "name": "RAJIB DAS",
+          "email": "capicapi928@gmail.com",
+          "phone": "7031164681",
+          "memberId": "CAPI928"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-29T12:15:30.947Z",
+        "endTime": "2025-12-29T12:23:28.150Z",
+        "duration": 477,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/bd15ba05-3edf-4a8b-9685-47f3750c5b7c_1767419557976_interview_bd15ba05-3edf-4a8b-9685-47f3750c5b7c_1767419557976.m4a",
+        "audioDuration": 477,
+        "audioFileSize": 0,
+        "location": {
+          "latitude": 26.544462,
+          "longitude": 88.7126342,
+          "accuracy": 92.9000015258789,
+          "address": "Goshala More Road. , Jalpaiguri, West Bengal, India",
+          "city": "Jalpaiguri",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-29T12:15:43.614Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-29T12:45:12.110Z",
+        "contentHash": "646d20966f0d0bf0"
+      },
+      "duplicates": [
+        {
+          "responseId": "d701eb0c-174c-444b-9b67-b72d104dd5d4",
+          "mongoId": "6958aeaa7b3f5592611883e7",
+          "sessionId": "bd15ba05-3edf-4a8b-9685-47f3750c5b7c",
+          "startTime": "2025-12-29T12:15:30.947Z",
+          "endTime": "2025-12-29T12:23:28.150Z",
+          "duration": 477,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/bd15ba05-3edf-4a8b-9685-47f3750c5b7c_1767419557976_interview_bd15ba05-3edf-4a8b-9685-47f3750c5b7c_1767419557976.m4a",
+          "audioDuration": 477,
+          "audioFileSize": 5644454,
+          "location": {
+            "latitude": 26.544462,
+            "longitude": 88.7126342,
+            "accuracy": 92.9000015258789,
+            "address": "Goshala More Road. , Jalpaiguri, West Bengal, India",
+            "city": "Jalpaiguri",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-29T12:15:43.614Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T05:52:42.591Z",
+          "timeDifference": 407250481,
+          "contentHash": "646d20966f0d0bf0"
+        }
+      ]
+    },
+    {
+      "groupNumber": 20,
+      "mode": "CAPI",
+      "contentHash": "675ed9acf7dd4354",
+      "original": {
+        "responseId": "bdec00f3-3d09-4baf-b1b5-9e3c149d492f",
+        "mongoId": "695256f6ce28698990967bd0",
+        "sessionId": "f42092bf-8f2b-4b82-a5a2-556d6533b6ab",
+        "interviewer": {
+          "id": "6942c3c9fe90bbe7745d11de",
+          "name": "Banani Ghosh",
+          "email": "capi397@gmail.com",
+          "phone": "6291990663",
+          "memberId": "CAPI397"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T14:34:51.980Z",
+        "endTime": "2025-12-28T14:43:19.767Z",
+        "duration": 507,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/f42092bf-8f2b-4b82-a5a2-556d6533b6ab_1767003893531_interview_f42092bf-8f2b-4b82-a5a2-556d6533b6ab_1767003893234.m4a",
+        "audioDuration": 507,
+        "audioFileSize": 7897330,
+        "location": {
+          "latitude": 22.5977239,
+          "longitude": 88.3606246,
+          "accuracy": 135.60000610351562,
+          "address": "22.597724, 88.360625",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-28T14:35:10.434Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-29T10:24:54.885Z",
+        "contentHash": "675ed9acf7dd4354"
+      },
+      "duplicates": [
+        {
+          "responseId": "af510460-019d-46ae-9866-82087cd708db",
+          "mongoId": "6952592a37122123a4d129eb",
+          "sessionId": "ef584ac9-dddd-46b4-8bdc-ee0a1ee444ff",
+          "startTime": "2025-12-28T14:34:51.980Z",
+          "endTime": "2025-12-28T14:43:19.767Z",
+          "duration": 507,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/f42092bf-8f2b-4b82-a5a2-556d6533b6ab_1767003893531_interview_f42092bf-8f2b-4b82-a5a2-556d6533b6ab_1767003893234.m4a",
+          "audioDuration": 507,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.5977239,
+            "longitude": 88.3606246,
+            "accuracy": 135.60000610351562,
+            "address": "22.597724, 88.360625",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-28T14:35:10.434Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T10:34:18.425Z",
+          "timeDifference": 563540,
+          "contentHash": "675ed9acf7dd4354"
+        }
+      ]
+    },
+    {
+      "groupNumber": 21,
+      "mode": "CAPI",
+      "contentHash": "69d30e40288c46e2",
+      "original": {
+        "responseId": "44ff941c-08ad-47a8-84bc-9c737a77436a",
+        "mongoId": "695676f8236c6c0f77252df9",
+        "sessionId": "51ff0e7e-4da2-4c3c-833f-9d9d9d2e7d2b",
+        "interviewer": {
+          "id": "6942c3bdfe90bbe7745cf15b",
+          "name": "Soma Das",
+          "email": "capi390@gmail.com",
+          "phone": "8910200135",
+          "memberId": "CAPI390"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-01T12:31:14.501Z",
+        "endTime": "2026-01-01T12:39:11.779Z",
+        "duration": 477,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/890f3e59-fae2-47bf-8ec1-6d235ba84b07_1767274828818_interview_890f3e59-fae2-47bf-8ec1-6d235ba84b07_1767274828818.m4a",
+        "audioDuration": 477,
+        "audioFileSize": 0,
+        "location": {
+          "latitude": 22.597949,
+          "longitude": 88.3608127,
+          "accuracy": 100,
+          "address": ", Kolkata, West Bengal, India",
+          "city": "Kolkata",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2026-01-01T12:31:22.655Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-01T13:30:32.345Z",
+        "contentHash": "69d30e40288c46e2"
+      },
+      "duplicates": [
+        {
+          "responseId": "9fa91dc1-6708-4e7d-90d9-ec09b1edeb94",
+          "mongoId": "695679697ff6f58db122699f",
+          "sessionId": "890f3e59-fae2-47bf-8ec1-6d235ba84b07",
+          "startTime": "2026-01-01T12:31:14.501Z",
+          "endTime": "2026-01-01T12:39:11.779Z",
+          "duration": 477,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/890f3e59-fae2-47bf-8ec1-6d235ba84b07_1767274828818_interview_890f3e59-fae2-47bf-8ec1-6d235ba84b07_1767274828818.m4a",
+          "audioDuration": 477,
+          "audioFileSize": 7574624,
+          "location": {
+            "latitude": 22.597949,
+            "longitude": 88.3608127,
+            "accuracy": 100,
+            "address": ", Kolkata, West Bengal, India",
+            "city": "Kolkata",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-01T12:31:22.655Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-01T13:40:57.869Z",
+          "timeDifference": 625524,
+          "contentHash": "69d30e40288c46e2"
+        }
+      ]
+    },
+    {
+      "groupNumber": 22,
+      "mode": "CAPI",
+      "contentHash": "6acf3765609f141a",
+      "original": {
+        "responseId": "b66f12a8-2560-4781-b674-248a6a8c3645",
+        "mongoId": "69590f194fa7f6e5b9c8b25f",
+        "sessionId": "afcde4fe-30cb-4457-8a75-b8f57bbd680b",
+        "interviewer": {
+          "id": "694433b056275b9dd8337758",
+          "name": "Subham paul.",
+          "email": "capi2011@gmail.com",
+          "phone": "6297497603",
+          "memberId": "CAPI201"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T10:59:43.296Z",
+        "endTime": "2026-01-03T11:04:45.326Z",
+        "duration": 302,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/afcde4fe-30cb-4457-8a75-b8f57bbd680b_1767444247718_interview_afcde4fe-30cb-4457-8a75-b8f57bbd680b_1767444247718.m4a",
+        "audioDuration": 302,
+        "audioFileSize": 4866160,
+        "location": {
+          "latitude": 22.697153091430664,
+          "longitude": 88.37374114990234,
+          "accuracy": 1,
+          "address": "22.697153, 88.373741",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-03T10:59:43.778Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-03T12:44:09.222Z",
+        "contentHash": "6acf3765609f141a"
+      },
+      "duplicates": [
+        {
+          "responseId": "a90fbeec-fe96-4bda-8947-cf8f578e7a67",
+          "mongoId": "6959b2a07c214a59ce20c21c",
+          "sessionId": "0c456515-9047-43dc-8896-14ef622912b2",
+          "startTime": "2026-01-03T10:59:43.296Z",
+          "endTime": "2026-01-03T11:04:45.326Z",
+          "duration": 302,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/afcde4fe-30cb-4457-8a75-b8f57bbd680b_1767444247718_interview_afcde4fe-30cb-4457-8a75-b8f57bbd680b_1767444247718.m4a",
+          "audioDuration": 302,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.697153091430664,
+            "longitude": 88.37374114990234,
+            "accuracy": 1,
+            "address": "22.697153, 88.373741",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-03T10:59:43.778Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-04T00:21:52.697Z",
+          "timeDifference": 41863475,
+          "contentHash": "6acf3765609f141a"
+        }
+      ]
+    },
+    {
+      "groupNumber": 23,
+      "mode": "CAPI",
+      "contentHash": "74412395e841bd50",
+      "original": {
+        "responseId": "163411ae-ab1e-4046-aeaf-f4c147362f24",
+        "mongoId": "695a2e26093c771a93ae9a68",
+        "sessionId": "b661c0de-38d8-480b-8bfe-9fcb39c456b6",
+        "interviewer": {
+          "id": "6948ddf2f5d623d5974dfae0",
+          "name": "PUJA ROY BANERJEE",
+          "email": "capicapi836@gmail.com",
+          "phone": "6297072294",
+          "memberId": "CAPI836"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-04T07:17:39.016Z",
+        "endTime": "2026-01-04T07:22:14.925Z",
+        "duration": 275,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/b661c0de-38d8-480b-8bfe-9fcb39c456b6_1767517733581_interview_b661c0de-38d8-480b-8bfe-9fcb39c456b6_1767517733581.m4a",
+        "audioDuration": 275,
+        "audioFileSize": 4393768,
+        "location": null,
+        "responseCount": 25,
+        "createdAt": "2026-01-04T09:08:54.511Z",
+        "contentHash": "74412395e841bd50"
+      },
+      "duplicates": [
+        {
+          "responseId": "22aaf049-eeb6-40e8-9820-3303db80a73e",
+          "mongoId": "695a2e6d9ffd76e27aadc938",
+          "sessionId": "96885b8d-42b9-47cb-b4af-3641f677b933",
+          "startTime": "2026-01-04T07:17:39.016Z",
+          "endTime": "2026-01-04T07:22:14.925Z",
+          "duration": 275,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/b661c0de-38d8-480b-8bfe-9fcb39c456b6_1767517733581_interview_b661c0de-38d8-480b-8bfe-9fcb39c456b6_1767517733581.m4a",
+          "audioDuration": 275,
+          "audioFileSize": 0,
+          "location": null,
+          "responseCount": 25,
+          "createdAt": "2026-01-04T09:10:05.323Z",
+          "timeDifference": 70812,
+          "contentHash": "74412395e841bd50"
+        }
+      ]
+    },
+    {
+      "groupNumber": 24,
+      "mode": "CAPI",
+      "contentHash": "7556718b67d4cd15",
+      "original": {
+        "responseId": "902c76eb-12ae-4c37-9c1a-e4432f390bff",
+        "mongoId": "69592107f513ae4c47313de4",
+        "sessionId": "e18c293c-95e7-4ac2-b9e9-44d59f749656",
+        "interviewer": {
+          "id": "6944338356275b9dd832ee21",
+          "name": "Anima Ghosh",
+          "email": "capi445@gmail.com",
+          "phone": "6296451278",
+          "memberId": "CAPI445"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-02T12:06:28.795Z",
+        "endTime": "2026-01-02T12:10:41.072Z",
+        "duration": 252,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/e18c293c-95e7-4ac2-b9e9-44d59f749656_1767448835716_interview_e18c293c-95e7-4ac2-b9e9-44d59f749656_1767448835716.m4a",
+        "audioDuration": 252,
+        "audioFileSize": 4038995,
+        "location": {
+          "latitude": 23.6717813,
+          "longitude": 86.970916,
+          "accuracy": 20,
+          "address": "23.671781, 86.970916",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-02T12:06:30.772Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-03T14:00:39.823Z",
+        "contentHash": "7556718b67d4cd15"
+      },
+      "duplicates": [
+        {
+          "responseId": "840bc290-0189-4572-a75d-dd0529a542d8",
+          "mongoId": "695921493a9ea08e62c60a18",
+          "sessionId": "a6544c53-2cc7-4b09-a519-e99f913d02ca",
+          "startTime": "2026-01-02T12:06:28.795Z",
+          "endTime": "2026-01-02T12:10:41.072Z",
+          "duration": 252,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/e18c293c-95e7-4ac2-b9e9-44d59f749656_1767448835716_interview_e18c293c-95e7-4ac2-b9e9-44d59f749656_1767448835716.m4a",
+          "audioDuration": 252,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 23.6717813,
+            "longitude": 86.970916,
+            "accuracy": 20,
+            "address": "23.671781, 86.970916",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-02T12:06:30.772Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T14:01:45.873Z",
+          "timeDifference": 66050,
+          "contentHash": "7556718b67d4cd15"
+        }
+      ]
+    },
+    {
+      "groupNumber": 25,
+      "mode": "CAPI",
+      "contentHash": "7775638160461683",
+      "original": {
+        "responseId": "af322122-c524-4033-8393-b8df0b22c370",
+        "mongoId": "6959f63ad9a4085a59f1d6a7",
+        "sessionId": "ee0e14f1-7df3-41ef-8e02-5265eb59d896",
+        "interviewer": {
+          "id": "694cf5f115d374e9c7050d96",
+          "name": "7. Monira khatun",
+          "email": "capicapi1009@gmail.com",
+          "phone": "9295794010",
+          "memberId": "CAPI1009"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-04T04:28:18.145Z",
+        "endTime": "2026-01-04T04:33:22.795Z",
+        "duration": 304,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/ee0e14f1-7df3-41ef-8e02-5265eb59d896_1767503416494_interview_ee0e14f1-7df3-41ef-8e02-5265eb59d896_1767503416494.m4a",
+        "audioDuration": 304,
+        "audioFileSize": 4589444,
+        "location": null,
+        "responseCount": 27,
+        "createdAt": "2026-01-04T05:10:18.347Z",
+        "contentHash": "7775638160461683"
+      },
+      "duplicates": [
+        {
+          "responseId": "86dbc0ba-f9a6-44ff-b84c-636f26db89ed",
+          "mongoId": "6959f6a20441c10b7fd38f7e",
+          "sessionId": "fef94323-632b-475f-afc8-8d2d3d7afdd4",
+          "startTime": "2026-01-04T04:28:18.145Z",
+          "endTime": "2026-01-04T04:33:22.795Z",
+          "duration": 304,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/ee0e14f1-7df3-41ef-8e02-5265eb59d896_1767503416494_interview_ee0e14f1-7df3-41ef-8e02-5265eb59d896_1767503416494.m4a",
+          "audioDuration": 304,
+          "audioFileSize": 0,
+          "location": null,
+          "responseCount": 27,
+          "createdAt": "2026-01-04T05:12:02.756Z",
+          "timeDifference": 104409,
+          "contentHash": "7775638160461683"
+        }
+      ]
+    },
+    {
+      "groupNumber": 26,
+      "mode": "CAPI",
+      "contentHash": "7ecdfaae68e44283",
+      "original": {
+        "responseId": "a24e6436-48e9-4537-aea1-789cc6f4beb4",
+        "mongoId": "695146c1949a4bc646ee8fca",
+        "sessionId": "5c2bff77-dd6e-449f-8644-a8d2741d1382",
+        "interviewer": {
+          "id": "6942c3c9fe90bbe7745d11de",
+          "name": "Banani Ghosh",
+          "email": "capi397@gmail.com",
+          "phone": "6291990663",
+          "memberId": "CAPI397"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T13:00:06.679Z",
+        "endTime": "2025-12-28T13:08:47.113Z",
+        "duration": 520,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/5c2bff77-dd6e-449f-8644-a8d2741d1382_1766934206894_interview_5c2bff77-dd6e-449f-8644-a8d2741d1382_1766934206622.m4a",
+        "audioDuration": 520,
+        "audioFileSize": 8102357,
+        "location": {
+          "latitude": 22.5977945,
+          "longitude": 88.3605674,
+          "accuracy": 156.89999389648438,
+          "address": "22.597794, 88.360567",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-28T13:00:25.147Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-28T15:03:29.275Z",
+        "contentHash": "7ecdfaae68e44283"
+      },
+      "duplicates": [
+        {
+          "responseId": "74e4fbba-f0c7-4402-b970-cdfd769d5a67",
+          "mongoId": "69523bbbafcfe0575e65a20d",
+          "sessionId": "21ae274e-39e7-421f-8e00-ce5ba7096e81",
+          "startTime": "2025-12-28T13:00:06.679Z",
+          "endTime": "2025-12-28T13:08:47.113Z",
+          "duration": 520,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/5c2bff77-dd6e-449f-8644-a8d2741d1382_1766934206894_interview_5c2bff77-dd6e-449f-8644-a8d2741d1382_1766934206622.m4a",
+          "audioDuration": 520,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.5977945,
+            "longitude": 88.3605674,
+            "accuracy": 156.89999389648438,
+            "address": "22.597794, 88.360567",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-28T13:00:25.147Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T08:28:43.809Z",
+          "timeDifference": 62714534,
+          "contentHash": "7ecdfaae68e44283"
+        }
+      ]
+    },
+    {
+      "groupNumber": 27,
+      "mode": "CAPI",
+      "contentHash": "81088e442c020716",
+      "original": {
+        "responseId": "ca31c155-e9a8-4e74-9bd2-bf18ee64556c",
+        "mongoId": "69528e0d060f29025f5a6e07",
+        "sessionId": "77a5b58d-1291-4451-a941-73f6c497af84",
+        "interviewer": {
+          "id": "6946cd8f962d7e42c4040c21",
+          "name": "Bilas sekh",
+          "email": "capi932@gmail.com",
+          "phone": "6295229456",
+          "memberId": "CAPI932"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-29T14:12:17.451Z",
+        "endTime": "2025-12-29T14:16:57.685Z",
+        "duration": 280,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/77a5b58d-1291-4451-a941-73f6c497af84_1767017992466_interview_77a5b58d-1291-4451-a941-73f6c497af84_1767017991994.m4a",
+        "audioDuration": 280,
+        "audioFileSize": 4435649,
+        "location": {
+          "latitude": 26.552398702341428,
+          "longitude": 88.18772088736296,
+          "accuracy": 1,
+          "address": "post office road , Siliguri, West Bengal, India",
+          "city": "Siliguri",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-29T14:12:22.597Z"
+        },
+        "responseCount": 25,
+        "createdAt": "2025-12-29T14:19:57.350Z",
+        "contentHash": "81088e442c020716"
+      },
+      "duplicates": [
+        {
+          "responseId": "9846611c-2999-401b-b58f-1b25965e9644",
+          "mongoId": "69528e3153cd42989a3770fa",
+          "sessionId": "315e161b-3e8a-4602-ac1c-8d477fef8502",
+          "startTime": "2025-12-29T14:12:17.451Z",
+          "endTime": "2025-12-29T14:16:57.685Z",
+          "duration": 280,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/77a5b58d-1291-4451-a941-73f6c497af84_1767017992466_interview_77a5b58d-1291-4451-a941-73f6c497af84_1767017991994.m4a",
+          "audioDuration": 280,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.552398702341428,
+            "longitude": 88.18772088736296,
+            "accuracy": 1,
+            "address": "post office road , Siliguri, West Bengal, India",
+            "city": "Siliguri",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-29T14:12:22.597Z"
+          },
+          "responseCount": 25,
+          "createdAt": "2025-12-29T14:20:33.885Z",
+          "timeDifference": 36535,
+          "contentHash": "81088e442c020716"
+        }
+      ]
+    },
+    {
+      "groupNumber": 28,
+      "mode": "CAPI",
+      "contentHash": "8406f3c7187eefa7",
+      "original": {
+        "responseId": "33dbf73d-a62d-4aef-bb4c-d5e6519ee056",
+        "mongoId": "6951469506da6707d92da77e",
+        "sessionId": "2deab82c-6963-4440-8247-3833a282d683",
+        "interviewer": {
+          "id": "6942c3c9fe90bbe7745d11de",
+          "name": "Banani Ghosh",
+          "email": "capi397@gmail.com",
+          "phone": "6291990663",
+          "memberId": "CAPI397"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T12:36:27.307Z",
+        "endTime": "2025-12-28T12:44:50.894Z",
+        "duration": 503,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/2deab82c-6963-4440-8247-3833a282d683_1766934161881_interview_2deab82c-6963-4440-8247-3833a282d683_1766934161599.m4a",
+        "audioDuration": 503,
+        "audioFileSize": 8101614,
+        "location": {
+          "latitude": 22.5977496,
+          "longitude": 88.3606112,
+          "accuracy": 46.939998626708984,
+          "address": "22.597750, 88.360611",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-28T12:36:29.001Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-28T15:02:45.307Z",
+        "contentHash": "8406f3c7187eefa7"
+      },
+      "duplicates": [
+        {
+          "responseId": "901f0ed6-4422-4217-826f-96e9c77fd3f4",
+          "mongoId": "6951492653c345e8900ca8a7",
+          "sessionId": "31c567f5-7970-4ec9-a8b2-9cf1dd998671",
+          "startTime": "2025-12-28T12:36:27.307Z",
+          "endTime": "2025-12-28T12:44:50.894Z",
+          "duration": 503,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/2deab82c-6963-4440-8247-3833a282d683_1766934161881_interview_2deab82c-6963-4440-8247-3833a282d683_1766934161599.m4a",
+          "audioDuration": 503,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.5977496,
+            "longitude": 88.3606112,
+            "accuracy": 46.939998626708984,
+            "address": "22.597750, 88.360611",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-28T12:36:29.001Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-28T15:13:42.225Z",
+          "timeDifference": 656918,
+          "contentHash": "8406f3c7187eefa7"
+        }
+      ]
+    },
+    {
+      "groupNumber": 29,
+      "mode": "CAPI",
+      "contentHash": "878beaa87332156a",
+      "original": {
+        "responseId": "4e5b6594-0d0a-453c-a8ee-d352997102ec",
+        "mongoId": "694e9bf060e04aa876539048",
+        "sessionId": "96bd4596-55da-45ac-9e4d-6e1962b5d99e",
+        "interviewer": {
+          "id": "6946cd93962d7e42c40417ad",
+          "name": "Belal sk",
+          "email": "capi934@gmail.com",
+          "phone": "8597089366",
+          "memberId": "CAPI934"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-26T13:21:06.442Z",
+        "endTime": "2025-12-26T13:26:58.137Z",
+        "duration": 351,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/96bd4596-55da-45ac-9e4d-6e1962b5d99e_1766759402114_interview_96bd4596-55da-45ac-9e4d-6e1962b5d99e_1766759400442.m4a",
+        "audioDuration": 351,
+        "audioFileSize": 4274710,
+        "location": {
+          "latitude": 26.714091729173546,
+          "longitude": 88.40536437928677,
+          "accuracy": 1,
+          "address": "26.714092, 88.405364",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-26T13:21:06.961Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-26T14:30:08.369Z",
+        "contentHash": "878beaa87332156a"
+      },
+      "duplicates": [
+        {
+          "responseId": "73b5ee76-60e3-44ad-aacc-634df5a61099",
+          "mongoId": "694e9d203623ef59211dbfea",
+          "sessionId": "13cc8bb2-cb3d-429a-9264-a94f1332ca63",
+          "startTime": "2025-12-26T13:21:06.442Z",
+          "endTime": "2025-12-26T13:26:58.137Z",
+          "duration": 351,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/96bd4596-55da-45ac-9e4d-6e1962b5d99e_1766759402114_interview_96bd4596-55da-45ac-9e4d-6e1962b5d99e_1766759400442.m4a",
+          "audioDuration": 351,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.714091729173546,
+            "longitude": 88.40536437928677,
+            "accuracy": 1,
+            "address": "26.714092, 88.405364",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-26T13:21:06.961Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-26T14:35:12.289Z",
+          "timeDifference": 303920,
+          "contentHash": "878beaa87332156a"
+        }
+      ]
+    },
+    {
+      "groupNumber": 30,
+      "mode": "CAPI",
+      "contentHash": "8a42129cde0ab540",
+      "original": {
+        "responseId": "9c21b81c-c5aa-436a-82e5-57bbfca7c274",
+        "mongoId": "695912565cd6227d7e0c8e94",
+        "sessionId": "766cf98c-87a0-4d5d-99cd-8d4b5f521946",
+        "interviewer": {
+          "id": "694433dd56275b9dd8341360",
+          "name": "Jhumpa Garai",
+          "email": "capi2381@gmail.com",
+          "phone": "7029124700",
+          "memberId": "CAPI238"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T11:46:23.106Z",
+        "endTime": "2026-01-03T11:51:49.484Z",
+        "duration": 326,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/766cf98c-87a0-4d5d-99cd-8d4b5f521946_1767445077541_interview_766cf98c-87a0-4d5d-99cd-8d4b5f521946_1767445077541.m4a",
+        "audioDuration": 326,
+        "audioFileSize": 3963742,
+        "location": {
+          "latitude": 22.67951774597168,
+          "longitude": 88.36964416503906,
+          "accuracy": 1,
+          "address": ", Panihati, West Bengal, India",
+          "city": "Panihati",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2026-01-03T11:46:23.460Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-03T12:57:58.451Z",
+        "contentHash": "8a42129cde0ab540"
+      },
+      "duplicates": [
+        {
+          "responseId": "2b333da7-74f3-4aa3-81de-c4c2de189127",
+          "mongoId": "6959127e343b980cb624413b",
+          "sessionId": "a80a75a4-fc1a-4853-a155-65a481a62f09",
+          "startTime": "2026-01-03T11:46:23.106Z",
+          "endTime": "2026-01-03T11:51:49.484Z",
+          "duration": 326,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/766cf98c-87a0-4d5d-99cd-8d4b5f521946_1767445077541_interview_766cf98c-87a0-4d5d-99cd-8d4b5f521946_1767445077541.m4a",
+          "audioDuration": 326,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.67951774597168,
+            "longitude": 88.36964416503906,
+            "accuracy": 1,
+            "address": ", Panihati, West Bengal, India",
+            "city": "Panihati",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-03T11:46:23.460Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T12:58:38.488Z",
+          "timeDifference": 40037,
+          "contentHash": "8a42129cde0ab540"
+        }
+      ]
+    },
+    {
+      "groupNumber": 31,
+      "mode": "CAPI",
+      "contentHash": "91118cf479582538",
+      "original": {
+        "responseId": "733ba5c7-7f9c-4b3b-b833-1f2c18a1f7da",
+        "mongoId": "695a0eccd4758ecd490d3b36",
+        "sessionId": "927a5c52-5f23-4c88-b508-0c5e69bc28cf",
+        "interviewer": {
+          "id": "6944338356275b9dd832ee21",
+          "name": "Anima Ghosh",
+          "email": "capi445@gmail.com",
+          "phone": "6296451278",
+          "memberId": "CAPI445"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-04T06:48:00.924Z",
+        "endTime": "2026-01-04T06:52:47.891Z",
+        "duration": 286,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/927a5c52-5f23-4c88-b508-0c5e69bc28cf_1767509706979_interview_927a5c52-5f23-4c88-b508-0c5e69bc28cf_1767509706834.m4a",
+        "audioDuration": 286,
+        "audioFileSize": 4603001,
+        "location": {
+          "latitude": 23.6717384,
+          "longitude": 86.9708768,
+          "accuracy": 23.655000686645508,
+          "address": "23.671738, 86.970877",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-04T06:48:02.724Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-04T06:55:08.141Z",
+        "contentHash": "91118cf479582538"
+      },
+      "duplicates": [
+        {
+          "responseId": "2ad4fff3-c96d-4606-ba16-4f15e830493c",
+          "mongoId": "695a0eedf401571b20c1aae5",
+          "sessionId": "1680d790-a4bf-48de-bb68-ab308299e4ee",
+          "startTime": "2026-01-04T06:48:00.924Z",
+          "endTime": "2026-01-04T06:52:47.891Z",
+          "duration": 286,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/927a5c52-5f23-4c88-b508-0c5e69bc28cf_1767509706979_interview_927a5c52-5f23-4c88-b508-0c5e69bc28cf_1767509706834.m4a",
+          "audioDuration": 286,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 23.6717384,
+            "longitude": 86.9708768,
+            "accuracy": 23.655000686645508,
+            "address": "23.671738, 86.970877",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-04T06:48:02.724Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-04T06:55:41.871Z",
+          "timeDifference": 33730,
+          "contentHash": "91118cf479582538"
+        }
+      ]
+    },
+    {
+      "groupNumber": 32,
+      "mode": "CAPI",
+      "contentHash": "94f25bab95f08cb4",
+      "original": {
+        "responseId": "7cb47364-0d48-40e9-aa44-65b5b21a5b28",
+        "mongoId": "695110be3dd446a1576d2142",
+        "sessionId": "fc2c7143-da92-43ed-8def-d65854438c0d",
+        "interviewer": {
+          "id": "694903ceea2c17c631334901",
+          "name": "RAJIB DAS",
+          "email": "capicapi928@gmail.com",
+          "phone": "7031164681",
+          "memberId": "CAPI928"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T11:04:11.349Z",
+        "endTime": "2025-12-28T11:10:53.657Z",
+        "duration": 402,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/fc2c7143-da92-43ed-8def-d65854438c0d_1766920379130_interview_fc2c7143-da92-43ed-8def-d65854438c0d_1766920379129.m4a",
+        "audioDuration": 402,
+        "audioFileSize": 4874944,
+        "location": {
+          "latitude": 26.5480009,
+          "longitude": 88.715562,
+          "accuracy": 75.39600372314453,
+          "address": "26.548001, 88.715562",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-28T11:04:12.554Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-28T11:13:02.669Z",
+        "contentHash": "94f25bab95f08cb4"
+      },
+      "duplicates": [
+        {
+          "responseId": "8a118d0b-df7a-4c58-a7a9-c593269f183a",
+          "mongoId": "695110ecec65215265c8065d",
+          "sessionId": "6669c1b7-8e94-4766-a798-99ba1efbd113",
+          "startTime": "2025-12-28T11:04:11.349Z",
+          "endTime": "2025-12-28T11:10:53.657Z",
+          "duration": 402,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/fc2c7143-da92-43ed-8def-d65854438c0d_1766920379130_interview_fc2c7143-da92-43ed-8def-d65854438c0d_1766920379129.m4a",
+          "audioDuration": 402,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.5480009,
+            "longitude": 88.715562,
+            "accuracy": 75.39600372314453,
+            "address": "26.548001, 88.715562",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-28T11:04:12.554Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-28T11:13:48.345Z",
+          "timeDifference": 45676,
+          "contentHash": "94f25bab95f08cb4"
+        }
+      ]
+    },
+    {
+      "groupNumber": 33,
+      "mode": "CAPI",
+      "contentHash": "95772008d1149af2",
+      "original": {
+        "responseId": "cc45ab6c-cb5d-430d-9d8d-054175cdc3ec",
+        "mongoId": "6957938e02159510e662f4bb",
+        "sessionId": "0b105ebf-066a-48bd-8317-02407501c39c",
+        "interviewer": {
+          "id": "6948f2a3111276275fb10904",
+          "name": "ABHIJIT ROY",
+          "email": "capicapi876@gmail.com",
+          "phone": "7047564750",
+          "memberId": "CAPI876"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-02T09:26:04.585Z",
+        "endTime": "2026-01-02T09:31:12.988Z",
+        "duration": 308,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/ca2791e4-e3e7-44df-9b11-7f66807e71e1_1767418782416_interview_ca2791e4-e3e7-44df-9b11-7f66807e71e1_1767418782416.m4a",
+        "audioDuration": 308,
+        "audioFileSize": 0,
+        "location": {
+          "latitude": 26.703799023685136,
+          "longitude": 88.43207716941833,
+          "accuracy": 0.009999999776482582,
+          "address": "26.703799, 88.432077",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-02T09:26:05.250Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-02T09:44:46.206Z",
+        "contentHash": "95772008d1149af2"
+      },
+      "duplicates": [
+        {
+          "responseId": "32c57620-c5b6-45e0-9ad7-16a10427f2f5",
+          "mongoId": "6958aba01f593128431d24e3",
+          "sessionId": "ca2791e4-e3e7-44df-9b11-7f66807e71e1",
+          "startTime": "2026-01-02T09:26:04.585Z",
+          "endTime": "2026-01-02T09:31:12.988Z",
+          "duration": 308,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/ca2791e4-e3e7-44df-9b11-7f66807e71e1_1767418782416_interview_ca2791e4-e3e7-44df-9b11-7f66807e71e1_1767418782416.m4a",
+          "audioDuration": 308,
+          "audioFileSize": 4963932,
+          "location": {
+            "latitude": 26.703799023685136,
+            "longitude": 88.43207716941833,
+            "accuracy": 0.009999999776482582,
+            "address": "26.703799, 88.432077",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-02T09:26:05.250Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T05:39:44.580Z",
+          "timeDifference": 71698374,
+          "contentHash": "95772008d1149af2"
+        }
+      ]
+    },
+    {
+      "groupNumber": 34,
+      "mode": "CAPI",
+      "contentHash": "9af1899c2fb811f5",
+      "original": {
+        "responseId": "88690a70-6698-4b5d-88ea-603a39f44f26",
+        "mongoId": "69589f3abb1485fae08b4016",
+        "sessionId": "6b142bf5-840b-4f76-981e-9f7608a00173",
+        "interviewer": {
+          "id": "6942c3c4fe90bbe7745d03e3",
+          "name": "Priyanka Sen",
+          "email": "capi394@gmail.com",
+          "phone": "6289577030",
+          "memberId": "CAPI394"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-01T08:15:58.477Z",
+        "endTime": "2026-01-01T08:20:22.800Z",
+        "duration": 264,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/8fafa6d0-3516-443d-a1bb-927e636a171a_1767416773230_interview_8fafa6d0-3516-443d-a1bb-927e636a171a_1767416773230.m4a",
+        "audioDuration": 264,
+        "audioFileSize": 0,
+        "location": {
+          "latitude": 22.5998988,
+          "longitude": 88.3659895,
+          "accuracy": 21.048999786376953,
+          "address": "22.599899, 88.365989",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-01T08:16:01.267Z"
+        },
+        "responseCount": 25,
+        "createdAt": "2026-01-03T04:46:50.938Z",
+        "contentHash": "9af1899c2fb811f5"
+      },
+      "duplicates": [
+        {
+          "responseId": "296eb1a5-e582-4f65-84d4-c6ed9054f9da",
+          "mongoId": "6958a3c78c62f0ace9200cd9",
+          "sessionId": "8fafa6d0-3516-443d-a1bb-927e636a171a",
+          "startTime": "2026-01-01T08:15:58.477Z",
+          "endTime": "2026-01-01T08:20:22.800Z",
+          "duration": 264,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/8fafa6d0-3516-443d-a1bb-927e636a171a_1767416773230_interview_8fafa6d0-3516-443d-a1bb-927e636a171a_1767416773230.m4a",
+          "audioDuration": 264,
+          "audioFileSize": 3171601,
+          "location": {
+            "latitude": 22.5998988,
+            "longitude": 88.3659895,
+            "accuracy": 21.048999786376953,
+            "address": "22.599899, 88.365989",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-01T08:16:01.267Z"
+          },
+          "responseCount": 25,
+          "createdAt": "2026-01-03T05:06:15.183Z",
+          "timeDifference": 1164245,
+          "contentHash": "9af1899c2fb811f5"
+        }
+      ]
+    },
+    {
+      "groupNumber": 35,
+      "mode": "CAPI",
+      "contentHash": "9cd0a164d790d5cf",
+      "original": {
+        "responseId": "1f8fad31-264a-4ba7-b623-81c0b7886aea",
+        "mongoId": "695a2e129ffd76e27aad8287",
+        "sessionId": "274f51a4-34c0-474e-9960-ff5726a4457b",
+        "interviewer": {
+          "id": "6948ddf2f5d623d5974dfae0",
+          "name": "PUJA ROY BANERJEE",
+          "email": "capicapi836@gmail.com",
+          "phone": "6297072294",
+          "memberId": "CAPI836"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-04T06:49:48.443Z",
+        "endTime": "2026-01-04T06:53:46.660Z",
+        "duration": 238,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/274f51a4-34c0-474e-9960-ff5726a4457b_1767517714244_interview_274f51a4-34c0-474e-9960-ff5726a4457b_1767517714244.m4a",
+        "audioDuration": 238,
+        "audioFileSize": 3804959,
+        "location": null,
+        "responseCount": 25,
+        "createdAt": "2026-01-04T09:08:34.771Z",
+        "contentHash": "9cd0a164d790d5cf"
+      },
+      "duplicates": [
+        {
+          "responseId": "f23de3de-337c-4506-8251-acdbd169a559",
+          "mongoId": "695a2e6cb7c151a389418ee3",
+          "sessionId": "3d55bd2f-12dd-4811-933a-4cb54ca63e22",
+          "startTime": "2026-01-04T06:49:48.443Z",
+          "endTime": "2026-01-04T06:53:46.660Z",
+          "duration": 238,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/274f51a4-34c0-474e-9960-ff5726a4457b_1767517714244_interview_274f51a4-34c0-474e-9960-ff5726a4457b_1767517714244.m4a",
+          "audioDuration": 238,
+          "audioFileSize": 0,
+          "location": null,
+          "responseCount": 25,
+          "createdAt": "2026-01-04T09:10:04.185Z",
+          "timeDifference": 89414,
+          "contentHash": "9cd0a164d790d5cf"
+        }
+      ]
+    },
+    {
+      "groupNumber": 36,
+      "mode": "CAPI",
+      "contentHash": "9ffec96583711d13",
+      "original": {
+        "responseId": "a72a7bbc-01f2-4893-8230-ac2c6881c68e",
+        "mongoId": "695219f71af9642ccae9cff7",
+        "sessionId": "475446ff-145e-4078-810b-109136332524",
+        "interviewer": {
+          "id": "6948d83a3f3054d9a2647d0d",
+          "name": "Bablu Adhikari",
+          "email": "capicapi945@gmail.com",
+          "phone": "9475382714",
+          "memberId": "CAPI945"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T06:18:39.050Z",
+        "endTime": "2025-12-28T06:29:54.350Z",
+        "duration": 675,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/475446ff-145e-4078-810b-109136332524_1766988278260_interview_475446ff-145e-4078-810b-109136332524_1766988277604.m4a",
+        "audioDuration": 675,
+        "audioFileSize": 10849837,
+        "location": {
+          "latitude": 26.3334657,
+          "longitude": 89.3094662,
+          "accuracy": 32.0989990234375,
+          "address": ", Dumniguri, West Bengal, India",
+          "city": "Dumniguri",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-28T06:18:43.024Z"
+        },
+        "responseCount": 25,
+        "createdAt": "2025-12-29T06:04:39.688Z",
+        "contentHash": "9ffec96583711d13"
+      },
+      "duplicates": [
+        {
+          "responseId": "a4e6a070-3578-4644-b42c-437b5de328fd",
+          "mongoId": "69521aeba6d2421953424afa",
+          "sessionId": "55c15f1c-f985-4e74-9cb4-5a0e516f26a5",
+          "startTime": "2025-12-28T06:18:39.050Z",
+          "endTime": "2025-12-28T06:29:54.350Z",
+          "duration": 675,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/475446ff-145e-4078-810b-109136332524_1766988278260_interview_475446ff-145e-4078-810b-109136332524_1766988277604.m4a",
+          "audioDuration": 675,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.3334657,
+            "longitude": 89.3094662,
+            "accuracy": 32.0989990234375,
+            "address": ", Dumniguri, West Bengal, India",
+            "city": "Dumniguri",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-28T06:18:43.024Z"
+          },
+          "responseCount": 25,
+          "createdAt": "2025-12-29T06:08:43.968Z",
+          "timeDifference": 244280,
+          "contentHash": "9ffec96583711d13"
+        }
+      ]
+    },
+    {
+      "groupNumber": 37,
+      "mode": "CAPI",
+      "contentHash": "a07689bffd544266",
+      "original": {
+        "responseId": "8698b5ad-c359-45b4-87e9-b8c71923eaea",
+        "mongoId": "695146bab8aed5854213c7d2",
+        "sessionId": "6c68c710-c279-459a-b46d-96f117062be3",
+        "interviewer": {
+          "id": "6942c3bdfe90bbe7745cf15b",
+          "name": "Soma Das",
+          "email": "capi390@gmail.com",
+          "phone": "8910200135",
+          "memberId": "CAPI390"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T12:47:36.464Z",
+        "endTime": "2025-12-28T12:56:18.770Z",
+        "duration": 522,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/6c68c710-c279-459a-b46d-96f117062be3_1766934200524_interview_6c68c710-c279-459a-b46d-96f117062be3_1766934200256.m4a",
+        "audioDuration": 522,
+        "audioFileSize": 8413739,
+        "location": {
+          "latitude": 22.5963537,
+          "longitude": 88.3614019,
+          "accuracy": 7.349999904632568,
+          "address": "22.596354, 88.361402",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-28T12:47:37.679Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-28T15:03:22.281Z",
+        "contentHash": "a07689bffd544266"
+      },
+      "duplicates": [
+        {
+          "responseId": "869fef3e-7a5b-48bd-8303-694c7b160229",
+          "mongoId": "69525186f0697d8de738cb76",
+          "sessionId": "bb49b58e-99e2-4f43-9c74-9c4e2ad3aecf",
+          "startTime": "2025-12-28T12:47:36.464Z",
+          "endTime": "2025-12-28T12:56:18.770Z",
+          "duration": 522,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/6c68c710-c279-459a-b46d-96f117062be3_1766934200524_interview_6c68c710-c279-459a-b46d-96f117062be3_1766934200256.m4a",
+          "audioDuration": 522,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.5963537,
+            "longitude": 88.3614019,
+            "accuracy": 7.349999904632568,
+            "address": "22.596354, 88.361402",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-28T12:47:37.679Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T10:01:42.768Z",
+          "timeDifference": 68300487,
+          "contentHash": "a07689bffd544266"
+        }
+      ]
+    },
+    {
+      "groupNumber": 38,
+      "mode": "CAPI",
+      "contentHash": "a16128202670a187",
+      "original": {
+        "responseId": "557b0b90-3666-49d9-8fc2-77af836683ad",
+        "mongoId": "695252f32449cae5d13ae172",
+        "sessionId": "f776cff1-ec91-4e07-bb4e-431183d1defa",
+        "interviewer": {
+          "id": "6942c3bdfe90bbe7745cf15b",
+          "name": "Soma Das",
+          "email": "capi390@gmail.com",
+          "phone": "8910200135",
+          "memberId": "CAPI390"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T14:11:27.076Z",
+        "endTime": "2025-12-28T14:20:56.637Z",
+        "duration": 569,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/f776cff1-ec91-4e07-bb4e-431183d1defa_1767002866590_interview_f776cff1-ec91-4e07-bb4e-431183d1defa_1767002866589.m4a",
+        "audioDuration": 569,
+        "audioFileSize": 9166951,
+        "location": {
+          "latitude": 22.5975736,
+          "longitude": 88.3605093,
+          "accuracy": 100,
+          "address": "Sovabazar Street 61, Kolkata, West Bengal, India",
+          "city": "Kolkata",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-28T14:11:29.077Z"
+        },
+        "responseCount": 26,
+        "createdAt": "2025-12-29T10:07:47.765Z",
+        "contentHash": "a16128202670a187"
+      },
+      "duplicates": [
+        {
+          "responseId": "2eea7c6f-2332-4504-b456-12971588838e",
+          "mongoId": "695258378d9b238af26a7123",
+          "sessionId": "06cd1bd7-a05c-45c4-8450-c7930e24b581",
+          "startTime": "2025-12-28T14:11:27.076Z",
+          "endTime": "2025-12-28T14:20:56.637Z",
+          "duration": 569,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/f776cff1-ec91-4e07-bb4e-431183d1defa_1767002866590_interview_f776cff1-ec91-4e07-bb4e-431183d1defa_1767002866589.m4a",
+          "audioDuration": 569,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.5975736,
+            "longitude": 88.3605093,
+            "accuracy": 100,
+            "address": "Sovabazar Street 61, Kolkata, West Bengal, India",
+            "city": "Kolkata",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-28T14:11:29.077Z"
+          },
+          "responseCount": 26,
+          "createdAt": "2025-12-29T10:30:15.314Z",
+          "timeDifference": 1347549,
+          "contentHash": "a16128202670a187"
+        }
+      ]
+    },
+    {
+      "groupNumber": 39,
+      "mode": "CAPI",
+      "contentHash": "a601aac3474e35f0",
+      "original": {
+        "responseId": "2e7af948-7364-471d-ae52-036a5f723b89",
+        "mongoId": "6957937ddf8c9f386ad7b831",
+        "sessionId": "066f56fa-746e-450d-976a-daafaa2adc68",
+        "interviewer": {
+          "id": "6948ddf2f5d623d5974dfae0",
+          "name": "PUJA ROY BANERJEE",
+          "email": "capicapi836@gmail.com",
+          "phone": "6297072294",
+          "memberId": "CAPI836"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-02T08:54:22.838Z",
+        "endTime": "2026-01-02T08:59:45.553Z",
+        "duration": 322,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/066f56fa-746e-450d-976a-daafaa2adc68_1767347068866_interview_066f56fa-746e-450d-976a-daafaa2adc68_1767347068865.m4a",
+        "audioDuration": 322,
+        "audioFileSize": 5173025,
+        "location": {
+          "latitude": 23.56931,
+          "longitude": 87.2770245,
+          "accuracy": 22.461999893188477,
+          "address": "23.569310, 87.277024",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-02T08:54:25.150Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-02T09:44:29.842Z",
+        "contentHash": "a601aac3474e35f0"
+      },
+      "duplicates": [
+        {
+          "responseId": "7e2e10a0-79ae-4f51-827a-3e2686ef2c04",
+          "mongoId": "6958a3eecb85c06afdd8cdbd",
+          "sessionId": "1a12c234-0c3b-4bb1-9745-b07f06c39f31",
+          "startTime": "2026-01-02T08:54:22.838Z",
+          "endTime": "2026-01-02T08:59:45.553Z",
+          "duration": 322,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/066f56fa-746e-450d-976a-daafaa2adc68_1767347068866_interview_066f56fa-746e-450d-976a-daafaa2adc68_1767347068865.m4a",
+          "audioDuration": 322,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 23.56931,
+            "longitude": 87.2770245,
+            "accuracy": 22.461999893188477,
+            "address": "23.569310, 87.277024",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-02T08:54:25.150Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T05:06:54.195Z",
+          "timeDifference": 69744353,
+          "contentHash": "a601aac3474e35f0"
+        }
+      ]
+    },
+    {
+      "groupNumber": 40,
+      "mode": "CAPI",
+      "contentHash": "ac4387467a07585b",
+      "original": {
+        "responseId": "0b9f4b20-d762-4f35-8707-d8d835999718",
+        "mongoId": "695903328bde23ea959572fd",
+        "sessionId": "d306479a-c399-4c10-991a-8785814e33cd",
+        "interviewer": {
+          "id": "694433b056275b9dd8337758",
+          "name": "Subham paul.",
+          "email": "capi2011@gmail.com",
+          "phone": "6297497603",
+          "memberId": "CAPI201"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T10:03:10.878Z",
+        "endTime": "2026-01-03T10:08:16.315Z",
+        "duration": 305,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/d306479a-c399-4c10-991a-8785814e33cd_1767441199705_interview_d306479a-c399-4c10-991a-8785814e33cd_1767441199585.m4a",
+        "audioDuration": 305,
+        "audioFileSize": 4922145,
+        "location": {
+          "latitude": 22.69647789001465,
+          "longitude": 88.37367248535156,
+          "accuracy": 1,
+          "address": "22.696478, 88.373672",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-03T10:03:11.318Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-03T11:53:22.491Z",
+        "contentHash": "ac4387467a07585b"
+      },
+      "duplicates": [
+        {
+          "responseId": "5664739c-e5bc-4eac-ae94-1f2350b41c49",
+          "mongoId": "6959b28bc7b422a49009165c",
+          "sessionId": "b638c180-fbd4-41b5-b3e9-b9348a762ab5",
+          "startTime": "2026-01-03T10:03:10.878Z",
+          "endTime": "2026-01-03T10:08:16.315Z",
+          "duration": 305,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/d306479a-c399-4c10-991a-8785814e33cd_1767441199705_interview_d306479a-c399-4c10-991a-8785814e33cd_1767441199585.m4a",
+          "audioDuration": 305,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.69647789001465,
+            "longitude": 88.37367248535156,
+            "accuracy": 1,
+            "address": "22.696478, 88.373672",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-03T10:03:11.318Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-04T00:21:31.268Z",
+          "timeDifference": 44888777,
+          "contentHash": "ac4387467a07585b"
+        }
+      ]
+    },
+    {
+      "groupNumber": 41,
+      "mode": "CAPI",
+      "contentHash": "adef58d8eb8e8c98",
+      "original": {
+        "responseId": "f033b39b-e5f4-490a-9374-4f2102e23966",
+        "mongoId": "6958e6f99d5e59613c28bab8",
+        "sessionId": "0e391859-e255-453f-b33f-c28705206f00",
+        "interviewer": {
+          "id": "6948ddf2f5d623d5974dfae0",
+          "name": "PUJA ROY BANERJEE",
+          "email": "capicapi836@gmail.com",
+          "phone": "6297072294",
+          "memberId": "CAPI836"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T08:52:29.367Z",
+        "endTime": "2026-01-03T08:56:26.962Z",
+        "duration": 237,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/0e391859-e255-453f-b33f-c28705206f00_1767433973337_interview_0e391859-e255-453f-b33f-c28705206f00_1767433973337.m4a",
+        "audioDuration": 237,
+        "audioFileSize": 3800428,
+        "location": {
+          "latitude": 23.5694101,
+          "longitude": 87.2770674,
+          "accuracy": 21.60300064086914,
+          "address": "Deshbandhu Nagar Road 16/6, Durgapur, West Bengal, India",
+          "city": "Durgapur",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2026-01-03T08:52:31.356Z"
+        },
+        "responseCount": 25,
+        "createdAt": "2026-01-03T09:52:57.106Z",
+        "contentHash": "adef58d8eb8e8c98"
+      },
+      "duplicates": [
+        {
+          "responseId": "3fe9680d-3aaf-4775-815b-9501b583b9f4",
+          "mongoId": "69594af94ccfdcd37e9994a8",
+          "sessionId": "e69225ff-7b9c-4de6-ac24-a58745fed90a",
+          "startTime": "2026-01-03T08:52:29.367Z",
+          "endTime": "2026-01-03T08:56:26.962Z",
+          "duration": 237,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/0e391859-e255-453f-b33f-c28705206f00_1767433973337_interview_0e391859-e255-453f-b33f-c28705206f00_1767433973337.m4a",
+          "audioDuration": 237,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 23.5694101,
+            "longitude": 87.2770674,
+            "accuracy": 21.60300064086914,
+            "address": "Deshbandhu Nagar Road 16/6, Durgapur, West Bengal, India",
+            "city": "Durgapur",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-03T08:52:31.356Z"
+          },
+          "responseCount": 25,
+          "createdAt": "2026-01-03T16:59:37.084Z",
+          "timeDifference": 25599978,
+          "contentHash": "adef58d8eb8e8c98"
+        }
+      ]
+    },
+    {
+      "groupNumber": 42,
+      "mode": "CAPI",
+      "contentHash": "b55488ad6596df32",
+      "original": {
+        "responseId": "825e573a-833b-426f-8810-715c941d2af9",
+        "mongoId": "6950e2761ad427c23b1b85b4",
+        "sessionId": "6ff77ce2-d83c-45cd-a7af-9a2278a9b3ae",
+        "interviewer": {
+          "id": "6942c371fe90bbe7745be810",
+          "name": "SHIBU GHOSH",
+          "email": "ghoshshibu@gmail.com",
+          "phone": "9231761032",
+          "memberId": "CAPI148"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T05:38:19.781Z",
+        "endTime": "2025-12-28T05:46:22.422Z",
+        "duration": 482,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/6ff77ce2-d83c-45cd-a7af-9a2278a9b3ae_1766908531951_interview_6ff77ce2-d83c-45cd-a7af-9a2278a9b3ae_1766908531190.m4a",
+        "audioDuration": 482,
+        "audioFileSize": 7752749,
+        "location": {
+          "latitude": 23.189825,
+          "longitude": 88.59771,
+          "accuracy": 5.099999904632568,
+          "address": "23.189825, 88.597710",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-28T05:38:22.521Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-28T07:55:34.171Z",
+        "contentHash": "b55488ad6596df32"
+      },
+      "duplicates": [
+        {
+          "responseId": "2a6746e3-5173-4e8a-b943-023b9f669033",
+          "mongoId": "6950e6bfb20722ace74e6a98",
+          "sessionId": "3aa25084-475d-4b00-a283-522ee3fe447c",
+          "startTime": "2025-12-28T05:38:19.781Z",
+          "endTime": "2025-12-28T05:46:22.422Z",
+          "duration": 482,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/6ff77ce2-d83c-45cd-a7af-9a2278a9b3ae_1766908531951_interview_6ff77ce2-d83c-45cd-a7af-9a2278a9b3ae_1766908531190.m4a",
+          "audioDuration": 482,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 23.189825,
+            "longitude": 88.59771,
+            "accuracy": 5.099999904632568,
+            "address": "23.189825, 88.597710",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-28T05:38:22.521Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-28T08:13:51.371Z",
+          "timeDifference": 1097200,
+          "contentHash": "b55488ad6596df32"
+        }
+      ]
+    },
+    {
+      "groupNumber": 43,
+      "mode": "CAPI",
+      "contentHash": "b99c9ade44ccb3f7",
+      "original": {
+        "responseId": "2255722b-f7d8-4538-830f-af741c7fab0b",
+        "mongoId": "695148e76d8233b8ada77f73",
+        "sessionId": "dfcbec67-16bc-4864-90d9-0d6181461e47",
+        "interviewer": {
+          "id": "6942c3c9fe90bbe7745d11de",
+          "name": "Banani Ghosh",
+          "email": "capi397@gmail.com",
+          "phone": "6291990663",
+          "memberId": "CAPI397"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-27T12:11:53.527Z",
+        "endTime": "2025-12-27T12:21:09.565Z",
+        "duration": 556,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/dfcbec67-16bc-4864-90d9-0d6181461e47_1766934758751_interview_dfcbec67-16bc-4864-90d9-0d6181461e47_1766934758473.m4a",
+        "audioDuration": 556,
+        "audioFileSize": 8717480,
+        "location": {
+          "latitude": 22.5977288,
+          "longitude": 88.3605137,
+          "accuracy": 92.9000015258789,
+          "address": "Chittaranjan Avenue 279 A, Kolkata, West Bengal, India",
+          "city": "Kolkata",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-27T12:12:09.118Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-28T15:12:39.644Z",
+        "contentHash": "b99c9ade44ccb3f7"
+      },
+      "duplicates": [
+        {
+          "responseId": "d21cbd66-fb49-4dc7-90e7-ae0ca213ea3b",
+          "mongoId": "69523b4b1a1b6a9e3d283c43",
+          "sessionId": "e2efa801-9188-479b-9c9e-2f663a7651d4",
+          "startTime": "2025-12-27T12:11:53.527Z",
+          "endTime": "2025-12-27T12:21:09.565Z",
+          "duration": 556,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/dfcbec67-16bc-4864-90d9-0d6181461e47_1766934758751_interview_dfcbec67-16bc-4864-90d9-0d6181461e47_1766934758473.m4a",
+          "audioDuration": 556,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.5977288,
+            "longitude": 88.3605137,
+            "accuracy": 92.9000015258789,
+            "address": "Chittaranjan Avenue 279 A, Kolkata, West Bengal, India",
+            "city": "Kolkata",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-27T12:12:09.118Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T08:26:51.146Z",
+          "timeDifference": 62051502,
+          "contentHash": "b99c9ade44ccb3f7"
+        }
+      ]
+    },
+    {
+      "groupNumber": 44,
+      "mode": "CAPI",
+      "contentHash": "baef1771a36cdf23",
+      "original": {
+        "responseId": "28db97b8-4f89-4c3d-8f76-0217ab2e948f",
+        "mongoId": "6958ad808b7d07a2ae86d7f3",
+        "sessionId": "7aca1de4-b1cc-4a28-8170-0af89858d62f",
+        "interviewer": {
+          "id": "694433b056275b9dd8337758",
+          "name": "Subham paul.",
+          "email": "capi2011@gmail.com",
+          "phone": "6297497603",
+          "memberId": "CAPI201"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-02T11:26:13.882Z",
+        "endTime": "2026-01-02T11:31:16.137Z",
+        "duration": 302,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/7aca1de4-b1cc-4a28-8170-0af89858d62f_1767419264311_interview_7aca1de4-b1cc-4a28-8170-0af89858d62f_1767419264111.m4a",
+        "audioDuration": 302,
+        "audioFileSize": 4792196,
+        "location": {
+          "latitude": 22.696884155273438,
+          "longitude": 88.39562225341797,
+          "accuracy": 1,
+          "address": "Indralok Road Number - 3 92, Barrackpore, West Bengal, India",
+          "city": "Barrackpore",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2026-01-02T11:26:19.045Z"
+        },
+        "responseCount": 25,
+        "createdAt": "2026-01-03T05:47:44.886Z",
+        "contentHash": "baef1771a36cdf23"
+      },
+      "duplicates": [
+        {
+          "responseId": "427e64ca-a272-4be0-9ba3-21f6950afaab",
+          "mongoId": "6958ff020b9055429fe9ed29",
+          "sessionId": "99cde42e-333a-40a9-b0cb-78f80aef1990",
+          "startTime": "2026-01-02T11:26:13.882Z",
+          "endTime": "2026-01-02T11:31:16.137Z",
+          "duration": 302,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/7aca1de4-b1cc-4a28-8170-0af89858d62f_1767419264311_interview_7aca1de4-b1cc-4a28-8170-0af89858d62f_1767419264111.m4a",
+          "audioDuration": 302,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.696884155273438,
+            "longitude": 88.39562225341797,
+            "accuracy": 1,
+            "address": "Indralok Road Number - 3 92, Barrackpore, West Bengal, India",
+            "city": "Barrackpore",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-02T11:26:19.045Z"
+          },
+          "responseCount": 25,
+          "createdAt": "2026-01-03T11:35:30.621Z",
+          "timeDifference": 20865735,
+          "contentHash": "baef1771a36cdf23"
+        }
+      ]
+    },
+    {
+      "groupNumber": 45,
+      "mode": "CAPI",
+      "contentHash": "bb7b427c35ad4fe2",
+      "original": {
+        "responseId": "4ff73311-a37e-4dec-90be-6e056b553941",
+        "mongoId": "6957a7f5e48569014971c879",
+        "sessionId": "dbb70059-a787-4ec8-8b8e-3c5af5cac52c",
+        "interviewer": {
+          "id": "6944336656275b9dd8329789",
+          "name": "Surajit Ghosh",
+          "email": "capi413@gmail.com",
+          "phone": "8670921540",
+          "memberId": "CAPI413"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-02T11:01:29.019Z",
+        "endTime": "2026-01-02T11:05:45.911Z",
+        "duration": 256,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/5069ba3e-f333-4dd5-8f94-e4d0eb86fcd3_1767437128479_interview_5069ba3e-f333-4dd5-8f94-e4d0eb86fcd3_1767437128479.m4a",
+        "audioDuration": 256,
+        "audioFileSize": 0,
+        "location": {
+          "latitude": 22.8129783,
+          "longitude": 87.0040106,
+          "accuracy": 13.33899974822998,
+          "address": ", Kusumtikri, West Bengal, India",
+          "city": "Kusumtikri",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2026-01-02T11:01:37.524Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-02T11:11:49.102Z",
+        "contentHash": "bb7b427c35ad4fe2"
+      },
+      "duplicates": [
+        {
+          "responseId": "fe7360ff-be02-4792-b38e-267f9a7fe33e",
+          "mongoId": "6958f34a3b522c8768b8f79f",
+          "sessionId": "5069ba3e-f333-4dd5-8f94-e4d0eb86fcd3",
+          "startTime": "2026-01-02T11:01:29.019Z",
+          "endTime": "2026-01-02T11:05:45.911Z",
+          "duration": 256,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/5069ba3e-f333-4dd5-8f94-e4d0eb86fcd3_1767437128479_interview_5069ba3e-f333-4dd5-8f94-e4d0eb86fcd3_1767437128479.m4a",
+          "audioDuration": 256,
+          "audioFileSize": 3018346,
+          "location": {
+            "latitude": 22.8129783,
+            "longitude": 87.0040106,
+            "accuracy": 13.33899974822998,
+            "address": ", Kusumtikri, West Bengal, India",
+            "city": "Kusumtikri",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-02T11:01:37.524Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T10:45:30.094Z",
+          "timeDifference": 84820992,
+          "contentHash": "bb7b427c35ad4fe2"
+        }
+      ]
+    },
+    {
+      "groupNumber": 46,
+      "mode": "CAPI",
+      "contentHash": "bddc1878db934a9e",
+      "original": {
+        "responseId": "871be578-3768-4ef0-84a0-ad5ed0c24ad8",
+        "mongoId": "6951465dae977eeeae2823c7",
+        "sessionId": "a2ff590d-a5f8-4b79-b060-8ba3d93f79ba",
+        "interviewer": {
+          "id": "6942c3bdfe90bbe7745cf15b",
+          "name": "Soma Das",
+          "email": "capi390@gmail.com",
+          "phone": "8910200135",
+          "memberId": "CAPI390"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T12:11:53.602Z",
+        "endTime": "2025-12-28T12:19:44.488Z",
+        "duration": 470,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/a2ff590d-a5f8-4b79-b060-8ba3d93f79ba_1766934108396_interview_a2ff590d-a5f8-4b79-b060-8ba3d93f79ba_1766934108091.m4a",
+        "audioDuration": 470,
+        "audioFileSize": 7588268,
+        "location": {
+          "latitude": 22.5978881,
+          "longitude": 88.360622,
+          "accuracy": 14,
+          "address": ", Kolkata, West Bengal, India",
+          "city": "Kolkata",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-28T12:11:54.301Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-28T15:01:49.299Z",
+        "contentHash": "bddc1878db934a9e"
+      },
+      "duplicates": [
+        {
+          "responseId": "7cc23d5a-4a3b-4dcc-b117-299bd6757968",
+          "mongoId": "6952514fda84a0f0affcece6",
+          "sessionId": "26bf61d8-65f3-4f6a-803b-6a5c278e2e7e",
+          "startTime": "2025-12-28T12:11:53.602Z",
+          "endTime": "2025-12-28T12:19:44.488Z",
+          "duration": 470,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/a2ff590d-a5f8-4b79-b060-8ba3d93f79ba_1766934108396_interview_a2ff590d-a5f8-4b79-b060-8ba3d93f79ba_1766934108091.m4a",
+          "audioDuration": 470,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.5978881,
+            "longitude": 88.360622,
+            "accuracy": 14,
+            "address": ", Kolkata, West Bengal, India",
+            "city": "Kolkata",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-28T12:11:54.301Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T10:00:47.204Z",
+          "timeDifference": 68337905,
+          "contentHash": "bddc1878db934a9e"
+        }
+      ]
+    },
+    {
+      "groupNumber": 47,
+      "mode": "CAPI",
+      "contentHash": "c4150cbf912d1c3c",
+      "original": {
+        "responseId": "4bdcbda5-15c4-4981-84c7-32f02ae4329b",
+        "mongoId": "6957ccaba8d03f2db5d88b00",
+        "sessionId": "offline_1767361646010_oz84lunma",
+        "interviewer": {
+          "id": "6949051d4550373277375cb2",
+          "name": "PRASANTA URAO",
+          "email": "capicapi981@gmail.com",
+          "phone": "7047596866",
+          "memberId": "CAPI981"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-02T07:24:08.305Z",
+        "endTime": "2026-01-02T07:31:02.017Z",
+        "duration": 413,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/ebcfe388-0775-4602-ae3c-27b38556ebe3_1767414034411_interview_ebcfe388-0775-4602-ae3c-27b38556ebe3_1767414034038.m4a",
+        "audioDuration": 413,
+        "audioFileSize": 0,
+        "location": {
+          "latitude": 26.5472883,
+          "longitude": 88.711734,
+          "accuracy": 6,
+          "address": "26.547288, 88.711734",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-02T07:24:13.020Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-02T13:48:27.337Z",
+        "contentHash": "c4150cbf912d1c3c"
+      },
+      "duplicates": [
+        {
+          "responseId": "2aaff040-94dc-4a1f-9f58-6ca335fe2bcc",
+          "mongoId": "69589913bd364ce3d9cf7ce5",
+          "sessionId": "ebcfe388-0775-4602-ae3c-27b38556ebe3",
+          "startTime": "2026-01-02T07:24:08.305Z",
+          "endTime": "2026-01-02T07:31:02.017Z",
+          "duration": 413,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/ebcfe388-0775-4602-ae3c-27b38556ebe3_1767414034411_interview_ebcfe388-0775-4602-ae3c-27b38556ebe3_1767414034038.m4a",
+          "audioDuration": 413,
+          "audioFileSize": 6606338,
+          "location": {
+            "latitude": 26.5472883,
+            "longitude": 88.711734,
+            "accuracy": 6,
+            "address": "26.547288, 88.711734",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-02T07:24:13.020Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T04:20:35.581Z",
+          "timeDifference": 52328244,
+          "contentHash": "c4150cbf912d1c3c"
+        }
+      ]
+    },
+    {
+      "groupNumber": 48,
+      "mode": "CAPI",
+      "contentHash": "c69a8c3582ebdd8c",
+      "original": {
+        "responseId": "5703eae7-b24c-487a-9932-e61144c28bd9",
+        "mongoId": "6958c3100846822ae00dc197",
+        "sessionId": "072c18ce-ff4f-494d-9be0-46ce058b763d",
+        "interviewer": {
+          "id": "6948ebd0929da5b3a54e056d",
+          "name": "JAYANTA ROY",
+          "email": "capicapi878@gmail.com",
+          "phone": "8001406810",
+          "memberId": "CAPI878"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-02T09:18:25.482Z",
+        "endTime": "2026-01-02T09:23:35.256Z",
+        "duration": 309,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/072c18ce-ff4f-494d-9be0-46ce058b763d_1767424782142_interview_072c18ce-ff4f-494d-9be0-46ce058b763d_1767424782142.m4a",
+        "audioDuration": 309,
+        "audioFileSize": 4996470,
+        "location": {
+          "latitude": 26.67797870828962,
+          "longitude": 88.43284495174885,
+          "accuracy": 0.009999999776482582,
+          "address": "26.677979, 88.432845",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-02T09:18:25.857Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-03T07:19:44.037Z",
+        "contentHash": "c69a8c3582ebdd8c"
+      },
+      "duplicates": [
+        {
+          "responseId": "07749f5b-8dfb-4f3f-9e9b-24df2ecb99a7",
+          "mongoId": "6958c70cad58ef90f871a01f",
+          "sessionId": "4b0c0610-54ce-475c-a108-0acc5f80b8dc",
+          "startTime": "2026-01-02T09:18:25.482Z",
+          "endTime": "2026-01-02T09:23:35.256Z",
+          "duration": 309,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/072c18ce-ff4f-494d-9be0-46ce058b763d_1767424782142_interview_072c18ce-ff4f-494d-9be0-46ce058b763d_1767424782142.m4a",
+          "audioDuration": 309,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.67797870828962,
+            "longitude": 88.43284495174885,
+            "accuracy": 0.009999999776482582,
+            "address": "26.677979, 88.432845",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-02T09:18:25.857Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T07:36:44.078Z",
+          "timeDifference": 1020041,
+          "contentHash": "c69a8c3582ebdd8c"
+        }
+      ]
+    },
+    {
+      "groupNumber": 49,
+      "mode": "CAPI",
+      "contentHash": "cadcc0deed1d2c5e",
+      "original": {
+        "responseId": "145fbd3c-35aa-4eca-b717-b76636b38fae",
+        "mongoId": "69596039f3c127a93953a192",
+        "sessionId": "9fdfe4c8-2099-4c90-9bd9-c6dbdd3703b0",
+        "interviewer": {
+          "id": "695222c1d671f1ca74385cab",
+          "name": "Banhima Banerjee",
+          "email": "capicapi813@gmail.com",
+          "phone": "8918046380",
+          "memberId": "CAPI813"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T10:00:36.776Z",
+        "endTime": "2026-01-03T10:08:44.132Z",
+        "duration": 487,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/9fdfe4c8-2099-4c90-9bd9-c6dbdd3703b0_1767465012064_interview_9fdfe4c8-2099-4c90-9bd9-c6dbdd3703b0_1767465012064.m4a",
+        "audioDuration": 487,
+        "audioFileSize": 7836858,
+        "location": {
+          "latitude": 23.5694154,
+          "longitude": 87.2770773,
+          "accuracy": 20.472000122070312,
+          "address": "Deshbandhu Nagar Road 16/6, Durgapur, West Bengal, India",
+          "city": "Durgapur",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2026-01-03T10:00:38.785Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-03T18:30:17.427Z",
+        "contentHash": "cadcc0deed1d2c5e"
+      },
+      "duplicates": [
+        {
+          "responseId": "7de495f5-1ef9-446c-8624-eff65b3c69c0",
+          "mongoId": "69596079ef0ab44375f9295e",
+          "sessionId": "97a02fd3-dfa1-4f12-863a-ce53d70f0751",
+          "startTime": "2026-01-03T10:00:36.776Z",
+          "endTime": "2026-01-03T10:08:44.132Z",
+          "duration": 487,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/9fdfe4c8-2099-4c90-9bd9-c6dbdd3703b0_1767465012064_interview_9fdfe4c8-2099-4c90-9bd9-c6dbdd3703b0_1767465012064.m4a",
+          "audioDuration": 487,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 23.5694154,
+            "longitude": 87.2770773,
+            "accuracy": 20.472000122070312,
+            "address": "Deshbandhu Nagar Road 16/6, Durgapur, West Bengal, India",
+            "city": "Durgapur",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-03T10:00:38.785Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T18:31:21.115Z",
+          "timeDifference": 63688,
+          "contentHash": "cadcc0deed1d2c5e"
+        }
+      ]
+    },
+    {
+      "groupNumber": 50,
+      "mode": "CAPI",
+      "contentHash": "cc6d45439611e0bf",
+      "original": {
+        "responseId": "2e9811d0-1254-409a-adef-1700cd0280b0",
+        "mongoId": "6959d124405ec96c082ce66a",
+        "sessionId": "83971aaa-4b15-423f-90d4-a364df87c2e9",
+        "interviewer": {
+          "id": "694cf64395dcc6c0bad36abb",
+          "name": "Mojid Mondal",
+          "email": "capicapi1010@gmail.com",
+          "phone": "9083805351",
+          "memberId": "CAPI1010"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-04T02:26:25.901Z",
+        "endTime": "2026-01-04T02:31:39.818Z",
+        "duration": 313,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/83971aaa-4b15-423f-90d4-a364df87c2e9_1767493922769_interview_83971aaa-4b15-423f-90d4-a364df87c2e9_1767493922607.m4a",
+        "audioDuration": 313,
+        "audioFileSize": 4768536,
+        "location": {
+          "latitude": 22.673057556152344,
+          "longitude": 88.3633041381836,
+          "accuracy": 1,
+          "address": "Balai Dhar Lane 43, Kolkata, West Bengal, India",
+          "city": "Kolkata",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2026-01-04T02:26:27.260Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-04T02:32:04.047Z",
+        "contentHash": "cc6d45439611e0bf"
+      },
+      "duplicates": [
+        {
+          "responseId": "b10a536a-6d8d-4c52-9511-60e99236bfeb",
+          "mongoId": "6959d13eab0ea5999e00b015",
+          "sessionId": "1329d568-d729-4b13-9019-a1418bc40177",
+          "startTime": "2026-01-04T02:26:25.901Z",
+          "endTime": "2026-01-04T02:31:39.818Z",
+          "duration": 313,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/83971aaa-4b15-423f-90d4-a364df87c2e9_1767493922769_interview_83971aaa-4b15-423f-90d4-a364df87c2e9_1767493922607.m4a",
+          "audioDuration": 313,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.673057556152344,
+            "longitude": 88.3633041381836,
+            "accuracy": 1,
+            "address": "Balai Dhar Lane 43, Kolkata, West Bengal, India",
+            "city": "Kolkata",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-04T02:26:27.260Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-04T02:32:30.838Z",
+          "timeDifference": 26791,
+          "contentHash": "cc6d45439611e0bf"
+        }
+      ]
+    },
+    {
+      "groupNumber": 51,
+      "mode": "CAPI",
+      "contentHash": "d9b8675fd13f9d07",
+      "original": {
+        "responseId": "2a0189ab-f386-4e70-bedd-5d18a0ad8c2a",
+        "mongoId": "6958f03359dbb940e8d7a807",
+        "sessionId": "08f9fb74-ff61-4f8a-8f78-fc45ed76de74",
+        "interviewer": {
+          "id": "694cf5f115d374e9c7050d96",
+          "name": "7. Monira khatun",
+          "email": "capicapi1009@gmail.com",
+          "phone": "9295794010",
+          "memberId": "CAPI1009"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T10:26:45.100Z",
+        "endTime": "2026-01-03T10:31:20.861Z",
+        "duration": 275,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/08f9fb74-ff61-4f8a-8f78-fc45ed76de74_1767436338048_interview_08f9fb74-ff61-4f8a-8f78-fc45ed76de74_1767436338048.m4a",
+        "audioDuration": 275,
+        "audioFileSize": 4206101,
+        "location": null,
+        "responseCount": 27,
+        "createdAt": "2026-01-03T10:32:19.078Z",
+        "contentHash": "d9b8675fd13f9d07"
+      },
+      "duplicates": [
+        {
+          "responseId": "b2c07303-c5a7-401a-9eb0-28859edfcda4",
+          "mongoId": "6958f0accbc3396ab45d6c45",
+          "sessionId": "652e1af1-a896-4cab-9d81-a6fe64b01f9e",
+          "startTime": "2026-01-03T10:26:45.100Z",
+          "endTime": "2026-01-03T10:31:20.861Z",
+          "duration": 275,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/08f9fb74-ff61-4f8a-8f78-fc45ed76de74_1767436338048_interview_08f9fb74-ff61-4f8a-8f78-fc45ed76de74_1767436338048.m4a",
+          "audioDuration": 275,
+          "audioFileSize": 0,
+          "location": null,
+          "responseCount": 27,
+          "createdAt": "2026-01-03T10:34:20.065Z",
+          "timeDifference": 120987,
+          "contentHash": "d9b8675fd13f9d07"
+        }
+      ]
+    },
+    {
+      "groupNumber": 52,
+      "mode": "CAPI",
+      "contentHash": "d9ce223976a15ad0",
+      "original": {
+        "responseId": "a6b8687f-9667-4369-b6e0-4cd0084007eb",
+        "mongoId": "695a1ab728977e47cb2fd73f",
+        "sessionId": "d1bf892e-d86c-4ce1-a56c-1597f2ea4a10",
+        "interviewer": {
+          "id": "6944338356275b9dd832ee21",
+          "name": "Anima Ghosh",
+          "email": "capi445@gmail.com",
+          "phone": "6296451278",
+          "memberId": "CAPI445"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-04T07:40:10.232Z",
+        "endTime": "2026-01-04T07:45:24.606Z",
+        "duration": 314,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/d1bf892e-d86c-4ce1-a56c-1597f2ea4a10_1767512758634_interview_d1bf892e-d86c-4ce1-a56c-1597f2ea4a10_1767512758634.m4a",
+        "audioDuration": 314,
+        "audioFileSize": 5045000,
+        "location": {
+          "latitude": 23.6717785,
+          "longitude": 86.9709142,
+          "accuracy": 20,
+          "address": "23.671778, 86.970914",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-04T07:40:12.130Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-04T07:45:59.047Z",
+        "contentHash": "d9ce223976a15ad0"
+      },
+      "duplicates": [
+        {
+          "responseId": "fea2c0c0-c48c-4a01-baff-cbd3fc0b0a67",
+          "mongoId": "695a1ad628977e47cb2fe432",
+          "sessionId": "c9c905f6-26ed-470c-adee-fdc5c1e8b60d",
+          "startTime": "2026-01-04T07:40:10.232Z",
+          "endTime": "2026-01-04T07:45:24.606Z",
+          "duration": 314,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/d1bf892e-d86c-4ce1-a56c-1597f2ea4a10_1767512758634_interview_d1bf892e-d86c-4ce1-a56c-1597f2ea4a10_1767512758634.m4a",
+          "audioDuration": 314,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 23.6717785,
+            "longitude": 86.9709142,
+            "accuracy": 20,
+            "address": "23.671778, 86.970914",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-04T07:40:12.130Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-04T07:46:30.569Z",
+          "timeDifference": 31522,
+          "contentHash": "d9ce223976a15ad0"
+        }
+      ]
+    },
+    {
+      "groupNumber": 53,
+      "mode": "CAPI",
+      "contentHash": "dabbd141169aaec9",
+      "original": {
+        "responseId": "7df2cb55-cbc0-49f9-a2b4-255a6c4677c6",
+        "mongoId": "6958cac388e983db33875fe8",
+        "sessionId": "46338c95-8354-404a-98a2-48529e5a6141",
+        "interviewer": {
+          "id": "695430e3c61b86f0cd236fde",
+          "name": "MOUSUMI BAURI",
+          "email": "capicapi496@gmail.com",
+          "phone": "7865039551",
+          "memberId": "CAPI496"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T07:31:52.786Z",
+        "endTime": "2026-01-03T07:40:08.315Z",
+        "duration": 495,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/2f01897e-c7eb-437f-8f30-508617433b60_1767432618741_interview_2f01897e-c7eb-437f-8f30-508617433b60_1767432618740.m4a",
+        "audioDuration": 495,
+        "audioFileSize": 0,
+        "location": {
+          "latitude": 23.6331884,
+          "longitude": 86.9678837,
+          "accuracy": 300,
+          "address": "Riverside Road , Paschim Bardhaman, West Bengal, India",
+          "city": "Paschim Bardhaman",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2026-01-03T07:32:11.695Z"
+        },
+        "responseCount": 25,
+        "createdAt": "2026-01-03T07:52:35.385Z",
+        "contentHash": "dabbd141169aaec9"
+      },
+      "duplicates": [
+        {
+          "responseId": "0158588c-a6de-4b6c-95f2-22644ccf681d",
+          "mongoId": "6958e1acec6c262d89547be7",
+          "sessionId": "2f01897e-c7eb-437f-8f30-508617433b60",
+          "startTime": "2026-01-03T07:31:52.786Z",
+          "endTime": "2026-01-03T07:40:08.315Z",
+          "duration": 495,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/2f01897e-c7eb-437f-8f30-508617433b60_1767432618741_interview_2f01897e-c7eb-437f-8f30-508617433b60_1767432618740.m4a",
+          "audioDuration": 495,
+          "audioFileSize": 7707101,
+          "location": {
+            "latitude": 23.6331884,
+            "longitude": 86.9678837,
+            "accuracy": 300,
+            "address": "Riverside Road , Paschim Bardhaman, West Bengal, India",
+            "city": "Paschim Bardhaman",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-03T07:32:11.695Z"
+          },
+          "responseCount": 25,
+          "createdAt": "2026-01-03T09:30:20.711Z",
+          "timeDifference": 5865326,
+          "contentHash": "dabbd141169aaec9"
+        }
+      ]
+    },
+    {
+      "groupNumber": 54,
+      "mode": "CAPI",
+      "contentHash": "e63efcb313743cb2",
+      "original": {
+        "responseId": "6dd4240c-e468-4a55-934d-786dd5e96c41",
+        "mongoId": "69578bdd59dcd8d30a96c804",
+        "sessionId": "8556f464-8df1-4274-92a0-52447b1a1053",
+        "interviewer": {
+          "id": "6944336656275b9dd8329789",
+          "name": "Surajit Ghosh",
+          "email": "capi413@gmail.com",
+          "phone": "8670921540",
+          "memberId": "CAPI413"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-02T09:03:59.660Z",
+        "endTime": "2026-01-02T09:08:29.908Z",
+        "duration": 270,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/9c49f446-693b-4bba-a716-e293ecdbfd5a_1767350971083_interview_9c49f446-693b-4bba-a716-e293ecdbfd5a_1767350971083.m4a",
+        "audioDuration": 270,
+        "audioFileSize": 0,
+        "location": {
+          "latitude": 22.8129262,
+          "longitude": 87.0038589,
+          "accuracy": 11.243000030517578,
+          "address": ", Kusumtikri, West Bengal, India",
+          "city": "Kusumtikri",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2026-01-02T09:04:05.713Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-02T09:11:57.706Z",
+        "contentHash": "e63efcb313743cb2"
+      },
+      "duplicates": [
+        {
+          "responseId": "927d4fbf-6edb-48e4-a366-482ca2f0963f",
+          "mongoId": "695a3980ca8e78ebe907174b",
+          "sessionId": "6d853219-3807-4b4c-95ed-1c6721d16319",
+          "startTime": "2026-01-02T09:03:59.660Z",
+          "endTime": "2026-01-02T09:08:29.908Z",
+          "duration": 270,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/9c49f446-693b-4bba-a716-e293ecdbfd5a_1767350971083_interview_9c49f446-693b-4bba-a716-e293ecdbfd5a_1767350971083.m4a",
+          "audioDuration": 270,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.8129262,
+            "longitude": 87.0038589,
+            "accuracy": 11.243000030517578,
+            "address": ", Kusumtikri, West Bengal, India",
+            "city": "Kusumtikri",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-02T09:04:05.713Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-04T09:57:20.198Z",
+          "timeDifference": 175522492,
+          "contentHash": "e63efcb313743cb2"
+        }
+      ]
+    },
+    {
+      "groupNumber": 55,
+      "mode": "CAPI",
+      "contentHash": "e87221e5aafb14d6",
+      "original": {
+        "responseId": "7dc94009-fc6c-4532-9261-1c0a42d913f7",
+        "mongoId": "69521a0058b9dfa97882846d",
+        "sessionId": "bce55d91-74c8-4366-acdd-14e2aec749aa",
+        "interviewer": {
+          "id": "6948d83a3f3054d9a2647d0d",
+          "name": "Bablu Adhikari",
+          "email": "capicapi945@gmail.com",
+          "phone": "9475382714",
+          "memberId": "CAPI945"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T06:47:36.750Z",
+        "endTime": "2025-12-28T06:53:14.926Z",
+        "duration": 338,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/bce55d91-74c8-4366-acdd-14e2aec749aa_1766988286093_interview_bce55d91-74c8-4366-acdd-14e2aec749aa_1766988286093.m4a",
+        "audioDuration": 338,
+        "audioFileSize": 5405207,
+        "location": {
+          "latitude": 26.3340847,
+          "longitude": 89.3095302,
+          "accuracy": 39.9630012512207,
+          "address": ", Dumniguri, West Bengal, India",
+          "city": "Dumniguri",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-28T06:47:39.359Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-29T06:04:48.804Z",
+        "contentHash": "e87221e5aafb14d6"
+      },
+      "duplicates": [
+        {
+          "responseId": "2283fd8d-da79-47ee-8dce-a0ad1acc48de",
+          "mongoId": "69521b293c9864222bd9f3a2",
+          "sessionId": "77d6701d-932b-4a15-a50e-42fcf35e4279",
+          "startTime": "2025-12-28T06:47:36.750Z",
+          "endTime": "2025-12-28T06:53:14.926Z",
+          "duration": 338,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/bce55d91-74c8-4366-acdd-14e2aec749aa_1766988286093_interview_bce55d91-74c8-4366-acdd-14e2aec749aa_1766988286093.m4a",
+          "audioDuration": 338,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.3340847,
+            "longitude": 89.3095302,
+            "accuracy": 39.9630012512207,
+            "address": ", Dumniguri, West Bengal, India",
+            "city": "Dumniguri",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-28T06:47:39.359Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T06:09:45.556Z",
+          "timeDifference": 296752,
+          "contentHash": "e87221e5aafb14d6"
+        }
+      ]
+    },
+    {
+      "groupNumber": 56,
+      "mode": "CAPI",
+      "contentHash": "ed270c7c55363bc8",
+      "original": {
+        "responseId": "d0950db3-dd50-43b5-bf65-beb2ac99fdd2",
+        "mongoId": "694e5ae3e120a331180053b8",
+        "sessionId": "83410525-f13f-4e82-8fbb-2a8a419037d5",
+        "interviewer": {
+          "id": "6948d83a3f3054d9a2647d0d",
+          "name": "Bablu Adhikari",
+          "email": "capicapi945@gmail.com",
+          "phone": "9475382714",
+          "memberId": "CAPI945"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-26T09:22:00.553Z",
+        "endTime": "2025-12-26T09:29:59.399Z",
+        "duration": 478,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/83410525-f13f-4e82-8fbb-2a8a419037d5_1766742754773_interview_83410525-f13f-4e82-8fbb-2a8a419037d5_1766742754515.m4a",
+        "audioDuration": 478,
+        "audioFileSize": 7549498,
+        "location": {
+          "latitude": 26.3325083,
+          "longitude": 89.308025,
+          "accuracy": 13,
+          "address": "Road , Nishiganj, West Bengal, India",
+          "city": "Nishiganj",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-26T09:22:12.091Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-26T09:52:35.864Z",
+        "contentHash": "ed270c7c55363bc8"
+      },
+      "duplicates": [
+        {
+          "responseId": "211d02a6-6fa5-4ce2-9f7c-3a369fe3508c",
+          "mongoId": "694ea4f088ba09dfbca63cc0",
+          "sessionId": "d2aade5f-c28c-4226-9d28-026bc38d6a53",
+          "startTime": "2025-12-26T09:22:00.553Z",
+          "endTime": "2025-12-26T09:29:59.399Z",
+          "duration": 478,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/83410525-f13f-4e82-8fbb-2a8a419037d5_1766742754773_interview_83410525-f13f-4e82-8fbb-2a8a419037d5_1766742754515.m4a",
+          "audioDuration": 478,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.3325083,
+            "longitude": 89.308025,
+            "accuracy": 13,
+            "address": "Road , Nishiganj, West Bengal, India",
+            "city": "Nishiganj",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-26T09:22:12.091Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-26T15:08:33.019Z",
+          "timeDifference": 18957155,
+          "contentHash": "ed270c7c55363bc8"
+        }
+      ]
+    },
+    {
+      "groupNumber": 57,
+      "mode": "CAPI",
+      "contentHash": "ee22e7cd111bf170",
+      "original": {
+        "responseId": "8920a147-6eba-4971-99be-e26c5502fa0a",
+        "mongoId": "6959602a69ed862d0321d739",
+        "sessionId": "a5a01b62-00ce-4b86-963a-4dedba36f29e",
+        "interviewer": {
+          "id": "695222c1d671f1ca74385cab",
+          "name": "Banhima Banerjee",
+          "email": "capicapi813@gmail.com",
+          "phone": "8918046380",
+          "memberId": "CAPI813"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T09:51:31.665Z",
+        "endTime": "2026-01-03T09:58:36.239Z",
+        "duration": 424,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/a5a01b62-00ce-4b86-963a-4dedba36f29e_1767465001281_interview_a5a01b62-00ce-4b86-963a-4dedba36f29e_1767465001280.m4a",
+        "audioDuration": 424,
+        "audioFileSize": 6818074,
+        "location": {
+          "latitude": 23.5694008,
+          "longitude": 87.2770685,
+          "accuracy": 21.7549991607666,
+          "address": "Deshbandhu Nagar Road 16/6, Durgapur, West Bengal, India",
+          "city": "Durgapur",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2026-01-03T09:51:33.736Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-03T18:30:02.157Z",
+        "contentHash": "ee22e7cd111bf170"
+      },
+      "duplicates": [
+        {
+          "responseId": "d0cf2b06-f6f0-469a-a2f6-7fdb964af7c8",
+          "mongoId": "69596044170b53ed0ed73700",
+          "sessionId": "5bc13f2c-c0d7-4514-a971-259a3924fcca",
+          "startTime": "2026-01-03T09:51:31.665Z",
+          "endTime": "2026-01-03T09:58:36.239Z",
+          "duration": 424,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/a5a01b62-00ce-4b86-963a-4dedba36f29e_1767465001281_interview_a5a01b62-00ce-4b86-963a-4dedba36f29e_1767465001280.m4a",
+          "audioDuration": 424,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 23.5694008,
+            "longitude": 87.2770685,
+            "accuracy": 21.7549991607666,
+            "address": "Deshbandhu Nagar Road 16/6, Durgapur, West Bengal, India",
+            "city": "Durgapur",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2026-01-03T09:51:33.736Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T18:30:28.872Z",
+          "timeDifference": 26715,
+          "contentHash": "ee22e7cd111bf170"
+        }
+      ]
+    },
+    {
+      "groupNumber": 58,
+      "mode": "CAPI",
+      "contentHash": "efb4d819df579308",
+      "original": {
+        "responseId": "69301a65-d2b7-4fca-b629-93dcd6a8e19b",
+        "mongoId": "6956840c8a73cba62b0ca43d",
+        "sessionId": "847906a1-2cd4-4b88-a4e1-c5eaf4fcbea3",
+        "interviewer": {
+          "id": "6942c3c9fe90bbe7745d11de",
+          "name": "Banani Ghosh",
+          "email": "capi397@gmail.com",
+          "phone": "6291990663",
+          "memberId": "CAPI397"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-01T11:26:01.445Z",
+        "endTime": "2026-01-01T11:35:30.241Z",
+        "duration": 568,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/d5355577-192f-457c-8f4b-9ee56b8e9cf7_1767439917700_interview_d5355577-192f-457c-8f4b-9ee56b8e9cf7_1767439917699.m4a",
+        "audioDuration": 568,
+        "audioFileSize": 0,
+        "location": null,
+        "responseCount": 27,
+        "createdAt": "2026-01-01T14:26:20.837Z",
+        "contentHash": "efb4d819df579308"
+      },
+      "duplicates": [
+        {
+          "responseId": "074a6325-05e2-4cfc-a543-214b7b5b5bf3",
+          "mongoId": "6958fe306bece2b33e2ca60e",
+          "sessionId": "d5355577-192f-457c-8f4b-9ee56b8e9cf7",
+          "startTime": "2026-01-01T11:26:01.445Z",
+          "endTime": "2026-01-01T11:35:30.241Z",
+          "duration": 568,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/d5355577-192f-457c-8f4b-9ee56b8e9cf7_1767439917700_interview_d5355577-192f-457c-8f4b-9ee56b8e9cf7_1767439917699.m4a",
+          "audioDuration": 568,
+          "audioFileSize": 8151544,
+          "location": null,
+          "responseCount": 27,
+          "createdAt": "2026-01-03T11:32:00.468Z",
+          "timeDifference": 162339631,
+          "contentHash": "efb4d819df579308"
+        }
+      ]
+    },
+    {
+      "groupNumber": 59,
+      "mode": "CAPI",
+      "contentHash": "f23b200713f97576",
+      "original": {
+        "responseId": "670e1801-c931-4738-9a97-09cf58e83eea",
+        "mongoId": "695256b1b31e7771763a4426",
+        "sessionId": "1e89b255-2321-42bc-88a7-16e4b6d32abf",
+        "interviewer": {
+          "id": "6942c3c9fe90bbe7745d11de",
+          "name": "Banani Ghosh",
+          "email": "capi397@gmail.com",
+          "phone": "6291990663",
+          "memberId": "CAPI397"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T14:13:59.609Z",
+        "endTime": "2025-12-28T14:22:29.226Z",
+        "duration": 509,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/1e89b255-2321-42bc-88a7-16e4b6d32abf_1767003824985_interview_1e89b255-2321-42bc-88a7-16e4b6d32abf_1767003824713.m4a",
+        "audioDuration": 509,
+        "audioFileSize": 7928155,
+        "location": {
+          "latitude": 22.5978079,
+          "longitude": 88.3605481,
+          "accuracy": 149.60000610351562,
+          "address": "22.597808, 88.360548",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2025-12-28T14:14:18.001Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-29T10:23:45.820Z",
+        "contentHash": "f23b200713f97576"
+      },
+      "duplicates": [
+        {
+          "responseId": "9ce04c7f-edb6-4c25-8d54-d4a9ff853984",
+          "mongoId": "69525b60e11bdc7740f5b3af",
+          "sessionId": "44d77273-eb37-46d9-a6a5-2cb6e3b15ea2",
+          "startTime": "2025-12-28T14:13:59.609Z",
+          "endTime": "2025-12-28T14:22:29.226Z",
+          "duration": 509,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/1e89b255-2321-42bc-88a7-16e4b6d32abf_1767003824985_interview_1e89b255-2321-42bc-88a7-16e4b6d32abf_1767003824713.m4a",
+          "audioDuration": 509,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.5978079,
+            "longitude": 88.3605481,
+            "accuracy": 149.60000610351562,
+            "address": "22.597808, 88.360548",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2025-12-28T14:14:18.001Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T10:43:44.286Z",
+          "timeDifference": 1198466,
+          "contentHash": "f23b200713f97576"
+        }
+      ]
+    },
+    {
+      "groupNumber": 60,
+      "mode": "CAPI",
+      "contentHash": "fa380caa39554138",
+      "original": {
+        "responseId": "93195e04-7580-4a6b-81c8-e2f5806ddab3",
+        "mongoId": "6952572a86bb79c0a0ed8ffd",
+        "sessionId": "ab47a04e-6501-4fe9-9a3d-9a945593c61e",
+        "interviewer": {
+          "id": "6942c3c9fe90bbe7745d11de",
+          "name": "Banani Ghosh",
+          "email": "capi397@gmail.com",
+          "phone": "6291990663",
+          "memberId": "CAPI397"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T14:59:12.759Z",
+        "endTime": "2025-12-28T15:08:45.068Z",
+        "duration": 572,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/ab47a04e-6501-4fe9-9a3d-9a945593c61e_1767003945369_interview_ab47a04e-6501-4fe9-9a3d-9a945593c61e_1767003945064.m4a",
+        "audioDuration": 572,
+        "audioFileSize": 8546999,
+        "location": {
+          "latitude": 22.5977583,
+          "longitude": 88.3605337,
+          "accuracy": 116.0999984741211,
+          "address": "Chittaranjan Avenue 279 A, Kolkata, West Bengal, India",
+          "city": "Kolkata",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-28T14:59:55.574Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-29T10:25:46.352Z",
+        "contentHash": "fa380caa39554138"
+      },
+      "duplicates": [
+        {
+          "responseId": "12b2c261-a173-4f0b-aedf-20532b91be6a",
+          "mongoId": "695259a9831a881faab3a14b",
+          "sessionId": "93cbed6b-7120-4abc-aeab-f3ec3fb131f5",
+          "startTime": "2025-12-28T14:59:12.759Z",
+          "endTime": "2025-12-28T15:08:45.068Z",
+          "duration": 572,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/ab47a04e-6501-4fe9-9a3d-9a945593c61e_1767003945369_interview_ab47a04e-6501-4fe9-9a3d-9a945593c61e_1767003945064.m4a",
+          "audioDuration": 572,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.5977583,
+            "longitude": 88.3605337,
+            "accuracy": 116.0999984741211,
+            "address": "Chittaranjan Avenue 279 A, Kolkata, West Bengal, India",
+            "city": "Kolkata",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-28T14:59:55.574Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T10:36:25.499Z",
+          "timeDifference": 639147,
+          "contentHash": "fa380caa39554138"
+        }
+      ]
+    },
+    {
+      "groupNumber": 61,
+      "mode": "CAPI",
+      "contentHash": "fb9646d757f018ae",
+      "original": {
+        "responseId": "607163e5-2793-4995-bb95-7f50abf7cf0a",
+        "mongoId": "69521a7629292a2fe3463278",
+        "sessionId": "b7aba7c2-5d9f-42bd-a0e5-e2dd68623f98",
+        "interviewer": {
+          "id": "6948d83a3f3054d9a2647d0d",
+          "name": "Bablu Adhikari",
+          "email": "capicapi945@gmail.com",
+          "phone": "9475382714",
+          "memberId": "CAPI945"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2025-12-28T07:15:43.755Z",
+        "endTime": "2025-12-28T07:22:04.222Z",
+        "duration": 380,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2025/12/b7aba7c2-5d9f-42bd-a0e5-e2dd68623f98_1766988402119_interview_b7aba7c2-5d9f-42bd-a0e5-e2dd68623f98_1766988401464.m4a",
+        "audioDuration": 380,
+        "audioFileSize": 6033438,
+        "location": {
+          "latitude": 26.3335967,
+          "longitude": 89.309415,
+          "accuracy": 59.42399978637695,
+          "address": ", Dumniguri, West Bengal, India",
+          "city": "Dumniguri",
+          "state": "West Bengal",
+          "country": "India",
+          "timestamp": "2025-12-28T07:15:47.319Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2025-12-29T06:06:46.313Z",
+        "contentHash": "fb9646d757f018ae"
+      },
+      "duplicates": [
+        {
+          "responseId": "b1d73077-988e-47ed-bb90-4da68e8474ab",
+          "mongoId": "69521e914bdee813b7685380",
+          "sessionId": "offline_1766989456264_yq7x1oe14",
+          "startTime": "2025-12-28T07:15:43.755Z",
+          "endTime": "2025-12-28T07:22:04.222Z",
+          "duration": 380,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2025/12/b7aba7c2-5d9f-42bd-a0e5-e2dd68623f98_1766988402119_interview_b7aba7c2-5d9f-42bd-a0e5-e2dd68623f98_1766988401464.m4a",
+          "audioDuration": 380,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 26.3335967,
+            "longitude": 89.309415,
+            "accuracy": 59.42399978637695,
+            "address": ", Dumniguri, West Bengal, India",
+            "city": "Dumniguri",
+            "state": "West Bengal",
+            "country": "India",
+            "timestamp": "2025-12-28T07:15:47.319Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2025-12-29T06:24:17.240Z",
+          "timeDifference": 1050927,
+          "contentHash": "fb9646d757f018ae"
+        }
+      ]
+    },
+    {
+      "groupNumber": 62,
+      "mode": "CAPI",
+      "contentHash": "fdb5ffa3c36392aa",
+      "original": {
+        "responseId": "976ec725-a508-416d-a913-43341ca1099b",
+        "mongoId": "6958efd5e48bddf315586ea4",
+        "sessionId": "e27fd58e-62dc-44c6-95b6-f5316fa4d360",
+        "interviewer": {
+          "id": "694433dd56275b9dd8341360",
+          "name": "Jhumpa Garai",
+          "email": "capi2381@gmail.com",
+          "phone": "7029124700",
+          "memberId": "CAPI238"
+        },
+        "survey": {
+          "id": "68fd1915d41841da463f0d46",
+          "name": "West Bengal Opinion Poll (2025 - 2026)"
+        },
+        "startTime": "2026-01-03T07:34:52.225Z",
+        "endTime": "2026-01-03T07:39:56.758Z",
+        "duration": 304,
+        "status": "Pending_Approval",
+        "call_id": null,
+        "audioUrl": "audio/interviews/2026/01/e27fd58e-62dc-44c6-95b6-f5316fa4d360_1767435444132_interview_e27fd58e-62dc-44c6-95b6-f5316fa4d360_1767435444132.m4a",
+        "audioDuration": 304,
+        "audioFileSize": 3696787,
+        "location": {
+          "latitude": 22.680973052978516,
+          "longitude": 88.36860656738281,
+          "accuracy": 1,
+          "address": "22.680973, 88.368607",
+          "city": "",
+          "state": "",
+          "country": "",
+          "timestamp": "2026-01-03T07:34:52.615Z"
+        },
+        "responseCount": 27,
+        "createdAt": "2026-01-03T10:30:45.955Z",
+        "contentHash": "fdb5ffa3c36392aa"
+      },
+      "duplicates": [
+        {
+          "responseId": "f811ac17-5d80-4216-b34f-01b9223d1d7e",
+          "mongoId": "695910e0c0431e10f4b40260",
+          "sessionId": "56d9a549-ee16-4f73-b7f9-6c348e487439",
+          "startTime": "2026-01-03T07:34:52.225Z",
+          "endTime": "2026-01-03T07:39:56.758Z",
+          "duration": 304,
+          "status": "Pending_Approval",
+          "call_id": null,
+          "audioUrl": "audio/interviews/2026/01/e27fd58e-62dc-44c6-95b6-f5316fa4d360_1767435444132_interview_e27fd58e-62dc-44c6-95b6-f5316fa4d360_1767435444132.m4a",
+          "audioDuration": 304,
+          "audioFileSize": 0,
+          "location": {
+            "latitude": 22.680973052978516,
+            "longitude": 88.36860656738281,
+            "accuracy": 1,
+            "address": "22.680973, 88.368607",
+            "city": "",
+            "state": "",
+            "country": "",
+            "timestamp": "2026-01-03T07:34:52.615Z"
+          },
+          "responseCount": 27,
+          "createdAt": "2026-01-03T12:51:44.161Z",
+          "timeDifference": 8458206,
+          "contentHash": "fdb5ffa3c36392aa"
+        }
+      ]
+    }
+  ]
+}

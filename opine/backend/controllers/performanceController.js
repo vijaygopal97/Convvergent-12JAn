@@ -467,6 +467,19 @@ exports.getQualityAgentPerformance = async (req, res) => {
     } = req.query;
 
     const qualityAgentId = new mongoose.Types.ObjectId(req.user.id);
+    
+    // TOP-TIER TECH COMPANY SOLUTION: Analytics caching (Meta, Google, Amazon pattern)
+    // Cache expensive aggregation queries to reduce database load
+    const analyticsCache = require('../utils/analyticsCache');
+    const cacheParams = { startDate, endDate, surveyId, timeRange, lightweight: req.query.lightweight };
+    const cacheKey = req.user.id;
+    
+    // Check cache first (5 minute TTL for real-time analytics)
+    const cachedResult = await analyticsCache.get('qa_performance', cacheKey, cacheParams);
+    if (cachedResult) {
+      console.log(`⚡ Using cached Quality Agent performance analytics for user ${cacheKey}`);
+      return res.status(200).json(cachedResult);
+    }
 
     // Calculate date range based on timeRange parameter
     let dateFilter = {};
@@ -513,9 +526,10 @@ exports.getQualityAgentPerformance = async (req, res) => {
     // OPTIMIZATION: If lightweight=true, only get overview stats (skip expensive aggregations)
     const lightweight = req.query.lightweight === 'true';
     
-    // Get overview statistics
+    // OPTIMIZATION: Index { 'verificationData.reviewer': 1, status: 1 } will be used automatically
+    // The $match stage will use the index for fast filtering
     const overview = await SurveyResponse.aggregate([
-      { $match: baseFilter },
+      { $match: baseFilter }, // This will use index: { 'verificationData.reviewer': 1, status: 1 }
       {
         $group: {
           _id: null,
@@ -543,7 +557,7 @@ exports.getQualityAgentPerformance = async (req, res) => {
 
     // If lightweight mode, return early with only overview stats
     if (lightweight) {
-      return res.status(200).json({
+      const lightweightResult = {
         success: true,
         data: {
           overview: overview[0] || {
@@ -554,7 +568,12 @@ exports.getQualityAgentPerformance = async (req, res) => {
             averageReviewTime: 0
           }
         }
-      });
+      };
+      
+      // Cache lightweight result (5 minute TTL)
+      await analyticsCache.set('qa_performance', cacheKey, cacheParams, lightweightResult, 5 * 60);
+      
+      return res.status(200).json(lightweightResult);
     }
 
     // Get daily performance (skip in lightweight mode)

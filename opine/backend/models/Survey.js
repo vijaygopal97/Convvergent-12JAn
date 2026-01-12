@@ -599,6 +599,8 @@ surveySchema.index({ startDate: 1, deadline: 1 });
 surveySchema.index({ 'assignedInterviewers.interviewer': 1 });
 surveySchema.index({ 'assignedQualityAgents.qualityAgent': 1 });
 surveySchema.index({ createdAt: -1 });
+// PERFORMANCE FIX: Compound index for quality agent assignment queries (critical for getNextReviewAssignment)
+surveySchema.index({ company: 1, 'assignedQualityAgents.qualityAgent': 1 });
 
 // Virtual for completion percentage
 surveySchema.virtual('completionPercentage').get(function() {

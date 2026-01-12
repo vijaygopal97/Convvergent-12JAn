@@ -68,7 +68,7 @@ const getPartyLogo = (optionText: string | null | undefined, questionText?: stri
     }
   }
   
-  const API_BASE_URL = 'https://convo.convergentview.com';
+  const API_BASE_URL = 'https://convo.convergentview.com';  // Development server
   const text = String(optionText).toLowerCase();
   const mainText = getMainText(optionText).toLowerCase();
   
@@ -421,9 +421,121 @@ export default function InterviewInterface({ navigation, route }: any) {
     }
   }, [showStationDropdown]);
 
+  // PERFORMANCE: Cache for shouldShowQuestion results (persists across renders)
+  const shouldShowQuestionCache = useRef(new Map<string, boolean>());
+  
+  // PERFORMANCE OPTIMIZED: Memoize shouldShowQuestion to avoid recreating on every render
+  // Cache results per question to avoid repeated calculations
+  const shouldShowQuestion = useCallback((question: any, interviewMode: string, currentSetNumber: number | null): boolean => {
+    // PERFORMANCE: Cache key based on question properties that affect visibility
+    const cacheKey = `${question.id || question._id}-${interviewMode}-${currentSetNumber}-${question.enabledForCAPI}-${question.enabledForCATI}-${question.setNumber}`;
+    
+    // Check cache first
+    if (shouldShowQuestionCache.current.has(cacheKey)) {
+      return shouldShowQuestionCache.current.get(cacheKey)!;
+    }
+    
+    // Check CAPI/CATI visibility
+    if (interviewMode === 'capi' && question.enabledForCAPI === false) {
+      const result = false;
+      shouldShowQuestionCache.current.set(cacheKey, result);
+      return result;
+    }
+    if (interviewMode === 'cati') {
+      // Hide questions explicitly disabled for CATI
+      if (question.enabledForCATI === false) {
+        const result = false;
+        shouldShowQuestionCache.current.set(cacheKey, result);
+        return result;
+      }
+      // Also hide questions that are CAPI-only (enabledForCAPI is true but enabledForCATI is not true)
+      if (question.enabledForCAPI === true && question.enabledForCATI !== true) {
+        const result = false;
+        shouldShowQuestionCache.current.set(cacheKey, result);
+        return result;
+      }
+    }
+    
+    // Sets logic ONLY applies to CATI interviews, NOT CAPI
+    // For CAPI, show all questions regardless of sets
+    if (interviewMode === 'capi') {
+      // For CAPI, always show questions (sets don't apply)
+      const result = true;
+      shouldShowQuestionCache.current.set(cacheKey, result);
+      return result;
+    }
+    
+    // For CATI, apply sets logic
+    if (interviewMode === 'cati' && question.setsForThisQuestion) {
+      // If question has a set number, only show if it matches the selected set
+      if (question.setNumber !== null && question.setNumber !== undefined) {
+        // If no set is selected yet, we'll determine it
+        if (currentSetNumber === null) {
+          const result = false; // Don't show until set is determined
+          shouldShowQuestionCache.current.set(cacheKey, result);
+          return result;
+        }
+        // Only show questions from the selected set
+        const result = question.setNumber === currentSetNumber;
+        shouldShowQuestionCache.current.set(cacheKey, result);
+        return result;
+      }
+      // If setsForThisQuestion is true but no setNumber, treat as always show (backward compatibility)
+      const result = true;
+      shouldShowQuestionCache.current.set(cacheKey, result);
+      return result;
+    }
+    
+    // Questions without Sets appear in all surveys
+    const result = true;
+    shouldShowQuestionCache.current.set(cacheKey, result);
+    return result;
+  }, [isCatiMode, selectedSetNumber]); // Only depends on these, which affect the logic
+
   // Get all questions from all sections
   // CRITICAL: For CATI, this depends on selectedSetNumber to filter questions correctly
+  // PERFORMANCE OPTIMIZED: Only recalculate when survey, interview mode, or set number changes
+  // CRITICAL: Ensure survey has targetAudience (for age/gender validation) - especially in offline mode
+  // Load from offline storage if missing
+  useEffect(() => {
+    const ensureTargetAudience = async () => {
+      if (!survey?._id && !survey?.id) return;
+      
+      // Check if survey already has targetAudience
+      if (survey?.targetAudience?.demographics?.ageRange) {
+        // Already have it - no need to load
+        return;
+      }
+      
+      // Missing targetAudience - try to load from offline storage
+      try {
+        console.log('⚠️ Survey missing targetAudience - loading from offline storage');
+        const { offlineStorage } = await import('../services/offlineStorage');
+        const surveys = await offlineStorage.getSurveys();
+        const surveyId = survey._id || survey.id;
+        const fullSurvey = surveys.find((s: any) => (s._id === surveyId || s.id === surveyId));
+        
+        if (fullSurvey?.targetAudience) {
+          console.log('✅ Found targetAudience in offline storage - updating survey state');
+          setSurvey((prevSurvey: any) => ({
+            ...prevSurvey,
+            targetAudience: fullSurvey.targetAudience
+          }));
+        } else {
+          console.warn('⚠️ targetAudience not found in offline storage either');
+        }
+      } catch (error) {
+        console.error('❌ Error loading targetAudience from offline storage:', error);
+      }
+    };
+    
+    ensureTargetAudience();
+  }, [survey?._id, survey?.id]); // Only run when survey ID changes
+
   const allQuestions = useMemo(() => {
+    // PERFORMANCE: Clear cache when dependencies change (prevents stale cache)
+    shouldShowQuestionCache.current.clear();
+    
     const questions: any[] = [];
     
     // Early return if survey is not available
@@ -572,14 +684,7 @@ export default function InterviewInterface({ navigation, route }: any) {
     const hasAssignedACs = assignedACs && assignedACs.length > 0;
     
     // CRITICAL LOGGING: Log AC selection logic
-    console.log('🔍 ========== AC SELECTION RENDER DEBUG ==========');
-    console.log('🔍 assignedACs:', assignedACs);
-    console.log('🔍 assignedACs.length:', assignedACs?.length || 0);
-    console.log('🔍 hasAssignedACs:', hasAssignedACs);
-    console.log('🔍 requiresACSelection:', requiresACSelection);
-    console.log('🔍 isTargetSurvey:', isTargetSurvey);
-    console.log('🔍 allACs.length:', allACs?.length || 0);
-    console.log('🔍 ================================================');
+  // Removed excessive AC selection debug logging
     
     // Show AC selection if requiresACSelection is true (even if allACs is empty - we'll show loading)
     // Only for target survey when interviewer has no assigned ACs
@@ -594,7 +699,7 @@ export default function InterviewInterface({ navigation, route }: any) {
       // This ensures dropdown is always shown (not checkboxes) when user has no assigned ACs
       const questionType = hasAssignedACs ? 'single_choice' : 'ac_searchable_dropdown';
       
-      console.log('🔍 Creating AC question - hasAssignedACs:', hasAssignedACs, 'questionType:', questionType, 'allACs.length:', allACs.length);
+      // Removed excessive logging
       
       const acQuestion = {
         id: 'ac-selection',
@@ -626,7 +731,7 @@ export default function InterviewInterface({ navigation, route }: any) {
         allACs: !hasAssignedACs ? allACs : [] // Include all ACs data for searchable dropdown
       };
       
-      console.log('🔍 AC Question created - type:', acQuestion.type, 'options.length:', acQuestion.options.length, 'allACs.length:', acQuestion.allACs.length);
+      // Removed excessive logging
       questions.push(acQuestion);
       
       // Add Polling Station selection question after AC selection (if AC is selected)
@@ -675,61 +780,12 @@ export default function InterviewInterface({ navigation, route }: any) {
       return setArray[selectedIndex];
     };
 
-    // Helper function to check if question should be shown based on interview mode and sets logic
-    const shouldShowQuestion = (question: any, interviewMode: string, currentSetNumber: number | null): boolean => {
-      // Check CAPI/CATI visibility
-      if (interviewMode === 'capi' && question.enabledForCAPI === false) {
-        return false;
-      }
-      if (interviewMode === 'cati') {
-        // Hide questions explicitly disabled for CATI
-        if (question.enabledForCATI === false) {
-        return false;
-        }
-        // Also hide questions that are CAPI-only (enabledForCAPI is true but enabledForCATI is not true)
-        // This catches cases where Survey Builder sets "show only in CAPI" but doesn't explicitly set enabledForCATI to false
-        if (question.enabledForCAPI === true && question.enabledForCATI !== true) {
-          return false;
-        }
-      }
-      
-      // Sets logic ONLY applies to CATI interviews, NOT CAPI
-      // For CAPI, show all questions regardless of sets
-      if (interviewMode === 'capi') {
-        // For CAPI, always show questions (sets don't apply)
-        return true;
-      }
-      
-      // For CATI, apply sets logic
-      if (interviewMode === 'cati' && question.setsForThisQuestion) {
-        // If question has a set number, only show if it matches the selected set
-        if (question.setNumber !== null && question.setNumber !== undefined) {
-          // If no set is selected yet, we'll determine it
-          if (currentSetNumber === null) {
-            return false; // Don't show until set is determined
-          }
-          // Only show questions from the selected set
-          return question.setNumber === currentSetNumber;
-        }
-        // If setsForThisQuestion is true but no setNumber, treat as always show (backward compatibility)
-        return true;
-      }
-      
-      // Questions without Sets appear in all surveys
-      return true;
-    };
-
     // Determine current interview mode
     const interviewMode = isCatiMode ? 'cati' : 'capi';
     
     // Determine which Set to show for this interview (if sets are used)
     // Note: Sets only apply to CATI, not CAPI
-    let currentSetNumber = selectedSetNumber;
-    // For CAPI, always set to null (no sets - show all questions from both sets)
-    if (interviewMode === 'capi') {
-      currentSetNumber = null;
-    }
-    // For CATI, use the selectedSetNumber (fetched via useEffect)
+    const currentSetNumber = interviewMode === 'capi' ? null : selectedSetNumber;
     
     // Add regular survey questions from sections (filtered by CAPI/CATI and sets logic)
     // SPECIAL: For target survey in CATI mode, include Q17 and Q7 even if they're conditionally hidden or in a different set
@@ -759,7 +815,7 @@ export default function InterviewInterface({ navigation, route }: any) {
               });
               // Debug logging for Q7 when included
               if (isQ7) {
-                console.log(`✅ Q7 Included in allQuestions: questionNumber=${question.questionNumber}, shouldShow=${shouldShow}, enabledForCATI=${question.enabledForCATI}, setNumber=${question.setNumber}, currentSetNumber=${currentSetNumber}`);
+                // Removed excessive Q7 logging
               }
             }
           });
@@ -958,7 +1014,7 @@ export default function InterviewInterface({ navigation, route }: any) {
     }
     
     return questions;
-  }, [survey?.sections, survey?.questions, requiresACSelection, assignedACs, allACs, selectedAC, availableGroups, availablePollingStations, selectedPollingStation.groupName, selectedPollingStation.stationName, interviewerFirstName, isCatiMode, selectedSetNumber]);
+  }, [survey?.sections, survey?.questions, requiresACSelection, assignedACs, allACs, selectedAC, availableGroups, availablePollingStations, selectedPollingStation.groupName, selectedPollingStation.stationName, interviewerFirstName, isCatiMode, selectedSetNumber, shouldShowQuestion]);
   
   // Check consent form response
   const consentResponse = responses['consent-form'];
@@ -978,13 +1034,14 @@ export default function InterviewInterface({ navigation, route }: any) {
   const shouldShowAbandonForVoter = false;
   
   // Debug logging
-  console.log('🔍 Consent check:', {
-    consentResponse,
-    currentQuestionId: currentQuestion?.id,
-    isConsentDisagreed,
-    shouldShowAbandonForConsent,
-    responsesKeys: Object.keys(responses)
-  });
+  // Removed excessive consent check logging - uncomment for debugging if needed
+  // console.log('🔍 Consent check:', {
+  //   consentResponse,
+  //   currentQuestionId: currentQuestion?.id,
+  //   isConsentDisagreed,
+  //   shouldShowAbandonForConsent,
+  //   responsesKeys: Object.keys(responses)
+  // });
   
   // Check call status for CATI interviews
   const callStatusResponse = responses['call-status'];
@@ -1101,7 +1158,7 @@ export default function InterviewInterface({ navigation, route }: any) {
           const conditionNum = parseFloat(conditionStrNum);
           met = !isNaN(responseNum) && !isNaN(conditionNum) && responseNum > conditionNum;
           if (question.questionNumber === '7') {
-            console.log(`🔍 Q7 Condition Debug: questionId=${condition.questionId}, response="${response}" (extracted: "${responseValue}", as string: "${responseStrNum}", parsed: ${responseNum}), condition.value="${condition.value}" (as string: "${conditionStrNum}", parsed: ${conditionNum}), met=${met}`);
+            // Removed excessive Q7 condition debug logging
           }
           break;
         case 'less_than':
@@ -1180,7 +1237,7 @@ export default function InterviewInterface({ navigation, route }: any) {
           // For CATI, check if AC is available from session data
           const acToCheck = selectedAC || acFromSessionData;
           if (!acToCheck || !hasByeElection) {
-            console.log(`🔍 Q7 Filtered by bye-election check: acToCheck=${acToCheck}, hasByeElection=${hasByeElection}`);
+            // Removed excessive Q7 bye-election logging
             return false;
           }
         }
@@ -1269,7 +1326,7 @@ export default function InterviewInterface({ navigation, route }: any) {
       const isTargetSurvey = survey && (survey._id === '68fd1915d41841da463f0d46' || survey.id === '68fd1915d41841da463f0d46');
       if (isTargetSurvey && requiresACSelection && assignedACs.length === 0) {
         const state = survey?.acAssignmentState || 'West Bengal';
-        console.log('🔍 AC selection question visible - loading ACs on-demand...');
+        // Removed excessive AC loading logging
         loadACsOnDemand(state).catch((err) => {
           console.error('⚠️ Error loading ACs when question became visible:', err);
         });
@@ -1401,7 +1458,7 @@ export default function InterviewInterface({ navigation, route }: any) {
       // OPTIMIZATION: Set default Set 1 immediately (don't block interview start)
       const defaultSet = getDefaultSet();
       if (defaultSet !== null && selectedSetNumber === null) {
-        console.log('✅ Setting default Set number:', defaultSet, '(will update from API if different)');
+        // Removed excessive set number logging
         setSelectedSetNumber(defaultSet);
       }
       
@@ -1592,7 +1649,7 @@ export default function InterviewInterface({ navigation, route }: any) {
       
       if (cachedACs && cachedACs.length > 0) {
         // Use cached ACs immediately (don't validate - just use them)
-        console.log('✅ Loaded', cachedACs.length, 'ACs from cache immediately (using cached data)');
+        // Removed excessive cache logging
         setAllACs(cachedACs);
         
         // Step 2: Fetch fresh data in background (non-blocking)
@@ -1638,7 +1695,7 @@ export default function InterviewInterface({ navigation, route }: any) {
   const loadACsOnDemand = async (state: string): Promise<void> => {
     // If ACs are already loaded, don't fetch again
     if (allACs.length > 0) {
-      console.log('✅ ACs already loaded:', allACs.length, 'ACs');
+      // Removed excessive AC loading logging
       return;
     }
 
@@ -1649,7 +1706,7 @@ export default function InterviewInterface({ navigation, route }: any) {
       
       if (cachedACs && cachedACs.length > 0) {
         // Use cached ACs immediately
-        console.log('✅ Using cached ACs immediately:', cachedACs.length, 'ACs');
+        // Removed excessive cache logging
         setAllACs(cachedACs);
         setLoadingAllACs(false);
         
@@ -2008,12 +2065,15 @@ export default function InterviewInterface({ navigation, route }: any) {
           setCatiRespondent(data.respondent);
           
           // Update survey with full data if fetched
+          // CRITICAL: Preserve targetAudience when merging full survey data (needed for age/gender validation)
           if (fullSurveyData && fullSurveyData.sections) {
-            // Update survey state with full data
+            // Update survey state with full data, preserving existing fields like targetAudience
             setSurvey((prevSurvey: any) => ({
               ...prevSurvey,
               sections: fullSurveyData.sections,
-              questions: fullSurveyData.questions
+              questions: fullSurveyData.questions,
+              // Preserve targetAudience from either fullSurveyData or prevSurvey (for validation)
+              targetAudience: fullSurveyData.targetAudience || prevSurvey.targetAudience
             }));
           }
           
@@ -2092,24 +2152,78 @@ export default function InterviewInterface({ navigation, route }: any) {
             fullSurveyPromise = apiService.getSurveyFull(survey._id);
           }
           
-          // Start interview, location fetch, and full survey fetch in parallel
-          const [interviewResult, location, surveyResult] = await Promise.all([
-            apiService.startInterview(survey._id),
-            locationPromise,
-            fullSurveyPromise || Promise.resolve({ success: false })
-          ]);
+          // CRITICAL: Validate survey sync is complete BEFORE starting interview (like META/Google)
+          // This ensures AC/Polling Station questions are never missed
+          const surveys = await offlineStorage.getSurveys();
+          const syncedSurvey = surveys.find((s: any) => s._id === survey._id || s.id === survey._id);
           
-          setLocationData(location);
-          setLocationLoading(false);
+          if (!syncedSurvey) {
+            Alert.alert(
+              'Survey Not Synced',
+              'This survey is not synced to your device. Please sync surveys from the dashboard first.',
+              [
+                {
+                  text: 'OK',
+                  onPress: () => {
+                    navigation.goBack();
+                  }
+                }
+              ]
+            );
+            setIsLoading(false);
+            return;
+          }
+          
+          // CRITICAL: Validate critical fields for target survey
+          const isTargetSurvey = survey._id === '68fd1915d41841da463f0d46' || survey.id === '68fd1915d41841da463f0d46';
+          if (isTargetSurvey && syncedSurvey.assignACs === undefined) {
+            Alert.alert(
+              'Survey Data Incomplete',
+              'Survey data is missing critical fields (assignACs). Please sync surveys again from the dashboard.',
+              [
+                {
+                  text: 'OK',
+                  onPress: () => {
+                    navigation.goBack();
+                  }
+                }
+              ]
+            );
+            setIsLoading(false);
+            return;
+          }
+          
+          console.log('✅ Survey sync validation passed before interview start');
+          
+          // PERFORMANCE OPTIMIZED: Start interview immediately (non-blocking)
+          // Don't wait for location - it will update when ready
+          // Location is not critical for starting interview, can be fetched in background
+          const interviewResult = await apiService.startInterview(survey._id);
+          
+          // Start location fetch in background (non-blocking)
+          locationPromise.then((location) => {
+            setLocationData(location);
+            setLocationLoading(false);
+          }).catch((locationError) => {
+            console.error('Location fetch error (non-critical):', locationError);
+            setLocationData(null);
+            setLocationLoading(false);
+          });
+          
+          // Fetch full survey data in parallel (if needed)
+          const surveyResult = fullSurveyPromise ? await fullSurveyPromise : { success: false };
           
           // Update survey with full data if fetched
+          // CRITICAL: Preserve targetAudience when merging full survey data (needed for age/gender validation)
           if (surveyResult && surveyResult.success && surveyResult.survey) {
             fullSurveyData = surveyResult.survey;
-            // Update survey state with full data
+            // Update survey state with full data, preserving existing fields like targetAudience
             setSurvey((prevSurvey: any) => ({
               ...prevSurvey,
               sections: fullSurveyData.sections,
-              questions: fullSurveyData.questions
+              questions: fullSurveyData.questions,
+              // Preserve targetAudience from either fullSurveyData or prevSurvey (for validation)
+              targetAudience: fullSurveyData.targetAudience || prevSurvey.targetAudience
             }));
             console.log('✅ Fetched full survey data in parallel');
           }
@@ -3088,14 +3202,27 @@ export default function InterviewInterface({ navigation, route }: any) {
     }
 
     // Real-time target audience validation for fixed questions
-    if (response && response.toString().trim().length > 0) {
+    // CRITICAL: Always validate if response exists (even if 0, as 0 might be invalid for age)
+    // For numbers, check if it's not null/undefined (allow 0 to be validated as invalid age)
+    const hasResponse = response !== null && response !== undefined;
+    // For strings, also check if not empty
+    const hasValidResponse = hasResponse && 
+                            (typeof response === 'number' || 
+                             (typeof response === 'string' && response.trim().length > 0));
+    
+    if (hasResponse) {
+      // Always validate if we have any response (including 0 for age questions)
+      // Removed excessive validation logging
       const validationError = validateFixedQuestion(questionId, response);
+      console.log('🔍 Validation result:', { questionId, validationError, hasError: !!validationError });
       setTargetAudienceErrors(prev => {
         const newErrors = new Map(prev);
         if (validationError) {
           newErrors.set(questionId, validationError);
+          console.log('❌ Set validation error for question:', questionId, validationError);
         } else {
           newErrors.delete(questionId);
+          console.log('✅ Cleared validation error for question:', questionId);
         }
         return newErrors;
       });
@@ -3186,6 +3313,13 @@ export default function InterviewInterface({ navigation, route }: any) {
   const goToNextQuestion = () => {
     const currentQuestion = visibleQuestions[currentQuestionIndex];
     
+    console.log('🔍 goToNextQuestion called:', {
+      currentQuestionId: currentQuestion?.id,
+      currentQuestionText: currentQuestion?.text,
+      targetAudienceErrors: Array.from(targetAudienceErrors.entries()),
+      hasError: targetAudienceErrors.has(currentQuestion?.id)
+    });
+    
     // For CATI interviews, check call status question
     if (isCatiMode && currentQuestion && currentQuestion.id === 'call-status') {
       const callStatusResponse = responses['call-status'];
@@ -3232,8 +3366,19 @@ export default function InterviewInterface({ navigation, route }: any) {
     }
     
     // Check for target audience validation errors
-    if (targetAudienceErrors.has(currentQuestion.id)) {
-      showSnackbar('Please correct the validation error before proceeding');
+    const hasValidationError = targetAudienceErrors.has(currentQuestion.id);
+    console.log('🔍 Checking validation errors in goToNextQuestion:', {
+      questionId: currentQuestion.id,
+      questionText: currentQuestion.text,
+      hasError: hasValidationError,
+      errorMessage: hasValidationError ? targetAudienceErrors.get(currentQuestion.id) : null,
+      allErrors: Array.from(targetAudienceErrors.entries())
+    });
+    
+    if (hasValidationError) {
+      const errorMsg = targetAudienceErrors.get(currentQuestion.id);
+      console.log('❌ Blocking navigation due to validation error:', errorMsg);
+      showSnackbar(errorMsg || 'Please correct the validation error before proceeding');
       return;
     }
 
@@ -5092,7 +5237,23 @@ export default function InterviewInterface({ navigation, route }: any) {
       }
       
       // Build final responses for offline save
+      // CRITICAL: This MUST be built before saving to ensure responses are preserved
       const finalResponsesForOffline = buildFinalResponsesForOffline();
+      
+      // CRITICAL VALIDATION: Ensure finalResponsesForOffline is not empty
+      // This prevents data loss during sync
+      if (!finalResponsesForOffline || finalResponsesForOffline.length === 0) {
+        console.error('❌ CRITICAL: finalResponsesForOffline is empty!');
+        console.error('   This indicates responses state is empty or not populated');
+        console.error('   Responses object keys:', Object.keys(responses || {}));
+        console.error('   All questions count:', allQuestions?.length || 0);
+        showSnackbar('Error: Interview responses are empty. Please retry the interview.', 'error');
+        setIsLoading(false);
+        setIsSubmitting(false);
+        return;
+      }
+      
+      console.log(`✅ Built ${finalResponsesForOffline.length} responses for offline save`);
       
       // Save to offline storage FIRST
       const interviewId = await saveInterviewOffline({
@@ -5145,16 +5306,78 @@ export default function InterviewInterface({ navigation, route }: any) {
   };
 
   // Validate age against target audience requirements
-  const validateAge = (age: string) => {
-    const ageRange = survey.targetAudience?.demographics?.ageRange;
-    if (!ageRange || !ageRange.min || !ageRange.max) return null; // No age restrictions
+  // CRITICAL: This function validates age against survey targetAudience.demographics.ageRange
+  // Top tech companies validate input at the point of entry to ensure data quality
+  const validateAge = (age: string | number) => {
+    console.log('🔍 validateAge called:', { age, ageType: typeof age, surveyId: survey?._id });
     
-    const ageNum = parseInt(age);
-    if (isNaN(ageNum)) return null; // Invalid age format
-    
-    if (ageNum < ageRange.min || ageNum > ageRange.max) {
-      return `Only respondents of age between ${ageRange.min} and ${ageRange.max} are allowed to participate`;
+    // Check if survey and targetAudience exist
+    if (!survey) {
+      console.warn('⚠️ Age validation: Survey not available');
+      return null; // Can't validate without survey data
     }
+    
+    if (!survey.targetAudience) {
+      console.warn('⚠️ Age validation: targetAudience not available in survey', {
+        surveyKeys: Object.keys(survey),
+        hasTargetAudience: !!survey.targetAudience
+      });
+      return null; // Can't validate without targetAudience
+    }
+    
+    const ageRange = survey.targetAudience?.demographics?.ageRange;
+    
+    // Removed excessive logging
+    
+    // CRITICAL FIX: Check for null/undefined explicitly (not falsy check) to handle min=0 case
+    // Use typeof check to ensure min and max are valid numbers
+    if (!ageRange) {
+      console.warn('⚠️ Age validation: ageRange is null/undefined');
+      return null; // No age restrictions (ageRange not properly configured)
+    }
+    
+    // CRITICAL FIX: Handle both object format {min, max} and array format [min, max]
+    let minAge: number | null = null;
+    let maxAge: number | null = null;
+    
+    // Check if ageRange is an array [min, max]
+    if (Array.isArray(ageRange) && ageRange.length >= 2) {
+      minAge = typeof ageRange[0] === 'number' ? ageRange[0] : parseInt(String(ageRange[0] || ''), 10);
+      maxAge = typeof ageRange[1] === 'number' ? ageRange[1] : parseInt(String(ageRange[1] || ''), 10);
+    } 
+    // Check if ageRange is an object {min, max}
+    else if (ageRange && typeof ageRange === 'object') {
+      // Handle both number and string values from backend
+      const minValue = ageRange.min;
+      const maxValue = ageRange.max;
+      
+      if (minValue !== undefined && minValue !== null) {
+        minAge = typeof minValue === 'number' ? minValue : parseInt(String(minValue), 10);
+      }
+      if (maxValue !== undefined && maxValue !== null) {
+        maxAge = typeof maxValue === 'number' ? maxValue : parseInt(String(maxValue), 10);
+      }
+    }
+    
+    // CRITICAL: If min or max are not valid numbers, return null (no validation - user didn't set age range)
+    if (minAge === null || maxAge === null || isNaN(minAge) || isNaN(maxAge) || minAge < 0 || maxAge < 0) {
+      return null; // No age restrictions (ageRange not properly configured or not set by user)
+    }
+    
+    // Convert age input to number (handle both string and number inputs)
+    const ageNum = typeof age === 'number' ? age : parseInt(String(age), 10);
+    
+    if (isNaN(ageNum) || !isFinite(ageNum) || ageNum <= 0) {
+      // Don't show "Please enter a valid age" - only show range validation message
+      return null; // Invalid age format - let the range check handle it or return null
+    }
+    
+    // Validate age is within range (using parsed numbers)
+    if (ageNum < minAge || ageNum > maxAge) {
+      const errorMsg = `Only respondents of age between ${minAge} and ${maxAge} are allowed to participate`;
+      return errorMsg;
+    }
+    
     return null; // Valid age
   };
 
@@ -5194,26 +5417,87 @@ export default function InterviewInterface({ navigation, route }: any) {
     return null; // Valid gender
   };
 
-  // Helper function to check if a question is an age question (by ID or text, ignoring translations)
+  // Helper function to check if a question is an age question (by ID, questionNumber, or text)
+  // CRITICAL: Must handle translations and work in offline mode
   const isAgeQuestion = (question: any): boolean => {
-    if (!question) return false;
-    const questionText = getMainText(question.text || '').toLowerCase();
+    if (!question) {
+      console.log('⚠️ isAgeQuestion: question is null/undefined');
+      return false;
+    }
+    
     const questionId = question.id || '';
+    const questionNumber = question.questionNumber || '';
+    const rawQuestionText = question.text || '';
     
-    // Check for fixed age question ID
-    if (questionId.includes('fixed_respondent_age')) {
+    // Try to extract main text (English) from translations
+    let questionText = '';
+    try {
+      questionText = getMainText(rawQuestionText).toLowerCase().trim();
+    } catch (e) {
+      // If getMainText fails, use raw text
+      questionText = String(rawQuestionText).toLowerCase().trim();
+    }
+    
+    // Also check raw text (in case translations are in a different format)
+    const rawTextLower = String(rawQuestionText).toLowerCase();
+    
+    // Removed excessive age question detection logging
+    
+    // Method 1: Check for fixed age question ID
+    if (questionId.includes('fixed_respondent_age') || questionId.includes('age')) {
+      console.log('✅ Detected age question by ID:', questionId);
       return true;
     }
     
-    // Check for age question text (ignoring translations)
-    if (questionText.includes('could you please tell me your age') || 
-        questionText.includes('tell me your age') ||
-        questionText.includes('what is your age') ||
-        questionText.includes('your age in complete years') ||
-        questionText.includes('age in complete years')) {
+    // Method 2: Check by question number (Q1 is typically age question)
+    if (questionNumber === '1' || questionNumber === '1.0' || String(questionNumber).startsWith('1.')) {
+      console.log('✅ Detected age question by questionNumber:', questionNumber);
+      // Double-check with text to be sure
+      if (rawTextLower.includes('age') || questionText.includes('age')) {
+        console.log('✅ Confirmed age question by Q1 + age text');
+        return true;
+      }
+    }
+    
+    // Method 3: Check for age question text patterns (check both normalized and raw text)
+    const agePatterns = [
+      'could you please tell me your age',
+      'tell me your age',
+      'what is your age',
+      'your age in complete years',
+      'age in complete years',
+      'please tell me your age',
+      'your age',
+      'age in years',
+      'complete years',
+      'বয়স', // Bengali: age
+      'আপনার বয়স', // Bengali: your age
+    ];
+    
+    // Check normalized text (English extracted from translations)
+    for (const pattern of agePatterns) {
+      if (questionText.includes(pattern.toLowerCase())) {
+        console.log('✅ Detected age question by normalized text pattern:', pattern);
+        return true;
+      }
+    }
+    
+    // Check raw text (might contain translations)
+    for (const pattern of agePatterns) {
+      if (rawTextLower.includes(pattern.toLowerCase())) {
+        console.log('✅ Detected age question by raw text pattern:', pattern);
+        return true;
+      }
+    }
+    
+    // Method 4: Check for "age" keyword anywhere in the text (case-insensitive)
+    // This is a fallback for any format
+    if (rawTextLower.includes('age') && (rawTextLower.includes('year') || rawTextLower.includes('complete'))) {
+      console.log('✅ Detected age question by "age" + "year/complete" keywords');
       return true;
     }
     
+    console.log('❌ Not detected as age question');
     return false;
   };
 
@@ -5221,9 +5505,25 @@ export default function InterviewInterface({ navigation, route }: any) {
   const validateFixedQuestion = (questionId: string, response: any) => {
     const question = allQuestions.find(q => q.id === questionId);
     
-    // Check if it's an age question (by ID or by text, ignoring translations)
-    if (questionId === 'fixed_respondent_age' || isAgeQuestion(question)) {
-      return validateAge(response);
+    if (!question) {
+      console.warn('⚠️ validateFixedQuestion: Question not found:', questionId);
+      return null;
+    }
+    
+    // CRITICAL: Check if it's an age question using multiple methods
+    // 1. Check by ID (fixed_respondent_age or contains 'age')
+    // 2. Check by question number (Q1 is typically age question)
+    // 3. Check by text (handling translations)
+    const questionNumber = question.questionNumber || '';
+    const isAgeQ = questionId === 'fixed_respondent_age' || 
+                   questionId.includes('age') ||
+                   questionNumber === '1' ||
+                   String(questionNumber).startsWith('1.') ||
+                   isAgeQuestion(question);
+    
+    if (isAgeQ) {
+      const result = validateAge(response);
+      return result;
     } else if (questionId === 'fixed_respondent_gender') {
       return validateGender(response);
     }
@@ -5906,12 +6206,32 @@ export default function InterviewInterface({ navigation, route }: any) {
         const isInterviewerIdQuestion = question.id === 'interviewer-id' || question.isInterviewerId;
         const didNotAnswer = currentResponse === 0 || currentResponse === '0';
         
+        // CRITICAL: Check if this is an age question for age range validation
+        // Check by ID, questionNumber (Q1), or text (handling translations)
+        const questionNumber = question.questionNumber || '';
+        const isAgeQuestionCheck = question.id === 'fixed_respondent_age' || 
+                                   question.id?.includes('age') ||
+                                   questionNumber === '1' ||
+                                   String(questionNumber).startsWith('1.') ||
+                                   isAgeQuestion(question);
+        const ageValidationError = isAgeQuestionCheck && targetAudienceErrors.has(question.id) 
+          ? targetAudienceErrors.get(question.id) 
+          : null;
+        
+        // Removed excessive age question rendering logging
+        
         return (
           <View style={styles.phoneNumberContainer}>
             <TextInput
               mode="outlined"
               value={didNotAnswer ? '' : (currentResponse !== null && currentResponse !== undefined ? currentResponse.toString() : '')}
               onChangeText={(text) => {
+                console.log('🔍 Numeric input onChangeText:', {
+                  questionId: question.id,
+                  text,
+                  isAgeQuestion: isAgeQuestionCheck,
+                  hasTargetAudience: !!survey?.targetAudience
+                });
                 // Allow empty string or valid number (including 0 and negative numbers)
                 if (text === '') {
                   handleResponseChange(question.id, '');
@@ -5931,9 +6251,14 @@ export default function InterviewInterface({ navigation, route }: any) {
                     }
                     // If longer than 5 digits, don't update (effectively blocks input)
                   } else {
+                    // CRITICAL: For age questions, validate in real-time as user types
                     const numValue = parseFloat(text);
                     if (!isNaN(numValue) && isFinite(numValue)) {
+                      // Always call handleResponseChange - it will trigger validation
                       handleResponseChange(question.id, numValue);
+                    } else if (text === '') {
+                      // Clear response if empty
+                      handleResponseChange(question.id, '');
                     }
                   }
                 }
@@ -5947,6 +6272,12 @@ export default function InterviewInterface({ navigation, route }: any) {
                 didNotAnswer && isPhoneQuestion && styles.disabledInput
               ]}
             />
+            {/* Display age validation error message below input (only show here, not in general error area) */}
+            {ageValidationError && (
+              <Text style={styles.validationErrorText}>
+                {ageValidationError}
+              </Text>
+            )}
             {isPhoneQuestion && (
               <View style={styles.checkboxContainer}>
                 <Checkbox
@@ -7003,7 +7334,7 @@ export default function InterviewInterface({ navigation, route }: any) {
               )
             )}
             
-            {/* CATI Respondent Info - Name and AC only (no phone) */}
+            {/* CATI Respondent Info - Name, AC, and Phone (temporarily for testing) */}
             {isCatiMode && catiRespondent && (
               <View style={styles.respondentInfoContainer}>
                 <Text style={styles.respondentName}>
@@ -7012,6 +7343,12 @@ export default function InterviewInterface({ navigation, route }: any) {
                 <Text style={styles.respondentAC}>
                   {selectedAC || acFromSessionData || catiRespondent.ac || catiRespondent.assemblyConstituency || catiRespondent.acName || catiRespondent.assemblyConstituencyName || 'N/A'}
                 </Text>
+                {/* TEMPORARY: Phone number display for testing */}
+                {catiRespondent.phone && (
+                  <Text style={styles.respondentPhone}>
+                    📞 {catiRespondent.phone}
+                  </Text>
+                )}
               </View>
             )}
             
@@ -7265,8 +7602,11 @@ export default function InterviewInterface({ navigation, route }: any) {
               {renderQuestion(currentQuestion)}
             </View>
             
-            {/* Target Audience Validation Error */}
-            {targetAudienceErrors.has(currentQuestion.id) && (
+            {/* Target Audience Validation Error - Exclude age questions (they show error inline below input) */}
+            {targetAudienceErrors.has(currentQuestion.id) && 
+             currentQuestion.type !== 'number' && 
+             currentQuestion.type !== 'numeric' && 
+             !(currentQuestion.id === 'fixed_respondent_age' || currentQuestion.id?.includes('age') || currentQuestion.questionNumber === '1') && (
               <View style={styles.validationError}>
                 <Text style={styles.validationErrorText}>
                   {targetAudienceErrors.get(currentQuestion.id)}
@@ -8350,6 +8690,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#dc2626',
     fontWeight: '500',
+    marginTop: 8,
+  },
+  textInputError: {
+    borderColor: '#dc2626',
+    borderWidth: 2,
   },
   disabledButton: {
     backgroundColor: '#9ca3af',

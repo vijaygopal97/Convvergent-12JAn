@@ -159,6 +159,60 @@ export default function AvailableSurveys({ navigation }: any) {
   };
 
   const handleStartInterview = async (survey: Survey) => {
+    // CRITICAL: Validate survey sync is complete before allowing interview start (like META/Google)
+    // This ensures AC/Polling Station questions are never missed
+    try {
+      const surveys = await offlineStorage.getSurveys();
+      const syncedSurvey = surveys.find((s: any) => s._id === survey._id || s.id === survey._id);
+      
+      if (!syncedSurvey) {
+        Alert.alert(
+          'Survey Not Synced',
+          'This survey is not synced to your device. Please sync surveys from the dashboard first.',
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                // Optionally navigate to dashboard
+              }
+            }
+          ]
+        );
+        return;
+      }
+      
+      // CRITICAL: Validate critical fields for target survey
+      const isTargetSurvey = survey._id === '68fd1915d41841da463f0d46' || survey.id === '68fd1915d41841da463f0d46';
+      if (isTargetSurvey) {
+        // For target survey, assignACs is CRITICAL - must be present
+        if (syncedSurvey.assignACs === undefined) {
+          Alert.alert(
+            'Survey Data Incomplete',
+            'Survey data is missing critical fields. Please sync surveys again from the dashboard to ensure all data is downloaded.',
+            [
+              {
+                text: 'OK',
+                onPress: () => {
+                  // Optionally trigger sync
+                }
+              }
+            ]
+          );
+          return;
+        }
+        
+        console.log('✅ Survey sync validation passed - assignACs:', syncedSurvey.assignACs);
+      }
+    } catch (validationError) {
+      console.error('❌ Survey validation error:', validationError);
+      Alert.alert(
+        'Validation Error',
+        'Unable to validate survey data. Please try syncing surveys again.',
+        [{ text: 'OK' }]
+      );
+      return;
+    }
+    
     // Check if this is a CATI interview (multi_mode with cati assignment or direct cati mode)
     const isCatiMode = survey.mode === 'cati' || (survey.mode === 'multi_mode' && survey.assignedMode === 'cati');
     

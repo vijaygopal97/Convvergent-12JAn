@@ -3,6 +3,19 @@ const Survey = require('../models/Survey');
 const User = require('../models/User');
 const mongoose = require('mongoose');
 
+// Import IST helper functions from surveyResponseController
+const getISTDateStartUTC = (istDateStr) => {
+  const [year, month, day] = istDateStr.split('-').map(Number);
+  const startDateUTC = new Date(Date.UTC(year, month - 1, day, 18, 30, 0, 0));
+  startDateUTC.setUTCDate(startDateUTC.getUTCDate() - 1);
+  return startDateUTC;
+};
+
+const getISTDateEndUTC = (istDateStr) => {
+  const [year, month, day] = istDateStr.split('-').map(Number);
+  return new Date(Date.UTC(year, month - 1, day, 18, 29, 59, 999));
+};
+
 // @desc    Get QC Performance for a specific survey (all quality agents)
 // @route   GET /api/qc-performance/survey/:surveyId
 // @access  Private (Company Admin)
@@ -41,12 +54,16 @@ exports.getQCPerformanceBySurvey = async (req, res) => {
       });
     }
 
-    // Build date filter
+    // Build date filter - Use verificationData.reviewedAt (review date) with IST conversion
+    // FIXED: Changed from startTime (interview date) to reviewedAt (review date) for accurate QC performance stats
     let dateFilter = {};
     if (startDate && endDate) {
+      // Convert IST dates to UTC for MongoDB query
+      const dateStart = getISTDateStartUTC(startDate);
+      const dateEnd = getISTDateEndUTC(endDate);
       dateFilter['verificationData.reviewedAt'] = {
-        $gte: new Date(startDate),
-        $lte: new Date(endDate)
+        $gte: dateStart,
+        $lte: dateEnd
       };
     }
 
@@ -344,12 +361,16 @@ exports.getQCPerformanceTrends = async (req, res) => {
       });
     }
 
-    // Build date filter
+    // Build date filter - Use verificationData.reviewedAt (review date) with IST conversion
+    // FIXED: Changed from startTime (interview date) to reviewedAt (review date) for accurate QC performance stats
     let dateFilter = {};
     if (startDate && endDate) {
+      // Convert IST dates to UTC for MongoDB query
+      const dateStart = getISTDateStartUTC(startDate);
+      const dateEnd = getISTDateEndUTC(endDate);
       dateFilter['verificationData.reviewedAt'] = {
-        $gte: new Date(startDate),
-        $lte: new Date(endDate)
+        $gte: dateStart,
+        $lte: dateEnd
       };
     }
 
@@ -368,7 +389,8 @@ exports.getQCPerformanceTrends = async (req, res) => {
           date: {
             $dateToString: {
               format: '%Y-%m-%d',
-              date: '$verificationData.reviewedAt'
+              date: '$verificationData.reviewedAt', // FIXED: Use reviewedAt (review date) instead of startTime (interview date)
+              timezone: '+05:30' // IST timezone
             }
           },
           status: 1
