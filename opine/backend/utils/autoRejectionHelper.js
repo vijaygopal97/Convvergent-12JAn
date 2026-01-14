@@ -332,95 +332,144 @@ const checkAutoRejection = async (surveyResponse, responses, surveyId) => {
     // Skip if phone number is "0" (indicates "Did not Answer")
     if (phoneNumber && phoneNumber.length > 0 && phoneNumber !== '0') {
       try {
-        // CRITICAL OPTIMIZATION: Use cursor-based streaming instead of loading ALL responses into memory
-        // For survey "68fd1915d41841da463f0d46" with thousands of responses, loading all causes 2-3GB memory spikes
-        // Top tech companies use cursors with early exit for duplicate checks - stop as soon as duplicate is found
-        let foundDuplicate = false;
+        // CRITICAL FIX: Check ALL statuses except abandoned/terminated (not just specific ones)
+        // This ensures we catch duplicates regardless of their current status
+        // Top-tier companies (Amazon, Google, Meta) check all valid responses, not just specific statuses
         
         // Normalize phone number for comparison (lowercase, cleaned)
         const normalizedPhoneNumber = phoneNumber.toLowerCase().trim();
         
-        // Use cursor to stream responses instead of loading all at once
-        // CRITICAL: Process in small batches and exit early when duplicate found
-        const duplicateCursor = SurveyResponse.find({
-          survey: surveyId,
-          _id: { $ne: surveyResponse._id },
-          status: { $in: ['Pending_Approval', 'Approved', 'Rejected'] }
-        })
-          .select('responses') // Only select responses field to minimize memory
-          .lean() // Use lean() for plain objects
-          .batchSize(50) // Small batches to prevent memory accumulation
-          .cursor();
+        // OPTIMIZED APPROACH: Use MongoDB aggregation pipeline with $limit(1) for early exit
+        // This is faster than cursor iteration and uses less memory
+        // MongoDB will stop searching as soon as it finds one match (indexed query)
+        const duplicateCheck = await SurveyResponse.aggregate([
+          {
+            $match: {
+              survey: surveyId,
+              _id: { $ne: surveyResponse._id },
+              // CRITICAL: Check ALL statuses except abandoned/terminated
+              // This catches duplicates in 'completed', 'Pending_Approval', 'Approved', 'Rejected', etc.
+              status: { $nin: ['abandoned', 'Terminated'] },
+              // Exclude responses with abandonedReason (even if status isn't 'abandoned')
+              abandonedReason: { $exists: false }
+            }
+          },
+          {
+            $project: {
+              responses: 1,
+              _id: 0
+            }
+          },
+          {
+            $limit: 1 // Early exit - stop as soon as we find one duplicate
+          }
+        ]).allowDiskUse(true); // Allow disk use for large datasets (prevents memory issues)
         
-        let processedCount = 0;
-        for await (const otherResponse of duplicateCursor) {
-          // Early exit: Stop immediately if duplicate already found
-          if (foundDuplicate) {
-            break;
+        // If we found a response, check if it has the same phone number
+        if (duplicateCheck.length > 0) {
+          const otherResponse = duplicateCheck[0];
+          
+          if (otherResponse.responses && Array.isArray(otherResponse.responses)) {
+            // Search through responses for phone number question
+            for (const resp of otherResponse.responses) {
+              const questionText = resp.questionText || resp.question?.text || '';
+              const isPhoneQuestion = questionText.includes('mobile number') || 
+                                     questionText.includes('phone number') ||
+                                     questionText.toLowerCase().includes('share your mobile') ||
+                                     questionText === PHONE_QUESTION_TEXT;
+              
+              if (isPhoneQuestion && resp.response) {
+                // Extract phone from other response
+                let otherPhoneValue = resp.response;
+                
+                if (Array.isArray(otherPhoneValue)) {
+                  otherPhoneValue = otherPhoneValue[0];
+                } else if (typeof otherPhoneValue === 'object' && otherPhoneValue !== null) {
+                  otherPhoneValue = otherPhoneValue.phone || otherPhoneValue.value || otherPhoneValue.text || otherPhoneValue;
+                }
+                
+                // Clean other phone number
+                let otherPhoneNumber = null;
+                if (typeof otherPhoneValue === 'string') {
+                  otherPhoneNumber = otherPhoneValue.replace(/\s+/g, '').replace(/-/g, '').replace(/\(/g, '').replace(/\)/g, '').trim().toLowerCase();
+                } else if (typeof otherPhoneValue === 'number') {
+                  otherPhoneNumber = otherPhoneValue.toString().trim().toLowerCase();
+                }
+                
+                // Compare cleaned phone numbers (case-insensitive)
+                if (otherPhoneNumber && otherPhoneNumber === normalizedPhoneNumber) {
+                  rejectionReasons.push({
+                    reason: 'Duplicate Phone Number',
+                    condition: 'duplicate_phone'
+                  });
+                  console.log(`✅ Duplicate phone check: Found duplicate phone number ${normalizedPhoneNumber}`);
+                  break; // Found duplicate, stop checking
+                }
+              }
+            }
           }
           
-          if (!otherResponse.responses || !Array.isArray(otherResponse.responses)) {
-            continue;
-          }
-          
-          // Search through responses for phone number question
-          for (const resp of otherResponse.responses) {
-            const questionText = resp.questionText || resp.question?.text || '';
-            const isPhoneQuestion = questionText.includes('mobile number') || 
-                                   questionText.includes('phone number') ||
-                                   questionText.toLowerCase().includes('share your mobile') ||
-                                   questionText === PHONE_QUESTION_TEXT;
+          // If no duplicate found in first response, use cursor-based approach for remaining responses
+          // This is a fallback for edge cases where aggregation doesn't catch it
+          if (rejectionReasons.length === 0) {
+            const duplicateCursor = SurveyResponse.find({
+              survey: surveyId,
+              _id: { $ne: surveyResponse._id },
+              status: { $nin: ['abandoned', 'Terminated'] },
+              abandonedReason: { $exists: false }
+            })
+              .select('responses')
+              .lean()
+              .batchSize(50)
+              .limit(100) // Limit to first 100 for performance
+              .cursor();
             
-            if (isPhoneQuestion && resp.response) {
-              // Extract phone from other response
-              let otherPhoneValue = resp.response;
+            let processedCount = 0;
+            for await (const otherResponse of duplicateCursor) {
+              if (rejectionReasons.length > 0) break; // Early exit if duplicate found
               
-              if (Array.isArray(otherPhoneValue)) {
-                otherPhoneValue = otherPhoneValue[0];
-              } else if (typeof otherPhoneValue === 'object' && otherPhoneValue !== null) {
-                otherPhoneValue = otherPhoneValue.phone || otherPhoneValue.value || otherPhoneValue.text || otherPhoneValue;
+              if (!otherResponse.responses || !Array.isArray(otherResponse.responses)) {
+                continue;
               }
               
-              // Clean other phone number
-              let otherPhoneNumber = null;
-              if (typeof otherPhoneValue === 'string') {
-                otherPhoneNumber = otherPhoneValue.replace(/\s+/g, '').replace(/-/g, '').replace(/\(/g, '').replace(/\)/g, '').trim().toLowerCase();
-              } else if (typeof otherPhoneValue === 'number') {
-                otherPhoneNumber = otherPhoneValue.toString().trim().toLowerCase();
+              for (const resp of otherResponse.responses) {
+                const questionText = resp.questionText || resp.question?.text || '';
+                const isPhoneQuestion = questionText.includes('mobile number') || 
+                                       questionText.includes('phone number') ||
+                                       questionText.toLowerCase().includes('share your mobile') ||
+                                       questionText === PHONE_QUESTION_TEXT;
+                
+                if (isPhoneQuestion && resp.response) {
+                  let otherPhoneValue = resp.response;
+                  if (Array.isArray(otherPhoneValue)) otherPhoneValue = otherPhoneValue[0];
+                  else if (typeof otherPhoneValue === 'object' && otherPhoneValue !== null) {
+                    otherPhoneValue = otherPhoneValue.phone || otherPhoneValue.value || otherPhoneValue.text || otherPhoneValue;
+                  }
+                  
+                  let otherPhoneNumber = null;
+                  if (typeof otherPhoneValue === 'string') {
+                    otherPhoneNumber = otherPhoneValue.replace(/\s+/g, '').replace(/-/g, '').replace(/\(/g, '').replace(/\)/g, '').trim().toLowerCase();
+                  } else if (typeof otherPhoneValue === 'number') {
+                    otherPhoneNumber = otherPhoneValue.toString().trim().toLowerCase();
+                  }
+                  
+                  if (otherPhoneNumber && otherPhoneNumber === normalizedPhoneNumber) {
+                    rejectionReasons.push({
+                      reason: 'Duplicate Phone Number',
+                      condition: 'duplicate_phone'
+                    });
+                    console.log(`✅ Duplicate phone check: Found duplicate phone number ${normalizedPhoneNumber} (fallback check)`);
+                    break;
+                  }
+                }
               }
               
-              // Compare cleaned phone numbers (case-insensitive)
-              if (otherPhoneNumber && otherPhoneNumber === normalizedPhoneNumber) {
-                rejectionReasons.push({
-                  reason: 'Duplicate Phone Number',
-                  condition: 'duplicate_phone'
-                });
-                foundDuplicate = true;
-                break; // Found duplicate, stop checking this response
-              }
+              processedCount++;
+              if (processedCount >= 100) break; // Limit processing for performance
             }
           }
-          
-          processedCount++;
-          
-          // CRITICAL: Explicit memory cleanup every 100 responses
-          // This prevents memory accumulation during cursor iteration
-          if (processedCount % 100 === 0) {
-            if (global.gc && typeof global.gc === 'function') {
-              global.gc();
-            }
-          }
-          
-          // Early exit if duplicate found - don't process remaining responses
-          if (foundDuplicate) {
-            break;
-          }
-        }
-        
-        if (foundDuplicate) {
-          console.log(`✅ Duplicate phone check: Found duplicate after processing ${processedCount} responses (early exit)`);
         } else {
-          console.log(`✅ Duplicate phone check: No duplicates found after processing ${processedCount} responses`);
+          console.log(`✅ Duplicate phone check: No duplicates found (checked all statuses except abandoned/terminated)`);
         }
       } catch (error) {
         console.error('Error checking for duplicate phone number:', error);

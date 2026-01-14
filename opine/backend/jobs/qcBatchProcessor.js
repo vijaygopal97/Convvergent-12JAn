@@ -11,6 +11,17 @@ const toObjectId = (id) => {
   return id;
 };
 
+// Helper function to check if abandonedReason is valid (matches SurveyResponse model logic)
+// CRITICAL: This must match the logic in SurveyResponse model to ensure consistency
+const hasValidAbandonedReason = (abandonedReason) => {
+  return abandonedReason && 
+         typeof abandonedReason === 'string' &&
+         abandonedReason.trim() !== '' &&
+         abandonedReason !== 'No reason specified' &&
+         abandonedReason.toLowerCase() !== 'null' &&
+         abandonedReason.toLowerCase() !== 'undefined';
+};
+
 /**
  * Process a single batch - select sample and send to QC
  * @param {QCBatch} batch - The batch to process
@@ -44,27 +55,62 @@ const processBatch = async (batch, config) => {
     const sampleObjectIds = sampleResponseIds.map(id => toObjectId(id));
     const remainingObjectIds = remainingResponseIds.map(id => toObjectId(id));
     
-    // Mark sample responses
-    await SurveyResponse.updateMany(
-      { _id: { $in: sampleObjectIds } },
+    // CRITICAL FIX: Optimized database-level filtering (prevents abandoned responses from status changes)
+    // Filter in database query instead of application - more efficient and prevents memory leaks
+    // Exclude responses with: abandonedReason, status='abandoned', status='Terminated', status='Approved', status='Rejected'
+    // This ensures abandoned responses NEVER get their status changed by batch processor
+    
+    // Mark sample responses - ONLY process responses in 'Pending_Approval' status
+    // QC batch processor has NO authority to change status of Rejected, abandoned, Terminated, or Approved responses
+    // These are final statuses and should never be touched by QC batch processor
+    const sampleUpdateResult = await SurveyResponse.updateMany(
+      { 
+        _id: { $in: sampleObjectIds },
+        // CRITICAL: ONLY process responses in 'Pending_Approval' status
+        // QC batch processor is ONLY for moving Pending_Approval responses to verification queue
+        status: 'Pending_Approval',
+        // Additional safety: Exclude abandoned responses
+        abandonedReason: { $exists: false },
+      },
       { 
         $set: { 
-          isSampleResponse: true,
-          status: 'Pending_Approval'
+          isSampleResponse: true
+          // Status is already 'Pending_Approval', no need to set it again
         }
       }
     );
     
-    // Mark remaining responses (not in QC queue yet)
-    await SurveyResponse.updateMany(
-      { _id: { $in: remainingObjectIds } },
+    // Log if any responses were excluded (check count difference)
+    const excludedSampleCount = sampleObjectIds.length - sampleUpdateResult.modifiedCount;
+    if (excludedSampleCount > 0) {
+      console.log(`   ⚠️  Excluded ${excludedSampleCount} sample responses (not in Pending_Approval status or abandoned) from processing`);
+    }
+    
+    // Mark remaining responses - ONLY process responses in 'Pending_Approval' status
+    // QC batch processor has NO authority to change status of Rejected, abandoned, Terminated, or Approved responses
+    // These are final statuses and should never be touched by QC batch processor
+    const remainingUpdateResult = await SurveyResponse.updateMany(
+      { 
+        _id: { $in: remainingObjectIds },
+        // CRITICAL: ONLY process responses in 'Pending_Approval' status
+        // QC batch processor is ONLY for moving Pending_Approval responses to verification queue
+        status: 'Pending_Approval',
+        // Additional safety: Exclude abandoned responses
+        abandonedReason: { $exists: false },
+      },
       { 
         $set: { 
-          isSampleResponse: false,
-          status: 'Pending_Approval'
+          isSampleResponse: false
+          // Status is already 'Pending_Approval', no need to set it again
         }
       }
     );
+    
+    // Log if any responses were excluded (check count difference)
+    const excludedRemainingCount = remainingObjectIds.length - remainingUpdateResult.modifiedCount;
+    if (excludedRemainingCount > 0) {
+      console.log(`   ⚠️  Excluded ${excludedRemainingCount} remaining responses (not in Pending_Approval status or abandoned) from processing`);
+    }
     
     // Update batch with sample and config snapshot
     batch.sampleResponses = sampleResponseIds;
@@ -156,11 +202,23 @@ const makeDecisionOnRemaining = async (batch) => {
       return id;
     });
     
+    // CRITICAL FIX: Optimized database-level filtering (prevents abandoned responses from auto-approval)
+    // Filter in database query instead of application - more efficient and prevents memory leaks
+    // This ensures abandoned responses NEVER get auto-approved
+    
     // Execute the action
     if (matchedRule.action === 'auto_approve') {
-      // Auto-approve all remaining responses
-      await SurveyResponse.updateMany(
-        { _id: { $in: remainingObjectIds } },
+      // Auto-approve all remaining responses - ONLY process responses in 'Pending_Approval' status
+      // QC batch processor has NO authority to change status of Rejected, abandoned, Terminated, or Approved responses
+      const autoApproveResult = await SurveyResponse.updateMany(
+        { 
+          _id: { $in: remainingObjectIds },
+          // CRITICAL: ONLY process responses in 'Pending_Approval' status
+          // QC batch processor is ONLY for moving Pending_Approval responses to verification queue
+          status: 'Pending_Approval',
+          // Additional safety: Exclude abandoned responses
+          abandonedReason: { $exists: false },
+        },
         { 
           $set: { 
             status: 'Approved',
@@ -177,6 +235,12 @@ const makeDecisionOnRemaining = async (batch) => {
         }
       );
       
+      // Log if any responses were excluded (check count difference)
+      const excludedAutoApproveCount = remainingObjectIds.length - autoApproveResult.modifiedCount;
+      if (excludedAutoApproveCount > 0) {
+        console.log(`   ⚠️  Excluded ${excludedAutoApproveCount} remaining responses (not in Pending_Approval status or abandoned) from auto-approval`);
+      }
+      
       batch.status = 'auto_approved';
       batch.remainingDecision = {
         decision: 'auto_approved',
@@ -184,19 +248,34 @@ const makeDecisionOnRemaining = async (batch) => {
         triggerApprovalRate: approvalRate
       };
       
-      console.log(`   ✅ Auto-approved ${remainingObjectIds.length} remaining responses`);
+      console.log(`   ✅ Auto-approved ${autoApproveResult.modifiedCount} remaining responses${excludedAutoApproveCount > 0 ? ` (${excludedAutoApproveCount} excluded - not in Pending_Approval status or abandoned)` : ''}`);
       
     } else if (matchedRule.action === 'send_to_qc') {
-      // Send remaining responses to QC queue
-      await SurveyResponse.updateMany(
-        { _id: { $in: remainingObjectIds } },
+      // Send remaining responses to QC queue - ONLY process responses in 'Pending_Approval' status
+      // QC batch processor has NO authority to change status of Rejected, abandoned, Terminated, or Approved responses
+      // Note: Status is already 'Pending_Approval', we're just marking them for QC queue
+      const sendToQCResult = await SurveyResponse.updateMany(
+        { 
+          _id: { $in: remainingObjectIds },
+          // CRITICAL: ONLY process responses in 'Pending_Approval' status
+          // QC batch processor is ONLY for moving Pending_Approval responses to verification queue
+          status: 'Pending_Approval',
+          // Additional safety: Exclude abandoned responses
+          abandonedReason: { $exists: false },
+        },
         { 
           $set: { 
-            status: 'Pending_Approval',
             isSampleResponse: false // They're not in the sample, but they're now in QC queue
+            // Status is already 'Pending_Approval', no need to set it again
           }
         }
       );
+      
+      // Log if any responses were excluded (check count difference)
+      const excludedSendToQCCount = remainingObjectIds.length - sendToQCResult.modifiedCount;
+      if (excludedSendToQCCount > 0) {
+        console.log(`   ⚠️  Excluded ${excludedSendToQCCount} remaining responses (not in Pending_Approval status or abandoned) from sending to QC queue`);
+      }
       
       batch.status = 'queued_for_qc';
       batch.remainingDecision = {
@@ -205,12 +284,20 @@ const makeDecisionOnRemaining = async (batch) => {
         triggerApprovalRate: approvalRate
       };
       
-      console.log(`   ✅ Sent ${remainingObjectIds.length} remaining responses to QC queue`);
+      console.log(`   ✅ Sent ${sendToQCResult.modifiedCount} remaining responses to QC queue${excludedSendToQCCount > 0 ? ` (${excludedSendToQCCount} excluded - not in Pending_Approval status or abandoned)` : ''}`);
       
     } else if (matchedRule.action === 'reject_all') {
-      // Reject all remaining responses
-      await SurveyResponse.updateMany(
-        { _id: { $in: remainingObjectIds } },
+      // Reject all remaining responses - ONLY process responses in 'Pending_Approval' status
+      // QC batch processor has NO authority to change status of Rejected, abandoned, Terminated, or Approved responses
+      const rejectAllResult = await SurveyResponse.updateMany(
+        { 
+          _id: { $in: remainingObjectIds },
+          // CRITICAL: ONLY process responses in 'Pending_Approval' status
+          // QC batch processor is ONLY for moving Pending_Approval responses to verification queue
+          status: 'Pending_Approval',
+          // Additional safety: Exclude abandoned responses
+          abandonedReason: { $exists: false },
+        },
         { 
           $set: { 
             status: 'Rejected',
@@ -226,6 +313,12 @@ const makeDecisionOnRemaining = async (batch) => {
         }
       );
       
+      // Log if any responses were excluded (check count difference)
+      const excludedRejectAllCount = remainingObjectIds.length - rejectAllResult.modifiedCount;
+      if (excludedRejectAllCount > 0) {
+        console.log(`   ⚠️  Excluded ${excludedRejectAllCount} remaining responses (not in Pending_Approval status or abandoned) from auto-rejection`);
+      }
+      
       batch.status = 'completed';
       batch.remainingDecision = {
         decision: 'rejected_all',
@@ -233,7 +326,7 @@ const makeDecisionOnRemaining = async (batch) => {
         triggerApprovalRate: approvalRate
       };
       
-      console.log(`   ❌ Rejected ${remainingObjectIds.length} remaining responses`);
+      console.log(`   ❌ Rejected ${rejectAllResult.modifiedCount} remaining responses${excludedRejectAllCount > 0 ? ` (${excludedRejectAllCount} excluded - not in Pending_Approval status or abandoned)` : ''}`);
     }
     
     batch.processingCompletedAt = new Date();
